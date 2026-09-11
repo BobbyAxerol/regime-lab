@@ -69,12 +69,3 @@ def map_htf_decisions(intents_by_htf_bar: dict[int, list[Any]], htf_index: pd.Da
             continue
         mapped.setdefault(exec_position, []).extend(intents_by_htf_bar[htf_position])
     return mapped
-
-
-def execution_slice_after(index: pd.DatetimeIndex, available_at: pd.Timestamp) -> pd.DatetimeIndex:
-    """The execution bars that OPEN at or after the decision became available.
-
-    Used by the pilot to prove the engine frame never contains bars the decision
-    could not have seen.
-    """
-    return index[index >= pd.Timestamp(available_at)]

@@ -27,7 +27,6 @@ from crypto_regime_lab.experiments.factorial import (
 )
 from crypto_regime_lab.experiments.regime_schedule import (
     RegimeSchedule,
-    ScheduleError,
     assert_compute_matched,
     transition_cutoffs,
 )
@@ -89,9 +88,11 @@ def test_triggers_respect_a_minimum_gap():
 
 def test_a_schedule_that_cannot_be_filled_is_refused():
     """A dynamic arm with fewer refreshes is not compute-matched."""
-    with pytest.raises(ScheduleError, match="no state change|compute-matched"):
-        transition_cutoffs(_emissions(n=40), count=6, earliest="2021-01-01",
-                           latest="2021-01-05", min_gap_days=30.0)
+    # RF-03/A10 superseded the raising contract: a schedule that cannot be
+    # filled returns fewer cutoffs. It is never padded back to the calendar.
+    schedule = transition_cutoffs(_emissions(n=40), count=6, earliest="2021-01-01",
+                                  latest="2021-01-05", min_gap_days=30.0)
+    assert len(schedule.cutoffs) < 6 and "periods had no eligible transition" in schedule.source
 
 
 def test_a_trigger_sits_at_availability_not_at_the_bar_it_describes():
@@ -305,8 +306,9 @@ def test_a_period_with_no_transition_refuses_rather_than_pads():
     flat = [{"state_namespace": "jm@test", "state_id": 0,
              "observed_at": str(t - pd.Timedelta("4h")), "available_at": str(t)}
             for t in pd.date_range("2021-01-01", periods=6570, freq="4h", tz="UTC")]
-    with pytest.raises(ScheduleError, match="no state change"):
-        transition_cutoffs(flat, count=6, earliest="2021-01-01", latest="2023-12-31")
+    # RF-03/A10: no eligible transition means no refresh, not a padded count.
+    schedule = transition_cutoffs(flat, count=6, earliest="2021-01-01", latest="2023-12-31")
+    assert schedule.cutoffs == () and "6 periods had no eligible transition" in schedule.source
 
 
 def test_arm_a_carries_the_legacy_label_it_earned(lab_root):
