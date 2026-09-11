@@ -1,0 +1,362 @@
+{
+  "schema": "regime_lab.corrective_phase_report.v3",
+  "phase_id": "RF-04",
+  "status": "PARTIAL_TECHNICAL_CLOSURE",
+  "study_id": "corrective_mode4_v3",
+  "generated_at_utc": "2026-09-11T20:16:25.113939+00:00",
+  "source": {
+    "archive_sha256": "2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f",
+    "lab_head_commit": "f4ba4e1b151222aa9811b25efcacebf960bf33c9",
+    "lab_branch": "mode4-corrective",
+    "plan_sha256": "bf983c2b63dd748d778a3d9c38360bfb6f081cb9b445d7a8044fbae63b2c7434",
+    "candidate_commit": null,
+    "candidate_source_manifest": "evidence/corrective_mode4_v3/RF-01/source_before_manifest.json",
+    "quantbt_core_version": "1.1.1",
+    "quantbt_native_version": "0.4.2",
+    "native_artifact": "ModuleNotFoundError: No module named 'quantbt_native'",
+    "actual_import_origins": [
+      "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py"
+    ]
+  },
+  "objective": "metrics/decay panels and ordered controls for the Mode 4 per_fold_causal calendar vs causal regime refit comparison",
+  "registered_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "findings": {
+    "G10": "SELECTED",
+    "G11": "EVALUATED",
+    "A14": "REPAIRED_UNIT_ONLY",
+    "RF-04.3": "D1_D2_D3_PANELS_COMPLETE",
+    "RF-04.4": "MATCHED_AND_PLACEBO_RUN",
+    "RF-04.5": "FROZEN_FOR_RF05_WITH_BLOCKERS"
+  },
+  "tests": {
+    "passed": 57,
+    "failed": 0,
+    "skipped": 0,
+    "artifact_refs": [
+      "test_suite_mode4_corrective.log",
+      "pyflakes_mode4_corrective.log"
+    ],
+    "test_file": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+    "note": null
+  },
+  "market_runs": {
+    "planned_cells": 20,
+    "executed_cells": 2,
+    "valid_pairs": 2,
+    "blocked_cells": [
+      "A-VWAP/BTCUSDT",
+      "A-VWAP/ETHUSDT",
+      "A-VWAP/SOLUSDT",
+      "A-VWAP/BNBUSDT",
+      "A-VWAP/DOGEUSDT",
+      "A-HASH/BTCUSDT",
+      "A-HASH/ETHUSDT",
+      "A-HASH/SOLUSDT",
+      "A-HASH/BNBUSDT",
+      "A-HASH/DOGEUSDT"
+    ],
+    "not_run_cells": 16,
+    "arms": [
+      "M4_CAL",
+      "M4_REGIME",
+      "M4_CAL_MATCHED",
+      "M4_REGIME_DELAYED"
+    ]
+  },
+  "metrics": {
+    "raw_quantbt_ref": "paired_discovery_pilot.json",
+    "canonical_ref": "decay_panels.json",
+    "decay_panel_ref": "decay_panels.json",
+    "controls_ref": "controls_and_funnel.json",
+    "mde_ref": "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json",
+    "mde_corrected_daily_account_bps": 0.03709428129829986,
+    "budget_aware_paired": {
+      "contrast": "M4_REGIME - M4_CAL_MATCHED on A-HMA/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL_MATCHED",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": 0.1619994933452141,
+        "ci95_low_bps": -0.21421834340841062,
+        "ci95_high_bps": 0.6154146378009397,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "INCONCLUSIVE",
+      "economic_status_reason": "bounded 2-cell discovery pilot; the CI is exploratory and cannot support an economic claim",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    "timing_paired": {
+      "contrast": "M4_REGIME - M4_CAL on A-HMA/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": 0.06330121421041358,
+        "ci95_low_bps": -0.3793854574780768,
+        "ci95_high_bps": 0.5579212389223244,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "INCONCLUSIVE",
+      "economic_status_reason": "bounded 2-cell discovery pilot; the CI is exploratory and cannot support an economic claim",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    }
+  },
+  "performance": {
+    "pilot_wall_seconds": 240.306,
+    "matched_wall_seconds": 164.743,
+    "placebo_wall_seconds": 171.856,
+    "d2_wall_seconds": 34.282123731449246,
+    "peak_rss_bytes": null,
+    "actual_candidate_bar_visits": null
+  },
+  "proof_capability": {
+    "technical_validity": "PARTIAL",
+    "positive_control": "params_changed_by_treatment=True, treatment_reached_execution=True",
+    "treatment_reached_execution": "A-HMA/BTCUSDT yes (6 vs 10 engine trades); A-SC/BTCUSDT no"
+  },
+  "potential": {
+    "level": "UNASSESSED",
+    "per_cell": {
+      "A-SC/BTCUSDT": "LOW_PARAMETER_OPPORTUNITY",
+      "A-HMA/BTCUSDT": "PARAMETER_RANK_SIGNAL_PRESENT"
+    },
+    "evidence_refs": [
+      "controls_and_funnel.json#funnel",
+      "decay_panels.json"
+    ],
+    "falsifiable_next_step": "repair or quarantine the A-SC endpoint evaluation so candidate objectives are parameter-sensitive, then freeze and run the registered 32-64 trials/cutoff design"
+  },
+  "claim": {
+    "validity": "PARTIAL_TECHNICAL_CLOSURE",
+    "execution_validity": "PARTIAL",
+    "implementation_fidelity": "DEVIATED",
+    "statistical_status": "NOT_EVALUABLE",
+    "economic_status": "INCONCLUSIVE",
+    "scope": "A-SC/BTCUSDT and A-HMA/BTCUSDT, 2021-01-01..2022-06-30, development window only; 2 of 20 planned cells executed"
+  },
+  "contrasts": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "route": "endpoint",
+      "execution_validity": "PASS",
+      "implementation_fidelity": "DEVIATED",
+      "statistical_status": "NOT_EVALUABLE",
+      "economic_status": "NOT_EVALUABLE",
+      "reason": "candidate objectives are exactly tied in every fold (endpoint scorer) and the endpoint account exposes no per-fill ledger; no economic claim is possible",
+      "low_parameter_opportunity": true,
+      "arms": {
+        "M4_CAL": "pv-87294d1b6008e1c2",
+        "M4_REGIME": "pv-44b2fe6675650cf9",
+        "M4_CAL_MATCHED": "pv-44b2fe6675650cf9"
+      }
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "route": "event",
+      "execution_validity": "PASS",
+      "implementation_fidelity": "AS_SPECIFIED",
+      "statistical_status": "INCONCLUSIVE",
+      "economic_status": "INCONCLUSIVE",
+      "reason": "both arms execute on the native-event account; 2-cell bounded pilot cannot support an economic claim",
+      "low_parameter_opportunity": false,
+      "arms": {
+        "M4_CAL": "pv-cd75e7a89a16631e",
+        "M4_REGIME": "pv-ee9e03f3dded94cf",
+        "M4_CAL_MATCHED": "pv-fe07e63f5f828653"
+      }
+    }
+  ],
+  "paired_endpoints": [
+    {
+      "contrast": "M4_REGIME - M4_CAL on A-SC/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": -6.252697771053896e-06,
+        "ci95_low_bps": -3.8091292569209173e-05,
+        "ci95_high_bps": 2.1770705505846245e-05,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "NOT_EVALUABLE",
+      "economic_status_reason": "implementation_fidelity=DEVIATED; A16 fails the contrast closed before any economic reading",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    {
+      "contrast": "M4_REGIME - M4_CAL_MATCHED on A-SC/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL_MATCHED",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": -6.252697771053896e-06,
+        "ci95_low_bps": -3.8091292569209173e-05,
+        "ci95_high_bps": 2.1770705505846245e-05,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "NOT_EVALUABLE",
+      "economic_status_reason": "implementation_fidelity=DEVIATED; A16 fails the contrast closed before any economic reading",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    {
+      "contrast": "M4_CAL_MATCHED - M4_CAL on A-SC/BTCUSDT",
+      "left_arm": "M4_CAL_MATCHED",
+      "right_arm": "M4_CAL",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": 0.0,
+        "ci95_low_bps": 0.0,
+        "ci95_high_bps": 0.0,
+        "n_days": 759,
+        "zero_variance": true,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "IDENTICAL_ACCOUNT_SERIES"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "NOT_EVALUABLE",
+      "economic_status_reason": "the two account equity series are identical; the timing treatment did not reach execution on this cell",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    {
+      "contrast": "M4_REGIME - M4_CAL on A-HMA/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": 0.06330121421041358,
+        "ci95_low_bps": -0.3793854574780768,
+        "ci95_high_bps": 0.5579212389223244,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "INCONCLUSIVE",
+      "economic_status_reason": "bounded 2-cell discovery pilot; the CI is exploratory and cannot support an economic claim",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    {
+      "contrast": "M4_REGIME - M4_CAL_MATCHED on A-HMA/BTCUSDT",
+      "left_arm": "M4_REGIME",
+      "right_arm": "M4_CAL_MATCHED",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": 0.1619994933452141,
+        "ci95_low_bps": -0.21421834340841062,
+        "ci95_high_bps": 0.6154146378009397,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "INCONCLUSIVE",
+      "economic_status_reason": "bounded 2-cell discovery pilot; the CI is exploratory and cannot support an economic claim",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    },
+    {
+      "contrast": "M4_CAL_MATCHED - M4_CAL on A-HMA/BTCUSDT",
+      "left_arm": "M4_CAL_MATCHED",
+      "right_arm": "M4_CAL",
+      "paired_daily_difference": {
+        "mean_daily_diff_bps": -0.09869827913480052,
+        "ci95_low_bps": -0.4053438926280948,
+        "ci95_high_bps": 0.20632974003812812,
+        "n_days": 759,
+        "zero_variance": false,
+        "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+        "block_days": 5,
+        "resamples": 2000,
+        "seed": 20260911,
+        "status": "EXPLORATORY_BOUNDED_PILOT"
+      },
+      "mde_corrected_daily_account_bps": 0.0371,
+      "economic_status": "INCONCLUSIVE",
+      "economic_status_reason": "bounded 2-cell discovery pilot; the CI is exploratory and cannot support an economic claim",
+      "claim_limit": "bounded 2-cell discovery pilot on BTCUSDT; the CI is exploratory and cannot support an economic claim"
+    }
+  ],
+  "limitations": [
+    "bounded 2-cell pilot on BTCUSDT with 8 trials/cutoff; not the registered 32-64",
+    "the endpoint cell (A-SC/BTCUSDT) returns one objective for every sampled candidate and no per-fill ledger; its parameter ranking is not identified",
+    "the delayed-state placebo and the D2 anchors are diagnostics, not confirmation evidence",
+    "the development window 2021-01-01..2022-06-30 is nested retrospective; no holdout claim",
+    "A-SC implementation_fidelity=DEVIATED; its statistical status is NOT_EVALUABLE",
+    "A-HMA statistical status is INCONCLUSIVE on a 2-cell bounded pilot",
+    "registered cohort extends to 2023-12-31 but the pilot executed 2021-01-01..2022-06-30"
+  ],
+  "review": {
+    "author": "OpenCode",
+    "reviewer": null,
+    "disagreements": []
+  },
+  "handoff": {
+    "next_phase": "RF-05",
+    "blocking_findings": [
+      "A-SC/BTCUSDT endpoint candidate ranking not identified",
+      "coverage: 2 of 20 cells executed at 8 trials/cutoff"
+    ]
+  },
+  "design_freeze_ref": "design_freeze.json",
+  "report_md": {
+    "path": "report.md",
+    "sha256": "2005ab3a1bc7efc7695c401e36d3862f41def5b64f08a0439996b074df00cf08"
+  },
+  "artifact_hashes": {
+    "paired_discovery_pilot.json": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5",
+    "paired_discovery_registration.json": "20c24ded268514391960ca3602dea6b23e5a748d4205896d42cce41a99d3d487",
+    "discovery_protocol.json": "94b03a347737895d9f20cffc971081d85a53d042b157a28059ce3857899646b2",
+    "positive_control.json": "2e51ec4898d78166de43efa61ba4c8169867f8207a46c0dd4050a1e0a44883ad",
+    "controls_registration.json": "69decb922482763defa7cc98b1eb7c04749006736bf3c32674e87d9c68c0bb6d",
+    "controls_and_funnel.json": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f",
+    "decay_panels.json": "90c9d5c361d33402191b01fa59a17bdab75f97d667f70fe329e33d1ccfe15fdd",
+    "design_freeze.json": "accdfe3dfa22923eecda8be2c9ea0671ac8d80018605afd0084f8a8b7b5b25ca",
+    "model_design_selection_manifest.json": "47b8ef7f216bda2fc5993fd56ba8d303c9b5f965141a4899b2e6c28bafcb5a7a",
+    "causal_model_registry.json": "17ed170e8112f99440330f52bc7ba318548929c6f9a43ecde7c44bb2bd7f43c2",
+    "emission_tape_sample.json": "a54d8eae5a0b7472aab5833fc05dc7c9af91f0d3daafccaebe375598c6aae17c",
+    "current_coordinate_contract.json": "61c274b5b32e784ad698b7c5f5e1c94c18360a299371be2b26be79307c90ddab",
+    "test_suite_mode4_corrective.log": "9ae5a6dfc422233fa81f0383e2ddd7b9d8e5966220433682c7b13134d767bb46",
+    "pyflakes_mode4_corrective.log": "ba5a7a923210660e4cf281ff757f4a82938b8ed9ba82df331eab2cd875185b50",
+    "source_hashes": {
+      "src/crypto_regime_lab/experiments/dynamic_fold_provider.py": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+      "scripts/run_rf04_paired_pilot.py": "7772808b0710614467153b4ed52f3c430280d4e240fb593f257c46bef92ca55d",
+      "scripts/run_rf04_decay_and_controls.py": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+      "tests/mode4_corrective/test_rf04_decay_and_controls.py": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292"
+    }
+  },
+  "lab_run_id": "RF-04",
+  "written_at_utc": "2026-09-11T20:16:25.115170+00:00"
+}

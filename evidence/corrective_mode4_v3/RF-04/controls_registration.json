@@ -1,0 +1,90 @@
+{
+  "schema": "regime_lab.rf04_controls_registration.v1",
+  "status": "REGISTERED_BEFORE_CONTROL_RUNS",
+  "study_id": "corrective_mode4_v3",
+  "phase": "RF-04",
+  "pilot_artifact": {
+    "path": "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json",
+    "sha256": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5"
+  },
+  "development_window": {
+    "start": "2021-01-01",
+    "end": "2022-06-30"
+  },
+  "matched_control": {
+    "arm": "M4_CAL_MATCHED",
+    "required": true,
+    "reason": "the pilot refit counts differ materially (3 calendar vs 6 regime); M4_CAL_MATCHED isolates refit count and compute from timing",
+    "rule": "six evenly spaced calendar cutoffs at a fixed 100-day cadence from the primary calendar first cutoff 2021-01-01 (2021-01-01, 2021-04-11, 2021-07-20, 2021-10-28, 2022-02-05, 2022-05-16), chosen in development before this run to match the 6 refits of the causal controller while keeping every fold's evaluation segment non-empty",
+    "cutoffs": [
+      "2021-01-01T00:00:00+00:00",
+      "2021-04-11T00:00:00+00:00",
+      "2021-07-20T00:00:00+00:00",
+      "2021-10-28T00:00:00+00:00",
+      "2022-02-05T00:00:00+00:00",
+      "2022-05-16T00:00:00+00:00"
+    ],
+    "refits": 6,
+    "budget": {
+      "optuna_trials_per_cutoff": 8,
+      "seed": 20260911,
+      "train_memory_days": 180,
+      "account_capital": 20000.0,
+      "entry_notional": 2000.0,
+      "one_way_fee": 0.0004,
+      "slippage_bps": 1.0
+    },
+    "cells": [
+      "A-SC/BTCUSDT",
+      "A-HMA/BTCUSDT"
+    ]
+  },
+  "placebo": {
+    "arm": "M4_REGIME_DELAYED",
+    "rule": "the causal controller reads the same emission tape with every emission's available_at shifted forward by 14 calendar days; the controller, training memory, budget, seed, economics and evaluation dates are otherwise identical to M4_REGIME",
+    "delay_days": 14,
+    "budget_rule": "run only if the bounded pilot budget remains under the registered tier cap (T3=900s per job) after the mandatory matched control and the D2 anchors; otherwise REGISTERED_NOT_RUN with the measured reason"
+  },
+  "decay_anchor": {
+    "rule": "the registered anchor subset is the FIRST selection (fold 0) of each primary arm on each cell; parameters are frozen from that selection and replayed through the actual native-event QuantBT account over H1=[0,90), H2=[90,180), H3=[180,270) days after the selection cutoff. The rule uses the earliest selection only and cannot select anchors by how they decay",
+    "anchors": [
+      {
+        "cell": "A-SC/BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "arm": "M4_CAL",
+        "fold_id": 0
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "arm": "M4_REGIME",
+        "fold_id": 0
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "arm": "M4_CAL",
+        "fold_id": 0
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "arm": "M4_REGIME",
+        "fold_id": 0
+      }
+    ],
+    "h_days": 90,
+    "windows": [
+      "H1=[0,90) days",
+      "H2=[90,180) days",
+      "H3=[180,270) days"
+    ]
+  },
+  "registered_at_utc": "2026-09-11T20:02:20.256556+00:00",
+  "lab_run_id": "RF-04",
+  "written_at_utc": "2026-09-11T20:02:20.256600+00:00"
+}
