@@ -1,0 +1,87 @@
+{
+  "schema": "regime_lab.rf03_controller_dispositions.v3",
+  "generated_at_utc": "2026-09-11T16:21:16.499232+00:00",
+  "phase": "RF-03",
+  "study_id": "corrective_mode4_v3",
+  "controller": {
+    "policy": "online_trigger_schedule",
+    "rules": [
+      "semantic change only",
+      "decision_eligible + quality allowlist",
+      "min spacing",
+      "MAX_AGE reason",
+      "budget cap",
+      "no forced count"
+    ],
+    "synthetic": {
+      "positive": {
+        "cutoffs": [
+          "2024-03-01T00:00:00+00:00"
+        ],
+        "source": "online controller: 1 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE']"
+      },
+      "null": {
+        "cutoffs": [],
+        "source": "online controller: 0 triggers, no forced count; reasons []"
+      },
+      "namespace_only": {
+        "cutoffs": [],
+        "source": "online controller: 0 triggers, no forced count; reasons []"
+      },
+      "ineligible": {
+        "cutoffs": [],
+        "source": "online controller: 0 triggers, no forced count; reasons []"
+      },
+      "max_age": {
+        "cutoffs": [
+          "2024-03-01T00:00:00+00:00",
+          "2024-11-01T00:00:00+00:00"
+        ],
+        "source": "online controller: 2 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'MAX_AGE']"
+      }
+    }
+  },
+  "dispositions": {
+    "A09": {
+      "status": "QUARANTINED_UNSUPPORTED_PATH",
+      "repair_phase": "RF-03",
+      "economic_evidence": "SECONDARY_NOT_EVALUATED",
+      "note": "E_RESPONSE_V2 remains disabled; no copy of D's schedule is accepted"
+    },
+    "A10": {
+      "status": "FIXED_AND_VERIFIED",
+      "repair": "semantic state identity + decision_eligible/quality filter; online controller with no forced count",
+      "tests": [
+        "test_a10_a_namespace_change_alone_does_not_trigger",
+        "test_a10_an_ineligible_or_unknown_emission_does_not_trigger"
+      ]
+    },
+    "A11": {
+      "status": "FIXED_AND_VERIFIED",
+      "repair": "Emission.economic_context kept; context_distance_economic compares raw coordinates",
+      "tests": [
+        "test_a11_opposite_economic_contexts_are_not_collapsed"
+      ]
+    },
+    "A12": {
+      "status": "SECONDARY_REPAIRED_NOT_MARKET_EVALUATED",
+      "note": "unit-level support/dependence diagnostics only; market evidence SECONDARY_NOT_EVALUATED"
+    },
+    "A13": {
+      "status": "SECONDARY_REPAIRED_NOT_MARKET_EVALUATED",
+      "note": "bank specialists remain secondary; no market sweep in RF-03"
+    },
+    "A14": {
+      "status": "REPAIRED_UNIT_ONLY",
+      "note": "inner-train scaler rule and fixed-target ablation rule recorded; outer retune prohibited"
+    }
+  },
+  "secondary": {
+    "E_RESPONSE_V2": "SECONDARY_NOT_EVALUATED",
+    "old_economic_claims": "INVALID"
+  },
+  "market_runs": 0,
+  "note": "synthetic tapes only; treatment-strength is proven at the controller level, not on prices",
+  "lab_run_id": "RF-03",
+  "written_at_utc": "2026-09-11T16:21:16.499261+00:00"
+}

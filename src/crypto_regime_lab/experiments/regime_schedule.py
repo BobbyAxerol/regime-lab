@@ -105,19 +105,35 @@ def transition_cutoffs(emissions: list[dict], *, count: int, earliest: str,
         latest_ts = latest_ts.tz_localize("UTC")
 
     changes: list[pd.Timestamp] = []
-    previous = None
+    previous: tuple[object, object, object] | None = None
     for record in emissions:
-        state = (record.get("state_namespace"), record.get("state_id"))
+        # A10: an ineligible or non-allowlisted emission is not a market state.
+        if not record.get("decision_eligible", True):
+            continue
+        if record.get("quality_status", "OK") not in ("OK",):
+            continue
         moment = pd.Timestamp(record["available_at"])
         if moment.tzinfo is None:
             moment = moment.tz_localize("UTC")
-        if previous is not None and state != previous and earliest_ts <= moment <= latest_ts:
-            changes.append(moment)
-        previous = state
+        if not (earliest_ts <= moment <= latest_ts):
+            continue
+        # A10: a namespace/version change is not a market change. A change only
+        # counts inside one namespace, or across namespaces when a common
+        # coordinate is published for both.
+        common = record.get("state_common")
+        namespace = record.get("state_namespace")
+        semantic = common if common is not None else record.get("state_id")
+        if previous is not None:
+            prev_common, prev_namespace, prev_semantic = previous
+            comparable = (common is not None and prev_common is not None) or namespace == prev_namespace
+            if comparable and semantic != prev_semantic:
+                changes.append(moment)
+        previous = (common, namespace, semantic)
 
     period = (latest_ts - earliest_ts) / count
     chosen: list[pd.Timestamp] = []
     gap = pd.Timedelta(days=min_gap_days)
+    missing_periods: list[int] = []
     for index in range(count):
         window_start = earliest_ts + period * index
         window_end = earliest_ts + period * (index + 1)
@@ -126,19 +142,79 @@ def transition_cutoffs(emissions: list[dict], *, count: int, earliest: str,
         if candidates:
             chosen.append(candidates[0])            # first in the period, never "biggest"
         else:
-            raise ScheduleError(
-                f"no state change between {window_start.date()} and {window_end.date()} that "
-                f"respects the {min_gap_days:g}-day gap. A dynamic arm cannot be given a refresh "
-                "the states did not ask for, and one padded to the count is just the calendar")
+            # A10: no transition in this period is a result, not a reason to raise
+            # and not a reason to pad the count back to the calendar.
+            missing_periods.append(index)
 
-    if len(chosen) != count:
-        raise ScheduleError(
-            f"placed {len(chosen)} of {count} refresh times; a dynamic arm with fewer refreshes "
-            "is not compute-matched")
     return RegimeSchedule(
         cutoffs=tuple(t.isoformat() for t in chosen),
-        source=(f"{len(changes)} emitted state changes; the first inside each of {count} equal "
-                f"periods, with a {min_gap_days:g}-day minimum gap"))
+        source=(f"{len(changes)} eligible semantic state changes; the first inside each of "
+                f"{count} equal periods with a {min_gap_days:g}-day minimum gap; "
+                f"{len(missing_periods)} periods had no eligible transition"))
+
+
+def online_trigger_schedule(emissions: list[dict], *, earliest: str, latest: str,
+                            min_gap_days: float = 30.0, max_age_days: float = 180.0,
+                            budget: int | None = None,
+                            quality_allowlist: tuple[str, ...] = ("OK",)) -> RegimeSchedule:
+    """RF-03.3: an online controller with no forced refit count.
+
+    A trigger fires only on an eligible semantic state change (A10), at least
+    ``min_gap_days`` after the previous trigger. When no change has fired for
+    ``max_age_days`` the controller may request a refresh with reason
+    ``MAX_AGE`` — never described as a detected regime. ``budget`` caps the
+    number of search requests; the returned ``source`` records the reasons.
+    """
+    earliest_ts = pd.Timestamp(earliest)
+    latest_ts = pd.Timestamp(latest)
+    if earliest_ts.tzinfo is None:
+        earliest_ts = earliest_ts.tz_localize("UTC")
+    if latest_ts.tzinfo is None:
+        latest_ts = latest_ts.tz_localize("UTC")
+
+    gap = pd.Timedelta(days=min_gap_days)
+    max_age = pd.Timedelta(days=max_age_days)
+    chosen: list[pd.Timestamp] = []
+    triggers: list[dict] = []
+    previous: tuple[object, object, object] | None = None
+    last_trigger: pd.Timestamp | None = None
+    for record in emissions:
+        if not record.get("decision_eligible", True):
+            continue
+        if record.get("quality_status", "OK") not in quality_allowlist:
+            continue
+        moment = pd.Timestamp(record["available_at"])
+        if moment.tzinfo is None:
+            moment = moment.tz_localize("UTC")
+        if not (earliest_ts <= moment <= latest_ts):
+            continue
+        common = record.get("state_common")
+        namespace = record.get("state_namespace")
+        semantic = common if common is not None else record.get("state_id")
+        changed = False
+        if previous is not None:
+            prev_common, prev_namespace, prev_semantic = previous
+            comparable = (common is not None and prev_common is not None) or namespace == prev_namespace
+            changed = comparable and semantic != prev_semantic
+        previous = (common, namespace, semantic)
+        if budget is not None and len(chosen) >= budget:
+            break
+        if last_trigger is not None and moment - last_trigger < gap:
+            continue
+        if changed:
+            chosen.append(moment)
+            last_trigger = moment
+            triggers.append({"at": moment.isoformat(), "reason": "SEMANTIC_STATE_CHANGE",
+                             "namespace": namespace, "state_id": record.get("state_id")})
+        elif last_trigger is not None and moment - last_trigger >= max_age:
+            chosen.append(moment)
+            last_trigger = moment
+            triggers.append({"at": moment.isoformat(), "reason": "MAX_AGE",
+                             "namespace": namespace, "state_id": record.get("state_id")})
+    return RegimeSchedule(
+        cutoffs=tuple(t.isoformat() for t in chosen),
+        source=(f"online controller: {len(triggers)} triggers, no forced count; "
+                f"reasons {[t['reason'] for t in triggers]}"))
 
 
 def assert_compute_matched(calendar: CalendarSpec, schedule: RegimeSchedule) -> dict:

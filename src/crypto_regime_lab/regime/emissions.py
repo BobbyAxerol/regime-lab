@@ -52,6 +52,9 @@ class Emission:
     input_refs: tuple[str, ...]
     membership_score: tuple[float, ...]
     membership_is_calibrated: bool = False
+    # A11: the raw economic coordinate the state was inferred from. Responses
+    # compare THIS, not the squared fit residual, which loses sign and state.
+    economic_context: tuple[float, ...] = ()
     decision_eligible: bool = True
 
     def as_record(self) -> dict:
@@ -68,6 +71,7 @@ class Emission:
             "quality_status": self.quality_status, "input_refs": list(self.input_refs),
             "membership_score": [float(m) for m in self.membership_score],
             "membership_is_calibrated": bool(self.membership_is_calibrated),
+            "economic_context": [float(v) for v in self.economic_context],
             "membership_note": ("softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a "
                                 "probability: nothing here calibrates it against outcomes, so "
                                 "'0.9' does not mean the market is 90% in this state "
@@ -223,7 +227,9 @@ def build_emission(state_id: int, costs: np.ndarray, *, namespace: str, z_t: np.
         model_fit_cutoff=model_fit_cutoff, ready_at=ready_at, version=version,
         quality_status=quality_status, input_refs=tuple(input_refs),
         membership_score=tuple(float(m) for m in membership_scores(np.asarray(costs))),
-        membership_is_calibrated=False, decision_eligible=decision_eligible)
+        membership_is_calibrated=False,
+        economic_context=tuple(float(v) for v in z_t.reshape(-1)),
+        decision_eligible=decision_eligible)
 
 
 def batch_stream_parity(z: np.ndarray, centroids: np.ndarray, weights: np.ndarray,

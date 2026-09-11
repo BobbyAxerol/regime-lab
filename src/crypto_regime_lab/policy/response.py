@@ -116,6 +116,27 @@ def context_distance(x_t: np.ndarray, x_e: np.ndarray, weights: np.ndarray) -> f
     return float(np.sqrt(np.sum(weights * diff * diff)))
 
 
+def emission_context(emission) -> np.ndarray:
+    """A11: the raw economic coordinate of an emission, never the fit residual.
+
+    A residual is a fit-error contribution: it carries neither the sign nor the
+    level of the market context, so two opposite regimes sitting on their own
+    centroids both report zero residual. Responses must compare this coordinate.
+    """
+    values = getattr(emission, "economic_context", None)
+    if values is None and isinstance(emission, dict):
+        values = emission.get("economic_context")
+    if not values:
+        raise ValueError("emission carries no economic_context; residual-only context is not comparable")
+    return np.asarray(values, dtype=np.float64)
+
+
+def context_distance_economic(left, right, weights: np.ndarray) -> float:
+    """Weighted context distance on the raw economic coordinates (A11)."""
+    return context_distance(emission_context(left), emission_context(right),
+                            np.asarray(weights, dtype=np.float64))
+
+
 def similarity_weights(x_t: np.ndarray, contexts: np.ndarray, ages_days: np.ndarray,
                        eligibility: np.ndarray, feature_weights: np.ndarray, *,
                        bandwidth: float = BANDWIDTH_H,
