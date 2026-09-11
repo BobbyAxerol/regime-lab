@@ -26,6 +26,7 @@ import numpy as np
 import pandas as pd
 
 from ..alphas.base import Fill, IntentKind, MarketSlice
+from ..alphas.contracts import BarDecision
 from ..experiments.evaluator import (
     ACCOUNT,
     MAX_SWEEPS,
@@ -211,8 +212,12 @@ def _one_sweep(alpha_id: str, frame: pd.DataFrame, arrays, engine_frame, market,
     observed whole-window run when ``forced_exits`` is supplied."""
     open_ = arrays[0]
     pending = list(schedule)
-    active = initial
-    adapter = build_adapter(alpha_id, active.params, market)
+    # A02: a version selected at a later cutoff may not be active before its own
+    # requested bar. If the first (initial) version is requested after bar 0, the
+    # account is flat until then instead of backfilling it to bar 0.
+    active_ready = initial.requested_at_bar <= 0
+    active = initial if active_ready else None
+    adapter = build_adapter(alpha_id, initial.params, market)
     # Every version's adapter is fed EVERY bar from the moment it is requested,
     # so its indicators warm on real history rather than being reinitialised at
     # the switch. Only the active one may emit intents.
@@ -233,6 +238,14 @@ def _one_sweep(alpha_id: str, frame: pd.DataFrame, arrays, engine_frame, market,
 
     applied_exits: dict[int, float] = {}
     for t in range(n):
+        if not active_ready and t >= initial.requested_at_bar:
+            active_ready = True
+            active = initial
+        if not active_ready:
+            version_by_bar.append("FLAT_UNTIL_READY")
+            tape_decisions.append(BarDecision(index=t, position_entering_bar=0.0,
+                                              target_after_close=0.0, intents=[]))
+            continue
         # -- an exit observed by a previous whole-window run takes precedence
         if forced_exits is not None and t in forced_exits and adapter.state.position != 0.0:
             adapter.on_fill(Fill(index=t, side=-int(np.sign(adapter.state.position)),

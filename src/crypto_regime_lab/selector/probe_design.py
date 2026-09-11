@@ -32,6 +32,9 @@ class ProbeStatus:
     EVALUATED = "EVALUATED"
     STRUCTURALLY_INVALID = "STRUCTURALLY_INVALID"
     RUNTIME_ERROR = "RUNTIME_ERROR"
+    # A03: an execution that did not converge, or left intents the engine never
+    # accepted, is not a financial observation and may not be scored.
+    NOT_EVALUATED = "NOT_EVALUATED"
     DUPLICATE = "DUPLICATE"
 
 

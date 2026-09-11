@@ -174,6 +174,11 @@ def _evaluate(alpha_id: str, params: dict, frame: pd.DataFrame, bounds, origin: 
     except Exception as exc:                      # a real failure, never a loss of 0
         return Evaluation(point_id, params, origin, ProbeStatus.RUNTIME_ERROR,
                           error=f"{type(exc).__name__}: {exc}")
+    if not run.converged or run.unmapped_intents:
+        return Evaluation(
+            point_id, params, origin, ProbeStatus.NOT_EVALUATED, window=window,
+            error=(f"A03: execution is not valid (converged={run.converged}, "
+                   f"unmapped_intents={run.unmapped_intents}); it is not scored as a return"))
     return Evaluation(point_id, params, origin, ProbeStatus.EVALUATED, episodes, window)
 
 

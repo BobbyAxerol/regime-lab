@@ -181,6 +181,12 @@ def _sweep(alpha_id: str, params: dict, frame: pd.DataFrame, arrays: list[np.nda
                         bar, price, _ = _exit_oracle(engine_frame, t, side, stop, take_profit,
                                                      backend=backend)
                         next_exit_bar, next_exit_price = bar, price
+                # A04: an on_fill follow-up that is not a protection level -- the
+                # HMA gap repair emits EXIT_ALL -- must reach the position, not
+                # be dropped because it has no stop_price.
+                if any(follow.kind is IntentKind.EXIT_ALL for follow in follow_ups) \
+                        and t + 2 < n:
+                    next_exit_bar, next_exit_price = t + 2, float(open_[t + 2])
             elif intent.kind is IntentKind.EXIT_ALL and adapter.state.position != 0.0 \
                     and t + 1 < n:
                 adapter.on_fill(Fill(index=t + 1,
