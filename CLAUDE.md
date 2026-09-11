@@ -62,7 +62,11 @@ These override any convenience default. They restate and tighten the guide.
 
 12. **Report the `../quantbt` status in EVERY reply.** The user has forbidden any modification of `/root/bobby/pool_alpha/quantbt`. At the end of each response, state honestly whether anything there was touched — verified, not assumed: run `git -C /root/bobby/pool_alpha/quantbt status --porcelain` (and compare digests where relevant) and report the result. If something *was* touched, say so immediately and plainly rather than burying it.
 
-## Current state (LAB-04 … LAB-08 all COMPLETE — 2026-09-11)
+## Corrective Mode 4 study — authoritative from 2026-09-11
+
+`REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` supersedes this digest wherever they conflict. It runs five corrective phases **RF-01 … RF-05** on branch `mode4-corrective` for Mode 4 `per_fold_causal`: `M4_CAL` (calendar baseline) vs `M4_REGIME` (causal regime timing) on the four real alphas, with findings A01–A16 mapped to dispositions, historical claim verdicts superseded to `NOT_EVALUABLE`, and the old E arm quarantined as not implemented as specified. Current state and contract: `evidence/corrective_mode4_v3/RF-01/report.md` and `corrective_study_spec.json`. The before-repair tests in `tests/mode4_corrective/` fail until RF-02/RF-03 fix their findings. Historical LAB-01…LAB-09 evidence and its `FAILED_VALIDITY` conclusion are preserved and never rewritten.
+
+## Historical state — LAB-01 … LAB-09 complete; LAB-09 conclusion FAILED_VALIDITY
 
 `pytest tests -q` → **696 tests**; `pyflakes` → **0** outside `alphas/raw-supplied/`.
 Audits: **LAB-04 64/64**, **LAB-05 53/53**, **LAB-06 79/79**, **LAB-07 75/75**, **LAB-08 74/74**.

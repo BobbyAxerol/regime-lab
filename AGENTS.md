@@ -9,18 +9,28 @@ are the executable truth.
 
 ## Current state (verify, don't assume)
 
-- LAB-00 … LAB-09 complete; **LAB-10 not started**. `reports/lab01_report.md` … `lab09_report.md`
-  are the measured results; `configs/*_task_audit.json` are the clause audits.
-- LAB-09 conclusion: **`FAILED_VALIDITY`**. Root cause COR-13: the registered one-way fee was
-  passed into the engine's `fee` parameter, which quantbt documents as a legacy ROUND-TRIP fee and
-  halves — every account was charged 0.0002 instead of 0.0004. This is a **design** defect (one
-  of twelve re-selected arm/cutoff choices changed at the registered fee), not just accounting.
+- Historical study LAB-01 … LAB-09 is complete and its conclusion is **`FAILED_VALIDITY`**
+  (`reports/lab09_report.md`). LAB-10 is folded into the corrective phases below — there is no
+  separate LAB-10 run. `evidence/crypto_regime_timeedge_v2/` is append-only and never edited.
+- The authoritative plan now is `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md`
+  (Vietnamese, ~13.5k lines): a Mode 4 `per_fold_causal` corrective study in five phases
+  **RF-01 … RF-05** on branch `mode4-corrective`. It supersedes Final V2 wherever they conflict.
+  Registered spec: `evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json`. Historical
+  claim verdicts are superseded to `NOT_EVALUABLE` in `historical_invalidation.json` without
+  editing any historical artifact.
+- **RF-01 is complete (TECHNICAL_ONLY)**: identity, Mode 4 binding, invalidation, dispositions and
+  spec are committed; the 12 restored audit probes reproduce on this source. The before-repair
+  tests in `tests/mode4_corrective/` **fail by design** (`6 failed / 3 passed`; full suite
+  `6 failed, 789 passed`) and must go green in RF-02…RF-03 — never delete or weaken them.
+- The lab marker keeps `study_id=crypto_regime_timeedge_v2` (LAB-01 bootstrap evidence; not
+  rewritten). The corrective study uses `study_id=corrective_mode4_v3` with a stable phase dir
+  `evidence/corrective_mode4_v3/RF-01/` (not a timestamped run dir).
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
-- Lab git: repo on `main`, remote `regime-lab`. **Standing rule (user): commit every finished
-  piece of work**, not only at phase ends. Before each commit run `git status` + `git diff`, stage
-  only the intended files, and keep one scoped purpose per commit. Never commit the venv or
-  secrets. Push only when explicitly asked.
+- Lab git: repo on `main`, remote `regime-lab`; corrective work is on **`mode4-corrective`**.
+  **Standing rule (user): commit every finished piece of work**, not only at phase ends. Before
+  each commit run `git status` + `git diff`, stage only the intended files, and keep one scoped
+  purpose per commit. Never commit the venv or secrets. Push only when explicitly asked.
 
 ## Environment and commands
 
@@ -28,11 +38,15 @@ Run from the lab root. Use only the lab venv — never the shared `/root/bobby/p
 
 ```bash
 LAB=/root/bobby/pool_alpha/lab_regime_model_quantbt
-$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # full suite (~786 tests)
+$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # 6 before-repair failures expected until RF-02/03
 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/test_x.py::test_y -q
+$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q   # the RF before-repair set
 $LAB/environments/lab_venv/bin/python -m pyflakes src scripts tests     # clean except src/.../alphas/raw-supplied/
 PYTHONPATH=src $LAB/environments/lab_venv/bin/python -m crypto_regime_lab.cli <stage> --lab-root $LAB
 $LAB/environments/lab_venv/bin/python scripts/<runner>.py               # scripts insert src/ themselves
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf01.py           # regenerate RF-01 artifacts (--force to supersede)
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf01_regressions.py --full
+$LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf01_report.py  # renders evidence/corrective_mode4_v3/RF-01/report.md
 ```
 
 - `python -m crypto_regime_lab.cli` needs `PYTHONPATH=src`; pytest gets it from `tests/conftest.py`.
