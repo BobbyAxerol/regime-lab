@@ -360,7 +360,16 @@ def run_cutoff(alpha_id: str, symbol: str, train: pd.DataFrame, fold: int,
 
 
 def _select_with_installed(ok: dict[str, Evaluation]) -> dict:
-    """Arm A. The decision is made by the installed function, not reimplemented."""
+    """Arm A. The decision is made by the installed function, not reimplemented.
+
+    A08 / QUARANTINED_FOR_HISTORICAL_TESTS_ONLY. This is the audited defect path:
+    the records are built by hand and a mean episode utility is written into the
+    ``mean_is_sharpe`` field, so it is an argmax-utility selector wearing a
+    Sharpe label, not the public Mode 4 pipeline. The corrective study never
+    calls it: arm A is the actual public WFO in
+    :mod:`crypto_regime_lab.selector.mode4_baseline`. It stays here so the
+    historical LAB-04 tests keep their evidence.
+    """
     from quantbt.walkforward import WalkForwardConfig, WalkForwardTrialRecord
     from quantbt.walkforward import _select_oos_candidate_record
 
