@@ -1,0 +1,1090 @@
+{
+  "schema": "crypto_regime_lab.causal_model_registry.v1",
+  "gate": "G10",
+  "finding": "A14",
+  "symbol": "BTCUSDT",
+  "snapshot_id": "server_core_v1",
+  "observation_interval": "4h",
+  "design": {
+    "source": "model_design_selection_manifest.json",
+    "n_states": 3,
+    "lambda_jump": 0.5,
+    "cadence": "4h",
+    "ratio_control": "K and lambda are fixed across the two refits so the only thing that changes is the training vintage"
+  },
+  "models": [
+    {
+      "model_id": "rf04_jm_k3_2023-06-01",
+      "state_namespace": "rf04@jm_k3@2023-06-01",
+      "training_start": "2022-06-01 00:00:00",
+      "training_cutoff": "2023-06-01",
+      "fit_ready_at": "2023-06-01 00:00:00",
+      "n_states": 3,
+      "lambda_jump": 0.5,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {},
+      "centroids": [
+        [
+          3.196111657727786,
+          0.19858222792299837,
+          0.42897933751057854,
+          0.2325854632552345,
+          0.795600900857393,
+          1.478315614423667,
+          0.3193701829318409,
+          0.15447181889424805
+        ],
+        [
+          -0.09283596254498235,
+          0.005289869577711129,
+          0.01905201179586458,
+          -0.01786475295802527,
+          -0.05675571127102598,
+          -0.20469812080638658,
+          0.12818659365803678,
+          0.022530305211054504
+        ],
+        [
+          0.11998518934416857,
+          -0.13568154200440857,
+          0.08154110630526144,
+          -0.19440101094296522,
+          0.13252646513136737,
+          2.3096327162536183,
+          0.08635348823734237,
+          -0.37484128827888963
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.019041239190946878,
+          -0.040461176189719325,
+          0.40552951038765417,
+          0.00029827475847177265,
+          -0.0009867663579608901,
+          0.006247655541514208,
+          0.4,
+          5.362169068808567e-05
+        ],
+        "scale": [
+          0.0120251364183311,
+          1.1434483773436543,
+          0.3608950703466071,
+          0.04132666992584058,
+          0.6345796060771808,
+          0.0030476354954899264,
+          0.593040000001,
+          0.003162193774532696
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the trailing training window ending at this cutoff"
+      },
+      "seeds": [
+        11,
+        23
+      ],
+      "selected_seed": 11,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.8459843831393938,
+          "train_median": 0.3480870718827964,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          308,
+          1546,
+          336
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "multi_start": {
+          "selected_seed": 11,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 18,
+              "converged": true,
+              "objective_trace": [
+                1924.1387553264585,
+                1076.098858919229,
+                1055.4240028903419,
+                1050.5034992906371,
+                1048.6315696051186,
+                1046.629546272079,
+                1044.5170719698697,
+                1042.2868927230238,
+                1040.9852013059221,
+                1039.905511914485,
+                1039.2794375072503,
+                1039.0991628781148,
+                1037.9139403407937,
+                1036.7228647230654,
+                1036.4454290266622,
+                1036.4261282310265,
+                1036.4216402972265,
+                1036.4216402972265
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1036.4216402972265
+            },
+            {
+              "seed": 23,
+              "iterations": 29,
+              "converged": true,
+              "objective_trace": [
+                1422.5067719259018,
+                1114.6226577639047,
+                1076.6062948796762,
+                1060.7115628576537,
+                1056.5073986702196,
+                1055.4908556568953,
+                1054.456803658916,
+                1053.9332038202574,
+                1053.6346888368214,
+                1053.4510894180444,
+                1052.290468334608,
+                1050.690804764511,
+                1050.4143976348523,
+                1049.8524384626558,
+                1047.6039079252246,
+                1045.5823354445313,
+                1043.471552317245,
+                1041.5875356827623,
+                1040.4698196848008,
+                1039.6721066833775,
+                1039.2598171047132,
+                1039.1184731046746,
+                1037.8996318076818,
+                1036.7277094005735,
+                1036.4940887787145,
+                1036.4430114573051,
+                1036.4261282310265,
+                1036.4216402972265,
+                1036.4216402972265
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1036.4216402972265
+            }
+          ],
+          "objective_spread": {
+            "min": 1036.4216402972265,
+            "max": 1036.4216402972265,
+            "range": 0.0
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "3d4c98845d8b5e9a",
+        "model_selection.py": "ab099eb8b4330fef",
+        "registry.py": "d652cb506729c190"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "RF-04 G10 causal registry fit; development role only",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "bd8f684cb1e4c4d2",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    },
+    {
+      "model_id": "rf04_jm_k3_2023-12-01",
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "training_start": "2022-12-01 00:00:00",
+      "training_cutoff": "2023-12-01",
+      "fit_ready_at": "2023-12-01 00:00:00",
+      "n_states": 3,
+      "lambda_jump": 0.5,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {},
+      "centroids": [
+        [
+          3.068014165659465,
+          0.6038048120361844,
+          0.8084022598500369,
+          0.28103636060537485,
+          1.0020433243283735,
+          0.9913186785424178,
+          0.553936981198169,
+          0.9200561544361016
+        ],
+        [
+          -0.0924880072613979,
+          -0.046869992657646894,
+          0.007989472437669828,
+          -0.013175287469902578,
+          -0.032078439234059224,
+          -0.15573862892325457,
+          0.12187378432410614,
+          -0.017608408491246105
+        ],
+        [
+          0.5075573582080852,
+          -0.11226439799686887,
+          0.12125801374956444,
+          -0.19060021847240885,
+          0.10203510151751076,
+          2.7247897399663126,
+          0.15426050492735224,
+          -0.3627415351891067
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.013984052571048799,
+          0.04628822300427825,
+          0.3803002798242583,
+          -0.00374588041672147,
+          -0.002759785595540509,
+          0.005258259309468435,
+          0.4,
+          0.0001292909017364663
+        ],
+        "scale": [
+          0.009375493937941489,
+          1.084718007819517,
+          0.34320929447212234,
+          0.04750370232139757,
+          0.7358731886063712,
+          0.002621242469146813,
+          0.593040000001,
+          0.002654908274876128
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the trailing training window ending at this cutoff"
+      },
+      "seeds": [
+        11,
+        23
+      ],
+      "selected_seed": 23,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.7124301442761638,
+          "train_median": 0.34034240602753435,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          266,
+          1562,
+          362
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "multi_start": {
+          "selected_seed": 23,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 12,
+              "converged": true,
+              "objective_trace": [
+                1493.9818908309858,
+                1056.2697952529668,
+                1037.596772426589,
+                1027.8787542790335,
+                1021.2189451063441,
+                1017.3552634035248,
+                1015.0934958719606,
+                1013.3146780657119,
+                1012.1573306864757,
+                1011.738268475746,
+                1011.6971213148075,
+                1011.6971213148075
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1011.6971213148075
+            },
+            {
+              "seed": 23,
+              "iterations": 9,
+              "converged": true,
+              "objective_trace": [
+                1252.9058590360614,
+                1043.2618740899493,
+                1021.6735273992497,
+                1014.8047891683575,
+                1013.4136857421993,
+                1012.0292450511226,
+                1011.4525345474617,
+                1011.4103478385466,
+                1011.4103478385466
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1011.4103478385466
+            }
+          ],
+          "objective_spread": {
+            "min": 1011.4103478385466,
+            "max": 1011.6971213148075,
+            "range": 0.28677347626091887
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "3d4c98845d8b5e9a",
+        "model_selection.py": "ab099eb8b4330fef",
+        "registry.py": "d652cb506729c190"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "RF-04 G10 causal registry fit; development role only",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "4ea380a34b95c440",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    },
+    {
+      "model_id": "rf04_mismatch_probe_jm_k2_2023-12-01",
+      "state_namespace": "rf04_mismatch_probe@jm_k2@2023-12-01",
+      "training_start": "2022-12-01 00:00:00",
+      "training_cutoff": "2023-12-01",
+      "fit_ready_at": "2023-12-01 00:00:00",
+      "n_states": 2,
+      "lambda_jump": 0.5,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {},
+      "centroids": [
+        [
+          1.6954690554939007,
+          0.1386691166238207,
+          0.4738157076068461,
+          -0.001984555070789936,
+          0.5522501609553103,
+          1.802479853235174,
+          0.2708631608789833,
+          0.181967946722639
+        ],
+        [
+          -0.17186012795135966,
+          -0.03607582105761713,
+          -0.0242485128783434,
+          -0.011688831972217945,
+          -0.06997360971043558,
+          -0.12341238491353193,
+          0.13481493280076973,
+          -0.027319869856439583
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.013984052571048799,
+          0.04628822300427825,
+          0.3803002798242583,
+          -0.00374588041672147,
+          -0.002759785595540509,
+          0.005258259309468435,
+          0.4,
+          0.0001292909017364663
+        ],
+        "scale": [
+          0.009375493937941489,
+          1.084718007819517,
+          0.34320929447212234,
+          0.04750370232139757,
+          0.7358731886063712,
+          0.002621242469146813,
+          0.593040000001,
+          0.002654908274876128
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the trailing training window ending at this cutoff"
+      },
+      "seeds": [
+        11,
+        23
+      ],
+      "selected_seed": 11,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 2.108215939932427,
+          "train_median": 0.3542202273961358,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          599,
+          1591
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "multi_start": {
+          "selected_seed": 11,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 11,
+              "converged": true,
+              "objective_trace": [
+                1605.9087898246655,
+                1110.4402050461317,
+                1100.2036394411398,
+                1096.9307948024516,
+                1094.3004038001018,
+                1093.8171113456117,
+                1093.553943324267,
+                1093.5376097080984,
+                1093.4793796622037,
+                1093.478594529721,
+                1093.478594529721
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1093.478594529721
+            },
+            {
+              "seed": 23,
+              "iterations": 15,
+              "converged": true,
+              "objective_trace": [
+                1379.9805375701624,
+                1109.152341993369,
+                1098.3698158341222,
+                1097.1270953552485,
+                1096.3872536755,
+                1096.1341340187284,
+                1095.981805531247,
+                1095.5968114334783,
+                1094.9441651277266,
+                1094.4304462994037,
+                1093.9942187780046,
+                1093.603103138341,
+                1093.5054596440766,
+                1093.4979039631291,
+                1093.4979039631291
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1093.4979039631291
+            }
+          ],
+          "objective_spread": {
+            "min": 1093.478594529721,
+            "max": 1093.4979039631291,
+            "range": 0.019309433408125187
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "3d4c98845d8b5e9a",
+        "model_selection.py": "ab099eb8b4330fef",
+        "registry.py": "d652cb506729c190"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "RF-04 G10 causal registry fit; development role only",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "82b53d25339a5d18",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    }
+  ],
+  "model_diagnostics": {
+    "old": {
+      "rows": 2190,
+      "selected_seed": 11,
+      "state_counts": [
+        308,
+        1546,
+        336
+      ],
+      "degenerate": false,
+      "raw_centroids": [
+        [
+          0.05747491788334186,
+          0.1866073500981209,
+          0.5603460385757754,
+          0.009910257427969572,
+          0.5038853399027737,
+          0.010753022681568775,
+          0.5893992932862183,
+          0.0005420915147362189
+        ],
+        [
+          0.017924874076816387,
+          -0.034412483404725976,
+          0.4124052875249671,
+          -0.00044001599033122185,
+          -0.03700278325895877,
+          0.005623810282684579,
+          0.4760197775030903,
+          0.0001248668815648038
+        ],
+        [
+          0.02048407746098979,
+          -0.1956060152301452,
+          0.4349572936838317,
+          -0.007735671654017874,
+          0.08311182567990344,
+          0.013286574189113548,
+          0.4512110726643599,
+          -0.0011316990975452346
+        ]
+      ]
+    },
+    "new": {
+      "rows": 2190,
+      "selected_seed": 23,
+      "state_counts": [
+        266,
+        1562,
+        362
+      ],
+      "degenerate": false,
+      "raw_centroids": [
+        [
+          0.04274820078270773,
+          0.7012461758280062,
+          0.6577514490770587,
+          0.0096043871989652,
+          0.734617030599708,
+          0.007856745930122318,
+          0.7285067873303162,
+          0.002571955599499581
+        ],
+        [
+          0.013116931819637275,
+          -0.004552502057839886,
+          0.38304234102279544,
+          -0.004371755350690561,
+          -0.02636544896022339,
+          0.004850030601248103,
+          0.47227602905568977,
+          8.254219232565793e-05
+        ],
+        [
+          0.0187426535060863,
+          -0.07548699113994274,
+          0.42191715717233724,
+          -0.012800096457428122,
+          0.07232510990792491,
+          0.012400593895363635,
+          0.49148264984227125,
+          -0.0008337546016783632
+        ]
+      ]
+    },
+    "mismatch_probe": {
+      "rows": 2190,
+      "n_states": 2,
+      "raw_centroids": [
+        [
+          0.029879912422799245,
+          0.19670511093456133,
+          0.5429182345418133,
+          -0.003840154130044695,
+          0.4036263012550254,
+          0.009982996050549989,
+          0.5606326889279432,
+          0.000612399109252619
+        ],
+        [
+          0.012372778983266977,
+          0.007156130256206414,
+          0.3719779648272839,
+          -0.004301143211214545,
+          -0.05425148889145647,
+          0.004934765524914391,
+          0.4799506477483033,
+          5.675915318606594e-05
+        ]
+      ]
+    }
+  },
+  "namespace_mappings": [
+    {
+      "schema": "crypto_regime_lab.state_namespace_mapping.v2",
+      "old_namespace": "rf04@jm_k3@2023-06-01",
+      "new_namespace": "rf04@jm_k3@2023-12-01",
+      "old_centroid_digest": "bd8f684cb1e4c4d2",
+      "new_centroid_digest": "4ea380a34b95c440",
+      "reference_spread": 1.1379091276839681,
+      "max_relative_distance": 0.5,
+      "common_coordinate_frame": {
+        "frame": "old_model_training_transform",
+        "axis": "raw economic feature coordinates recovered through each fit's own scaler, then expressed in the old model's standardized frame",
+        "old_scaler_ref_present": true,
+        "new_scaler_ref_present": true
+      },
+      "k_matches": true,
+      "one_to_one": true,
+      "assignment_method": "exact_permutation",
+      "assignment_total_distance": 0.9057367904903503,
+      "mapping": {
+        "0": {
+          "new_state": 0,
+          "old_state": null,
+          "assigned_old_state": 0,
+          "status": "unmatched",
+          "distance": 0.6095364754801438,
+          "assigned_distance": 0.6095364754801438,
+          "nearest_distance": 0.6095364754801438,
+          "relative_distance": 0.5356635786205157,
+          "runner_up_distance": 0.9866176488618775,
+          "new_centroid_raw": [
+            0.04274820078270773,
+            0.7012461758280062,
+            0.6577514490770587,
+            0.0096043871989652,
+            0.734617030599708,
+            0.007856745930122318,
+            0.7285067873303162,
+            0.002571955599499581
+          ],
+          "old_centroid_raw_assigned": [
+            0.05747491788334186,
+            0.1866073500981209,
+            0.5603460385757754,
+            0.009910257427969572,
+            0.5038853399027737,
+            0.010753022681568775,
+            0.5893992932862183,
+            0.0005420915147362189
+          ],
+          "new_centroid_common": [
+            1.971450532205356,
+            0.648658362470885,
+            0.6988788692712488,
+            0.22518418389850803,
+            1.15919860946209,
+            0.5279799342767001,
+            0.5539369811981691,
+            0.7963882318323933
+          ],
+          "old_centroid_common_assigned": [
+            3.1961116577277857,
+            0.1985822279229984,
+            0.42897933751057865,
+            0.2325854632552345,
+            0.7956009008573931,
+            1.4783156144236669,
+            0.3193701829318409,
+            0.15447181889424802
+          ]
+        },
+        "1": {
+          "new_state": 1,
+          "old_state": 1,
+          "assigned_old_state": 1,
+          "status": "matched",
+          "distance": 0.16527458924526126,
+          "assigned_distance": 0.16527458924526126,
+          "nearest_distance": 0.16527458924526126,
+          "relative_distance": 0.14524410185693054,
+          "runner_up_distance": 0.9597633030831288,
+          "new_centroid_raw": [
+            0.013116931819637275,
+            -0.004552502057839886,
+            0.38304234102279544,
+            -0.004371755350690561,
+            -0.02636544896022339,
+            0.004850030601248103,
+            0.47227602905568977,
+            8.254219232565793e-05
+          ],
+          "old_centroid_raw_assigned": [
+            0.017924874076816387,
+            -0.034412483404725976,
+            0.4124052875249671,
+            -0.00044001599033122185,
+            -0.03700278325895877,
+            0.005623810282684579,
+            0.4760197775030903,
+            0.0001248668815648038
+          ],
+          "new_centroid_common": [
+            -0.49266030464973337,
+            0.03140384370941074,
+            -0.062309438982532606,
+            -0.11300281676560335,
+            -0.03999290610542536,
+            -0.4585932085166989,
+            0.12187378432410609,
+            0.009145708232837847
+          ],
+          "old_centroid_common_assigned": [
+            -0.0928359625449825,
+            0.005289869577711126,
+            0.01905201179586451,
+            -0.01786475295802527,
+            -0.05675571127102599,
+            -0.20469812080638672,
+            0.12818659365803675,
+            0.02253030521105451
+          ]
+        },
+        "2": {
+          "new_state": 2,
+          "old_state": 2,
+          "assigned_old_state": 2,
+          "status": "matched",
+          "distance": 0.13092572576494524,
+          "assigned_distance": 0.13092572576494524,
+          "nearest_distance": 0.13092572576494524,
+          "relative_distance": 0.11505815585768575,
+          "runner_up_distance": 0.7617505124325937,
+          "new_centroid_raw": [
+            0.0187426535060863,
+            -0.07548699113994274,
+            0.42191715717233724,
+            -0.012800096457428122,
+            0.07232510990792491,
+            0.012400593895363635,
+            0.49148264984227125,
+            -0.0008337546016783632
+          ],
+          "old_centroid_raw_assigned": [
+            0.02048407746098979,
+            -0.1956060152301452,
+            0.4349572936838317,
+            -0.007735671654017874,
+            0.08311182567990344,
+            0.013286574189113548,
+            0.4512110726643599,
+            -0.0011316990975452346
+          ],
+          "new_centroid_common": [
+            -0.024830128696537276,
+            -0.03063174135730719,
+            0.04540834201183247,
+            -0.3169471733242604,
+            0.11552825770604619,
+            2.0189220013203397,
+            0.15426050492735222,
+            -0.2806204665612511
+          ],
+          "old_centroid_common_assigned": [
+            0.11998518934416852,
+            -0.13568154200440857,
+            0.08154110630526148,
+            -0.19440101094296522,
+            0.13252646513136734,
+            2.3096327162536183,
+            0.08635348823734236,
+            -0.3748412882788896
+          ]
+        }
+      },
+      "matched_states": [
+        "1",
+        "2"
+      ],
+      "unmatched_states": [
+        "0"
+      ],
+      "ambiguous_states": [],
+      "unmapped_states": [
+        "0"
+      ],
+      "all_states_mapped": false,
+      "information_used": "training centroids and declared feature weights only",
+      "is_market_transition": false,
+      "emits_market_transition": false,
+      "triggers_parameter_search": false,
+      "rule": "a permuted or unmatched state ID after a refit is a MODEL event. It is emitted as a model-transition/uncertainty record and never as a market regime change, and it never triggers a parameter search or a market refit (guide 8.4). When K matches the mapping is one-to-one in common raw/economic coordinates (A14)"
+    },
+    {
+      "schema": "crypto_regime_lab.state_namespace_mapping.v2",
+      "old_namespace": "rf04@jm_k3@2023-12-01",
+      "new_namespace": "rf04_mismatch_probe@jm_k2@2023-12-01",
+      "old_centroid_digest": "4ea380a34b95c440",
+      "new_centroid_digest": "82b53d25339a5d18",
+      "reference_spread": 1.2427468816248062,
+      "max_relative_distance": 0.5,
+      "common_coordinate_frame": {
+        "frame": "old_model_training_transform",
+        "axis": "raw economic feature coordinates recovered through each fit's own scaler, then expressed in the old model's standardized frame",
+        "old_scaler_ref_present": true,
+        "new_scaler_ref_present": true
+      },
+      "k_matches": false,
+      "one_to_one": false,
+      "assignment_method": "independent_nearest_k_mismatch",
+      "assignment_total_distance": null,
+      "mapping": {
+        "0": {
+          "new_state": 0,
+          "old_state": null,
+          "assigned_old_state": 2,
+          "status": "ambiguous",
+          "distance": 0.5884785548217053,
+          "assigned_distance": 0.5884785548217053,
+          "nearest_distance": 0.5884785548217053,
+          "relative_distance": 0.4735305020860805,
+          "runner_up_distance": 0.659855959851493,
+          "new_centroid_raw": [
+            0.029879912422799245,
+            0.19670511093456133,
+            0.5429182345418133,
+            -0.003840154130044695,
+            0.4036263012550254,
+            0.009982996050549989,
+            0.5606326889279432,
+            0.000612399109252619
+          ],
+          "old_centroid_raw_assigned": [
+            0.0187426535060863,
+            -0.07548699113994274,
+            0.42191715717233724,
+            -0.012800096457428122,
+            0.07232510990792491,
+            0.012400593895363635,
+            0.49148264984227125,
+            -0.0008337546016783632
+          ],
+          "new_centroid_common": [
+            1.6954690554939005,
+            0.1386691166238207,
+            0.473815707606846,
+            -0.001984555070789939,
+            0.5522501609553103,
+            1.8024798532351745,
+            0.2708631608789833,
+            0.181967946722639
+          ],
+          "old_centroid_common_assigned": [
+            0.5075573582080853,
+            -0.11226439799686887,
+            0.12125801374956453,
+            -0.19060021847240885,
+            0.10203510151751075,
+            2.7247897399663126,
+            0.15426050492735222,
+            -0.3627415351891067
+          ]
+        },
+        "1": {
+          "new_state": 1,
+          "old_state": 1,
+          "assigned_old_state": 1,
+          "status": "matched",
+          "distance": 0.03483275514859446,
+          "assigned_distance": 0.03483275514859446,
+          "nearest_distance": 0.03483275514859446,
+          "relative_distance": 0.028028841322098534,
+          "runner_up_distance": 0.9891702784827672,
+          "new_centroid_raw": [
+            0.012372778983266977,
+            0.007156130256206414,
+            0.3719779648272839,
+            -0.004301143211214545,
+            -0.05425148889145647,
+            0.004934765524914391,
+            0.4799506477483033,
+            5.675915318606594e-05
+          ],
+          "old_centroid_raw_assigned": [
+            0.013116931819637275,
+            -0.004552502057839886,
+            0.38304234102279544,
+            -0.004371755350690561,
+            -0.02636544896022339,
+            0.004850030601248103,
+            0.47227602905568977,
+            8.254219232565793e-05
+          ],
+          "new_centroid_common": [
+            -0.1718601279513597,
+            -0.03607582105761713,
+            -0.02424851287834334,
+            -0.011688831972217938,
+            -0.06997360971043558,
+            -0.12341238491353197,
+            0.13481493280076973,
+            -0.027319869856439586
+          ],
+          "old_centroid_common_assigned": [
+            -0.09248800726139786,
+            -0.046869992657646894,
+            0.007989472437669886,
+            -0.013175287469902581,
+            -0.032078439234059224,
+            -0.15573862892325468,
+            0.12187378432410609,
+            -0.017608408491246102
+          ]
+        }
+      },
+      "matched_states": [
+        "1"
+      ],
+      "unmatched_states": [],
+      "ambiguous_states": [
+        "0"
+      ],
+      "unmapped_states": [
+        "0"
+      ],
+      "all_states_mapped": false,
+      "information_used": "training centroids and declared feature weights only",
+      "is_market_transition": false,
+      "emits_market_transition": false,
+      "triggers_parameter_search": false,
+      "rule": "a permuted or unmatched state ID after a refit is a MODEL event. It is emitted as a model-transition/uncertainty record and never as a market regime change, and it never triggers a parameter search or a market refit (guide 8.4). When K matches the mapping is one-to-one in common raw/economic coordinates (A14)"
+    }
+  ],
+  "model_transition_events": [
+    {
+      "schema": "crypto_regime_lab.model_transition.v2",
+      "event_class": "MODEL_VERSION",
+      "from_version": "rf04_jm_k3_2023-06-01",
+      "to_version": "rf04_jm_k3_2023-12-01",
+      "from_namespace": "rf04@jm_k3@2023-06-01",
+      "to_namespace": "rf04@jm_k3@2023-12-01",
+      "training_cutoff": "2023-12-01",
+      "mapping_confident": false,
+      "mapping_status_counts": {
+        "matched": 2,
+        "unmatched": 1,
+        "ambiguous": 0
+      },
+      "one_to_one": true,
+      "unmapped_states": [
+        "0"
+      ],
+      "event_type": "MODEL_TRANSITION_WITH_UNMAPPED_STATES",
+      "is_market_event": false,
+      "market_transition": false,
+      "emits_market_transition": false,
+      "requires_parameter_search": false,
+      "prior_emissions_rewritten": false,
+      "prior_emissions_rule": "decision-vintage emissions stay exactly as they were emitted; the new model's view of the same past is a separate asof_<cutoff>_training_labels series (guide 8.4)",
+      "rule": "a namespace/version change is a MODEL event. It is never emitted as a market transition and never reaches the trigger path; only a semantic state change in common coordinates can (G10/A10)"
+    }
+  ],
+  "market_transition_guard": {
+    "refit_events_emitted_as_market_transitions": 0,
+    "events_checked": 1,
+    "all_events_not_market": true,
+    "scheduler_rule": "online_trigger_schedule fires only on a semantic change: state_common across namespaces or state_id within one namespace. A namespace/version change alone is not comparable and produces no trigger (RF-03 A10)"
+  },
+  "coordinate_contract_ref": "current_coordinate_contract.json",
+  "lab_run_id": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T19:19:22.106166+00:00"
+}

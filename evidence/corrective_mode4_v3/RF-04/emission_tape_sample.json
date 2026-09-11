@@ -1,0 +1,1847 @@
+{
+  "schema": "crypto_regime_lab.emission_tape_sample.v1",
+  "gate": "G10",
+  "finding": "A11/A14",
+  "symbol": "BTCUSDT",
+  "observation_interval": "4h",
+  "model_id": "rf04_jm_k3_2023-12-01",
+  "state_namespace": "rf04@jm_k3@2023-12-01",
+  "model_fit_cutoff": "2023-12-01",
+  "span": [
+    "2023-12-01 00:00:00",
+    "2023-12-31 00:00:00"
+  ],
+  "total_emissions_computed": 181,
+  "sample_size": 31,
+  "sample_stride": 7,
+  "sampling_rule": "first 6 emissions then every sample_stride-th; counts above are the computed denominator, not an estimate",
+  "switch_count_full_tape": 16,
+  "common_status_counts": {
+    "matched": 154,
+    "unmatched": 27,
+    "ambiguous": 0
+  },
+  "emissions": [
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.7469969609188027,
+        0.0,
+        0.2809360141833952
+      ],
+      "second_best_gap": 0.2809360141833952,
+      "fit_residual": 0.14570122298084418,
+      "novelty_score": 0.08508447685755462,
+      "feature_contributions": [
+        8.053713159472995e-06,
+        7.529998866266982e-07,
+        0.06775175527855684,
+        0.02156627859165711,
+        0.01105520482675883,
+        0.027380947545698357,
+        0.016965862290301652,
+        0.0009723677348252814
+      ],
+      "group_contributions": {
+        "G1": 0.06776056199160294,
+        "G2": 0.03262148341841594,
+        "G5": 0.045319177570825285
+      },
+      "observed_at": "2023-12-01 00:00:00",
+      "available_at": "2023-12-01 04:00:00",
+      "inferred_at": "2023-12-01 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.21256893559769022,
+        0.4486590743721058,
+        0.33877199003020403
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.08044778978535064,
+        -0.050551568130088084,
+        -1.0963345719505808,
+        0.49554402914770473,
+        0.33215013998660814,
+        0.5462991591071124,
+        0.6744907594754579,
+        -0.149905873421059
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.890371476489183,
+        0.0,
+        0.6264334039311257
+      ],
+      "second_best_gap": 0.6264334039311257,
+      "fit_residual": 0.2947519121775666,
+      "novelty_score": 0.17212492618328487,
+      "feature_contributions": [
+        0.00014067040874563296,
+        0.04210937575122976,
+        0.001713311841264524,
+        0.00013140109407729634,
+        0.024173915306694348,
+        0.022430605551184625,
+        0.04399194503604111,
+        0.16006068718832928
+      ],
+      "group_contributions": {
+        "G1": 0.04396335800123992,
+        "G2": 0.024305316400771645,
+        "G5": 0.226483237775555
+      },
+      "observed_at": "2023-12-01 04:00:00",
+      "available_at": "2023-12-01 08:00:00",
+      "inferred_at": "2023-12-01 08:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.21105586722062147,
+        0.5141393555605066,
+        0.274804777218872
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.14280765906287,
+        0.8237440225765071,
+        0.18360158233548252,
+        -0.05288439384271782,
+        0.5065187977439374,
+        0.47967533057191053,
+        1.0117361392131867,
+        1.6797696782619462
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.39366168356793185,
+        0.0,
+        0.9005563922157633
+      ],
+      "second_best_gap": 0.39366168356793185,
+      "fit_residual": 1.03481355266756,
+      "novelty_score": 0.5421974375649372,
+      "feature_contributions": [
+        0.0030752413716255015,
+        0.0700929843160992,
+        0.013918563743075874,
+        0.26705326511691135,
+        0.1374022748143776,
+        0.024261228212974693,
+        0.04399194503604111,
+        0.47501805005645453
+      ],
+      "group_contributions": {
+        "G1": 0.08708678943080057,
+        "G2": 0.40445553993128897,
+        "G5": 0.5432712233054704
+      },
+      "observed_at": "2023-12-01 08:00:00",
+      "available_at": "2023-12-01 12:00:00",
+      "inferred_at": "2023-12-01 12:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.32417410365472277,
+        0.48055534889987794,
+        0.19527054744539932
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.1427870332534409,
+        1.0763725090710696,
+        0.5085233348040094,
+        1.7769753155249786,
+        1.2519882637734332,
+        0.5050957738082804,
+        1.0117361392131867,
+        2.9064854513251897
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.8560994348832296,
+        0.0,
+        0.8357550062599641
+      ],
+      "second_best_gap": 0.8357550062599641,
+      "fit_residual": 0.2498955965089349,
+      "novelty_score": 0.14593038866094277,
+      "feature_contributions": [
+        0.0012447963953874717,
+        0.0967599451661268,
+        0.03613372440530799,
+        0.0381569546696809,
+        0.026133185181629666,
+        0.007052946897053643,
+        0.04399194503604111,
+        0.00042209875770729896
+      ],
+      "group_contributions": {
+        "G1": 0.13413846596682227,
+        "G2": 0.06429013985131057,
+        "G5": 0.05146699069080206
+      },
+      "observed_at": "2023-12-01 12:00:00",
+      "available_at": "2023-12-01 16:00:00",
+      "inferred_at": "2023-12-01 16:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.22859683431027872,
+        0.5381080293143025,
+        0.2332951363754189
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.057199450853751124,
+        1.2728568779448588,
+        0.8144676428152342,
+        -0.6898461498809945,
+        0.527919973424009,
+        0.2005660779597244,
+        1.0117361392131867,
+        0.06955682333160504
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.5222815391927342,
+        0.0,
+        1.0356631571939439
+      ],
+      "second_best_gap": 0.5222815391927342,
+      "fit_residual": 0.644182791873136,
+      "novelty_score": 0.376180478968051,
+      "feature_contributions": [
+        0.008314724050236633,
+        0.11692059504259926,
+        0.05070948606031837,
+        0.12138037710164377,
+        0.10438423618606867,
+        0.000133727339510513,
+        0.016965862290301652,
+        0.22537378380245707
+      ],
+      "group_contributions": {
+        "G1": 0.17594480515315425,
+        "G2": 0.22576461328771244,
+        "G5": 0.24247337343226924
+      },
+      "observed_at": "2023-12-01 16:00:00",
+      "available_at": "2023-12-01 20:00:00",
+      "inferred_at": "2023-12-01 20:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.30447536112380946,
+        0.5133057683196991,
+        0.18221887055649152
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.2943776450059744,
+        1.4038438698137872,
+        0.9633798372026336,
+        1.193706863040132,
+        1.0871225410339282,
+        -0.10667650390619855,
+        0.6744907594754579,
+        1.9965236895709013
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.1869949666648814,
+        0.0,
+        0.907363325590389
+      ],
+      "second_best_gap": 0.907363325590389,
+      "fit_residual": 0.44098689319585155,
+      "novelty_score": 0.2575210992809605,
+      "feature_contributions": [
+        0.008988806817894495,
+        0.1016290853392363,
+        0.031409954855519895,
+        0.22977071070946234,
+        0.02129921865317395,
+        3.287312731716242e-05,
+        0.04399194503604111,
+        0.0038642986572063097
+      ],
+      "group_contributions": {
+        "G1": 0.1420278470126507,
+        "G2": 0.2510699293626363,
+        "G5": 0.047889116820564584
+      },
+      "observed_at": "2023-12-01 20:00:00",
+      "available_at": "2023-12-02 00:00:00",
+      "inferred_at": "2023-12-02 00:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.17857586870467695,
+        0.585232095118984,
+        0.23619203617633916
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.3097538636596947,
+        1.3056548818294191,
+        0.7599064807566452,
+        -1.673671757961047,
+        -0.5376381526587816,
+        -0.1314134096702052,
+        1.0117361392131867,
+        -0.28134573203441393
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.357200361503026,
+        0.0,
+        0.9520624361105908
+      ],
+      "second_best_gap": 0.9520624361105908,
+      "fit_residual": 0.26877118926409976,
+      "novelty_score": 0.1569530822395725,
+      "feature_contributions": [
+        0.0021973147708777693,
+        0.07811637045921452,
+        0.018550183028226263,
+        0.011351400628774808,
+        0.08545382932406209,
+        4.9210178177113104e-05,
+        0.04399194503604111,
+        0.029060935838726043
+      ],
+      "group_contributions": {
+        "G1": 0.09886386825831855,
+        "G2": 0.0968052299528369,
+        "G5": 0.07310209105294427
+      },
+      "observed_at": "2023-12-02 00:00:00",
+      "available_at": "2023-12-02 04:00:00",
+      "inferred_at": "2023-12-02 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.15662173360560697,
+        0.6085225192989742,
+        0.2348557470954189
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.10638799902342232,
+        1.138918634487116,
+        0.5858331316639979,
+        -0.382250899703084,
+        -1.0447214917894723,
+        -0.12597651866225265,
+        1.0117361392131867,
+        -0.7408627517876198
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.0209004518725062,
+        0.0,
+        1.1379775077382661
+      ],
+      "second_best_gap": 1.0209004518725062,
+      "fit_residual": 0.4630308105391017,
+      "novelty_score": 0.2703939848797877,
+      "feature_contributions": [
+        0.00713912860019654,
+        0.0716354080264597,
+        0.11230494440758919,
+        0.07285948955237684,
+        0.09274649562409142,
+        0.0036393377297966934,
+        0.016965862290301652,
+        0.0857401443082897
+      ],
+      "group_contributions": {
+        "G1": 0.19107948103424544,
+        "G2": 0.16560598517646824,
+        "G5": 0.10634534432838805
+      },
+      "observed_at": "2023-12-03 04:00:00",
+      "available_at": "2023-12-03 08:00:00",
+      "inferred_at": "2023-12-03 08:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.2143526383163421,
+        0.5949771213484486,
+        0.1906702403352094
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.2659869776448543,
+        1.0886639542044778,
+        1.4297802444349443,
+        0.921872237861576,
+        -1.0870466603142475,
+        -0.4116840901768984,
+        0.6744907594754579,
+        1.2246969475099325
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 0,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.0,
+        1.671906510252596,
+        1.5147995921891755
+      ],
+      "second_best_gap": 1.5147995921891755,
+      "fit_residual": 1.154614273504587,
+      "novelty_score": 0.6742548169710229,
+      "feature_contributions": [
+        0.10968901200526024,
+        0.05502638725667319,
+        0.015149795896927937,
+        9.89923304696838e-05,
+        0.0844801271545689,
+        0.05078211146058048,
+        0.0008074007476072068,
+        0.8385804466524993
+      ],
+      "group_contributions": {
+        "G1": 0.17986519515886137,
+        "G2": 0.08457911948503859,
+        "G5": 0.890169958860687
+      },
+      "observed_at": "2023-12-04 08:00:00",
+      "available_at": "2023-12-04 12:00:00",
+      "inferred_at": "2023-12-04 12:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.7103580668420162,
+        0.1334681205776055,
+        0.1561738125803783
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.6628799314687652,
+        1.5990309022388667,
+        1.3306055977795286,
+        0.24657031984586483,
+        2.008900576303462,
+        1.9473929467300146,
+        0.6744907594754579,
+        4.8052135566200835
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": null,
+      "common_status": "unmatched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 0,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.0,
+        0.21674145148581658,
+        0.009533079403573175
+      ],
+      "second_best_gap": 0.009533079403573175,
+      "fit_residual": 0.37035964247364217,
+      "novelty_score": 0.21627722667203536,
+      "feature_contributions": [
+        0.23528827495561042,
+        0.004394416838009856,
+        0.009801086548518556,
+        0.025317487713200536,
+        0.0010763237303088385,
+        0.012519058516150143,
+        0.011643337171069952,
+        0.07031965700077383
+      ],
+      "group_contributions": {
+        "G1": 0.24948377834213883,
+        "G2": 0.026393811443509375,
+        "G5": 0.09448205268799392
+      },
+      "observed_at": "2023-12-05 12:00:00",
+      "available_at": "2023-12-05 16:00:00",
+      "inferred_at": "2023-12-05 16:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.35769852570531074,
+        0.28799671481404815,
+        0.35430475948064105
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.0100566954475594,
+        0.8850511508286697,
+        0.3883789773128256,
+        0.8322258494006588,
+        1.1156913985034604,
+        0.5166155573280081,
+        1.0117361392131867,
+        2.045113408985366
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": null,
+      "common_status": "unmatched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.604320991255702,
+        1.3952621167826464,
+        0.0
+      ],
+      "second_best_gap": 1.3952621167826464,
+      "fit_residual": 0.2993172909652141,
+      "novelty_score": 0.1747909495553374,
+      "feature_contributions": [
+        0.03562275414738824,
+        0.008718865486760506,
+        0.031185021794515676,
+        0.042193018815383024,
+        0.002266243104689893,
+        0.14703667849630495,
+        0.0018601924671871775,
+        0.030434516652984606
+      ],
+      "group_contributions": {
+        "G1": 0.07552664142866441,
+        "G2": 0.044459261920072914,
+        "G5": 0.17933138761647674
+      },
+      "observed_at": "2023-12-06 16:00:00",
+      "available_at": "2023-12-06 20:00:00",
+      "inferred_at": "2023-12-06 20:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.1387540219062303,
+        0.17101676855003933,
+        0.6902292095437305
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.29319826909214697,
+        0.2838916050646638,
+        -0.6279618420346254,
+        0.5209587922811592,
+        -0.06287371345694326,
+        4.351645668723831,
+        0.33724537973772883,
+        0.3774079765676214
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.66969322613086,
+        0.978658815951134,
+        0.0
+      ],
+      "second_best_gap": 0.978658815951134,
+      "fit_residual": 0.5713394086867533,
+      "novelty_score": 0.33364246161892686,
+      "feature_contributions": [
+        0.007449789316733288,
+        0.008347239007601556,
+        0.013029512639116678,
+        0.005097236515628757,
+        0.04280575381403969,
+        0.010596646334325138,
+        0.0150355287637326,
+        0.4689777022955756
+      ],
+      "group_contributions": {
+        "G1": 0.028826540963451525,
+        "G2": 0.04790299032966845,
+        "G5": 0.4946098773936334
+      },
+      "observed_at": "2023-12-07 20:00:00",
+      "available_at": "2023-12-08 00:00:00",
+      "inferred_at": "2023-12-08 00:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.12039029571594669,
+        0.240272414349961,
+        0.6393372899340923
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.8737488486897719,
+        -0.49988573659528507,
+        -0.3630262287197732,
+        -0.437919522586635,
+        -0.6146719835377972,
+        2.288052251287069,
+        0.6744907594754579,
+        -3.26818446894643
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.3270141077622477,
+        0.6051108981706623,
+        0.0
+      ],
+      "second_best_gap": 0.6051108981706623,
+      "fit_residual": 0.362622627963384,
+      "novelty_score": 0.21175907769169933,
+      "feature_contributions": [
+        0.010863885981508269,
+        0.07780011933697373,
+        0.015340808985516362,
+        0.0011539045729252243,
+        0.12634748390260392,
+        0.07090901318581108,
+        0.0150355287637326,
+        0.045171883234312864
+      ],
+      "group_contributions": {
+        "G1": 0.10400481430399836,
+        "G2": 0.12750138847552914,
+        "G5": 0.13111642518385655
+      },
+      "observed_at": "2023-12-09 00:00:00",
+      "available_at": "2023-12-09 04:00:00",
+      "inferred_at": "2023-12-09 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.14645325249954305,
+        0.3014516057154463,
+        0.5520951417850106
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.0653470601968914,
+        1.0711214849954571,
+        0.6467430865530596,
+        -0.07292755862696007,
+        -1.1292933708371438,
+        1.5950277131019823,
+        0.6744907594754579,
+        -1.2644587293346057
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.1311175843946786,
+        0.24927699397750558,
+        0.0
+      ],
+      "second_best_gap": 0.24927699397750558,
+      "fit_residual": 0.6972609607396822,
+      "novelty_score": 0.26076272729124217,
+      "feature_contributions": [
+        0.02349705908336899,
+        0.005065863947256471,
+        0.02769602078587472,
+        0.11722897651461132,
+        0.1742644453197882,
+        0.17138141075149796,
+        0.03815714768051425,
+        0.13997003665677027
+      ],
+      "group_contributions": {
+        "G1": 0.05625894381650018,
+        "G2": 0.2914934218343995,
+        "G5": 0.3495085950887825
+      },
+      "observed_at": "2023-12-10 04:00:00",
+      "available_at": "2023-12-10 08:00:00",
+      "inferred_at": "2023-12-10 08:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.15350468001492007,
+        0.37076618902545444,
+        0.47572913095962555
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.1427864458683754,
+        -0.41423385183386957,
+        -0.5848074040027462,
+        0.9954637419341689,
+        -1.3440538804740743,
+        0.9684112518473754,
+        -0.6744907594754579,
+        1.2245393661707835
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.5173936377532884,
+        0.9592967619129508,
+        0.0
+      ],
+      "second_best_gap": 0.5173936377532884,
+      "fit_residual": 0.2650421034568912,
+      "novelty_score": 0.15477542505473893,
+      "feature_contributions": [
+        0.18375979053020514,
+        0.03346122410234348,
+        0.021590720726329962,
+        0.002042758842181434,
+        0.0005473554232696904,
+        0.005897170717853449,
+        0.013421001925578003,
+        0.004322081189130087
+      ],
+      "group_contributions": {
+        "G1": 0.23881173535887856,
+        "G2": 0.0025901142654511243,
+        "G5": 0.02364025383256154
+      },
+      "observed_at": "2023-12-11 08:00:00",
+      "available_at": "2023-12-11 12:00:00",
+      "inferred_at": "2023-12-11 12:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.30116297487074756,
+        0.19359114570740846,
+        0.5052458794218441
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        2.3262591560693213,
+        -0.8883456011207318,
+        0.7446623553080263,
+        -0.3471668372203949,
+        0.18307993527782077,
+        2.398984471559919,
+        -0.33724537973772895,
+        -0.6416634981184206
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.6469830185215579,
+        0.7622194836729888,
+        0.0
+      ],
+      "second_best_gap": 0.6469830185215579,
+      "fit_residual": 0.2762620263493458,
+      "novelty_score": 0.1613274721148526,
+      "feature_contributions": [
+        0.10335787898514703,
+        0.0033442506898230754,
+        0.03123052977155553,
+        0.0055362171976242195,
+        0.057552159892718134,
+        0.05880191669920454,
+        0.013421001925578003,
+        0.0030180711876952497
+      ],
+      "group_contributions": {
+        "G1": 0.13793265944652564,
+        "G2": 0.06308837709034236,
+        "G5": 0.07524098981247779
+      },
+      "observed_at": "2023-12-12 12:00:00",
+      "available_at": "2023-12-12 16:00:00",
+      "inferred_at": "2023-12-12 16:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.26309379825805396,
+        0.23445745686559047,
+        0.5024487448763556
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.8715374979948223,
+        -0.3576141736576902,
+        -0.6285083071051399,
+        -0.4483493336435198,
+        0.9330741611967882,
+        1.6959872805088705,
+        -0.33724537973772895,
+        -0.1296636911573015
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 0,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.0,
+        1.119978020221213,
+        0.584940950174732
+      ],
+      "second_best_gap": 0.584940950174732,
+      "fit_residual": 0.08246836648685071,
+      "novelty_score": 0.04815867482974595,
+      "feature_contributions": [
+        0.03832603581995982,
+        0.006606940504468895,
+        0.011434106473093519,
+        0.0063232323943144585,
+        0.0016696681001337713,
+        0.01063612292868954,
+        0.0008074007476072068,
+        0.006664859518583513
+      ],
+      "group_contributions": {
+        "G1": 0.05636708279752223,
+        "G2": 0.00799290049444823,
+        "G5": 0.01810838319488026
+      },
+      "observed_at": "2023-12-13 16:00:00",
+      "available_at": "2023-12-13 20:00:00",
+      "inferred_at": "2023-12-13 20:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.5309474040682898,
+        0.1732412177168327,
+        0.29581137821487746
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        2.2374308496945483,
+        0.948659751221402,
+        0.3547350728994229,
+        0.5564974081815676,
+        1.1435919633243217,
+        1.4288689187622259,
+        0.6744907594754579,
+        1.2664193616832098
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": null,
+      "common_status": "unmatched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.4318093605098885,
+        0.13327894111272043,
+        0.0
+      ],
+      "second_best_gap": 0.13327894111272043,
+      "fit_residual": 1.161762082906119,
+      "novelty_score": 0.6784288905385922,
+      "feature_contributions": [
+        0.03700024535864562,
+        0.0021688513904517593,
+        0.058265299189528406,
+        0.002030476700602914,
+        0.06719952651081951,
+        0.15390348485676836,
+        0.04084802574410523,
+        0.8003461731551973
+      ],
+      "group_contributions": {
+        "G1": 0.0974343959386258,
+        "G2": 0.06923000321142242,
+        "G5": 0.9950976837560709
+      },
+      "observed_at": "2023-12-14 20:00:00",
+      "available_at": "2023-12-15 00:00:00",
+      "inferred_at": "2023-12-15 00:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.2572070685676735,
+        0.3466833731725427,
+        0.3961095582597838
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.3236482945966848,
+        0.08531931850864602,
+        -0.9028393377808023,
+        -0.34669544712221406,
+        -0.7959595076700022,
+        1.0603791153241149,
+        1.0117361392131867,
+        -4.1582956603193955
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.1211801316586738,
+        0.9193905586783735,
+        0.0
+      ],
+      "second_best_gap": 0.9193905586783735,
+      "fit_residual": 0.35418362370425505,
+      "novelty_score": 0.2068309909680823,
+      "feature_contributions": [
+        0.013796530922655028,
+        0.006993380041492504,
+        0.012779940063159065,
+        0.273166813027918,
+        0.008014273861935298,
+        0.0009774221912683028,
+        0.03815714768051425,
+        0.00029811591531260517
+      ],
+      "group_contributions": {
+        "G1": 0.0335698510273066,
+        "G2": 0.2811810868898533,
+        "G5": 0.03943268578709516
+      },
+      "observed_at": "2023-12-16 00:00:00",
+      "available_at": "2023-12-16 04:00:00",
+      "inferred_at": "2023-12-16 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.18896219747891987,
+        0.2312123505477314,
+        0.5798254519733487
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.0058921418704245,
+        -0.4670612986976291,
+        -0.35836571495541025,
+        1.6199250523633826,
+        -0.20807985514086064,
+        2.592148873553169,
+        -0.6744907594754579,
+        -0.4359951117272314
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.144680505356905,
+        0.5363696259517763,
+        0.0
+      ],
+      "second_best_gap": 0.5363696259517763,
+      "fit_residual": 0.480644524664931,
+      "novelty_score": 0.2806797849661174,
+      "feature_contributions": [
+        0.023674295961970883,
+        0.015928196112242488,
+        0.0057551608119098905,
+        0.06531495352219698,
+        0.011285913866386693,
+        0.06362290412970995,
+        0.013421001925578003,
+        0.2816420983349362
+      ],
+      "group_contributions": {
+        "G1": 0.04535765288612326,
+        "G2": 0.07660086738858367,
+        "G5": 0.35868600439022413
+      },
+      "observed_at": "2023-12-17 04:00:00",
+      "available_at": "2023-12-17 08:00:00",
+      "inferred_at": "2023-12-17 08:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.16725868334123373,
+        0.30730861259117154,
+        0.5254327040675947
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.1452345897473686,
+        -0.647715170729867,
+        -0.20060048717029322,
+        -1.0759134072741818,
+        -0.265974363573593,
+        1.654643827328798,
+        -0.33724537973772895,
+        1.8888263118963085
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 1,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.6162280140900163,
+        0.0,
+        0.7820361599537846
+      ],
+      "second_best_gap": 0.6162280140900163,
+      "fit_residual": 0.5319724602384808,
+      "novelty_score": 0.31065352476806757,
+      "feature_contributions": [
+        0.03715392499148411,
+        0.044495478295635896,
+        0.011667908303722259,
+        0.0028582624799655806,
+        0.11997146188613833,
+        0.021119405414581054,
+        0.03523313814561598,
+        0.2594728807213376
+      ],
+      "group_contributions": {
+        "G1": 0.09331731159084226,
+        "G2": 0.12282972436610391,
+        "G5": 0.31582542428153465
+      },
+      "observed_at": "2023-12-18 08:00:00",
+      "available_at": "2023-12-18 12:00:00",
+      "inferred_at": "2023-12-18 12:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.27033323904595125,
+        0.5006380729576208,
+        0.2290286879964281
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.7252959800156299,
+        -0.9418105545506958,
+        0.46627142655216547,
+        -0.19837558379684414,
+        1.1677788617120408,
+        0.46082385571431966,
+        -0.6744907594754579,
+        2.1435282954180823
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 1,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 0,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.0,
+        0.3733625475862603,
+        0.4430999962660259
+      ],
+      "second_best_gap": 0.3733625475862603,
+      "fit_residual": 0.6036378322596431,
+      "novelty_score": 0.34438327077270425,
+      "feature_contributions": [
+        0.1155848106266272,
+        0.004222315522534067,
+        0.009501018809625653,
+        0.14215839720293455,
+        8.129578310712416e-05,
+        0.004003677586279994,
+        0.011643337171069952,
+        0.31644297955746453
+      ],
+      "group_contributions": {
+        "G1": 0.12930814495878692,
+        "G2": 0.14223969298604167,
+        "G5": 0.33208999431481445
+      },
+      "observed_at": "2023-12-19 12:00:00",
+      "available_at": "2023-12-19 16:00:00",
+      "inferred_at": "2023-12-19 16:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.429100091011689,
+        0.29539919840746875,
+        0.2755007105808422
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.625611104348484,
+        0.879488832983379,
+        0.3948586242161878,
+        -1.0250650008651716,
+        1.0332771104787186,
+        0.7228671995875797,
+        1.0117361392131867,
+        -1.4665677438843612
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": null,
+      "common_status": "unmatched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 0,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.0,
+        0.710322975218175,
+        0.4656476917228201
+      ],
+      "second_best_gap": 0.4656476917228201,
+      "fit_residual": 0.46174879458955587,
+      "novelty_score": 0.24958477152540112,
+      "feature_contributions": [
+        0.08905236345179669,
+        0.005373035507200309,
+        0.0013853068121999505,
+        0.11013183516905918,
+        0.0007138737585663886,
+        0.020668981709873323,
+        0.011643337171069952,
+        0.22278006100979011
+      ],
+      "group_contributions": {
+        "G1": 0.09581070577119695,
+        "G2": 0.11084570892762557,
+        "G5": 0.2550923798907334
+      },
+      "observed_at": "2023-12-20 16:00:00",
+      "available_at": "2023-12-20 20:00:00",
+      "inferred_at": "2023-12-20 20:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.4718730995084578,
+        0.23191875520332125,
+        0.296208145288221
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        1.8019404939750956,
+        0.9147945853883086,
+        0.6504924038574513,
+        -0.8685644492537301,
+        1.09459863267315,
+        1.6012708658306674,
+        1.0117361392131867,
+        -1.0824525467125905
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": null,
+      "common_status": "unmatched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.6219867163701505,
+        1.0231472970089641,
+        0.0
+      ],
+      "second_best_gap": 1.0231472970089641,
+      "fit_residual": 0.18840234079312385,
+      "novelty_score": 0.11002045334395852,
+      "feature_contributions": [
+        0.04960996045339424,
+        0.01220308162999689,
+        0.02342527686268656,
+        0.03706951657179936,
+        0.015685678505000335,
+        0.008680723185803423,
+        0.04084802574410523,
+        0.0008800778403378119
+      ],
+      "group_contributions": {
+        "G1": 0.0852383189460777,
+        "G2": 0.052755195076799696,
+        "G5": 0.05040882677024647
+      },
+      "observed_at": "2023-12-21 20:00:00",
+      "available_at": "2023-12-22 00:00:00",
+      "inferred_at": "2023-12-22 00:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.12685293022190577,
+        0.23087300675322794,
+        0.6422740630248663
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.4374184553242487,
+        0.3564097631641066,
+        -0.5280916482418453,
+        0.4763586999488027,
+        -0.3318175717023324,
+        3.120078264141328,
+        1.0117361392131867,
+        -0.4886041631851906
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.0928606223737771,
+        0.6177014610722484,
+        0.0
+      ],
+      "second_best_gap": 0.6177014610722484,
+      "fit_residual": 0.6723882409384088,
+      "novelty_score": 0.39265148606842826,
+      "feature_contributions": [
+        0.002427917877938851,
+        0.017357369149467974,
+        0.00372575841985522,
+        0.23100904915203374,
+        0.021461513076065832,
+        0.05016837297716912,
+        0.013421001925578003,
+        0.3328172583603
+      ],
+      "group_contributions": {
+        "G1": 0.023511045447262045,
+        "G2": 0.25247056222809955,
+        "G5": 0.39640663326304715
+      },
+      "observed_at": "2023-12-23 00:00:00",
+      "available_at": "2023-12-23 04:00:00",
+      "inferred_at": "2023-12-23 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.1788568112186405,
+        0.28765007087304484,
+        0.5334931179083147
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.2985058769818109,
+        -0.6712211447048977,
+        -0.13770849288284537,
+        -1.8555652600947263,
+        -0.40544707246773376,
+        1.774510458076486,
+        -0.33724537973772895,
+        2.084851292567463
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.8311484035369363,
+        1.2159645429299528,
+        0.0
+      ],
+      "second_best_gap": 1.2159645429299528,
+      "fit_residual": 0.24751835597417737,
+      "novelty_score": 0.1445421623775504,
+      "feature_contributions": [
+        0.08454553016277387,
+        0.006961883214381661,
+        0.03123960958396617,
+        0.00569181896986362,
+        0.010736900426075814,
+        0.05896587228919007,
+        0.04084802574410523,
+        0.008528715583820928
+      ],
+      "group_contributions": {
+        "G1": 0.12274702296112171,
+        "G2": 0.016428719395939435,
+        "G5": 0.10834261361711622
+      },
+      "observed_at": "2023-12-24 04:00:00",
+      "available_at": "2023-12-24 08:00:00",
+      "inferred_at": "2023-12-24 08:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.10999833739793013,
+        0.2034965622706215,
+        0.6865051003314485
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        -0.7260631437818621,
+        0.2417326328647895,
+        -0.6286172908920746,
+        -0.4519464019883796,
+        -0.2569116983190524,
+        3.755025490270786,
+        1.0117361392131867,
+        0.029070767462018268
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.0719176509021004,
+        0.210188978021759,
+        0.0
+      ],
+      "second_best_gap": 0.210188978021759,
+      "fit_residual": 0.3502712257642958,
+      "novelty_score": 0.05756627175195195,
+      "feature_contributions": [
+        0.007053344980072701,
+        0.018241975666184535,
+        0.0009390944190803816,
+        0.0003521199762889664,
+        0.03955196717220744,
+        0.2646050131488624,
+        0.013421001925578003,
+        0.006106708476021404
+      ],
+      "group_contributions": {
+        "G1": 0.02623441506533762,
+        "G2": 0.03990408714849641,
+        "G5": 0.2841327235504618
+      },
+      "observed_at": "2023-12-25 08:00:00",
+      "available_at": "2023-12-25 12:00:00",
+      "inferred_at": "2023-12-25 12:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.15902739095792442,
+        0.3764574892247274,
+        0.46451511981734817
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.15124259617694422,
+        -0.685287575531008,
+        0.251272241984196,
+        -0.255603600811081,
+        -0.5868942171113958,
+        0.5423850486499833,
+        -0.33724537973772895,
+        -0.031198547677102017
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.6738701965277965,
+        1.3691419513426324,
+        0.0
+      ],
+      "second_best_gap": 1.3691419513426324,
+      "fit_residual": 0.41899329838488764,
+      "novelty_score": 0.24467760030117558,
+      "feature_contributions": [
+        0.0001854833413587376,
+        0.1069145963993555,
+        0.09343412448644466,
+        0.1044302092558439,
+        0.006450480958743526,
+        0.04229734642263984,
+        0.013421001925578003,
+        0.051860055594923474
+      ],
+      "group_contributions": {
+        "G1": 0.2005342042271589,
+        "G2": 0.11088069021458742,
+        "G5": 0.10757840394314132
+      },
+      "observed_at": "2023-12-26 12:00:00",
+      "available_at": "2023-12-26 16:00:00",
+      "inferred_at": "2023-12-26 16:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.13005553248393076,
+        0.17638864616930897,
+        0.6935558213467603
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.44977587203424857,
+        -1.4995144602381358,
+        1.418105823153584,
+        -1.3100476317393863,
+        0.3802540288120468,
+        3.5973447443113207,
+        -0.33724537973772895,
+        -1.3289097403731847
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.0761127748380284,
+        1.329846175368259,
+        0.0
+      ],
+      "second_best_gap": 1.0761127748380284,
+      "fit_residual": 0.32562264963790494,
+      "novelty_score": 0.1901523695587268,
+      "feature_contributions": [
+        4.265054912160692e-05,
+        0.09091513078187166,
+        0.018842367563413735,
+        8.764762221923363e-06,
+        0.019532022779047635,
+        0.075580238892722,
+        0.04084802574410523,
+        0.07985344856540115
+      ],
+      "group_contributions": {
+        "G1": 0.109800148894407,
+        "G2": 0.019540787541269557,
+        "G5": 0.19628171320222837
+      },
+      "observed_at": "2023-12-27 16:00:00",
+      "available_at": "2023-12-27 20:00:00",
+      "inferred_at": "2023-12-27 20:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.21235237786475888,
+        0.16476391877335078,
+        0.6228837033618904
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.4798497801077004,
+        1.1669823937027195,
+        0.703634709833334,
+        -0.180344627477099,
+        0.5861675971719252,
+        3.891170595462919,
+        1.0117361392131867,
+        0.8361588252150517
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        1.2977691500921484,
+        0.9493844720494736,
+        0.0
+      ],
+      "second_best_gap": 0.9493844720494736,
+      "fit_residual": 0.18775631643595753,
+      "novelty_score": 0.10964319745452815,
+      "feature_contributions": [
+        0.001251591904354666,
+        0.05396605667485679,
+        0.03251111976299864,
+        0.011894173739638924,
+        0.004744563996565901,
+        0.00018446171936801093,
+        0.03815714768051425,
+        0.04504720095766036
+      ],
+      "group_contributions": {
+        "G1": 0.08772876834221009,
+        "G2": 0.016638737736204827,
+        "G5": 0.08338881035754263
+      },
+      "observed_at": "2023-12-28 20:00:00",
+      "available_at": "2023-12-29 00:00:00",
+      "inferred_at": "2023-12-29 00:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.16453058556654188,
+        0.2331031737758106,
+        0.6023662406576474
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.3574618743373705,
+        -1.09785509405047,
+        0.886241775494855,
+        -0.568396572181212,
+        -0.13657497362348328,
+        2.66716760056986,
+        -0.6744907594754579,
+        0.537730350678457
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    },
+    {
+      "state_id": 2,
+      "state_namespace": "rf04@jm_k3@2023-12-01",
+      "state_costs": [
+        0.9201628930799124,
+        0.07459865520644127,
+        0.0
+      ],
+      "second_best_gap": 0.07459865520644127,
+      "fit_residual": 0.5395537277494695,
+      "novelty_score": 0.1732247006015072,
+      "feature_contributions": [
+        0.009859801409238625,
+        0.021628109978816895,
+        0.0008440723407677888,
+        0.08113963321171593,
+        0.06283879440673246,
+        0.305794655627355,
+        0.03815714768051425,
+        0.019291513094328572
+      ],
+      "group_contributions": {
+        "G1": 0.03233198372882331,
+        "G2": 0.14397842761844837,
+        "G5": 0.36324331640219787
+      },
+      "observed_at": "2023-12-30 00:00:00",
+      "available_at": "2023-12-30 04:00:00",
+      "inferred_at": "2023-12-30 04:00:00",
+      "model_fit_cutoff": "2023-12-01",
+      "ready_at": "2023-12-01 00:00:00",
+      "version": "rf04_jm_k3_2023-12-01",
+      "quality_status": "OK",
+      "input_refs": [
+        "panel:BTCUSDT"
+      ],
+      "membership_score": [
+        0.17126246970188697,
+        0.3989202523603187,
+        0.42981727793779445
+      ],
+      "membership_is_calibrated": false,
+      "economic_context": [
+        0.9288368679949905,
+        -0.7362082893995366,
+        -0.0020030998825141953,
+        -1.1773502367346793,
+        -0.7663343664399881,
+        0.37866446596827,
+        -0.6744907594754579,
+        0.22653534005538672
+      ],
+      "membership_note": "softmax(-cost) over state costs. It is a MEMBERSHIP SCORE, not a probability: nothing here calibrates it against outcomes, so '0.9' does not mean the market is 90% in this state (guide 8.5)",
+      "decision_eligible": true,
+      "state_common": 2,
+      "common_status": "matched",
+      "namespace_is_refit": false
+    }
+  ],
+  "economic_context_note": "economic_context holds the raw causal feature vector the state was inferred from (A11). Responses compare THIS, never the squared fit residual, which loses sign and state identity",
+  "namespace_transition_control": {
+    "schema": "crypto_regime_lab.namespace_transition_control.v1",
+    "gate": "G10/A10",
+    "window": {
+      "earliest": "2023-12-01 00:00:00",
+      "latest": "2023-12-31 00:00:00",
+      "min_gap_days": 0.0,
+      "max_age_days": 10000.0
+    },
+    "split_index": 45,
+    "constant_namespace_tape_triggers": 16,
+    "namespace_only_tape_triggers": 16,
+    "semantic_change_tape_triggers": 17,
+    "namespace_only_emits_market_transition": false,
+    "control_can_fire": true,
+    "model_version_event_emits_market_transition": false,
+    "verdict": "PASS",
+    "rule": "a refit version boundary may not fire a market trigger. The positive row injects a state_common change at the SAME split and MUST fire, or the check would be vacuous"
+  },
+  "lab_run_id": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T19:19:22.264028+00:00"
+}

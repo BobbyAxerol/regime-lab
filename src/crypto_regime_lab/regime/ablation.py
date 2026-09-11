@@ -16,9 +16,13 @@ oversight. The decision, and what would have to be true to revisit it, is record
 
 from __future__ import annotations
 
+import hashlib
+
 import numpy as np
 
-from .model_selection import score_k
+from .causality import apply_scaler, fit_scaler
+from .jump_model import forward_filter, loss_matrix, multi_start_fit
+from .model_selection import SCALER_MODE_INNER_TRAIN, inner_splits, score_k
 
 #: Guide 8.1. ``implemented`` is a fact about this repository, not an opinion.
 MODEL_LADDER = {
@@ -196,4 +200,229 @@ def group_ablation(z: np.ndarray, all_features: tuple[str, ...], weights: np.nda
         "interpretation_limit": ("this measures contribution to the FIT objective out of fold. It "
                                  "says nothing about whether the extra block improves a trading "
                                  "decision, which is a LAB-06+ question"),
+    }
+
+
+# ---------------------------------------------------------------------------
+# G10/A14 — fixed-target/cohort ablation (the P10 counterexample repair)
+# ---------------------------------------------------------------------------
+
+def _average_ranks(values: np.ndarray) -> np.ndarray:
+    values = np.asarray(values, dtype=np.float64)
+    order = np.argsort(values, kind="stable")
+    ranks = np.empty(values.shape[0], dtype=np.float64)
+    ranks[order] = np.arange(1, values.shape[0] + 1, dtype=np.float64)
+    sorted_values = values[order]
+    start = 0
+    while start < values.shape[0]:
+        end = start
+        while end + 1 < values.shape[0] and sorted_values[end + 1] == sorted_values[start]:
+            end += 1
+        if end > start:
+            ranks[order[start:end + 1]] = 0.5 * ((start + 1) + (end + 1))
+        start = end + 1
+    return ranks
+
+
+def rank_ic(predicted: np.ndarray, realized: np.ndarray) -> dict:
+    """Spearman rank correlation between a state profile and a FIXED target.
+
+    This is an out-of-sample rank statistic, not a calibrated forecast: it says
+    whether the state a feature set assigns orders the fixed paired target
+    correctly. When either side is constant the statistic is undefined and is
+    returned as ``null`` with a reason rather than as zero (T61).
+    """
+    predicted = np.asarray(predicted, dtype=np.float64)
+    realized = np.asarray(realized, dtype=np.float64)
+    if predicted.shape != realized.shape:
+        raise ValueError("predicted and realized must have the same shape")
+    finite = np.isfinite(predicted) & np.isfinite(realized)
+    n = int(finite.sum())
+    if n < 8:
+        return {"rank_ic": None, "n": n, "reason": "fewer than 8 finite paired observations"}
+    p = _average_ranks(predicted[finite])
+    r = _average_ranks(realized[finite])
+    p_centered, r_centered = p - p.mean(), r - r.mean()
+    denom = float(np.sqrt(np.sum(p_centered ** 2) * np.sum(r_centered ** 2)))
+    if denom <= 0:
+        return {"rank_ic": None, "n": n, "reason": "predicted or realized is constant; undefined"}
+    return {"rank_ic": float(np.sum(p_centered * r_centered) / denom), "n": n, "reason": None}
+
+
+def _digest(values: np.ndarray) -> str:
+    return hashlib.sha256(
+        np.round(np.asarray(values, dtype=np.float64), 12).tobytes()).hexdigest()[:16]
+
+
+def fixed_target_ablation(raw: np.ndarray, all_features: tuple[str, ...],
+                          weights: np.ndarray, *, target: np.ndarray, cohort: np.ndarray | None,
+                          n_states: int, lambda_jump: float, seeds: tuple[int, ...],
+                          ladder: tuple[tuple[str, ...], ...] = (("G1",), ("G1", "G2"),
+                                                                 ("G1", "G2", "G5")),
+                          n_folds: int = 3, min_train: int = 100,
+                          purge_rows: int = 0,
+                          target_name: str = "future_paired_utility",
+                          target_kind: str = "paired") -> dict:
+    """G10/A14 — every feature set scored against the SAME fixed target and cohort.
+
+    The audited defect (P10): the ablation statistic was ``variance_resolved`` on
+    the feature block itself, so each feature set had a DIFFERENT target --
+    explaining G1 versus explaining G1 + G2. Adding a pure-noise dimension moved
+    that statistic from 1.0 to 0.5 with the states and the economic target
+    unchanged. This API holds ``target`` and ``cohort`` fixed, scores decision
+    value out of fold as the rank IC of the state profile against that target, and
+    reports reconstruction quality (``variance_resolved``) SEPARATELY as a
+    diagnostic that is never the decision column.
+
+    ``purge_rows`` drops the first rows of each validation block so a forward
+    outcome window cannot overlap the fit boundary. The scaler is fitted on each
+    fold's raw inner train only and applied frozen to validation (A14).
+    """
+    raw = np.asarray(raw, dtype=np.float64)
+    target = np.asarray(target, dtype=np.float64)
+    if raw.ndim != 2:
+        raise ValueError("raw must be (T, J)")
+    if target.shape != (raw.shape[0],):
+        raise ValueError("target must have one entry per observation")
+    if cohort is None:
+        cohort = np.ones(raw.shape[0], dtype=bool)
+    cohort = np.asarray(cohort, dtype=bool)
+    if cohort.shape != (raw.shape[0],):
+        raise ValueError("cohort must have one entry per observation")
+    folds = inner_splits(raw.shape[0], n_folds, min_train)
+    target_digest = _digest(target)
+    cohort_digest = _digest(cohort.astype(np.float64))
+
+    rows = []
+    previous_rank_ic = None
+    previous_reconstruction = None
+    for keep in ladder:
+        restricted = group_weights(all_features, weights, keep)
+        fold_rows = []
+        rank_ics, reconstructions = [], []
+        scored_total = 0
+        for fold_index, (train_end, valid_start, valid_end) in enumerate(folds):
+            scaler = fit_scaler(raw[:train_end])
+            z_train = apply_scaler(raw[:train_end], scaler)
+            fit = multi_start_fit(z_train, restricted, n_states=n_states,
+                                  lambda_jump=lambda_jump, seeds=seeds)
+            z_valid = apply_scaler(raw[valid_start:valid_end], scaler)
+            loss = loss_matrix(z_valid, fit["centroids"], restricted)
+            states = forward_filter(loss, lambda_jump).online_states
+
+            train_loss = loss_matrix(z_train, fit["centroids"], restricted)
+            train_states = forward_filter(train_loss, lambda_jump).online_states
+            train_target = target[:train_end]
+            train_cohort = cohort[:train_end] & np.isfinite(train_target)
+            global_train_mean = (float(train_target[train_cohort].mean())
+                                 if train_cohort.any() else None)
+            state_profile = np.full(n_states, np.nan, dtype=np.float64)
+            states_without_support = []
+            for k in range(n_states):
+                members = train_cohort & (train_states == k)
+                if members.any():
+                    state_profile[k] = float(train_target[members].mean())
+                else:
+                    states_without_support.append(int(k))
+                    state_profile[k] = global_train_mean if global_train_mean is not None else np.nan
+
+            first_scored = int(valid_start + max(0, purge_rows))
+            valid_target = target[first_scored:valid_end]
+            valid_cohort = cohort[first_scored:valid_end] & np.isfinite(valid_target)
+            valid_states = states[first_scored - valid_start:]
+            predicted = state_profile[valid_states]
+            predicted[~valid_cohort] = np.nan
+            realized = valid_target.copy()
+            realized[~valid_cohort] = np.nan
+            ic = rank_ic(predicted, realized)
+
+            reconstruction = variance_resolved(
+                z_valid[first_scored - valid_start:], fit["centroids"],
+                valid_states, restricted)
+            rank_ics.append(ic["rank_ic"])
+            reconstructions.append(reconstruction)
+            scored_total += ic["n"]
+            fold_rows.append({
+                "fold": fold_index,
+                "train_end": int(train_end), "valid_start": int(valid_start),
+                "valid_end": int(valid_end), "purge_rows": int(purge_rows),
+                "scored_rows": int(ic["n"]),
+                "rank_ic": ic["rank_ic"], "rank_ic_undefined_reason": ic["reason"],
+                "scaler": {"mode": SCALER_MODE_INNER_TRAIN, "fitted_rows": int(train_end),
+                           "applied_frozen_to": [int(valid_start), int(valid_end)]},
+                "states_without_train_target_support": states_without_support,
+                "global_train_target_mean": global_train_mean,
+            })
+        finite_ics = [v for v in rank_ics if v is not None]
+        mean_rank_ic = float(np.mean(finite_ics)) if finite_ics else None
+        finite_reconstruction = [v for v in reconstructions if v is not None]
+        mean_reconstruction = (float(np.mean(finite_reconstruction))
+                               if finite_reconstruction else None)
+        incremental = (None if mean_rank_ic is None or previous_rank_ic is None
+                       else float(mean_rank_ic - previous_rank_ic))
+        incremental_reconstruction = (
+            None if mean_reconstruction is None or previous_reconstruction is None
+            else float(mean_reconstruction - previous_reconstruction))
+        rows.append({
+            "groups": list(keep),
+            "features_active": int(np.count_nonzero(restricted)),
+            "fixed_target": target_name,
+            "fixed_target_digest": target_digest,
+            "cohort_digest": cohort_digest,
+            "decision_value_basis": "fixed_target_rank_ic",
+            "fixed_target_rank_ic_mean": mean_rank_ic,
+            "fixed_target_rank_ic_folds": rank_ics,
+            "scored_rows": int(scored_total),
+            "folds_scored": int(len(folds)),
+            "incremental_decision_value": incremental,
+            "reconstruction_quality": mean_reconstruction,
+            "incremental_reconstruction_quality": incremental_reconstruction,
+            "reconstruction_quality_used_for_decision": False,
+            "folds": fold_rows,
+        })
+        previous_rank_ic = mean_rank_ic
+        previous_reconstruction = mean_reconstruction
+
+    added = [r for r in rows if r["incremental_decision_value"] is not None]
+    return {
+        "schema": "crypto_regime_lab.fixed_target_ablation.v1",
+        "ladder": rows,
+        "target_name": target_name,
+        "target_kind": target_kind,
+        "decided_on": "fixed_target_rank_ic",
+        "reconstruction_quality_role": "diagnostic_only",
+        "target_fixed_across_sets": True,
+        "cohort_fixed_across_sets": True,
+        "target_digest": target_digest,
+        "cohort_digest": cohort_digest,
+        "reconstruction_quality_used_for_decision": False,
+        "blocks_with_positive_incremental_decision_value": [
+            r["groups"][-1] for r in added if r["incremental_decision_value"] > 0],
+        "blocks_with_nonpositive_incremental_decision_value": [
+            r["groups"][-1] for r in added if r["incremental_decision_value"] <= 0],
+        "p10_counterexample_guard": {
+            "old_statistic": ("variance_resolved over the concatenated feature block, so each "
+                              "feature set explained ITS OWN target"),
+            "old_failure": ("adding a noise dimension moved variance_resolved 1.0 -> 0.5 with the "
+                            "states and the economic target unchanged (P10)"),
+            "repair": ("every feature set is scored against the same target array and the same "
+                       "cohort; the target and cohort digests are recorded on every row"),
+            "decision_column": "fixed_target_rank_ic",
+            "reconstruction_column_used_for_decision": False,
+        },
+        "scored_on": "held-out INNER chronological blocks of the development window",
+        "holdout_used": False,
+        "outcome_used": True,
+        "outcome_note": ("the fixed target IS an outcome. It is used only to score held-out "
+                         "validation blocks, never to fit the model or the scaler, and the same "
+                         "array is used for every feature set"),
+        "inner_scaler_rule": ("per fold: fit_scaler(raw[:train_end]); the frozen scaler is applied "
+                              "to raw[train_end:valid_end]. No validation observation enters the "
+                              "scale (A14)"),
+        "purge_rows": int(purge_rows),
+        "denominators": {
+            "feature_sets": len(rows),
+            "folds_per_set": {str(r["groups"]): r["folds_scored"] for r in rows},
+            "scored_rows_per_set": {str(r["groups"]): r["scored_rows"] for r in rows},
+        },
     }

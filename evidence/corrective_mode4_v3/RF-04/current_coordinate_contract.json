@@ -1,0 +1,198 @@
+{
+  "schema": "crypto_regime_lab.current_coordinate_contract.v1",
+  "gate": "G10",
+  "finding": "A11/A14",
+  "symbol": "BTCUSDT",
+  "observation_interval": "4h",
+  "feature_names": [
+    "g1_rv_6",
+    "g1_direction_6",
+    "g1_efficiency_6",
+    "g2_taker_imbalance",
+    "g2_log_activity_30",
+    "g5_dispersion_6",
+    "g5_breadth_6",
+    "g5_residual_return_30"
+  ],
+  "coordinate_axis": {
+    "name": "raw_economic_feature_coordinates",
+    "definition": "the physical feature values before standardization. A state centroid is only an economic location after the fit's own training scaler is inverted: raw = standardized * scale + median",
+    "reason": "two fits with different scalers live in different standardized spaces. Mapping their centroids without recovery is a coordinate mismatch, not a state comparison (A14)"
+  },
+  "shared_frame": {
+    "frame": "old_model_training_transform",
+    "construction": "both models' centroids are recovered to raw coordinates with their own training scalers, then expressed in the old model's standardized frame; distances use the declared feature weights",
+    "fit_scope": "training windows only; no emission, outcome or post-cutoff row enters"
+  },
+  "mapping_statuses": {
+    "matched": "unique, within max_relative_distance, runner-up separated; yields old_state",
+    "unmatched": "no old state within max_relative_distance (or a moved state): MODEL event",
+    "ambiguous": "runner-up within 1.25x of the nearest, or the one-to-one assignment had to take a non-nearest old state: MODEL event",
+    "max_relative_distance": 0.5,
+    "runner_up_ratio": 1.25,
+    "one_to_one_when_k_matches": true
+  },
+  "state_common_policy": "cross-namespace comparisons use matched old-namespace IDs (state_common). An unmatched/ambiguous state carries state_common = null and cannot be compared across vintages",
+  "event_classes": {
+    "MODEL_VERSION": "a refit/namespace change. is_market_event=false, emits_market_transition=false, requires_parameter_search=false",
+    "MARKET_TRANSITION": "a semantic state change in common coordinates. It is the only change the online scheduler may trigger on"
+  },
+  "scheduler_comparability_rule": "online_trigger_schedule compares state_common across namespaces, or state_id within one namespace. Namespace-only changes are skipped",
+  "emission_fields": {
+    "economic_context": "raw causal feature vector at inference time (A11)",
+    "state_namespace": "the fit vintage; never comparable across vintages by integer ID",
+    "state_common": "matched old-namespace state id, or null",
+    "model_fit_cutoff": "the declared training cutoff; no later row entered the fit"
+  },
+  "real_bindings": {
+    "registry_models": [
+      {
+        "model_id": "rf04_jm_k3_2023-06-01",
+        "n_states": 3,
+        "state_namespace": "rf04@jm_k3@2023-06-01",
+        "scaler_ref": {
+          "median": [
+            0.019041239190946878,
+            -0.040461176189719325,
+            0.40552951038765417,
+            0.00029827475847177265,
+            -0.0009867663579608901,
+            0.006247655541514208,
+            0.4,
+            5.362169068808567e-05
+          ],
+          "scale": [
+            0.0120251364183311,
+            1.1434483773436543,
+            0.3608950703466071,
+            0.04132666992584058,
+            0.6345796060771808,
+            0.0030476354954899264,
+            0.593040000001,
+            0.003162193774532696
+          ],
+          "clip": 5.0,
+          "fitted_rows": 2190,
+          "fitted_on": "the trailing training window ending at this cutoff"
+        },
+        "centroids_raw": [
+          [
+            0.05747491788334186,
+            0.1866073500981209,
+            0.5603460385757754,
+            0.009910257427969572,
+            0.5038853399027737,
+            0.010753022681568775,
+            0.5893992932862183,
+            0.0005420915147362189
+          ],
+          [
+            0.017924874076816387,
+            -0.034412483404725976,
+            0.4124052875249671,
+            -0.00044001599033122185,
+            -0.03700278325895877,
+            0.005623810282684579,
+            0.4760197775030903,
+            0.0001248668815648038
+          ],
+          [
+            0.02048407746098979,
+            -0.1956060152301452,
+            0.4349572936838317,
+            -0.007735671654017874,
+            0.08311182567990344,
+            0.013286574189113548,
+            0.4512110726643599,
+            -0.0011316990975452346
+          ]
+        ]
+      },
+      {
+        "model_id": "rf04_jm_k3_2023-12-01",
+        "n_states": 3,
+        "state_namespace": "rf04@jm_k3@2023-12-01",
+        "scaler_ref": {
+          "median": [
+            0.013984052571048799,
+            0.04628822300427825,
+            0.3803002798242583,
+            -0.00374588041672147,
+            -0.002759785595540509,
+            0.005258259309468435,
+            0.4,
+            0.0001292909017364663
+          ],
+          "scale": [
+            0.009375493937941489,
+            1.084718007819517,
+            0.34320929447212234,
+            0.04750370232139757,
+            0.7358731886063712,
+            0.002621242469146813,
+            0.593040000001,
+            0.002654908274876128
+          ],
+          "clip": 5.0,
+          "fitted_rows": 2190,
+          "fitted_on": "the trailing training window ending at this cutoff"
+        },
+        "centroids_raw": [
+          [
+            0.04274820078270773,
+            0.7012461758280062,
+            0.6577514490770587,
+            0.0096043871989652,
+            0.734617030599708,
+            0.007856745930122318,
+            0.7285067873303162,
+            0.002571955599499581
+          ],
+          [
+            0.013116931819637275,
+            -0.004552502057839886,
+            0.38304234102279544,
+            -0.004371755350690561,
+            -0.02636544896022339,
+            0.004850030601248103,
+            0.47227602905568977,
+            8.254219232565793e-05
+          ],
+          [
+            0.0187426535060863,
+            -0.07548699113994274,
+            0.42191715717233724,
+            -0.012800096457428122,
+            0.07232510990792491,
+            0.012400593895363635,
+            0.49148264984227125,
+            -0.0008337546016783632
+          ]
+        ]
+      }
+    ],
+    "mapping_status_counts": {
+      "matched": 2,
+      "unmatched": 1,
+      "ambiguous": 0
+    },
+    "mismatch_mapping": {
+      "k_matches": false,
+      "one_to_one": false,
+      "assignment_method": "independent_nearest_k_mismatch"
+    },
+    "sample_span": [
+      "2023-12-01 00:00:00",
+      "2023-12-31 00:00:00"
+    ],
+    "sample_total_emissions": 181
+  },
+  "holds": [
+    "no post-cutoff data enters centroids or the scaler",
+    "no prior decision vintage is rewritten by a refit",
+    "a version event never reaches the market trigger path"
+  ],
+  "lab_run_id": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T19:19:22.269056+00:00"
+}

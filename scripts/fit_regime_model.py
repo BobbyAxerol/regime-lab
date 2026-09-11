@@ -174,10 +174,15 @@ def main(argv: list[str] | None = None) -> int:
                                   & (development["time"] >= first_cut
                                      - pd.Timedelta(days=TRAIN_MEMORY_DAYS))]
         raw_first = first_train[features].to_numpy(float)
-        scaler_first = C.fit_scaler(raw_first)
-        z_first = C.apply_scaler(raw_first, scaler_first)
-        k_choice = MS.choose_k(z_first, weights, lambda_jump=LAMBDA_JUMP, seeds=SEEDS,
-                               candidates=(MS.PARSIMONIOUS_K, MS.STARTING_K))
+        # G10/A14: the inner K comparison must NOT run on a scaler fitted over the
+        # whole calibration frame. ``choose_k_causal`` fits each inner fold's
+        # scaler on that fold's raw inner train only and applies it frozen to the
+        # validation block. The frozen first-model scaler below is separate: it is
+        # the deployed model's training transform and legitimately covers its own
+        # training window.
+        k_choice = MS.choose_k_causal(raw_first, weights, lambda_jump=LAMBDA_JUMP, seeds=SEEDS,
+                                      candidates=(MS.PARSIMONIOUS_K, MS.STARTING_K))
+        z_first = C.apply_scaler(raw_first, C.fit_scaler(raw_first))
         att.detail = {"best": k_choice["best_by_inner_criterion"]}
     # The registered starting K is 3. The inner criterion is REPORTED; it does not
     # silently override a registered choice (guide 8.1).
