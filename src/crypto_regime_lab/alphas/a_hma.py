@@ -30,6 +30,11 @@ from .reference import indicators as ref
 
 ADAPT_PCT = 0.03141
 SL_MODES = {"One Distance Zone": 0, "Half Distance Zone": 1, "Last High/Low": 2, "ATR Only": 3}
+# A05: the LAB-02 schema invented the names "Zone Distance" and "ATR", which the
+# adapter silently defaulted to mode 1. The canonical names are the raw alpha's
+# sl_mode_map keys. Old artifacts replay through an EXPLICIT migration, never a
+# silent fallback; a truly unknown name is infeasible.
+LEGACY_SL_INPUT_ALIASES = {"Zone Distance": "One Distance Zone", "ATR": "ATR Only"}
 IGNORED_KNOBS = ("sl_mult", "double_up", "time_ms", "volume")
 
 
@@ -108,6 +113,13 @@ class AdaptiveHmaEventAdapterV1(AlphaAdapter):
         if float(self.params["tick_size"]) <= 0:
             raise InfeasibleConfiguration("tick_size must be positive (SD-HMA-04)")
         self.ignored_knobs = {k: self.params[k] for k in IGNORED_KNOBS if k in self.params}
+        raw_sl = self.params.get("sl_input", "Half Distance Zone")
+        canonical_sl = LEGACY_SL_INPUT_ALIASES.get(raw_sl, raw_sl)
+        if canonical_sl not in SL_MODES:
+            raise InfeasibleConfiguration(
+                f"{self.alpha_id}: unknown sl_input {raw_sl!r}; accepted: {tuple(SL_MODES)}")
+        self.sl_input = canonical_sl
+        self.sl_input_migrated_from = raw_sl if canonical_sl != raw_sl else None
 
     # -- lifecycle --------------------------------------------------------
 
@@ -257,7 +269,7 @@ class AdaptiveHmaEventAdapterV1(AlphaAdapter):
         last_high = hh48 + 5.0 * pip_size
         last_low = ll48 - 5.0 * pip_size
 
-        mode = SL_MODES.get(self.params.get("sl_input", "Half Distance Zone"), 1)
+        mode = SL_MODES[self.sl_input]
         sl_buy_raw, sl_sell_raw = {
             0: (bot_tl, top_tl),
             1: (lower_tl, upper_tl),

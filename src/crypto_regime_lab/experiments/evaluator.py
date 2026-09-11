@@ -267,9 +267,11 @@ def _drawdown(equity: np.ndarray) -> float:
 def episode_metrics(run: CandidateRun, bounds: list[tuple[str, int, int]]) -> dict:
     """Utility and gate outcome per inner episode.
 
-    U = (net return - lambda_dd * max drawdown) / risk unit, with net return taken
-    against the frozen initial capital so every episode is measured against the
-    same fixed risk allocation rather than a drifting equity base.
+    A07: money PnL over the half-open block ``[lo, hi)`` is
+    ``E_{hi-1} - E_{lo-1}``, with the first block measuring from the initial
+    account before the first observation. The old formula measured from
+    ``E[lo]``, so the move across a block boundary was dropped and the block
+    money deltas did not telescope to the whole-account delta.
     """
     capital = ACCOUNT["initial_capital_usdt"]
     out: dict[str, dict] = {}
@@ -277,13 +279,18 @@ def episode_metrics(run: CandidateRun, bounds: list[tuple[str, int, int]]) -> di
         segment = run.equity[lo:hi]
         if segment.size < 2 or not np.isfinite(segment).all():
             raise EvaluationError(f"episode {name}: account trace is not finite")
-        net_return = float(segment[-1] - segment[0]) / capital
-        mdd = _drawdown(segment)
+        prior = float(run.equity[lo - 1]) if lo > 0 else float(capital)
+        if not np.isfinite(prior) or prior <= 0:
+            raise EvaluationError(f"episode {name}: starting mark {prior!r} is not usable")
+        end = float(segment[-1])
+        net_return = (end - prior) / prior
+        mdd = _drawdown(np.concatenate([[prior], segment]))
         utility = (net_return - UTILITY["drawdown_penalty"] * mdd) / UTILITY["risk_unit_fraction"]
         trades = sum(1 for f in run.fills if lo <= f["bar_index"] < hi)
         exposure = float(np.mean(np.abs(run.positions[lo:hi]) > 0.0))
         out[name] = {
             "utility": float(utility), "net_return": net_return, "max_drawdown": mdd,
+            "starting_equity": prior, "money_delta": end - prior,
             "trades": int(trades), "exposure": exposure,
             "gate_pass": bool(net_return > UTILITY["gate_min_return"]
                               and mdd <= UTILITY["gate_max_drawdown"]),

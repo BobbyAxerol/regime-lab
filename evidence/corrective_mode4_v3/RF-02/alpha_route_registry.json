@@ -1,0 +1,650 @@
+{
+  "schema": "regime_lab.alpha_route_registry.v3",
+  "generated_at_utc": "2026-09-11T15:32:12.014836+00:00",
+  "phase": "RF-02",
+  "study_id": "corrective_mode4_v3",
+  "rule": "route decisions are made from capability and schema BEFORE any outcome, never from which candidate made more money; a cell that cannot preserve semantics is BLOCKED_CAPABILITY, not silently rerouted",
+  "alphas": {
+    "A-SC": {
+      "adapter_class": "SignalCombineAdapterV1",
+      "adapter_file": "crypto_regime_lab/alphas/a_sc.py",
+      "adapter_sha256": "495d75e35c4ed51c30161a457aad0e9a7a00b5d099666b5d35c0ce1850acb9c2",
+      "adapter_version": "canonical_v1",
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "warmup_bars": 23,
+      "warmup_source": "adapter.warmup_bars() computed on this commit",
+      "seed_point": {
+        "coeff": 4,
+        "AP": 20,
+        "alpha.condition_threshold": 55,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "ignored_knobs": [],
+      "schema": {
+        "params": {
+          "coeff": {
+            "kind": "int",
+            "low": 1,
+            "high": 8,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "AP": {
+            "kind": "int",
+            "low": 5,
+            "high": 60,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "alpha.condition_threshold": {
+            "kind": "int",
+            "low": 30,
+            "high": 80,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "novolumedata": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "fixed_value": false,
+            "active_when": null
+          },
+          "src_col": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "fixed_value": "close",
+            "active_when": null
+          }
+        },
+        "dependencies": []
+      },
+      "semantics": {
+        "intents_emitted": [
+          "ENTER_LONG",
+          "EXIT_ALL"
+        ],
+        "sizing_basis": "FIXED_NOTIONAL",
+        "protection": "none (long-flat crossover; no resting stop/target)",
+        "intrabar_required": false,
+        "known_blockers": [],
+        "route_candidate": "signal_or_pct_equity (crossover target series is exact)"
+      },
+      "route_status": "PENDING_QUALIFICATION",
+      "cell_status": {
+        "A-SC/BTCUSDT": "PENDING_QUALIFICATION",
+        "A-SC/ETHUSDT": "PENDING_QUALIFICATION",
+        "A-SC/SOLUSDT": "PENDING_QUALIFICATION",
+        "A-SC/BNBUSDT": "PENDING_QUALIFICATION",
+        "A-SC/DOGEUSDT": "PENDING_QUALIFICATION"
+      }
+    },
+    "A-HMA": {
+      "adapter_class": "AdaptiveHmaEventAdapterV1",
+      "adapter_file": "crypto_regime_lab/alphas/a_hma.py",
+      "adapter_sha256": "f6da200feae9b8ce0ae43d3d85bf563e2564c08fda4899440ad96c3fd185a6b5",
+      "adapter_version": "canonical_v1",
+      "decision_bars": "1h",
+      "execution_bars": "1m",
+      "warmup_bars": 250,
+      "warmup_source": "adapter.warmup_bars() computed on this commit",
+      "seed_point": {
+        "min_length": 200,
+        "max_length": 240,
+        "minor_min": 60,
+        "minor_max": 120,
+        "flat": 25.0,
+        "atr_fast": 30,
+        "atr_slow": 75,
+        "mult": 3.0,
+        "max_sl": 5.0,
+        "take_profit": 4.5,
+        "min_profit": 2.0,
+        "sl_input": "Half Distance Zone",
+        "tick_size": 0.01
+      },
+      "ignored_knobs": [],
+      "schema": {
+        "params": {
+          "min_length": {
+            "kind": "int",
+            "low": 40,
+            "high": 360,
+            "step": 10,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "max_length": {
+            "kind": "int",
+            "low": 60,
+            "high": 420,
+            "step": 10,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "minor_min": {
+            "kind": "int",
+            "low": 10,
+            "high": 120,
+            "step": 2,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "minor_max": {
+            "kind": "int",
+            "low": 30,
+            "high": 220,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "flat": {
+            "kind": "float",
+            "low": 4.0,
+            "high": 50.0,
+            "step": 1.0,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "atr_fast": {
+            "kind": "int",
+            "low": 4,
+            "high": 60,
+            "step": 2,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "atr_slow": {
+            "kind": "int",
+            "low": 10,
+            "high": 140,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 6.0,
+            "step": 0.25,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "max_sl": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 9.0,
+            "step": 0.25,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "take_profit": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 8.0,
+            "step": 0.5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "min_profit": {
+            "kind": "float",
+            "low": 0.1,
+            "high": 4.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "sl_input": {
+            "kind": "categorical",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              "One Distance Zone",
+              "Half Distance Zone",
+              "Last High/Low",
+              "ATR Only"
+            ],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "tick_size": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "fixed_value": 0.01,
+            "active_when": null
+          }
+        },
+        "dependencies": [
+          [
+            "min_length",
+            "max_length"
+          ],
+          [
+            "minor_min",
+            "minor_max"
+          ],
+          [
+            "atr_fast",
+            "atr_slow"
+          ]
+        ]
+      },
+      "semantics": {
+        "intents_emitted": [
+          "ENTER_LONG",
+          "ENTER_SHORT",
+          "EXIT_ALL",
+          "SET_PROTECTION"
+        ],
+        "sizing_basis": "FIXED_NOTIONAL entries; level-based protection quantities",
+        "protection": "resting stop/TP; gap policy may emit corrective EXIT_ALL after a fill",
+        "intrabar_required": true,
+        "known_blockers": [
+          "corrective EXIT_ALL after an invalid bracket must reach the position (A04)"
+        ],
+        "route_candidate": "native_event_feedback"
+      },
+      "route_status": "PENDING_QUALIFICATION",
+      "cell_status": {
+        "A-HMA/BTCUSDT": "PENDING_QUALIFICATION",
+        "A-HMA/ETHUSDT": "PENDING_QUALIFICATION",
+        "A-HMA/SOLUSDT": "PENDING_QUALIFICATION",
+        "A-HMA/BNBUSDT": "PENDING_QUALIFICATION",
+        "A-HMA/DOGEUSDT": "PENDING_QUALIFICATION"
+      }
+    },
+    "A-VWAP": {
+      "adapter_class": "VwapMeanReversionEventAdapterV1",
+      "adapter_file": "crypto_regime_lab/alphas/a_vwap.py",
+      "adapter_sha256": "242facf154f4505ab862ac6815ee497d0e9c6e3ee70bbdb8b6cb1895a2900b77",
+      "adapter_version": "canonical_v1",
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "warmup_bars": 50,
+      "warmup_source": "adapter.warmup_bars() computed on this commit",
+      "seed_point": {
+        "rsi_len": 40,
+        "rsi_os": 30,
+        "rsi_ob": 72,
+        "dev_mult": 2.5,
+        "atr_len": 45,
+        "stop_atr": 5.5,
+        "target_r": 5.5,
+        "htf_ema_len": 360,
+        "exit_at_vwap": false,
+        "time_stop_on": true,
+        "time_stop_bars": 60,
+        "htf_tf": "1h"
+      },
+      "ignored_knobs": [],
+      "schema": {
+        "params": {
+          "rsi_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 80,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "rsi_os": {
+            "kind": "int",
+            "low": 10,
+            "high": 50,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "rsi_ob": {
+            "kind": "int",
+            "low": 55,
+            "high": 90,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "dev_mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "atr_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 90,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "stop_atr": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 10.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "target_r": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 10.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "htf_ema_len": {
+            "kind": "int",
+            "low": 20,
+            "high": 700,
+            "step": 10,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "exit_at_vwap": {
+            "kind": "bool",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              false,
+              true
+            ],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "time_stop_on": {
+            "kind": "bool",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              false,
+              true
+            ],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "time_stop_bars": {
+            "kind": "int",
+            "low": 5,
+            "high": 120,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": [
+              "time_stop_on",
+              true
+            ]
+          },
+          "htf_tf": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "fixed_value": "1h",
+            "active_when": null
+          }
+        },
+        "dependencies": [
+          [
+            "rsi_os",
+            "rsi_ob"
+          ]
+        ]
+      },
+      "semantics": {
+        "intents_emitted": [
+          "ENTER_LONG",
+          "ENTER_SHORT",
+          "EXIT_ALL",
+          "SET_PROTECTION",
+          "AMEND_PROTECTION"
+        ],
+        "sizing_basis": "FIXED_NOTIONAL entries; level-based protection quantities",
+        "protection": "stop/TP plus optional dynamic VWAP amendment and time stop",
+        "intrabar_required": true,
+        "known_blockers": [
+          "AMEND_PROTECTION is unmapped on the intent tape (A04)"
+        ],
+        "route_candidate": "native_event_feedback"
+      },
+      "route_status": "PENDING_QUALIFICATION",
+      "cell_status": {
+        "A-VWAP/BTCUSDT": "PENDING_QUALIFICATION",
+        "A-VWAP/ETHUSDT": "PENDING_QUALIFICATION",
+        "A-VWAP/SOLUSDT": "PENDING_QUALIFICATION",
+        "A-VWAP/BNBUSDT": "PENDING_QUALIFICATION",
+        "A-VWAP/DOGEUSDT": "PENDING_QUALIFICATION"
+      }
+    },
+    "A-HASH": {
+      "adapter_class": "HashMomentumEventAdapterV1",
+      "adapter_file": "crypto_regime_lab/alphas/a_hash.py",
+      "adapter_sha256": "7bbd1aa478ed53d7339127cd4b93615ded3134e2ad4c2d6cfccfbecbd1b38bf2",
+      "adapter_version": "canonical_v1",
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "warmup_bars": 106,
+      "warmup_source": "adapter.warmup_bars() computed on this commit",
+      "seed_point": {
+        "mom_len": 35,
+        "ema_len": 44,
+        "cooldown_bars": 20,
+        "stop_loss_perc": 4.0,
+        "tp1_ratio": 2.0,
+        "tp2_ratio": 3.0,
+        "rr_ratio": 4.0,
+        "mom_threshold_mult": 3.5,
+        "tp1_qty_perc": 45,
+        "tp2_qty_perc": 45
+      },
+      "ignored_knobs": [],
+      "schema": {
+        "params": {
+          "mom_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 70,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "ema_len": {
+            "kind": "int",
+            "low": 10,
+            "high": 80,
+            "step": 2,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "cooldown_bars": {
+            "kind": "int",
+            "low": 0,
+            "high": 40,
+            "step": 1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "stop_loss_perc": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 8.0,
+            "step": 0.25,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "rr_ratio": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "tp1_ratio": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 4.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "tp2_ratio": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "mom_threshold_mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 7.0,
+            "step": 0.25,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "tp1_qty_perc": {
+            "kind": "int",
+            "low": 20,
+            "high": 70,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          },
+          "tp2_qty_perc": {
+            "kind": "int",
+            "low": 20,
+            "high": 70,
+            "step": 5,
+            "choices": [],
+            "fixed_value": null,
+            "active_when": null
+          }
+        },
+        "dependencies": [
+          [
+            "tp1_ratio",
+            "tp2_ratio"
+          ],
+          [
+            "tp2_ratio",
+            "rr_ratio"
+          ]
+        ]
+      },
+      "semantics": {
+        "intents_emitted": [
+          "ENTER_LONG",
+          "ENTER_SHORT",
+          "SET_PROTECTION (partial TP ladder)"
+        ],
+        "sizing_basis": "FRACTION_OF_REMAINING protection ladder; fixed-notional entries",
+        "protection": "ordered multi-rung partial TP ladder with remaining quantity and cooldown",
+        "intrabar_required": true,
+        "known_blockers": [
+          "partial ladder not expressible on the current intent tape; needs native event order capability or the cell is BLOCKED_CAPABILITY"
+        ],
+        "route_candidate": "native_event_feedback_or_block"
+      },
+      "route_status": "PENDING_QUALIFICATION",
+      "cell_status": {
+        "A-HASH/BTCUSDT": "PENDING_QUALIFICATION",
+        "A-HASH/ETHUSDT": "PENDING_QUALIFICATION",
+        "A-HASH/SOLUSDT": "PENDING_QUALIFICATION",
+        "A-HASH/BNBUSDT": "PENDING_QUALIFICATION",
+        "A-HASH/DOGEUSDT": "PENDING_QUALIFICATION"
+      }
+    }
+  },
+  "a05_stop_mode_repair": {
+    "canonical_enum": {
+      "One Distance Zone": 0,
+      "Half Distance Zone": 1,
+      "Last High/Low": 2,
+      "ATR Only": 3
+    },
+    "schema_choices_before": [
+      "Half Distance Zone",
+      "Zone Distance",
+      "ATR"
+    ],
+    "schema_choices_after": [
+      "One Distance Zone",
+      "Half Distance Zone",
+      "Last High/Low",
+      "ATR Only"
+    ],
+    "legacy_aliases_explicit": {
+      "Zone Distance": "One Distance Zone",
+      "ATR": "ATR Only"
+    },
+    "silent_default_removed": true,
+    "repair": "the adapter validates sl_input and raises InfeasibleConfiguration on an unknown name; historical names replay only through the explicit alias table"
+  },
+  "route_decision_vocabulary": [
+    "QUALIFIED_FAST",
+    "QUALIFIED_EVENT",
+    "BLOCKED_CAPABILITY",
+    "INSUFFICIENT_DATA"
+  ],
+  "acceptance_refs": [
+    "T15",
+    "T16",
+    "T19",
+    "T20",
+    "T22"
+  ],
+  "lab_run_id": "RF-02",
+  "written_at_utc": "2026-09-11T15:32:12.014898+00:00"
+}

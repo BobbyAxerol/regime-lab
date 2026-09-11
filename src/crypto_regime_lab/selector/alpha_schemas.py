@@ -54,7 +54,7 @@ A_HMA = ParamSchema.from_specs(
         ParamSpec("take_profit", "float", 1.0, 8.0, 0.5),
         ParamSpec("min_profit", "float", 0.1, 4.0, 0.1),
         ParamSpec("sl_input", "categorical",
-                  choices=("Half Distance Zone", "Zone Distance", "ATR")),
+                  choices=("One Distance Zone", "Half Distance Zone", "Last High/Low", "ATR Only")),
         ParamSpec("tick_size", "fixed", fixed_value=0.01),
     ],
     dependencies=(("min_length", "max_length"), ("minor_min", "minor_max"),
