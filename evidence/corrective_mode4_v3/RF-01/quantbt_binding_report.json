@@ -1118,9 +1118,43 @@
   ],
   "checks_total": 11,
   "checks_present": 11,
+  "research_retention_resolution": {
+    "enum_source": {
+      "file": "core/research_audit.py",
+      "file_sha256": "b7347591cdc7b71b0def67a3417847c56dc33dabf311f6640a8a50633f13c70e",
+      "research_retention_levels": [
+        "full_trial_ledger",
+        "selected_only",
+        "none"
+      ],
+      "financial_retention_levels": [
+        "score",
+        "compact",
+        "audit"
+      ],
+      "financial_retention_scopes": [
+        "selected_final_execution",
+        "segmented_reset_flat_execution"
+      ]
+    },
+    "endpoint_default": {
+      "file": "endpoint.py",
+      "line": 1997,
+      "value": "none",
+      "warning": "a copied enum name that is not passed through falls back to none"
+    },
+    "registered_choice": {
+      "research_retention": "full_trial_ledger",
+      "financial_retention": "score",
+      "financial_retention_scope": "selected_final_execution",
+      "reason": "RF-04.2 needs the full trial ledger; financial depth may be raised by a spec revision if RF-02 shows it is required"
+    },
+    "status": "RESOLVED_FROM_INSTALLED_SOURCE",
+    "present_in_source": true
+  },
   "rule": "every VFY claim is re-verified against the candidate copy in this lab. The merged plan is a guide, not the measurement.",
   "schema": "regime_lab.quantbt_binding_report.v3",
   "lab_run_id": "RF-01",
   "study_id": "corrective_mode4_v3",
-  "written_at_utc": "2026-09-11T15:06:09.196894+00:00"
+  "written_at_utc": "2026-09-11T15:16:23.925275+00:00"
 }

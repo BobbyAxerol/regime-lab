@@ -45,6 +45,9 @@ def render_markdown(identity, binding, invalidation, disposition, spec, regressi
         "No model and no market was run in this phase. **proof status: TECHNICAL_ONLY** — "
         "this is not evidence of an edge or of its absence.")
     add("")
+    add("Revision 2 (2026-09-11): adds the `research_retention` resolution to the binding report and the "
+        "study spec. Revision 1 is preserved in git (`67dfb53`).")
+    add("")
     add("## 1. Objective, and what is not tested")
     add("")
     add("Stop the invalid interpretation of the historical results, register the corrected Mode 4 protocol, "
@@ -65,6 +68,10 @@ def render_markdown(identity, binding, invalidation, disposition, spec, regressi
         f"quantbt-native `{qt['distributions'].get('quantbt-native')}`, import origin `{qt['import_origin']}`")
     add(f"- candidate copy `{candidate['root']}`: endpoint sha256 `{candidate['endpoint_sha256']}`, "
         f"matches the audited VFY01 hash: **{candidate['matches_audited_vfy01']}**")
+    retention = binding["research_retention_resolution"]
+    add(f"- research_retention resolved: **{retention['registered_choice']['research_retention']}** from "
+        f"`{retention['enum_source']['file']}`; the endpoint default is "
+        f"`{retention['endpoint_default']['value']}` and is refused; status `{retention['status']}`")
     add(f"- preflight gate **{identity['preflight']['gate']}**, counts {identity['preflight']['counts']}")
     add(f"- protected-path write probes refused: "
         f"**{all(r['refused'] for r in identity['protected_paths_write_refused'])}**")

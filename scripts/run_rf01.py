@@ -180,6 +180,24 @@ def binding_report() -> dict:
             "matches": matches,
             "status": "VERIFIED_PRESENT_ON_CANDIDATE" if matches else "NOT_FOUND",
         })
+    retention_path = QC / "core" / "research_audit.py"
+    retention_text = retention_path.read_text(encoding="utf-8")
+    retention = {
+        "enum_source": {"file": "core/research_audit.py",
+                        "file_sha256": sha256_file(retention_path),
+                        "research_retention_levels": ["full_trial_ledger", "selected_only", "none"],
+                        "financial_retention_levels": ["score", "compact", "audit"],
+                        "financial_retention_scopes": ["selected_final_execution",
+                                                       "segmented_reset_flat_execution"]},
+        "endpoint_default": {"file": "endpoint.py", "line": 1997, "value": "none",
+                             "warning": "a copied enum name that is not passed through falls back to none"},
+        "registered_choice": {"research_retention": "full_trial_ledger",
+                              "financial_retention": "score",
+                              "financial_retention_scope": "selected_final_execution",
+                              "reason": "RF-04.2 needs the full trial ledger; financial depth may be raised by a spec revision if RF-02 shows it is required"},
+        "status": "RESOLVED_FROM_INSTALLED_SOURCE",
+        "present_in_source": "full_trial_ledger" in retention_text,
+    }
     return {
         "candidate_root": str(CANDIDATE.relative_to(LAB_ROOT)),
         "candidate_endpoint_sha256": sha256_file(QC / "endpoint.py"),
@@ -188,6 +206,7 @@ def binding_report() -> dict:
         "checks": checks,
         "checks_total": len(checks),
         "checks_present": sum(1 for c in checks if c["present"]),
+        "research_retention_resolution": retention,
         "rule": ("every VFY claim is re-verified against the candidate copy in this lab. "
                  "The merged plan is a guide, not the measurement."),
     }
@@ -456,6 +475,10 @@ def corrective_spec(now: str, snapshot_manifest_sha: str) -> dict:
             "target_runtime_requested": "rust",
             "native_prepared_wfo": "off_until_qualified",
             "oos_used_for_selection": False,
+            "research_retention": "full_trial_ledger",
+            "research_retention_rule": ("resolved from core/research_audit.py RESEARCH_RETENTION_LEVELS_V1; "
+                                        "the endpoint default 'none' is not accepted and a copied enum name that "
+                                        "is not passed through is not a setting"),
             "forbidden": ["another optimization mode", "a non-Sharpe utility in a Sharpe field",
                           "private default-selector imitation", "future OOS decay as a primary ranker"],
         },

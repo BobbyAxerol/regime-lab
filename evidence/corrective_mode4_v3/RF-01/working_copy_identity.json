@@ -1,17 +1,16 @@
 {
   "schema": "regime_lab.working_copy_identity.v3",
-  "generated_at_utc": "2026-09-11T15:06:02.294044+00:00",
+  "generated_at_utc": "2026-09-11T15:16:15.112943+00:00",
   "phase": "RF-01",
   "study_id": "corrective_mode4_v3",
   "lab_root": "/root/bobby/pool_alpha/lab_regime_model_quantbt",
   "lab_marker_study_id": "crypto_regime_timeedge_v2",
   "lab_marker_note": "the marker is LAB-01 bootstrap evidence and is not rewritten; the corrective study is a successor study inside the same LAB_ROOT",
   "branch": "mode4-corrective",
-  "head_commit": "fd2d4f0dc5a6667cad763d80bc45e59cd0daf7e5",
+  "head_commit": "f4ba4e1b151222aa9811b25efcacebf960bf33c9",
   "working_tree_porcelain": [
-    "?? evidence/corrective_mode4_v3/",
-    "?? scripts/extract_embedded_audit.py",
-    "?? scripts/run_rf01.py"
+    "M scripts/run_rf01.py",
+    " M scripts/write_rf01_report.py"
   ],
   "plan": {
     "path": "REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md",
@@ -291,19 +290,19 @@
           "over_budget_worker_died": true,
           "parent_survived": true,
           "disk_within_quota": true,
-          "lab_gib_used": 4.945
+          "lab_gib_used": 4.946
         },
         "detail": {
           "worker_error": "numpy._core._exceptions._ArrayMemoryError: Unable to allocate 64.0 MiB for an array with shape (8388608,) and data type float64",
           "disk": {
-            "lab_bytes_used": 5309488928,
-            "lab_gib_used": 4.945,
+            "lab_bytes_used": 5310366053,
+            "lab_gib_used": 4.946,
             "quota_gib": 20,
             "quota_bytes": 21474836480,
             "within_quota": true,
-            "filesystem_free_gib": 5.342,
+            "filesystem_free_gib": 5.245,
             "filesystem_total_gib": 78.646,
-            "headroom_gib": 15.055
+            "headroom_gib": 15.054
           }
         }
       },
@@ -335,12 +334,12 @@
     "containment_claim": "Worker writes outside LAB_ROOT are refused by the kernel (read-only bind mounts) and replay workers have an empty network namespace."
   },
   "source_manifest_counts": {
-    "src": 101,
-    "scripts": 90,
-    "tests": 29,
+    "src": 102,
+    "scripts": 92,
+    "tests": 30,
     "configs": 143,
     "candidate_quantbt": 208
   },
   "lab_run_id": "RF-01",
-  "written_at_utc": "2026-09-11T15:06:09.190918+00:00"
+  "written_at_utc": "2026-09-11T15:16:23.913447+00:00"
 }

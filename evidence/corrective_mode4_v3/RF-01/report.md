@@ -2,18 +2,21 @@
 
 Generated from committed RF-01 artifacts by `scripts/write_rf01_report.py`. No model and no market was run in this phase. **proof status: TECHNICAL_ONLY** — this is not evidence of an edge or of its absence.
 
+Revision 2 (2026-09-11): adds the `research_retention` resolution to the binding report and the study spec. Revision 1 is preserved in git (`67dfb53`).
+
 ## 1. Objective, and what is not tested
 
 Stop the invalid interpretation of the historical results, register the corrected Mode 4 protocol, and turn each audit finding into a regression before any repair. **Not tested here:** whether regime timing has an edge. RF-01 runs no market experiment by design (merged plan RF-01 exit).
 
 ## 2. Identity and resolved runtime
 
-- branch `mode4-corrective`, head `fd2d4f0dc5a6667cad763d80bc45e59cd0daf7e5`; working tree entries 3
+- branch `mode4-corrective`, head `f4ba4e1b151222aa9811b25efcacebf960bf33c9`; working tree entries 2
 - plan sha256 `bf983c2b63dd748d778a3d9c38360bfb6f081cb9b445d7a8044fbae63b2c7434`; audit archive `2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f` (present in lab: False)
 - recovered audit bundle: 20 members, 1462711 bytes, `RESTORED_VERIFIED`, restored code executed: False
 - python `3.12.13` at `/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python`
 - quantbt-engine `1.1.1`, quantbt-native `0.4.2`, import origin `/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py`
 - candidate copy `quantbt_candidate`: endpoint sha256 `45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6`, matches the audited VFY01 hash: **True**
+- research_retention resolved: **full_trial_ledger** from `core/research_audit.py`; the endpoint default is `none` and is refused; status `RESOLVED_FROM_INSTALLED_SOURCE`
 - preflight gate **PASS**, counts {'PASS': 9}
 - protected-path write probes refused: **True**
 

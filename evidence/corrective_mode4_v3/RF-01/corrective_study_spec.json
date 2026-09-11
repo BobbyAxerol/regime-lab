@@ -1,6 +1,6 @@
 {
   "schema": "regime_lab.corrective_study_spec.v3",
-  "registered_at_utc": "2026-09-11T15:06:02.294044+00:00",
+  "registered_at_utc": "2026-09-11T15:16:15.112943+00:00",
   "registered_by": "OpenCode under user approval (2026-09-11)",
   "study_id": "corrective_mode4_v3",
   "supersedes_study": "crypto_regime_timeedge_v2",
@@ -30,6 +30,8 @@
     "target_runtime_requested": "rust",
     "native_prepared_wfo": "off_until_qualified",
     "oos_used_for_selection": false,
+    "research_retention": "full_trial_ledger",
+    "research_retention_rule": "resolved from core/research_audit.py RESEARCH_RETENTION_LEVELS_V1; the endpoint default 'none' is not accepted and a copied enum name that is not passed through is not a setting",
     "forbidden": [
       "another optimization mode",
       "a non-Sharpe utility in a Sharpe field",
@@ -221,5 +223,5 @@
     "note": "separate from the historical T01..T64 registry; the old registry is untouched"
   },
   "lab_run_id": "RF-01",
-  "written_at_utc": "2026-09-11T15:06:09.203387+00:00"
+  "written_at_utc": "2026-09-11T15:16:23.935688+00:00"
 }

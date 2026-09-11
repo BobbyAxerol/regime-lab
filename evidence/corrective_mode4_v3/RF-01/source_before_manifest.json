@@ -1,11 +1,11 @@
 {
   "schema": "regime_lab.source_before_manifest.v3",
-  "generated_at_utc": "2026-09-11T15:06:02.294044+00:00",
+  "generated_at_utc": "2026-09-11T15:16:15.112943+00:00",
   "purpose": "hash of every lab source/config/test file before RF-02 repairs",
   "counts": {
-    "src": 101,
-    "scripts": 90,
-    "tests": 29,
+    "src": 102,
+    "scripts": 92,
+    "tests": 30,
     "configs": 143,
     "candidate_quantbt": 208
   },
@@ -51,6 +51,7 @@
       "crypto_regime_lab/data/snapshot.py": "4b72499a6ef7c56ca867d60ebc6c5f28851e4990a8ff6c4cc364e888ce6e0253",
       "crypto_regime_lab/evidence/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "crypto_regime_lab/evidence/audit_queue.py": "8c00f89c9dfa9135384645db4840b5dfce807887880cbc14e24a00aaf3b6b51c",
+      "crypto_regime_lab/evidence/claim_gate.py": "23e01cd46604703b52be836505a83f05eb598478c54645a5d17c4eb8776ea00e",
       "crypto_regime_lab/evidence/data_sources.py": "db52ead7c1b7a20f7cba12cdd265e36c5b53c6e907a29ddf7662583d9445d9ff",
       "crypto_regime_lab/evidence/glossary.py": "36480d94fe255639424f2f9195c1546bb75800ac88c53a2f8aa71c7976d9aba1",
       "crypto_regime_lab/evidence/identities.py": "2e90b0f75567af7d7f61ebb90a787510eef38dd0a6efedaf6901c3bfd973c2bf",
@@ -121,12 +122,12 @@
       "audit_assertion_vacuity.py": "988455ca190ad6f7419478ab87a26fadbbb51e62f0573461dcb56b3a22dc4732",
       "audit_evidence_pointers.py": "d75ff7da27331830695714a5dfb032173789395c355e4a2a8ba1322a9c141d21",
       "audit_forbidden_claims.py": "16aa619a566bbbd7a92ca19d05bd53200b825265a73cc261d0dddb2f3804ad1c",
-      "audit_guard_strength.py": "88cfbe9c083dc2605c762d2d1d12d62cf2a558538afcc35a9b079e7103af751f",
+      "audit_guard_strength.py": "ca65312bb4feac48d66fcd9de99b8566a9feb2d0e2bf148743c91d71e512bdad",
       "audit_guide_section_coverage.py": "fed03f576f18e988f340cd8f0470af31dc2243cf12d97c09f778e78a79d41cb5",
       "audit_identities.py": "65b47b19e473ce814a712b80f9adcf763bd241c962ecb664cb656521ce848420",
-      "audit_lab04.py": "a3d96441dfc2cee112b3775d07d0bb3e01704a613b674186b81b37b29a822176",
-      "audit_lab05.py": "73983b49f00b7467dfec878072573d1ce434ef47ef4fdba1248edfc69d1b40b3",
-      "audit_lab06.py": "d7c060a9621430f40a1f66d4826c5b412a839e39bf4707ac1d5e11cd5779f7e5",
+      "audit_lab04.py": "f20b378a54e21b3df683b396b99da03fb94f0747d7093078c112818014ba1454",
+      "audit_lab05.py": "6cd3d6d7fcedc90f1bfacbbfc976f1a6b33fe547be2c00c8c878e7f238a70500",
+      "audit_lab06.py": "ef898e9538123f4370fc735c131d108fef95f8d955ec58fd0aea8ddc3dfc2fa5",
       "audit_lab07.py": "88e82416cbae5c2af323d3ab1900ed65310bf6d62664c187e4630b8686353720",
       "audit_lab07_leakage.py": "79c6611f6b91d55cabeeba0abc95911eaaee999c9f33228a8e02bf40d20f9e0f",
       "audit_lab08.py": "3a2257360ed6e624d5d6c42f26510eb7874eca89ed3fe36b1e74879dd0a3167a",
@@ -177,7 +178,8 @@
       "run_lab09_support.py": "98ff23ef6362c2317b10145c80606f174b25d7be58209018281483eff77f8d28",
       "run_probes_sandboxed.py": "aad9c9eda9dcf8cf77fb45f4a917db32f855e0be24829d7d6f10e3efd2d32d83",
       "run_response_policy.py": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
-      "run_rf01.py": "67dd3910680d69cd2fe59c65746c95899a433fa5eccf157ef612851e7fc8a417",
+      "run_rf01.py": "9a6d7813ac241e0e2944837043dbcd5e175d62a49ec288a83fd5561ad4d9da28",
+      "run_rf01_regressions.py": "d8093b9b0e6e883d6c309eac9da3d3ac301b858540cc41c5959cc7a790db3064",
       "snapshot_data.py": "79a6d80cff2b8028a25d46a4354d60a254dd0a1455dee25b9c9132ff085c0d7a",
       "summarize_calendar_baseline.py": "3baa525894dc040c752f9082c6b1fd3714433b33d417e5b806b39ce1e0bc37dd",
       "trace_installed_selector.py": "db9d7cdb1de60591e36bdd633fba31d2153c723c8098f0e29b10abb44344c297",
@@ -203,11 +205,13 @@
       "write_lab07_report.py": "8a42f9558b4e96082cc9ac7b600bf7fa013718adc026898d40d220ecc7c59b23",
       "write_lab08_report.py": "17a8088c3aaf91dfec7bcfb57150938366ffd8e90401d2618ef8e2fd31932a32",
       "write_lab09_limitations.py": "b2ddaea70dacc3a035aca25867b61baefbed8316ce7aa000662c2c928e4091e3",
-      "write_lab09_report.py": "b27f63d937e740a257e17bc5c027f6b2e1b04cefd98a76a8f035cbcf69e8d3c9"
+      "write_lab09_report.py": "b27f63d937e740a257e17bc5c027f6b2e1b04cefd98a76a8f035cbcf69e8d3c9",
+      "write_rf01_report.py": "1eb62d2ddfe3fda6a911e845d9209af1099fc458efda345d92c10b471a1d602f"
     },
     "tests": {
       "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "conftest.py": "4d6389254f1d1ab5693abe7b00464ba95263f1dbfafde716e49e4d86fd6840c0",
+      "mode4_corrective/test_rf01_before_repairs.py": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
       "test_contingency_paths.py": "196a4560563b687479b6cd664465485c55798bf1145545c9825acc4bc11e6345",
       "test_guide_contracts.py": "97bcecfc20a699c45ec4dded81c10ec6f623e7b790c617e8fb2458965d8f160b",
       "test_guide_publishing_discipline.py": "259fe9c0c643254e787248910745df526dca3e9587bc3ecaccaf9c4c092b8831",
@@ -224,7 +228,7 @@
       "test_lab02_suites.py": "806b53d98c126fd9cfb5b33ab60ff9b7a50fcb0c997f1fe6233b4b62731881f1",
       "test_lab03_data.py": "ea49ee759935384f41ad2ecd9a5fd663d303b1de8c68154394796ec247e1879d",
       "test_lab03_pipeline.py": "7c95e56b9159b00d255787bbec21dd06b11c4c6e1c9e0202377b8055fb081390",
-      "test_lab04_evaluator.py": "5b4bf39528bfc26de7eaf4cd29b1d17838dca1ba78e52f849afa488d608b5cbf",
+      "test_lab04_evaluator.py": "e08d8d90e1cfd0547fa1b7f8f0e17e8197aa62a87d4a2fac1625ddfcb62b4f81",
       "test_lab04_legacy_labelling.py": "ebc52ef3249c7eb98964912bcfac7534428a48591a934acdb8a2d7a1e830953b",
       "test_lab04_selector.py": "54e30bc4ab92e21da527f93358b087557cb614465aff0591fd175aced21d580a",
       "test_lab05_regime.py": "0d82b2663e184742527418c4f0380c66073761d6a774898d3f3ee49fa66326a5",
@@ -594,5 +598,5 @@
   },
   "lab_run_id": "RF-01",
   "study_id": "corrective_mode4_v3",
-  "written_at_utc": "2026-09-11T15:06:09.194450+00:00"
+  "written_at_utc": "2026-09-11T15:16:23.922585+00:00"
 }
