@@ -86,3 +86,34 @@ def test_a01_the_bound_route_charges_the_registered_one_way_rate():
             f"fill charged {realized_fee_rate(fill)} one-way against the registered 0.0004")
     assert out["contract"]["bound"] == {"fee": 0.0008, "fee_rate": 0.0004}
 
+
+# --- A06: HTF decision clock -> 1m execution clock ------------------------
+
+def test_a06_an_htf_decision_does_not_fill_on_its_own_close():
+    from crypto_regime_lab.integration.execution_clock import map_htf_decisions
+
+    htf = pd.date_range("2024-01-01 00:00", periods=3, freq="15min", tz="UTC")
+    execution = pd.date_range("2024-01-01 00:00", periods=60, freq="1min", tz="UTC")
+    mapped = map_htf_decisions({0: ["intent"]}, htf, execution)
+    assert mapped == {15: ["intent"]}, mapped
+    assert execution[15] == pd.Timestamp("2024-01-01 00:15", tz="UTC")
+    assert 0 not in mapped, "the decision filled on the bar that produced it"
+
+
+def test_a06_a_decision_after_the_last_execution_bar_becomes_a_missing_fill():
+    from crypto_regime_lab.integration.execution_clock import map_htf_decisions
+
+    htf = pd.date_range("2024-01-01 00:00", periods=2, freq="15min", tz="UTC")
+    execution = pd.date_range("2024-01-01 00:00", periods=16, freq="1min", tz="UTC")
+    mapped = map_htf_decisions({1: ["late"]}, htf, execution)
+    assert mapped == {-1: ["late"]}, mapped
+
+
+def test_a06_the_htf_interval_is_read_from_the_index_not_assumed():
+    from crypto_regime_lab.integration.execution_clock import bar_close, htf_interval
+
+    hourly = pd.date_range("2024-01-01", periods=4, freq="1h", tz="UTC")
+    assert htf_interval(hourly) == pd.Timedelta(hours=1)
+    assert bar_close(hourly[0], htf_interval(hourly)) == pd.Timestamp("2024-01-01 01:00", tz="UTC")
+
+
