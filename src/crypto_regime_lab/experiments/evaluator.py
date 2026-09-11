@@ -47,6 +47,10 @@ UTILITY = {
     "turnover_penalty": 0.0,         # costs are already inside net return; not double charged
 }
 
+# G4: the fixed-point oracle evaluator is QUARANTINED. The corrective path is
+# integration/event_account.py (actual engine fills). No corrected runner may
+# import _exit_oracle or run_candidate_fixed_point_reference.
+LEGACY_FIXED_POINT_EVALUATOR = "QUARANTINED_UNSUPPORTED_PATH"
 MAX_SWEEPS = 4
 #: How far ahead the exit oracle looks for a resting stop or take profit to fire.
 ORACLE_HORIZON = 4000

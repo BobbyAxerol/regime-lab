@@ -1,0 +1,29 @@
+{
+  "schema": "regime_lab.spec_revisions.v1",
+  "generated_at_utc": "2026-09-11T17:17:10.350279+00:00",
+  "study_id": "corrective_mode4_v3",
+  "revisions": [
+    {
+      "id": "REV-01",
+      "change": "A05 canonical HMA sl_input choices 3 -> 4",
+      "reason": "the old schema names silently collapsed to one mode"
+    },
+    {
+      "id": "REV-02",
+      "change": "A08 sizing/route registered: target_mode=signal_notional, backend=native_vectorized, alloc_per_trade=0.1",
+      "reason": "pct_equity fallback does not establish a constant target per fold"
+    },
+    {
+      "id": "REV-03",
+      "change": "final stitched account timing registered as close_target_v2_same_close",
+      "reason": "engine-declared clock; A06 governs the 1m event pilot, not this cohort"
+    },
+    {
+      "id": "REV-04",
+      "change": "corrected MDE frozen at 3.709e-06 account/day (0.0371 bps)",
+      "reason": "A15: the old derivation omitted the allocation factor"
+    }
+  ],
+  "lab_run_id": "pre-RF04-clearing",
+  "written_at_utc": "2026-09-11T17:17:10.352799+00:00"
+}

@@ -42,6 +42,7 @@ class EventAccountRun:
     entries: int
     engine_fill_count: int
     unmapped_intents: list[dict] = field(default_factory=list)
+    rejections: list[dict] = field(default_factory=list)
     status: str = "EVALUATED"
     diagnostics: dict = field(default_factory=dict)
 
@@ -53,6 +54,15 @@ class EventAccountRun:
 def _side_sign(value: Any) -> int:
     text = getattr(value, "value", value)
     return 1 if str(text).lower() in {"buy", "long", "1", "1.0"} else -1
+
+
+def _rejection_reason(event) -> str | None:
+    """Map one engine order event to a rejection reason, or None when it is fine."""
+    name = str(getattr(event, "event_name", "") or getattr(event, "status", "")).lower()
+    for token in ("reject", "unsupported", "invalid", "error"):
+        if token in name:
+            return name
+    return None
 
 
 def _position(context) -> float:
@@ -84,6 +94,7 @@ class EventAccountStrategy:
         self.version_by_bar: list[str] = []
         self.entries = 0
         self.unmapped: list[dict] = []
+        self.rejections: list[dict] = []
         self.fills_out: list[dict] = []
         self.switches: list[dict] = []
         self._active_ready = initial.requested_at_bar <= 0
@@ -174,6 +185,13 @@ class EventAccountStrategy:
             return []
 
         commands = []
+        # G5: every command must end executed, rejected or unsupported. Rejections
+        # are read from the engine's own order events, not inferred.
+        for event in (getattr(context, "order_events_this_bar", None) or []):
+            reason = _rejection_reason(event)
+            if reason is not None:
+                self.rejections.append({"bar": bar, "reason": reason,
+                                        "order_id": getattr(event, "order_id", None)})
         # 1. Actual engine fills drive the adapter; follow-ups become commands now.
         for event in (getattr(context, "fills_this_bar", None) or []):
             side = _side_sign(getattr(event, "side", 1))
@@ -244,7 +262,7 @@ def run_event_account(alpha_id: str, frame: pd.DataFrame, *, initial, schedule,
         **bound_fee_kwargs(one_way_fee),
     )
     result = endpoint.simulate(data=frame, strategy=strategy)
-    status = "EVALUATED" if not strategy.unmapped else "NOT_EVALUATED"
+    status = "EVALUATED" if not strategy.unmapped and not strategy.rejections else "NOT_EVALUATED"
     return EventAccountRun(
         equity=np.asarray(result.equity, dtype=float).reshape(-1),
         positions=np.asarray(result.positions, dtype=float).reshape(-1),
@@ -254,6 +272,7 @@ def run_event_account(alpha_id: str, frame: pd.DataFrame, *, initial, schedule,
         entries=strategy.entries,
         engine_fill_count=len(getattr(result, "fills", None) or []),
         unmapped_intents=strategy.unmapped,
+        rejections=strategy.rejections,
         status=status,
         diagnostics={"engine_backend": backend, "switches": strategy.switches,
                      "fee_binding": bound_fee_kwargs(one_way_fee)},

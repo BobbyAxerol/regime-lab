@@ -1,0 +1,28 @@
+{
+  "schema": "regime_lab.corrected_mde.v1",
+  "generated_at_utc": "2026-09-11T17:17:10.350230+00:00",
+  "pilot_window": {
+    "start": "2021-01-05 00:00",
+    "end": "2021-03-05 00:00",
+    "bars_15m": 2592,
+    "bars_1h": 648,
+    "days": 26.958
+  },
+  "inputs": {
+    "round_trip_cost_uncertainty": 0.001,
+    "round_trips_per_day_measured": 0.037094,
+    "notional_over_equity": 0.1,
+    "source": "A-SC real-snapshot event account on the registered account"
+  },
+  "corrected_daily_account_mde": 3.7094281298299854e-06,
+  "corrected_daily_account_bps": 0.03709428129829986,
+  "historical_registered": {
+    "value": 6.4e-05,
+    "status": "PRESERVED_AS_HISTORY"
+  },
+  "status": "FROZEN_BEFORE_RF04_RESULTS",
+  "rule": "computed from measured account units; never chosen after seeing a result",
+  "lab_run_id": "pre-RF04-clearing",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T17:17:10.350317+00:00"
+}
