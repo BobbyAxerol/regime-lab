@@ -153,7 +153,11 @@ def run_wfo(frame: pd.DataFrame, *, mode: str, metric: str,
         strategy_class=strategy, split_mode=split_mode, split_frequency=split_frequency,
         optimization_mode=mode, optimization_schedule=optimization_schedule,
         optuna_trials=optuna_trials, random_seed=seed,
-        account=q.AccountConfig(initial_capital=20000.0), fee=0.0004, slippage_bps=1.0,
+        account=q.AccountConfig(initial_capital=20000.0),
+        # A01: EndpointConfig.fee is a legacy ROUND-TRIP rate while the study
+        # registers a ONE-WAY rate. Pass both, built from the one-way value, so no
+        # route halves or doubles it.
+        fee=0.0008, fee_rate=0.0004, slippage_bps=1.0,
         symbols=["S"], use_funding=False,
     )
     # The selection metric lives in the WFO config, not on EndpointConfig; it is
