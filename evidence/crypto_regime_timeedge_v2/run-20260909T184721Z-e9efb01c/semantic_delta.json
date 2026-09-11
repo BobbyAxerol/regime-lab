@@ -1,0 +1,532 @@
+{
+  "schema": "crypto_regime_lab.semantic_delta.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "change_kinds": [
+    "packaging_fix",
+    "execution_repair",
+    "indicator_repair",
+    "thesis_change"
+  ],
+  "rule": "a delta with an empty applies_to_experiment_arms is NOT part of any canonical arm; its effect may never be credited to regime work",
+  "count": 25,
+  "deltas": [
+    {
+      "delta_id": "SD-HASH-01",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "module references np without importing numpy and cannot be imported",
+      "after_semantics": "the lab adapter imports numpy explicitly; the original bytes are untouched",
+      "source_line_refs": "L1, L8, L131-133",
+      "reproducer": "importing the raw module raises NameError: np",
+      "expected_effect": "none on decisions; the alpha simply becomes runnable",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-01"
+      ]
+    },
+    {
+      "delta_id": "SD-HASH-02",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "entry booked at the signal close, protective levels derived from it",
+      "after_semantics": "close decision then next-open fill; levels derived from the actual fill price",
+      "source_line_refs": "L104-125",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "shifts every entry by one bar and re-prices SL/TP",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-05"
+      ]
+    },
+    {
+      "delta_id": "SD-HASH-03",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "an if/elif chain fills at most one TP stage per bar and gates the final TP on both partials",
+      "after_semantics": "an explicit ordered ladder evaluates every level a bar actually crossed, in price order",
+      "source_line_refs": "L72-94",
+      "reproducer": "fixtures/all_tp_same_bar",
+      "expected_effect": "more complete exits on wide bars; the legacy stage-lock path is retained as legacy_reproduction",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-04"
+      ]
+    },
+    {
+      "delta_id": "SD-HASH-04",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "realized-only equity inside the alpha, used as if it were the account",
+      "after_semantics": "the engine ledger owns equity; the legacy column is kept as a labelled diagnostic",
+      "source_line_refs": "L48-94",
+      "reproducer": "probes/HASH_EQUITY_NO_MTM",
+      "expected_effect": "removes a mark-to-market blind spot from any objective",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-03"
+      ]
+    },
+    {
+      "delta_id": "SD-HASH-05",
+      "alpha_id": "A-HASH",
+      "adapter_version": "research_revision_1",
+      "change_kind": "indicator_repair",
+      "before_semantics": "the ATR variable is the absolute close-to-close move and ignores high/low",
+      "after_semantics": "a true-range ATR variant, offered as a SEPARATE version",
+      "source_line_refs": "L21-29",
+      "reproducer": "probes/HASH_ATR_CLOSE_ONLY",
+      "expected_effect": "changes the entry threshold scale; must never be mixed into canonical results",
+      "applies_to_experiment_arms": [],
+      "finding_refs": [
+        "AH-02"
+      ]
+    },
+    {
+      "delta_id": "SD-HASH-06",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "account configuration (initial_capital, trading_fee, usd_per_trade) lives inside the alpha",
+      "after_semantics": "account configuration moves to the experiment-level economic contract, identical for all arms",
+      "source_line_refs": "L42-46, L139-149",
+      "reproducer": "configs/study_registration.json execution.account_contract",
+      "expected_effect": "removes a per-alpha sizing degree of freedom from the search space",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-03"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-01",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "helpers index past the end of short inputs",
+      "after_semantics": "explicit warmup readiness: too-short input yields a valid no-signal state, never a crash and never a silent zero",
+      "source_line_refs": "L8-17, L43-53, L67-77",
+      "reproducer": "probes/VWAP_SHORT_INPUT",
+      "expected_effect": "no decision change after warmup",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-01"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-02",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "entry at the signal close with levels from that price",
+      "after_semantics": "close decision, next-open fill, levels from the actual fill",
+      "source_line_refs": "L159-174",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "shifts entries by one bar",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-05",
+        "AV-02"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-03",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the time stop is tested before the price stop and the take profit",
+      "after_semantics": "a frozen priority: stop, then take profit, then the time stop as a close decision",
+      "source_line_refs": "L125-151",
+      "reproducer": "fixtures/time_stop_vs_sl_same_bar",
+      "expected_effect": "changes which exit wins on a bar where both trigger; applied identically to every arm",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-03"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-04",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the dynamic VWAP exit uses the current bar's completed VWAP as an intrabar level",
+      "after_semantics": "exit_at_vwap is OFF in the canonical pilot; when enabled it is the resting previous-observed-VWAP variant, registered before any result is seen",
+      "source_line_refs": "L134, L146",
+      "reproducer": "fixtures/dynamic_vwap_not_yet_available",
+      "expected_effect": "removes a look-ahead exit; registered ahead of performance, not switched off because a backtest looked bad",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-04"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-05",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the HTF EMA is joined on the resample label with a trailing ffill",
+      "after_semantics": "the join is on available_at from a closed HTF bucket, with warmup convergence from the EMA span rather than a hardcoded 200 bars",
+      "source_line_refs": "L200-217, L118",
+      "reproducer": "fixtures/htf_closed_bucket_only",
+      "expected_effect": "removes any dependence on the resample label convention",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-06"
+      ]
+    },
+    {
+      "delta_id": "SD-VWAP-06",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "the module default merges the VN30F1M-annotated tete preset",
+      "after_semantics": "no default is ever executed; a configuration must be supplied explicitly",
+      "source_line_refs": "L231-249",
+      "reproducer": "catalog/unmapped_presets.json",
+      "expected_effect": "prevents an accidental VN-tuned run",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-07"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-01",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the comment treats the next open as equal to the current close",
+      "after_semantics": "the engine supplies the actual fill; entry-dependent levels are re-derived from it",
+      "source_line_refs": "L283",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "levels move whenever the next open gaps",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-01",
+        "HM-03"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-02",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "a single pos_weight array mixes the pre-bar position with intrabar exit events",
+      "after_semantics": "separate fields: position_entering_bar and target_after_close, plus a typed exit event",
+      "source_line_refs": "L204, L214-249",
+      "reproducer": "fixtures/weight_vs_target_no_double_count",
+      "expected_effect": "removes a lag/double-count ambiguity",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-02"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-03",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "indicator_repair",
+      "before_semantics": "the RSI recursion returns 100 whenever avg_loss is zero, even when avg_gain is also zero, while the seed returns 50 in that case",
+      "after_semantics": "the flat case stays 50 throughout the recursion, consistent with the seed",
+      "source_line_refs": "L45-57",
+      "reproducer": "probes/HMA_RSI_FLAT",
+      "expected_effect": "affects only flat segments; applied before any A/B and to every arm identically",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-07"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-04",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "mintick is hardcoded to 0.0001 for every instrument",
+      "after_semantics": "the instrument's real tick size is used; the pip buffer keeps the 10x semantics, versioned",
+      "source_line_refs": "L161-162",
+      "reproducer": "fixtures/instrument_tick",
+      "expected_effect": "changes the 48-bar high/low buffer per symbol",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-06"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-05",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "min_length > max_length is accepted silently in 4 presets",
+      "after_semantics": "the adapter rejects an infeasible configuration instead of swapping the bounds",
+      "source_line_refs": "L332-349",
+      "reproducer": "catalog/preset_catalog.json feasibility flags",
+      "expected_effect": "those four presets are not runnable as canonical configurations",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-04"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-06",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "time_ms, volume, double_up and sl_mult are carried but never read",
+      "after_semantics": "they are dropped from the active search space and recorded as deprecated/ignored",
+      "source_line_refs": "L136, L139, L332-349",
+      "reproducer": "catalog unused_knobs",
+      "expected_effect": "shrinks the search space without changing any decision",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-05",
+        "HM-09"
+      ]
+    },
+    {
+      "delta_id": "SD-HMA-07",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "indicator_repair",
+      "before_semantics": "every kernel runs njit(fastmath=True)",
+      "after_semantics": "the reference oracle runs fastmath=False; a fastmath kernel is only accepted when it reproduces the oracle's decisions within the declared tolerance",
+      "source_line_refs": "L7-129",
+      "reproducer": "reference/parity",
+      "expected_effect": "no decision change is permitted; a difference blocks the kernel",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-08"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-01",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "the indicator choice and the method dispatch disagree when volume is absent",
+      "after_semantics": "use_rsi is resolved once and both the construction and the call follow it; the crypto primary path requires volume and a missing column is an explicit rejection",
+      "source_line_refs": "L39-48",
+      "reproducer": "probes/SC_FALLBACK",
+      "expected_effect": "removes an AttributeError path; no decision change when volume is present",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-01"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-02",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "execution consumes the unapproved signals while the approved ones are computed and dropped",
+      "after_semantics": "one declared decision timestamp with a next-open fill; no second shift is applied",
+      "source_line_refs": "L104-110, L124-140",
+      "reproducer": "fixtures/no_double_shift",
+      "expected_effect": "fixes the intent timing without changing the signal definition",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-04"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-03",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "position amplitude is 2 with no account contract attached",
+      "after_semantics": "direction is normalised to 0/1 against the fixed experiment notional as sizing_mapping_v1; the legacy amplitude path is a separate labelled reproduction",
+      "source_line_refs": "L133-143",
+      "reproducer": "fixtures/sizing_mapping_v1",
+      "expected_effect": "2 is never interpreted as 2x leverage",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-05"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-04",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "the internal MFI/RSI threshold is named regime_threshold",
+      "after_semantics": "it is namespaced alpha.condition_threshold; external market state uses a different namespace",
+      "source_line_refs": "L13, L24, L48",
+      "reproducer": "catalog parameter schema",
+      "expected_effect": "prevents an internal indicator threshold being read as a regime-model output",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-01"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-06",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the zero-seeded trend emits a spurious buy_signal on the first condition-true bar",
+      "after_semantics": "warmup_ready stays False until 3 bars after the trend leaves its seed, so the seed jump and its comparison window can never produce a decision",
+      "source_line_refs": "L26, L53-57, L66-69",
+      "reproducer": "fixtures/sc_seed_jump_not_tradable",
+      "expected_effect": "removes one manufactured entry per series; identical treatment for every arm",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-07"
+      ]
+    },
+    {
+      "delta_id": "SD-SC-05",
+      "alpha_id": "A-SC",
+      "adapter_version": "legacy_reproduction",
+      "change_kind": "thesis_change",
+      "before_semantics": "the cross formula compares trend[t] vs trend[t-2] and trend[t-1] vs trend[t-2]",
+      "after_semantics": "a conventional crossover(trend, trend.shift(2)) is available as a research revision only",
+      "source_line_refs": "L66-69",
+      "reproducer": "fixtures/crossover_convention",
+      "expected_effect": "changes the signal definition, so it is never mixed into canonical results",
+      "applies_to_experiment_arms": [],
+      "finding_refs": [
+        "SC-03"
+      ]
+    }
+  ],
+  "lab_run_id": "run-20260909T184721Z-e9efb01c",
+  "written_at_utc": "2026-09-09T18:47:21.247963+00:00"
+}

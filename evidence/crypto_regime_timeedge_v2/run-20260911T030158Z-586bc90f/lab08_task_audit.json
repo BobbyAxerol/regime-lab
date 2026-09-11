@@ -1,0 +1,549 @@
+{
+  "schema": "crypto_regime_lab.lab08_task_audit.v1",
+  "guide_section": "LAB-08",
+  "checklist_written_before_code": true,
+  "checklist_source": "configs/lab08_checklist.json",
+  "tasks_total": 74,
+  "tasks_done": 74,
+  "tasks_blocked": 0,
+  "clauses_without_an_evidence_pointer": [],
+  "artifacts_present": [
+    "lab08_pilot_protocol.json",
+    "lab08_factorial_full.json",
+    "lab08_discovery.json",
+    "lab08_data_ablation.json",
+    "lab08_checklist.json"
+  ],
+  "artifacts_missing": [],
+  "acceptance_tests": "30 passed in 2.72s",
+  "acceptance_tests_passed": true,
+  "acceptance_ids_covered": [
+    "T53",
+    "T58",
+    "T59",
+    "T60"
+  ],
+  "tasks": [
+    {
+      "clause_id": "L08.1.1",
+      "requirement": "primary timeframes are frozen into the immutable study registry before any arm runs",
+      "evidence": "lab08_pilot_protocol.json:timeframes",
+      "note": "from the LAB-01 registration, not chosen here",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.2",
+      "requirement": "evaluation intervals are frozen",
+      "evidence": "lab08_pilot_protocol.json:evaluation_interval",
+      "note": "daily UTC on the continuous account",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.3",
+      "requirement": "model and data cohorts are frozen",
+      "evidence": "lab08_pilot_protocol.json:data_roles + primary_matrix.cells",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.4",
+      "requirement": "seeds are frozen",
+      "evidence": "lab08_pilot_protocol.json:seeds",
+      "note": "probe design, model multi-start and placebo",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.5",
+      "requirement": "compute budgets are frozen (guide 10.5 MATCHED_TOTAL_COMPUTE and OPERATIONAL_POLICY)",
+      "evidence": "lab08_pilot_protocol.json:compute_budget",
+      "note": "points at the registration made before LAB-07",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.6",
+      "requirement": "supplied presets appear ONLY as the retrospective USER_PRESET_REFERENCE control",
+      "evidence": "lab08_pilot_protocol.json:controls.USER_PRESET_REFERENCE + preset_role",
+      "note": "retrospective only",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.7",
+      "requirement": "any outer-window claim is qualified by the recorded contamination status",
+      "evidence": "lab08_pilot_protocol.json:contamination",
+      "note": "the outer window is declared NOT an untouched holdout",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.1.8",
+      "requirement": "the freeze happens BEFORE the factorial runs, and is provably earlier",
+      "evidence": "tests/test_lab08_factorial.py::test_the_protocol_was_frozen_before_any_arm_ran",
+      "note": "the freeze script refuses to overwrite; the test compares timestamps",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.1",
+      "requirement": "arms A, B, C and D share one engine",
+      "evidence": "lab08_factorial_full.json:cells[].arms \u2014 every arm runs through run_continuous_account",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.2",
+      "requirement": "arms share identical costs: fee, slippage, funding treatment, exposure constraints",
+      "evidence": "lab08_pilot_protocol.json:economics.identical_across_arms + evaluator.ACCOUNT",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.3",
+      "requirement": "arms share identical cutoffs",
+      "evidence": "lab08_factorial_full.json:cells[].notes.compute_match",
+      "note": "same cutoff count and training memory",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.4",
+      "requirement": "arms share the identical incumbent-retention rule",
+      "evidence": "experiments/calendar_baseline.py retention rule, shared by both selectors",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.5",
+      "requirement": "each arm pays the ACTUAL operational latency, never zero",
+      "evidence": "lab07_continuous_trace.json:training_jobs.benchmark.source",
+      "note": "measured latency, never zero (carried from LAB-07)",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.6",
+      "requirement": "a 2-cell pilot runs first for debugging, and is labelled as a pilot not a result",
+      "evidence": "lab08_factorial_pilot.json:is_a_result=false",
+      "note": "the pilot found two defects: a state tape covering a sixth of the window, and dynamic training windows a fifth the size of the calendar's",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.7",
+      "requirement": "all 20 cell statuses are reported, including NOT_READY and insufficient-sample ones",
+      "evidence": "lab08_factorial_full.json:cells_planned=20 with NOT_READY rows carrying null metrics",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.8",
+      "requirement": "no alpha is filtered out after its result is known; a low-trade alpha stays in the denominator",
+      "evidence": "tests/test_lab08_factorial.py::test_an_unrunnable_arm_reports_null_not_zero",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.9",
+      "requirement": "insufficient sample is REPORTED as such, never silently dropped or read as a zero",
+      "evidence": "lab08_factorial_full.json:cells[].arms[].status",
+      "note": "INSUFFICIENT/NOT_READY reported, never a zero",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.2.10",
+      "requirement": "the registered contrasts are computed: B-A, C-A, D-B, D-C and the interaction (D-C)-(B-A)",
+      "evidence": "lab08_discovery.json:contrast_panel",
+      "note": "B-A, C-A, D-B, D-C and the interaction",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.1",
+      "requirement": "arm E (selector + bank + response policy) is compared against arm B",
+      "evidence": "lab08_discovery.json:contrast_panel['D-B'] + cells[].arms.E.policy_note",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.2",
+      "requirement": "arm E is compared against the BANK_CALENDAR control",
+      "evidence": "lab08_factorial_full.json:cells[].controls.BANK_CALENDAR",
+      "note": "reported degenerate, not dropped",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.3",
+      "requirement": "the dynamic-refit arm is compared against a BUDGET-MATCHED calendar (CALENDAR_MATCHED)",
+      "evidence": "lab08_factorial_full.json:cells[].controls.CALENDAR_MATCHED",
+      "note": "satisfied by construction: the dynamic arms were given the calendar's budget",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.4",
+      "requirement": "RISK_ONLY isolates the exposure effect: same regime context, risk scaling only, params unchanged",
+      "evidence": "lab08_factorial_full.json:cells[].controls.RISK_ONLY",
+      "note": "arm A's own selections, resized only",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.5",
+      "requirement": "STATE_PLACEBO labels have approximately the same dwell and switch frequency as the real states",
+      "evidence": "tests/test_lab08_factorial.py::test_the_placebo_matches_the_real_dwell_rather_than_switching_freely",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.6",
+      "requirement": "the placebo is generated from development or known past ONLY; no future label is shuffled into the decision tape",
+      "evidence": "tests/test_lab08_factorial.py::test_the_placebo_is_built_from_rates_not_from_a_future_sequence",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.7",
+      "requirement": "DELAYED_STATE adds a registered delay and its transition sensitivity is read",
+      "evidence": "tests/test_lab08_factorial.py::test_the_delay_control_moves_availability_not_the_world",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.8",
+      "requirement": "EXPOST_DIAGNOSTIC hindsight labels are diagnostic only and never produce an eligible trade result",
+      "evidence": "tests/test_lab08_factorial.py::test_the_hindsight_control_is_never_tradeable",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.9",
+      "requirement": "USER_PRESET_REFERENCE is labelled retrospective and is never a core outcome",
+      "evidence": "lab08_factorial_full.json:cells[].controls.USER_PRESET_REFERENCE.eligible_as_a_core_outcome=false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.10",
+      "requirement": "no control is dropped because it beats the proposed method",
+      "evidence": "experiments/controls.py:control_registry().retention_rule + tests/test_lab08_factorial.py::test_all_seven_mandatory_controls_are_declared",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.3.11",
+      "requirement": "controls are staged, not a full Cartesian product run at once",
+      "evidence": "controls.control_registry().staging_rule",
+      "note": "no Cartesian product",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.4.1",
+      "requirement": "server-core is compared against server-derivatives and server-liquidity",
+      "evidence": "lab08_data_ablation.json:per_symbol[].scores",
+      "note": "core vs derivatives vs liquidity",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.4.2",
+      "requirement": "the comparison is on COMPARABLE intervals, not each cohort's own longest window",
+      "evidence": "lab08_data_ablation.json:per_symbol[].comparable_interval",
+      "note": "every cohort scored on the SAME rows; the mislabelled liquidity cohort that scored an impact proxy as the order book was split apart",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.4.3",
+      "requirement": "every ablation trial is added to the experiment-search ledger",
+      "evidence": "compute_budget_registration.json:ledger_opened_with",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.4.4",
+      "requirement": "an improvement that comes from a short recent window is not attributed to a feature group",
+      "evidence": "lab08_data_ablation.json:comparable_interval_rule",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.5.1",
+      "requirement": "the ladder runs M0 then M1, with M1S and a limited M2 comparator declared built or deliberately unbuilt",
+      "evidence": "lab08_data_ablation.json:complexity_ladder + ladder_declared_unbuilt",
+      "note": "M1S and M2 declared unbuilt",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.5.2",
+      "requirement": "K, lambda_jump, training memory and refit cadence are tuned in DEVELOPMENT only",
+      "evidence": "lab08_data_ablation.json:tuning_stage",
+      "note": "development only",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.5.3",
+      "requirement": "not every combination is swept by default",
+      "evidence": "lab08_data_ablation.json:ladder_rule",
+      "note": "no default sweep",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.5.4",
+      "requirement": "each proposal states its question, its expected failure and its stop condition BEFORE it runs",
+      "evidence": "lab08_data_ablation.json:complexity_ladder[].question/expected_failure/stop_condition",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.1",
+      "requirement": "trial counts are captured",
+      "evidence": "lab08_discovery.json:compute.unique_strategy_executions_in_dynamic_refreshes",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.2",
+      "requirement": "candidate episode bars are captured",
+      "evidence": "lab08_factorial_full.json:cells[].bars",
+      "note": "candidate episode bars per cell",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.3",
+      "requirement": "model fits are captured",
+      "evidence": "lab08_*_regime_model_registry.json:models",
+      "note": "40 fits per symbol",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.4",
+      "requirement": "response evaluations are captured",
+      "evidence": "lab06_response_model.json:response_count",
+      "note": "carried from LAB-06",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.5",
+      "requirement": "cold and warm runtime are captured separately",
+      "evidence": "lab08_discovery.json:compute.wall_seconds_per_cell",
+      "note": "min, median and max",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.6",
+      "requirement": "compute waiting and activation delays are captured",
+      "evidence": "lab07_continuous_trace.json:continuous_account.switches[].blocked_bars",
+      "note": "activation delay, measured in LAB-07",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.6.7",
+      "requirement": "CPU never exceeds the registered resource budget to let the dynamic policy finish first",
+      "evidence": "lab08_discovery.json:compute.budget_exceeded=false",
+      "note": "one worker, within the registered budget",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.1",
+      "requirement": "exactly one confirmatory design is selected, or NO_PROMISING_DESIGN is declared",
+      "evidence": "lab08_discovery.json:design_selection.outcome",
+      "note": "DESIGN_FROZEN or NO_PROMISING_DESIGN",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.2",
+      "requirement": "the selection reason is recorded and rests on DEVELOPMENT evidence",
+      "evidence": "lab08_discovery.json:design_selection.decision_rule + evidence_stage",
+      "note": "development only",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.3",
+      "requirement": "the tradeoffs of the selected design are recorded",
+      "evidence": "lab08_discovery.json:design_selection.tradeoffs",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.4",
+      "requirement": "the failure cases of the selected design are recorded",
+      "evidence": "lab08_discovery.json:design_selection.failure_cases",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.5",
+      "requirement": "the uncertainty around the selection is recorded",
+      "evidence": "lab08_discovery.json:design_selection.uncertainty",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.6",
+      "requirement": "no outer confirmation result is used to choose the design",
+      "evidence": "lab08_discovery.json:design_selection.evidence_stage",
+      "note": "the outer window was not consulted at any point",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.7",
+      "requirement": "alpha versions are frozen at selection",
+      "evidence": "lab08_discovery.json:design_selection.alpha_versions_frozen",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L08.7.8",
+      "requirement": "an optional alpha improvement is never folded into the winner silently",
+      "evidence": "lab08_discovery.json:design_selection.optional_alpha_improvements_folded_in=false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G11.1.1",
+      "requirement": "the whole phase runs in the DISCOVERY stage; the outer window is not consumed",
+      "evidence": "lab08_pilot_protocol.json:stage=discovery + outer_window_is_not_consumed",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G11.2.1",
+      "requirement": "the registered primary utility is the endpoint, not a more convenient statistic",
+      "evidence": "lab08_discovery.json:design_selection.registered_endpoint",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G11.2.2",
+      "requirement": "the conclusion level comes from the registered vocabulary",
+      "evidence": "lab08_discovery.json:design_selection.conclusion_vocabulary",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G11.2.3",
+      "requirement": "a risk-only improvement is never recorded as a parameter-selection edge",
+      "evidence": "lab08_factorial_full.json:cells[].controls.RISK_ONLY",
+      "note": "exposure is isolated from selection",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.6",
+      "requirement": "each arm holds its own account with the SAME initial conditions",
+      "evidence": "lab08_pilot_protocol.json:economics + account_rule",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.7",
+      "requirement": "no arm's account resets at a fold or regime boundary",
+      "evidence": "lab08_factorial_full.json:cells[].arms[].account_resets=0",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.8",
+      "requirement": "segments of unequal length are compared on the daily account, not by averaging fold Sharpes",
+      "evidence": "operational_segments.json:daily_account_comparison",
+      "note": "the daily account is primary; per-segment Sharpes are diagnostic (T55)",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T53.2",
+      "requirement": "A/B/C/D share fixed economics and budgets with no hidden fee, risk or evaluation advantage",
+      "evidence": "lab08_pilot_protocol.json:economics.identical_across_arms + lab08_factorial_full.json:cells[].notes.compute_match",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T58.1",
+      "requirement": "RISK_ONLY and CALENDAR_MATCHED controls are present in the reported comparison",
+      "evidence": "lab08_factorial_full.json:cells[].controls.RISK_ONLY and .CALENDAR_MATCHED",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T59.1",
+      "requirement": "every negative, failed and pruned trial is retained with a correct null/status",
+      "evidence": "tests/test_lab08_factorial.py::test_an_unrunnable_arm_reports_null_not_zero + lab04_calendar_baseline.json:search_effort.structurally_invalid",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T60.1",
+      "requirement": "the objective recomputed from its components matches the reported value under the numeric contract",
+      "evidence": "experiments/factorial.py:ArmResult.as_record recomputes every metric from the equity path",
+      "note": "no metric is carried over from another artifact",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.1",
+      "requirement": "every-run JSON/JSONL is written",
+      "evidence": "lab08_factorial_full.json + evidence/**/attempts.jsonl",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.2",
+      "requirement": "comparison panels are written",
+      "evidence": "lab08_discovery.json:contrast_panel",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.3",
+      "requirement": "local-neighborhood chart DATA is written",
+      "evidence": "lab08_factorial_full.json:cells[].notes.regime_cutoff_evidence[].cutoff_evidence.robust_scores",
+      "note": "the local-neighbourhood panel behind every dynamic selection",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.4",
+      "requirement": "regime feature and weight profiles are written",
+      "evidence": "lab08_*_regime_model_registry.json:models[].feature_weights/centroids",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.5",
+      "requirement": "a discovery report is written",
+      "evidence": "reports/lab08_report.md",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.6",
+      "requirement": "a design-selection manifest is written",
+      "evidence": "lab08_discovery.json:design_selection",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.7",
+      "requirement": "a registry of ALL attempted hypotheses is written",
+      "evidence": "lab08_discovery.json:all_attempted_hypotheses",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.1",
+      "requirement": "the phase ends with either a design freeze or NO_PROMISING_DESIGN",
+      "evidence": "lab08_discovery.json:design_selection.outcome",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.2",
+      "requirement": "profit is NOT required to close discovery",
+      "evidence": "lab08_discovery.json:design_selection.not_required_to_be_profitable",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.3",
+      "requirement": "a negative result is never relabelled a technical failure to justify a rerun",
+      "evidence": "lab08_discovery.json:design_selection.not_required_to_be_profitable",
+      "note": "a negative result is not a technical failure",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.4",
+      "requirement": "no arm was re-run after seeing its result in order to improve it",
+      "evidence": "correction_ledger.json",
+      "note": "every re-run is recorded with what it superseded",
+      "status": "DONE"
+    }
+  ],
+  "lab_run_id": "run-20260911T030158Z-586bc90f",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T03:02:02.169496+00:00"
+}

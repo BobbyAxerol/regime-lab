@@ -1,0 +1,319 @@
+{
+  "schema": "crypto_regime_lab.eligibility_report.v1",
+  "snapshot_id": "server_core_v1",
+  "warmup_bars": 30,
+  "per_symbol": {
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "data_start": "2020-01-01 00:00:00",
+      "data_end": "2026-09-09 19:03:00",
+      "warmup_bars": 30,
+      "first_decision_bar": "2020-01-06 00:00:00",
+      "usable_interval": [
+        "2020-01-06 00:00:00",
+        "2026-09-09 19:03:00"
+      ],
+      "products": {
+        "crypto_binance_futures_1m": {
+          "partitions": 81,
+          "closed_partitions": 80,
+          "rows": 3519064,
+          "time_min": "2020-01-01 00:00:00",
+          "time_max": "2026-09-09 19:03:00",
+          "sources": [
+            "binance_futures"
+          ]
+        },
+        "crypto_binance_spot_1m": {
+          "partitions": 104,
+          "closed_partitions": 103,
+          "rows": 4516114,
+          "time_min": "2018-01-01 00:00:00",
+          "time_max": "2026-08-07 04:13:00",
+          "sources": [
+            "binance_spot_rest",
+            "binance_spot_rest_manual_gap_repair",
+            "binance_usdm_futures_proxy_gap_fill",
+            "binance_vision_spot_daily",
+            "binance_vision_spot_daily_gap_repair",
+            "binance_vision_spot_monthly"
+          ]
+        },
+        "crypto_binance_futures_metrics_5m": {
+          "partitions": 73,
+          "closed_partitions": 72,
+          "rows": 632870,
+          "time_min": "2020-09-01 00:00:00",
+          "time_max": "2026-09-09 15:45:00",
+          "sources": [
+            "binance_futures_data_rest",
+            "binance_vision_usdm_metrics"
+          ]
+        },
+        "crypto_binance_orderbook_snapshot_1h": {
+          "partitions": 2,
+          "closed_partitions": 1,
+          "rows": 719,
+          "time_min": "2026-08-10 18:00:00",
+          "time_max": "2026-09-09 18:00:00",
+          "sources": [
+            "binance_usdm_depth_rest"
+          ]
+        }
+      },
+      "blockers": []
+    },
+    "ETHUSDT": {
+      "symbol": "ETHUSDT",
+      "data_start": "2020-01-01 00:00:00",
+      "data_end": "2026-09-09 19:03:00",
+      "warmup_bars": 30,
+      "first_decision_bar": "2020-01-06 00:00:00",
+      "usable_interval": [
+        "2020-01-06 00:00:00",
+        "2026-09-09 19:03:00"
+      ],
+      "products": {
+        "crypto_binance_futures_1m": {
+          "partitions": 81,
+          "closed_partitions": 80,
+          "rows": 3519064,
+          "time_min": "2020-01-01 00:00:00",
+          "time_max": "2026-09-09 19:03:00",
+          "sources": [
+            "binance_futures"
+          ]
+        },
+        "crypto_binance_futures_metrics_5m": {
+          "partitions": 58,
+          "closed_partitions": 57,
+          "rows": 502037,
+          "time_min": "2021-12-01 00:00:00",
+          "time_max": "2026-09-09 15:50:00",
+          "sources": [
+            "binance_futures_data_rest",
+            "binance_vision_usdm_metrics"
+          ]
+        }
+      },
+      "blockers": [
+        "SERVER_CORE_SPOT: crypto_binance_spot_1m absent for ETHUSDT",
+        "SERVER_LIQUIDITY: crypto_binance_orderbook_snapshot_1h absent for ETHUSDT"
+      ]
+    },
+    "SOLUSDT": {
+      "symbol": "SOLUSDT",
+      "data_start": "2020-09-14 07:00:00",
+      "data_end": "2026-09-09 19:04:00",
+      "warmup_bars": 30,
+      "first_decision_bar": "2020-09-19 07:00:00",
+      "usable_interval": [
+        "2020-09-19 07:00:00",
+        "2026-09-09 19:04:00"
+      ],
+      "products": {
+        "crypto_binance_futures_1m": {
+          "partitions": 73,
+          "closed_partitions": 72,
+          "rows": 3148565,
+          "time_min": "2020-09-14 07:00:00",
+          "time_max": "2026-09-09 19:04:00",
+          "sources": [
+            "binance_futures"
+          ]
+        }
+      },
+      "blockers": [
+        "SERVER_CORE_SPOT: crypto_binance_spot_1m absent for SOLUSDT",
+        "SERVER_DERIVATIVES: crypto_binance_futures_metrics_5m absent for SOLUSDT",
+        "SERVER_LIQUIDITY: crypto_binance_orderbook_snapshot_1h absent for SOLUSDT"
+      ]
+    },
+    "BNBUSDT": {
+      "symbol": "BNBUSDT",
+      "data_start": "2020-02-10 08:01:00",
+      "data_end": "2026-09-09 19:04:00",
+      "warmup_bars": 30,
+      "first_decision_bar": "2020-02-15 08:01:00",
+      "usable_interval": [
+        "2020-02-15 08:01:00",
+        "2026-09-09 19:04:00"
+      ],
+      "products": {
+        "crypto_binance_futures_1m": {
+          "partitions": 80,
+          "closed_partitions": 79,
+          "rows": 3460984,
+          "time_min": "2020-02-10 08:01:00",
+          "time_max": "2026-09-09 19:04:00",
+          "sources": [
+            "binance_futures"
+          ]
+        }
+      },
+      "blockers": [
+        "SERVER_CORE_SPOT: crypto_binance_spot_1m absent for BNBUSDT",
+        "SERVER_DERIVATIVES: crypto_binance_futures_metrics_5m absent for BNBUSDT",
+        "SERVER_LIQUIDITY: crypto_binance_orderbook_snapshot_1h absent for BNBUSDT"
+      ]
+    },
+    "DOGEUSDT": {
+      "symbol": "DOGEUSDT",
+      "data_start": "2020-07-10 09:00:00",
+      "data_end": "2026-09-09 19:06:00",
+      "warmup_bars": 30,
+      "first_decision_bar": "2020-07-15 09:00:00",
+      "usable_interval": [
+        "2020-07-15 09:00:00",
+        "2026-09-09 19:06:00"
+      ],
+      "products": {
+        "crypto_binance_futures_1m": {
+          "partitions": 75,
+          "closed_partitions": 74,
+          "rows": 3243487,
+          "time_min": "2020-07-10 09:00:00",
+          "time_max": "2026-09-09 19:06:00",
+          "sources": [
+            "binance_futures"
+          ]
+        }
+      },
+      "blockers": [
+        "SERVER_CORE_SPOT: crypto_binance_spot_1m absent for DOGEUSDT",
+        "SERVER_DERIVATIVES: crypto_binance_futures_metrics_5m absent for DOGEUSDT",
+        "SERVER_LIQUIDITY: crypto_binance_orderbook_snapshot_1h absent for DOGEUSDT"
+      ]
+    }
+  },
+  "cohorts": {
+    "SERVER_CORE_LONG": {
+      "products": [
+        "crypto_binance_futures_1m"
+      ],
+      "meaning": "perpetual OHLCV with quote volume, trade count and taker volumes",
+      "role": "primary signal and execution venue (guide 4.1)",
+      "members": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ],
+      "member_count": 5,
+      "common_period": [
+        "2020-09-14 07:00:00",
+        "2026-09-09 19:03:00"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_CORE_SPOT": {
+      "products": [
+        "crypto_binance_spot_1m"
+      ],
+      "meaning": "spot OHLCV, treated clean from 2020-01-01 by user convention",
+      "role": "basis and spot-activity context",
+      "members": [
+        "BTCUSDT"
+      ],
+      "member_count": 1,
+      "common_period": [
+        "2018-01-01 00:00:00",
+        "2026-08-07 04:13:00"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_DERIVATIVES": {
+      "products": [
+        "crypto_binance_futures_metrics_5m"
+      ],
+      "meaning": "open interest and trader ratios",
+      "role": "G3 leverage and crowding",
+      "members": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "member_count": 2,
+      "common_period": [
+        "2021-12-01 00:00:00",
+        "2026-09-09 15:45:00"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_LIQUIDITY": {
+      "products": [
+        "crypto_binance_orderbook_snapshot_1h"
+      ],
+      "meaning": "hourly REST depth snapshots",
+      "role": "G4 spread and depth",
+      "members": [
+        "BTCUSDT"
+      ],
+      "member_count": 1,
+      "common_period": [
+        "2026-08-10 18:00:00",
+        "2026-09-09 18:00:00"
+      ],
+      "status": "AVAILABLE"
+    },
+    "FREE_ENRICHED": {
+      "products": [],
+      "meaning": "external free sources",
+      "role": "optional; never a prerequisite",
+      "members": [],
+      "member_count": 0,
+      "common_period": null,
+      "status": "EMPTY"
+    }
+  },
+  "five_symbol_common_period": [
+    "2020-09-14 07:00:00",
+    "2026-09-09 19:03:00"
+  ],
+  "per_symbol_longest_history": {
+    "BTCUSDT": [
+      "2020-01-01 00:00:00",
+      "2026-09-09 19:03:00"
+    ],
+    "ETHUSDT": [
+      "2020-01-01 00:00:00",
+      "2026-09-09 19:03:00"
+    ],
+    "SOLUSDT": [
+      "2020-09-14 07:00:00",
+      "2026-09-09 19:04:00"
+    ],
+    "BNBUSDT": [
+      "2020-02-10 08:01:00",
+      "2026-09-09 19:04:00"
+    ],
+    "DOGEUSDT": [
+      "2020-07-10 09:00:00",
+      "2026-09-09 19:06:00"
+    ]
+  },
+  "reporting_rule": "the five-symbol common-period aggregate is reported SEPARATELY from each symbol's longest valid history; returns are never back-filled with zeros before listing (guide 10.4)",
+  "no_intersection_collapse": "cohorts are reported independently. Intersecting every source would shrink the core cohort to the orderbook product's few weeks, which the guide forbids (6.2).",
+  "data_roles": {
+    "development": {
+      "start": "2020-01-01",
+      "end": "2023-12-31",
+      "permits": [
+        "scaler fitting",
+        "hyperparameter and design choices",
+        "inner chronological validation"
+      ]
+    },
+    "outer_evaluation": {
+      "start": "2024-01-01",
+      "end": null,
+      "permits": [
+        "frozen-protocol evaluation"
+      ],
+      "contamination": "NOT an untouched holdout: the supplied presets were TPE-tuned on the full sample with an unknown cutoff"
+    }
+  },
+  "lab_run_id": "run-20260909T191603Z-9d7e1b60",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:17:41.825235+00:00"
+}

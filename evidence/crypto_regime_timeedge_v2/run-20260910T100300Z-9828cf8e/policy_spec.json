@@ -1,0 +1,281 @@
+{
+  "schema": "crypto_regime_lab.policy_spec.v1",
+  "decisions": [
+    "KEEP_INCUMBENT",
+    "SWITCH_READY",
+    "WAIT_CAMPAIGN_BOUNDARY",
+    "REFRESH_BANK_REQUESTED",
+    "FALLBACK_DATA",
+    "FALLBACK_NOVEL_STATE",
+    "NO_SUPPORTED_CANDIDATE"
+  ],
+  "switch_rule": "delta_shrunk - z_alpha*SE > C_transition + delta",
+  "z_alpha": 1.0,
+  "delta_margin": 0.0002,
+  "min_switch_spacing": "7 days 00:00:00",
+  "inaction_region": true,
+  "quality_gate_may_reject_everything": true,
+  "check_order": [
+    "data quality",
+    "novel/stale state",
+    "bank adequacy",
+    "support",
+    "economics vs transition cost",
+    "indicator warmth",
+    "switch spacing",
+    "campaign boundary"
+  ],
+  "z_alpha_note": "z_alpha is a conservative decision heuristic. It is NOT a confidence guarantee: with a handful of episodes and a model whose assumptions may be wrong, an arbitrary Gaussian 95% label would be false precision (guide 9.3)",
+  "cost_charging": "C_transition decides; the engine charges. The estimate is never subtracted from realised PnL as well (guide 9.3)",
+  "zero_switches_is_valid": "a technical pass does not require switches. Zero switches because no challenger cleared the bar is a valid result (L06 exit)",
+  "clocks": {
+    "schema": "crypto_regime_lab.clock_scheduler.v1",
+    "clocks": [
+      "inference",
+      "switch",
+      "bank_refresh",
+      "model_retrain"
+    ],
+    "cadences": {
+      "inference": "0 days 04:00:00",
+      "model_retrain": "28 days 00:00:00",
+      "bank_refresh": "180 days 00:00:00 (frozen baseline calendar)",
+      "switch": "every eligible inference boundary, when needed"
+    },
+    "counters": {
+      "inference": 208,
+      "switch_assessments": 155,
+      "switches_executed": 0,
+      "bank_refreshes": 6,
+      "model_retrains": 0,
+      "rule": "model retraining, bank refresh and switch frequency are three separate counters. A high switch count says nothing about how often the model was refitted, and vice versa (guide 8.6)"
+    },
+    "jobs": [
+      {
+        "job_id": "bank-0",
+        "clock": "bank_refresh",
+        "triggered_at": "2021-01-01 00:00:00+00:00",
+        "cutoff": "2021-01-01 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2021-01-01 06:00:00+00:00",
+        "effective_at": "2021-01-01 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      },
+      {
+        "job_id": "bank-1",
+        "clock": "bank_refresh",
+        "triggered_at": "2021-06-30 00:00:00+00:00",
+        "cutoff": "2021-06-30 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2021-06-30 06:00:00+00:00",
+        "effective_at": "2021-06-30 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      },
+      {
+        "job_id": "bank-2",
+        "clock": "bank_refresh",
+        "triggered_at": "2021-12-27 00:00:00+00:00",
+        "cutoff": "2021-12-27 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2021-12-27 06:00:00+00:00",
+        "effective_at": "2021-12-27 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      },
+      {
+        "job_id": "bank-3",
+        "clock": "bank_refresh",
+        "triggered_at": "2022-06-25 00:00:00+00:00",
+        "cutoff": "2022-06-25 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2022-06-25 06:00:00+00:00",
+        "effective_at": "2022-06-25 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      },
+      {
+        "job_id": "bank-4",
+        "clock": "bank_refresh",
+        "triggered_at": "2022-12-22 00:00:00+00:00",
+        "cutoff": "2022-12-22 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2022-12-22 06:00:00+00:00",
+        "effective_at": "2022-12-22 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      },
+      {
+        "job_id": "bank-5",
+        "clock": "bank_refresh",
+        "triggered_at": "2023-06-20 00:00:00+00:00",
+        "cutoff": "2023-06-20 00:00:00+00:00",
+        "status": "READY",
+        "ready_at": "2023-06-20 06:00:00+00:00",
+        "effective_at": "2023-06-20 06:00:00+00:00",
+        "superseded_by": null,
+        "reason": "frozen baseline calendar",
+        "cutoff_rule": "the cutoff is fixed at the trigger. A job that takes a long time may NOT quietly extend its cutoff to include data that arrived while it ran (guide 9.4)"
+      }
+    ],
+    "coalesce_window": "1 days 00:00:00",
+    "separation_rule": "a state change never triggers a retrain and a retrain never triggers a parameter search. Merging any two of these clocks is what produces a recursive trigger storm (guide 9.4, T52)",
+    "triggered_refresh_is_a_separate_variant": true
+  },
+  "campaigns": {
+    "schema": "crypto_regime_lab.campaign_book.v1",
+    "campaigns": [],
+    "open": 0,
+    "transition_blocked": 0,
+    "pending_activations": [],
+    "activation_delays": [],
+    "max_activation_delay": null,
+    "warmups": {
+      "cfaeb9f9e69d8da7": {
+        "candidate_id": "cfaeb9f9e69d8da7",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "9383661adf0822b2": {
+        "candidate_id": "9383661adf0822b2",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "77488c06f52f2a68": {
+        "candidate_id": "77488c06f52f2a68",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "0041ec619c05ccf6": {
+        "candidate_id": "0041ec619c05ccf6",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "ad076a0af564efb4": {
+        "candidate_id": "ad076a0af564efb4",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "04c6103a2b3fea6b": {
+        "candidate_id": "04c6103a2b3fea6b",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "157852f8231cbb26": {
+        "candidate_id": "157852f8231cbb26",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "0d63a3f9b145f072": {
+        "candidate_id": "0d63a3f9b145f072",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "4d87ffc8e312efb6": {
+        "candidate_id": "4d87ffc8e312efb6",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      },
+      "incumbent_seed": {
+        "candidate_id": "incumbent_seed",
+        "required_bars": 120,
+        "bars_seen": 120,
+        "status": "READY",
+        "source": "warmed_from_history_past_only",
+        "carried_from": null,
+        "rule": "indicators are warmed from past-only history. They are never reset at a switch, and adaptive state is never carried across parameter sets without a contract (guide 9.5, T51)"
+      }
+    },
+    "forced_unwind_used": false,
+    "forced_unwind_rule": "a long-open campaign is reported TRANSITION_BLOCKED and left alone. Forcing it flat to let a switch through would manufacture the time edge the study is measuring; a forced unwind is a separate ablation with its own costs (guide 9.5)",
+    "shadow_account_rule": "a candidate that is not deployed keeps shadow INDICATOR state only. It never keeps a shadow financial account, because a second account would let a hypothetical equity curve leak into a deployment claim (guide 9.5)"
+  },
+  "counterfactual_limits": {
+    "schema": "crypto_regime_lab.counterfactual_limits.v1",
+    "limits": [
+      {
+        "id": "CF-1",
+        "limit": "training utilities start flat; a live switch does not",
+        "consequence": "the estimate answers 'what would this candidate have done from flat', which is a different question from 'what happens if I switch to it right now, holding what I hold'",
+        "not_captured_by": "response uncertainty"
+      },
+      {
+        "id": "CF-2",
+        "limit": "the transition cost is a PROJECTION",
+        "consequence": "realised cost depends on the book at the moment of the switch. The projection uses declared fee and slippage rates and cannot know the spread it will actually cross",
+        "not_captured_by": "response uncertainty"
+      },
+      {
+        "id": "CF-3",
+        "limit": "activation delay is state-dependent",
+        "consequence": "a switch waits for a campaign boundary, and how long that takes depends on the very market state that motivated the switch. The delay is therefore correlated with the signal, and a symmetric error bar cannot represent that",
+        "not_captured_by": "response uncertainty"
+      },
+      {
+        "id": "CF-4",
+        "limit": "execution risk is conditional on state",
+        "consequence": "slippage, partial fills and gap risk are worse in exactly the regimes where a switch is most tempting. The response estimate is built from realised episode outcomes and carries no separate term for this",
+        "not_captured_by": "response uncertainty"
+      }
+    ],
+    "deploy_equity_rule": "the deployed account is a single continuous simulation that pays real fills. A hypothetical curve in which the account resets to flat at every switch -- an 'expert' curve -- is NOT used as deploy equity, because it silently removes CF-1, CF-3 and CF-4 at once (guide L06.6)",
+    "why_uncertainty_is_not_enough": "response uncertainty measures how much the CONDITIONAL ESTIMATE would move if the episodes were different. It does not measure the four limits above, which are differences between the experiment and the deployment. Widening the error bar would not represent them; it would only make the same estimate less decisive"
+  },
+  "initial_state_contract": {
+    "contract": "flat_at_episode_start",
+    "training_episodes_use": "flat_at_episode_start",
+    "live_switch_uses": "inherited_live_position",
+    "mismatch_is_real": true,
+    "why": "every bank training utility is measured from a declared starting state. A live switch inherits whatever the account is holding, so the two are not the same experiment and the difference does not average away"
+  },
+  "expert_curve": {
+    "reset_flat_expert_curve_used_as_deploy_equity": false,
+    "permitted": false,
+    "detail": "deploy equity comes from one continuous account. Stitching per-candidate curves that each start flat would delete the transition costs and the activation delays that make switching expensive (guide L06.6)"
+  },
+  "lab_run_id": "run-20260910T100300Z-9828cf8e",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T10:04:30.654848+00:00"
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "crypto_regime_lab.alpha_certification.v1",
+  "alpha_id": "A-HASH",
+  "raw_source_digest": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+  "adapter_version": "canonical_v1",
+  "status": "NOT_READY_SPECIFIC_BLOCKER",
+  "indicator_convention": "the 'ATR' is the absolute close-to-close move (AH-02), preserved as the legacy convention; a true-range variant exists as a separate research revision",
+  "timing_contract": "intrabar_bracket_v1",
+  "partial_quantity_convention": "fraction_of_remaining",
+  "engine_capabilities_verified": [
+    "next_open_entry_fill",
+    "protective_stop",
+    "single_take_profit",
+    "partial_reduce_only_ladder",
+    "same_bar_stop_and_tp_conservative",
+    "funding_at_event",
+    "terminal_forced_flat",
+    "terminal_mark_open"
+  ],
+  "semantic_delta_refs": [
+    "SD-HASH-01",
+    "SD-HASH-02",
+    "SD-HASH-03",
+    "SD-HASH-04",
+    "SD-HASH-05",
+    "SD-HASH-06"
+  ],
+  "golden_trace_refs": [
+    "golden_traces/A-HASH.json#2edcc73f44eed23a"
+  ],
+  "market_test_evidence_refs": [],
+  "blockers": [
+    "BLOCKED_CAPABILITY: the canonical three-rung partial ladder needs a next-open entry, a protective stop and partial reduce-only exits on ONE route. intrabar_bracket_v1 provides the first two but a single take-profit level; the orders route provides the ladder but fills the entry at the stamped bar's close and rejects stop_market. Measured, not assumed."
+  ],
+  "market_test_evidence_note": "empty by design: LAB-02 runs synthetic fixtures only. Market qualification is LAB-03.",
+  "legacy_divergence": {
+    "kind": "PREFIX_THEN_BLOCKED_DIVERGENCE",
+    "explained": true,
+    "attributed_to": "BLOCK-HASH-LADDER",
+    "artifact": "legacy_divergence/A-HASH.json"
+  },
+  "version_tiers_built": [
+    "raw_supplied",
+    "legacy_reproduction",
+    "canonical_v1"
+  ],
+  "synthetic_suite": {
+    "decisions": 400,
+    "entries": 6,
+    "technical_exits": 0,
+    "engine_fills": 12,
+    "warmup_blocked_bars": 31
+  },
+  "declared_reduced_fidelity_variant": {
+    "variant_id": "A-HASH-single-tp-v1",
+    "definition": "the ladder collapsed to its FINAL rung only, executed on intrabar_bracket_v1 with a next-open entry and a protective stop",
+    "status": "AVAILABLE_BUT_NOT_THE_CANONICAL_ALPHA",
+    "rule": "results from this variant are labelled and may never be reported as the canonical A-HASH; the partial-exit thesis is not being tested by it"
+  },
+  "lab_run_id": "run-20260909T184724Z-76ac1ff4",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:31.771433+00:00"
+}

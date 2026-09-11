@@ -1,0 +1,148 @@
+{
+  "archive_inspection": {
+    "schema": "crypto_regime_lab.archive_inspection.v1",
+    "archive_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alpha_zip_original.zip",
+    "archive_sha256": "57406dbb9ffdcf4617e4895925126fa73600a585a6541f996c6b2d980f6701ae",
+    "archive_sha256_matches_guide": true,
+    "entry_count": 10,
+    "entries": [
+      {
+        "name": "alpha_to_tes_regime_model/",
+        "size_bytes": 0,
+        "compressed_bytes": 0,
+        "is_dir": true,
+        "external_attr": 1106051072
+      },
+      {
+        "name": "__MACOSX/._alpha_to_tes_regime_model",
+        "size_bytes": 163,
+        "compressed_bytes": 86,
+        "is_dir": false,
+        "external_attr": 2179792896,
+        "ignored_metadata": true
+      },
+      {
+        "name": "alpha_to_tes_regime_model/vwap.py",
+        "size_bytes": 13440,
+        "compressed_bytes": 3596,
+        "is_dir": false,
+        "external_attr": 2175008768
+      },
+      {
+        "name": "__MACOSX/alpha_to_tes_regime_model/._vwap.py",
+        "size_bytes": 163,
+        "compressed_bytes": 86,
+        "is_dir": false,
+        "external_attr": 2175008768,
+        "ignored_metadata": true
+      },
+      {
+        "name": "alpha_to_tes_regime_model/hash_momentum.py",
+        "size_bytes": 7768,
+        "compressed_bytes": 2053,
+        "is_dir": false,
+        "external_attr": 2175008768
+      },
+      {
+        "name": "__MACOSX/alpha_to_tes_regime_model/._hash_momentum.py",
+        "size_bytes": 163,
+        "compressed_bytes": 86,
+        "is_dir": false,
+        "external_attr": 2175008768,
+        "ignored_metadata": true
+      },
+      {
+        "name": "alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+        "size_bytes": 16576,
+        "compressed_bytes": 5059,
+        "is_dir": false,
+        "external_attr": 2175008768
+      },
+      {
+        "name": "__MACOSX/alpha_to_tes_regime_model/._adaptive_hma_cpp.py",
+        "size_bytes": 163,
+        "compressed_bytes": 86,
+        "is_dir": false,
+        "external_attr": 2175008768,
+        "ignored_metadata": true
+      },
+      {
+        "name": "alpha_to_tes_regime_model/signal_combine.py",
+        "size_bytes": 5671,
+        "compressed_bytes": 1470,
+        "is_dir": false,
+        "external_attr": 2175008768
+      },
+      {
+        "name": "__MACOSX/alpha_to_tes_regime_model/._signal_combine.py",
+        "size_bytes": 163,
+        "compressed_bytes": 86,
+        "is_dir": false,
+        "external_attr": 2175008768,
+        "ignored_metadata": true
+      }
+    ],
+    "rejections": [],
+    "admissible": true
+  },
+  "retained_archive": {
+    "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alpha_zip_original.zip",
+    "sha256": "57406dbb9ffdcf4617e4895925126fa73600a585a6541f996c6b2d980f6701ae"
+  },
+  "extraction": {
+    "schema": "crypto_regime_lab.archive_extraction.v1",
+    "archive_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alpha_zip_original.zip",
+    "archive_sha256": "57406dbb9ffdcf4617e4895925126fa73600a585a6541f996c6b2d980f6701ae",
+    "archive_sha256_matches_guide": true,
+    "dest_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw",
+    "extracted": [
+      {
+        "member": "alpha_to_tes_regime_model/vwap.py",
+        "basename": "vwap.py",
+        "alpha_id": "A-VWAP",
+        "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/vwap.py",
+        "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+        "size_bytes": 13440
+      },
+      {
+        "member": "alpha_to_tes_regime_model/hash_momentum.py",
+        "basename": "hash_momentum.py",
+        "alpha_id": "A-HASH",
+        "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/hash_momentum.py",
+        "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+        "size_bytes": 7768
+      },
+      {
+        "member": "alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+        "basename": "adaptive_hma_cpp.py",
+        "alpha_id": "A-HMA",
+        "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/adaptive_hma_cpp.py",
+        "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+        "size_bytes": 16576
+      },
+      {
+        "member": "alpha_to_tes_regime_model/signal_combine.py",
+        "basename": "signal_combine.py",
+        "alpha_id": "A-SC",
+        "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/signal_combine.py",
+        "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+        "size_bytes": 5671
+      }
+    ],
+    "status": "EXTRACTED_AND_VERIFIED"
+  },
+  "loose_copy_crosscheck": {
+    "source_dir": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+    "status": "VERIFIED",
+    "identical_to_archive": true,
+    "mismatches": []
+  },
+  "archive_source": "retained copy in vendor_readonly (supplied archive no longer at LAB_ROOT)",
+  "provenance_chain": "user archive -> sha256 verified vs guide 1.1 -> inspected -> extracted -> digest re-verified -> read-only lab copy",
+  "idempotence": "Re-running LAB-01 uses the retained read-only copy when the supplied zip is no longer at LAB_ROOT. The digest gate against guide 1.1 is applied either way, so a substituted archive still stops the phase.",
+  "supersedes": "alpha_source_snapshot.json from the bootstrap run, which sourced the loose files because the archive was not yet on this host",
+  "schema": "crypto_regime_lab.archive_ingestion.v1",
+  "lab_run_id": "run-20260909T184757Z-0ebe394b",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:57.913320+00:00"
+}

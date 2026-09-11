@@ -1,0 +1,102 @@
+{
+  "schema": "crypto_regime_lab.loader_endpoint_parity.v1",
+  "checked_at_utc": "2026-09-10T10:43:03.823699+00:00",
+  "loader_snapshot_sha256": "99612d99ada25732e457740c129fadf808725474d7647097253d919bb984bd4e",
+  "loader_snapshot_path": "vendor_readonly/loader_snapshot/data_loader.py",
+  "storage_root": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage",
+  "probe_partition": "2020-01",
+  "how_the_lab_reads": "the lab parses this loader STATICALLY to learn which storage path holds which product, then reads the parquet directly from its own byte copy; it never calls the loader at run time",
+  "why_this_is_measured": "so the choice above is auditable rather than asserted: if the endpoint returned the same numbers the choice would be cosmetic, and it does not",
+  "per_symbol": [
+    {
+      "symbol": "BTCUSDT",
+      "status": "COMPARED",
+      "partition": "2020-01",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44594,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.0043204535151674505
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44594,
+      "bars_a_cast_would_zero": 92,
+      "volume_sum_parquet": 5165281.358,
+      "volume_sum_loader": 5142965.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "COMPARED",
+      "partition": "2020-01",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44548,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.00099148386465064
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44548,
+      "bars_a_cast_would_zero": 58,
+      "volume_sum_parquet": 22437318.238999996,
+      "volume_sum_loader": 22415072.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "NO_SNAPSHOT_PARTITION",
+      "partition": "2020-01"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "NO_SNAPSHOT_PARTITION",
+      "partition": "2020-01"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "NO_SNAPSHOT_PARTITION",
+      "partition": "2020-01"
+    }
+  ],
+  "finding": "MarketDataLoaderBase._normalize casts volume to int64. Symbols whose stored volume is fractional lose the fraction on every bar, and a bar under 1.0 unit with real trades becomes volume 0. Symbols already stored as int64 are unaffected, so the defect is invisible on exactly the symbols one would test first.",
+  "lab_consequence": "reading the parquet directly preserves the stored resolution; panel.normalize_numeric_dtypes coerces to float64 on read so a feature's dtype never depends on which month it came from",
+  "lab_run_id": "run-20260910T104303Z-3d01577b",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T10:43:03.826064+00:00"
+}

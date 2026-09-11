@@ -1,0 +1,285 @@
+{
+  "schema": "crypto_regime_lab.preflight.v1",
+  "results": [
+    {
+      "id": "ISO",
+      "title": "OS-level worker containment (bubblewrap namespaces)",
+      "status": "PASS",
+      "expectation": "LAB_ROOT writable, protected roots read-only, network namespace empty, no credentials in worker env",
+      "observed": {
+        "available": true,
+        "mechanism": "bubblewrap mount+net+pid namespace, read-only root, LAB_ROOT writable",
+        "failures": []
+      },
+      "detail": {
+        "bwrap_version": "bubblewrap 0.6.1",
+        "checks": {
+          "lab_root_writable": true,
+          "fake_protected_write_refused": true,
+          "fake_protected_errno": 30,
+          "fake_protected_error": "[Errno 30] Read-only file system: '/root/bobby/pool_alpha/lab_regime_model_quantbt/.cache/fake_protected_fixture/should_not_exist'",
+          "protected_mounts": {
+            "/root/bobby/pool_alpha/quantbt": {
+              "mount_point": "/root/bobby/pool_alpha/quantbt",
+              "read_only": true
+            },
+            "/root/bobby/pool_alpha/alphas_storage/_get_data": {
+              "mount_point": "/root/bobby/pool_alpha/alphas_storage/_get_data",
+              "read_only": true
+            },
+            "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model": {
+              "mount_point": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+              "read_only": true
+            }
+          },
+          "network_blocked": true,
+          "network_errno": 101,
+          "dns_blocked": true,
+          "credential_env_vars": [],
+          "visible_pids": 2,
+          "required": {
+            "lab_root_writable": true,
+            "fake_protected_write_refused": true,
+            "network_blocked": true,
+            "no_credential_env": true,
+            "protected_roots_read_only": true
+          }
+        },
+        "claim": "Worker writes outside LAB_ROOT are refused by the kernel (read-only bind mounts) and replay workers have an empty network namespace."
+      }
+    },
+    {
+      "id": "T01",
+      "title": "LAB_ROOT inside protected repo is rejected",
+      "status": "PASS",
+      "expectation": "real LAB_ROOT accepted; a LAB_ROOT inside a protected root is rejected",
+      "observed": {
+        "real_lab_root_problems": [],
+        "positive_control_rejected": true
+      },
+      "detail": {
+        "lab_root": "/root/bobby/pool_alpha/lab_regime_model_quantbt",
+        "protected_roots": [
+          "/root/bobby/pool_alpha/quantbt",
+          "/root/bobby/pool_alpha/alphas_storage/_get_data",
+          "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model"
+        ]
+      }
+    },
+    {
+      "id": "T02",
+      "title": "editable copies are physical, not aliases",
+      "status": "PASS",
+      "expectation": "no symlink escaping LAB_ROOT and no multi-link file among lab-owned sources",
+      "observed": {
+        "offender_count": 0
+      },
+      "detail": {
+        "offenders": []
+      }
+    },
+    {
+      "id": "T03",
+      "title": "zip traversal/absolute/symlink/duplicate rejected before extract",
+      "status": "PASS",
+      "expectation": "hostile archive rejected with at least ['ABSOLUTE_PATH', 'DUPLICATE_ENTRY', 'PATH_TRAVERSAL', 'SYMLINK_MEMBER']; benign single-file archive admissible",
+      "observed": {
+        "hostile_rejection_codes": [
+          "ABSOLUTE_PATH",
+          "DUPLICATE_ENTRY",
+          "NOT_IN_ALLOWLIST",
+          "PATH_TRAVERSAL",
+          "SYMLINK_MEMBER"
+        ],
+        "hostile_admissible": false,
+        "benign_admissible": true
+      },
+      "detail": {}
+    },
+    {
+      "id": "T04",
+      "title": "four-file allowlist and digests",
+      "status": "PASS",
+      "expectation": "exactly the four allowed files, each matching the guide digest, no extra .py",
+      "observed": {
+        "status": "VERIFIED",
+        "problems": []
+      },
+      "detail": {
+        "files": {
+          "vwap.py": {
+            "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+            "matches": true
+          },
+          "hash_momentum.py": {
+            "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+            "matches": true
+          },
+          "adaptive_hma_cpp.py": {
+            "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+            "matches": true
+          },
+          "signal_combine.py": {
+            "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+            "matches": true
+          }
+        }
+      }
+    },
+    {
+      "id": "T05",
+      "title": "worker caches redirected into the lab; protected-path write refused by the kernel",
+      "status": "PASS",
+      "expectation": "no cache variable outside LAB_ROOT; write to a (fake) protected path refused by BOTH the guard and the OS",
+      "observed": {
+        "cache_offenders": [],
+        "guard_refused": true,
+        "kernel_refused": true,
+        "kernel_errno": 30
+      },
+      "detail": {
+        "pythondontwritebytecode": "1",
+        "numba_cache_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/.cache/numba",
+        "note": "errno 30 (EROFS) is the read-only bind mount refusing the write"
+      }
+    },
+    {
+      "id": "T06",
+      "title": "no live credentials in a replay worker; network unreachable at OS level",
+      "status": "PASS",
+      "expectation": "credential-shaped vars stripped AND an isolated worker cannot reach the network or resolve DNS",
+      "observed": {
+        "leaked_from_env_builder": [],
+        "credentials_visible_in_worker": [],
+        "network_blocked": true,
+        "dns_blocked": true,
+        "network_errno": 101
+      },
+      "detail": {
+        "note": "errno 101 (ENETUNREACH) comes from an empty network namespace, not from a proxy variable"
+      }
+    },
+    {
+      "id": "T07",
+      "title": "budget enforced: over-budget worker dies alone, cancel scoped, disk within quota",
+      "status": "PASS",
+      "expectation": "memory cap kills only the worker; foreign process group refused; lab disk usage under quota",
+      "observed": {
+        "budget": {
+          "workers": 1,
+          "cpu_limit": 2,
+          "working_memory_gib": 4,
+          "disk_quota_gib": 20
+        },
+        "foreign_group_result": "REFUSED",
+        "over_budget_worker_died": true,
+        "parent_survived": true,
+        "disk_within_quota": true,
+        "lab_gib_used": 2.634
+      },
+      "detail": {
+        "worker_error": "numpy._core._exceptions._ArrayMemoryError: Unable to allocate 64.0 MiB for an array with shape (8388608,) and data type float64",
+        "disk": {
+          "lab_bytes_used": 2827759997,
+          "lab_gib_used": 2.634,
+          "quota_gib": 20,
+          "quota_bytes": 21474836480,
+          "within_quota": true,
+          "filesystem_free_gib": 8.973,
+          "filesystem_total_gib": 78.646,
+          "headroom_gib": 17.366
+        }
+      }
+    },
+    {
+      "id": "T08",
+      "title": "protected-source integrity manifest",
+      "status": "PASS",
+      "expectation": "digest manifest built for protected alpha sources (compared again at run end)",
+      "observed": {
+        "file_count": 4
+      },
+      "detail": {
+        "manifests": {
+          "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model": {
+            "adaptive_hma_cpp.py": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+            "hash_momentum.py": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+            "signal_combine.py": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+            "vwap.py": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84"
+          }
+        }
+      }
+    }
+  ],
+  "counts": {
+    "PASS": 9
+  },
+  "gate": "PASS",
+  "os_isolation_available": true,
+  "containment_claim": "Worker writes outside LAB_ROOT are refused by the kernel (read-only bind mounts) and replay workers have an empty network namespace.",
+  "os_level_isolation_declared_in_policy": {
+    "mechanism": "bubblewrap: --ro-bind / with LAB_ROOT re-bound writable, --unshare-net/pid/ipc/uts, --clearenv",
+    "availability": "MEASURED_AT_PREFLIGHT",
+    "static_claim_forbidden": true,
+    "note": "Availability is never taken from this file. safety/sandbox.probe_isolation() measures it each preflight and the result is written to evidence; a stale 'true' here would be exactly the false containment claim guide 0.2 forbids.",
+    "required_checks": [
+      "lab_root_writable",
+      "fake_protected_write_refused",
+      "network_blocked",
+      "no_credential_env",
+      "protected_roots_read_only"
+    ]
+  },
+  "safe_to_run_synthetic": true,
+  "safe_to_run_market_execution": false,
+  "market_execution_note": "Market execution stays disabled at LAB-01 exit by design (guide LAB-01 exit gate). It is unlocked only after LAB-02 adapter certification and LAB-03 data qualification.",
+  "environment": {
+    "python_version": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+    "numba": {
+      "numba_version": "0.65.1",
+      "llvmlite_version": "0.47.0",
+      "threading_layer": null,
+      "num_threads": 4,
+      "default_num_threads": 4,
+      "cache_dir": null,
+      "disable_jit": 0,
+      "fastmath_policy": "lab reference kernels must run fastmath=False; a fastmath variant is a separate recorded version, never a silent substitution (guide L02.2)"
+    },
+    "threads": {
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "NUMBA_NUM_THREADS": null,
+      "os_sched_affinity": 4
+    },
+    "python_executable": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+    "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "hostname": "Bobby",
+    "cpu_count": 4,
+    "packages": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "numba": "0.65.1",
+      "llvmlite": "0.47.0",
+      "scipy": "1.18.1",
+      "pyarrow": "25.0.1",
+      "ta": "0.11.0",
+      "optuna": "4.8.0",
+      "pytest": "9.1.1"
+    },
+    "quantbt_import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "env_flags": {
+      "PYTHONDONTWRITEBYTECODE": null,
+      "NUMBA_CACHE_DIR": null,
+      "MPLCONFIGDIR": null,
+      "TMPDIR": null
+    }
+  },
+  "lab_run_id": "run-20260910T080521Z-7875b489",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T08:05:26.130926+00:00"
+}

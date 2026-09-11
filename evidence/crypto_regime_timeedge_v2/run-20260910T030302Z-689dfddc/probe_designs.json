@@ -1,0 +1,1194 @@
+{
+  "schema": "crypto_regime_lab.probe_designs.v1",
+  "seed": 20260910,
+  "determinism": "seeds derive from a sha256 of (seed, anchor_id) and every set iteration is sorted, so a design is reproducible across processes",
+  "designs": {
+    "A-SC": {
+      "schema": {
+        "schema": "crypto_regime_lab.param_schema.v1",
+        "name": "A-SC",
+        "parameters": {
+          "coeff": {
+            "kind": "int",
+            "low": 1,
+            "high": 8,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "AP": {
+            "kind": "int",
+            "low": 5,
+            "high": 60,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "alpha.condition_threshold": {
+            "kind": "int",
+            "low": 30,
+            "high": 80,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "novolumedata": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": false,
+            "informative": false
+          },
+          "src_col": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": "close",
+            "informative": false
+          }
+        },
+        "dependencies": [],
+        "branch_mismatch_penalty": 1.0,
+        "distance_rule": "normalised by DECLARED bounds and step; fixed parameters excluded from the denominator; inactive parameters create no distance; a branch mismatch costs a locked penalty"
+      },
+      "design_digest": "40be69e8f6994cdf",
+      "probe_count": 8,
+      "unique_probe_ids": 8,
+      "structurally_invalid_rejections": [],
+      "rejection_count": 0,
+      "accounting_rules": {
+        "valid_bad_probes_retained": true,
+        "structurally_invalid_is_not_bad_performance": true,
+        "runtime_error_means_incomplete_evidence": true
+      },
+      "probes": {
+        "seed_A-SC": [
+          {
+            "probe_id": "6ff374246a2b0ee1",
+            "point": {
+              "coeff": 4,
+              "AP": 22,
+              "alpha.condition_threshold": 65,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.0787878787878788,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "f74caa219a74f243",
+            "point": {
+              "coeff": 3,
+              "AP": 20,
+              "alpha.condition_threshold": 65,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.11428571428571428,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "82194e9ac416f6db",
+            "point": {
+              "coeff": 4,
+              "AP": 21,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.0393939393939394,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "1000f4a3a29cf648",
+            "point": {
+              "coeff": 3,
+              "AP": 22,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.09307359307359307,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "62f579bcb14211a5",
+            "point": {
+              "coeff": 3,
+              "AP": 21,
+              "alpha.condition_threshold": 55,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.05367965367965368,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "1e52e09ab793cfbc",
+            "point": {
+              "coeff": 4,
+              "AP": 18,
+              "alpha.condition_threshold": 55,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.012121212121212121,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "32a3194218d96455",
+            "point": {
+              "coeff": 4,
+              "AP": 19,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.0393939393939394,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "94a74624aae3bde4",
+            "point": {
+              "coeff": 4,
+              "AP": 21,
+              "alpha.condition_threshold": 55,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "anchor_id": "seed_A-SC",
+            "distance_to_anchor": 0.006060606060606061,
+            "status": "EVALUATED",
+            "reason": null
+          }
+        ]
+      }
+    },
+    "A-HMA": {
+      "schema": {
+        "schema": "crypto_regime_lab.param_schema.v1",
+        "name": "A-HMA",
+        "parameters": {
+          "min_length": {
+            "kind": "int",
+            "low": 40,
+            "high": 360,
+            "step": 10,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "max_length": {
+            "kind": "int",
+            "low": 60,
+            "high": 420,
+            "step": 10,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "minor_min": {
+            "kind": "int",
+            "low": 10,
+            "high": 120,
+            "step": 2,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "minor_max": {
+            "kind": "int",
+            "low": 30,
+            "high": 220,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "flat": {
+            "kind": "float",
+            "low": 4.0,
+            "high": 50.0,
+            "step": 1.0,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "atr_fast": {
+            "kind": "int",
+            "low": 4,
+            "high": 60,
+            "step": 2,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "atr_slow": {
+            "kind": "int",
+            "low": 10,
+            "high": 140,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 6.0,
+            "step": 0.25,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "max_sl": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 9.0,
+            "step": 0.25,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "take_profit": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 8.0,
+            "step": 0.5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "min_profit": {
+            "kind": "float",
+            "low": 0.1,
+            "high": 4.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "sl_input": {
+            "kind": "categorical",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              "Half Distance Zone",
+              "Zone Distance",
+              "ATR"
+            ],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "tick_size": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": 0.01,
+            "informative": false
+          }
+        },
+        "dependencies": [
+          [
+            "min_length",
+            "max_length"
+          ],
+          [
+            "minor_min",
+            "minor_max"
+          ],
+          [
+            "atr_fast",
+            "atr_slow"
+          ]
+        ],
+        "branch_mismatch_penalty": 1.0,
+        "distance_rule": "normalised by DECLARED bounds and step; fixed parameters excluded from the denominator; inactive parameters create no distance; a branch mismatch costs a locked penalty"
+      },
+      "design_digest": "732e1a45a0b63b6a",
+      "probe_count": 8,
+      "unique_probe_ids": 8,
+      "structurally_invalid_rejections": [],
+      "rejection_count": 0,
+      "accounting_rules": {
+        "valid_bad_probes_retained": true,
+        "structurally_invalid_is_not_bad_performance": true,
+        "runtime_error_means_incomplete_evidence": true
+      },
+      "probes": {
+        "seed_A-HMA": [
+          {
+            "probe_id": "4774a7c0b60d6f44",
+            "point": {
+              "min_length": 220,
+              "max_length": 240,
+              "minor_min": 60,
+              "minor_max": 120,
+              "flat": 24.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 2.5,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 2.0,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.014595685111989462,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "8cc391626c9339a7",
+            "point": {
+              "min_length": 200,
+              "max_length": 240,
+              "minor_min": 60,
+              "minor_max": 120,
+              "flat": 25.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 3.0,
+              "max_sl": 5.25,
+              "take_profit": 4.5,
+              "min_profit": 0.1,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.04320245726495727,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "a0e00bd44d8edf2c",
+            "point": {
+              "min_length": 200,
+              "max_length": 240,
+              "minor_min": 58,
+              "minor_max": 120,
+              "flat": 26.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 3.0,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 0.5,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.03537802776933212,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "9601aec59425939f",
+            "point": {
+              "min_length": 200,
+              "max_length": 240,
+              "minor_min": 60,
+              "minor_max": 120,
+              "flat": 25.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 3.25,
+              "max_sl": 5.0,
+              "take_profit": 5.0,
+              "min_profit": 2.0,
+              "sl_input": "ATR",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.09307359307359307,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "34275cec78526cac",
+            "point": {
+              "min_length": 180,
+              "max_length": 240,
+              "minor_min": 60,
+              "minor_max": 120,
+              "flat": 26.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 3.0,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 1.4000000000000001,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.019840440356744704,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "240b489cd7198052",
+            "point": {
+              "min_length": 200,
+              "max_length": 250,
+              "minor_min": 60,
+              "minor_max": 120,
+              "flat": 25.0,
+              "atr_fast": 30,
+              "atr_slow": 70,
+              "mult": 3.0,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 2.0,
+              "sl_input": "Zone Distance",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.08885327635327635,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "d3b0a371e7502f87",
+            "point": {
+              "min_length": 200,
+              "max_length": 240,
+              "minor_min": 62,
+              "minor_max": 120,
+              "flat": 25.0,
+              "atr_fast": 28,
+              "atr_slow": 75,
+              "mult": 2.5,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 2.0,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.012067099567099566,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "619f79be8ebf0181",
+            "point": {
+              "min_length": 200,
+              "max_length": 250,
+              "minor_min": 62,
+              "minor_max": 120,
+              "flat": 26.0,
+              "atr_fast": 30,
+              "atr_slow": 75,
+              "mult": 3.0,
+              "max_sl": 5.0,
+              "take_profit": 4.5,
+              "min_profit": 2.0,
+              "sl_input": "Half Distance Zone",
+              "tick_size": 0.01
+            },
+            "anchor_id": "seed_A-HMA",
+            "distance_to_anchor": 0.005641560532864881,
+            "status": "EVALUATED",
+            "reason": null
+          }
+        ]
+      }
+    },
+    "A-VWAP": {
+      "schema": {
+        "schema": "crypto_regime_lab.param_schema.v1",
+        "name": "A-VWAP",
+        "parameters": {
+          "rsi_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 80,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "rsi_os": {
+            "kind": "int",
+            "low": 10,
+            "high": 50,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "rsi_ob": {
+            "kind": "int",
+            "low": 55,
+            "high": 90,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "dev_mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "atr_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 90,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "stop_atr": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 10.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "target_r": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 10.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "htf_ema_len": {
+            "kind": "int",
+            "low": 20,
+            "high": 700,
+            "step": 10,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "exit_at_vwap": {
+            "kind": "bool",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              false,
+              true
+            ],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "time_stop_on": {
+            "kind": "bool",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [
+              false,
+              true
+            ],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "time_stop_bars": {
+            "kind": "int",
+            "low": 5,
+            "high": 120,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": [
+              "time_stop_on",
+              true
+            ],
+            "fixed_value": null,
+            "informative": true
+          },
+          "htf_tf": {
+            "kind": "fixed",
+            "low": null,
+            "high": null,
+            "step": null,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": "1h",
+            "informative": false
+          }
+        },
+        "dependencies": [
+          [
+            "rsi_os",
+            "rsi_ob"
+          ]
+        ],
+        "branch_mismatch_penalty": 1.0,
+        "distance_rule": "normalised by DECLARED bounds and step; fixed parameters excluded from the denominator; inactive parameters create no distance; a branch mismatch costs a locked penalty"
+      },
+      "design_digest": "ee2025961be694f8",
+      "probe_count": 8,
+      "unique_probe_ids": 8,
+      "structurally_invalid_rejections": [],
+      "rejection_count": 0,
+      "accounting_rules": {
+        "valid_bad_probes_retained": true,
+        "structurally_invalid_is_not_bad_performance": true,
+        "runtime_error_means_incomplete_evidence": true
+      },
+      "probes": {
+        "seed_A-VWAP": [
+          {
+            "probe_id": "c995ee6b4048458d",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 74,
+              "dev_mult": 2.5,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.005194805194805195,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "41e9e5f73de69eeb",
+            "point": {
+              "rsi_len": 41,
+              "rsi_os": 30,
+              "rsi_ob": 72,
+              "dev_mult": 2.5,
+              "atr_len": 45,
+              "stop_atr": 1.2000000000000002,
+              "target_r": 3.500000000000002,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.06484848484848482,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "f090c6e04f2ef5c9",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 32,
+              "rsi_ob": 71,
+              "dev_mult": 2.5,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.007142857142857143,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "2612f5ad6f977a94",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 70,
+              "dev_mult": 2.5,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.005194805194805195,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "2f758cf9e9a92863",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 72,
+              "dev_mult": 2.5,
+              "atr_len": 44,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.0010695187165775401,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "9e15c6ef852b5572",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 72,
+              "dev_mult": 0.7999999999999999,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.03434343434343435,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "49781d40bbbe4f51",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 72,
+              "dev_mult": 2.5,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 5.5,
+              "htf_ema_len": 350,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.001336898395721925,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "9f5e511ad4f8338b",
+            "point": {
+              "rsi_len": 40,
+              "rsi_os": 30,
+              "rsi_ob": 72,
+              "dev_mult": 1.4000000000000001,
+              "atr_len": 45,
+              "stop_atr": 5.5,
+              "target_r": 2.200000000000001,
+              "htf_ema_len": 360,
+              "exit_at_vwap": false,
+              "time_stop_on": true,
+              "time_stop_bars": 60,
+              "htf_tf": "1h"
+            },
+            "anchor_id": "seed_A-VWAP",
+            "distance_to_anchor": 0.05555555555555554,
+            "status": "EVALUATED",
+            "reason": null
+          }
+        ]
+      }
+    },
+    "A-HASH": {
+      "schema": {
+        "schema": "crypto_regime_lab.param_schema.v1",
+        "name": "A-HASH",
+        "parameters": {
+          "mom_len": {
+            "kind": "int",
+            "low": 5,
+            "high": 70,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "ema_len": {
+            "kind": "int",
+            "low": 10,
+            "high": 80,
+            "step": 2,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "cooldown_bars": {
+            "kind": "int",
+            "low": 0,
+            "high": 40,
+            "step": 1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "stop_loss_perc": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 8.0,
+            "step": 0.25,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "rr_ratio": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "tp1_ratio": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 4.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "tp2_ratio": {
+            "kind": "float",
+            "low": 1.0,
+            "high": 5.0,
+            "step": 0.1,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "mom_threshold_mult": {
+            "kind": "float",
+            "low": 0.5,
+            "high": 7.0,
+            "step": 0.25,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "tp1_qty_perc": {
+            "kind": "int",
+            "low": 20,
+            "high": 70,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          },
+          "tp2_qty_perc": {
+            "kind": "int",
+            "low": 20,
+            "high": 70,
+            "step": 5,
+            "choices": [],
+            "weight": 1.0,
+            "active_when": null,
+            "fixed_value": null,
+            "informative": true
+          }
+        },
+        "dependencies": [
+          [
+            "tp1_ratio",
+            "tp2_ratio"
+          ]
+        ],
+        "branch_mismatch_penalty": 1.0,
+        "distance_rule": "normalised by DECLARED bounds and step; fixed parameters excluded from the denominator; inactive parameters create no distance; a branch mismatch costs a locked penalty"
+      },
+      "design_digest": "1a65b1cb3025e362",
+      "probe_count": 8,
+      "unique_probe_ids": 8,
+      "structurally_invalid_rejections": [],
+      "rejection_count": 0,
+      "accounting_rules": {
+        "valid_bad_probes_retained": true,
+        "structurally_invalid_is_not_bad_performance": true,
+        "runtime_error_means_incomplete_evidence": true
+      },
+      "probes": {
+        "seed_A-HASH": [
+          {
+            "probe_id": "f4f27ae3f94b12ed",
+            "point": {
+              "mom_len": 36,
+              "ema_len": 48,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 4.0,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 45
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.014945054945054945,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "cc02a5aa09b82e84",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 44,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 3.75,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 45
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.0038461538461538464,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "171b98ea9cc66e9b",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 40,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 4.0,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 45
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.013406593406593406,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "7c89a5022efb3972",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 46,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 3.5,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 45
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.002857142857142857,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "db10a09dc34465b3",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 44,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.25,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 3.5,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 35
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.023333333333333334,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "daa05c3a16316eb5",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 44,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.9000000000000012,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 3.5,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 50
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.035714285714285754,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "30716e40bc663449",
+            "point": {
+              "mom_len": 35,
+              "ema_len": 46,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 2.4000000000000012,
+              "mom_threshold_mult": 3.5,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 55
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.037857142857142825,
+            "status": "EVALUATED",
+            "reason": null
+          },
+          {
+            "probe_id": "ccb96cf848ede6d1",
+            "point": {
+              "mom_len": 33,
+              "ema_len": 44,
+              "cooldown_bars": 20,
+              "stop_loss_perc": 4.0,
+              "rr_ratio": 3.0,
+              "tp1_ratio": 2.0,
+              "tp2_ratio": 3.0,
+              "mom_threshold_mult": 3.5,
+              "tp1_qty_perc": 45,
+              "tp2_qty_perc": 45
+            },
+            "anchor_id": "seed_A-HASH",
+            "distance_to_anchor": 0.003076923076923077,
+            "status": "EVALUATED",
+            "reason": null
+          }
+        ]
+      }
+    }
+  },
+  "lab_run_id": "run-20260910T030302Z-689dfddc",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T03:03:22.258671+00:00"
+}

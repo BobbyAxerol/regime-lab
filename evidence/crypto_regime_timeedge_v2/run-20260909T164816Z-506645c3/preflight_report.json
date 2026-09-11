@@ -1,0 +1,154 @@
+{
+  "schema": "crypto_regime_lab.preflight.v1",
+  "results": [
+    {
+      "id": "T01",
+      "title": "LAB_ROOT inside protected repo is rejected",
+      "status": "PASS",
+      "expectation": "real LAB_ROOT accepted; a LAB_ROOT inside a protected root is rejected",
+      "observed": {
+        "real_lab_root_problems": [],
+        "positive_control_rejected": true
+      },
+      "detail": {
+        "lab_root": "/root/bobby/pool_alpha/lab_regime_model_quantbt",
+        "protected_roots": [
+          "/root/bobby/pool_alpha/quantbt",
+          "/root/bobby/pool_alpha/alphas_storage/_get_data",
+          "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model"
+        ]
+      }
+    },
+    {
+      "id": "T02",
+      "title": "editable copies are physical, not aliases",
+      "status": "PASS",
+      "expectation": "no symlink escaping LAB_ROOT and no multi-link file among lab-owned sources",
+      "observed": {
+        "offender_count": 0
+      },
+      "detail": {
+        "offenders": []
+      }
+    },
+    {
+      "id": "T03",
+      "title": "zip traversal/absolute/symlink/duplicate rejected before extract",
+      "status": "PASS",
+      "expectation": "hostile archive rejected with at least ['ABSOLUTE_PATH', 'DUPLICATE_ENTRY', 'PATH_TRAVERSAL', 'SYMLINK_MEMBER']; benign single-file archive admissible",
+      "observed": {
+        "hostile_rejection_codes": [
+          "ABSOLUTE_PATH",
+          "DUPLICATE_ENTRY",
+          "NOT_IN_ALLOWLIST",
+          "PATH_TRAVERSAL",
+          "SYMLINK_MEMBER"
+        ],
+        "hostile_admissible": false,
+        "benign_admissible": true
+      },
+      "detail": {}
+    },
+    {
+      "id": "T04",
+      "title": "four-file allowlist and digests",
+      "status": "PASS",
+      "expectation": "exactly the four allowed files, each matching the guide digest, no extra .py",
+      "observed": {
+        "status": "VERIFIED",
+        "problems": []
+      },
+      "detail": {
+        "files": {
+          "vwap.py": {
+            "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+            "matches": true
+          },
+          "hash_momentum.py": {
+            "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+            "matches": true
+          },
+          "adaptive_hma_cpp.py": {
+            "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+            "matches": true
+          },
+          "signal_combine.py": {
+            "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+            "matches": true
+          }
+        }
+      }
+    },
+    {
+      "id": "T05",
+      "title": "worker caches redirected into the lab; protected-path write refused",
+      "status": "PASS",
+      "expectation": "no cache variable points outside LAB_ROOT; guard refuses a write to a (fake) protected path",
+      "observed": {
+        "cache_offenders": [],
+        "fake_protected_write_refused": true
+      },
+      "detail": {
+        "pythondontwritebytecode": "1",
+        "numba_cache_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/.cache/numba"
+      }
+    },
+    {
+      "id": "T06",
+      "title": "no live credentials in a replay worker; network marked off",
+      "status": "PASS",
+      "expectation": "credential-shaped env vars stripped and network flag disabled",
+      "observed": {
+        "leaked": [],
+        "network_flag": "disabled"
+      },
+      "detail": {
+        "note": "env stripping is hygiene; it is not an OS-level network block"
+      }
+    },
+    {
+      "id": "T07",
+      "title": "resource budget declared; cancel refuses non-own process group",
+      "status": "PASS",
+      "expectation": "killing a group that is not our own is refused",
+      "observed": {
+        "budget": {
+          "workers": 1,
+          "cpu_limit": 2,
+          "working_memory_gib": 4,
+          "disk_quota_gib": 20
+        },
+        "foreign_group_result": "REFUSED"
+      },
+      "detail": {}
+    },
+    {
+      "id": "T08",
+      "title": "protected-source integrity manifest",
+      "status": "PASS",
+      "expectation": "digest manifest built for protected alpha sources (compared again at run end)",
+      "observed": {
+        "file_count": 4
+      },
+      "detail": {
+        "manifests": {
+          "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model": {
+            "adaptive_hma_cpp.py": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+            "hash_momentum.py": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+            "signal_combine.py": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+            "vwap.py": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84"
+          }
+        }
+      }
+    }
+  ],
+  "counts": {
+    "PASS": 8
+  },
+  "gate": "PASS",
+  "safe_to_run_synthetic": true,
+  "safe_to_run_market_execution": false,
+  "lab_run_id": "run-20260909T164816Z-506645c3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T16:48:17.401135+00:00"
+}

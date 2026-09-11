@@ -1,0 +1,868 @@
+{
+  "schema": "crypto_regime_lab.acceptance_coverage.v1",
+  "note": "Guide section 14 lists 64 REQUIREMENTS. This file records which are implemented as running tests. A requirement with no test is NOT_YET_IMPLEMENTED, never assumed passing.",
+  "as_of_phase": "LAB-09",
+  "counts": {
+    "COVERED": 62,
+    "PARTIAL": 1,
+    "NOT_YET_IMPLEMENTED": 1
+  },
+  "requirements": [
+    {
+      "id": "T01",
+      "title": "LAB_ROOT inside protected repo -> preflight reject",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t01_lab_root_outside_protected_roots",
+        "tests/test_lab01_safety.py::test_t01_lab_root_inside_protected_root_is_rejected",
+        "tests/test_lab01_safety.py::test_t01_lab_root_containing_protected_root_is_rejected"
+      ]
+    },
+    {
+      "id": "T02",
+      "title": "Symlink/hardlink editable copy pointing at source",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t02_write_target_escaping_lab_is_refused",
+        "tests/test_lab01_safety.py::test_t02_symlinked_parent_cannot_smuggle_a_write",
+        "tests/test_lab01_safety.py::test_t02_repo_has_no_aliasing_copies"
+      ]
+    },
+    {
+      "id": "T03",
+      "title": "ZIP path traversal/symlink/duplicate",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t03_hostile_zip_rejected_before_extraction",
+        "tests/test_lab01_safety.py::test_t03_duplicate_member_rejected",
+        "tests/test_lab01_safety.py::test_t03_benign_allowlisted_zip_is_admissible",
+        "tests/test_lab01_archive.py::test_real_archive_is_admissible_with_no_rejections",
+        "tests/test_lab01_archive.py::test_read_guard_refuses_an_archive_from_outside_the_readable_roots",
+        "tests/test_lab01_archive.py::test_extraction_refuses_an_archive_with_a_tampered_member",
+        "tests/test_lab01_archive.py::test_extraction_refuses_an_incomplete_archive"
+      ]
+    },
+    {
+      "id": "T04",
+      "title": "Archive hash or 4-file allowlist changed",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t04_four_alpha_digests_match_guide",
+        "tests/test_lab01_safety.py::test_t04_digest_drift_is_a_stop_condition",
+        "tests/test_lab01_safety.py::test_t04_extra_python_file_is_flagged",
+        "tests/test_lab01_archive.py::test_retained_archive_digest_matches_the_guide",
+        "tests/test_lab01_archive.py::test_real_archive_contains_exactly_the_four_allowed_files",
+        "tests/test_lab01_archive.py::test_extracted_copies_match_the_published_digests",
+        "tests/test_lab01_archive.py::test_loose_copies_in_alphas_storage_are_identical_to_the_archive"
+      ]
+    },
+    {
+      "id": "T05",
+      "title": "Import writes cache to protected path (sandbox fixture)",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t05_worker_caches_resolve_inside_lab",
+        "tests/test_lab01_safety.py::test_t05_write_to_fake_protected_path_is_denied",
+        "tests/test_lab01_isolation.py::test_write_to_fake_protected_path_is_refused_by_the_kernel",
+        "tests/test_lab01_isolation.py::test_every_protected_root_is_mounted_read_only",
+        "tests/test_lab01_isolation.py::test_quantbt_repo_specifically_is_read_only"
+      ],
+      "limitation": "Enforced by read-only bind mounts (EROFS) inside a bubblewrap namespace, measured each preflight. Applies to workers launched through safety.sandbox; code run outside that wrapper is not contained."
+    },
+    {
+      "id": "T06",
+      "title": "Network/live credentials in replay worker",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t06_credentials_stripped_from_worker_env",
+        "tests/test_lab01_safety.py::test_t06_acquisition_stage_is_labelled_differently",
+        "tests/test_lab01_isolation.py::test_replay_worker_has_no_network",
+        "tests/test_lab01_isolation.py::test_worker_environment_carries_no_credentials",
+        "tests/test_lab01_isolation.py::test_acquisition_stage_can_opt_into_network"
+      ],
+      "limitation": "Empty network namespace (ENETUNREACH) plus --clearenv, measured each preflight."
+    },
+    {
+      "id": "T07",
+      "title": "Memory/process/cancel over budget",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t07_cancel_refuses_foreign_process_group",
+        "tests/test_lab01_safety.py::test_t07_budget_matches_policy",
+        "tests/test_lab01_isolation.py::test_over_budget_worker_dies_without_taking_the_parent",
+        "tests/test_lab01_isolation.py::test_worker_cannot_see_the_host_process_table",
+        "tests/test_lab01_evidence.py::test_disk_usage_is_within_the_declared_quota"
+      ]
+    },
+    {
+      "id": "T08",
+      "title": "Source hash before/after",
+      "owning_phase": "LAB-01",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t08_protected_sources_unchanged_since_bootstrap"
+      ]
+    },
+    {
+      "id": "T09",
+      "title": "HASH standalone missing numpy",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t09_raw_hash_cannot_run_without_numpy",
+        "tests/test_lab02_alphas.py::test_t09_canonical_adapter_runs",
+        "tests/test_lab02_alphas.py::test_t09_static_inventory_finds_the_missing_import"
+      ]
+    },
+    {
+      "id": "T10",
+      "title": "HASH short arrays and ATR convention",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t10_raw_hash_indexes_past_the_end_on_short_input",
+        "tests/test_lab02_alphas.py::test_t10_adapter_fails_fast_instead_of_indexing_past_the_end",
+        "tests/test_lab02_alphas.py::test_t10_atr_conventions_do_not_mix",
+        "tests/test_lab02_alphas.py::test_t10_variant_selection_is_explicit"
+      ]
+    },
+    {
+      "id": "T11",
+      "title": "HASH multiple TP crossed same bar",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t11_raw_source_fills_only_one_rung_on_a_bar_that_crosses_all",
+        "tests/test_lab02_alphas.py::test_t11_engine_resolves_an_ambiguous_bar_conservatively"
+      ],
+      "limitation": "The engine resolves an ambiguous bar conservatively (verified). A-HASH's own multi-rung same-bar ladder cannot be executed on this install: see the A-HASH blocker."
+    },
+    {
+      "id": "T12",
+      "title": "HASH TP2 remaining fraction and lot rounding",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t12_tp2_is_a_fraction_of_the_remaining_quantity",
+        "tests/test_lab02_alphas.py::test_t12_ladder_never_over_closes",
+        "tests/test_lab02_alphas.py::test_t12_unordered_ladder_presets_are_rejected",
+        "tests/test_lab02_alphas.py::test_t12_account_config_cannot_enter_the_alpha",
+        "tests/test_lab02_gaps.py::test_ladder_quantisation_respects_the_instrument_step",
+        "tests/test_lab02_gaps.py::test_ladder_never_over_closes_after_quantisation",
+        "tests/test_lab02_gaps.py::test_dust_is_explicit_when_the_step_is_coarse",
+        "tests/test_lab02_gaps.py::test_a_rung_below_the_minimum_notional_is_rejected_not_resized",
+        "tests/test_lab02_gaps.py::test_fraction_of_remaining_survives_quantisation"
+      ]
+    },
+    {
+      "id": "T13",
+      "title": "HMA open != previous close",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t13_levels_move_when_the_open_gaps_away_from_the_close",
+        "tests/test_lab02_alphas.py::test_t13_normalize_policy_keeps_the_entry_distance",
+        "tests/test_lab02_alphas.py::test_t13_source_core_has_no_open_argument"
+      ]
+    },
+    {
+      "id": "T14",
+      "title": "HMA invalid min/max, unused knobs",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t14_inverted_lengths_are_rejected_not_swapped",
+        "tests/test_lab02_alphas.py::test_t14_unused_knobs_are_recorded_not_implemented",
+        "tests/test_lab02_alphas.py::test_t14_tick_size_is_required_and_replaces_the_hardcoded_mintick"
+      ]
+    },
+    {
+      "id": "T15",
+      "title": "HMA RSI flat, warmup/padding",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t15_rsi_flat_repair_and_legacy_are_both_available",
+        "tests/test_lab02_alphas.py::test_t15_no_decision_before_warmup",
+        "tests/test_lab02_alphas.py::test_t15_hull_padding_convention_is_preserved"
+      ]
+    },
+    {
+      "id": "T16",
+      "title": "VWAP dynamic threshold not yet available",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t16_dynamic_vwap_exit_is_off_by_default_and_lagged_when_enabled"
+      ]
+    },
+    {
+      "id": "T17",
+      "title": "VWAP UTC day, HTF close and missing bucket",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t17_utc_day_reset_and_htf_availability",
+        "tests/test_lab02_alphas.py::test_t17_htf_join_uses_available_at_not_the_resample_label",
+        "tests/test_lab02_alphas.py::test_t17_publication_delay_pushes_availability_later",
+        "tests/test_lab02_alphas.py::test_t17_missing_index_is_a_hard_error"
+      ]
+    },
+    {
+      "id": "T18",
+      "title": "VWAP simultaneous time/SL/TP",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t18_exit_precedence_is_frozen_and_identical_for_every_arm",
+        "tests/test_lab02_alphas.py::test_t18_raw_source_puts_the_time_stop_first"
+      ]
+    },
+    {
+      "id": "T19",
+      "title": "SC missing volume/RSI fallback",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t19_missing_volume_is_an_explicit_rejection",
+        "tests/test_lab02_alphas.py::test_t19_fallback_is_available_but_must_be_asked_for",
+        "tests/test_lab02_alphas.py::test_t19_construction_and_dispatch_agree"
+      ]
+    },
+    {
+      "id": "T20",
+      "title": "SC long-flat/amplitude/crossover",
+      "owning_phase": "LAB-02",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab02_alphas.py::test_t20_position_is_long_flat_and_never_short",
+        "tests/test_lab02_alphas.py::test_t20_amplitude_is_normalised_and_the_legacy_value_is_retained",
+        "tests/test_lab02_alphas.py::test_t20_no_double_shift",
+        "tests/test_lab02_alphas.py::test_t20_crossover_convention_is_the_source_one",
+        "tests/test_lab02_alphas.py::test_t20_seed_jump_is_not_tradable",
+        "tests/test_lab02_alphas.py::test_t20_vectorised_and_loop_paths_agree"
+      ]
+    },
+    {
+      "id": "T21",
+      "title": "Fractional crypto volume",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t21_volume_stays_fractional_through_resampling",
+        "tests/test_lab03_data.py::test_t21_real_volume_granularity_is_per_symbol",
+        "tests/test_lab03_data.py::test_t21_stored_volume_dtype_varies_and_is_coerced",
+        "tests/test_lab03_data.py::test_t21_resampling_never_truncates_real_volume"
+      ],
+      "limitation": "Measured: SOL/DOGE store volume as int64 in part of the sample, so fractional resolution was already lost upstream for those symbols. The lab coerces to float64 and records the limit; it cannot recover it."
+    },
+    {
+      "id": "T22",
+      "title": "ms/ns and open/close labels",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t22_bar_close_is_derived_not_read_from_close_time",
+        "tests/test_lab03_data.py::test_t22_close_time_defect_is_detected_not_absorbed",
+        "tests/test_lab03_data.py::test_t22_real_storage_close_time_defect_map",
+        "tests/test_lab03_data.py::test_t22_time_column_is_on_the_interval_grid",
+        "tests/test_lab03_data.py::test_t22_off_grid_rows_are_reported"
+      ]
+    },
+    {
+      "id": "T23",
+      "title": "Same-length symbols, offset timestamps",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t23_symbol_column_must_match_the_request",
+        "tests/test_lab03_data.py::test_t23_same_length_series_are_not_relabelled"
+      ]
+    },
+    {
+      "id": "T24",
+      "title": "Symbol before listing",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t24_no_bars_are_fabricated_before_listing",
+        "tests/test_lab03_data.py::test_t24_market_breadth_uses_the_point_in_time_universe"
+      ]
+    },
+    {
+      "id": "T25",
+      "title": "Changed future raw data/preprocessing",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t25_trailing_features_are_causal",
+        "tests/test_lab03_data.py::test_t25_resampling_a_longer_series_does_not_change_earlier_buckets",
+        "tests/test_lab03_data.py::test_t25_scaler_fitted_on_training_is_unaffected_by_future_rows",
+        "tests/test_lab03_data.py::test_t25_streamed_and_batch_resampling_agree",
+        "tests/test_lab03_pipeline.py::test_loader_ignores_a_future_partition"
+      ]
+    },
+    {
+      "id": "T26",
+      "title": "Snapshot sample_time at end of hour",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t26_book_snapshot_uses_sample_time_not_the_hour_label",
+        "tests/test_lab03_data.py::test_t26_real_book_snapshot_is_never_available_before_its_label",
+        "tests/test_lab03_data.py::test_t26_staleness_ttl_masks_an_old_observation"
+      ],
+      "limitation": "The order-book product keeps a rolling 30-day window, so its sample_time evidence exists only for recent weeks and never inside the development role."
+    },
+    {
+      "id": "T27",
+      "title": "Market universe and source revision",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t27_vintage_id_combines_source_and_ingest",
+        "tests/test_lab03_data.py::test_t27_as_of_join_never_reads_a_bucket_that_has_not_closed",
+        "tests/test_lab03_data.py::test_t27_real_sources_are_recorded_per_product",
+        "tests/test_lab03_pipeline.py::test_the_documented_repair_is_visible_in_the_data",
+        "tests/test_lab03_pipeline.py::test_repair_window_is_masked_in_the_panels"
+      ]
+    },
+    {
+      "id": "T28",
+      "title": "Enrichment missing/stale",
+      "owning_phase": "LAB-03",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab03_data.py::test_t28_enrichment_is_inventoried_but_not_acquired",
+        "tests/test_lab03_data.py::test_t28_missing_join_is_nan_not_zero",
+        "tests/test_lab03_data.py::test_t28_stale_values_are_dropped_by_ttl",
+        "tests/test_lab03_data.py::test_t28_funding_is_missing_and_never_zero",
+        "tests/test_lab03_data.py::test_t28_taker_imbalance_is_undefined_at_zero_volume"
+      ]
+    },
+    {
+      "id": "T29",
+      "title": "Sharp peak vs broad profitable neighborhood",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t29_broad_neighbourhood_beats_a_sharp_peak",
+        "tests/test_lab04_selector.py::test_t29_bad_neighbour_counterexample_is_first_class",
+        "tests/test_lab04_selector.py::test_t29_valid_bad_probes_stay_in_the_denominator",
+        "tests/test_lab04_selector.py::test_t29_runtime_error_is_incomplete_evidence_not_a_loss",
+        "tests/test_lab04_selector.py::test_t29_structurally_invalid_is_not_bad_performance"
+      ]
+    },
+    {
+      "id": "T30",
+      "title": "Flat but negative region",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t30_flat_but_negative_fails_economic_quality",
+        "tests/test_lab04_selector.py::test_t30_a_flat_negative_region_is_never_eligible"
+      ]
+    },
+    {
+      "id": "T31",
+      "title": "Fixed/inactive params/far sampled point",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t31_geometry_is_unchanged_by_a_far_sampled_point",
+        "tests/test_lab04_selector.py::test_t31_lab_distance_ignores_samples_entirely",
+        "tests/test_lab04_selector.py::test_t31_fixed_dimension_is_excluded_from_the_denominator",
+        "tests/test_lab04_selector.py::test_t31_inactive_parameter_creates_no_false_distance"
+      ]
+    },
+    {
+      "id": "T32",
+      "title": "Dependent parameter TP/length manifold",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t32_probes_on_a_dependent_manifold_are_feasible_and_unique",
+        "tests/test_lab04_selector.py::test_t32_dependencies_are_parameterised_not_repaired",
+        "tests/test_lab04_selector.py::test_t32_a_chained_dependency_is_declared_in_full",
+        "tests/test_lab04_selector.py::test_t32_probe_design_is_reproducible_across_processes",
+        "tests/test_lab04_selector.py::test_t32_inactive_conditional_key_still_builds_a_valid_point"
+      ]
+    },
+    {
+      "id": "T33",
+      "title": "Centroid not yet evaluated",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t33_unevaluated_centroid_is_not_deployable",
+        "tests/test_lab04_selector.py::test_t33_assert_evaluated_accepts_only_a_point_that_was_run"
+      ]
+    },
+    {
+      "id": "T34",
+      "title": "Medoid metric/tie-break",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t34_medoid_minimises_the_same_distance_the_selector_declares",
+        "tests/test_lab04_selector.py::test_t34_tie_break_is_deterministic_on_the_stable_id"
+      ]
+    },
+    {
+      "id": "T35",
+      "title": "Incumbent guard differs from robust objective",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t35_incumbent_guard_disagreement_is_visible",
+        "tests/test_lab04_selector.py::test_t35_incumbent_receives_the_same_validation_budget",
+        "tests/test_lab04_selector.py::test_t35_the_incumbent_is_an_anchor_with_a_full_probe_budget"
+      ]
+    },
+    {
+      "id": "T36",
+      "title": "Full-set tuned presets into early bank",
+      "owning_phase": "LAB-04",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab04_selector.py::test_t36_presets_are_barred_from_the_primary_bank",
+        "tests/test_lab04_selector.py::test_t36_no_preset_value_is_a_seed_point_or_an_anchor",
+        "tests/test_lab04_selector.py::test_t36_declared_bounds_enclose_the_alpha_operating_range"
+      ]
+    },
+    {
+      "id": "T37",
+      "title": "Forward JM DP vs exhaustive tiny paths",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t37_endpoint_costs_equal_brute_force",
+        "tests/test_lab05_regime.py::test_t37_online_states_equal_brute_force",
+        "tests/test_lab05_regime.py::test_t37_offline_path_equals_brute_force_best_path",
+        "tests/test_lab05_regime.py::test_t37_the_causal_and_offline_answers_really_do_differ",
+        "tests/test_lab05_regime.py::test_t37_offline_path_is_never_decision_eligible",
+        "tests/test_lab05_regime.py::test_t37_normalisation_changes_neither_argmin_nor_differences",
+        "tests/test_lab05_regime.py::test_t37_tie_break_is_the_lowest_state_index"
+      ]
+    },
+    {
+      "id": "T38",
+      "title": "Batch versus streaming regime emissions",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t38_streaming_equals_batch_at_every_prefix",
+        "tests/test_lab05_regime.py::test_t38_the_streaming_filter_cannot_see_the_future",
+        "tests/test_lab05_regime.py::test_t38_an_emission_tape_is_append_only",
+        "tests/test_lab05_regime.py::test_t38_a_foreign_namespace_cannot_be_appended",
+        "tests/test_lab05_regime.py::test_t38_switches_come_from_the_tape_not_from_lambda"
+      ]
+    },
+    {
+      "id": "T39",
+      "title": "Model/scaler fit with future suffix",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t39_a_causal_fit_is_bit_identical_under_a_mutated_future",
+        "tests/test_lab05_regime.py::test_t39_the_detector_catches_a_known_leak",
+        "tests/test_lab05_regime.py::test_t39_the_scaler_is_fitted_on_the_prefix_only"
+      ]
+    },
+    {
+      "id": "T40",
+      "title": "Sparse weights collapse to 0/empty states",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t40_all_zero_weights_is_flagged_and_blocks_decisions",
+        "tests/test_lab05_regime.py::test_t40_identical_centroids_are_degenerate",
+        "tests/test_lab05_regime.py::test_t40_an_empty_state_is_reported_not_hidden",
+        "tests/test_lab05_regime.py::test_t40_a_healthy_model_is_usable",
+        "tests/test_lab05_regime.py::test_t40_empty_states_survive_a_fit_without_inventing_members"
+      ]
+    },
+    {
+      "id": "T41",
+      "title": "Model refit permutes state IDs",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t41_a_pure_permutation_maps_cleanly_and_is_not_a_market_event",
+        "tests/test_lab05_regime.py::test_t41_a_state_that_really_moved_is_left_unmapped",
+        "tests/test_lab05_regime.py::test_t41_relabelling_marks_unmapped_states_as_minus_one",
+        "tests/test_lab05_regime.py::test_t41_a_model_transition_never_rewrites_prior_emissions",
+        "tests/test_lab05_regime.py::test_t41_mapping_uses_training_information_only"
+      ]
+    },
+    {
+      "id": "T42",
+      "title": "Membership score called a probability",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t42_membership_sums_to_one_and_is_still_not_a_probability",
+        "tests/test_lab05_regime.py::test_t42_second_best_gap_measures_ambiguity"
+      ]
+    },
+    {
+      "id": "T43",
+      "title": "Known regime change and model drift",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t43_the_inference_modules_cannot_call_a_fit",
+        "tests/test_lab05_regime.py::test_t43_the_registry_says_a_transition_is_not_a_search_trigger"
+      ]
+    },
+    {
+      "id": "T44",
+      "title": "Novelty versus missing data",
+      "owning_phase": "LAB-05",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab05_regime.py::test_t44_identical_residual_but_missing_inputs_gives_a_different_status",
+        "tests/test_lab05_regime.py::test_t44_all_four_fallback_reasons_are_distinct",
+        "tests/test_lab05_regime.py::test_t44_the_novelty_threshold_comes_from_training_residuals"
+      ]
+    },
+    {
+      "id": "T45",
+      "title": "Response outcome not yet complete",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t45_an_unfinished_outcome_is_unusable",
+        "tests/test_lab06_policy.py::test_t45_the_availability_lag_is_the_full_horizon_plus_delays",
+        "tests/test_lab06_policy.py::test_t45_the_builder_marks_an_unfinished_window_rather_than_dropping_it",
+        "tests/test_lab06_policy.py::test_t45_an_open_position_at_horizon_end_is_marked_not_counted_as_a_win",
+        "tests/test_lab06_policy.py::test_t45_the_primary_grid_is_non_overlapping",
+        "tests/test_lab06_policy.py::test_t45_an_overlapping_grid_must_declare_a_purge",
+        "tests/test_lab06_policy.py::test_t45_the_dependence_correction_makes_the_inflation_visible",
+        "tests/test_lab06_policy.py::test_t45_purging_removes_windows_inside_the_shadow"
+      ]
+    },
+    {
+      "id": "T46",
+      "title": "Candidate discovered after inner cutoff",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t46_a_later_discovery_is_rejected_with_a_reason",
+        "tests/test_lab06_policy.py::test_t46_trial_rows_are_retained_even_when_rejected_or_merged",
+        "tests/test_lab06_policy.py::test_t46_duplicates_merge_for_coverage_without_losing_rows",
+        "tests/test_lab06_policy.py::test_t46_the_bank_respects_the_proposed_size_range",
+        "tests/test_lab06_policy.py::test_t46_a_retired_version_still_serves_an_open_campaign_and_cannot_be_deleted",
+        "tests/test_lab06_policy.py::test_t46_indicator_readiness_is_tracked_by_version_and_cutoff",
+        "tests/test_lab06_policy.py::test_t46_every_entry_carries_its_own_discovery_time",
+        "tests/test_lab06_policy.py::test_t46_admissible_re_checks_rather_than_trusting_the_build"
+      ]
+    },
+    {
+      "id": "T47",
+      "title": "Incumbent/challenger paired episodes",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t47_mismatched_episode_counts_are_refused",
+        "tests/test_lab06_policy.py::test_t47_the_delta_is_a_per_episode_difference",
+        "tests/test_lab06_policy.py::test_t47_episodes_carry_the_same_initial_state_contract"
+      ]
+    },
+    {
+      "id": "T48",
+      "title": "One episode dominates similarity",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t48_a_dominating_episode_is_flagged_and_shrunk",
+        "tests/test_lab06_policy.py::test_t48_n_effective_is_labelled_as_weight_concentration",
+        "tests/test_lab06_policy.py::test_t48_a_single_contiguous_block_is_not_enough_support",
+        "tests/test_lab06_policy.py::test_t48_thin_support_keeps_the_incumbent_rather_than_recommending",
+        "tests/test_lab06_policy.py::test_t48_eligibility_may_not_be_a_graded_quality_score",
+        "tests/test_lab06_policy.py::test_t48_supporting_episodes_are_returned_with_the_estimate",
+        "tests/test_lab06_policy.py::test_t48_the_standard_error_comes_from_blocks_not_from_bars"
+      ]
+    },
+    {
+      "id": "T49",
+      "title": "Refit latency/job out-of-order",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t49_activation_may_never_precede_ready",
+        "tests/test_lab06_policy.py::test_t49_a_superseded_job_never_becomes_effective",
+        "tests/test_lab06_policy.py::test_t49_a_refit_keeps_the_cutoff_it_was_triggered_with",
+        "tests/test_lab06_policy.py::test_t49_near_duplicate_triggers_coalesce_into_one_job",
+        "tests/test_lab06_policy.py::test_t49_the_incumbent_runs_while_a_refit_is_pending",
+        "tests/test_lab06_policy.py::test_t49_a_job_cannot_be_ready_before_it_was_triggered"
+      ]
+    },
+    {
+      "id": "T50",
+      "title": "Params switch while campaign open",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t50_the_entry_digest_is_immutable",
+        "tests/test_lab06_policy.py::test_t50_an_open_campaign_defers_the_switch_rather_than_cancelling_it",
+        "tests/test_lab06_policy.py::test_t50_the_decision_machine_waits_at_a_campaign_boundary",
+        "tests/test_lab06_policy.py::test_t50_a_long_open_campaign_is_blocked_not_force_closed"
+      ]
+    },
+    {
+      "id": "T51",
+      "title": "New parameter indicators not warm",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t51_an_unwarmed_candidate_waits_instead_of_switching",
+        "tests/test_lab06_policy.py::test_t51_indicator_state_is_never_carried_without_a_contract",
+        "tests/test_lab06_policy.py::test_t51_warmup_progresses_from_cold_through_warming_to_ready"
+      ]
+    },
+    {
+      "id": "T52",
+      "title": "Model fit/bank refresh/switch counters",
+      "owning_phase": "LAB-06",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab06_policy.py::test_t52_the_four_clocks_are_distinct",
+        "tests/test_lab06_policy.py::test_t52_inference_and_switch_can_never_start_a_refit",
+        "tests/test_lab06_policy.py::test_t52_the_counters_stay_separate",
+        "tests/test_lab06_policy.py::test_t52_the_retrain_detector_ignores_strategy_performance",
+        "tests/test_lab06_policy.py::test_t52_a_familiar_state_change_is_not_drift"
+      ]
+    },
+    {
+      "id": "T53",
+      "title": "A/B/C/D fixed economics and budgets",
+      "owning_phase": "LAB-08",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab08_factorial.py::test_the_five_arms_differ_only_in_selector_and_timing",
+        "tests/test_lab08_factorial.py::test_the_dynamic_arm_gets_exactly_the_calendars_refresh_count",
+        "tests/test_lab08_factorial.py::test_the_protocol_registers_every_contrast_and_control",
+        "tests/test_lab08_factorial.py::test_a_contrast_is_taken_on_shared_dates_only"
+      ]
+    },
+    {
+      "id": "T54",
+      "title": "Current WFO uses OOS for selection",
+      "owning_phase": "LAB-08",
+      "status": "PARTIAL",
+      "tests": [
+        "tests/test_lab04_legacy_labelling.py::test_modes_declaring_oos_selection_are_named_and_labelled"
+      ],
+      "partial_reason": "LAB-04 measured which installed modes consume OOS to select and fixed the label. LAB-07 carries that label into the run record. Applying it to a reported ARM COMPARISON is LAB-08's, because there is no arm comparison yet.",
+      "partially_discharged_by": "LAB-04 + LAB-07"
+    },
+    {
+      "id": "T55",
+      "title": "Dynamic folds of different length",
+      "owning_phase": "LAB-07",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab07_integration.py::test_the_daily_account_is_the_comparison_not_the_mean_of_segment_sharpes",
+        "tests/test_lab07_integration.py::test_segment_sharpes_are_diagnostic_and_the_daily_account_is_primary",
+        "tests/test_lab07_integration.py::test_an_open_segment_has_no_length_until_the_next_activation_exists"
+      ]
+    },
+    {
+      "id": "T56",
+      "title": "Carried account across segments",
+      "owning_phase": "LAB-07",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab07_integration.py::test_the_continuous_account_never_resets_across_a_parameter_switch",
+        "tests/test_lab07_integration.py::test_the_tape_is_built_from_the_active_adapter_at_every_bar",
+        "tests/test_lab07_integration.py::test_a_handcrafted_fill_cannot_enter_the_account",
+        "tests/test_lab07_integration.py::test_the_run_actually_traded"
+      ]
+    },
+    {
+      "id": "T57",
+      "title": "Sequential optimizer vs adaptive batch",
+      "owning_phase": "LAB-07",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab07_integration.py::test_t57_the_sequencing_contract_is_declared",
+        "tests/test_lab07_integration.py::test_t57_the_primary_search_is_a_fixed_matrix_that_actually_reproduces",
+        "tests/test_lab07_integration.py::test_t57_the_design_is_seeded_not_sampler_dependent",
+        "tests/test_lab07_integration.py::test_t57_exactly_one_schedule_type_is_declared_for_the_primary_comparison",
+        "tests/test_lab04_selector.py::test_t32_probe_design_is_reproducible_across_processes"
+      ]
+    },
+    {
+      "id": "T58",
+      "title": "Risk-only/matched-cadence controls",
+      "owning_phase": "LAB-08",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab08_factorial.py::test_all_seven_mandatory_controls_are_declared",
+        "tests/test_lab08_factorial.py::test_the_placebo_matches_the_real_dwell_rather_than_switching_freely",
+        "tests/test_lab08_factorial.py::test_a_free_running_placebo_is_detected_as_unmatched",
+        "tests/test_lab08_factorial.py::test_risk_only_never_levers_above_the_baseline",
+        "tests/test_lab08_factorial.py::test_an_unseen_state_gets_no_extrapolated_size"
+      ]
+    },
+    {
+      "id": "T59",
+      "title": "Negative/failed/pruned trials retained",
+      "owning_phase": "LAB-08",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab08_factorial.py::test_an_unrunnable_arm_reports_null_not_zero",
+        "tests/test_lab08_factorial.py::test_the_protocol_covers_all_twenty_cells_including_the_blocked_ones",
+        "tests/test_lab08_factorial.py::test_a_period_with_no_transition_refuses_rather_than_pads"
+      ]
+    },
+    {
+      "id": "T60",
+      "title": "Objective recompute from components",
+      "owning_phase": "LAB-08",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab08_factorial.py::test_a_contrast_is_taken_on_shared_dates_only",
+        "tests/test_lab08_factorial.py::test_the_hindsight_control_is_never_tradeable"
+      ]
+    },
+    {
+      "id": "T61",
+      "title": "JSON NaN/Inf, audit queue/error",
+      "owning_phase": "LAB-09",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab01_safety.py::test_t61_nan_and_inf_are_refused_by_the_writer",
+        "tests/test_lab01_safety.py::test_t61_sanitize_numeric_yields_null_plus_status",
+        "tests/test_lab01_evidence.py::test_no_drop_policy_exists",
+        "tests/test_lab01_evidence.py::test_full_queue_fails_explicitly_rather_than_dropping",
+        "tests/test_lab01_evidence.py::test_backpressure_blocks_the_producer_until_the_writer_drains",
+        "tests/test_lab01_evidence.py::test_backpressure_timeout_raises_instead_of_losing_a_row",
+        "tests/test_lab01_evidence.py::test_partial_sink_commit_is_an_error",
+        "tests/test_lab01_evidence.py::test_run_success_requires_every_required_artifact",
+        "tests/test_lab01_evidence.py::test_run_success_requires_the_queue_to_be_flushed"
+      ]
+    },
+    {
+      "id": "T62",
+      "title": "Untested heatmap cells, hindsight labels",
+      "owning_phase": "LAB-09",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab09_confirmation.py::test_no_untested_cell_is_presented_as_evidence",
+        "tests/test_lab09_confirmation.py::test_the_confirmation_runs_the_same_matrix",
+        "tests/test_lab09_confirmation.py::test_a_missing_measurement_is_never_reported_as_a_negative_result",
+        "tests/test_lab09_confirmation.py::test_the_scope_of_the_conclusion_is_explicit"
+      ]
+    },
+    {
+      "id": "T63",
+      "title": "Full 5-symbol paired bootstrap",
+      "owning_phase": "LAB-09",
+      "status": "COVERED",
+      "tests": [
+        "tests/test_lab09_uncertainty.py::test_symbols_are_resampled_together_so_common_shocks_survive",
+        "tests/test_lab09_uncertainty.py::test_blocks_widen_the_interval_on_an_autocorrelated_series",
+        "tests/test_lab09_uncertainty.py::test_pairing_excludes_days_a_cell_was_not_live",
+        "tests/test_lab09_uncertainty.py::test_the_interval_refuses_a_window_too_short_for_its_blocks",
+        "tests/test_lab09_confirmation.py::test_the_block_length_came_from_development"
+      ]
+    },
+    {
+      "id": "T64",
+      "title": "Offline reproduce report/run and sources",
+      "owning_phase": "LAB-10",
+      "status": "NOT_YET_IMPLEMENTED",
+      "tests": []
+    }
+  ],
+  "extra_gates": [
+    {
+      "id": "ISO",
+      "title": "OS-level worker containment measured at every preflight",
+      "status": "COVERED",
+      "owning_phase": "LAB-01",
+      "tests": [
+        "tests/test_lab01_isolation.py::test_isolation_is_available_and_measured",
+        "tests/test_lab01_isolation.py::test_lab_root_is_writable_inside_the_sandbox",
+        "tests/test_lab01_isolation.py::test_sandbox_clears_the_environment_before_setting_its_own"
+      ],
+      "note": "Not a guide 14 requirement; added because guide 0.2 makes OS containment a precondition, not a checklist item."
+    },
+    {
+      "id": "CAP",
+      "title": "Engine route x capability matrix measured, blockers recorded",
+      "status": "COVERED",
+      "owning_phase": "LAB-02",
+      "tests": [
+        "tests/test_lab02_suites.py::test_capability_matrix_records_the_hash_ladder_blocker",
+        "tests/test_lab02_suites.py::test_fill_trace_parity_is_disclosed_as_blocked"
+      ],
+      "note": "not a guide 14 requirement; added because guide 4.4 requires unsupported capabilities to be recorded as BLOCKED_CAPABILITY rather than downgraded"
+    },
+    {
+      "id": "NUMBA",
+      "title": "Compiled/fastmath kernels do not change decisions",
+      "status": "COVERED",
+      "owning_phase": "LAB-02",
+      "tests": [
+        "tests/test_lab02_gaps.py::test_compiled_kernels_are_compared_not_assumed",
+        "tests/test_lab02_gaps.py::test_fastmath_kernels_are_identified_and_do_not_change_decisions"
+      ],
+      "note": "guide L02.2 forbids enabling an accelerated kernel that changes decisions; measured over 14 kernels"
+    },
+    {
+      "id": "LEGACY",
+      "title": "legacy_reproduction tier built and every divergence attributed",
+      "status": "COVERED",
+      "owning_phase": "LAB-02",
+      "tests": [
+        "tests/test_lab02_gaps.py::test_every_legacy_canonical_difference_is_attributed",
+        "tests/test_lab02_gaps.py::test_hma_divergence_is_exactly_the_one_bar_weight_offset"
+      ],
+      "note": "guide 2.1 tier plus L02.8's original-vs-corrected requirement"
+    },
+    {
+      "id": "READLOCK",
+      "title": "Snapshot read-lock separates expected mutation from real invalidation",
+      "status": "COVERED",
+      "owning_phase": "LAB-03",
+      "tests": [
+        "tests/test_lab03_pipeline.py::test_read_lock_distinguishes_expected_drift_from_a_real_invalidation",
+        "tests/test_lab03_pipeline.py::test_open_partitions_are_excluded_from_a_primary_read"
+      ],
+      "note": "guide L01.4 policy executed here; a rolling-window product is mutable by design and must not be judged as corruption"
+    },
+    {
+      "id": "PROVENANCE",
+      "title": "Product docs read; absences explained as configuration, not loss",
+      "status": "COVERED",
+      "owning_phase": "LAB-03",
+      "tests": [
+        "tests/test_lab03_pipeline.py::test_product_docs_were_actually_read",
+        "tests/test_lab03_pipeline.py::test_absences_are_configuration_not_loss",
+        "tests/test_lab03_pipeline.py::test_orderbook_is_a_rolling_window_and_cannot_hold_history"
+      ],
+      "note": "guide 6.1 requires reading the real docs rather than concluding from a reader name"
+    },
+    {
+      "id": "TIERS",
+      "title": "Feature tiers follow measured coverage, not ambition",
+      "status": "COVERED",
+      "owning_phase": "LAB-03",
+      "tests": [
+        "tests/test_lab03_pipeline.py::test_primary_core_only_contains_features_covering_all_five_symbols",
+        "tests/test_lab03_pipeline.py::test_partial_coverage_features_are_extensions_not_core"
+      ],
+      "note": "guide 6.2: only blocks with adequate support enter the model"
+    }
+  ]
+}

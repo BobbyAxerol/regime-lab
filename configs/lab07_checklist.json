@@ -1,0 +1,307 @@
+{
+  "schema": "crypto_regime_lab.lab07_checklist.v1",
+  "note": "Written BEFORE any LAB-07 code. Every clause of the LAB-07 tasks, guide 9.5 (campaign/bank migration), guide 10.3 (one economic engine and account path), the acceptance requirements LAB-07 owns (T53-T57) and the phase outputs and exit gate. scripts/audit_lab07.py reads THIS file, so the audit cannot become a list of what happened to get built.",
+  "written_before_code": true,
+  "clauses": [
+    [
+      "L07.1.1",
+      "with the experimental scheduler and regime provider DISABLED, the continuous run reproduces the current canonical baseline path exactly: same orders"
+    ],
+    [
+      "L07.1.2",
+      "disabled-hooks parity also holds for the account path (cash, position, equity), not only for orders"
+    ],
+    [
+      "L07.1.3",
+      "disabled-hooks parity also holds for reported metrics"
+    ],
+    [
+      "L07.1.4",
+      "disabled-hooks parity also holds for selection: the same candidate is chosen at every cutoff"
+    ],
+    [
+      "L07.1.5",
+      "the same FIXED intents replay identically on the Python and the Rust backend, and this parity is established BEFORE any performance claim"
+    ],
+    [
+      "L07.1.6",
+      "a hook that is enabled but makes no decision must still not change the baseline path; 'disabled' and 'enabled but inert' are tested separately"
+    ],
+    [
+      "L07.2.1",
+      "one ordered event stream carries market bar completions"
+    ],
+    [
+      "L07.2.2",
+      "the same stream carries regime-ready observations"
+    ],
+    [
+      "L07.2.3",
+      "the same stream carries refit REQUEST, START and READY as three distinct events"
+    ],
+    [
+      "L07.2.4",
+      "the same stream carries parameter activations"
+    ],
+    [
+      "L07.2.5",
+      "the same stream carries engine fills"
+    ],
+    [
+      "L07.2.6",
+      "the event clock breaks ties with a sequence id, never with millisecond equality"
+    ],
+    [
+      "L07.2.7",
+      "the engine can never read a future activation_end; an activation's end is unknown until the next activation exists"
+    ],
+    [
+      "L07.2.8",
+      "an event whose available_at is later than the current clock is not visible, even if its observed_at is in the past"
+    ],
+    [
+      "L07.3.1",
+      "a refit's candidate evaluation runs under its OWN account policy (normally flat/reset for training)"
+    ],
+    [
+      "L07.3.2",
+      "a refit never mutates the continuous deployment account"
+    ],
+    [
+      "L07.3.3",
+      "a refit job cannot access any data after its request cutoff"
+    ],
+    [
+      "L07.3.4",
+      "refit latency comes from a measured benchmark, the resource budget, or a frozen scenario"
+    ],
+    [
+      "L07.3.5",
+      "a refit latency of zero is never used in order to fill earlier (guide L07.3 names this explicitly)"
+    ],
+    [
+      "L07.3.6",
+      "the training account contract is recorded and is NOT identified with the deployment account contract (guide 10.3)"
+    ],
+    [
+      "L07.4.1",
+      "per-alpha migration policy follows guide 9.5"
+    ],
+    [
+      "L07.4.2",
+      "an entry campaign carries an immutable entry_parameter_digest"
+    ],
+    [
+      "L07.4.3",
+      "when the regime changes, an OPEN trade stays protected by the parameters it entered with"
+    ],
+    [
+      "L07.4.4",
+      "pending future-entry policy MAY change while an open campaign keeps its own"
+    ],
+    [
+      "L07.4.5",
+      "pending entry commands have explicit cancel/retain semantics at an activation"
+    ],
+    [
+      "L07.4.6",
+      "an old campaign's protective orders keep their parameter version until terminal"
+    ],
+    [
+      "L07.4.7",
+      "retired parameter versions are never deleted while an order still references them"
+    ],
+    [
+      "L07.4.8",
+      "new candidate indicators must be causally warm before activation; wait or fall back rather than reinitialise"
+    ],
+    [
+      "L07.4.9",
+      "no EMA/HMA reset at a switch, and no adaptive-length state carried from params A to params B without a declared contract"
+    ],
+    [
+      "L07.4.10",
+      "activation records both the requested decision time and the ACTUAL activation delay"
+    ],
+    [
+      "L07.4.11",
+      "bank switching uses the same QuantBT order lifecycle as any other order; no side channel"
+    ],
+    [
+      "L07.4.12",
+      "a campaign that will not close is reported stale/transition-blocked; it is never force-closed to manufacture a timing edge"
+    ],
+    [
+      "L07.4.13",
+      "forced unwind exists only as a separate ablation and carries its costs"
+    ],
+    [
+      "L07.5.1",
+      "a segment STARTS when its parameters become effective"
+    ],
+    [
+      "L07.5.2",
+      "a segment's END is only written once a NEXT activation exists; the open segment has a null end"
+    ],
+    [
+      "L07.5.3",
+      "a trigger may legitimately result in no change; a no-change trigger is recorded, not dropped"
+    ],
+    [
+      "L07.5.4",
+      "the reporting clock is unchanged by segmentation: daily UTC on one evaluation interval"
+    ],
+    [
+      "L07.5.5",
+      "no future segment length ever enters a policy decision"
+    ],
+    [
+      "L07.5.6",
+      "segments of different length are never averaged as unweighted fold Sharpes to rank arms (T55)"
+    ],
+    [
+      "L07.6.1",
+      "missing context is handled explicitly"
+    ],
+    [
+      "L07.6.2",
+      "stale context is handled explicitly and is distinguished from missing"
+    ],
+    [
+      "L07.6.3",
+      "a failed model fit keeps the validated incumbent; it never selects random parameters"
+    ],
+    [
+      "L07.6.4",
+      "an incomplete probe panel is incomplete evidence, not bad performance"
+    ],
+    [
+      "L07.6.5",
+      "an out-of-order job completion cannot activate earlier than its READY event"
+    ],
+    [
+      "L07.6.6",
+      "a simulation reject is handled and recorded"
+    ],
+    [
+      "L07.6.7",
+      "a liquidation is handled and recorded"
+    ],
+    [
+      "L07.6.8",
+      "an interrupted artifact write is detected; a partial artifact is never read as complete"
+    ],
+    [
+      "L07.6.9",
+      "a worker failure does not erase already-committed trials"
+    ],
+    [
+      "L07.7.1",
+      "feeding one observation/event at a time gives exactly the offline event replay under the same availability"
+    ],
+    [
+      "L07.7.2",
+      "mutating the future does not change any past decision"
+    ],
+    [
+      "L07.7.3",
+      "reset/resume is offered ONLY if a full model+strategy+account state contract supports it; otherwise it is refused, not approximated"
+    ],
+    [
+      "L07.7.4",
+      "the prefix of a longer stream equals the whole of the shorter stream, for decisions and for the account"
+    ],
+    [
+      "G10.3.1",
+      "each arm has its own account with the SAME initial conditions"
+    ],
+    [
+      "G10.3.2",
+      "within an arm the account is continuous in chronological order"
+    ],
+    [
+      "G10.3.3",
+      "best segments from independent runs are never summed (T56)"
+    ],
+    [
+      "G10.3.4",
+      "money is never reset at a regime or fold change (T56)"
+    ],
+    [
+      "G10.3.5",
+      "fees, slippage, funding and gross exposure constraints are identical across arms"
+    ],
+    [
+      "T53.1",
+      "A/B/C/D share fixed economics and budgets with no hidden fee, risk or evaluation advantage"
+    ],
+    [
+      "T54.1",
+      "an installed WFO mode that uses OOS for selection is reported as A_legacy_selection_adjusted, never as an untouched baseline"
+    ],
+    [
+      "T55.1",
+      "dynamic folds of different length are compared on the same daily account, not by averaging fold Sharpes"
+    ],
+    [
+      "T56.1",
+      "a carried account across segments shows no reset and no virtual splice of expert PnL"
+    ],
+    [
+      "T57.1",
+      "a sequential optimizer and an adaptive batch are declared as different contracts; no false identical-sequence claim"
+    ],
+    [
+      "OUT.1",
+      "a lab-only QuantBT patch/diff exists as a PROPOSAL and is never applied upstream"
+    ],
+    [
+      "OUT.2",
+      "integration_binding_map.json maps each lab integration point to a VERIFIED installed symbol"
+    ],
+    [
+      "OUT.3",
+      "regime provider, scheduler and parameter-provider adapters exist"
+    ],
+    [
+      "OUT.4",
+      "full continuous traces are written"
+    ],
+    [
+      "OUT.5",
+      "parameter_activation_tape is written"
+    ],
+    [
+      "OUT.6",
+      "operational_segments is written"
+    ],
+    [
+      "OUT.7",
+      "installed-lab smoke tests run against the INSTALLED package, not a mock"
+    ],
+    [
+      "EXIT.1",
+      "no leakage: every causality probe passes and the leaky control is still detected"
+    ],
+    [
+      "EXIT.2",
+      "no account resets anywhere in a continuous arm"
+    ],
+    [
+      "EXIT.3",
+      "no handcrafted fills: every fill comes from the engine"
+    ],
+    [
+      "EXIT.4",
+      "disabled-hooks parity passes"
+    ],
+    [
+      "EXIT.5",
+      "dynamic integration passes"
+    ],
+    [
+      "EXIT.6",
+      "an unsupported hook is a BLOCKER or a documented lab patch; it is never silently routed to a different contract"
+    ]
+  ]
+}

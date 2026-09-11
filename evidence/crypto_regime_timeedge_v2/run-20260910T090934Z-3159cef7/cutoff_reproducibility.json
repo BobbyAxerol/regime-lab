@@ -1,0 +1,58 @@
+{
+  "schema": "crypto_regime_lab.cutoff_reproducibility.v1",
+  "cell": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT",
+    "fold": 0
+  },
+  "train_window": {
+    "start": "2020-07-05T00:00:00+00:00",
+    "end": "2021-01-01T00:00:00+00:00",
+    "bars": 17280
+  },
+  "reproduced": true,
+  "compares": "the decision -- selected parameters, point id, candidate pool size -- not status label text; a renamed reason is not a changed choice",
+  "checks": [
+    {
+      "arm": "A",
+      "reproduced": true,
+      "same_selected_params": true,
+      "same_point_id": true,
+      "same_train_bars": true,
+      "same_candidate_pool_size": true,
+      "stored_point_id": "79821a846b9d4c6f",
+      "replayed_point_id": "79821a846b9d4c6f",
+      "stored_status": "SELECTED",
+      "replayed_status": "SELECTED",
+      "status_label_changed_only": false
+    },
+    {
+      "arm": "B",
+      "reproduced": true,
+      "same_selected_params": true,
+      "same_point_id": true,
+      "same_train_bars": true,
+      "same_candidate_pool_size": true,
+      "stored_point_id": "cfaeb9f9e69d8da7",
+      "replayed_point_id": "cfaeb9f9e69d8da7",
+      "stored_status": "SELECTED",
+      "replayed_status": "SELECTED",
+      "status_label_changed_only": false
+    }
+  ],
+  "governing_module_digests": {
+    "src/crypto_regime_lab/experiments/calendar_baseline.py": "f468f00abf37afe6",
+    "src/crypto_regime_lab/experiments/evaluator.py": "b70fcaa6a53f4286",
+    "src/crypto_regime_lab/selector/alpha_schemas.py": "933268e7b8d72701",
+    "src/crypto_regime_lab/selector/probe_design.py": "49a2bb7cd9dc2d79",
+    "src/crypto_regime_lab/selector/robust_score.py": "17ac6b18e34d8e41",
+    "src/crypto_regime_lab/selector/schema_distance.py": "4667fdb29df277db",
+    "src/crypto_regime_lab/selector/representative.py": "daa5d777b0d0d56a"
+  },
+  "probe_design_digest": "40be69e8f6994cdf",
+  "stored_probe_design_digest": "40be69e8f6994cdf",
+  "probe_design_unchanged": true,
+  "lab_run_id": "run-20260910T090934Z-3159cef7",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T09:11:16.027197+00:00"
+}

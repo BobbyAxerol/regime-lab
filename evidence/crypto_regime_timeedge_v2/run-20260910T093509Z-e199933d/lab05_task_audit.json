@@ -1,0 +1,403 @@
+{
+  "schema": "crypto_regime_lab.lab05_task_audit.v1",
+  "guide_section": "LAB-05 \u2014 Persistent regime model va causal emissions",
+  "tasks_total": 53,
+  "tasks_done": 53,
+  "tasks_blocked": 0,
+  "artifacts_present": [
+    "lab05_emission_tape.json",
+    "lab05_group_ablation.json",
+    "lab05_k_selection.json",
+    "lab05_regime_model_registry.json",
+    "lab05_selftest.json"
+  ],
+  "artifacts_missing": [],
+  "acceptance_tests": "79 passed in 5.83s",
+  "acceptance_tests_passed": true,
+  "acceptance_ids_covered": [
+    "T37",
+    "T38",
+    "T39",
+    "T40",
+    "T41",
+    "T42",
+    "T43",
+    "T44"
+  ],
+  "tasks": [
+    {
+      "task_id": "L05.1.1",
+      "requirement": "model artifact carries training cutoffs, scaler, schema/weights/centroids",
+      "artifact": "configs/lab05_regime_model_registry.json:models[*]",
+      "note": "ModelArtifact.as_record, checked by test_the_model_artifact_carries_what_l051_requires",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.1.2",
+      "requirement": "artifact carries lambda, state namespace, seeds",
+      "artifact": "models[*].lambda_jump/state_namespace/seeds",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.1.3",
+      "requirement": "artifact carries library/code hashes and a fit-ready timestamp",
+      "artifact": "models[*].code_hashes/library_versions/fit_ready_at",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.1.4",
+      "requirement": "a library method name is used only after pinned-source verification",
+      "artifact": "registry.verify_library_method + lab05_selftest.library_method_probe",
+      "note": "safe_to_call is False until the source is read; the lab uses its own implementation",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.1.5",
+      "requirement": "predict_online is not assumed to be the proposed DP",
+      "artifact": "test_a_library_method_is_never_trusted_by_name",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.1",
+      "requirement": "rule baseline M0 with train-only thresholds",
+      "artifact": "regime/m0_rules.py",
+      "note": "quantiles of the training window, frozen with the model",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.2",
+      "requirement": "discrete JM reference implementation",
+      "artifact": "regime/jump_model.py",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.3",
+      "requirement": "forward recurrence checked against a brute-force oracle on small arrays",
+      "artifact": "lab05_selftest.acceptance_checks.T37",
+      "note": "endpoint cost, online state and best-path parity",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.4",
+      "requirement": "batch-prefix results equal sequential emissions",
+      "artifact": "lab05_selftest.acceptance_checks.T38",
+      "note": "T38, every prefix",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.5",
+      "requirement": "no retroactive labels",
+      "artifact": "EmissionTape.overwrite raises after seal(); offline path decision_eligible=false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.6",
+      "requirement": "greedy online and endpoint DP are two model versions, not mixed",
+      "artifact": "lab05_selftest.online_algorithm_versions",
+      "note": "both implemented and measured; each carries its own model_version_suffix and the tape records which produced it",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.2.7",
+      "requirement": "the M0 rule baseline is RUN, not merely defined",
+      "artifact": "lab05_selftest.m0_comparator",
+      "note": "thresholds fitted on a prefix then frozen; M0 is a control and never a silent fallback",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.1",
+      "requirement": "bounded multi-start",
+      "artifact": "jump_model.multi_start_fit with declared seeds",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.2",
+      "requirement": "convergence report",
+      "artifact": "robustness.convergence_report",
+      "note": "objective monotone non-increasing and finite on every start",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.3",
+      "requirement": "empty states handled",
+      "artifact": "quality.check_degeneracy + FitDiagnostics.empty_states",
+      "note": "the centroid is retained and reported; members are never invented",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.4",
+      "requirement": "outliers",
+      "artifact": "robustness.outlier_sensitivity",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.5",
+      "requirement": "source transition",
+      "artifact": "robustness.source_transition_report",
+      "note": "flags the coincidence and refuses to label it without provenance",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.6",
+      "requirement": "constant features",
+      "artifact": "robustness.constant_feature_report",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.3.7",
+      "requirement": "seeds chosen on train fit, never on outer PnL",
+      "artifact": "multi_start_fit.outer_information_used == false",
+      "note": "the function has no argument through which an outcome could reach it",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.1",
+      "requirement": "starting K=3",
+      "artifact": "model_selection.STARTING_K",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.2",
+      "requirement": "K=2 registered alternative",
+      "artifact": "model_selection.PARSIMONIOUS_K",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.3",
+      "requirement": "K=4 only on an explicit discovery decision",
+      "artifact": "test_k4_stays_shut_without_an_explicit_decision",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.4",
+      "requirement": "K is not optimised by looking at a holdout chart",
+      "artifact": "k_selection.chart_inspection_used == false, scores[*].holdout_used == false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.5",
+      "requirement": "sparse extension needs nondegenerate constraints",
+      "artifact": "quality.check_degeneracy.collapsed_weights",
+      "note": "an all-zero weight vector is the exact failure guide 8.3 names",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.7",
+      "requirement": "group ablation shows whether flow/market blocks contribute beyond price/vol",
+      "artifact": "configs/lab05_group_ablation.json",
+      "note": "guide 8.3; decided on a scale-free variance-resolved measure because the fit objective is not comparable across feature sets",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.8",
+      "requirement": "every model-ladder rung that was NOT built is declared with a reason",
+      "artifact": "ablation.ladder_record",
+      "note": "guide 8.1 has five rungs; L05.2 asks for M0/M1, and M1S/M2/M3 carry a reason and a condition that would reopen them",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.4.6",
+      "requirement": "lambda_J units are frequency-bound",
+      "artifact": "model_selection.lambda_jump_units.transferable_across_frequencies == false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.5.1",
+      "requirement": "slow fit cadence, 4h inference",
+      "artifact": "registry.clock_separation",
+      "note": "28-day fits, 4h observations",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.5.2",
+      "requirement": "versions mapped by training centroids",
+      "artifact": "registry.map_state_namespaces.information_used",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.5.3",
+      "requirement": "a state-model transition does not create a parameter-search trigger",
+      "artifact": "mapping.triggers_parameter_search == false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.5.4",
+      "requirement": "old decision emissions are immutable",
+      "artifact": "EmissionTape seal/overwrite + model_transition.prior_emissions_rewritten == false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.5.5",
+      "requirement": "an unreliable mapping becomes an uncertainty/model-transition event",
+      "artifact": "UNMAPPED_REFIT_STATE + model_transition_event",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.1",
+      "requirement": "ambiguity score",
+      "artifact": "emissions.second_best_gap",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.2",
+      "requirement": "out-of-support / fit residual",
+      "artifact": "quality.fit_novelty_threshold",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.3",
+      "requirement": "missing/stale data have their own statuses",
+      "artifact": "lab05_selftest.acceptance_checks.T44",
+      "note": "four distinct statuses",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.4",
+      "requirement": "fallback semantics",
+      "artifact": "QualityVerdict.decision_eligible",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.5",
+      "requirement": "stress/crowding is a separate overlay",
+      "artifact": "quality.stress_overlay.is_a_regime_state == false",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.6.6",
+      "requirement": "no fake calibrated confidence",
+      "artifact": "lab05_selftest.acceptance_checks.T42",
+      "note": "membership_is_calibrated == false",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.1",
+      "requirement": "no-regime world",
+      "artifact": "lab05_selftest.synthetic_worlds.negative_control",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.2",
+      "requirement": "recurring state world",
+      "artifact": "synthetic_worlds.worlds[recurring_state]",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.3",
+      "requirement": "structural break world",
+      "artifact": "synthetic_worlds.worlds[structural_break]",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.4",
+      "requirement": "detection delay measured",
+      "artifact": "worlds[*].detection",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.5",
+      "requirement": "noise sensitivity measured",
+      "artifact": "lab05_selftest.noise_sensitivity",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L05.7.6",
+      "requirement": "ground-truth latent labels are diagnostic only, never a policy input",
+      "artifact": "worlds.ground_truth_is_diagnostic_only",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.1",
+      "requirement": "regime_model_registry.json",
+      "artifact": "configs/lab05_regime_model_registry.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.2",
+      "requirement": "serialized model arrays + metadata",
+      "artifact": "registry.models[*].centroids/scaler_ref",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.3",
+      "requirement": "online emission tape",
+      "artifact": "configs/lab05_emission_tape.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.4",
+      "requirement": "training loss/weight/centroid reports",
+      "artifact": "registry.models[*].fit_diagnostics + robustness",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.5",
+      "requirement": "fit-vs-infer tests",
+      "artifact": "lab05_selftest.acceptance_checks.T37/T38/T39",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "OUT.6",
+      "requirement": "state-transition diagnostics",
+      "artifact": "registry.model_transitions + emission_tape.model_transitions_emitted",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.1",
+      "requirement": "causal provider technical pass",
+      "artifact": "T37/T38/T39 all true and the emission path cannot refit",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.2",
+      "requirement": "reproducible state vocabulary",
+      "artifact": "namespaced fits with centroid digests and a declared mapping rule",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.3",
+      "requirement": "no predictive/financial claim from fit loss or clean labels",
+      "artifact": "lab05_selftest.exit_claim_limits + the no-regime negative control",
+      "note": "",
+      "status": "DONE"
+    }
+  ],
+  "lab_run_id": "run-20260910T093509Z-e199933d",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T09:35:16.387120+00:00"
+}

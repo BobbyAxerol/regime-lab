@@ -1,0 +1,303 @@
+{
+  "schema": "crypto_regime_lab.lab08_checklist.v1",
+  "note": "Written BEFORE any LAB-08 code. Every clause of the LAB-08 tasks, guide 10.2 (mandatory controls), 10.3 (one economic engine), 11.1-11.2 (conclusion discipline), the acceptance requirements LAB-08 owns (T53, T58, T59, T60) and the phase outputs and exit gate. scripts/audit_lab08.py reads THIS file.",
+  "written_before_code": true,
+  "clauses": [
+    [
+      "L08.1.1",
+      "primary timeframes are frozen into the immutable study registry before any arm runs"
+    ],
+    [
+      "L08.1.2",
+      "evaluation intervals are frozen"
+    ],
+    [
+      "L08.1.3",
+      "model and data cohorts are frozen"
+    ],
+    [
+      "L08.1.4",
+      "seeds are frozen"
+    ],
+    [
+      "L08.1.5",
+      "compute budgets are frozen (guide 10.5 MATCHED_TOTAL_COMPUTE and OPERATIONAL_POLICY)"
+    ],
+    [
+      "L08.1.6",
+      "supplied presets appear ONLY as the retrospective USER_PRESET_REFERENCE control"
+    ],
+    [
+      "L08.1.7",
+      "any outer-window claim is qualified by the recorded contamination status"
+    ],
+    [
+      "L08.1.8",
+      "the freeze happens BEFORE the factorial runs, and is provably earlier"
+    ],
+    [
+      "L08.2.1",
+      "arms A, B, C and D share one engine"
+    ],
+    [
+      "L08.2.2",
+      "arms share identical costs: fee, slippage, funding treatment, exposure constraints"
+    ],
+    [
+      "L08.2.3",
+      "arms share identical cutoffs"
+    ],
+    [
+      "L08.2.4",
+      "arms share the identical incumbent-retention rule"
+    ],
+    [
+      "L08.2.5",
+      "each arm pays the ACTUAL operational latency, never zero"
+    ],
+    [
+      "L08.2.6",
+      "a 2-cell pilot runs first for debugging, and is labelled as a pilot not a result"
+    ],
+    [
+      "L08.2.7",
+      "all 20 cell statuses are reported, including NOT_READY and insufficient-sample ones"
+    ],
+    [
+      "L08.2.8",
+      "no alpha is filtered out after its result is known; a low-trade alpha stays in the denominator"
+    ],
+    [
+      "L08.2.9",
+      "insufficient sample is REPORTED as such, never silently dropped or read as a zero"
+    ],
+    [
+      "L08.2.10",
+      "the registered contrasts are computed: B-A, C-A, D-B, D-C and the interaction (D-C)-(B-A)"
+    ],
+    [
+      "L08.3.1",
+      "arm E (selector + bank + response policy) is compared against arm B"
+    ],
+    [
+      "L08.3.2",
+      "arm E is compared against the BANK_CALENDAR control"
+    ],
+    [
+      "L08.3.3",
+      "the dynamic-refit arm is compared against a BUDGET-MATCHED calendar (CALENDAR_MATCHED)"
+    ],
+    [
+      "L08.3.4",
+      "RISK_ONLY isolates the exposure effect: same regime context, risk scaling only, params unchanged"
+    ],
+    [
+      "L08.3.5",
+      "STATE_PLACEBO labels have approximately the same dwell and switch frequency as the real states"
+    ],
+    [
+      "L08.3.6",
+      "the placebo is generated from development or known past ONLY; no future label is shuffled into the decision tape"
+    ],
+    [
+      "L08.3.7",
+      "DELAYED_STATE adds a registered delay and its transition sensitivity is read"
+    ],
+    [
+      "L08.3.8",
+      "EXPOST_DIAGNOSTIC hindsight labels are diagnostic only and never produce an eligible trade result"
+    ],
+    [
+      "L08.3.9",
+      "USER_PRESET_REFERENCE is labelled retrospective and is never a core outcome"
+    ],
+    [
+      "L08.3.10",
+      "no control is dropped because it beats the proposed method"
+    ],
+    [
+      "L08.3.11",
+      "controls are staged, not a full Cartesian product run at once"
+    ],
+    [
+      "L08.4.1",
+      "server-core is compared against server-derivatives and server-liquidity"
+    ],
+    [
+      "L08.4.2",
+      "the comparison is on COMPARABLE intervals, not each cohort's own longest window"
+    ],
+    [
+      "L08.4.3",
+      "every ablation trial is added to the experiment-search ledger"
+    ],
+    [
+      "L08.4.4",
+      "an improvement that comes from a short recent window is not attributed to a feature group"
+    ],
+    [
+      "L08.5.1",
+      "the ladder runs M0 then M1, with M1S and a limited M2 comparator declared built or deliberately unbuilt"
+    ],
+    [
+      "L08.5.2",
+      "K, lambda_jump, training memory and refit cadence are tuned in DEVELOPMENT only"
+    ],
+    [
+      "L08.5.3",
+      "not every combination is swept by default"
+    ],
+    [
+      "L08.5.4",
+      "each proposal states its question, its expected failure and its stop condition BEFORE it runs"
+    ],
+    [
+      "L08.6.1",
+      "trial counts are captured"
+    ],
+    [
+      "L08.6.2",
+      "candidate episode bars are captured"
+    ],
+    [
+      "L08.6.3",
+      "model fits are captured"
+    ],
+    [
+      "L08.6.4",
+      "response evaluations are captured"
+    ],
+    [
+      "L08.6.5",
+      "cold and warm runtime are captured separately"
+    ],
+    [
+      "L08.6.6",
+      "compute waiting and activation delays are captured"
+    ],
+    [
+      "L08.6.7",
+      "CPU never exceeds the registered resource budget to let the dynamic policy finish first"
+    ],
+    [
+      "L08.7.1",
+      "exactly one confirmatory design is selected, or NO_PROMISING_DESIGN is declared"
+    ],
+    [
+      "L08.7.2",
+      "the selection reason is recorded and rests on DEVELOPMENT evidence"
+    ],
+    [
+      "L08.7.3",
+      "the tradeoffs of the selected design are recorded"
+    ],
+    [
+      "L08.7.4",
+      "the failure cases of the selected design are recorded"
+    ],
+    [
+      "L08.7.5",
+      "the uncertainty around the selection is recorded"
+    ],
+    [
+      "L08.7.6",
+      "no outer confirmation result is used to choose the design"
+    ],
+    [
+      "L08.7.7",
+      "alpha versions are frozen at selection"
+    ],
+    [
+      "L08.7.8",
+      "an optional alpha improvement is never folded into the winner silently"
+    ],
+    [
+      "G11.1.1",
+      "the whole phase runs in the DISCOVERY stage; the outer window is not consumed"
+    ],
+    [
+      "G11.2.1",
+      "the registered primary utility is the endpoint, not a more convenient statistic"
+    ],
+    [
+      "G11.2.2",
+      "the conclusion level comes from the registered vocabulary"
+    ],
+    [
+      "G11.2.3",
+      "a risk-only improvement is never recorded as a parameter-selection edge"
+    ],
+    [
+      "G10.3.6",
+      "each arm holds its own account with the SAME initial conditions"
+    ],
+    [
+      "G10.3.7",
+      "no arm's account resets at a fold or regime boundary"
+    ],
+    [
+      "G10.3.8",
+      "segments of unequal length are compared on the daily account, not by averaging fold Sharpes"
+    ],
+    [
+      "T53.2",
+      "A/B/C/D share fixed economics and budgets with no hidden fee, risk or evaluation advantage"
+    ],
+    [
+      "T58.1",
+      "RISK_ONLY and CALENDAR_MATCHED controls are present in the reported comparison"
+    ],
+    [
+      "T59.1",
+      "every negative, failed and pruned trial is retained with a correct null/status"
+    ],
+    [
+      "T60.1",
+      "the objective recomputed from its components matches the reported value under the numeric contract"
+    ],
+    [
+      "OUT.1",
+      "every-run JSON/JSONL is written"
+    ],
+    [
+      "OUT.2",
+      "comparison panels are written"
+    ],
+    [
+      "OUT.3",
+      "local-neighborhood chart DATA is written"
+    ],
+    [
+      "OUT.4",
+      "regime feature and weight profiles are written"
+    ],
+    [
+      "OUT.5",
+      "a discovery report is written"
+    ],
+    [
+      "OUT.6",
+      "a design-selection manifest is written"
+    ],
+    [
+      "OUT.7",
+      "a registry of ALL attempted hypotheses is written"
+    ],
+    [
+      "EXIT.1",
+      "the phase ends with either a design freeze or NO_PROMISING_DESIGN"
+    ],
+    [
+      "EXIT.2",
+      "profit is NOT required to close discovery"
+    ],
+    [
+      "EXIT.3",
+      "a negative result is never relabelled a technical failure to justify a rerun"
+    ],
+    [
+      "EXIT.4",
+      "no arm was re-run after seeing its result in order to improve it"
+    ]
+  ]
+}

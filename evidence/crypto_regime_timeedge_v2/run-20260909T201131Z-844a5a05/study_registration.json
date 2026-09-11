@@ -1,0 +1,420 @@
+{
+  "schema": "crypto_regime_lab.study.v2",
+  "study_id": "crypto_regime_timeedge_v2",
+  "status": "REGISTERED_DATA_PINNED",
+  "status_reason": "every field LAB-01 left null is now pinned from measured data. The study is registered and may proceed to LAB-04; it is not FROZEN, which happens at the LAB-08 design freeze.",
+  "registered_at_utc": "2026-09-09T18:48:15.262517+00:00",
+  "guide_sha256": "36920763409e2627a83a455c5eb01083d9e0c5e080105d9adb3272f6d6ddbaa7",
+  "baseline": {
+    "core_version": "1.1.1",
+    "native_expected": "0.4.2",
+    "native_installed": "0.4.2",
+    "source_sha": null,
+    "source_sha_blocker": "lab consumes the PyPI wheel; upstream git SHA not required and not claimed",
+    "wheel_digests": "recorded in evidence/environment_baseline.json wheelhouse map",
+    "installed_origins": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "matches_guide_baseline": true
+  },
+  "allowed_alpha_files": [
+    "adaptive_hma_cpp.py",
+    "hash_momentum.py",
+    "signal_combine.py",
+    "vwap.py"
+  ],
+  "alpha_ids": {
+    "vwap.py": "A-VWAP",
+    "hash_momentum.py": "A-HASH",
+    "adaptive_hma_cpp.py": "A-HMA",
+    "signal_combine.py": "A-SC"
+  },
+  "trade_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "DOGEUSDT"
+  ],
+  "spot_clean_from": "2020-01-01T00:00:00Z",
+  "source_preset_role": "retrospective_reference_only",
+  "primary_arms": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "extension_arms": [
+    "E"
+  ],
+  "arm_definitions": {
+    "A": {
+      "selector": "installed_wfo_selector",
+      "refit": "frozen_calendar",
+      "purpose": "primary baseline"
+    },
+    "B": {
+      "selector": "independent_neighborhood",
+      "refit": "frozen_calendar",
+      "purpose": "robustness contribution"
+    },
+    "C": {
+      "selector": "installed_wfo_selector",
+      "refit": "regime_triggered_full_refresh",
+      "purpose": "timing contribution"
+    },
+    "D": {
+      "selector": "independent_neighborhood",
+      "refit": "regime_triggered_full_refresh",
+      "purpose": "selector x timing interaction"
+    },
+    "E": {
+      "selector": "independent_neighborhood + bank + response policy",
+      "refit": "slow model fit; bank refresh as B",
+      "purpose": "extension: intelligent switching separated from frequent refit"
+    }
+  },
+  "controls": [
+    "RISK_ONLY",
+    "CALENDAR_MATCHED",
+    "BANK_CALENDAR",
+    "STATE_PLACEBO",
+    "DELAYED_STATE",
+    "EXPOST_DIAGNOSTIC",
+    "USER_PRESET_REFERENCE"
+  ],
+  "primary_matrix": {
+    "alphas": 4,
+    "symbols": 5,
+    "cells": 20,
+    "pilot_order": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "cell_list": [
+      {
+        "cell_id": "A-SC|BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-SC|ETHUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "ETHUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-SC|SOLUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "SOLUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-SC|BNBUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BNBUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-SC|DOGEUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "DOGEUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HMA|BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "decision_bars": "1h",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HMA|ETHUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "decision_bars": "1h",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HMA|SOLUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "decision_bars": "1h",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HMA|BNBUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "decision_bars": "1h",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HMA|DOGEUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "DOGEUSDT",
+        "decision_bars": "1h",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-VWAP|BTCUSDT",
+        "alpha_id": "A-VWAP",
+        "symbol": "BTCUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-VWAP|ETHUSDT",
+        "alpha_id": "A-VWAP",
+        "symbol": "ETHUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-VWAP|SOLUSDT",
+        "alpha_id": "A-VWAP",
+        "symbol": "SOLUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-VWAP|BNBUSDT",
+        "alpha_id": "A-VWAP",
+        "symbol": "BNBUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-VWAP|DOGEUSDT",
+        "alpha_id": "A-VWAP",
+        "symbol": "DOGEUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HASH|BTCUSDT",
+        "alpha_id": "A-HASH",
+        "symbol": "BTCUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HASH|ETHUSDT",
+        "alpha_id": "A-HASH",
+        "symbol": "ETHUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HASH|SOLUSDT",
+        "alpha_id": "A-HASH",
+        "symbol": "SOLUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HASH|BNBUSDT",
+        "alpha_id": "A-HASH",
+        "symbol": "BNBUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      },
+      {
+        "cell_id": "A-HASH|DOGEUSDT",
+        "alpha_id": "A-HASH",
+        "symbol": "DOGEUSDT",
+        "decision_bars": "15m",
+        "execution_bars": "1m",
+        "status": "REGISTERED_NOT_RUN"
+      }
+    ]
+  },
+  "timeframes": {
+    "A-SC": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "1h"
+    },
+    "A-VWAP": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "5m"
+    },
+    "A-HMA": {
+      "decision_bars": "1h",
+      "execution_bars": "1m",
+      "secondary_registered": "15m"
+    },
+    "A-HASH": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "1h"
+    }
+  },
+  "model": {
+    "primary": "discrete_jump_model",
+    "initial_states": 3,
+    "observation_interval": "4h",
+    "fit_cadence_days": 28,
+    "train_memory_days": 365,
+    "values_are_starting_hypotheses": true,
+    "incumbent_comparator": "quantbt.volatility_regime_labels (M0/legacy; see incumbent_regime_probe.json)"
+  },
+  "execution": {
+    "contract": "event_lifecycle_v3_next_open",
+    "contract_available_in_install": true,
+    "account_contract": {
+      "initial_capital_usdt": 20000.0,
+      "entry_notional_usdt": 2000.0,
+      "leverage_cap": 1.0,
+      "margin_mode": "cross",
+      "frozen_for_all_arms": true,
+      "provenance": "guide 4.1 proposal sizing, frozen here; never a tuned parameter"
+    },
+    "instrument_registry_digest": "85ae389330d104d80a581e0970275fd983212ead062270d70b908f8efe5bf484",
+    "fee_funding_slippage_config": {
+      "taker_fee_rate": 0.0004,
+      "fee_provenance": "Binance USD-M standard taker rate; re-pin against actual contract data in LAB-03",
+      "slippage": 0.0001,
+      "slippage_provenance": "engine default, applied identically to every arm",
+      "funding": "MISSING_NOT_ZERO",
+      "funding_policy": "missing funding history is never treated as zero on a realistic-net-carry claim",
+      "frozen_for_all_arms": true,
+      "funding_evidence": "no funding product exists in this storage; the primary runs use_funding=False and are labelled a no-funding cohort"
+    },
+    "cost_stress_levels": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "instrument_registry_artifact": "configs/instrument_registry.json"
+  },
+  "data_roles": {
+    "development": {
+      "start": "2020-01-01",
+      "end": "2023-12-31",
+      "permits": [
+        "scaler fitting",
+        "hyperparameter and design choices",
+        "inner chronological validation"
+      ]
+    },
+    "outer_evaluation": {
+      "start": "2024-01-01",
+      "end": null,
+      "permits": [
+        "frozen-protocol evaluation"
+      ],
+      "contamination": "NOT an untouched holdout: the supplied presets were TPE-tuned on the full sample with an unknown cutoff"
+    }
+  },
+  "primary_endpoint": {
+    "statistic": "mean daily net-return difference between arms on the same risk budget",
+    "aggregation": "daily UTC paired differences on a common evaluation interval",
+    "guardrails": [
+      "max_drawdown",
+      "expected_shortfall",
+      "exposure",
+      "turnover",
+      "costs",
+      "trade_count"
+    ],
+    "registered_before_results": true
+  },
+  "minimum_economic_effect": 6.4e-05,
+  "hypothesis_family_and_adjustment": {
+    "primary_family": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "adjustment": "Holm-type across the primary contrast family; block bootstrap for paired uncertainty",
+    "block_length_selection": "development only, with a registered sensitivity range",
+    "exploratory_contrasts_disclosed": true
+  },
+  "contamination": {
+    "claim_level": "RETROSPECTIVE_NESTED_CAUSAL_RESEARCH",
+    "reason": "supplied presets were TPE-tuned on the full sample and the tuning cutoff is unknown, so no interval of this dataset can be called an untouched holdout",
+    "prospective_protocol_required_for_strong_claim": true
+  },
+  "resource_budget": {
+    "workers": 1,
+    "cpu_limit": 2,
+    "working_memory_gib": 4
+  },
+  "market_experiments_allowed": false,
+  "market_experiments_unlock_gate": "LAB-02 adapter certification AND LAB-03 data qualification",
+  "production_mutations_allowed": false,
+  "live_execution_allowed": false,
+  "protected_roots": [
+    "/root/bobby/pool_alpha/quantbt",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data",
+    "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model"
+  ],
+  "minimum_economic_effect_artifact": "configs/minimum_economic_effect.json",
+  "snapshot_id": "server_core_v1",
+  "cohort_coverage": {
+    "SERVER_CORE_LONG": {
+      "members": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_CORE_SPOT": {
+      "members": [
+        "BTCUSDT"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_DERIVATIVES": {
+      "members": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "status": "AVAILABLE"
+    },
+    "SERVER_LIQUIDITY": {
+      "members": [
+        "BTCUSDT"
+      ],
+      "status": "AVAILABLE"
+    },
+    "FREE_ENRICHED": {
+      "members": [],
+      "status": "EMPTY"
+    }
+  },
+  "lab_run_id": "run-20260909T201131Z-844a5a05",
+  "written_at_utc": "2026-09-09T20:11:32.136408+00:00"
+}

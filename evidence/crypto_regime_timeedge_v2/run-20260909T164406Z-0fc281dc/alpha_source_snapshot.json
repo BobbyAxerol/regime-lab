@@ -1,0 +1,79 @@
+{
+  "verification": {
+    "schema": "crypto_regime_lab.alpha_source_verification.v1",
+    "source_dir": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+    "files": {
+      "vwap.py": {
+        "alpha_id": "A-VWAP",
+        "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/vwap.py",
+        "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+        "expected_sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+        "matches": true,
+        "size_bytes": 13440
+      },
+      "hash_momentum.py": {
+        "alpha_id": "A-HASH",
+        "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/hash_momentum.py",
+        "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+        "expected_sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+        "matches": true,
+        "size_bytes": 7768
+      },
+      "adaptive_hma_cpp.py": {
+        "alpha_id": "A-HMA",
+        "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+        "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+        "expected_sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+        "matches": true,
+        "size_bytes": 16576
+      },
+      "signal_combine.py": {
+        "alpha_id": "A-SC",
+        "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/signal_combine.py",
+        "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+        "expected_sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+        "matches": true,
+        "size_bytes": 5671
+      }
+    },
+    "problems": [],
+    "status": "VERIFIED"
+  },
+  "snapshots": [
+    {
+      "source_path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/vwap.py",
+      "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/vwap.py",
+      "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+      "size_bytes": 13440,
+      "source_mtime_utc": "2026-09-09T14:53:24.284000+00:00"
+    },
+    {
+      "source_path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/hash_momentum.py",
+      "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/hash_momentum.py",
+      "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+      "size_bytes": 7768,
+      "source_mtime_utc": "2026-09-09T14:51:28.196000+00:00"
+    },
+    {
+      "source_path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+      "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/adaptive_hma_cpp.py",
+      "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+      "size_bytes": 16576,
+      "source_mtime_utc": "2026-09-09T14:48:48.628000+00:00"
+    },
+    {
+      "source_path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/signal_combine.py",
+      "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/alphas_raw/signal_combine.py",
+      "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+      "size_bytes": 5671,
+      "source_mtime_utc": "2026-05-01T10:35:07.080000+00:00"
+    }
+  ],
+  "archive_present_on_disk": false,
+  "archive_note": "The original alpha_to_tes_regime_model.zip is not present on this host; only the extracted four .py files are. Archive-level admission control (T03) is therefore exercised against synthetic hostile fixtures, and file-level identity (T04) is verified against the SHA-256 values published in guide section 1.1.",
+  "expected_archive_sha256": "57406dbb9ffdcf4617e4895925126fa73600a585a6541f996c6b2d980f6701ae",
+  "schema": "crypto_regime_lab.alpha_source_snapshot.v1",
+  "lab_run_id": "run-20260909T164406Z-0fc281dc",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T16:44:06.606820+00:00"
+}

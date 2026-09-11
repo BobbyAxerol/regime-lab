@@ -1,0 +1,124 @@
+{
+  "schema": "crypto_regime_lab.engine_capability_matrix.v1",
+  "routes": [
+    {
+      "route": "intrabar_bracket_v1 (reference / rust)",
+      "next_open_entry_fill": {
+        "supported": true,
+        "error": null
+      },
+      "protective_stop": {
+        "supported": true,
+        "error": null
+      },
+      "single_take_profit": {
+        "supported": true,
+        "error": null
+      },
+      "partial_reduce_only_ladder": {
+        "supported": false,
+        "error": null
+      },
+      "same_bar_stop_and_tp_conservative": {
+        "supported": true,
+        "error": null
+      },
+      "funding_at_event": {
+        "supported": true,
+        "error": null
+      },
+      "terminal_forced_flat": {
+        "supported": true,
+        "error": null
+      },
+      "terminal_mark_open": {
+        "supported": true,
+        "error": null
+      }
+    },
+    {
+      "route": "orders (BacktestEngineV2 / native_event)",
+      "next_open_entry_fill": {
+        "supported": false,
+        "error": null
+      },
+      "protective_stop": {
+        "supported": false,
+        "error": "NotImplementedError: unsupported order_type=<OrderType.STOP_MARKET: 'stop_market'>"
+      },
+      "single_take_profit": {
+        "supported": true,
+        "error": null
+      },
+      "partial_reduce_only_ladder": {
+        "supported": true,
+        "error": null
+      }
+    }
+  ],
+  "by_capability": {
+    "next_open_entry_fill": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    },
+    "protective_stop": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    },
+    "single_take_profit": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)",
+        "orders (BacktestEngineV2 / native_event)"
+      ],
+      "supported": true
+    },
+    "partial_reduce_only_ladder": {
+      "supported_by": [
+        "orders (BacktestEngineV2 / native_event)"
+      ],
+      "supported": true
+    },
+    "same_bar_stop_and_tp_conservative": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    },
+    "funding_at_event": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    },
+    "terminal_forced_flat": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    },
+    "terminal_mark_open": {
+      "supported_by": [
+        "intrabar_bracket_v1 (reference / rust)"
+      ],
+      "supported": true
+    }
+  },
+  "blocked_capabilities": [],
+  "a_hash_ladder_route": {
+    "required_together": [
+      "next_open_entry_fill",
+      "protective_stop",
+      "partial_reduce_only_ladder"
+    ],
+    "routes_supporting_all": [],
+    "status": "BLOCKED_CAPABILITY",
+    "detail": "intrabar_bracket_v1 gives a next-open entry and a protective stop but expresses only ONE take-profit level; the orders route executes a three-rung partial reduce-only ladder but fills a market order at the close of the stamped bar and rejects stop_market entirely. No single route provides all three, so A-HASH's canonical ladder cannot be executed at full fidelity on this install."
+  },
+  "lab_run_id": "run-20260909T184724Z-76ac1ff4",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:31.246740+00:00"
+}

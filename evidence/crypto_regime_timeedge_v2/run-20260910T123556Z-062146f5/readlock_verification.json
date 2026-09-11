@@ -1,0 +1,1798 @@
+{
+  "schema": "crypto_regime_lab.snapshot_verification.v1",
+  "snapshot_id": "server_core_v1",
+  "files_checked": 627,
+  "missing": [],
+  "snapshot_files_changed": [],
+  "source_files_changed": [
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=09/part.parquet"
+  ],
+  "closed_partition_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+      "partition": "2020-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2020-09",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8636,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:23",
+        "vintage_max_upstream": "2026-09-10 10:31:38"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+      "partition": "2020-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2020-10",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8918,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:23",
+        "vintage_max_upstream": "2026-09-10 10:31:38"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+      "partition": "2020-11",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2020-11",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8621,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:23",
+        "vintage_max_upstream": "2026-09-10 10:31:38"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+      "partition": "2021-01",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-01",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8911,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:23",
+        "vintage_max_upstream": "2026-09-10 10:31:38"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+      "partition": "2021-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-02",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 7948,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:24",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+      "partition": "2021-03",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-03",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8921,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:24",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+      "partition": "2021-04",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-04",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8607,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:24",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+      "partition": "2021-05",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-05",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8916,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:24",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+      "partition": "2021-06",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-06",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8456,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:25",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+      "partition": "2021-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-08",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8927,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:25",
+        "vintage_max_upstream": "2026-09-10 10:31:39"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+      "partition": "2021-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-09",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8609,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:25",
+        "vintage_max_upstream": "2026-09-10 10:31:40"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+      "partition": "2021-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-10",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8906,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:40"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+      "partition": "2021-11",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-11",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8602,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+      "partition": "2021-12",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2021-12",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8921,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+      "partition": "2023-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2023-09",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8637,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+      "partition": "2024-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2024-02",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8227,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+      "partition": "2024-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2024-10",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8927,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+      "partition": "2025-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2025-08",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8926,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:53:26",
+        "vintage_max_upstream": "2026-09-10 10:31:41"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+      "partition": "2021-12",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2021-12",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8921,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:56:15",
+        "vintage_max_upstream": "2026-09-10 10:34:21"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+      "partition": "2023-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2023-09",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8637,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:56:15",
+        "vintage_max_upstream": "2026-09-10 10:34:21"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+      "partition": "2024-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2024-02",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8227,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:56:15",
+        "vintage_max_upstream": "2026-09-10 10:34:21"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+      "partition": "2024-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2024-10",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8927,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:56:15",
+        "vintage_max_upstream": "2026-09-10 10:34:22"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+      "partition": "2025-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "content_verdict": {
+        "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2025-08",
+        "vintage_columns_ignored": [
+          "ingested_at"
+        ],
+        "classification": "VINTAGE_RESTAMP_ONLY",
+        "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+        "measured_columns_compared": [
+          "time",
+          "market",
+          "symbol",
+          "contract_type",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio",
+          "source"
+        ],
+        "rows_compared": 8926,
+        "vintage_columns_that_moved": [
+          "ingested_at"
+        ],
+        "vintage_max_snapshot": "2026-09-09 15:56:15",
+        "vintage_max_upstream": "2026-09-10 10:34:22"
+      }
+    }
+  ],
+  "drift_by_product": {},
+  "primary_core_products": [
+    "crypto_binance_futures_1m"
+  ],
+  "primary_core_closed_drift": [],
+  "products_invalidated": [],
+  "open_partition_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BTCUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_1m",
+        "symbol": "BTCUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/BTCUSDT/2026-09.parquet",
+        "sha256": "75650dca20829ed89f1dd196f3bd5ce3d0af2d707fb3ce066b895831d959f1a5",
+        "bytes": 903205,
+        "rows": 12731,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 20:10:00",
+        "closed": false,
+        "sources": [
+          "binance_futures"
+        ],
+        "ingested_at_max": "2026-09-09 20:11:58"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "ETHUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_1m",
+        "symbol": "ETHUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/ETHUSDT/2026-09.parquet",
+        "sha256": "e7fb6cbbafb8706d993148498a058b1e89c25364109711485cdee61ddc98c4d7",
+        "bytes": 902546,
+        "rows": 12733,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 20:12:00",
+        "closed": false,
+        "sources": [
+          "binance_futures"
+        ],
+        "ingested_at_max": "2026-09-09 20:13:17"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "SOLUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_1m",
+        "symbol": "SOLUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/SOLUSDT/2026-09.parquet",
+        "sha256": "b319c428fd873426e8afb66833301d9c0345fc9ac8ba42ed6671ca25f2bad4a5",
+        "bytes": 794483,
+        "rows": 12733,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 20:12:00",
+        "closed": false,
+        "sources": [
+          "binance_futures"
+        ],
+        "ingested_at_max": "2026-09-09 20:13:18"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BNBUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_1m",
+        "symbol": "BNBUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/BNBUSDT/2026-09.parquet",
+        "sha256": "bdc1b232da0c3c9e146bac29628eff778818499baabef8aab5781578c265bca2",
+        "bytes": 821877,
+        "rows": 12733,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 20:12:00",
+        "closed": false,
+        "sources": [
+          "binance_futures"
+        ],
+        "ingested_at_max": "2026-09-09 20:13:19"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "DOGEUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_1m",
+        "symbol": "DOGEUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/DOGEUSDT/2026-09.parquet",
+        "sha256": "26b0a25a9cb98f78a71ee2d032fe3f085b69dcc7ce4a67a903192eb240140ffc",
+        "bytes": 804832,
+        "rows": 12734,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 20:13:00",
+        "closed": false,
+        "sources": [
+          "binance_futures"
+        ],
+        "ingested_at_max": "2026-09-09 20:14:37"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "BTCUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_metrics_5m/BTCUSDT/2026-09.parquet",
+        "sha256": "c7c87f930f477a34e991c46c1fcd130430ed68991882162aac56fe249aacd009",
+        "bytes": 146098,
+        "rows": 2494,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 15:45:00",
+        "closed": false,
+        "sources": [
+          "binance_futures_data_rest",
+          "binance_vision_usdm_metrics"
+        ],
+        "ingested_at_max": "2026-09-09 15:55:38"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "_record": {
+        "product_id": "crypto_binance_futures_metrics_5m",
+        "symbol": "ETHUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_metrics_5m/ETHUSDT/2026-09.parquet",
+        "sha256": "5321c9808d493619856e83dc3cd296e1862e54479657bb613b7a96dd57dc1d26",
+        "bytes": 151435,
+        "rows": 2495,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 15:50:00",
+        "closed": false,
+        "sources": [
+          "binance_futures_data_rest",
+          "binance_vision_usdm_metrics"
+        ],
+        "ingested_at_max": "2026-09-09 15:57:44"
+      }
+    }
+  ],
+  "rolling_window_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=08/part.parquet",
+      "partition": "2026-08",
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "symbol": "BTCUSDT",
+      "_record": {
+        "product_id": "crypto_binance_orderbook_snapshot_1h",
+        "symbol": "BTCUSDT",
+        "partition": "2026-08",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=08/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_orderbook_snapshot_1h/BTCUSDT/2026-08.parquet",
+        "sha256": "b5c549358298c7ae362371e7dc4c5e668af94c100beb7e760605e61d5bb02f36",
+        "bytes": 144388,
+        "rows": 507,
+        "time_min": "2026-08-10 19:00:00",
+        "time_max": "2026-08-31 23:00:00",
+        "closed": true,
+        "sources": [
+          "binance_usdm_depth_rest"
+        ],
+        "ingested_at_max": "2026-08-31 23:17:07"
+      }
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "symbol": "BTCUSDT",
+      "_record": {
+        "product_id": "crypto_binance_orderbook_snapshot_1h",
+        "symbol": "BTCUSDT",
+        "partition": "2026-09",
+        "source_path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+        "snapshot_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_orderbook_snapshot_1h/BTCUSDT/2026-09.parquet",
+        "sha256": "7ca5bddf916927f388eb44e6d36ac2ebad5b450d7d1b6ddf1c1160e334a5f35a",
+        "bytes": 76241,
+        "rows": 212,
+        "time_min": "2026-09-01 00:00:00",
+        "time_max": "2026-09-09 19:00:00",
+        "closed": false,
+        "sources": [
+          "binance_usdm_depth_rest"
+        ],
+        "ingested_at_max": "2026-09-09 19:44:04"
+      }
+    }
+  ],
+  "rolling_window_products": [
+    "crypto_binance_orderbook_snapshot_1h"
+  ],
+  "status": "EXTERNAL_VINTAGE_RESTAMP_ONLY",
+  "consequence": "closed partitions were rewritten upstream, and every one of them was READ and proven to carry identical measurements -- only the ingest vintage moved. The digests no longer match, which is reported rather than hidden, but no number this study consumed has changed, so no cohort is invalidated.",
+  "closed_partition_drift_classified": true,
+  "closed_partition_content_revisions": [],
+  "closed_partition_vintage_restamps": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2020-09",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8636,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:23",
+      "vintage_max_upstream": "2026-09-10 10:31:38"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2020-10",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8918,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:23",
+      "vintage_max_upstream": "2026-09-10 10:31:38"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2020-11",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8621,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:23",
+      "vintage_max_upstream": "2026-09-10 10:31:38"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-01",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8911,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:23",
+      "vintage_max_upstream": "2026-09-10 10:31:38"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-02",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 7948,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:24",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-03",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8921,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:24",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-04",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8607,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:24",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-05",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8916,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:24",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-06",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8456,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:25",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-08",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8927,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:25",
+      "vintage_max_upstream": "2026-09-10 10:31:39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-09",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8609,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:25",
+      "vintage_max_upstream": "2026-09-10 10:31:40"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-10",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8906,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:40"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-11",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8602,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2021-12",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8921,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2023-09",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8637,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2024-02",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8227,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2024-10",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8927,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT",
+      "partition": "2025-08",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8926,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:53:26",
+      "vintage_max_upstream": "2026-09-10 10:31:41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "partition": "2021-12",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8921,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:56:15",
+      "vintage_max_upstream": "2026-09-10 10:34:21"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "partition": "2023-09",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8637,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:56:15",
+      "vintage_max_upstream": "2026-09-10 10:34:21"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "partition": "2024-02",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8227,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:56:15",
+      "vintage_max_upstream": "2026-09-10 10:34:21"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "partition": "2024-10",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8927,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:56:15",
+      "vintage_max_upstream": "2026-09-10 10:34:22"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT",
+      "partition": "2025-08",
+      "vintage_columns_ignored": [
+        "ingested_at"
+      ],
+      "classification": "VINTAGE_RESTAMP_ONLY",
+      "reason": "every measured column is identical; only the ingest vintage moved, so the numbers this study read are the numbers upstream still holds",
+      "measured_columns_compared": [
+        "time",
+        "market",
+        "symbol",
+        "contract_type",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio",
+        "source"
+      ],
+      "rows_compared": 8926,
+      "vintage_columns_that_moved": [
+        "ingested_at"
+      ],
+      "vintage_max_snapshot": "2026-09-09 15:56:15",
+      "vintage_max_upstream": "2026-09-10 10:34:22"
+    }
+  ],
+  "classification_rule": "the file digest detects drift; a read decides what the drift MEANS. A closed partition stops invalidating its cohort only when every measured column is read and proven identical (VINTAGE_RESTAMP_ONLY). A changed value, row count or schema, or a file that will not read, stays CONTENT_REVISION and still invalidates. Without deep=True nothing is classified and every closed-partition drift invalidates.",
+  "primary_run_valid": true,
+  "primary_run_valid_rule": "a primary run stays valid while the lab's own snapshot bytes match the manifest and no CLOSED partition of a product the primary core reads has changed upstream. Drift in any other product invalidates the cohorts that read THAT product and is listed in products_invalidated; it is never downgraded to a warning.",
+  "cohort_runs_invalidated": [],
+  "rolling_window_note": "a rolling-window product can never be part of an immutable snapshot; its cohort is reported separately and is not in the primary core (see feature tiers)",
+  "checked_at_utc": "2026-09-10T12:36:10.087480+00:00",
+  "lab_run_id": "run-20260910T123556Z-062146f5",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T12:36:10.093314+00:00"
+}

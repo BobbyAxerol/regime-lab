@@ -1,0 +1,394 @@
+{
+  "schema": "crypto_regime_lab.phase_task_audit.v1",
+  "phase": "LAB-01",
+  "audited_at_utc": "2026-09-09 (third pass)",
+  "method": "each guide sub-task read verbatim, then matched to a delivered artifact AND a runnable test",
+  "tasks": [
+    {
+      "id": "L01.1",
+      "title": "Resolve allowed paths",
+      "requirements": [
+        {
+          "text": "read-only metadata, no full alpha-storage scan",
+          "status": "DONE",
+          "evidence": "configs/sandbox_policy.json declares 3 protected + 15 forbidden-read roots; SandboxPolicy.assert_readable refuses anything else"
+        },
+        {
+          "text": "canonicalize realpaths",
+          "status": "DONE",
+          "evidence": "safety/paths.py realpath() + resolve_write_target resolves the nearest existing ancestor so a symlinked parent cannot smuggle a write"
+        },
+        {
+          "text": "LAB_ROOT not inside nor containing protected roots",
+          "status": "DONE",
+          "tests": [
+            "test_t01_lab_root_inside_protected_root_is_rejected",
+            "test_t01_lab_root_containing_protected_root_is_rejected"
+          ]
+        },
+        {
+          "text": "LAB_ROOT must be new or carry a marker for the SAME study; no reuse of an arbitrary directory",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "tests": [
+            "test_marker_accepts_the_registered_study",
+            "test_marker_rejects_a_different_study",
+            "test_marker_refuses_an_occupied_directory_with_no_marker"
+          ]
+        }
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "L01.2",
+      "title": "Snapshot sources",
+      "requirements": [
+        {
+          "text": "copy the archive, verify SHA",
+          "status": "DONE",
+          "evidence": "vendor_readonly/alpha_zip_original.zip sha256 57406dbb..6701ae == guide 1.1"
+        },
+        {
+          "text": "inventory the ZIP before extraction; reject absolute/traversal/duplicate/symlink/oversize",
+          "status": "DONE",
+          "tests": [
+            "test_t03_hostile_zip_rejected_before_extraction",
+            "test_t03_duplicate_member_rejected",
+            "test_real_archive_is_admissible_with_no_rejections"
+          ]
+        },
+        {
+          "text": "install wheel 1.1.1 in an isolated environment; keep source mapping AND artifact hashes",
+          "status": "DONE",
+          "evidence": "environments/lab_venv + vendor_readonly/quantbt_1_1_1_dist + configs/requirements.lock (hash-pinned)"
+        },
+        {
+          "text": "do not silently use newest main",
+          "status": "DONE",
+          "evidence": "exact pins quantbt-engine==1.1.1 / quantbt-native==0.4.2; ../quantbt source tree never imported"
+        },
+        {
+          "text": "if the source is dirty, record the boundary and pick a clean snapshot",
+          "status": "DONE",
+          "note": "was ASSERTED BUT NOT RECORDED in the previous pass",
+          "evidence": "configs/../evidence source_boundary.json: quantbt clean on fix/public-native-consumer-proof-contract; alphas_storage dirty in TA/ and standardize_simulation/ (pre-existing user work, untouched); every git read used GIT_OPTIONAL_LOCKS=0 and the .git/index digest is recorded before and after to prove the probe wrote nothing",
+          "tests": [
+            "test_reading_upstream_repos_did_not_modify_them",
+            "test_quantbt_repo_is_clean_and_not_consumed_by_the_lab"
+          ]
+        },
+        {
+          "text": "user instruction: unzip the supplied archive to .py and delete the zip",
+          "status": "DONE",
+          "evidence": "src/crypto_regime_lab/alphas/raw-supplied/ holds the four files read-only with guide digests; zip removed; provenance retained at vendor_readonly/alpha_zip_original.zip",
+          "tests": [
+            "test_zip_was_removed_from_the_alphas_package",
+            "test_four_alphas_are_unpacked_read_only_with_guide_digests",
+            "test_unpacked_files_match_the_vendor_readonly_provenance_copies"
+          ]
+        }
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "L01.3",
+      "title": "Environment isolation",
+      "requirements": [
+        {
+          "text": "core/native pair pin",
+          "status": "DONE",
+          "tests": [
+            "test_installed_baseline_is_the_guide_baseline"
+          ]
+        },
+        {
+          "text": "dependency lock",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "evidence": "configs/requirements.lock, 31 packages, every line --hash=sha256, zero UNPINNED_LOCAL_ARTIFACT",
+          "tests": [
+            "test_lockfile_is_hash_pinned_and_complete"
+          ]
+        },
+        {
+          "text": "ta for A-SC only inside the lab",
+          "status": "DONE",
+          "evidence": "ta==0.11.0 installed in lab_venv only; the shared parent venv was not modified"
+        },
+        {
+          "text": "Numba compiler flags recorded",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "evidence": "environment_fingerprint().numba: version, llvmlite, threading layer, num_threads, DISABLE_JIT, cache dir, fastmath policy",
+          "tests": [
+            "test_environment_fingerprint_records_numba_and_thread_metadata"
+          ]
+        },
+        {
+          "text": "Python OS/thread metadata",
+          "status": "DONE",
+          "note": "was PARTIAL in the first pass",
+          "evidence": "environment_fingerprint().threads incl. sched_getaffinity"
+        },
+        {
+          "text": "baseline and candidate as separate processes",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "evidence": "environment_pin.json process_separation = SEPARATED; distinct import origins, each in its own pid namespace, neither from a protected root",
+          "tests": [
+            "test_baseline_and_candidate_import_from_different_origins"
+          ]
+        },
+        {
+          "text": "wheel/source imports and NATIVE CAPABILITY probed",
+          "status": "DONE",
+          "note": "native probe was MISSING in the first pass",
+          "evidence": "api_binding_map.v2 native_capability: matrix full-contract-v2-0.4, fingerprint 601d639f..., 20 capabilities, 0 of the 12 guide-4.4 required ones missing",
+          "tests": [
+            "test_native_capability_matrix_covers_the_required_fixtures"
+          ]
+        },
+        {
+          "text": "do not run original arbitrary modules before containment",
+          "status": "DONE",
+          "evidence": "raw-supplied/__init__.py raises ImportError on any import. A plain underscore directory without __init__.py stayed importable via PEP 420, and a hyphenated name blocked only the import statement, not importlib.import_module. During that investigation vwap.py was imported once outside containment; static AST confirms it has no module-level side effects, so only definitions ran.",
+          "note": "guard hardened after two weaker guards were MEASURED insufficient",
+          "tests": [
+            "test_raw_supplied_cannot_be_imported",
+            "test_underscore_namespace_layout_really_would_have_been_importable",
+            "test_alpha_sources_have_no_module_level_side_effects",
+            "test_no_alpha_module_has_been_imported"
+          ]
+        },
+        {
+          "text": "development editable only in the lab",
+          "status": "DONE",
+          "evidence": "editable code is LAB_ROOT/src and LAB_ROOT/quantbt_candidate only; no editable install points at a protected root"
+        }
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "L01.4",
+      "title": "Evidence schema and write guard",
+      "requirements": [
+        {
+          "text": "strict JSON writer atomic-to-lab",
+          "status": "DONE",
+          "tests": [
+            "test_t61_nan_and_inf_are_refused_by_the_writer",
+            "test_evidence_writer_is_atomic_and_ledgered"
+          ]
+        },
+        {
+          "text": "append-only attempt ledger",
+          "status": "DONE",
+          "tests": [
+            "test_evidence_writer_records_failed_attempts"
+          ]
+        },
+        {
+          "text": "null/status for missing metrics",
+          "status": "DONE",
+          "tests": [
+            "test_t61_sanitize_numeric_yields_null_plus_status"
+          ]
+        },
+        {
+          "text": "every artifact carries lab_run_id",
+          "status": "DONE",
+          "evidence": "EvidenceWriter.write_json injects lab_run_id and study_id"
+        },
+        {
+          "text": "budgets and cancellation on our own process group",
+          "status": "DONE",
+          "note": "process-group ownership was DEFINED BUT NEVER CALLED in the first pass",
+          "evidence": "become_process_group_leader() now invoked by bootstrap_lab.py and pin_environment.py; environment_pin.json process_group.status = OWNED",
+          "tests": [
+            "test_process_group_is_owned",
+            "test_t07_cancel_refuses_foreign_process_group"
+          ]
+        },
+        {
+          "text": "verify sources unchanged before/after via manifests",
+          "status": "DONE",
+          "tests": [
+            "test_t08_protected_sources_unchanged_since_bootstrap"
+          ],
+          "evidence": "cli verify-source-integrity -> UNCHANGED"
+        },
+        {
+          "text": "mutable external data partitions snapshot/read-locked",
+          "status": "DONE",
+          "note": "was the single DEFERRED item in the previous pass",
+          "evidence": "configs/data_readlock_policy.json: 7 rules covering no-collector, snapshot-under-LAB_ROOT, manifest-as-read-lock, EXTERNAL_DATA_DRIFT invalidation, closed-partition-only, missing-coverage-not-silent-truncation, no aliasing. LAB-01 owns the policy; LAB-03 executes it against real partitions.",
+          "tests": [
+            "test_data_readlock_policy_is_registered"
+          ]
+        }
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "L01.5",
+      "title": "Preregister claims and contamination",
+      "requirements": [
+        {
+          "text": "hypothesis registry",
+          "status": "DONE",
+          "evidence": "configs/hypothesis_registry.json: 5 primary + 2 extension contrasts, 8 conclusion levels, falsification commitments, forbidden claims"
+        },
+        {
+          "text": "20-cell matrix",
+          "status": "DONE",
+          "evidence": "configs/study_registration.json primary_matrix.cell_list = 20"
+        },
+        {
+          "text": "baselines / variant IDs",
+          "status": "DONE",
+          "evidence": "arms A-E + 7 controls registered"
+        },
+        {
+          "text": "primary timeframes",
+          "status": "DONE",
+          "evidence": "guide 10.4 table registered before any result"
+        },
+        {
+          "text": "cost/risk setup",
+          "status": "DONE",
+          "evidence": "capital 20000, notional 2000, leverage 1, taker 4bps, slippage 1bp, stress 1x/1.5x/2x, frozen for all arms"
+        },
+        {
+          "text": "compute budgets",
+          "status": "DONE",
+          "evidence": "workers 1, cpu 2, memory 4GiB, disk quota 20GiB"
+        },
+        {
+          "text": "freeze/holdout policy",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "evidence": "configs/freeze_holdout_policy.json: two-stage information, freeze procedure, holdout status, access logging, unlock gates",
+          "tests": [
+            "test_freeze_and_holdout_policy_is_registered"
+          ]
+        },
+        {
+          "text": "full-sample presets into a quarantined reference catalog, no primary warm start",
+          "status": "DONE",
+          "note": "was MISSING in the first pass",
+          "evidence": "configs/preset_quarantine_catalog.json: 36 literal dictionaries from all four alphas, every one flagged eligible_for_early_fold_warm_start=false / primary_candidate_bank=false / independent_oos_claim=false",
+          "tests": [
+            "test_every_preset_is_quarantined_from_the_primary_path",
+            "test_preset_identity_includes_file_hash_and_values",
+            "test_literal_dict_counts_reconcile_with_the_guide"
+          ]
+        }
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "L01.6",
+      "title": "Actual API map",
+      "requirements": [
+        {
+          "text": "read installed QuantBTEndpoint signatures",
+          "status": "DONE",
+          "tests": [
+            "test_endpoint_surface_is_bound"
+          ]
+        },
+        {
+          "text": "WFO config AND modes",
+          "status": "DONE",
+          "note": "modes were MISSING in the first pass",
+          "evidence": "5 modes read from installed source; causality resolved per (mode, schedule) by resolve_causality_schedule_v2, not guessed from names",
+          "tests": [
+            "test_all_five_wfo_modes_are_enumerated",
+            "test_causality_is_resolved_by_the_installed_resolver_not_by_naming"
+          ]
+        },
+        {
+          "text": "command classes",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "command surface 15/15 bound"
+        },
+        {
+          "text": "callbacks",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "callback surface 14/14 bound"
+        },
+        {
+          "text": "parent/OCO",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "lifecycle_and_oco surface 16/16 bound; native matrix reports oco supported"
+        },
+        {
+          "text": "result exports",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "result_exports surface 20/20 bound",
+          "tests": [
+            "test_result_export_surface_is_bound"
+          ]
+        },
+        {
+          "text": "tests column in the map",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "each operation carries tests[] and test_coverage; all six are COVERED",
+          "tests": [
+            "test_every_operation_names_a_real_symbol_and_a_test"
+          ]
+        },
+        {
+          "text": "unknown never filled with an imagined API",
+          "status": "DONE",
+          "evidence": "unknowns register: 0 api unknowns, 5 named data unknowns with handling",
+          "tests": [
+            "test_unknowns_are_listed_rather_than_invented"
+          ]
+        },
+        {
+          "text": "map the loader by inspect/static read, no production import",
+          "status": "DONE",
+          "note": "MISSING in the first pass",
+          "evidence": "ast.parse of the snapshot: 20 classes, 10 crypto readers, module never imported",
+          "tests": [
+            "test_loader_is_mapped_statically_without_importing_it"
+          ]
+        }
+      ],
+      "status": "DONE"
+    }
+  ],
+  "exit_gate": {
+    "SAFE_TO_RUN_SYNTHETIC": true,
+    "OS_ISOLATION": true,
+    "api_and_data_unknowns_listed": true,
+    "market_execution_disabled": true,
+    "status": "PASS",
+    "all_guide_subtasks_complete": true
+  },
+  "remaining_deferrals": [
+    {
+      "item": "schema split of quarantined presets into preset_catalog / unmapped_presets",
+      "owner": "LAB-02 L02.1",
+      "reason": "needs each alpha's real parameter schema",
+      "blocks_lab01_exit": false
+    },
+    {
+      "item": "data_roles, instrument_registry_digest, minimum_economic_effect",
+      "owner": "LAB-03",
+      "reason": "require the data product inventory",
+      "blocks_lab01_exit": false,
+      "note": "guide 13.2 expects these null until the data pin; study status stays DRAFT_REQUIRES_LAB03_DATA_PIN"
+    }
+  ],
+  "requirement_counts": {
+    "DONE": 43,
+    "TOTAL": 43
+  }
+}

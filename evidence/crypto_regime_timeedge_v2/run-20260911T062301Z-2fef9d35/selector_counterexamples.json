@@ -1,0 +1,312 @@
+{
+  "schema": "crypto_regime_lab.selector_counterexamples.v1",
+  "count": 11,
+  "errors": [],
+  "by_verdict": {
+    "LAB_SELECTOR_IMMUNE": [
+      "CE-11",
+      "CE-01",
+      "CE-02",
+      "CE-03",
+      "CE-07",
+      "CE-08",
+      "CE-09",
+      "CE-10"
+    ],
+    "DEFECT_CONFIRMED": [
+      "CE-04",
+      "CE-05",
+      "CE-06"
+    ]
+  },
+  "counterexamples": [
+    {
+      "id": "CE-11",
+      "title": "a losing but valid neighbour must not be dropped",
+      "guide_test": "T29",
+      "selector_family": "lab robust score",
+      "source_symbols": [
+        "selector.robust_score.score_candidate"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "with_the_losing_probe": {
+          "F": 1.0150000000000001,
+          "R": -0.015000000000000124,
+          "P_survive": 0.8
+        },
+        "if_it_were_dropped": {
+          "F": 0.020000000000000018,
+          "R": 0.98,
+          "P_survive": 1.0
+        },
+        "R_penalty_from_keeping_it": 0.995,
+        "retained": true
+      },
+      "expectation": "every valid evaluation stays in the denominator; only structurally invalid points are excluded, and they are excluded rather than scored badly",
+      "reproducer": "score one centre with and without a valid neighbour that lost money",
+      "lab_behaviour": null,
+      "note": ""
+    },
+    {
+      "id": "CE-01",
+      "title": "sharp peak versus a broad profitable neighbourhood",
+      "guide_test": "T29",
+      "selector_family": "lab robust score",
+      "source_symbols": [
+        "selector.robust_score.score_candidate"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "peak": {
+          "G": 1.5,
+          "F": 1.4,
+          "R": 0.10000000000000009
+        },
+        "broad": {
+          "G": 1.0,
+          "F": 0.050000000000000044,
+          "R": 0.95
+        },
+        "broad_wins_on_R": true
+      },
+      "expectation": "the peak has the better raw quality but a large neighbour regret, so R prefers the broad profitable region",
+      "reproducer": "two synthetic neighbourhoods with identical episode counts",
+      "lab_behaviour": null,
+      "note": "all valid bad probes stay in the denominator; none is dropped for losing"
+    },
+    {
+      "id": "CE-02",
+      "title": "a perfectly flat region that is negative",
+      "guide_test": "T30",
+      "selector_family": "lab robust score",
+      "source_symbols": [
+        "selector.robust_score.score_candidate"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "G": -0.4,
+        "F": 0.009999999999999953,
+        "R": -0.41,
+        "status": "FAILS_ECONOMIC_QUALITY"
+      },
+      "expectation": "flatness alone must not qualify: the region fails economic quality",
+      "reproducer": "a flat neighbourhood at utility -0.4",
+      "lab_behaviour": null,
+      "note": "R is high because F is tiny, which is exactly why the quality gate is separate"
+    },
+    {
+      "id": "CE-03",
+      "title": "duplicate samples must not inflate the local panel",
+      "guide_test": "T29 (panel accounting)",
+      "selector_family": "lab probe design",
+      "source_symbols": [
+        "selector.probe_design.ProbeDesign.probes_for"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "probes": 10,
+        "unique_ids": 10,
+        "duplicates": 0
+      },
+      "expectation": "every probe in a local panel is a distinct point",
+      "reproducer": "request 10 probes inside a tight radius and count unique ids",
+      "lab_behaviour": null,
+      "note": ""
+    },
+    {
+      "id": "CE-04",
+      "title": "a fixed dimension dilutes every distance",
+      "guide_test": "T31",
+      "selector_family": "quantbt.optimization.candidate_selection",
+      "source_symbols": [
+        "_param_distance",
+        "candidate_selection.py:281-300"
+      ],
+      "verdict": "DEFECT_CONFIRMED",
+      "observed": {
+        "distance_with_fixed_dim": 0.57735,
+        "distance_without_fixed_dim": 0.707107,
+        "ratio": 0.8165
+      },
+      "expectation": "a parameter that never varies carries no information and must not enter the denominator",
+      "reproducer": "call the installed _param_distance with and without a constant parameter in param_names",
+      "lab_behaviour": {
+        "lab_distance": 0.003384,
+        "fixed_excluded_from_denominator": true
+      },
+      "note": "the WFO family is NOT affected: _is_clusterable_param drops any parameter that does not vary before the matrix is built"
+    },
+    {
+      "id": "CE-05",
+      "title": "one far-away sample rescales the whole geometry",
+      "guide_test": "T31",
+      "selector_family": "quantbt.optimization.candidate_selection",
+      "source_symbols": [
+        "_numeric_span",
+        "_param_distance",
+        "candidate_selection.py:302-306"
+      ],
+      "verdict": "DEFECT_CONFIRMED",
+      "observed": {
+        "distance_before": 0.707107,
+        "distance_after_one_far_sample": 0.007215,
+        "shrink_factor": 98.0,
+        "span_before": 2.0,
+        "span_after": 196.0
+      },
+      "expectation": "geometry must come from the DECLARED bounds, so an unrelated sample cannot rescale it",
+      "reproducer": "add one distant record and re-measure the distance between two unchanged points",
+      "lab_behaviour": {
+        "lab_distance_unchanged": 0.003384,
+        "wfo_family_normalised_values_unchanged": true
+      },
+      "note": "the WFO family normalises by the declared (low, high) in param_ranges and is immune; only the CandidateSelector family rescales"
+    },
+    {
+      "id": "CE-06",
+      "title": "an inactive parameter manufactures distance",
+      "guide_test": "T31/T32",
+      "selector_family": "quantbt.optimization.candidate_selection",
+      "source_symbols": [
+        "_param_distance",
+        "candidate_selection.py:290-299"
+      ],
+      "verdict": "DEFECT_CONFIRMED",
+      "observed": {
+        "installed_distance": 0.57735,
+        "cause": "a missing value is not numeric, so the branch returns a full unit of distance"
+      },
+      "expectation": "an inactive conditional parameter must not create distance; a branch MISMATCH is a declared, locked penalty instead",
+      "reproducer": "compare two points that differ only in whether a conditional branch is active",
+      "lab_behaviour": {
+        "lab_distance": 0.5,
+        "explicit_branch_penalty": true
+      },
+      "note": ""
+    },
+    {
+      "id": "CE-07",
+      "title": "no local consensus available",
+      "guide_test": "T29 (stability evidence)",
+      "selector_family": "lab robust score",
+      "source_symbols": [
+        "selector.robust_score.score_candidate"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "status": "INSUFFICIENT_LOCAL_EVIDENCE",
+        "F": null,
+        "R": null
+      },
+      "expectation": "with no neighbour sharing an episode there is no stability evidence, so the candidate is INSUFFICIENT_LOCAL_EVIDENCE rather than silently excellent",
+      "reproducer": "score a candidate whose neighbourhood is empty",
+      "lab_behaviour": null,
+      "note": ""
+    },
+    {
+      "id": "CE-08",
+      "title": "a centroid nobody evaluated is not deployable",
+      "guide_test": "T33",
+      "selector_family": "lab representative",
+      "source_symbols": [
+        "selector.representative.assert_evaluated"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "centroid": {
+          "fast": 6,
+          "slow": 25,
+          "dev": 50,
+          "time_stop": false
+        },
+        "centroid_in_evaluated_set": false,
+        "deployment_refused": true
+      },
+      "expectation": "a geometric centre is a proposal; it must be evaluated before it can be selected",
+      "reproducer": "compute the centroid of three evaluated candidates and try to deploy it",
+      "lab_behaviour": null,
+      "note": ""
+    },
+    {
+      "id": "CE-09",
+      "title": "a raw-quality guard disagrees with the robust objective",
+      "guide_test": "T35",
+      "selector_family": "lab robust score",
+      "source_symbols": [
+        "selector.robust_score.score_candidate"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "incumbent": {
+          "G": 0.9,
+          "R": 0.88
+        },
+        "challenger": {
+          "G": 1.05,
+          "R": 0.19999999999999996
+        },
+        "winner_on_raw_quality": "challenger",
+        "winner_on_robust_objective": "incumbent",
+        "guards_disagree": true
+      },
+      "expectation": "when a raw guard and the robust objective disagree the policy must be VISIBLE, and the incumbent must be judged on the same objective and budget as the challenger",
+      "reproducer": "score an incumbent on a plateau against a challenger on a peak",
+      "lab_behaviour": null,
+      "note": "the incumbent received the same episode count and the same neighbourhood budget"
+    },
+    {
+      "id": "CE-10",
+      "title": "full-sample tuned presets must not seed the primary bank",
+      "guide_test": "T36",
+      "selector_family": "lab preset quarantine",
+      "source_symbols": [
+        "configs/preset_catalog.json"
+      ],
+      "verdict": "LAB_SELECTOR_IMMUNE",
+      "observed": {
+        "presets_checked": 25,
+        "eligible_for_primary_bank": [],
+        "all_quarantined": true
+      },
+      "expectation": "every supplied preset is provenance=user_full_sample_tpe and is barred from the primary candidate bank and from warm-starting an early fold",
+      "reproducer": "read the committed preset catalog and check the eligibility flags",
+      "lab_behaviour": null,
+      "note": ""
+    }
+  ],
+  "selector_families": {
+    "candidate_selection": {
+      "symbols": [
+        "CandidateSelector",
+        "RobustSelectionConfig",
+        "_param_distance",
+        "_numeric_span"
+      ],
+      "geometry": "normalised by the SAMPLED span of observed records",
+      "consumers": [
+        "optimization.multiseed",
+        "optimization.__init__"
+      ]
+    },
+    "walkforward": {
+      "symbols": [
+        "_param_matrix",
+        "_normalize_param_values",
+        "_is_clusterable_param",
+        "select_flat_minima_record",
+        "select_is_only_robust_record",
+        "select_is_plateau_robust_record",
+        "select_full_sample_robust_record"
+      ],
+      "geometry": "normalised by the DECLARED param_ranges; non-varying parameters dropped",
+      "consumers": [
+        "WalkForwardEngine"
+      ]
+    }
+  },
+  "scoping_rule": "a claim about 'the selector' would be wrong: the two families measure distance differently, so every finding names the family it applies to",
+  "lab_run_id": "run-20260911T062301Z-2fef9d35",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T06:23:21.092583+00:00"
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "crypto_regime_lab.lab09_confirmation_spec.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "unlocked_at_utc": "2026-09-11T03:45:26.023039+00:00",
+  "immutable": "this file is never re-issued. Re-unlocking would let the protocol be revised after a result is visible, which is the one thing the freeze exists to prevent (L09.1)",
+  "interval": {
+    "start": "2024-01-01",
+    "end": "2026-09-09",
+    "per_symbol_coverage": {
+      "BTCUSDT": {
+        "data_to": "2026-09-09",
+        "outer_days": 982
+      },
+      "ETHUSDT": {
+        "data_to": "2026-09-09",
+        "outer_days": 982
+      },
+      "SOLUSDT": {
+        "data_to": "2026-09-09",
+        "outer_days": 982
+      },
+      "BNBUSDT": {
+        "data_to": "2026-09-09",
+        "outer_days": 982
+      },
+      "DOGEUSDT": {
+        "data_to": "2026-09-09",
+        "outer_days": 982
+      }
+    },
+    "permits": [
+      "frozen-protocol evaluation"
+    ]
+  },
+  "prior_access_audit": {
+    "checked": [
+      {
+        "artifact": "lab05_regime_model_registry.json",
+        "declared": "development",
+        "latest_date_used": null,
+        "declared_flag": false,
+        "inside_development": true
+      },
+      {
+        "artifact": "lab07_continuous_trace.json",
+        "declared": [
+          "2021-01-01",
+          "2023-12-31"
+        ],
+        "latest_date_used": "2023-12-31",
+        "declared_flag": null,
+        "inside_development": true
+      },
+      {
+        "artifact": "lab08_pilot_protocol.json",
+        "declared": "discovery",
+        "latest_date_used": null,
+        "declared_flag": true,
+        "inside_development": true
+      },
+      {
+        "artifact": "lab08_factorial_full.json",
+        "declared": "cells run on the development window",
+        "cells": 15,
+        "inside_development": true,
+        "note": "the factorial's own runner slices bars to the development role"
+      }
+    ],
+    "any_phase_read_the_outer_window": false
+  },
+  "unused_by_this_lab": true,
+  "holdout_status": "NESTED_RETROSPECTIVE",
+  "why_not_a_clean_holdout": "NOT an untouched holdout: the supplied presets were TPE-tuned on the full sample with an unknown cutoff",
+  "what_that_costs": "the supplied presets were tuned on the full sample with an unknown cutoff, so any arm that touches them is nested retrospective and cannot support an out-of-sample claim. The USER_PRESET_REFERENCE control is exactly that arm, and it is labelled retrospective; the other arms deploy selections made inside development",
+  "what_would_be_a_clean_holdout": "an interval that begins after this protocol was frozen and that no preset could have seen. That is a PROSPECTIVE observation, specified below and deliberately NOT executed here",
+  "prospective_protocol": {
+    "status": "SPECIFIED_NOT_EXECUTED",
+    "earliest_valid_start": "2026-09-11",
+    "what_it_would_require": [
+      "the frozen protocol, unchanged, run forward from a date after this stamp",
+      "no parameter, threshold or seed touched in between",
+      "the same account contract, costs and engine",
+      "a pre-registered stopping rule so the observation cannot be ended on a good day"
+    ],
+    "not_self_executed": true,
+    "why": "guide L09.1: the lab specifies a prospective protocol and does not execute it live. Nothing here starts a live process, and the lab has no market execution path"
+  },
+  "frozen_protocol": {
+    "source": "configs/lab08_pilot_protocol.json",
+    "frozen_at_utc": "2026-09-10T14:50:28.446136+00:00",
+    "registered_contrasts": [
+      "B-A",
+      "C-A",
+      "D-B",
+      "D-C",
+      "(D-C)-(B-A)"
+    ],
+    "seeds": {
+      "probe_design": 20260910,
+      "model_multi_start": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "placebo": 20260911,
+      "rule": "every seed is fixed here; a seed chosen later is a search decision"
+    },
+    "economics": {
+      "source": "configs/study_registration.json execution block, frozen at LAB-01",
+      "identical_across_arms": true,
+      "rule": "fees, slippage, funding treatment and gross exposure constraints are the same for every arm and every control (guide 10.3)"
+    },
+    "cells": 20
+  },
+  "development_outcome_being_confirmed": {
+    "outcome": "NO_PROMISING_DESIGN",
+    "note": "LAB-08 froze no design. The confirmation therefore tests whether the NEGATIVE finding reproduces on an interval the lab has not used -- a negative result needs confirming exactly as a positive one does"
+  },
+  "no_retuning_after_unlock": true,
+  "retuning_rule": "from this stamp the only permitted action is to run the frozen protocol and report the outcome. Any parameter change after it invalidates the confirmation and requires a protocol revision (L09.1)",
+  "access_log": "evidence/**/attempts.jsonl, plus every artifact's lab_run_id",
+  "lab_run_id": "run-20260911T034525Z-5c88b715",
+  "written_at_utc": "2026-09-11T03:45:26.027616+00:00"
+}

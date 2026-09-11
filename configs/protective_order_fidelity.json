@@ -1,0 +1,100 @@
+{
+  "schema": "crypto_regime_lab.protective_order_fidelity.v1",
+  "generated_at_utc": "2026-09-11T06:41:50.321014+00:00",
+  "guide_section": "4.3",
+  "declared": {
+    "execution_bars": {
+      "A-SC": "1m",
+      "A-VWAP": "1m",
+      "A-HMA": "1m",
+      "A-HASH": "1m"
+    },
+    "source": "configs/lab08_pilot_protocol.json timeframes"
+  },
+  "actual": {
+    "protection_resolved_on": "the DECISION bar",
+    "evidence": "integration/continuous_account.py and experiments/evaluator.py both build engine_frame from the decision-bar frame and pass it to run_intrabar; no 1-minute frame is constructed anywhere in the account path",
+    "source_check_passes": true
+  },
+  "declared_matches_actual": false,
+  "finding": "the protocol declares 1-minute execution bars and the account resolves protective orders on the decision bar. Within a 15-minute bar that touched both a stop and a take-profit, the engine's intrabar contract picks one by its own ordering rule rather than by the minute path",
+  "direction": "unknown in sign and bounded in scope. It is NOT a contrast risk: every arm, every control and both selectors run through the same engine on the same frame, so the resolution cancels in B-A, C-A, D-B and D-C. It is a LEVEL risk, and guide 4.3's warning is precisely about crediting a fill-fidelity difference to regime work",
+  "exposure": {
+    "per_alpha": {
+      "A-HASH": {
+        "status": "NOT_READY",
+        "reason": "LAB-02 certification NOT_READY_SPECIFIC_BLOCKER: BLOCKED_CAPABILITY: the canonical three-rung partial ladder needs a next-open entry, a protective stop and partial reduce-only exits on ONE route. intrabar_bracket_v1 provides the first two but a single take-profit level; the orders route provides the ladder but fills the entry at the stamped bar's close and rejects stop_market. Measured, not assumed."
+      },
+      "A-HMA": {
+        "status": "MEASURED",
+        "window": [
+          "2021-01-01",
+          "2021-06-30"
+        ],
+        "symbol": "BTCUSDT",
+        "decision_bars": "1h",
+        "fills": 60,
+        "fill_reasons": {
+          "entry": 30,
+          "stop_loss": 7,
+          "take_profit": 9,
+          "technical_exit": 14
+        },
+        "protective_fills": 16,
+        "protective_share": 0.26666666666666666,
+        "exposed_to_the_resolution": true,
+        "reading": "only a fill resolved by a resting stop or take-profit depends on the bar resolution. A strategy whose exits are all technical is unaffected"
+      },
+      "A-SC": {
+        "status": "MEASURED",
+        "window": [
+          "2021-01-01",
+          "2021-06-30"
+        ],
+        "symbol": "BTCUSDT",
+        "decision_bars": "15m",
+        "fills": 48,
+        "fill_reasons": {
+          "entry": 24,
+          "technical_exit": 24
+        },
+        "protective_fills": 0,
+        "protective_share": 0.0,
+        "exposed_to_the_resolution": false,
+        "reading": "only a fill resolved by a resting stop or take-profit depends on the bar resolution. A strategy whose exits are all technical is unaffected"
+      },
+      "A-VWAP": {
+        "status": "MEASURED",
+        "window": [
+          "2021-01-01",
+          "2021-06-30"
+        ],
+        "symbol": "BTCUSDT",
+        "decision_bars": "15m",
+        "fills": 2,
+        "fill_reasons": {
+          "entry": 1,
+          "stop_loss": 1
+        },
+        "protective_fills": 1,
+        "protective_share": 0.5,
+        "exposed_to_the_resolution": true,
+        "reading": "only a fill resolved by a resting stop or take-profit depends on the bar resolution. A strategy whose exits are all technical is unaffected"
+      }
+    },
+    "alphas_measured": 3,
+    "alphas_exposed": [
+      "A-HMA",
+      "A-VWAP"
+    ],
+    "alphas_not_exposed": [
+      "A-SC"
+    ]
+  },
+  "two_cohort_requirement": {
+    "guide_text": "guide 4.3: keep an exact legacy-resolution cohort and a common higher-fidelity corrected cohort, and never attribute a fill-fidelity gain to a regime edge",
+    "status": "NOT_BUILT",
+    "why_not_built": "a 1-minute cohort means re-indexing every decision-bar intent onto the minute frame and re-running every account. That is an implementation, not a measurement, and the lab records the gap and proposes the revision rather than improvising one mid-phase (OP-19)",
+    "what_protects_the_conclusion_meanwhile": "the resolution is identical across arms, so no contrast can be explained by it, and the alphas that rest no protection are unaffected even in level"
+  }
+}

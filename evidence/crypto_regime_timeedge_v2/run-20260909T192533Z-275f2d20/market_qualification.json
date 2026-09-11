@@ -1,0 +1,612 @@
+{
+  "schema": "crypto_regime_lab.market_qualification.v1",
+  "data_role": "development",
+  "slice_policy": "a bounded development slice per alpha-symbol; it checks gaps, HTF availability, warmup and the account trace only, and may never be reused as evidence for a result",
+  "smoke_parameters": {
+    "A-SC": {
+      "coeff": 2,
+      "AP": 14,
+      "novolumedata": false,
+      "src_col": "close",
+      "alpha.condition_threshold": 50
+    },
+    "A-HMA": {
+      "min_length": 8,
+      "max_length": 24,
+      "minor_min": 4,
+      "minor_max": 12,
+      "flat": 8.0,
+      "atr_fast": 6,
+      "atr_slow": 18,
+      "mult": 1.5,
+      "max_sl": 2.0,
+      "take_profit": 3.0,
+      "min_profit": 0.5,
+      "tick_size": 0.01,
+      "sl_input": "Half Distance Zone"
+    },
+    "A-VWAP": {
+      "rsi_len": 14,
+      "rsi_os": 35,
+      "rsi_ob": 65,
+      "dev_mult": 1.5,
+      "atr_len": 14,
+      "stop_atr": 2.0,
+      "target_r": 2.0,
+      "htf_ema_len": 20,
+      "htf_tf": "1h",
+      "exit_at_vwap": false,
+      "time_stop_on": true,
+      "time_stop_bars": 16
+    },
+    "A-HASH": {
+      "mom_len": 10,
+      "ema_len": 30,
+      "cooldown_bars": 5,
+      "stop_loss_perc": 2.0,
+      "rr_ratio": 3.0,
+      "tp1_ratio": 1.0,
+      "tp1_qty_perc": 50,
+      "tp2_ratio": 2.0,
+      "tp2_qty_perc": 50,
+      "mom_threshold_mult": 1.0
+    }
+  },
+  "smoke_parameter_policy": "these lengths keep the smoke fast; they are not the study's parameters and never enter a search space",
+  "decision_intervals": {
+    "A-SC": "15min",
+    "A-VWAP": "15min",
+    "A-HMA": "1h",
+    "A-HASH": "15min"
+  },
+  "cells_attempted": 20,
+  "cells_qualified": 20,
+  "results": [
+    {
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 29,
+        "warmup_blocked_through": 28,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "trend still inside the zero-seed comparison window (SD-SC-06)",
+          "warmup requires 17 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 23,
+        "warmup_blocked_through": 22,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "trend still inside the zero-seed comparison window (SD-SC-06)",
+          "warmup requires 17 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 22,
+        "warmup_blocked_through": 21,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "trend still inside the zero-seed comparison window (SD-SC-06)",
+          "warmup requires 17 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 22,
+        "warmup_blocked_through": 21,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "trend still inside the zero-seed comparison window (SD-SC-06)",
+          "warmup requires 17 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 29,
+        "warmup_blocked_through": 28,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "trend still inside the zero-seed comparison window (SD-SC-06)",
+          "warmup requires 17 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-05-02 11:00:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 58,
+        "warmup_blocked_through": 57,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 58 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-05-02 11:00:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 58,
+        "warmup_blocked_through": 57,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 58 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-05-02 11:00:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 58,
+        "warmup_blocked_through": 57,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 58 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-05-02 11:00:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 58,
+        "warmup_blocked_through": 57,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 58 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-05-02 11:00:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 58,
+        "warmup_blocked_through": 57,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 58 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 284,
+        "warmup_blocked_through": 283,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "HTF EMA has seen 12 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 13 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 14 closed buckets; 70 are needed for span convergence at epsilon=0.001"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 284,
+        "warmup_blocked_through": 283,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "HTF EMA has seen 12 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 13 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 14 closed buckets; 70 are needed for span convergence at epsilon=0.001"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 284,
+        "warmup_blocked_through": 283,
+        "no_intent_during_warmup": true,
+        "entries": 0,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "HTF EMA has seen 12 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 13 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 14 closed buckets; 70 are needed for span convergence at epsilon=0.001"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 284,
+        "warmup_blocked_through": 283,
+        "no_intent_during_warmup": true,
+        "entries": 0,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "HTF EMA has seen 12 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 13 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 14 closed buckets; 70 are needed for span convergence at epsilon=0.001"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 284,
+        "warmup_blocked_through": 283,
+        "no_intent_during_warmup": true,
+        "entries": 0,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "HTF EMA has seen 12 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 13 closed buckets; 70 are needed for span convergence at epsilon=0.001",
+          "HTF EMA has seen 14 closed buckets; 70 are needed for span convergence at epsilon=0.001"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 31,
+        "warmup_blocked_through": 30,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 0,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 31 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 31,
+        "warmup_blocked_through": 30,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 31 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 31,
+        "warmup_blocked_through": 30,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 31 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 31,
+        "warmup_blocked_through": 30,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 31 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "status": "QUALIFIED",
+      "bars": 1500,
+      "slice_start": "2022-03-01 00:00:00+00:00",
+      "slice_end": "2022-03-16 14:45:00+00:00",
+      "data_role": "development",
+      "checks": {
+        "decisions": 1500,
+        "warmup_blocked_bars": 31,
+        "warmup_blocked_through": 30,
+        "no_intent_during_warmup": true,
+        "entries": 1,
+        "engine_fills": 2,
+        "account_trace_bars": 1500,
+        "account_trace_finite": true,
+        "terminal_position": 0.0,
+        "missing_bars_in_slice": 0,
+        "htf_blocked_reasons": [
+          "warmup requires 31 bars"
+        ]
+      },
+      "error": null,
+      "not_model_selection": true
+    }
+  ],
+  "not_ready_alphas": [
+    "A-HASH"
+  ],
+  "not_ready_rule": "an alpha carrying a LAB-02 blocker is still listed with all five of its cells; it is not silently dropped from the matrix",
+  "status": "PASS",
+  "slice_start": "2022-03-01",
+  "slice_bars": 1500,
+  "snapshot_id": "server_core_v1",
+  "lab_run_id": "run-20260909T192533Z-275f2d20",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:27:43.175158+00:00"
+}

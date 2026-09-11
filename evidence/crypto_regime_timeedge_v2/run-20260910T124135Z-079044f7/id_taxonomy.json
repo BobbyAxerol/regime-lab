@@ -1,0 +1,178 @@
+{
+  "schema": "crypto_regime_lab.identity_taxonomy.v1",
+  "guide_section": "13.1",
+  "rule": "trial / candidate / execution / selection / activation are never collapsed into one ID; a missing identity is recorded as owed, never improvised at join time",
+  "identities": {
+    "study_id": {
+      "names": "the research protocol",
+      "owner": "LAB-01",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/alpha_registry.json",
+        "configs/compute_budget_registration.json",
+        "configs/data_readlock_policy.json",
+        "configs/freeze_holdout_policy.json",
+        "configs/hypothesis_registry.json",
+        "configs/lab02_certification_summary.json"
+      ]
+    },
+    "experiment_id": {
+      "names": "arm + cell + cohort + config version",
+      "owner": "LAB-08",
+      "status": "OWED",
+      "found_in": []
+    },
+    "trial_id": {
+      "names": "one optimizer proposal instance",
+      "owner": "LAB-04",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/api_binding_map.json",
+        "configs/lab04_installed_wfo_trace.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T171641Z-9c16bb2f/api_binding_map.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T171910Z-119241eb/api_binding_map.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T173741Z-e9e5f3db/api_binding_map.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T184758Z-5c2c862a/api_binding_map.json"
+      ]
+    },
+    "candidate_id": {
+      "names": "strategy version + typed effective params",
+      "owner": "LAB-04",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/lab04_calendar_baseline.json",
+        "configs/lab04_incumbent_parity.json",
+        "configs/lab06_bank_registry.json",
+        "configs/lab06_policy_spec.json",
+        "configs/lab06_response_model.json",
+        "configs/lab07_continuous_trace.json"
+      ]
+    },
+    "execution_id": {
+      "names": "candidate + market + initial state + economics + seed",
+      "owner": "LAB-04",
+      "status": "DERIVABLE",
+      "found_in": []
+    },
+    "probe_design_id": {
+      "names": "a local validation design, independent of the sampler",
+      "owner": "LAB-04",
+      "status": "DERIVABLE",
+      "found_in": []
+    },
+    "model_id": {
+      "names": "a fit artifact: features, scaler, centroids, state namespace",
+      "owner": "LAB-05",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T073815Z-658b4831/regime_model_registry.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T074007Z-c02d4064/regime_model_registry.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T075229Z-e7218a07/lab05_selftest.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T080539Z-db2b4009/lab05_selftest.json"
+      ]
+    },
+    "observation_id": {
+      "names": "one decision-vintage regime emission",
+      "owner": "LAB-05",
+      "status": "DERIVABLE",
+      "found_in": []
+    },
+    "response_id": {
+      "names": "a conditional estimate plus its supporting episodes",
+      "owner": "LAB-06",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/lab06_decision_ledger.json",
+        "configs/lab06_response_model.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095205Z-b4c8c05d/decision_ledger.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095205Z-b4c8c05d/response_model.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095638Z-ab1e3801/decision_ledger.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095638Z-ab1e3801/response_model.json"
+      ]
+    },
+    "selection_id": {
+      "names": "an evidence-based keep/switch proposal",
+      "owner": "LAB-06",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/lab06_decision_ledger.json",
+        "configs/parameter_activation_tape.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095205Z-b4c8c05d/decision_ledger.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095638Z-ab1e3801/decision_ledger.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T095959Z-7fbca200/decision_ledger.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T100300Z-9828cf8e/decision_ledger.json"
+      ]
+    },
+    "activation_id": {
+      "names": "the params actually in force at a timestamp/phase",
+      "owner": "LAB-07",
+      "status": "PRESENT",
+      "found_in": [
+        "configs/lab07_continuous_trace.json",
+        "configs/operational_segments.json",
+        "configs/parameter_activation_tape.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T115825Z-75d5a47d/lab07_continuous_trace.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T115825Z-75d5a47d/operational_segments.json",
+        "evidence/crypto_regime_timeedge_v2/run-20260910T115825Z-75d5a47d/parameter_activation_tape.json"
+      ]
+    },
+    "attempt_id": {
+      "names": "one run or retry of an operation",
+      "owner": "LAB-01",
+      "status": "PRESENT",
+      "found_in": [
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164406Z-0fc281dc/attempts.jsonl",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164431Z-f5644fc9/attempts.jsonl",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164520Z-844efbdb/attempts.jsonl",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164630Z-05b732c1/attempts.jsonl",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164816Z-506645c3/attempts.jsonl",
+        "evidence/crypto_regime_timeedge_v2/run-20260909T164817Z-36027a6a/attempts.jsonl"
+      ]
+    }
+  },
+  "present_count": 8,
+  "derivable_count": 3,
+  "owed_count": 1,
+  "total": 12,
+  "derivations_demonstrated": {
+    "probe_design_id": {
+      "derived": "pd-6d72da79b988ed47",
+      "from": "configs/lab04_probe_designs.json + lab04_calendar_baseline.json",
+      "inputs": {
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "seed": 20260910,
+        "anchors": 2
+      }
+    },
+    "execution_id": {
+      "derived": "ex-8b422e952c4af67e",
+      "from": "configs/lab04_calendar_baseline.json account_contract",
+      "economics_is_part_of_the_identity": true,
+      "why": "the same candidate over the same bars at a different fee is a different measurement; sharing an ID would let a cost-stress run be compared against a headline one as if they were the same thing"
+    },
+    "observation_id": {
+      "derived": "ob-6714b7083b2e9de7",
+      "from": "an emission_tape.json record in evidence/",
+      "inputs": {
+        "state_namespace": "jm@2023-07-01",
+        "observed_at": "2023-07-01 00:00:00",
+        "available_at": "2023-07-01 04:00:00"
+      }
+    }
+  },
+  "owed_by_phase": [
+    "LAB-08"
+  ],
+  "derivable": [
+    "execution_id",
+    "observation_id",
+    "probe_design_id"
+  ],
+  "note": "an identity marked OWED is minted by a phase that has not run. The three that completed phases owed -- probe_design_id, execution_id, observation_id -- are DERIVED from records that already exist (see derivations_demonstrated) rather than back-filled into artifacts, so no measurement moves and no run is repeated",
+  "lab_run_id": "run-20260910T124135Z-079044f7",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T12:41:40.301606+00:00"
+}

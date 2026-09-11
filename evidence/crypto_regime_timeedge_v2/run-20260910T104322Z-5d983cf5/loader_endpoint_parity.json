@@ -1,0 +1,507 @@
+{
+  "schema": "crypto_regime_lab.loader_endpoint_parity.v1",
+  "checked_at_utc": "2026-09-10T10:43:24.685194+00:00",
+  "loader_snapshot_sha256": "99612d99ada25732e457740c129fadf808725474d7647097253d919bb984bd4e",
+  "loader_snapshot_path": "vendor_readonly/loader_snapshot/data_loader.py",
+  "storage_root": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage",
+  "probe_rule": "each symbol's first, middle and last closed partition",
+  "how_the_lab_reads": "the lab parses this loader STATICALLY to learn which storage path holds which product, then reads the parquet directly from its own byte copy; it never calls the loader at run time",
+  "why_this_is_measured": "so the choice above is auditable rather than asserted: if the endpoint returned the same numbers the choice would be cosmetic, and it does not",
+  "per_symbol": [
+    {
+      "symbol": "BTCUSDT",
+      "status": "COMPARED",
+      "partition": "2020-01",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44594,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.0043204535151674505
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44594,
+      "bars_a_cast_would_zero": 92,
+      "volume_sum_parquet": 5165281.358,
+      "volume_sum_loader": 5142965.0
+    },
+    {
+      "symbol": "BTCUSDT",
+      "status": "COMPARED",
+      "partition": "2023-05",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44598,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.0016675436466135273
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44598,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 13328157.283999998,
+      "volume_sum_loader": 13305932.0
+    },
+    {
+      "symbol": "BTCUSDT",
+      "status": "COMPARED",
+      "partition": "2026-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44594,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.005145980653956203
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44594,
+      "bars_a_cast_would_zero": 41,
+      "volume_sum_parquet": 4330158.914,
+      "volume_sum_loader": 4307876.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "COMPARED",
+      "partition": "2020-01",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44548,
+          "max_absolute_difference": 0.9990000000000236,
+          "share_of_total_lost": 0.00099148386465064
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44548,
+      "bars_a_cast_would_zero": 58,
+      "volume_sum_parquet": 22437318.238999996,
+      "volume_sum_loader": 22415072.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "COMPARED",
+      "partition": "2023-05",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44603,
+          "max_absolute_difference": 0.9990000000034343,
+          "share_of_total_lost": 0.00024094665297250036
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44603,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 92904731.08400002,
+      "volume_sum_loader": 92882346.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "COMPARED",
+      "partition": "2026-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44591,
+          "max_absolute_difference": 0.9990000000034343,
+          "share_of_total_lost": 0.0002053148805971473
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44591,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 108257525.881,
+      "volume_sum_loader": 108235299.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "COMPARED",
+      "partition": "2020-02",
+      "rows": 28319,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 28032,
+          "max_absolute_difference": 0.9900000000000091,
+          "share_of_total_lost": 0.0004760748509392935
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 28032,
+      "bars_a_cast_would_zero": 1,
+      "volume_sum_parquet": 29447596.26,
+      "volume_sum_loader": 29433577.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "COMPARED",
+      "partition": "2023-06",
+      "rows": 43200,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 42737,
+          "max_absolute_difference": 0.9900000000016007,
+          "share_of_total_lost": 0.00028018658467390573
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 42737,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 76833371.68,
+      "volume_sum_loader": 76811844.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "COMPARED",
+      "partition": "2026-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44174,
+          "max_absolute_difference": 0.9900000000000091,
+          "share_of_total_lost": 0.0015192728020725927
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44174,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 14577566.3,
+      "volume_sum_loader": 14555419.0
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "COMPARED",
+      "partition": "2020-09",
+      "rows": 24060,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {},
+      "stored_volume_dtype": "int64",
+      "bars_with_a_fractional_volume": 0,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 95130081.0,
+      "volume_sum_loader": 95130081.0
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "COMPARED",
+      "partition": "2023-09",
+      "rows": 43200,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {},
+      "stored_volume_dtype": "int64",
+      "bars_with_a_fractional_volume": 0,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 844380657.0,
+      "volume_sum_loader": 844380657.0
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "COMPARED",
+      "partition": "2026-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {
+        "volume": {
+          "dtype_parquet": "float64",
+          "dtype_loader": "int64",
+          "rows_differing": 44176,
+          "max_absolute_difference": 0.9900000000052387,
+          "share_of_total_lost": 3.735719448596503e-05
+        }
+      },
+      "stored_volume_dtype": "float64",
+      "bars_with_a_fractional_volume": 44176,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 594119293.6300001,
+      "volume_sum_loader": 594097099.0
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "COMPARED",
+      "partition": "2020-07",
+      "rows": 31140,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {},
+      "stored_volume_dtype": "int64",
+      "bars_with_a_fractional_volume": 0,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 82562487768.0,
+      "volume_sum_loader": 82562487768.0
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "COMPARED",
+      "partition": "2023-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {},
+      "stored_volume_dtype": "int64",
+      "bars_with_a_fractional_volume": 0,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 170116483937.0,
+      "volume_sum_loader": 170116483937.0
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "COMPARED",
+      "partition": "2026-08",
+      "rows": 44640,
+      "columns_identical": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "close_time",
+        "quote_volume",
+        "number_of_trades",
+        "taker_buy_base_volume",
+        "taker_buy_quote_volume",
+        "source",
+        "ingested_at"
+      ],
+      "columns_differing": {},
+      "stored_volume_dtype": "int64",
+      "bars_with_a_fractional_volume": 0,
+      "bars_a_cast_would_zero": 0,
+      "volume_sum_parquet": 144829231709.0,
+      "volume_sum_loader": 144829231709.0
+    }
+  ],
+  "finding": "MarketDataLoaderBase._normalize casts volume to int64. Symbols whose stored volume is fractional lose the fraction on every bar, and a bar under 1.0 unit with real trades becomes volume 0. Symbols already stored as int64 are unaffected, so the defect is invisible on exactly the symbols one would test first.",
+  "lab_consequence": "reading the parquet directly preserves the stored resolution; panel.normalize_numeric_dtypes coerces to float64 on read so a feature's dtype never depends on which month it came from",
+  "lab_run_id": "run-20260910T104322Z-5d983cf5",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T10:43:24.693364+00:00"
+}

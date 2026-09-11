@@ -1,0 +1,498 @@
+{
+  "schema": "crypto_regime_lab.lab08_data_ablation.v1",
+  "generated_at_utc": "2026-09-10T16:54:17.043300+00:00",
+  "cohorts": {
+    "server_core": {
+      "groups": [],
+      "why": "price, path shape, activity and market coordination"
+    },
+    "server_derivatives": {
+      "groups": [
+        "g3_dlog_oi",
+        "g3_return_oi_interaction",
+        "g3_basis"
+      ],
+      "why": "adds leverage and crowding from open interest AND basis"
+    },
+    "server_derivatives_oi_only": {
+      "groups": [
+        "g3_dlog_oi",
+        "g3_return_oi_interaction"
+      ],
+      "why": "open interest and its return interaction, without basis (basis needs spot, collected for BTCUSDT only)"
+    },
+    "server_liquidity_impact": {
+      "groups": [
+        "g4_log_amihud_30"
+      ],
+      "why": "adds an impact proxy computed from the perpetual bars"
+    },
+    "server_liquidity_book": {
+      "groups": [
+        "g4_spread_bps"
+      ],
+      "why": "adds the spread, the only feature the order book supplies"
+    }
+  },
+  "per_symbol": [
+    {
+      "symbol": "BTCUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_derivatives",
+        "server_derivatives_oi_only",
+        "server_liquidity_impact"
+      ],
+      "cohorts_unavailable": {
+        "server_liquidity_book": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "g4_spread_bps"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-01 04:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7296,
+          "features": 8,
+          "variance_resolved_out_of_fold": -0.00585615962581576,
+          "interval_rows": 7296
+        },
+        "server_derivatives": {
+          "observations": 7290,
+          "features": 11,
+          "variance_resolved_out_of_fold": -0.014057235450219308,
+          "interval_rows": 7290
+        },
+        "server_derivatives_oi_only": {
+          "observations": 7290,
+          "features": 10,
+          "variance_resolved_out_of_fold": -0.013665769151645968,
+          "interval_rows": 7290
+        },
+        "server_liquidity_impact": {
+          "observations": 7296,
+          "features": 9,
+          "variance_resolved_out_of_fold": -0.061998731506897053,
+          "interval_rows": 7296
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_derivatives": -0.008201075824403548,
+        "server_derivatives_oi_only": -0.007809609525830208,
+        "server_liquidity_impact": -0.056142571881081293
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_derivatives_oi_only",
+        "server_liquidity_impact"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g3_basis"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_liquidity_book": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "g4_spread_bps"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        }
+      },
+      "comparable_interval": [
+        "2021-12-01 04:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 4560,
+          "features": 8,
+          "variance_resolved_out_of_fold": 0.075498944694523,
+          "interval_rows": 4560
+        },
+        "server_derivatives_oi_only": {
+          "observations": 4554,
+          "features": 10,
+          "variance_resolved_out_of_fold": -0.005881874039443291,
+          "interval_rows": 4554
+        },
+        "server_liquidity_impact": {
+          "observations": 4560,
+          "features": 9,
+          "variance_resolved_out_of_fold": 0.01296825314681771,
+          "interval_rows": 4560
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_derivatives_oi_only": -0.0813808187339663,
+        "server_liquidity_impact": -0.0625306915477053
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity_impact"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g3_basis"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_derivatives_oi_only": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_liquidity_book": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "g4_spread_bps"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 8,
+          "variance_resolved_out_of_fold": -0.0072665771719220285,
+          "interval_rows": 7187
+        },
+        "server_liquidity_impact": {
+          "observations": 7187,
+          "features": 9,
+          "variance_resolved_out_of_fold": -0.01633519817665552,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity_impact": -0.00906862100473349
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity_impact"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g3_basis"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_derivatives_oi_only": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_liquidity_book": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "g4_spread_bps"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        }
+      },
+      "comparable_interval": [
+        "2020-02-15 12:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 8488,
+          "features": 8,
+          "variance_resolved_out_of_fold": -0.03203621947150115,
+          "interval_rows": 8488
+        },
+        "server_liquidity_impact": {
+          "observations": 8488,
+          "features": 9,
+          "variance_resolved_out_of_fold": -0.08701084890853794,
+          "interval_rows": 8488
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity_impact": -0.05497462943703679
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity_impact"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g3_basis"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_derivatives_oi_only": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        },
+        "server_liquidity_book": {
+          "rows": 0,
+          "features": [
+            "z_g1_rv_6",
+            "z_g1_direction_6",
+            "z_g1_efficiency_6",
+            "z_g2_taker_imbalance",
+            "z_g2_log_activity_30",
+            "z_g5_dispersion_6",
+            "z_g5_breadth_6",
+            "z_g5_residual_return_30",
+            "g4_spread_bps"
+          ],
+          "reason": "fewer than 500 usable rows on the development window. The collector never covered this product for this symbol, or the product is a rolling window that by design cannot accumulate history (LAB-03)"
+        }
+      },
+      "comparable_interval": [
+        "2020-07-15 12:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7582,
+          "features": 8,
+          "variance_resolved_out_of_fold": 0.04684110411018927,
+          "interval_rows": 7582
+        },
+        "server_liquidity_impact": {
+          "observations": 7582,
+          "features": 9,
+          "variance_resolved_out_of_fold": 0.011672318938314108,
+          "interval_rows": 7582
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity_impact": -0.03516878517187516
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    }
+  ],
+  "cohort_gains_over_core": [
+    {
+      "symbol": "BTCUSDT",
+      "cohort": "server_derivatives",
+      "gain": -0.008201075824403548
+    },
+    {
+      "symbol": "BTCUSDT",
+      "cohort": "server_derivatives_oi_only",
+      "gain": -0.007809609525830208
+    },
+    {
+      "symbol": "BTCUSDT",
+      "cohort": "server_liquidity_impact",
+      "gain": -0.056142571881081293
+    },
+    {
+      "symbol": "ETHUSDT",
+      "cohort": "server_derivatives_oi_only",
+      "gain": -0.0813808187339663
+    },
+    {
+      "symbol": "ETHUSDT",
+      "cohort": "server_liquidity_impact",
+      "gain": -0.0625306915477053
+    },
+    {
+      "symbol": "SOLUSDT",
+      "cohort": "server_liquidity_impact",
+      "gain": -0.00906862100473349
+    },
+    {
+      "symbol": "BNBUSDT",
+      "cohort": "server_liquidity_impact",
+      "gain": -0.05497462943703679
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "cohort": "server_liquidity_impact",
+      "gain": -0.03516878517187516
+    }
+  ],
+  "any_cohort_beats_core": false,
+  "comparable_interval_rule": "a cohort is only compared on rows every cohort in that comparison has. Guide L08.4 forbids attributing an improvement that comes from a short recent window to a feature group",
+  "complexity_ladder": [
+    {
+      "rung": "M0",
+      "model": "rule-based volatility/direction/activity thresholds",
+      "question": "does an explainable rule already separate the states a jump model finds?",
+      "expected_failure": "M0 tracks volatility only and misses coordinated moves",
+      "stop_condition": "if M0 resolves as much variance out of fold as M1, M1 is unjustified"
+    },
+    {
+      "rung": "M1",
+      "model": "regularized discrete jump model",
+      "question": "does persistence-penalised clustering resolve out-of-fold variance?",
+      "expected_failure": "states are volatility buckets with extra steps",
+      "stop_condition": "if M1 does not beat M0 out of fold, the ladder stops here"
+    },
+    {
+      "rung": "M1S",
+      "model": "sparse or group-regularized features",
+      "question": "with many blocks, does sparsity find the ones that matter?",
+      "expected_failure": "with three blocks there is nothing to select",
+      "stop_condition": "guide 8.1 scopes M1S to 'many blocks'; with 3 it is not attempted, and guide 8.3 forbids writing a naive sparse objective without a pinned research implementation"
+    },
+    {
+      "rung": "M2",
+      "model": "small HMM or GMM comparator",
+      "question": "is the structure specific to a jump model or to the features?",
+      "expected_failure": "a different family finds the same partition",
+      "stop_condition": "guide 8.1 declines to make M2 mandatory and warns against sweeping model families; not attempted"
+    }
+  ],
+  "ladder_rule": "each rung states its question, its expected failure and its stop condition BEFORE it runs. A ladder without those is a sweep (guide L08.5)",
+  "ladder_implemented": [
+    "M0",
+    "M1"
+  ],
+  "ladder_declared_unbuilt": [
+    "M1S",
+    "M2"
+  ],
+  "tuning_stage": "development only; K, lambda, training memory and cadence are never tuned against the outer window"
+}

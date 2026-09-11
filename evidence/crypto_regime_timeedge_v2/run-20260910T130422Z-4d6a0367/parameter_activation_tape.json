@@ -1,0 +1,213 @@
+{
+  "schema": "crypto_regime_lab.parameter_activation_tape.v1",
+  "activations": [
+    {
+      "activation_id": "act-fold1",
+      "selection_id": "sel-act-fold1",
+      "parameter_version": "pv-224417467fc3a106",
+      "requested_at": "2021-06-30 00:00:00+00:00",
+      "activated_at": "2021-07-02 03:30:00+00:00",
+      "activation_delay_seconds": 185400.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "act-fold2",
+      "selection_id": "sel-act-fold2",
+      "parameter_version": "pv-9e73415a51d13d13",
+      "requested_at": "2021-12-27 00:00:00+00:00",
+      "activated_at": "2021-12-27 09:00:00+00:00",
+      "activation_delay_seconds": 32400.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "act-fold3",
+      "selection_id": "sel-act-fold3",
+      "parameter_version": "pv-faa15bbfee21c050",
+      "requested_at": "2022-06-25 00:00:00+00:00",
+      "activated_at": "2022-06-28 20:00:00+00:00",
+      "activation_delay_seconds": 331200.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "act-fold4",
+      "selection_id": "sel-act-fold4",
+      "parameter_version": "pv-d3bf37ec84bb6245",
+      "requested_at": "2022-12-22 00:00:00+00:00",
+      "activated_at": "2022-12-22 15:15:00+00:00",
+      "activation_delay_seconds": 54900.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "act-fold5",
+      "selection_id": "sel-act-fold5",
+      "parameter_version": "pv-80ad8c254e432aa9",
+      "requested_at": "2023-06-20 00:00:00+00:00",
+      "activated_at": "2023-06-20 08:15:00+00:00",
+      "activation_delay_seconds": 29700.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "contract-open",
+      "selection_id": "sel-open",
+      "parameter_version": "pv-6e60b595089fc1e1",
+      "requested_at": "2021-01-01 04:00:00+00:00",
+      "activated_at": null,
+      "activation_delay_seconds": null,
+      "blocked_reason": "TRANSITION_BLOCKED_OPEN_CAMPAIGN",
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "contract-cold",
+      "selection_id": "sel-cold",
+      "parameter_version": "pv-6e60b595089fc1e1",
+      "requested_at": "2021-01-04 00:00:00+00:00",
+      "activated_at": null,
+      "activation_delay_seconds": null,
+      "blocked_reason": "WAITING_FOR_WARM_INDICATORS",
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "contract-warm",
+      "selection_id": "sel-warm",
+      "parameter_version": "pv-6e60b595089fc1e1",
+      "requested_at": "2021-01-04 00:00:00+00:00",
+      "activated_at": "2021-01-04 04:00:00+00:00",
+      "activation_delay_seconds": 14400.0,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": false
+    },
+    {
+      "activation_id": "contract-nochange",
+      "selection_id": "sel-nochange",
+      "parameter_version": "pv-6e60b595089fc1e1",
+      "requested_at": "2021-01-06 00:00:00+00:00",
+      "activated_at": null,
+      "activation_delay_seconds": null,
+      "blocked_reason": null,
+      "pending_policy": "retain_under_entry_version",
+      "no_change": true
+    }
+  ],
+  "requested": 9,
+  "effected": 6,
+  "no_change_triggers": 1,
+  "blocked_by_reason": {
+    "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 1,
+    "WAITING_FOR_WARM_INDICATORS": 1
+  },
+  "max_activation_delay_seconds": 331200.0,
+  "mean_activation_delay_seconds": 108000.0,
+  "campaigns": [
+    {
+      "campaign_id": "contract-camp",
+      "entry_parameter_digest": "pv-96f6bb74aeeb08c6",
+      "opened_at": "2021-01-01 00:00:00+00:00",
+      "closed_at": "2021-01-04 00:00:00+00:00",
+      "close_reason": "take_profit",
+      "stale": false,
+      "protective_orders": [
+        {
+          "order_id": "sl-contract",
+          "kind": "stop",
+          "parameter_version": "pv-96f6bb74aeeb08c6",
+          "price": 28000.0,
+          "active": false
+        }
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "parameter_version": "pv-18f098c54d73aaf8",
+      "required_bars": 0,
+      "warm_bars": 0,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-224417467fc3a106",
+      "required_bars": 206,
+      "warm_bars": 206,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-9e73415a51d13d13",
+      "required_bars": 36,
+      "warm_bars": 36,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-faa15bbfee21c050",
+      "required_bars": 368,
+      "warm_bars": 368,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-d3bf37ec84bb6245",
+      "required_bars": 61,
+      "warm_bars": 61,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-80ad8c254e432aa9",
+      "required_bars": 33,
+      "warm_bars": 33,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-96f6bb74aeeb08c6",
+      "required_bars": 30,
+      "warm_bars": 30,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    },
+    {
+      "parameter_version": "pv-6e60b595089fc1e1",
+      "required_bars": 30,
+      "warm_bars": 30,
+      "is_warm": true,
+      "carried_from": null,
+      "carry_contract": null
+    }
+  ],
+  "retired_versions": [
+    "pv-96f6bb74aeeb08c6"
+  ],
+  "versions_referenced_by_live_orders": [],
+  "forced_unwind_used": false,
+  "rules": {
+    "open_campaign": "an open trade stays protected by the parameters it entered with; the switch waits for terminal (guide 9.5)",
+    "warm_indicators": "a new version waits until its indicators are causally warm; it never reinitialises to activate sooner",
+    "delay_is_recorded": "requested_at and activated_at are both kept, so the price of switching is measured rather than assumed away",
+    "retirement": "a retired version stays resolvable while any live order references it",
+    "no_forced_close": "a campaign is never closed to let a switch land; forced unwind is a separate ablation with its own costs"
+  },
+  "lab_run_id": "run-20260910T130422Z-4d6a0367",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T13:05:33.193119+00:00"
+}

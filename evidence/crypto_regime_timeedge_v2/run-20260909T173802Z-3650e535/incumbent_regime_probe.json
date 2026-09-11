@@ -1,0 +1,55 @@
+{
+  "evidence_type": "INSTALLED_ENGINE_SOURCE_PROBES_NOT_MARKET_BACKTEST",
+  "quantbt_version": "1.1.1",
+  "quantbt_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+  "probes": [
+    {
+      "probe_id": "QBT_REGIME_TAIL_MUTATION",
+      "expectation": "a causal labeller leaves prefix labels unchanged when only the tail changes",
+      "prefix_length": 300,
+      "prefix_labels_changed": 97,
+      "prefix_changed_fraction": 0.323333,
+      "causal_within_window": false,
+      "observed": "prefix labels changed after a tail-only mutation"
+    },
+    {
+      "probe_id": "QBT_REGIME_LABEL_SEMANTICS",
+      "expectation": "labels are trailing-|return| quantile buckets, 0 = low vol",
+      "label_counts": {
+        "0": 200,
+        "1": 200,
+        "2": 200
+      },
+      "mean_label_calm_half": 0.3333333333333333,
+      "mean_label_wild_half": 1.6666666666666667,
+      "separates_calm_from_wild": true,
+      "constant_input_unique_labels": [
+        2
+      ],
+      "quantile_cuts_are_in_sample": true
+    },
+    {
+      "probe_id": "QBT_REGIME_DIRECTION_BLIND",
+      "expectation": "sign-flipped returns give identical labels if only |r| is used",
+      "identical_labels_under_sign_flip": true,
+      "implication": "no bull/bear direction axis; magnitude only"
+    },
+    {
+      "probe_id": "QBT_WFO_REGIME_CONFIG",
+      "regime_count_default": 3,
+      "regime_lookback_default": 20,
+      "regime_weights_default": null,
+      "candidate_selection_metric_default": "robust_decay",
+      "optimization_mode_default": "none",
+      "optimization_schedule_default": "global",
+      "fold_account_policy_default": "carry_position",
+      "sbb_simulation_default": "stationary"
+    }
+  ],
+  "reading": "QuantBT 1.1.1 ships volatility_regime_labels: trailing mean-|return| bucketed by quantiles computed over the WHOLE array it is given. It is direction-blind and its cut points are in-sample to that array, so labels at time t move when later observations change. It is a valid in-objective descriptor for an IS window, and a valid M0-style comparator, but it is NOT an online causal state estimator and must carry decision_eligible=false when used outside an in-sample scoring window.",
+  "lab_consequence": "The lab's LAB-05 jump model must be compared against this incumbent as the M0/legacy baseline, and any claim that 'QuantBT already does regime' has to state which of the two semantics is meant.",
+  "schema": "crypto_regime_lab.incumbent_regime_probe.v1",
+  "lab_run_id": "run-20260909T173802Z-3650e535",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T17:38:02.151935+00:00"
+}

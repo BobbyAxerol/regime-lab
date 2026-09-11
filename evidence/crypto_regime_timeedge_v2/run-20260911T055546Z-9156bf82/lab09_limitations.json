@@ -1,0 +1,124 @@
+{
+  "schema": "crypto_regime_lab.lab09_limitations.v1",
+  "generated_at_utc": "2026-09-11T05:55:46.423747+00:00",
+  "conclusion_level": null,
+  "limitations": [
+    {
+      "id": "LIM-01",
+      "limitation": "one of the four alphas contributes no cell",
+      "measured": {
+        "cells_not_ready": null,
+        "cells_planned": null
+      },
+      "consequence": "the matrix is 15 of 20. Every aggregate is over three alphas, and A-HASH's blocker is unresolved rather than negative",
+      "where": "configs/lab09_confirmation_results.json"
+    },
+    {
+      "id": "LIM-02",
+      "limitation": "the parameters were selected under an understated fee",
+      "measured": {
+        "one_way_rate_charged_over_registered": 0.5
+      },
+      "consequence": "the AS_DECLARED panel corrects the DEPLOYMENT accounting. It cannot correct the SELECTION: every candidate was scored under the halved fee, and rescoring them is a full re-run of the search",
+      "where": "configs/cost_binding_verification.json, configs/lab09_stress.json cost_stress.as_declared"
+    },
+    {
+      "id": "LIM-03",
+      "limitation": "no funding product exists in this storage",
+      "measured": {
+        "use_funding": false
+      },
+      "consequence": "this is a labelled no-funding cohort. A realistic net-carry claim is not available, and the gap is never booked as zero",
+      "where": "configs/study_registration.json execution.fee_funding_slippage_config"
+    },
+    {
+      "id": "LIM-04",
+      "limitation": "the interval is nested retrospective",
+      "measured": {
+        "holdout_status": "NESTED_RETROSPECTIVE"
+      },
+      "consequence": "no out-of-sample claim is available from this dataset at any interval. A prospective protocol is specified and deliberately not executed",
+      "where": "configs/lab09_confirmation_spec.json"
+    },
+    {
+      "id": "LIM-05",
+      "limitation": "the state vocabulary is not decision-eligible across refits",
+      "measured": {
+        "risk_only": "BLOCKED_BY_STATE_NAMESPACING"
+      },
+      "consequence": "the RISK_ONLY control cannot be computed: a per-state risk scale fitted on one window has almost no state key in common with a later one. The control is reported BLOCKED with its measurement rather than as a scale of 1.0 that would look like a result",
+      "where": "configs/lab09_confirmation_results.json cells[].controls.RISK_ONLY"
+    },
+    {
+      "id": "LIM-06",
+      "limitation": "arm E has no independent contribution here",
+      "measured": {
+        "switches_measured_by_lab06": 0
+      },
+      "consequence": "the response policy deploys arm D's schedule, so E-B IS D-B. It is reported as an extension and excluded from the primary family",
+      "where": "configs/lab09_uncertainty.json exploratory"
+    },
+    {
+      "id": "LIM-07",
+      "limitation": "the states do not resolve out-of-fold variance beyond price and volatility",
+      "measured": {
+        "symbols_where_a_block_improved": 0,
+        "symbols_measured": 5
+      },
+      "consequence": "guide 8.3's requirement is not met on the confirmation interval either. The registered core is not changed in response, because selecting a feature set on this result would be choosing the model on an outcome",
+      "where": "configs/lab09_group_ablation.json"
+    },
+    {
+      "id": "LIM-08",
+      "limitation": "the pooled statistic averages per-cell means over unequal day counts",
+      "measured": {
+        "episodes": null
+      },
+      "consequence": "a cell with few days gets an equal vote on less evidence. The counts are reported so the reader can see it rather than infer it",
+      "where": "configs/lab09_uncertainty.json contrasts[].episodes"
+    },
+    {
+      "id": "LIM-09",
+      "limitation": "the information stress is staged, not exhaustive",
+      "measured": {
+        "cells_covered": null,
+        "cells_total_run": null
+      },
+      "consequence": "the tape corruptions were run on a subset chosen in protocol order before any stress result was read. A cell outside the subset is UNCHECKED, not clear",
+      "where": "configs/lab09_stress.json information_stress.staging_rule"
+    },
+    {
+      "id": "LIM-10",
+      "limitation": "the account stops before the data does",
+      "measured": {
+        "window": null,
+        "window_note": null
+      },
+      "consequence": "the last days of the 1-minute product are not traded, because the 4h feature panel that feeds the state provider ends earlier",
+      "where": "configs/lab09_confirmation_results.json window_note"
+    },
+    {
+      "id": "LIM-11",
+      "limitation": "three years of development and under three of confirmation is a small sample for a daily endpoint",
+      "measured": {
+        "union_days": null
+      },
+      "consequence": "the intervals are wide relative to the minimum economic effect, which is why an inconclusive reading is the honest one rather than a negative one",
+      "where": "configs/lab09_uncertainty.json"
+    },
+    {
+      "id": "LIM-12",
+      "limitation": "the policy layer was measured on one cell",
+      "measured": {
+        "policy_panel": "MEASURED"
+      },
+      "consequence": "LAB-06's policy runs on A-SC/BTCUSDT. Its decision counts describe that cell and are not a statement about the other fourteen",
+      "where": "configs/lab09_policy_decision_ledger.json"
+    }
+  ],
+  "count": 12,
+  "rule": "each limitation names the artifact that measured it. A limitation with no measurement behind it is an opinion, and opinions belong in reports/improvement_opinions.md",
+  "lab_run_id": "run-20260911T055546Z-9156bf82",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T05:55:46.431023+00:00"
+}

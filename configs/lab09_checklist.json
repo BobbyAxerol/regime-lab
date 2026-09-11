@@ -1,0 +1,268 @@
+{
+  "schema": "crypto_regime_lab.lab09_checklist.v1",
+  "note": "Written BEFORE any LAB-09 code. Every clause of the LAB-09 tasks, guide 11.1-11.4 (conclusion discipline, paired uncertainty, transition diagnostics), the acceptance requirements LAB-09 owns (T62, T63) and the phase outputs and exit gate. scripts/audit_lab09.py reads THIS file.",
+  "written_before_code": true,
+  "phase_context": "LAB-08 concluded NO_PROMISING_DESIGN. That does not suspend this phase: a negative finding needs confirming exactly as a positive one does, and the exit gate asks for an honest scoped conclusion rather than an edge",
+  "clauses": [
+    [
+      "L09.1.1",
+      "the interval used for confirmation is confirmed as one no phase has consumed"
+    ],
+    [
+      "L09.1.2",
+      "if it is not a clean holdout, the nested-retrospective status is stated plainly"
+    ],
+    [
+      "L09.1.3",
+      "a prospective protocol artifact is produced, and it is NOT self-executed live"
+    ],
+    [
+      "L09.1.4",
+      "every access to the confirmation interval is logged"
+    ],
+    [
+      "L09.1.5",
+      "no retuning happens after the interval is unlocked"
+    ],
+    [
+      "L09.1.6",
+      "the unlock is recorded with a timestamp that precedes the confirmation run"
+    ],
+    [
+      "L09.2.1",
+      "the same 20 cells and cohorts as the development phase"
+    ],
+    [
+      "L09.2.2",
+      "the declared minimum seeds are used, unchanged"
+    ],
+    [
+      "L09.2.3",
+      "costs are untouched from the frozen account contract"
+    ],
+    [
+      "L09.2.4",
+      "the engine is untouched"
+    ],
+    [
+      "L09.2.5",
+      "a stateful deployment may adapt only according to the frozen policy"
+    ],
+    [
+      "L09.2.6",
+      "no human adjustment happens between the start and the end of the run"
+    ],
+    [
+      "L09.2.7",
+      "the protocol executed is the one LAB-08 froze, identified by its freeze stamp"
+    ],
+    [
+      "L09.3.1",
+      "daily PAIRED deltas between arms on the same dates"
+    ],
+    [
+      "L09.3.2",
+      "block inference that preserves time structure, not iid resampling of bars"
+    ],
+    [
+      "L09.3.3",
+      "common market shocks are preserved: symbols are resampled together, not independently"
+    ],
+    [
+      "L09.3.4",
+      "episode counts are reported"
+    ],
+    [
+      "L09.3.5",
+      "concentration is reported: how much of the result comes from how few periods"
+    ],
+    [
+      "L09.3.6",
+      "multiple comparisons follow the family protocol registered in advance"
+    ],
+    [
+      "L09.3.7",
+      "exploratory contrasts are disclosed as exploratory"
+    ],
+    [
+      "L09.3.8",
+      "block length is chosen on development and carries a sensitivity check"
+    ],
+    [
+      "L09.4.1",
+      "transaction costs are stressed at 1x, 1.5x and 2x the configured assumption"
+    ],
+    [
+      "L09.4.2",
+      "no zero-latency model refit is used as a default"
+    ],
+    [
+      "L09.4.3",
+      "mislabelled transitions are stressed"
+    ],
+    [
+      "L09.4.4",
+      "stale feeds are stressed"
+    ],
+    [
+      "L09.4.5",
+      "missing enrichment is stressed"
+    ],
+    [
+      "L09.4.6",
+      "no retuning happens when a stress scenario loses"
+    ],
+    [
+      "L09.5.1",
+      "a genuinely new regime episode is exercised"
+    ],
+    [
+      "L09.5.2",
+      "mixed and ambiguous states are exercised"
+    ],
+    [
+      "L09.5.3",
+      "a state-label permutation after a refit is exercised"
+    ],
+    [
+      "L09.5.4",
+      "a stale candidate bank is exercised"
+    ],
+    [
+      "L09.5.5",
+      "the case where no challenger qualifies is exercised"
+    ],
+    [
+      "L09.5.6",
+      "the case where a campaign is not flat is exercised"
+    ],
+    [
+      "L09.5.7",
+      "every fallback is checked, and the time-edge attribution is checked"
+    ],
+    [
+      "L09.6.1",
+      "fills, fees, funding, cash and PnL sum consistently"
+    ],
+    [
+      "L09.6.2",
+      "the parameter-version lifecycle reconciles: every version deployed is accounted for"
+    ],
+    [
+      "L09.6.3",
+      "every-trial cardinality reconciles against the search records"
+    ],
+    [
+      "L09.6.4",
+      "the objective recomputed from its components matches the reported value"
+    ],
+    [
+      "L09.6.5",
+      "a selected run replays to the same result"
+    ],
+    [
+      "L09.6.6",
+      "audits are retained and are not skipped by a fast profile"
+    ],
+    [
+      "L09.7.1",
+      "descriptive contribution is judged separately"
+    ],
+    [
+      "L09.7.2",
+      "predictive contribution is judged separately"
+    ],
+    [
+      "L09.7.3",
+      "selection contribution is judged separately"
+    ],
+    [
+      "L09.7.4",
+      "timing contribution is judged separately"
+    ],
+    [
+      "L09.7.5",
+      "policy contribution is judged separately"
+    ],
+    [
+      "L09.7.6",
+      "the net gain after risk and cost carries a confidence interval, or is called inconclusive"
+    ],
+    [
+      "L09.7.7",
+      "no 'fund-grade alpha proven' claim is made from a lab backtest"
+    ],
+    [
+      "G11.1.2",
+      "the confirmation interval was not used to adjust the design"
+    ],
+    [
+      "G11.2.4",
+      "the conclusion level comes from the registered vocabulary"
+    ],
+    [
+      "G11.4.1",
+      "diagnostics sit around DETECTED transitions, not around retrospective true starts"
+    ],
+    [
+      "G11.4.2",
+      "if the model only helps in one crash or one symbol, the conclusion is limited to that"
+    ],
+    [
+      "G11.4.3",
+      "losing periods and under-observed states are not hidden"
+    ],
+    [
+      "T62.1",
+      "untested heatmap cells and hindsight labels are masked or flagged, never shown as evidence"
+    ],
+    [
+      "T63.1",
+      "the full five-symbol paired bootstrap retains common shocks and dependence"
+    ],
+    [
+      "OUT.1",
+      "confirmation_spec.json is written"
+    ],
+    [
+      "OUT.2",
+      "frozen results are written"
+    ],
+    [
+      "OUT.3",
+      "uncertainty panels are written"
+    ],
+    [
+      "OUT.4",
+      "stress panels are written"
+    ],
+    [
+      "OUT.5",
+      "claim_report.json is written"
+    ],
+    [
+      "OUT.6",
+      "a leakage and contamination report is written"
+    ],
+    [
+      "OUT.7",
+      "limitations are written"
+    ],
+    [
+      "EXIT.1",
+      "the conclusion is honest and carries an explicit scope"
+    ],
+    [
+      "EXIT.2",
+      "a validity PASS is never presented as an edge PASS"
+    ],
+    [
+      "EXIT.3",
+      "a major causal or accounting error yields FAILED_VALIDITY and invalidates the affected runs"
+    ],
+    [
+      "EXIT.4",
+      "a failing result never keeps its headline while awaiting a retest"
+    ]
+  ]
+}

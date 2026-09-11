@@ -1,0 +1,198 @@
+{
+  "schema": "crypto_regime_lab.legacy_divergence.v1",
+  "alpha_id": "A-HASH",
+  "fixture": "drifting_momentum",
+  "legacy": {
+    "alpha_id": "A-HASH",
+    "tier": "legacy_reproduction",
+    "entry_bars": [
+      33,
+      71,
+      82,
+      116,
+      127,
+      134,
+      215,
+      269,
+      288,
+      312,
+      328,
+      353,
+      380
+    ],
+    "exit_bars": [
+      60,
+      77,
+      106,
+      121,
+      129,
+      210,
+      250,
+      282,
+      306,
+      323,
+      345,
+      362
+    ],
+    "entry_count": 13,
+    "minimal_fixes": [
+      "inject numpy: the module uses np without importing it (AH-01)"
+    ],
+    "eligibility": {
+      "eligible_for_diagnostics": true,
+      "eligible_for_in_sample_reference": true,
+      "eligible_for_ab_comparison": false,
+      "eligible_for_any_arm": false,
+      "reason": "guide 2.1: legacy_reproduction is diagnostic / in-sample reference only"
+    },
+    "extras": {
+      "legacy_realized_equity_final": 20039.656000000025,
+      "legacy_equity_is_diagnostic_only": true
+    }
+  },
+  "canonical": {
+    "entry_bars": [
+      33,
+      71,
+      82,
+      116,
+      127,
+      134
+    ],
+    "exit_bars": [],
+    "entry_count": 6,
+    "warmup_blocked_through_bar": 30,
+    "protective_exit_bars": [
+      60,
+      77,
+      106,
+      121,
+      129,
+      210
+    ],
+    "fixed_point_converged": false,
+    "fixed_point_passes": 6
+  },
+  "divergence": {
+    "legacy_only_entries": [
+      215,
+      269,
+      288,
+      312,
+      328,
+      353,
+      380
+    ],
+    "canonical_only_entries": [],
+    "legacy_only_inside_canonical_warmup": [],
+    "identical": false
+  },
+  "attribution": {
+    "kind": "PREFIX_THEN_BLOCKED_DIVERGENCE",
+    "common_prefix_entries": 6,
+    "common_prefix_bars": [
+      33,
+      71,
+      82,
+      116,
+      127,
+      134
+    ],
+    "first_divergent_legacy_bar": 215,
+    "fixed_point_converged": false,
+    "explained": true,
+    "attributed_blocker": "BLOCK-HASH-LADDER",
+    "detail": "the first 6 entries are identical. After that the paths separate because the canonical ladder cannot be executed: only its final rung is expressible on intrabar_bracket_v1, so the position closes at a different bar than the legacy partial exits would close it, and the cooldown then admits a different set of entries. The replay does not reach a fixed point for the same reason. This is the recorded blocker showing through, not an unexplained adapter difference."
+  },
+  "attributed_to": {
+    "SD-HASH-01": {
+      "delta_id": "SD-HASH-01",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "module references np without importing numpy and cannot be imported",
+      "after_semantics": "the lab adapter imports numpy explicitly; the original bytes are untouched",
+      "source_line_refs": "L1, L8, L131-133",
+      "reproducer": "importing the raw module raises NameError: np",
+      "expected_effect": "none on decisions; the alpha simply becomes runnable",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-01"
+      ]
+    },
+    "SD-HASH-02": {
+      "delta_id": "SD-HASH-02",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "entry booked at the signal close, protective levels derived from it",
+      "after_semantics": "close decision then next-open fill; levels derived from the actual fill price",
+      "source_line_refs": "L104-125",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "shifts every entry by one bar and re-prices SL/TP",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-05"
+      ]
+    },
+    "SD-HASH-03": {
+      "delta_id": "SD-HASH-03",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "an if/elif chain fills at most one TP stage per bar and gates the final TP on both partials",
+      "after_semantics": "an explicit ordered ladder evaluates every level a bar actually crossed, in price order",
+      "source_line_refs": "L72-94",
+      "reproducer": "fixtures/all_tp_same_bar",
+      "expected_effect": "more complete exits on wide bars; the legacy stage-lock path is retained as legacy_reproduction",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-04"
+      ]
+    },
+    "SD-HASH-04": {
+      "delta_id": "SD-HASH-04",
+      "alpha_id": "A-HASH",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "realized-only equity inside the alpha, used as if it were the account",
+      "after_semantics": "the engine ledger owns equity; the legacy column is kept as a labelled diagnostic",
+      "source_line_refs": "L48-94",
+      "reproducer": "probes/HASH_EQUITY_NO_MTM",
+      "expected_effect": "removes a mark-to-market blind spot from any objective",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AH-03"
+      ]
+    }
+  },
+  "attribution_rule": "every difference must map to a semantic delta. A legacy entry that falls inside the canonical warmup window is attributed to the readiness repairs; an unattributed difference is a defect in the adapter, not a result.",
+  "claim_boundary": "the legacy tier is diagnostic and in-sample only. Neither side is a performance claim, and a canonical result is never compared against a legacy number as if they were arms.",
+  "lab_run_id": "run-20260909T184315Z-ef4c4ff3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:43:22.806711+00:00"
+}

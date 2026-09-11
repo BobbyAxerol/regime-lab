@@ -1,0 +1,316 @@
+{
+  "schema": "crypto_regime_lab.feature_schema.v1",
+  "snapshot_id": "server_core_v1",
+  "regime_observation_interval": "4h",
+  "groups": {
+    "G1": "direction and path shape",
+    "G2": "activity / active-flow proxies",
+    "G3": "leverage and crowding",
+    "G4": "liquidity and absorption",
+    "G5": "market coordination"
+  },
+  "specs": {
+    "g1_rv_6": {
+      "name": "g1_rv_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "realized volatility over 6 regime bars",
+      "caveat": ""
+    },
+    "g1_direction_6": {
+      "name": "g1_direction_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "sum(r)/sqrt(sum r^2): a direction descriptor",
+      "caveat": "not a t-statistic"
+    },
+    "g1_efficiency_6": {
+      "name": "g1_efficiency_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "|sum r| / sum|r|: separates directional from choppy volatility",
+      "caveat": ""
+    },
+    "g1_downside_ratio_6": {
+      "name": "g1_downside_ratio_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "share of realized variance from negative returns",
+      "caveat": "a variation ratio, not a crash probability"
+    },
+    "g2_taker_imbalance": {
+      "name": "g2_taker_imbalance",
+      "group": "G2",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "taker_buy_base_volume",
+        "volume"
+      ],
+      "description": "2*takerbuy/volume - 1 on the regime bar",
+      "caveat": "both sides of every trade exist; not net capital inflow"
+    },
+    "g2_log_activity_30": {
+      "name": "g2_log_activity_30",
+      "group": "G2",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "quote_volume"
+      ],
+      "description": "log(quote volume / trailing median)",
+      "caveat": ""
+    },
+    "g2_trade_count_30": {
+      "name": "g2_trade_count_30",
+      "group": "G2",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "number_of_trades"
+      ],
+      "description": "log(trade count / trailing median)",
+      "caveat": ""
+    },
+    "g3_dlog_oi": {
+      "name": "g3_dlog_oi",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "sum_open_interest"
+      ],
+      "description": "change in log open interest",
+      "caveat": "a rise is not evidence of new longs"
+    },
+    "g3_basis": {
+      "name": "g3_basis",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "close",
+        "spot_close"
+      ],
+      "description": "F/S - 1 on synchronised closes",
+      "caveat": "requires a spot series for the same symbol"
+    },
+    "g3_return_oi_interaction": {
+      "name": "g3_return_oi_interaction",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "close",
+        "sum_open_interest"
+      ],
+      "description": "one preregistered return x OI-change interaction",
+      "caveat": ""
+    },
+    "g4_spread_bps": {
+      "name": "g4_spread_bps",
+      "group": "G4",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "spread_bps"
+      ],
+      "description": "relative spread in basis points",
+      "caveat": "a missing snapshot is missing, never a zero spread"
+    },
+    "g4_amihud_30": {
+      "name": "g4_amihud_30",
+      "group": "G4",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "close",
+        "quote_volume"
+      ],
+      "description": "rolling |r| / quote volume: an impact proxy",
+      "caveat": ""
+    },
+    "g5_dispersion_6": {
+      "name": "g5_dispersion_6",
+      "group": "G5",
+      "scope": "market",
+      "window": 6,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "cross-sectional dispersion of the eligible universe",
+      "caveat": ""
+    },
+    "g5_breadth_6": {
+      "name": "g5_breadth_6",
+      "group": "G5",
+      "scope": "market",
+      "window": 6,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "share of the eligible universe with a positive trailing return",
+      "caveat": ""
+    },
+    "g5_factor_concentration_30": {
+      "name": "g5_factor_concentration_30",
+      "group": "G5",
+      "scope": "market",
+      "window": 30,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "first-eigenvalue share of a trailing covariance",
+      "caveat": ""
+    },
+    "g5_residual_return_30": {
+      "name": "g5_residual_return_30",
+      "group": "G5",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "close",
+        "market_returns"
+      ],
+      "description": "return residual to a beta fitted on a PAST window only",
+      "caveat": ""
+    }
+  },
+  "active_features": [
+    "g1_direction_6",
+    "g1_downside_ratio_6",
+    "g1_efficiency_6",
+    "g1_rv_6",
+    "g2_log_activity_30",
+    "g2_taker_imbalance",
+    "g2_trade_count_30",
+    "g3_basis",
+    "g3_dlog_oi",
+    "g3_return_oi_interaction",
+    "g5_breadth_6",
+    "g5_dispersion_6",
+    "g5_factor_concentration_30",
+    "g5_residual_return_30"
+  ],
+  "active_feature_count": 14,
+  "complexity_budget": "guide 6.4 starts at roughly 8-12 active features",
+  "dropped_features": {
+    "g4_amihud_30": "training dispersion is degenerate (1.4826*MAD=1.07e-10); the feature is dropped rather than allowed to dominate"
+  },
+  "group_weights": {
+    "g1_direction_6": 0.0625,
+    "g1_downside_ratio_6": 0.0625,
+    "g1_efficiency_6": 0.0625,
+    "g1_rv_6": 0.0625,
+    "g2_log_activity_30": 0.08333333333333333,
+    "g2_taker_imbalance": 0.08333333333333333,
+    "g2_trade_count_30": 0.08333333333333333,
+    "g3_basis": 0.08333333333333333,
+    "g3_dlog_oi": 0.08333333333333333,
+    "g3_return_oi_interaction": 0.08333333333333333,
+    "g5_breadth_6": 0.0625,
+    "g5_dispersion_6": 0.0625,
+    "g5_factor_concentration_30": 0.0625,
+    "g5_residual_return_30": 0.0625
+  },
+  "group_weight_rule": "w_j = omega_g / d_g, so adding features to one block cannot inflate it",
+  "scaler": {
+    "schema": "crypto_regime_lab.robust_scaler.v1",
+    "formula": "clip((x - median_train) / (1.4826*MAD_train + eps), -c, c)",
+    "clip": 5.0,
+    "fitted_on_rows": 40869,
+    "training_range": [
+      "2020-01-01 00:00:00",
+      "2023-12-31 00:00:00"
+    ],
+    "median": {
+      "g1_rv_6": 0.031364479806007976,
+      "g1_direction_6": 0.03215343661171148,
+      "g1_efficiency_6": 0.3867904701420899,
+      "g1_downside_ratio_6": 0.4974082146536436,
+      "g2_taker_imbalance": -0.017061695167933988,
+      "g2_log_activity_30": -0.007445457083273651,
+      "g2_trade_count_30": -0.006530490871787892,
+      "g3_dlog_oi": 0.0004418255116940273,
+      "g3_basis": -0.00028947327853312554,
+      "g3_return_oi_interaction": 8.18729724679476e-07,
+      "g5_dispersion_6": 0.007718270986763484,
+      "g5_breadth_6": 0.6,
+      "g5_factor_concentration_30": 0.8032114343531188,
+      "g5_residual_return_30": -0.0002012011647859295
+    },
+    "scale": {
+      "g1_rv_6": 0.021588873903529537,
+      "g1_direction_6": 1.1133502977441587,
+      "g1_efficiency_6": 0.3208388812497548,
+      "g1_downside_ratio_6": 0.44265341317927315,
+      "g2_taker_imbalance": 0.04726177480875774,
+      "g2_log_activity_30": 0.5352390824910591,
+      "g2_trade_count_30": 0.43471672844500336,
+      "g3_dlog_oi": 0.014318674658388469,
+      "g3_basis": 0.0003911762616168412,
+      "g3_return_oi_interaction": 6.0077986285330656e-05,
+      "g5_dispersion_6": 0.004441918048415329,
+      "g5_breadth_6": 0.59304,
+      "g5_factor_concentration_30": 0.1016626055406127,
+      "g5_residual_return_30": 0.005235842528682495
+    },
+    "epsilon": {
+      "g1_rv_6": 1e-09,
+      "g1_direction_6": 1e-09,
+      "g1_efficiency_6": 1e-09,
+      "g1_downside_ratio_6": 1e-09,
+      "g2_taker_imbalance": 1e-09,
+      "g2_log_activity_30": 1e-09,
+      "g2_trade_count_30": 1e-09,
+      "g3_dlog_oi": 1e-09,
+      "g3_basis": 1e-09,
+      "g3_return_oi_interaction": 1e-09,
+      "g5_dispersion_6": 1e-09,
+      "g5_breadth_6": 1e-09,
+      "g5_factor_concentration_30": 1e-09,
+      "g5_residual_return_30": 1e-09
+    },
+    "dropped": {
+      "g4_amihud_30": "training dispersion is degenerate (1.4826*MAD=1.07e-10); the feature is dropped rather than allowed to dominate"
+    },
+    "active_features": [
+      "g1_direction_6",
+      "g1_downside_ratio_6",
+      "g1_efficiency_6",
+      "g1_rv_6",
+      "g2_log_activity_30",
+      "g2_taker_imbalance",
+      "g2_trade_count_30",
+      "g3_basis",
+      "g3_dlog_oi",
+      "g3_return_oi_interaction",
+      "g5_breadth_6",
+      "g5_dispersion_6",
+      "g5_factor_concentration_30",
+      "g5_residual_return_30"
+    ],
+    "policy": "fitted on the training slice only; never on the full history"
+  },
+  "intermediate_aggregates_retained": true,
+  "retention_note": "raw feature values are stored alongside the z-scores so any feature can be recomputed and audited",
+  "lab_run_id": "run-20260909T191303Z-134c907e",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:14:41.605101+00:00"
+}

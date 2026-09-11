@@ -1,0 +1,187 @@
+{
+  "schema": "crypto_regime_lab.legacy_divergence.v1",
+  "alpha_id": "A-VWAP",
+  "fixture": "mean_reverting_15m",
+  "legacy": {
+    "alpha_id": "A-VWAP",
+    "tier": "legacy_reproduction",
+    "entry_bars": [
+      584,
+      826,
+      839,
+      904,
+      963,
+      978
+    ],
+    "exit_bars": [
+      589,
+      834,
+      846,
+      912,
+      971,
+      986
+    ],
+    "entry_count": 6,
+    "minimal_fixes": [
+      "none: vwap.py imports everything it uses"
+    ],
+    "eligibility": {
+      "eligible_for_diagnostics": true,
+      "eligible_for_in_sample_reference": true,
+      "eligible_for_ab_comparison": false,
+      "eligible_for_any_arm": false,
+      "reason": "guide 2.1: legacy_reproduction is diagnostic / in-sample reference only"
+    },
+    "extras": {
+      "htf_nan_filled": 4
+    }
+  },
+  "canonical": {
+    "entry_bars": [
+      584,
+      826,
+      839,
+      904,
+      963,
+      978
+    ],
+    "exit_bars": [
+      835,
+      913,
+      972,
+      987
+    ],
+    "entry_count": 6,
+    "warmup_blocked_through_bar": 283,
+    "protective_exit_bars": [
+      589,
+      846
+    ],
+    "fixed_point_converged": true,
+    "fixed_point_passes": 2
+  },
+  "divergence": {
+    "legacy_only_entries": [],
+    "canonical_only_entries": [],
+    "legacy_only_inside_canonical_warmup": [],
+    "identical": true
+  },
+  "attribution": {
+    "kind": "IDENTICAL",
+    "explained": true,
+    "detail": "the legacy reproduction and canonical_v1 enter on exactly the same bars; the repairs on this fixture change timing and accounting, not the signal"
+  },
+  "attributed_to": {
+    "SD-VWAP-01": {
+      "delta_id": "SD-VWAP-01",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "helpers index past the end of short inputs",
+      "after_semantics": "explicit warmup readiness: too-short input yields a valid no-signal state, never a crash and never a silent zero",
+      "source_line_refs": "L8-17, L43-53, L67-77",
+      "reproducer": "probes/VWAP_SHORT_INPUT",
+      "expected_effect": "no decision change after warmup",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-01"
+      ]
+    },
+    "SD-VWAP-02": {
+      "delta_id": "SD-VWAP-02",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "entry at the signal close with levels from that price",
+      "after_semantics": "close decision, next-open fill, levels from the actual fill",
+      "source_line_refs": "L159-174",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "shifts entries by one bar",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-05",
+        "AV-02"
+      ]
+    },
+    "SD-VWAP-03": {
+      "delta_id": "SD-VWAP-03",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the time stop is tested before the price stop and the take profit",
+      "after_semantics": "a frozen priority: stop, then take profit, then the time stop as a close decision",
+      "source_line_refs": "L125-151",
+      "reproducer": "fixtures/time_stop_vs_sl_same_bar",
+      "expected_effect": "changes which exit wins on a bar where both trigger; applied identically to every arm",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-03"
+      ]
+    },
+    "SD-VWAP-04": {
+      "delta_id": "SD-VWAP-04",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the dynamic VWAP exit uses the current bar's completed VWAP as an intrabar level",
+      "after_semantics": "exit_at_vwap is OFF in the canonical pilot; when enabled it is the resting previous-observed-VWAP variant, registered before any result is seen",
+      "source_line_refs": "L134, L146",
+      "reproducer": "fixtures/dynamic_vwap_not_yet_available",
+      "expected_effect": "removes a look-ahead exit; registered ahead of performance, not switched off because a backtest looked bad",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-04"
+      ]
+    },
+    "SD-VWAP-05": {
+      "delta_id": "SD-VWAP-05",
+      "alpha_id": "A-VWAP",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the HTF EMA is joined on the resample label with a trailing ffill",
+      "after_semantics": "the join is on available_at from a closed HTF bucket, with warmup convergence from the EMA span rather than a hardcoded 200 bars",
+      "source_line_refs": "L200-217, L118",
+      "reproducer": "fixtures/htf_closed_bucket_only",
+      "expected_effect": "removes any dependence on the resample label convention",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "AV-06"
+      ]
+    }
+  },
+  "attribution_rule": "every difference must map to a semantic delta. A legacy entry that falls inside the canonical warmup window is attributed to the readiness repairs; an unattributed difference is a defect in the adapter, not a result.",
+  "claim_boundary": "the legacy tier is diagnostic and in-sample only. Neither side is a performance claim, and a canonical result is never compared against a legacy number as if they were arms.",
+  "lab_run_id": "run-20260910T112628Z-08654dcf",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T11:26:34.525932+00:00"
+}

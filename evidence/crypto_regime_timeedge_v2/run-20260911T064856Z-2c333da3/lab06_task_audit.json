@@ -1,0 +1,587 @@
+{
+  "schema": "crypto_regime_lab.lab06_task_audit.v1",
+  "guide_section": "LAB-06 \u2014 Conditional parameter response va bon clocks",
+  "checklist_written_before_code": true,
+  "checklist_source": "configs/lab06_checklist.json",
+  "tasks_total": 79,
+  "tasks_done": 79,
+  "tasks_blocked": 0,
+  "clauses_without_an_evidence_pointer": [],
+  "artifacts_present": [
+    "lab06_bank_registry.json",
+    "lab06_decision_ledger.json",
+    "lab06_policy_spec.json",
+    "lab06_response_model.json"
+  ],
+  "artifacts_missing": [],
+  "acceptance_tests": "60 passed in 1.06s",
+  "acceptance_tests_passed": true,
+  "acceptance_ids_covered": [
+    "T45",
+    "T46",
+    "T47",
+    "T48",
+    "T49",
+    "T50",
+    "T51",
+    "T52"
+  ],
+  "tasks": [
+    {
+      "clause_id": "L06.1.1",
+      "requirement": "horizon chosen from strategy/holding diagnostics at development; 7 calendar days for the pilot or another registered horizon",
+      "evidence": "lab06_response_model.json:horizon",
+      "note": "registered 7d; measured holding reported beside it",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.1.2",
+      "requirement": "only a COMPLETE outcome may be used; open positions marked under the same account contract, not just closed wins",
+      "evidence": "tests/test_lab06_policy.py::test_t45_an_open_position_at_horizon_end_is_marked_not_counted_as_a_win",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.1.3",
+      "requirement": "non-overlapping grid for primary evidence",
+      "evidence": "tests/test_lab06_policy.py::test_t45_the_primary_grid_is_non_overlapping",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.1.4",
+      "requirement": "overlapping extension carries purge and dependence corrections",
+      "evidence": "tests/test_lab06_policy.py::test_t45_an_overlapping_grid_must_declare_a_purge + test_t45_the_dependence_correction_makes_the_inflation_visible",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.2.1",
+      "requirement": "bank only from discoveries BEFORE the cutoff",
+      "evidence": "tests/test_lab06_policy.py::test_t46_a_later_discovery_is_rejected_with_a_reason",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.2.2",
+      "requirement": "3-8 candidates maximum as a proposal",
+      "evidence": "tests/test_lab06_policy.py::test_t46_the_bank_respects_the_proposed_size_range",
+      "note": "3-8",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.2.3",
+      "requirement": "effective duplicates merged for coverage, but trial rows are never deleted",
+      "evidence": "tests/test_lab06_policy.py::test_t46_duplicates_merge_for_coverage_without_losing_rows",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.2.4",
+      "requirement": "retired params still serve open campaigns",
+      "evidence": "tests/test_lab06_policy.py::test_t46_a_retired_version_still_serves_an_open_campaign_and_cannot_be_deleted",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.2.5",
+      "requirement": "indicator readiness tracked by version/cutoff",
+      "evidence": "tests/test_lab06_policy.py::test_t46_indicator_readiness_is_tracked_by_version_and_cutoff",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.1",
+      "requirement": "weighted paired delta with the guide 9.2 kernel",
+      "evidence": "policy/response.py:estimate_response",
+      "note": "guide 9.2 kernel, paired per episode",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.2",
+      "requirement": "pooled shrinkage a_t = N_eff/(N_eff+kappa)",
+      "evidence": "response.py shrink a_t = N_eff/(N_eff+kappa)",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.3",
+      "requirement": "support diagnostics: N_eff, contiguous episode count, autocorrelation/block, per-episode contribution",
+      "evidence": "tests/test_lab06_policy.py::test_t48_the_standard_error_comes_from_blocks_not_from_bars",
+      "note": "N_eff, blocks, autocorrelation, per-episode contribution",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.4",
+      "requirement": "context distance and group weights are train-only",
+      "evidence": "response.hyperparameters.chosen_on",
+      "note": "inner development only",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.5",
+      "requirement": "episodes are NOT selected because their outcome was good",
+      "evidence": "tests/test_lab06_policy.py::test_t48_eligibility_may_not_be_a_graded_quality_score",
+      "note": "q_e is 0/1",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.3.6",
+      "requirement": "supporting episode IDs and weights returned with every recommendation",
+      "evidence": "tests/test_lab06_policy.py::test_t48_supporting_episodes_are_returned_with_the_estimate",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.4.1",
+      "requirement": "keep/switch/wait/refresh/fallback implemented as distinct decisions",
+      "evidence": "tests/test_lab06_policy.py::test_the_seven_decisions_exist_and_are_distinct",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.4.2",
+      "requirement": "uncertainty enters the rule (z_alpha * SE)",
+      "evidence": "decision.decide uses z_alpha * SE",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.4.3",
+      "requirement": "minimum spacing between switches",
+      "evidence": "tests/test_lab06_policy.py::test_minimum_spacing_blocks_a_second_switch_too_soon",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.4.4",
+      "requirement": "economic cost threshold C_transition + delta",
+      "evidence": "tests/test_lab06_policy.py::test_the_transition_cost_is_never_double_charged",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.4.5",
+      "requirement": "the quality gate may reject everything; no best-of-bad is forced into a trade",
+      "evidence": "tests/test_lab06_policy.py::test_the_quality_gate_may_reject_everything",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.5.1",
+      "requirement": "model fit 28d and inference 4h as the registered hypothesis",
+      "evidence": "lab06_policy_spec.json:clocks.cadences",
+      "note": "28d fit, 4h inference",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.5.2",
+      "requirement": "bank refresh on the baseline calendar",
+      "evidence": "clocks.BANK_REFRESH_CADENCE",
+      "note": "frozen baseline calendar",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.5.3",
+      "requirement": "switch assessment at every eligible 4h boundary when needed",
+      "evidence": "policy_spec.clocks.cadences.switch",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.5.4",
+      "requirement": "a triggered-refresh variant is a SEPARATE variant",
+      "evidence": "policy_spec.clocks.triggered_refresh_is_a_separate_variant",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.5.5",
+      "requirement": "deadline/coalesce/out-of-order fit completion tests",
+      "evidence": "tests/test_lab06_policy.py::test_t49_a_superseded_job_never_becomes_effective + test_t49_near_duplicate_triggers_coalesce_into_one_job",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.6.1",
+      "requirement": "bank training utilities carry an initial-state contract",
+      "evidence": "tests/test_lab06_policy.py::test_training_and_live_initial_state_contracts_differ_and_say_so",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.6.2",
+      "requirement": "a live switch pays transition cost and delay against the ACTUAL current campaign",
+      "evidence": "limitations.counterfactual_limits CF-2/CF-3",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.6.3",
+      "requirement": "no hypothetical reset-flat expert curve is used as deploy equity",
+      "evidence": "tests/test_lab06_policy.py::test_the_reset_flat_expert_curve_is_forbidden",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L06.6.4",
+      "requirement": "record why response uncertainty cannot capture all state-dependent execution risk",
+      "evidence": "tests/test_lab06_policy.py::test_the_counterfactual_limits_are_recorded_with_four_named_causes",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.1.1",
+      "requirement": "episode table carries every field guide 9.1 lists",
+      "evidence": "policy/episodes.py:Episode.as_record",
+      "note": "every field guide 9.1 lists",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.1.2",
+      "requirement": "an outcome may only be used at T when end + publication/processing delay <= T",
+      "evidence": "tests/test_lab06_policy.py::test_t45_the_availability_lag_is_the_full_horizon_plus_delays",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.1.3",
+      "requirement": "no response label built from future PnL is fed into a regime fit at episode_start",
+      "evidence": "run_response_policy.context_at reads only emissions already available",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.1.4",
+      "requirement": "candidate creation time is replayed in the nested experiment",
+      "evidence": "tests/test_lab06_policy.py::test_t46_every_entry_carries_its_own_discovery_time",
+      "note": "creation time replayed",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.2.1",
+      "requirement": "kernel w = exp(-d^2/2h^2) * exp(-(t-e)/tau) * q_e with q_e an ELIGIBILITY, never an outcome bonus",
+      "evidence": "response.similarity_weights",
+      "note": "q_e refused unless 0/1",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.2.2",
+      "requirement": "h, tau and feature weights chosen inner-only",
+      "evidence": "response.hyperparameters",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.2.3",
+      "requirement": "episodes sharing a label are not collapsed as interchangeable when contexts differ",
+      "evidence": "tests/test_lab06_policy.py::test_t48_a_dominating_episode_is_flagged_and_shrunk",
+      "note": "context distance, not label identity",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.2.4",
+      "requirement": "N_eff is reported as weight concentration, NOT as an independent observation count",
+      "evidence": "tests/test_lab06_policy.py::test_t48_n_effective_is_labelled_as_weight_concentration",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.2.5",
+      "requirement": "insufficient episodes returns a status and keeps the incumbent",
+      "evidence": "tests/test_lab06_policy.py::test_t48_thin_support_keeps_the_incumbent_rather_than_recommending",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.1",
+      "requirement": "utility is net return on a fixed allocation minus registered penalties",
+      "evidence": "episodes carry net_return/max_drawdown/cost on the frozen allocation",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.2",
+      "requirement": "relative SE from paired contiguous blocks, not iid bars",
+      "evidence": "response.block_standard_error",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.3",
+      "requirement": "transition cost from projected turnover, fees, slippage and residual handling, in the same units",
+      "evidence": "decision.transition_cost",
+      "note": "turnover x (fee + slippage) + residual",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.4",
+      "requirement": "the switch rule is the guide 9.3 inequality",
+      "evidence": "tests/test_lab06_policy.py::test_a_clear_winner_does_switch_so_the_machine_is_not_merely_conservative",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.5",
+      "requirement": "an inaction region is kept",
+      "evidence": "tests/test_lab06_policy.py::test_an_inaction_region_exists_between_worse_and_clearly_better",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.6",
+      "requirement": "seven distinct decision values exist",
+      "evidence": "decision.DECISIONS",
+      "note": "seven",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.3.7",
+      "requirement": "C_transition is never double-charged into actual PnL",
+      "evidence": "TransitionCost.charging_rule",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.1",
+      "requirement": "four clocks are separate with their own counters",
+      "evidence": "tests/test_lab06_policy.py::test_t52_the_counters_stay_separate",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.2",
+      "requirement": "a familiar market state transition does not mean the model is broken",
+      "evidence": "tests/test_lab06_policy.py::test_t52_a_familiar_state_change_is_not_drift",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.3",
+      "requirement": "the retrain detector reads covariate fit/novelty only, not strategy performance",
+      "evidence": "tests/test_lab06_policy.py::test_t52_the_retrain_detector_ignores_strategy_performance",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.4",
+      "requirement": "a refit job keeps the cutoff fixed at its trigger",
+      "evidence": "tests/test_lab06_policy.py::test_t49_a_refit_keeps_the_cutoff_it_was_triggered_with",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.5",
+      "requirement": "coalesce/cancel/supersede is deterministic; a stale job never uses undeclared future inputs",
+      "evidence": "tests/test_lab06_policy.py::test_t49_a_superseded_job_never_becomes_effective",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.6",
+      "requirement": "the incumbent operates while a refit is pending",
+      "evidence": "tests/test_lab06_policy.py::test_t49_the_incumbent_runs_while_a_refit_is_pending",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.4.7",
+      "requirement": "effective_at >= ready_at; no retroactive activation",
+      "evidence": "tests/test_lab06_policy.py::test_t49_activation_may_never_precede_ready",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.1",
+      "requirement": "an entry campaign carries an immutable entry_parameter_digest",
+      "evidence": "tests/test_lab06_policy.py::test_t50_the_entry_digest_is_immutable",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.2",
+      "requirement": "an open trade stays protected by the params it entered with",
+      "evidence": "Campaign.protective_version fixed at entry",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.3",
+      "requirement": "activation waits for flat/terminal; requested time and actual delay are both recorded",
+      "evidence": "tests/test_lab06_policy.py::test_t50_an_open_campaign_defers_the_switch_rather_than_cancelling_it",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.4",
+      "requirement": "new candidate indicators must be warm and causal before activation",
+      "evidence": "tests/test_lab06_policy.py::test_t51_an_unwarmed_candidate_waits_instead_of_switching",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.5",
+      "requirement": "no EMA/HMA reset per switch and no adaptive-length state carried across params without a contract",
+      "evidence": "tests/test_lab06_policy.py::test_t51_indicator_state_is_never_carried_without_a_contract",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.6",
+      "requirement": "a long-open campaign is reported stale/transition-blocked, never force-closed",
+      "evidence": "tests/test_lab06_policy.py::test_t50_a_long_open_campaign_is_blocked_not_force_closed",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G9.5.7",
+      "requirement": "retired parameter versions survive while orders reference them",
+      "evidence": "tests/test_lab06_policy.py::test_t46_a_retired_version_still_serves_an_open_campaign_and_cannot_be_deleted",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G7.4.1",
+      "requirement": "a specialist is not dropped only because the pooled mean is lower",
+      "evidence": "bank.specialist_note",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G7.4.2",
+      "requirement": "the bank at T contains no candidate discovered after T",
+      "evidence": "tests/test_lab06_policy.py::test_t46_a_later_discovery_is_rejected_with_a_reason",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G7.4.3",
+      "requirement": "bank version carries entry/retire dates, adapter hash, parameter digest, validation panel, status, warmup readiness and reason",
+      "evidence": "BankEntry.as_record",
+      "note": "entry/retire dates, adapter hash, digest, panel, status, warmup, reason",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T45",
+      "requirement": "an unfinished outcome may not be used at decision T",
+      "evidence": "tests/test_lab06_policy.py::test_t45_an_unfinished_outcome_is_unusable",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T46",
+      "requirement": "a candidate discovered after the inner cutoff never appears in the inner pseudo-live bank",
+      "evidence": "tests/test_lab06_policy.py::test_t46_a_later_discovery_is_rejected_with_a_reason",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T47",
+      "requirement": "incumbent and challenger get the same economics, initial state and horizon",
+      "evidence": "tests/test_lab06_policy.py::test_t47_mismatched_episode_counts_are_refused",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T48",
+      "requirement": "when one episode dominates the similarity, support/uncertainty warns and it shrinks or falls back",
+      "evidence": "tests/test_lab06_policy.py::test_t48_a_dominating_episode_is_flagged_and_shrunk",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T49",
+      "requirement": "refit latency and out-of-order jobs cause no early or backdated activation",
+      "evidence": "tests/test_lab06_policy.py::test_t49_activation_may_never_precede_ready",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T50",
+      "requirement": "a switch while a campaign is open keeps the old protective version or migrates explicitly",
+      "evidence": "tests/test_lab06_policy.py::test_t50_the_decision_machine_waits_at_a_campaign_boundary",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T51",
+      "requirement": "unwarmed indicators cause wait/fallback, never a reset that fabricates signals",
+      "evidence": "tests/test_lab06_policy.py::test_t51_an_unwarmed_candidate_waits_instead_of_switching",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T52",
+      "requirement": "model fit, bank refresh and switch counters stay distinct with no recursive trigger storm",
+      "evidence": "tests/test_lab06_policy.py::test_t52_inference_and_switch_can_never_start_a_refit",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.1",
+      "requirement": "response_model.json",
+      "evidence": "configs/lab06_response_model.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.2",
+      "requirement": "response_panel.parquet",
+      "evidence": "evidence/.../response_panel.parquet",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.3",
+      "requirement": "supporting-neighbor records",
+      "evidence": "response_model.responses[*].supporting_episodes",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.4",
+      "requirement": "bank_registry.json",
+      "evidence": "configs/lab06_bank_registry.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.5",
+      "requirement": "policy_spec.json",
+      "evidence": "configs/lab06_policy_spec.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.6",
+      "requirement": "decision ledger examples",
+      "evidence": "configs/lab06_decision_ledger.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.7",
+      "requirement": "state-machine tests",
+      "evidence": "tests/test_lab06_policy.py",
+      "note": "56 tests",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.1",
+      "requirement": "every keep/switch carries evidence, data cutoffs and consistent units",
+      "evidence": "decision_ledger.every_decision_records_its_cutoffs",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.2",
+      "requirement": "the technical pass does not depend on there being many switches; zero switches from insufficient edge is a valid result",
+      "evidence": "policy_spec.zero_switches_is_valid",
+      "note": "",
+      "status": "DONE"
+    }
+  ],
+  "lab_run_id": "run-20260911T064856Z-2c333da3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T06:48:57.974733+00:00"
+}

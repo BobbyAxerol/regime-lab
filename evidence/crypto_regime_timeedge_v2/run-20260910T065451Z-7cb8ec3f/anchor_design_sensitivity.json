@@ -1,0 +1,127 @@
+{
+  "schema": "crypto_regime_lab.anchor_design_sensitivity.v1",
+  "primary_design": {
+    "id": "v2_with_space_filling",
+    "cells_dir": "lab04_cells",
+    "anchors": "2 TPE top + 1 farthest-point space filling + 1 incumbent",
+    "verdict": "no separation: B better in 4 cells, A better in 1, sign-test p=0.375. The neighborhood selector is not shown to improve stable performance on this calendar; both arms are kept for the factorial rather than defaulting to the new selector CAVEAT: arm B kept the incumbent at a materially different rate from arm A, so any B-A difference mixes TWO mechanisms: choosing a better point, and changing the point less often. This experiment does not separate them. a HOLD control on the same calendar that never re-selects after the first cutoff. It is registered in the LAB-06 control family (CALENDAR_MATCHED / RISK_ONLY) and is NOT run here; until it is, no causal claim about the selector is available.",
+    "contrast": {
+      "cells": 5,
+      "B_better": 4,
+      "A_better": 1,
+      "ties": 0,
+      "two_sided_sign_test_p": 0.375,
+      "caveat": "a paired sign test over 5 cells drawn from the same five symbols and one calendar; the cells are not independent, so this is a descriptive statistic and not a confirmatory test"
+    }
+  },
+  "sensitivity_design": {
+    "id": "v1_tpe_only",
+    "cells_dir": "lab04_cells_v1_tpe_only",
+    "anchors": "3 TPE top + 1 incumbent (no space-filling coverage)",
+    "verdict": "no separation: B better in 10 cells, A better in 5, sign-test p=0.3017578125. The neighborhood selector is not shown to improve stable performance on this calendar; both arms are kept for the factorial rather than defaulting to the new selector CAVEAT: arm B kept the incumbent at a materially different rate from arm A, so any B-A difference mixes TWO mechanisms: choosing a better point, and changing the point less often. This experiment does not separate them. a HOLD control on the same calendar that never re-selects after the first cutoff. It is registered in the LAB-06 control family (CALENDAR_MATCHED / RISK_ONLY) and is NOT run here; until it is, no causal claim about the selector is available.",
+    "contrast": {
+      "cells": 15,
+      "B_better": 10,
+      "A_better": 5,
+      "ties": 0,
+      "two_sided_sign_test_p": 0.3017578125,
+      "caveat": "a paired sign test over 15 cells drawn from the same five symbols and one calendar; the cells are not independent, so this is a descriptive statistic and not a confirmatory test"
+    }
+  },
+  "cells_compared": 5,
+  "mechanism": {
+    "arm_A_also_moved_in_cells": 1,
+    "why_arm_A_moves": "arm A ranks the WHOLE pool, probes included, not just the discovery trials. The discovery search is identical between designs -- same TPE seed, same 64 trials -- but one of the four anchor slots moved from the TPE ranking to a space-filling point, so eight probes now surround a different region. When the best in-sample objective in the pool was one of the probes that no longer exists, arm A's choice moves too. This comparison is therefore between two complete DESIGNS; it does not isolate arm B's behaviour, and neither arm should be described as invariant.",
+    "arm_B_retained": {
+      "v2": 23,
+      "v1": 23
+    },
+    "eligible_candidates": {
+      "v2": 60,
+      "v1": 73
+    },
+    "reading": "space-filling coverage spends one of four anchor slots away from the region TPE favours. That region is where candidates tend to clear the economic gate, so broader coverage can COST eligibility rather than add it. Whether that is worth it is not decided by eligibility counts -- it is decided out of sample -- but the mechanism belongs in the record either way."
+  },
+  "arm_B_outcome_changed_in_cells": 1,
+  "per_cell": [
+    {
+      "cell": "A-SC/BNBUSDT",
+      "v2_A": 0.20723695083313642,
+      "v2_B": 0.5296471391249469,
+      "v2_difference": 0.32241018829181045,
+      "v1_A": 0.20723695083313642,
+      "v1_B": 0.5296471391249469,
+      "v1_difference": 0.32241018829181045,
+      "arm_B_changed": false,
+      "arm_A_changed": false,
+      "v2_arm_B_retained": 6,
+      "v1_arm_B_retained": 6,
+      "v2_eligible_total": 0,
+      "v1_eligible_total": 0
+    },
+    {
+      "cell": "A-SC/BTCUSDT",
+      "v2_A": 0.01960235694267798,
+      "v2_B": 0.05189549831518936,
+      "v2_difference": 0.03229314137251138,
+      "v1_A": 0.01960235694267798,
+      "v1_B": 0.05189549831518936,
+      "v1_difference": 0.03229314137251138,
+      "arm_B_changed": false,
+      "arm_A_changed": false,
+      "v2_arm_B_retained": 5,
+      "v1_arm_B_retained": 5,
+      "v2_eligible_total": 15,
+      "v1_eligible_total": 15
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "v2_A": 0.4632466342179993,
+      "v2_B": 0.6825584398688456,
+      "v2_difference": 0.2193118056508463,
+      "v1_A": 0.46421312250362123,
+      "v1_B": 0.6825584398688456,
+      "v1_difference": 0.21834531736522433,
+      "arm_B_changed": false,
+      "arm_A_changed": true,
+      "v2_arm_B_retained": 6,
+      "v1_arm_B_retained": 6,
+      "v2_eligible_total": 0,
+      "v1_eligible_total": 0
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "v2_A": 0.15339030128308506,
+      "v2_B": 0.1294117254125311,
+      "v2_difference": -0.023978575870553964,
+      "v1_A": 0.15339030128308506,
+      "v1_B": 0.1294117254125311,
+      "v1_difference": -0.023978575870553964,
+      "arm_B_changed": false,
+      "arm_A_changed": false,
+      "v2_arm_B_retained": 2,
+      "v1_arm_B_retained": 2,
+      "v2_eligible_total": 35,
+      "v1_eligible_total": 38
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "v2_A": 0.5425955504901128,
+      "v2_B": 0.7749067567390047,
+      "v2_difference": 0.2323112062488919,
+      "v1_A": 0.5425955504901128,
+      "v1_B": 0.6852642858696134,
+      "v1_difference": 0.14266873537950064,
+      "arm_B_changed": true,
+      "arm_A_changed": false,
+      "v2_arm_B_retained": 4,
+      "v1_arm_B_retained": 4,
+      "v2_eligible_total": 10,
+      "v1_eligible_total": 20
+    }
+  ],
+  "rule": "v2 is the primary because it is what guide 7.2 step 1 specifies. v1 is reported as a registered sensitivity on the anchor composition; neither is chosen after the fact for looking better.",
+  "lab_run_id": "run-20260910T065451Z-7cb8ec3f",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T06:54:52.107223+00:00"
+}

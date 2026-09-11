@@ -1,0 +1,116 @@
+{
+  "schema": "crypto_regime_lab.availability_rules.v1",
+  "resample_verification": {
+    "probe": "BTCUSDT 2023-05",
+    "targets": {
+      "15min": {
+        "buckets": 2976,
+        "expected_bars_per_bucket": 15,
+        "incomplete_buckets_dropped": 0,
+        "volume_sum_matches": true,
+        "open_is_first": true,
+        "close_is_last": true,
+        "high_is_max": true,
+        "low_is_min": true
+      },
+      "1h": {
+        "buckets": 744,
+        "expected_bars_per_bucket": 60,
+        "incomplete_buckets_dropped": 0,
+        "volume_sum_matches": true,
+        "open_is_first": true,
+        "close_is_last": true,
+        "high_is_max": true,
+        "low_is_min": true
+      },
+      "4h": {
+        "buckets": 186,
+        "expected_bars_per_bucket": 240,
+        "incomplete_buckets_dropped": 0,
+        "volume_sum_matches": true,
+        "open_is_first": true,
+        "close_is_last": true,
+        "high_is_max": true,
+        "low_is_min": true
+      }
+    },
+    "rule": "every target is produced and its aggregation contract checked, not only the interval the regime model happens to consume"
+  },
+  "products": {
+    "crypto_binance_spot_1m": {
+      "product_id": "crypto_binance_spot_1m",
+      "kind": "ohlcv_bars",
+      "interval": "1min",
+      "publication_delay_seconds": 0.0,
+      "ttl_seconds": null,
+      "bar_timestamp_convention": "left-labelled: `time` is the bar OPEN",
+      "bar_close_rule": "derived: time + interval (the stored close_time is untrusted)",
+      "available_at_rule": "bar_close + publication_delay",
+      "vintage_id_rule": "source + archive_ingested_at"
+    },
+    "crypto_binance_futures_1m": {
+      "product_id": "crypto_binance_futures_1m",
+      "kind": "ohlcv_bars",
+      "interval": "1min",
+      "publication_delay_seconds": 0.0,
+      "ttl_seconds": null,
+      "bar_timestamp_convention": "left-labelled: `time` is the bar OPEN",
+      "bar_close_rule": "derived: time + interval (the stored close_time is untrusted)",
+      "available_at_rule": "bar_close + publication_delay",
+      "vintage_id_rule": "source + archive_ingested_at"
+    },
+    "crypto_binance_futures_metrics_5m": {
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "kind": "derivatives_metrics",
+      "interval": "5min",
+      "publication_delay_seconds": 0.0,
+      "ttl_seconds": 1800.0,
+      "bar_timestamp_convention": "left-labelled: `time` is the bar OPEN",
+      "bar_close_rule": "derived: time + interval (the stored close_time is untrusted)",
+      "available_at_rule": "bar_close + publication_delay",
+      "vintage_id_rule": "source + archive_ingested_at"
+    },
+    "crypto_binance_orderbook_snapshot_1h": {
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "kind": "book_snapshot",
+      "interval": "1h",
+      "publication_delay_seconds": 0.0,
+      "ttl_seconds": 7200.0,
+      "bar_timestamp_convention": "left-labelled: `time` is the bar OPEN",
+      "bar_close_rule": "derived: time + interval (the stored close_time is untrusted)",
+      "available_at_rule": "bar_close + publication_delay",
+      "vintage_id_rule": "source + archive_ingested_at"
+    }
+  },
+  "resampling": {
+    "source": "1m",
+    "targets": [
+      "15min",
+      "1h",
+      "4h"
+    ],
+    "ohlc": "first/max/min/last on the CLOSED bucket",
+    "flow_columns": "summed in their own units; fractional volume never truncated",
+    "level_columns": "open interest and ratios take the LAST value, never a sum",
+    "incomplete_buckets": "dropped, never aggregated over a hole",
+    "labelling": "left-labelled; the bucket open is the row's `time`"
+  },
+  "funding": {
+    "schema": "crypto_regime_lab.funding_events.v1",
+    "events": [],
+    "status": "MISSING",
+    "searched": [
+      "crypto/* products",
+      "the loader's reader classes"
+    ],
+    "policy": "a missing funding history is NEVER treated as zero carry. Any cohort that would need funding is marked missing, and a no-funding study carries its own disclaimer (guide 4.1).",
+    "consequence_for_primary": "the primary economic contract runs with use_funding=False and is labelled a no-funding cohort; it may not claim realistic net carry"
+  },
+  "snapshot_products": {
+    "crypto_binance_orderbook_snapshot_1h": "availability comes from the real sample_time, not the hour label (T26)"
+  },
+  "fail_closed": "a primary read raises on a quality failure; it never warns and continues",
+  "lab_run_id": "run-20260909T195038Z-5c977e09",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:52:17.273914+00:00"
+}

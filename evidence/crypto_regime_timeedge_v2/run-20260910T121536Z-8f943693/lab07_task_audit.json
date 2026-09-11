@@ -1,0 +1,557 @@
+{
+  "schema": "crypto_regime_lab.lab07_task_audit.v1",
+  "guide_section": "LAB-07",
+  "checklist_written_before_code": true,
+  "checklist_source": "configs/lab07_checklist.json",
+  "tasks_total": 75,
+  "tasks_done": 75,
+  "tasks_blocked": 0,
+  "clauses_without_an_evidence_pointer": [],
+  "artifacts_present": [
+    "integration_binding_map.json",
+    "lab07_continuous_trace.json",
+    "parameter_activation_tape.json",
+    "operational_segments.json",
+    "lab07_checklist.json"
+  ],
+  "artifacts_missing": [],
+  "acceptance_tests": "46 passed in 2.50s",
+  "acceptance_tests_passed": true,
+  "acceptance_ids_covered": [
+    "T53",
+    "T54",
+    "T55",
+    "T56",
+    "T57"
+  ],
+  "tasks": [
+    {
+      "clause_id": "L07.1.1",
+      "requirement": "with the experimental scheduler and regime provider DISABLED, the continuous run reproduces the current canonical baseline path exactly: same orders",
+      "evidence": "lab07_continuous_trace.json:integration_baseline_parity.surfaces.orders",
+      "note": "canonical run_candidate vs the integration with no schedule, same real bars",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.1.2",
+      "requirement": "disabled-hooks parity also holds for the account path (cash, position, equity), not only for orders",
+      "evidence": "lab07_continuous_trace.json:integration_baseline_parity.surfaces.account",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.1.3",
+      "requirement": "disabled-hooks parity also holds for reported metrics",
+      "evidence": "lab07_continuous_trace.json:integration_baseline_parity.surfaces.metrics",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.1.4",
+      "requirement": "disabled-hooks parity also holds for selection: the same candidate is chosen at every cutoff",
+      "evidence": "lab07_continuous_trace.json:integration_baseline_parity.surfaces.selection",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.1.5",
+      "requirement": "the same FIXED intents replay identically on the Python and the Rust backend, and this parity is established BEFORE any performance claim",
+      "evidence": "lab07_continuous_trace.json:engine_fixed_intent_parity.status",
+      "note": "quantbt_bridge.parity, run before any performance number is quoted",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.1.6",
+      "requirement": "a hook that is enabled but makes no decision must still not change the baseline path; 'disabled' and 'enabled but inert' are tested separately",
+      "evidence": "tests/test_lab07_integration.py::test_disabled_and_inert_hooks_give_the_same_path_as_the_baseline",
+      "note": "DISABLED, INERT and baseline are three runs, not two",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.1",
+      "requirement": "one ordered event stream carries market bar completions",
+      "evidence": "tests/test_lab07_integration.py::test_the_stream_carries_every_kind_the_guide_names",
+      "note": "BAR_COMPLETED",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.2",
+      "requirement": "the same stream carries regime-ready observations",
+      "evidence": "tests/test_lab07_integration.py::test_the_stream_carries_every_kind_the_guide_names",
+      "note": "REGIME_OBSERVATION_READY",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.3",
+      "requirement": "the same stream carries refit REQUEST, START and READY as three distinct events",
+      "evidence": "tests/test_lab07_integration.py::test_refit_request_start_and_ready_are_three_events_not_one",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.4",
+      "requirement": "the same stream carries parameter activations",
+      "evidence": "tests/test_lab07_integration.py::test_the_stream_carries_every_kind_the_guide_names",
+      "note": "PARAMETER_ACTIVATED",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.5",
+      "requirement": "the same stream carries engine fills",
+      "evidence": "tests/test_lab07_integration.py::test_the_stream_carries_every_kind_the_guide_names",
+      "note": "ENGINE_FILL",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.6",
+      "requirement": "the event clock breaks ties with a sequence id, never with millisecond equality",
+      "evidence": "tests/test_lab07_integration.py::test_same_timestamp_events_are_ordered_causally_not_by_arrival",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.7",
+      "requirement": "the engine can never read a future activation_end; an activation's end is unknown until the next activation exists",
+      "evidence": "tests/test_lab07_integration.py::test_an_activation_may_not_publish_its_own_end + lab07_continuous_trace.json:activation_end_guard.clean",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.2.8",
+      "requirement": "an event whose available_at is later than the current clock is not visible, even if its observed_at is in the past",
+      "evidence": "tests/test_lab07_integration.py::test_visibility_is_decided_by_available_at_not_observed_at",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.1",
+      "requirement": "a refit's candidate evaluation runs under its OWN account policy (normally flat/reset for training)",
+      "evidence": "lab07_continuous_trace.json:training_jobs.training_account_contract",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.2",
+      "requirement": "a refit never mutates the continuous deployment account",
+      "evidence": "lab07_continuous_trace.json:training_jobs.deployment_account_reachable_from_here",
+      "note": "the runner never receives the deployment account",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.3",
+      "requirement": "a refit job cannot access any data after its request cutoff",
+      "evidence": "tests/test_lab07_integration.py::test_a_job_cannot_read_past_its_cutoff_however_long_it_runs + tests/test_lab07_integration.py::test_a_job_cannot_be_commissioned_to_read_the_future",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.4",
+      "requirement": "refit latency comes from a measured benchmark, the resource budget, or a frozen scenario",
+      "evidence": "lab07_continuous_trace.json:training_jobs.benchmark.source",
+      "note": "measured_benchmark: one real causal_fit is timed in the run",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.5",
+      "requirement": "a refit latency of zero is never used in order to fill earlier (guide L07.3 names this explicitly)",
+      "evidence": "tests/test_lab07_integration.py::test_a_zero_latency_refit_is_refused + training_jobs.zero_latency_jobs == 0",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.3.6",
+      "requirement": "the training account contract is recorded and is NOT identified with the deployment account contract (guide 10.3)",
+      "evidence": "tests/test_lab07_integration.py::test_the_training_account_contract_is_not_the_deployment_contract",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.1",
+      "requirement": "per-alpha migration policy follows guide 9.5",
+      "evidence": "parameter_activation_tape.json:rules",
+      "note": "guide 9.5 rules recorded with the tape",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.2",
+      "requirement": "an entry campaign carries an immutable entry_parameter_digest",
+      "evidence": "tests/test_lab07_integration.py::test_the_entry_digest_is_immutable",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.3",
+      "requirement": "when the regime changes, an OPEN trade stays protected by the parameters it entered with",
+      "evidence": "tests/test_lab07_integration.py::test_an_open_campaign_blocks_the_switch_and_is_never_force_closed",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.4",
+      "requirement": "pending future-entry policy MAY change while an open campaign keeps its own",
+      "evidence": "integration/activation.py:PENDING_POLICIES",
+      "note": "retain_under_entry_version vs cancel_and_requote, chosen explicitly",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.5",
+      "requirement": "pending entry commands have explicit cancel/retain semantics at an activation",
+      "evidence": "parameter_activation_tape.json:activations[].pending_policy",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.6",
+      "requirement": "an old campaign's protective orders keep their parameter version until terminal",
+      "evidence": "integration/activation.py:ProtectiveOrder.parameter_version",
+      "note": "an order keeps the version that placed it",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.7",
+      "requirement": "retired parameter versions are never deleted while an order still references them",
+      "evidence": "tests/test_lab07_integration.py::test_a_retired_version_survives_while_an_order_references_it",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.8",
+      "requirement": "new candidate indicators must be causally warm before activation; wait or fall back rather than reinitialise",
+      "evidence": "tests/test_lab07_integration.py::test_a_cold_indicator_makes_the_switch_wait_rather_than_reinitialise",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.9",
+      "requirement": "no EMA/HMA reset at a switch, and no adaptive-length state carried from params A to params B without a declared contract",
+      "evidence": "tests/test_lab07_integration.py::test_carrying_indicator_state_without_a_contract_is_refused",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.10",
+      "requirement": "activation records both the requested decision time and the ACTUAL activation delay",
+      "evidence": "lab07_continuous_trace.json:continuous_account.switches[].blocked_bars",
+      "note": "requested vs effective bar, measured on the real account",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.11",
+      "requirement": "bank switching uses the same QuantBT order lifecycle as any other order; no side channel",
+      "evidence": "integration/continuous_account.py: one build_intent_tape and one _engine call",
+      "note": "a switch produces intents on the same tape as any other bar",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.12",
+      "requirement": "a campaign that will not close is reported stale/transition-blocked; it is never force-closed to manufacture a timing edge",
+      "evidence": "parameter_activation_tape.json:blocked_by_reason + TERMINAL_REASONS excludes 'parameters changed'",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.4.13",
+      "requirement": "forced unwind exists only as a separate ablation and carries its costs",
+      "evidence": "parameter_activation_tape.json:forced_unwind_used",
+      "note": "false; forced unwind exists only as a separate ablation",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.1",
+      "requirement": "a segment STARTS when its parameters become effective",
+      "evidence": "operational_segments.json:segments[].start",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.2",
+      "requirement": "a segment's END is only written once a NEXT activation exists; the open segment has a null end",
+      "evidence": "tests/test_lab07_integration.py::test_an_open_segment_has_no_length_until_the_next_activation_exists + operational_segments.json:open_segment_has_null_end",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.3",
+      "requirement": "a trigger may legitimately result in no change; a no-change trigger is recorded, not dropped",
+      "evidence": "tests/test_lab07_integration.py::test_a_no_change_trigger_is_recorded_not_dropped + operational_segments.json:no_change_trigger_count",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.4",
+      "requirement": "the reporting clock is unchanged by segmentation: daily UTC on one evaluation interval",
+      "evidence": "operational_segments.json:reporting_clock",
+      "note": "daily UTC, unchanged",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.5",
+      "requirement": "no future segment length ever enters a policy decision",
+      "evidence": "tests/test_lab07_integration.py::test_a_decision_may_not_carry_the_length_of_its_own_segment + operational_segments.json:future_length_guard.clean",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.5.6",
+      "requirement": "segments of different length are never averaged as unweighted fold Sharpes to rank arms (T55)",
+      "evidence": "operational_segments.json:daily_account_comparison",
+      "note": "T55, measured gap",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.1",
+      "requirement": "missing context is handled explicitly",
+      "evidence": "tests/test_lab07_integration.py::test_missing_and_stale_context_are_different_failures",
+      "note": "MISSING_CONTEXT",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.2",
+      "requirement": "stale context is handled explicitly and is distinguished from missing",
+      "evidence": "tests/test_lab07_integration.py::test_missing_and_stale_context_are_different_failures",
+      "note": "STALE_CONTEXT",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.3",
+      "requirement": "a failed model fit keeps the validated incumbent; it never selects random parameters",
+      "evidence": "tests/test_lab07_integration.py::test_a_failed_fit_with_no_previous_model_stops_rather_than_guesses",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.4",
+      "requirement": "an incomplete probe panel is incomplete evidence, not bad performance",
+      "evidence": "tests/test_lab07_integration.py::test_an_incomplete_panel_is_missing_evidence_not_bad_performance",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.5",
+      "requirement": "an out-of-order job completion cannot activate earlier than its READY event",
+      "evidence": "tests/test_lab07_integration.py::test_an_out_of_order_job_cannot_activate_before_its_ready_event",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.6",
+      "requirement": "a simulation reject is handled and recorded",
+      "evidence": "lab07_continuous_trace.json:failures.by_mode.SIMULATION_REJECT",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.7",
+      "requirement": "a liquidation is handled and recorded",
+      "evidence": "lab07_continuous_trace.json:failures.by_mode.LIQUIDATION",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.8",
+      "requirement": "an interrupted artifact write is detected; a partial artifact is never read as complete",
+      "evidence": "tests/test_lab07_integration.py::test_a_partial_artifact_is_refused_not_parsed",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.6.9",
+      "requirement": "a worker failure does not erase already-committed trials",
+      "evidence": "tests/test_lab07_integration.py::test_committed_trials_survive_a_worker_failure",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.7.1",
+      "requirement": "feeding one observation/event at a time gives exactly the offline event replay under the same availability",
+      "evidence": "lab07_continuous_trace.json:replay_parity.identical",
+      "note": "consumes the DECISION each event implies, not the event's own fields",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.7.2",
+      "requirement": "mutating the future does not change any past decision",
+      "evidence": "lab07_continuous_trace.json:prefix_stability.prefix_survives_future_mutation",
+      "note": "on the real account, with open positions",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.7.3",
+      "requirement": "reset/resume is offered ONLY if a full model+strategy+account state contract supports it; otherwise it is refused, not approximated",
+      "evidence": "integration/continuous_account.py: no resume path is offered",
+      "note": "a resume would need a full model+strategy+account state contract; none is claimed, so none is offered",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "L07.7.4",
+      "requirement": "the prefix of a longer stream equals the whole of the shorter stream, for decisions and for the account",
+      "evidence": "lab07_continuous_trace.json:prefix_stability.prefix_matches_longer_run",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.1",
+      "requirement": "each arm has its own account with the SAME initial conditions",
+      "evidence": "lab07_continuous_trace.json:continuous_account.initial_equity",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.2",
+      "requirement": "within an arm the account is continuous in chronological order",
+      "evidence": "integration/continuous_account.py: one chronological sweep",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.3",
+      "requirement": "best segments from independent runs are never summed (T56)",
+      "evidence": "lab07_continuous_trace.json:continuous_account.spliced_from_independent_runs",
+      "note": "false",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.4",
+      "requirement": "money is never reset at a regime or fold change (T56)",
+      "evidence": "lab07_continuous_trace.json:continuous_account.account_resets",
+      "note": "0",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "G10.3.5",
+      "requirement": "fees, slippage, funding and gross exposure constraints are identical across arms",
+      "evidence": "experiments/evaluator.py:ACCOUNT",
+      "note": "one frozen account contract, shared by every arm since LAB-01",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T53.1",
+      "requirement": "A/B/C/D share fixed economics and budgets with no hidden fee, risk or evaluation advantage",
+      "evidence": "lab07_continuous_trace.json:continuous_account + evaluator.ACCOUNT",
+      "note": "PARTIAL until arms C/D/E exist; economics and budget are fixed and shared",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T54.1",
+      "requirement": "an installed WFO mode that uses OOS for selection is reported as A_legacy_selection_adjusted, never as an untouched baseline",
+      "evidence": "lab04_installed_wfo_trace.json:legacy_oos_labelling",
+      "note": "A_legacy_selection_adjusted; LAB-07 carries the label into the run record",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T55.1",
+      "requirement": "dynamic folds of different length are compared on the same daily account, not by averaging fold Sharpes",
+      "evidence": "operational_segments.json:daily_account_comparison",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T56.1",
+      "requirement": "a carried account across segments shows no reset and no virtual splice of expert PnL",
+      "evidence": "tests/test_lab07_integration.py::test_the_continuous_account_never_resets_across_a_parameter_switch",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "T57.1",
+      "requirement": "a sequential optimizer and an adaptive batch are declared as different contracts; no false identical-sequence claim",
+      "evidence": "integration/jobs.py:RefitJob + lab04_calendar_baseline.json:search_budget",
+      "note": "the schedule is deterministic and sequential; no adaptive batch is claimed",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.1",
+      "requirement": "a lab-only QuantBT patch/diff exists as a PROPOSAL and is never applied upstream",
+      "evidence": "handoff/lab_only_patch.diff",
+      "note": "a proposal, never applied",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.2",
+      "requirement": "integration_binding_map.json maps each lab integration point to a VERIFIED installed symbol",
+      "evidence": "integration_binding_map.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.3",
+      "requirement": "regime provider, scheduler and parameter-provider adapters exist",
+      "evidence": "integration/{events,jobs,activation,segments,failures,continuous,continuous_account}.py",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.4",
+      "requirement": "full continuous traces are written",
+      "evidence": "lab07_continuous_trace.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.5",
+      "requirement": "parameter_activation_tape is written",
+      "evidence": "parameter_activation_tape.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.6",
+      "requirement": "operational_segments is written",
+      "evidence": "operational_segments.json",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "OUT.7",
+      "requirement": "installed-lab smoke tests run against the INSTALLED package, not a mock",
+      "evidence": "tests/test_lab07_integration.py::test_every_integration_point_binds_to_a_symbol_that_exists",
+      "note": "probes the INSTALLED package, not a mock",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.1",
+      "requirement": "no leakage: every causality probe passes and the leaky control is still detected",
+      "evidence": "configs/causality_verification.json:status",
+      "note": "CAUSAL, leaky control detected",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.2",
+      "requirement": "no account resets anywhere in a continuous arm",
+      "evidence": "lab07_continuous_trace.json:continuous_account.account_resets",
+      "note": "0",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.3",
+      "requirement": "no handcrafted fills: every fill comes from the engine",
+      "evidence": "tests/test_lab07_integration.py::test_a_handcrafted_fill_cannot_enter_the_account + every fill carries source='engine'",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.4",
+      "requirement": "disabled-hooks parity passes",
+      "evidence": "lab07_continuous_trace.json:integration_baseline_parity.identical",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.5",
+      "requirement": "dynamic integration passes",
+      "evidence": "lab07_continuous_trace.json:continuous_account.switches_effected",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "clause_id": "EXIT.6",
+      "requirement": "an unsupported hook is a BLOCKER or a documented lab patch; it is never silently routed to a different contract",
+      "evidence": "integration_binding_map.json:reroute_policy + known_blockers",
+      "note": "",
+      "status": "DONE"
+    }
+  ],
+  "lab_run_id": "run-20260910T121536Z-8f943693",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T12:15:40.317554+00:00"
+}

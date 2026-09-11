@@ -1,0 +1,48 @@
+{
+  "schema": "crypto_regime_lab.cost_binding_verification.v1",
+  "generated_at_utc": "2026-09-11T04:11:50.224988+00:00",
+  "registered": {
+    "one_way_taker_fee_rate": 0.0004,
+    "provenance": "Binance USD-M standard taker rate; re-pin against actual contract data in LAB-03",
+    "slippage": 0.0001,
+    "source": "configs/study_registration.json, frozen at LAB-01"
+  },
+  "lab_binding": {
+    "call": "run_intrabar(..., fee=ACCOUNT['taker_fee_rate'], slippage_bps=...)",
+    "engine_semantic": "quantbt endpoint docs: `fee` is a LEGACY ROUND-TRIP fee, converted to the canonical one-way `fee_rate` at the endpoint boundary when explicit `fee_rate` is omitted (v2_fee_rate = fee / 2.0)",
+    "correct_binding_would_be": "fee_rate=<one-way rate>, or fee=2 * <one-way rate>"
+  },
+  "measurement": {
+    "status": "MEASURED",
+    "probe": {
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "window": [
+        "2021-01-01",
+        "2021-04-30"
+      ]
+    },
+    "fills": 34,
+    "distinct_one_way_rates": [
+      0.0002
+    ],
+    "measured_one_way_fee_rate": 0.0002,
+    "gross_notional": 68852.60445034075,
+    "total_fees_charged": 13.77052089006815,
+    "cash_identity": {
+      "equity_change": 838.8339294508187,
+      "minus_signed_cash_minus_fees": 838.8339294506834,
+      "residual": 1.3528733688872308e-10,
+      "relative_residual": 1.612802393166132e-13,
+      "identity": "equity[-1] - equity[0] == -sum(side * qty * price) - sum(fee), with side +1 for a buy. The account closes flat on the last bar, so there is no open position to carry",
+      "holds": true
+    }
+  },
+  "verdict": {
+    "binding_charges_the_registered_rate": false,
+    "measured_over_registered": 0.5,
+    "finding": "the account is charged HALF the registered one-way taker fee, because the registered one-way rate is passed into a round-trip parameter. The engine behaves exactly as documented; the lab's binding to it does not",
+    "direction": "flattering: every account in every phase paid less than the study declared, so absolute returns are overstated",
+    "why_it_was_not_caught_earlier": "the engine's default for `fee` is 0.0004, which is also the registered one-way rate, so the call looked correct and produced no warning. LAB-01 recorded the SIGNATURE in api_binding_map.json and never probed the SEMANTIC -- the exact failure the guide's 'never assume a signature' rule names"
+  }
+}

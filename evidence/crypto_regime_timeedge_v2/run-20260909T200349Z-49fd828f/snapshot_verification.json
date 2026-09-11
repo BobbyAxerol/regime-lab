@@ -1,0 +1,58 @@
+{
+  "schema": "crypto_regime_lab.snapshot_verification.v1",
+  "snapshot_id": "server_core_v1",
+  "files_checked": 627,
+  "missing": [],
+  "snapshot_files_changed": [],
+  "source_files_changed": [
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet"
+  ],
+  "closed_partition_drift": [],
+  "open_partition_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "DOGEUSDT"
+    }
+  ],
+  "rolling_window_drift": [],
+  "rolling_window_products": [
+    "crypto_binance_orderbook_snapshot_1h"
+  ],
+  "status": "EXPECTED_MUTABLE_DRIFT_ONLY",
+  "consequence": "only partitions that are mutable by design changed: an open trailing partition the collector is appending to, or a rolling-window product that prunes and rewrites its own history. The snapshot's own bytes are unchanged, so what was read is still exactly what was read, and the primary cohort does not depend on the rolling-window product.",
+  "primary_run_valid": true,
+  "rolling_window_note": "a rolling-window product can never be part of an immutable snapshot; its cohort is reported separately and is not in the primary core (see feature tiers)",
+  "lab_run_id": "run-20260909T200349Z-49fd828f",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T20:07:36.697642+00:00"
+}

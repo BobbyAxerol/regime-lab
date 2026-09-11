@@ -1,0 +1,2737 @@
+{
+  "schema": "crypto_regime_lab.api_binding_map.v2",
+  "installed": {
+    "import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "module_version_attr": "1.1.1",
+    "distributions": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2"
+    },
+    "public_symbol_count": 582,
+    "init_sha256": "1b3e6280930667cfead1d983010b1997055b60fcd0decea402c44a2a21703566",
+    "native_import_origin": null,
+    "native_import_error": "ModuleNotFoundError: No module named 'quantbt_native'"
+  },
+  "execution_contracts": [
+    "close_target_v2",
+    "event_lifecycle_v2_next_bar_close",
+    "event_lifecycle_v3_next_open",
+    "fill_replay_v1",
+    "fill_replay_v2",
+    "intrabar_bracket_v1",
+    "next_open_v1"
+  ],
+  "event_clock_contracts": [
+    "event_lifecycle_v2_next_bar_close",
+    "event_lifecycle_v3_next_open"
+  ],
+  "guide_target_contract": "event_lifecycle_v3_next_open",
+  "guide_target_contract_available": true,
+  "operations": {
+    "inspect_installed_contracts": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "EXECUTION_CONTRACT_REGISTRY": {
+          "kind": "dict",
+          "signature": null,
+          "doc_first_line": "dict() -> new empty dictionary",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "dict_keys": [
+            "close_target_v2",
+            "event_lifecycle_v2_next_bar_close",
+            "event_lifecycle_v3_next_open",
+            "fill_replay_v1",
+            "fill_replay_v2",
+            "intrabar_bracket_v1",
+            "next_open_v1"
+          ]
+        },
+        "get_execution_contract": {
+          "kind": "function",
+          "signature": "(engine_id: 'str') -> 'ExecutionContract'",
+          "doc_first_line": null,
+          "module": "quantbt.core.execution_contract",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_contract.py",
+          "source_line": 244
+        },
+        "EVENT_CLOCK_CONTRACTS": {
+          "kind": "dict",
+          "signature": null,
+          "doc_first_line": "dict() -> new empty dictionary",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "dict_keys": [
+            "event_lifecycle_v2_next_bar_close",
+            "event_lifecycle_v3_next_open"
+          ]
+        },
+        "get_event_clock_contract": {
+          "kind": "function",
+          "signature": "(contract: 'str | int | EventClockContract') -> 'EventClockContract'",
+          "doc_first_line": null,
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 181
+        },
+        "walkforward_support_matrix": {
+          "kind": "function",
+          "signature": "(as_dataframe: 'bool' = True)",
+          "doc_first_line": "Return the current walk-forward compatibility matrix.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 874
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_incumbent_regime_surface.py::test_target_execution_contract_exists_in_this_install",
+        "tests/test_lab01_api_map.py::test_execution_contracts_are_enumerated"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    },
+    "prepare_market": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "prepare_market_handle_v2": {
+          "kind": "function",
+          "signature": "(data: 'pd.DataFrame | Mapping[str, pd.DataFrame] | PreparedMarketHandleV2', *, symbols: 'Optional[Sequence[str]]' = None, calendar_policy: 'CalendarPolicyV2 | str' = <CalendarPolicyV2.EXACT: 'exact'>, missing_policy: 'MissingObservationPolicyV1 | str' = <MissingObservationPolicyV1.NO_OBSERVATION: 'no_observation'>, primary_symbol: 'Optional[str]' = None, cutoff_timestamp=None, cache: 'Optional[PreparedMarketCacheV2]' = None) -> 'PreparedMarketHandleV2'",
+          "doc_first_line": "Prepare a canonical immutable V2 market handle.",
+          "module": "quantbt.core.market_calendar_v2",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/market_calendar_v2.py",
+          "source_line": 479
+        },
+        "PreparedMarketHandleV2": {
+          "kind": "type",
+          "signature": "(calendar: 'CalendarPlanV2', opens: 'np.ndarray', highs: 'np.ndarray', lows: 'np.ndarray', closes: 'np.ndarray', volumes: 'np.ndarray', funding_rates: 'np.ndarray', funding_event_mask: 'np.ndarray', shared_funding_event_mask: 'np.ndarray', observed: 'np.ndarray', stale: 'np.ndarray', tradable: 'np.ndarray', mark_closes: 'np.ndarray', fingerprint: 'str', source_rows: 'Mapping[str, int]', allocation_id: 'int') -> None",
+          "doc_first_line": "An immutable prepared market allocation with explicit lifetime control.",
+          "module": "quantbt.core.market_calendar_v2",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/market_calendar_v2.py",
+          "source_line": 209,
+          "dataclass_fields": [
+            "_closed",
+            "allocation_id",
+            "calendar",
+            "closes",
+            "fingerprint",
+            "funding_event_mask",
+            "funding_rates",
+            "highs",
+            "lows",
+            "mark_closes",
+            "observed",
+            "opens",
+            "shared_funding_event_mask",
+            "source_rows",
+            "stale",
+            "tradable",
+            "volumes"
+          ]
+        },
+        "prepare_market_tape": {
+          "kind": "function",
+          "signature": "(*, data: 'Optional[Union[pd.DataFrame, FrameMap]]' = None, opens: 'Optional[Union[pd.Series, SeriesMap]]' = None, highs: 'Optional[Union[pd.Series, SeriesMap]]' = None, lows: 'Optional[Union[pd.Series, SeriesMap]]' = None, closes: 'Optional[Union[pd.Series, SeriesMap]]' = None, volumes: 'Optional[Union[pd.Series, SeriesMap]]' = None, datetime_index: 'Optional[pd.DatetimeIndex]' = None, symbols: 'Optional[Sequence[str]]' = None, funding_rate: 'Union[float, pd.Series, Dict[str, Union[float, pd.Series]]]' = 0.0, funding_event_timestamps: 'Optional[Union[pd.DatetimeIndex, Sequence]]' = None, funding_event_rates: 'Optional[Union[Sequence, pd.Series, Dict[str, Union[Sequence, pd.Series]]]]' = None, use_funding: 'bool' = True, validation_mode: 'str' = 'strict', missing_funding_policy: 'str' = 'raise', source_timezone: 'Optional[str]' = None, bar_timestamp_semantics: 'str' = 'close') -> 'PreparedMarketTape'",
+          "doc_first_line": "Build a strict, immutable OHLCV/funding tape.",
+          "module": "quantbt.core.market_tape",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/market_tape.py",
+          "source_line": 64
+        },
+        "prepare_instrument_registry_v2": {
+          "kind": "function",
+          "signature": "(*, specs: 'Optional[Mapping[str, InstrumentSpec] | Sequence[InstrumentSpec]]' = None, symbols: 'Optional[Sequence[str]]' = None, contract_size: 'Optional[float | Mapping[str, float]]' = None, leverage: 'float | Mapping[str, float]' = 1.0, fee_rate: 'float | Mapping[str, float]' = 0.0, qty_step: 'Optional[float | Mapping[str, float]]' = None, min_qty: 'Optional[float | Mapping[str, float]]' = None, min_notional: 'Optional[float | Mapping[str, float]]' = None) -> 'InstrumentRegistryV2'",
+          "doc_first_line": "Build V2 rules from existing public instrument fields without renaming them.",
+          "module": "quantbt.core.instrument_registry_v2",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/instrument_registry_v2.py",
+          "source_line": 257
+        },
+        "compile_instrument_table": {
+          "kind": "function",
+          "signature": "(symbols: 'Sequence[str]', instruments: 'Mapping[str, InstrumentSpec] | Sequence[InstrumentSpec] | None' = None, *, default_contract_size: 'float' = 1.0, default_venue: 'str' = 'SIM', default_settlement: 'str' = 'USD', fee_model_id: 'int | Mapping[str, int]' = 0, margin_model_id: 'int | Mapping[str, int]' = 0) -> 'PreparedInstrumentTable'",
+          "doc_first_line": "Compile Python instrument objects into immutable contiguous columns.",
+          "module": "quantbt.core.instrument_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/instrument_contracts.py",
+          "source_line": 104
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_lab01_api_map.py::test_prepare_market_is_bound"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    },
+    "evaluate_candidate": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "QuantBTEndpoint": {
+          "kind": "type",
+          "signature": "(config: 'Optional[EndpointConfig]' = None, **kwargs)",
+          "doc_first_line": "Stable notebook/service facade for all QuantBT backtest modes.",
+          "module": "quantbt.endpoint",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+          "source_line": 795
+        },
+        "EndpointConfig": {
+          "kind": "type",
+          "signature": "(mode: 'str' = 'single_signal', backend: 'str' = 'auto', native_backend: 'Optional[str]' = None, backend_policy: 'Optional[str]' = None, native_static_abi: 'str' = '0.5', target_runtime: 'str' = 'numba', sizing: 'str' = 'signal_notional', account: 'AccountConfig' = <factory>, execution: 'ExecutionConfig' = <factory>, fee: 'float' = 0.0004, fee_rate: 'Optional[float]' = None, alloc_per_trade: 'Union[float, Dict[str, float]]' = 100000.0, use_pyramiding: 'bool' = True, use_funding: 'bool' = True, funding_rate: 'Union[float, pd.Series, Dict]' = 0.0, contract_size: 'Union[float, Dict[str, float]]' = 1.0, instruments: 'Optional[Union[Dict[str, InstrumentSpec], Sequence[InstrumentSpec]]]' = None, qty_step: 'Optional[Union[float, Dict[str, float]]]' = None, lot_size: 'Optional[Union[float, Dict[str, float]]]' = None, slot_size: 'Optional[Union[float, Dict[str, float]]]' = None, min_qty: 'Optional[Union[float, Dict[str, float]]]' = None, min_notional: 'Optional[Union[float, Dict[str, float]]]' = None, slippage: 'float' = 0.0001, portfolio_mode: 'str' = 'longshort', betas: 'Union[float, Dict[str, float], None]' = None, risk_lookback: 'int' = 60, asset_type: 'str' = 'crypto', basket: 'Optional[BasketSpec]' = None, arbitrage_spec: 'object' = None, structured_order_spec: 'object' = None, event_engine_version: 'str' = 'v1', execution_contract: 'object' = None, reactive_execution_mode: 'str' = 'fast', reactive_kernel_mode: 'str' = 'replay_certified', reactive_runtime: 'str' = 'legacy_python_loop', reactive_gil_policy: 'str' = 'held_for_session', audit_mode: 'Optional[str]' = None, oracle_sample_rate: 'float' = 0.0, oracle_sample_seed: 'int' = 0, symbols: 'Optional[Sequence[str]]' = None, dca_kwargs: 'Dict' = <factory>, nautilus_config: 'object' = None, nautilus_depth_config: 'Optional[NautilusExecutionDepthConfig]' = None, option_config: 'object' = None, report_level: 'str' = 'full', audit_sink: 'str' = 'memory', audit_sink_path: 'Optional[str]' = None, runtime_budget: 'RuntimeBudgetV1' = <factory>, shadow_evidence_dir: 'Optional[str]' = None, strategy_class: 'object' = None, walkforward_config: 'Optional[WalkForwardConfig]' = None, walkforward_target_mode: 'str' = 'signal_notional', metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Configuration for `QuantBTEndpoint`.",
+          "module": "quantbt.endpoint",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+          "source_line": 209,
+          "dataclass_fields": [
+            "account",
+            "alloc_per_trade",
+            "arbitrage_spec",
+            "asset_type",
+            "audit_mode",
+            "audit_sink",
+            "audit_sink_path",
+            "backend",
+            "backend_policy",
+            "basket",
+            "betas",
+            "contract_size",
+            "dca_kwargs",
+            "event_engine_version",
+            "execution",
+            "execution_contract",
+            "fee",
+            "fee_rate",
+            "funding_rate",
+            "instruments",
+            "lot_size",
+            "metadata",
+            "min_notional",
+            "min_qty",
+            "mode",
+            "native_backend",
+            "native_static_abi",
+            "nautilus_config",
+            "nautilus_depth_config",
+            "option_config",
+            "oracle_sample_rate",
+            "oracle_sample_seed",
+            "portfolio_mode",
+            "qty_step",
+            "reactive_execution_mode",
+            "reactive_gil_policy",
+            "reactive_kernel_mode",
+            "reactive_runtime",
+            "report_level",
+            "risk_lookback",
+            "runtime_budget",
+            "shadow_evidence_dir",
+            "sizing",
+            "slippage",
+            "slot_size",
+            "strategy_class",
+            "structured_order_spec",
+            "symbols",
+            "target_runtime",
+            "use_funding",
+            "use_pyramiding",
+            "walkforward_config",
+            "walkforward_target_mode"
+          ]
+        },
+        "BacktestResult": {
+          "kind": "type",
+          "signature": "(equity: 'pd.Series', returns: 'pd.Series', positions: 'pd.DataFrame', closes: 'pd.DataFrame', symbols: 'List[str]', initial_capital: 'float', leverage: 'float', liquidated: 'bool' = False, liquidation_bar: 'int' = -1, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Immutable output of a single backtest run.",
+          "module": "quantbt.core.types",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/types.py",
+          "source_line": 17,
+          "dataclass_fields": [
+            "closes",
+            "equity",
+            "initial_capital",
+            "leverage",
+            "liquidated",
+            "liquidation_bar",
+            "metadata",
+            "positions",
+            "returns",
+            "symbols"
+          ]
+        },
+        "GenericEndpointEvaluator": {
+          "kind": "type",
+          "signature": "(build_run_inputs: 'Callable[[Mapping[str, Any]], Mapping[str, Any]]', run_func: 'Callable[..., Any]', objective_builder: 'ObjectiveBuilder', metadata: 'dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Evaluate params by building endpoint inputs and calling a run function.",
+          "module": "quantbt.optimization.evaluators.generic",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/evaluators/generic.py",
+          "source_line": 14,
+          "dataclass_fields": [
+            "build_run_inputs",
+            "last_result",
+            "last_run_inputs",
+            "metadata",
+            "objective_builder",
+            "run_func"
+          ]
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_lab01_api_map.py::test_endpoint_surface_is_bound"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    },
+    "run_continuous": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "WalkForwardEngine": {
+          "kind": "type",
+          "signature": "(strategy: 'Any', config: 'Optional[WalkForwardConfig]' = None, scorer: 'Optional[Callable[..., Dict[str, float]]]' = None, native_scorer: 'Optional[Callable[..., Dict[str, float]]]' = None)",
+          "doc_first_line": "Time-safe walk-forward splitter and OOS stitcher.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 952
+        },
+        "WalkForwardConfig": {
+          "kind": "type",
+          "signature": "(split_mode: 'Union[str, int, pd.Timestamp]' = 'walk_forward_2022', split_frequency: 'str' = 'quarterly', window_mode: 'str' = 'expanding', train_window: 'Optional[str]' = None, min_train_bars: 'int' = 1, min_test_bars: 'int' = 1, target_mode: 'str' = 'signal_notional', fill_value: 'float' = 0.0, optimization_mode: 'str' = 'none', optimization_schedule: 'str' = 'global', fold_boundary_position_policy: 'str' = 'carry', inner_split_frequency: 'Optional[str]' = None, inner_window_mode: 'Optional[str]' = None, inner_train_window: 'Optional[str]' = None, inner_min_folds: 'int' = 2, calendar_contract: 'str' = 'exact_v2', calendar_primary_symbol: 'Optional[str]' = None, calendar_missing_policy: 'str' = 'no_observation', label_horizon_bars: 'int' = 0, purge_bars: 'int' = 0, embargo_bars: 'int' = 0, warmup_policy: 'str' = 'none', warmup_bars: 'Optional[int]' = None, fold_account_policy: 'str' = 'carry_position', intent_contract: 'Optional[Union[WfoIntentContractV1, Mapping[str, Any]]]' = None, strategy_lifecycle_policy: 'str' = 'isolated_v1', trusted_strategy_global: 'bool' = False, proxy_validation_mode: 'str' = 'off', proxy_validation_top_fraction: 'float' = 0.1, proxy_min_spearman: 'float' = 0.7, proxy_min_top_k_overlap: 'float' = 0.5, proxy_max_winner_regret: 'float' = 0.25, proxy_max_false_positive_rate: 'float' = 0.25, optuna_trials: 'int' = 0, optuna_early_stopping: 'Optional[int]' = None, random_seed: 'int' = 42, decay_lambda: 'float' = 0.5, decay_gamma: 'float' = 0.5, top_is_fraction: 'float' = 0.1, top_is_k: 'Optional[int]' = None, candidate_selection_metric: 'str' = 'robust_decay', candidate_decay_lambda: 'Optional[float]' = None, candidate_decay_gamma: 'Optional[float]' = None, sbb_samples: 'int' = 256, sbb_block_length: 'int' = 20, sbb_decay_lambda: 'float' = 0.5, sbb_std_penalty: 'float' = 0.1, sbb_simulation: 'str' = 'stationary', regime_count: 'int' = 3, regime_lookback: 'int' = 20, regime_weights: 'Optional[Dict[Union[int, str], float]]' = None, stress_vol_multiplier: 'float' = 1.0, garch_p: 'int' = 1, garch_q: 'int' = 1, garch_dist: 'str' = 't', garch_vol_multiplier: 'float' = 1.0, flat_top_fraction: 'float' = 0.1, flat_eps: 'float' = 0.15, flat_min_samples: 'int' = 3, flat_selector: 'str' = 'medoid', plateau_quantile: 'float' = 0.25, plateau_median_weight: 'float' = 0.25, plateau_std_penalty: 'float' = 0.5, plateau_size_bonus: 'float' = 0.01, is_subperiods: 'int' = 6, q25_weight: 'float' = 0.3, dispersion_penalty: 'float' = 0.5, temporal_weight: 'float' = 0.65, plateau_weight: 'float' = 0.35, use_bootstrap_penalty: 'bool' = False, use_complexity_penalty: 'bool' = False, scoring_backend: 'str' = 'proxy', scoring_trading_days: 'int' = 365, min_trades_per_year: 'Optional[float]' = None, trade_penalty_factor: 'Optional[float]' = None, use_numba: 'bool' = True, metadata: 'Dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Configuration for Phase 1 walk-forward splitting and stitching.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 342,
+          "dataclass_fields": [
+            "calendar_contract",
+            "calendar_missing_policy",
+            "calendar_primary_symbol",
+            "candidate_decay_gamma",
+            "candidate_decay_lambda",
+            "candidate_selection_metric",
+            "decay_gamma",
+            "decay_lambda",
+            "dispersion_penalty",
+            "embargo_bars",
+            "fill_value",
+            "flat_eps",
+            "flat_min_samples",
+            "flat_selector",
+            "flat_top_fraction",
+            "fold_account_policy",
+            "fold_boundary_position_policy",
+            "garch_dist",
+            "garch_p",
+            "garch_q",
+            "garch_vol_multiplier",
+            "inner_min_folds",
+            "inner_split_frequency",
+            "inner_train_window",
+            "inner_window_mode",
+            "intent_contract",
+            "is_subperiods",
+            "label_horizon_bars",
+            "metadata",
+            "min_test_bars",
+            "min_trades_per_year",
+            "min_train_bars",
+            "optimization_mode",
+            "optimization_schedule",
+            "optuna_early_stopping",
+            "optuna_trials",
+            "plateau_median_weight",
+            "plateau_quantile",
+            "plateau_size_bonus",
+            "plateau_std_penalty",
+            "plateau_weight",
+            "proxy_max_false_positive_rate",
+            "proxy_max_winner_regret",
+            "proxy_min_spearman",
+            "proxy_min_top_k_overlap",
+            "proxy_validation_mode",
+            "proxy_validation_top_fraction",
+            "purge_bars",
+            "q25_weight",
+            "random_seed",
+            "regime_count",
+            "regime_lookback",
+            "regime_weights",
+            "sbb_block_length",
+            "sbb_decay_lambda",
+            "sbb_samples",
+            "sbb_simulation",
+            "sbb_std_penalty",
+            "scoring_backend",
+            "scoring_trading_days",
+            "split_frequency",
+            "split_mode",
+            "strategy_lifecycle_policy",
+            "stress_vol_multiplier",
+            "target_mode",
+            "temporal_weight",
+            "top_is_fraction",
+            "top_is_k",
+            "trade_penalty_factor",
+            "train_window",
+            "trusted_strategy_global",
+            "use_bootstrap_penalty",
+            "use_complexity_penalty",
+            "use_numba",
+            "warmup_bars",
+            "warmup_policy",
+            "window_mode"
+          ]
+        },
+        "WalkForwardResult": {
+          "kind": "type",
+          "signature": "(folds: 'List[WalkForwardFold]', oos_output: 'Optional[StrategyOutput]', fold_table: 'pd.DataFrame', params: 'Dict[str, Any]', backtest_result: 'Any' = None, trial_table: 'pd.DataFrame' = <factory>, candidate_table: 'pd.DataFrame' = <factory>, best_trial: 'Optional[Dict[str, Any]]' = None, metadata: 'Dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Phase 1 walk-forward artifact returned before/after final backtest.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 796,
+          "dataclass_fields": [
+            "backtest_result",
+            "best_trial",
+            "candidate_table",
+            "fold_table",
+            "folds",
+            "metadata",
+            "oos_output",
+            "params",
+            "trial_table"
+          ]
+        },
+        "ReactivePreparedWfoRuntimeV1": {
+          "kind": "type",
+          "signature": "(*, endpoint, data: 'pd.DataFrame', strategy_factory: 'object', walkforward_config: 'WalkForwardConfig', runtime_config: 'ReactiveWfoRuntimeConfigV1 | None' = None, symbols: 'Sequence[str] | None' = None, _use_prepared_wfo_preparation: 'bool | None' = None) -> 'None'",
+          "doc_first_line": "One prepared native market plus isolated reactive strategy builders.",
+          "module": "quantbt.backends.reactive_wfo",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/backends/reactive_wfo.py",
+          "source_line": 55
+        },
+        "prepare_reactive_wfo_strategy": {
+          "kind": "function",
+          "signature": "(*, strategy_factory: 'object', data, datetime_index: 'pd.DatetimeIndex', folds: 'Sequence[object]', random_seed: 'int', static_config: 'Mapping[str, Any]') -> 'PreparedReactiveWfoStrategyAdapterV1'",
+          "doc_first_line": "Prepare one isolated W3 factory and require its causal-cache promise.",
+          "module": "quantbt.strategies.reactive_wfo",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/reactive_wfo.py",
+          "source_line": 333
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_lab01_api_map.py::test_all_five_wfo_modes_are_enumerated"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    },
+    "replay_fixed_intents": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "FillReplayTapeV2": {
+          "kind": "type",
+          "signature": "(bar_index: 'np.ndarray', sequence: 'np.ndarray', event_id: 'np.ndarray', symbol: 'np.ndarray', signed_qty: 'np.ndarray', price: 'np.ndarray', fee: 'np.ndarray') -> None",
+          "doc_first_line": "One ordered set of explicit signed fills for the Rust accounting route.",
+          "module": "quantbt.core.fill_replay_v2",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/fill_replay_v2.py",
+          "source_line": 38,
+          "dataclass_fields": [
+            "bar_index",
+            "event_id",
+            "fee",
+            "price",
+            "sequence",
+            "signed_qty",
+            "symbol"
+          ]
+        },
+        "run_fill_replay_kernel": {
+          "kind": "function",
+          "signature": "(*, tape: 'PreparedMarketTape', fill_tape: 'FillReplayTape', account: 'AccountConfig', contract_size: 'float' = 1.0) -> 'NativeFillReplayResult'",
+          "doc_first_line": "Replay explicit fills through fast accounting without certifying signal generation.",
+          "module": "quantbt.core.intrabar_kernel",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/intrabar_kernel.py",
+          "source_line": 535
+        },
+        "TraceReplayer": {
+          "kind": "type",
+          "signature": "()",
+          "doc_first_line": "Verify a trace without re-running order matching or market simulation.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 70
+        },
+        "IntrabarIntentTape": {
+          "kind": "type",
+          "signature": "(entry_side: 'np.ndarray', entry_size: 'np.ndarray', stop_value: 'Optional[np.ndarray]' = None, take_profit_value: 'Optional[np.ndarray]' = None, trailing_value: 'Optional[np.ndarray]' = None, technical_exit: 'Optional[np.ndarray]' = None, exit_long: 'Optional[np.ndarray]' = None, exit_short: 'Optional[np.ndarray]' = None, level_mode: 'IntrabarLevelMode' = <IntrabarLevelMode.PERCENT_DISTANCE: 'percent_distance'>) -> None",
+          "doc_first_line": "IntrabarIntentTape(entry_side: 'np.ndarray', entry_size: 'np.ndarray', stop_value: 'Optional[np.ndarray]' = None, take_profit_value: 'Optional[np.ndarray]' = None, trailing_value: 'Optional[np.ndarray]' = None, technical_exit: 'Optional[np.ndarray]' = None, exit_long: 'Optional[np.ndarray]' = None, exit_short: 'Optional[np.ndarray]' = None, level_mode: 'IntrabarLevelMode' = <IntrabarLevelMode.PERCENT_DISTANCE: 'percent_distance'>)",
+          "module": "quantbt.core.intrabar_reference",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/intrabar_reference.py",
+          "source_line": 79,
+          "dataclass_fields": [
+            "entry_side",
+            "entry_size",
+            "exit_long",
+            "exit_short",
+            "level_mode",
+            "stop_value",
+            "take_profit_value",
+            "technical_exit",
+            "trailing_value"
+          ]
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_lab01_api_map.py::test_replay_surface_is_bound"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    },
+    "export_required_artifacts": {
+      "status": "BOUND",
+      "bound_symbols": {
+        "ResearchAuditWriterV1": {
+          "kind": "type",
+          "signature": "(*, plan: 'ResearchRetentionPlanV1', export_hook: 'AuditExportHookV1 | None' = None) -> 'None'",
+          "doc_first_line": "Bounded, synchronous, idempotent owner for immutable audit chunks.",
+          "module": "quantbt.core.research_audit",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/research_audit.py",
+          "source_line": 479
+        },
+        "ResearchRetentionPlanV1": {
+          "kind": "type",
+          "signature": "(financial_retention: 'str' = 'score', research_retention: 'str' = 'none', financial_scope: 'str' = 'selected_final_execution', chunk_rows: 'int' = 256, max_retained_chunks: 'int' = 4096, max_materialized_frames: 'int' = 3) -> None",
+          "doc_first_line": "Independent financial and research-retention contract for one WFO run.",
+          "module": "quantbt.core.research_audit",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/research_audit.py",
+          "source_line": 195,
+          "dataclass_fields": [
+            "chunk_rows",
+            "financial_retention",
+            "financial_scope",
+            "max_materialized_frames",
+            "max_retained_chunks",
+            "research_retention"
+          ]
+        },
+        "build_canonical_execution_trace": {
+          "kind": "function",
+          "signature": "(result, *, run_id: 'str' = 'native-event-run', materialize: 'bool' = True) -> 'CanonicalTraceArtifact'",
+          "doc_first_line": "Project a backend result into the versioned backend-neutral trace.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 197
+        },
+        "metrics_from_result": {
+          "kind": "function",
+          "signature": "(result: 'Any', *, names: 'Sequence[str]' = ('sharpe', 'max_drawdown_pct', 'num_trades', 'profit_factor'), trading_days: 'int' = 365, scope: 'str' = 'auto') -> 'dict[str, float]'",
+          "doc_first_line": "Extract optional display metrics from a QuantBT result.",
+          "module": "quantbt.optimization.objectives",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/objectives.py",
+          "source_line": 87
+        }
+      },
+      "absent_candidates": [],
+      "note": null,
+      "tests": [
+        "tests/test_lab01_api_map.py::test_result_export_surface_is_bound"
+      ],
+      "test_coverage": "COVERED",
+      "version": "1.1.1"
+    }
+  },
+  "incumbent_regime_surface": {
+    "volatility_regime_labels": {
+      "kind": "function",
+      "signature": "(returns: 'np.ndarray', regime_count: 'int' = 3, lookback: 'int' = 20) -> 'np.ndarray'",
+      "doc_first_line": "Assign trailing-volatility regime labels from 0 (low vol) to N-1 (high vol).",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 3405
+    },
+    "WalkForwardConfig": {
+      "kind": "type",
+      "signature": "(split_mode: 'Union[str, int, pd.Timestamp]' = 'walk_forward_2022', split_frequency: 'str' = 'quarterly', window_mode: 'str' = 'expanding', train_window: 'Optional[str]' = None, min_train_bars: 'int' = 1, min_test_bars: 'int' = 1, target_mode: 'str' = 'signal_notional', fill_value: 'float' = 0.0, optimization_mode: 'str' = 'none', optimization_schedule: 'str' = 'global', fold_boundary_position_policy: 'str' = 'carry', inner_split_frequency: 'Optional[str]' = None, inner_window_mode: 'Optional[str]' = None, inner_train_window: 'Optional[str]' = None, inner_min_folds: 'int' = 2, calendar_contract: 'str' = 'exact_v2', calendar_primary_symbol: 'Optional[str]' = None, calendar_missing_policy: 'str' = 'no_observation', label_horizon_bars: 'int' = 0, purge_bars: 'int' = 0, embargo_bars: 'int' = 0, warmup_policy: 'str' = 'none', warmup_bars: 'Optional[int]' = None, fold_account_policy: 'str' = 'carry_position', intent_contract: 'Optional[Union[WfoIntentContractV1, Mapping[str, Any]]]' = None, strategy_lifecycle_policy: 'str' = 'isolated_v1', trusted_strategy_global: 'bool' = False, proxy_validation_mode: 'str' = 'off', proxy_validation_top_fraction: 'float' = 0.1, proxy_min_spearman: 'float' = 0.7, proxy_min_top_k_overlap: 'float' = 0.5, proxy_max_winner_regret: 'float' = 0.25, proxy_max_false_positive_rate: 'float' = 0.25, optuna_trials: 'int' = 0, optuna_early_stopping: 'Optional[int]' = None, random_seed: 'int' = 42, decay_lambda: 'float' = 0.5, decay_gamma: 'float' = 0.5, top_is_fraction: 'float' = 0.1, top_is_k: 'Optional[int]' = None, candidate_selection_metric: 'str' = 'robust_decay', candidate_decay_lambda: 'Optional[float]' = None, candidate_decay_gamma: 'Optional[float]' = None, sbb_samples: 'int' = 256, sbb_block_length: 'int' = 20, sbb_decay_lambda: 'float' = 0.5, sbb_std_penalty: 'float' = 0.1, sbb_simulation: 'str' = 'stationary', regime_count: 'int' = 3, regime_lookback: 'int' = 20, regime_weights: 'Optional[Dict[Union[int, str], float]]' = None, stress_vol_multiplier: 'float' = 1.0, garch_p: 'int' = 1, garch_q: 'int' = 1, garch_dist: 'str' = 't', garch_vol_multiplier: 'float' = 1.0, flat_top_fraction: 'float' = 0.1, flat_eps: 'float' = 0.15, flat_min_samples: 'int' = 3, flat_selector: 'str' = 'medoid', plateau_quantile: 'float' = 0.25, plateau_median_weight: 'float' = 0.25, plateau_std_penalty: 'float' = 0.5, plateau_size_bonus: 'float' = 0.01, is_subperiods: 'int' = 6, q25_weight: 'float' = 0.3, dispersion_penalty: 'float' = 0.5, temporal_weight: 'float' = 0.65, plateau_weight: 'float' = 0.35, use_bootstrap_penalty: 'bool' = False, use_complexity_penalty: 'bool' = False, scoring_backend: 'str' = 'proxy', scoring_trading_days: 'int' = 365, min_trades_per_year: 'Optional[float]' = None, trade_penalty_factor: 'Optional[float]' = None, use_numba: 'bool' = True, metadata: 'Dict[str, Any]' = <factory>) -> None",
+      "doc_first_line": "Configuration for Phase 1 walk-forward splitting and stitching.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 342,
+      "dataclass_fields": [
+        "calendar_contract",
+        "calendar_missing_policy",
+        "calendar_primary_symbol",
+        "candidate_decay_gamma",
+        "candidate_decay_lambda",
+        "candidate_selection_metric",
+        "decay_gamma",
+        "decay_lambda",
+        "dispersion_penalty",
+        "embargo_bars",
+        "fill_value",
+        "flat_eps",
+        "flat_min_samples",
+        "flat_selector",
+        "flat_top_fraction",
+        "fold_account_policy",
+        "fold_boundary_position_policy",
+        "garch_dist",
+        "garch_p",
+        "garch_q",
+        "garch_vol_multiplier",
+        "inner_min_folds",
+        "inner_split_frequency",
+        "inner_train_window",
+        "inner_window_mode",
+        "intent_contract",
+        "is_subperiods",
+        "label_horizon_bars",
+        "metadata",
+        "min_test_bars",
+        "min_trades_per_year",
+        "min_train_bars",
+        "optimization_mode",
+        "optimization_schedule",
+        "optuna_early_stopping",
+        "optuna_trials",
+        "plateau_median_weight",
+        "plateau_quantile",
+        "plateau_size_bonus",
+        "plateau_std_penalty",
+        "plateau_weight",
+        "proxy_max_false_positive_rate",
+        "proxy_max_winner_regret",
+        "proxy_min_spearman",
+        "proxy_min_top_k_overlap",
+        "proxy_validation_mode",
+        "proxy_validation_top_fraction",
+        "purge_bars",
+        "q25_weight",
+        "random_seed",
+        "regime_count",
+        "regime_lookback",
+        "regime_weights",
+        "sbb_block_length",
+        "sbb_decay_lambda",
+        "sbb_samples",
+        "sbb_simulation",
+        "sbb_std_penalty",
+        "scoring_backend",
+        "scoring_trading_days",
+        "split_frequency",
+        "split_mode",
+        "strategy_lifecycle_policy",
+        "stress_vol_multiplier",
+        "target_mode",
+        "temporal_weight",
+        "top_is_fraction",
+        "top_is_k",
+        "trade_penalty_factor",
+        "train_window",
+        "trusted_strategy_global",
+        "use_bootstrap_penalty",
+        "use_complexity_penalty",
+        "use_numba",
+        "warmup_bars",
+        "warmup_policy",
+        "window_mode"
+      ]
+    },
+    "RobustSelectionConfig": {
+      "kind": "type",
+      "signature": "(top_quantile: 'float' = 0.1, min_trades: 'Optional[float]' = None, max_drawdown_pct: 'Optional[float]' = None, neighborhood_radius: 'float' = 0.1, min_neighbor_count: 'int' = 3, seed_consensus: 'int' = 1, instability_penalty: 'float' = 0.25, worst_weight: 'float' = 0.25, drawdown_penalty: 'float' = 0.0, size_bonus: 'float' = 0.01, ignore_params: 'tuple[str, ...]' = ()) -> None",
+      "doc_first_line": "Configuration for plateau-based production candidate selection.",
+      "module": "quantbt.optimization.candidate_selection",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/candidate_selection.py",
+      "source_line": 30,
+      "dataclass_fields": [
+        "drawdown_penalty",
+        "ignore_params",
+        "instability_penalty",
+        "max_drawdown_pct",
+        "min_neighbor_count",
+        "min_trades",
+        "neighborhood_radius",
+        "seed_consensus",
+        "size_bonus",
+        "top_quantile",
+        "worst_weight"
+      ]
+    },
+    "CandidateSelector": {
+      "kind": "type",
+      "signature": "(mode: 'str' = 'feasible_best', objective_index: 'int' = 0, config: 'Optional[RobustSelectionConfig]' = None) -> None",
+      "doc_first_line": "Small public selector interface.",
+      "module": "quantbt.optimization.candidate_selection",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/candidate_selection.py",
+      "source_line": 63,
+      "dataclass_fields": [
+        "config",
+        "mode",
+        "objective_index"
+      ]
+    },
+    "select_flat_minima_record": {
+      "kind": "function",
+      "signature": "(records: 'Sequence[WalkForwardTrialRecord]', param_ranges: 'Dict[str, Any]', config: 'WalkForwardConfig') -> 'WalkForwardTrialRecord'",
+      "doc_first_line": "Select a robust top-trial cluster member instead of a sharp isolated peak.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 3819
+    },
+    "select_full_sample_robust_record": {
+      "kind": "function",
+      "signature": "(records: 'Sequence[WalkForwardTrialRecord]', param_ranges: 'Dict[str, Any]', config: 'WalkForwardConfig') -> 'WalkForwardTrialRecord'",
+      "doc_first_line": "Select params for full-sample robust calibration.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 4245
+    },
+    "select_is_only_robust_record": {
+      "kind": "function",
+      "signature": "(records: 'Sequence[WalkForwardTrialRecord]', param_ranges: 'Dict[str, Any]', config: 'WalkForwardConfig') -> 'WalkForwardTrialRecord'",
+      "doc_first_line": "Select strict train-only robust params from IS temporal stability + plateau.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 4062
+    },
+    "select_is_plateau_robust_record": {
+      "kind": "function",
+      "signature": "(records: 'Sequence[WalkForwardTrialRecord]', param_ranges: 'Dict[str, Any]', config: 'WalkForwardConfig') -> 'WalkForwardTrialRecord'",
+      "doc_first_line": "Select robust train-only params from the top IS/search trial plateau.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 3926
+    },
+    "stationary_bootstrap_sharpes": {
+      "kind": "function",
+      "signature": "(returns: 'np.ndarray', n_samples: 'int', block_length: 'int', seed: 'int', trading_days: 'int' = 365, use_numba: 'bool' = True) -> 'np.ndarray'",
+      "doc_first_line": "Generate Sharpe values from stationary block bootstrap samples.",
+      "module": "quantbt.walkforward",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "source_line": 3309
+    },
+    "resolve_causality_schedule_v2": {
+      "kind": "function",
+      "signature": "(*, optimization_schedule: 'str', optimization_mode: 'str', trusted_strategy_global: 'bool' = False) -> 'WfoCausalityScheduleV2'",
+      "doc_first_line": "Map stable legacy aliases to their exact versioned causality meaning.",
+      "module": "quantbt.core.wfo_contracts",
+      "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+      "source_line": 158
+    }
+  },
+  "incumbent_regime_absent": [],
+  "unresolved": [],
+  "surfaces": {
+    "wfo": {
+      "bound": {
+        "WalkForwardConfig": {
+          "kind": "type",
+          "signature": "(split_mode: 'Union[str, int, pd.Timestamp]' = 'walk_forward_2022', split_frequency: 'str' = 'quarterly', window_mode: 'str' = 'expanding', train_window: 'Optional[str]' = None, min_train_bars: 'int' = 1, min_test_bars: 'int' = 1, target_mode: 'str' = 'signal_notional', fill_value: 'float' = 0.0, optimization_mode: 'str' = 'none', optimization_schedule: 'str' = 'global', fold_boundary_position_policy: 'str' = 'carry', inner_split_frequency: 'Optional[str]' = None, inner_window_mode: 'Optional[str]' = None, inner_train_window: 'Optional[str]' = None, inner_min_folds: 'int' = 2, calendar_contract: 'str' = 'exact_v2', calendar_primary_symbol: 'Optional[str]' = None, calendar_missing_policy: 'str' = 'no_observation', label_horizon_bars: 'int' = 0, purge_bars: 'int' = 0, embargo_bars: 'int' = 0, warmup_policy: 'str' = 'none', warmup_bars: 'Optional[int]' = None, fold_account_policy: 'str' = 'carry_position', intent_contract: 'Optional[Union[WfoIntentContractV1, Mapping[str, Any]]]' = None, strategy_lifecycle_policy: 'str' = 'isolated_v1', trusted_strategy_global: 'bool' = False, proxy_validation_mode: 'str' = 'off', proxy_validation_top_fraction: 'float' = 0.1, proxy_min_spearman: 'float' = 0.7, proxy_min_top_k_overlap: 'float' = 0.5, proxy_max_winner_regret: 'float' = 0.25, proxy_max_false_positive_rate: 'float' = 0.25, optuna_trials: 'int' = 0, optuna_early_stopping: 'Optional[int]' = None, random_seed: 'int' = 42, decay_lambda: 'float' = 0.5, decay_gamma: 'float' = 0.5, top_is_fraction: 'float' = 0.1, top_is_k: 'Optional[int]' = None, candidate_selection_metric: 'str' = 'robust_decay', candidate_decay_lambda: 'Optional[float]' = None, candidate_decay_gamma: 'Optional[float]' = None, sbb_samples: 'int' = 256, sbb_block_length: 'int' = 20, sbb_decay_lambda: 'float' = 0.5, sbb_std_penalty: 'float' = 0.1, sbb_simulation: 'str' = 'stationary', regime_count: 'int' = 3, regime_lookback: 'int' = 20, regime_weights: 'Optional[Dict[Union[int, str], float]]' = None, stress_vol_multiplier: 'float' = 1.0, garch_p: 'int' = 1, garch_q: 'int' = 1, garch_dist: 'str' = 't', garch_vol_multiplier: 'float' = 1.0, flat_top_fraction: 'float' = 0.1, flat_eps: 'float' = 0.15, flat_min_samples: 'int' = 3, flat_selector: 'str' = 'medoid', plateau_quantile: 'float' = 0.25, plateau_median_weight: 'float' = 0.25, plateau_std_penalty: 'float' = 0.5, plateau_size_bonus: 'float' = 0.01, is_subperiods: 'int' = 6, q25_weight: 'float' = 0.3, dispersion_penalty: 'float' = 0.5, temporal_weight: 'float' = 0.65, plateau_weight: 'float' = 0.35, use_bootstrap_penalty: 'bool' = False, use_complexity_penalty: 'bool' = False, scoring_backend: 'str' = 'proxy', scoring_trading_days: 'int' = 365, min_trades_per_year: 'Optional[float]' = None, trade_penalty_factor: 'Optional[float]' = None, use_numba: 'bool' = True, metadata: 'Dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Configuration for Phase 1 walk-forward splitting and stitching.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 342,
+          "dataclass_fields": [
+            "calendar_contract",
+            "calendar_missing_policy",
+            "calendar_primary_symbol",
+            "candidate_decay_gamma",
+            "candidate_decay_lambda",
+            "candidate_selection_metric",
+            "decay_gamma",
+            "decay_lambda",
+            "dispersion_penalty",
+            "embargo_bars",
+            "fill_value",
+            "flat_eps",
+            "flat_min_samples",
+            "flat_selector",
+            "flat_top_fraction",
+            "fold_account_policy",
+            "fold_boundary_position_policy",
+            "garch_dist",
+            "garch_p",
+            "garch_q",
+            "garch_vol_multiplier",
+            "inner_min_folds",
+            "inner_split_frequency",
+            "inner_train_window",
+            "inner_window_mode",
+            "intent_contract",
+            "is_subperiods",
+            "label_horizon_bars",
+            "metadata",
+            "min_test_bars",
+            "min_trades_per_year",
+            "min_train_bars",
+            "optimization_mode",
+            "optimization_schedule",
+            "optuna_early_stopping",
+            "optuna_trials",
+            "plateau_median_weight",
+            "plateau_quantile",
+            "plateau_size_bonus",
+            "plateau_std_penalty",
+            "plateau_weight",
+            "proxy_max_false_positive_rate",
+            "proxy_max_winner_regret",
+            "proxy_min_spearman",
+            "proxy_min_top_k_overlap",
+            "proxy_validation_mode",
+            "proxy_validation_top_fraction",
+            "purge_bars",
+            "q25_weight",
+            "random_seed",
+            "regime_count",
+            "regime_lookback",
+            "regime_weights",
+            "sbb_block_length",
+            "sbb_decay_lambda",
+            "sbb_samples",
+            "sbb_simulation",
+            "sbb_std_penalty",
+            "scoring_backend",
+            "scoring_trading_days",
+            "split_frequency",
+            "split_mode",
+            "strategy_lifecycle_policy",
+            "stress_vol_multiplier",
+            "target_mode",
+            "temporal_weight",
+            "top_is_fraction",
+            "top_is_k",
+            "trade_penalty_factor",
+            "train_window",
+            "trusted_strategy_global",
+            "use_bootstrap_penalty",
+            "use_complexity_penalty",
+            "use_numba",
+            "warmup_bars",
+            "warmup_policy",
+            "window_mode"
+          ]
+        },
+        "WalkForwardEngine": {
+          "kind": "type",
+          "signature": "(strategy: 'Any', config: 'Optional[WalkForwardConfig]' = None, scorer: 'Optional[Callable[..., Dict[str, float]]]' = None, native_scorer: 'Optional[Callable[..., Dict[str, float]]]' = None)",
+          "doc_first_line": "Time-safe walk-forward splitter and OOS stitcher.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 952
+        },
+        "WalkForwardResult": {
+          "kind": "type",
+          "signature": "(folds: 'List[WalkForwardFold]', oos_output: 'Optional[StrategyOutput]', fold_table: 'pd.DataFrame', params: 'Dict[str, Any]', backtest_result: 'Any' = None, trial_table: 'pd.DataFrame' = <factory>, candidate_table: 'pd.DataFrame' = <factory>, best_trial: 'Optional[Dict[str, Any]]' = None, metadata: 'Dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Phase 1 walk-forward artifact returned before/after final backtest.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 796,
+          "dataclass_fields": [
+            "backtest_result",
+            "best_trial",
+            "candidate_table",
+            "fold_table",
+            "folds",
+            "metadata",
+            "oos_output",
+            "params",
+            "trial_table"
+          ]
+        },
+        "WalkForwardFold": {
+          "kind": "type",
+          "signature": "(fold_id: 'int', train_start: 'pd.Timestamp', train_end: 'pd.Timestamp', test_start: 'pd.Timestamp', test_end: 'pd.Timestamp', train_index: 'pd.DatetimeIndex', test_index: 'pd.DatetimeIndex', validation_index: 'Optional[pd.DatetimeIndex]' = None, warmup_index: 'pd.DatetimeIndex' = <factory>, label_horizon_index: 'pd.DatetimeIndex' = <factory>, purge_index: 'pd.DatetimeIndex' = <factory>, embargo_index: 'pd.DatetimeIndex' = <factory>, cutoff_timestamp: 'Optional[pd.Timestamp]' = None, account_policy: 'str' = 'carry_position') -> None",
+          "doc_first_line": "One canonical-clock train/OOS fold with causal provenance.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 114,
+          "dataclass_fields": [
+            "account_policy",
+            "cutoff_timestamp",
+            "embargo_index",
+            "fold_id",
+            "label_horizon_index",
+            "purge_index",
+            "test_end",
+            "test_index",
+            "test_start",
+            "train_end",
+            "train_index",
+            "train_start",
+            "validation_index",
+            "warmup_index"
+          ]
+        },
+        "WalkForwardTrialRecord": {
+          "kind": "type",
+          "signature": "(trial_id: 'int', params: 'Dict[str, Any]', objective: 'float', mean_is_sharpe: 'float', mean_oos_sharpe: 'float', mean_decay: 'float', std_decay: 'float', fold_metrics: 'List[Dict[str, Any]]', pruned: 'bool' = False, selection_metadata: 'Dict[str, Any]' = <factory>) -> None",
+          "doc_first_line": "Audit row for one parameter trial.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 816,
+          "dataclass_fields": [
+            "fold_metrics",
+            "mean_decay",
+            "mean_is_sharpe",
+            "mean_oos_sharpe",
+            "objective",
+            "params",
+            "pruned",
+            "selection_metadata",
+            "std_decay",
+            "trial_id"
+          ]
+        },
+        "WalkForwardCompatibilityEntry": {
+          "kind": "type",
+          "signature": "(target_mode: 'str', expected_output: 'str', final_engine: 'str', status: 'str', notes: 'str' = '') -> None",
+          "doc_first_line": "One public walk-forward endpoint compatibility row.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 70,
+          "dataclass_fields": [
+            "expected_output",
+            "final_engine",
+            "notes",
+            "status",
+            "target_mode"
+          ]
+        },
+        "walkforward_support_matrix": {
+          "kind": "function",
+          "signature": "(as_dataframe: 'bool' = True)",
+          "doc_first_line": "Return the current walk-forward compatibility matrix.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 874
+        },
+        "WfoCausalityScheduleV2": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Versioned meaning of a walk-forward optimizer schedule.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 24
+        },
+        "resolve_causality_schedule_v2": {
+          "kind": "function",
+          "signature": "(*, optimization_schedule: 'str', optimization_mode: 'str', trusted_strategy_global: 'bool' = False) -> 'WfoCausalityScheduleV2'",
+          "doc_first_line": "Map stable legacy aliases to their exact versioned causality meaning.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 158
+        },
+        "WfoIntentContractV1": {
+          "kind": "type",
+          "signature": "(kind: 'WfoIntentKindV1' = <WfoIntentKindV1.TARGET_POSITION: 'target_position'>, observation_phase: 'str' = 'strategy_defined', effective_phase: 'str' = 'downstream_execution', already_shifted: 'bool' = False, route_id: 'str' = 'legacy_series_adapter_v1', certified: 'bool' = False) -> None",
+          "doc_first_line": "Explicit timing and semantic declaration for a WFO strategy output.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 75,
+          "dataclass_fields": [
+            "already_shifted",
+            "certified",
+            "effective_phase",
+            "kind",
+            "observation_phase",
+            "route_id"
+          ]
+        },
+        "WfoIntentKindV1": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "The semantic kind of an output emitted by a WFO strategy adapter.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 51
+        },
+        "WFO_CONTRACT_SCHEMA_V1": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "quantbt-wfo-contract-v1"
+        },
+        "FoldAccountPolicyV1": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Account state treatment at an outer-fold boundary.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 42
+        },
+        "FoldWarmupPolicyV1": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "How historical observations may initialize a fold-local strategy.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 33
+        }
+      },
+      "absent": [],
+      "bound_count": 14
+    },
+    "command": {
+      "bound": {
+        "OrderCommand": {
+          "kind": "type",
+          "signature": "(timestamp: 'object', action: 'OrderAction' = <OrderAction.PLACE: 'place'>, symbol: 'Optional[str]' = None, side: 'Optional[OrderSide]' = None, order_type: 'Optional[OrderType]' = None, qty: 'Optional[float]' = None, price: 'Optional[float]' = None, trigger_price: 'Optional[float]' = None, tif: 'TimeInForce' = <TimeInForce.GTC: 'gtc'>, reduce_only: 'bool' = False, order_id: 'Optional[str]' = None, target_order_id: 'Optional[str]' = None, parent_order_id: 'Optional[str]' = None, group_id: 'Optional[str]' = None, oco_group_id: 'Optional[str]' = None, activation_policy: 'OrderActivationPolicy' = <OrderActivationPolicy.IMMEDIATE: 'immediate'>, expires_at: 'Optional[object]' = None, tag: 'Optional[str]' = None, metadata: 'Dict' = <factory>, tag_prefix: 'Optional[str]' = None) -> None",
+          "doc_first_line": "Canonical order-lifecycle command for native-event v2 and adapters.",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 66,
+          "dataclass_fields": [
+            "action",
+            "activation_policy",
+            "expires_at",
+            "group_id",
+            "metadata",
+            "oco_group_id",
+            "order_id",
+            "order_type",
+            "parent_order_id",
+            "price",
+            "qty",
+            "reduce_only",
+            "side",
+            "symbol",
+            "tag",
+            "tag_prefix",
+            "target_order_id",
+            "tif",
+            "timestamp",
+            "trigger_price"
+          ]
+        },
+        "OrderIntent": {
+          "kind": "type",
+          "signature": "(timestamp: 'object', symbol: 'str', side: 'OrderSide', order_type: 'OrderType', qty: 'float', price: 'Optional[float]' = None, trigger_price: 'Optional[float]' = None, tif: 'TimeInForce' = <TimeInForce.GTC: 'gtc'>, reduce_only: 'bool' = False, order_id: 'Optional[str]' = None, tag: 'Optional[str]' = None, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "OrderIntent(timestamp: 'object', symbol: 'str', side: 'OrderSide', order_type: 'OrderType', qty: 'float', price: 'Optional[float]' = None, trigger_price: 'Optional[float]' = None, tif: 'TimeInForce' = <TimeInForce.GTC: 'gtc'>, reduce_only: 'bool' = False, order_id: 'Optional[str]' = None, tag: 'Optional[str]' = None, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 34,
+          "dataclass_fields": [
+            "metadata",
+            "order_id",
+            "order_type",
+            "price",
+            "qty",
+            "reduce_only",
+            "side",
+            "symbol",
+            "tag",
+            "tif",
+            "timestamp",
+            "trigger_price"
+          ]
+        },
+        "OrderAction": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Lifecycle command consumed by the native-event v2 compiler.",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 16
+        },
+        "OrderSide": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 38
+        },
+        "OrderType": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 47
+        },
+        "TimeInForce": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 54
+        },
+        "CommandWriter": {
+          "kind": "type",
+          "signature": "(initial_capacity: 'int' = 8, hard_limit: 'int' = 65536)",
+          "doc_first_line": "Capacity-managed primitive command buffer reused across callbacks.",
+          "module": "quantbt.strategies.commands",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/commands.py",
+          "source_line": 90
+        },
+        "CommandBatchView": {
+          "kind": "type",
+          "signature": "(writer: \"'CommandWriter'\", generation: 'int', length: 'int') -> None",
+          "doc_first_line": "Ephemeral valid prefix of a reusable command writer.",
+          "module": "quantbt.strategies.commands",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/commands.py",
+          "source_line": 35,
+          "dataclass_fields": [
+            "generation",
+            "length",
+            "writer"
+          ]
+        },
+        "CommandOutcome": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Enum where members are also (and must be) ints",
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 30
+        },
+        "CommandValidationError": {
+          "kind": "type",
+          "signature": "(message: 'str', *, context: 'EngineErrorContext | None' = None)",
+          "doc_first_line": "Unspecified run-time error.",
+          "module": "quantbt.errors",
+          "defined_in": null,
+          "source_line": null
+        },
+        "BracketOrderSpec": {
+          "kind": "type",
+          "signature": "(symbol: 'str', entry_timestamp: 'object', side: 'OrderSide', qty: 'float', package_id: 'str' = 'BRACKET-001', entry_order_type: 'OrderType' = <OrderType.MARKET: 'market'>, entry_price: 'Optional[float]' = None, entry_trigger_price: 'Optional[float]' = None, take_profit_price: 'Optional[float]' = None, stop_loss_price: 'Optional[float]' = None, exit_timestamp: 'Optional[object]' = None, entry_tif: 'TimeInForce' = <TimeInForce.IOC: 'ioc'>, exit_tif: 'TimeInForce' = <TimeInForce.GTC: 'gtc'>, reduce_only_exits: 'bool' = True, tag: 'Optional[str]' = None, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Entry plus linked take-profit/stop-loss exits.",
+          "module": "quantbt.core.structured_orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/structured_orders.py",
+          "source_line": 30,
+          "dataclass_fields": [
+            "entry_order_type",
+            "entry_price",
+            "entry_tif",
+            "entry_timestamp",
+            "entry_trigger_price",
+            "exit_tif",
+            "exit_timestamp",
+            "metadata",
+            "package_id",
+            "qty",
+            "reduce_only_exits",
+            "side",
+            "stop_loss_price",
+            "symbol",
+            "tag",
+            "take_profit_price"
+          ]
+        },
+        "build_bracket_order_plan": {
+          "kind": "function",
+          "signature": "(spec: 'BracketOrderSpec') -> 'StructuredOrderPlan'",
+          "doc_first_line": null,
+          "module": "quantbt.core.structured_orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/structured_orders.py",
+          "source_line": 127
+        },
+        "StructuredOrderPlan": {
+          "kind": "type",
+          "signature": "(package_id: 'str', package_type: 'str', orders: 'tuple[OrderIntent, ...]', order_table: 'pd.DataFrame', metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "StructuredOrderPlan(package_id: 'str', package_type: 'str', orders: 'tuple[OrderIntent, ...]', order_table: 'pd.DataFrame', metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.structured_orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/structured_orders.py",
+          "source_line": 21,
+          "dataclass_fields": [
+            "metadata",
+            "order_table",
+            "orders",
+            "package_id",
+            "package_type"
+          ]
+        },
+        "order_intents_to_lifecycle_commands": {
+          "kind": "function",
+          "signature": "(orders: 'Sequence[OrderIntent]', *, linked_metadata: 'bool' = True) -> 'Tuple[OrderCommand, ...]'",
+          "doc_first_line": "Convert `OrderIntent` records into lifecycle-v2 `OrderCommand` records.",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 264
+        },
+        "OrderActivationPolicy": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "When a placed child order becomes eligible for matching.",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 26
+        }
+      },
+      "absent": [],
+      "bound_count": 15
+    },
+    "lifecycle_and_oco": {
+      "bound": {
+        "LifecycleEventKind": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Enum where members are also (and must be) ints",
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 49
+        },
+        "LifecycleModel": {
+          "kind": "type",
+          "signature": "(kind: 'LifecycleModelKind' = <LifecycleModelKind.OPEN_ENDED: 'open_ended'>, roll_days_before_expiry: 'Optional[int]' = None, force_flat_before_expiry: 'bool' = True, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "LifecycleModel(kind: 'LifecycleModelKind' = <LifecycleModelKind.OPEN_ENDED: 'open_ended'>, roll_days_before_expiry: 'Optional[int]' = None, force_flat_before_expiry: 'bool' = True, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 202,
+          "dataclass_fields": [
+            "force_flat_before_expiry",
+            "kind",
+            "metadata",
+            "roll_days_before_expiry"
+          ]
+        },
+        "LifecycleModelKind": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 118
+        },
+        "LifecycleOrderStatus": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Enum where members are also (and must be) ints",
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 37
+        },
+        "LifecycleTransition": {
+          "kind": "type",
+          "signature": "(action: 'str', from_status: 'str', to_status: 'str', outcome: 'CommandOutcome', reason: 'str') -> None",
+          "doc_first_line": "LifecycleTransition(action: 'str', from_status: 'str', to_status: 'str', outcome: 'CommandOutcome', reason: 'str')",
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 132,
+          "dataclass_fields": [
+            "action",
+            "from_status",
+            "outcome",
+            "reason",
+            "to_status"
+          ]
+        },
+        "lifecycle_transitions": {
+          "kind": "function",
+          "signature": "() -> 'tuple[LifecycleTransition, ...]'",
+          "doc_first_line": null,
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 202
+        },
+        "validate_lifecycle_transition": {
+          "kind": "function",
+          "signature": "(action: 'str', from_status: 'str', to_status: 'Optional[str]' = None) -> 'LifecycleTransition'",
+          "doc_first_line": null,
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 215
+        },
+        "StrategyLifecycleV1": {
+          "kind": "_ProtocolMeta",
+          "signature": "(*args, **kwargs)",
+          "doc_first_line": "Optional lifecycle protocol for mutable WFO strategy adapters.",
+          "module": "quantbt.core.wfo_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/wfo_contracts.py",
+          "source_line": 141
+        },
+        "ProtectiveExitReentryPolicy": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.intrabar_session",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/intrabar_session.py",
+          "source_line": 31
+        },
+        "StopGapPolicy": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.execution_contract",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_contract.py",
+          "source_line": 35
+        },
+        "TakeProfitGapPolicy": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.execution_contract",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_contract.py",
+          "source_line": 39
+        },
+        "TrailingUpdatePhase": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.execution_contract",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_contract.py",
+          "source_line": 54
+        },
+        "FillPhase": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.execution_contract",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_contract.py",
+          "source_line": 21
+        },
+        "FillDecision": {
+          "kind": "type",
+          "signature": "(matched: 'bool', fill_price: 'float', triggered: 'bool', ambiguous: 'bool', ambiguity_code: 'str', liquidity_assumption: 'str', price_reason: 'str', path_assumption: 'str') -> None",
+          "doc_first_line": "FillDecision(matched: 'bool', fill_price: 'float', triggered: 'bool', ambiguous: 'bool', ambiguity_code: 'str', liquidity_assumption: 'str', price_reason: 'str', path_assumption: 'str')",
+          "module": "quantbt.core.event_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/event_contracts.py",
+          "source_line": 120,
+          "dataclass_fields": [
+            "ambiguity_code",
+            "ambiguous",
+            "fill_price",
+            "liquidity_assumption",
+            "matched",
+            "path_assumption",
+            "price_reason",
+            "triggered"
+          ]
+        },
+        "Fill": {
+          "kind": "type",
+          "signature": "(timestamp: 'object', symbol: 'str', side: 'OrderSide', qty: 'float', price: 'float', fee: 'float' = 0.0, liquidity: 'LiquiditySide' = <LiquiditySide.TAKER: 'taker'>, order_id: 'Optional[str]' = None, trade_id: 'Optional[str]' = None, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Fill(timestamp: 'object', symbol: 'str', side: 'OrderSide', qty: 'float', price: 'float', fee: 'float' = 0.0, liquidity: 'LiquiditySide' = <LiquiditySide.TAKER: 'taker'>, order_id: 'Optional[str]' = None, trade_id: 'Optional[str]' = None, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.orders",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/orders.py",
+          "source_line": 195,
+          "dataclass_fields": [
+            "fee",
+            "liquidity",
+            "metadata",
+            "order_id",
+            "price",
+            "qty",
+            "side",
+            "symbol",
+            "timestamp",
+            "trade_id"
+          ]
+        },
+        "IntrabarFill": {
+          "kind": "type",
+          "signature": "(bar_index: 'int', sequence: 'int', timestamp: 'pd.Timestamp', side: 'int', qty: 'float', price: 'float', fee: 'float', reason: 'IntrabarFillReason') -> None",
+          "doc_first_line": "IntrabarFill(bar_index: 'int', sequence: 'int', timestamp: 'pd.Timestamp', side: 'int', qty: 'float', price: 'float', fee: 'float', reason: 'IntrabarFillReason')",
+          "module": "quantbt.core.intrabar_reference",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/intrabar_reference.py",
+          "source_line": 181,
+          "dataclass_fields": [
+            "bar_index",
+            "fee",
+            "price",
+            "qty",
+            "reason",
+            "sequence",
+            "side",
+            "timestamp"
+          ]
+        }
+      },
+      "absent": [],
+      "bound_count": 16
+    },
+    "callbacks": {
+      "bound": {
+        "CallbackSchedule": {
+          "kind": "type",
+          "signature": "(every_n_bars: 'int | None' = 1, explicit_bars: 'tuple[int, ...]' = (), on_fill: 'bool' = True, on_order_event: 'bool' = True, on_liquidation: 'bool' = True) -> None",
+          "doc_first_line": "Declare when Python must be called after a bar is processed.",
+          "module": "quantbt.strategies.requirements",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/requirements.py",
+          "source_line": 26,
+          "dataclass_fields": [
+            "every_n_bars",
+            "explicit_bars",
+            "on_fill",
+            "on_liquidation",
+            "on_order_event"
+          ]
+        },
+        "StrategyCallbackError": {
+          "kind": "type",
+          "signature": "(message: 'str', *, context: 'EngineErrorContext | None' = None)",
+          "doc_first_line": "Unspecified run-time error.",
+          "module": "quantbt.errors",
+          "defined_in": null,
+          "source_line": null
+        },
+        "StrategyContextView": {
+          "kind": "type",
+          "signature": "(session, bar: 'int', requirements: 'StrategyContextRequirements', generation: 'int')",
+          "doc_first_line": "Read-only numeric view over one authoritative engine projection.",
+          "module": "quantbt.strategies.context",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/context.py",
+          "source_line": 24
+        },
+        "StrategyContextRequirements": {
+          "kind": "type",
+          "signature": "(market: 'tuple[str, ...]' = ('open', 'high', 'low', 'close', 'volume'), account: 'tuple[str, ...]' = ('equity', 'available_equity', 'initial_margin', 'maintenance_margin', 'liquidated'), positions: 'tuple[str, ...]' = ('qty',), fills: 'str' = 'new_only', events: 'str' = 'new_only', active_orders: 'str' = 'snapshot', callback: 'CallbackSchedule' = <factory>, context_mode: 'str' = 'compatibility') -> None",
+          "doc_first_line": "Compile-time strategy projection contract.",
+          "module": "quantbt.strategies.requirements",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/requirements.py",
+          "source_line": 71,
+          "dataclass_fields": [
+            "account",
+            "active_orders",
+            "callback",
+            "context_mode",
+            "events",
+            "fills",
+            "market",
+            "positions"
+          ]
+        },
+        "MaterializedStrategyContext": {
+          "kind": "type",
+          "signature": "()",
+          "doc_first_line": "Compatibility adapter from a numeric view to the historical context.",
+          "module": "quantbt.strategies.context",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/context.py",
+          "source_line": 175
+        },
+        "NativeStrategyContext": {
+          "kind": "type",
+          "signature": "(bar_index: 'int', timestamp: 'pd.Timestamp | int', open: 'np.ndarray', high: 'np.ndarray', low: 'np.ndarray', close: 'np.ndarray', volume: 'np.ndarray', equity: 'float', available_equity: 'float', initial_margin: 'float', maintenance_margin: 'float', positions: 'Mapping[str, float]', fills_this_bar: 'Sequence[NativeFillEvent]', order_events_this_bar: 'Sequence[NativeOrderEvent]', active_orders: 'Sequence[NativeActiveOrderSnapshot]', liquidated: 'bool', symbols: 'Tuple[str, ...]' = <factory>, size_order: 'Callable[..., float]' = <function NativeStrategyContext.<lambda> at 0x7f726414d800>, _timestamp_is_ns: 'bool' = False, _timestamp_materialization_counter: 'MutableSequence[int] | None' = None) -> None",
+          "doc_first_line": "Immutable callback snapshot with an optional lazy timestamp.",
+          "module": "quantbt.core.reactive",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/reactive.py",
+          "source_line": 131,
+          "dataclass_fields": [
+            "_timestamp_is_ns",
+            "_timestamp_materialization_counter",
+            "active_orders",
+            "available_equity",
+            "bar_index",
+            "close",
+            "equity",
+            "fills_this_bar",
+            "high",
+            "initial_margin",
+            "liquidated",
+            "low",
+            "maintenance_margin",
+            "open",
+            "order_events_this_bar",
+            "positions",
+            "size_order",
+            "symbols",
+            "timestamp",
+            "volume"
+          ]
+        },
+        "StaleStrategyContextError": {
+          "kind": "type",
+          "signature": null,
+          "doc_first_line": "Raised when a callback retains an ephemeral context beyond its lease.",
+          "module": "quantbt.strategies.context",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/context.py",
+          "source_line": 14
+        },
+        "WakePlanV1": {
+          "kind": "type",
+          "signature": "(next_bar: 'int | None' = None, next_timestamp_ns: 'int | None' = None, on_fill: 'bool' = False, on_order_event: 'bool' = False, on_liquidation: 'bool' = False, on_funding: 'bool' = False, price_crosses: 'tuple[PriceCrossConditionV1, ...]' = (), position_thresholds: 'tuple[PositionThresholdV1, ...]' = (), equity_thresholds: 'tuple[EquityThresholdV1, ...]' = (), margin_thresholds: 'tuple[MarginThresholdV1, ...]' = ()) -> None",
+          "doc_first_line": "The complete replacement wake plan returned after one R2 callback.",
+          "module": "quantbt.strategies.reactive_protocols",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/reactive_protocols.py",
+          "source_line": 171,
+          "dataclass_fields": [
+            "equity_thresholds",
+            "margin_thresholds",
+            "next_bar",
+            "next_timestamp_ns",
+            "on_fill",
+            "on_funding",
+            "on_liquidation",
+            "on_order_event",
+            "position_thresholds",
+            "price_crosses"
+          ]
+        },
+        "WakeReasonV1": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "Versioned coalesced R2 wake reasons.",
+          "module": "quantbt.strategies.reactive_protocols",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/reactive_protocols.py",
+          "source_line": 23
+        },
+        "wake_reason_names": {
+          "kind": "function",
+          "signature": "(mask: 'int | WakeReasonV1') -> 'tuple[str, ...]'",
+          "doc_first_line": "Decode one versioned coalesced wake bitmask for audit presentation.",
+          "module": "quantbt.strategies.reactive_protocols",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/reactive_protocols.py",
+          "source_line": 433
+        },
+        "CandidateWakePlansV1": {
+          "kind": "type",
+          "signature": "(plans: 'Mapping[int, WakePlanV1]' = <factory>) -> None",
+          "doc_first_line": "Candidate-indexed R3B replacement plans from one batch callback.",
+          "module": "quantbt.strategies.reactive_protocols",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/strategies/reactive_protocols.py",
+          "source_line": 280,
+          "dataclass_fields": [
+            "plans"
+          ]
+        },
+        "EarlyStoppingCallback": {
+          "kind": "type",
+          "signature": "(early_stopping_rounds: 'int', direction: 'str' = 'maximize')",
+          "doc_first_line": "Stop Optuna if best value does not improve after N trials.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 845
+        },
+        "SingleObjectiveEarlyStopping": {
+          "kind": "type",
+          "signature": "(patience: 'int', direction: 'str', min_delta: 'float' = 0.0001, min_trials: 'int' = 0)",
+          "doc_first_line": "Stop a single-objective Optuna study after best-value stagnation.",
+          "module": "quantbt.optimization.callbacks",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/callbacks.py",
+          "source_line": 11
+        },
+        "logging_callback": {
+          "kind": "function",
+          "signature": "(study, frozen_trial) -> 'None'",
+          "doc_first_line": "Record previous best value when Optuna improves.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 867
+        }
+      },
+      "absent": [],
+      "bound_count": 14
+    },
+    "result_exports": {
+      "bound": {
+        "BacktestResult": {
+          "kind": "type",
+          "signature": "(equity: 'pd.Series', returns: 'pd.Series', positions: 'pd.DataFrame', closes: 'pd.DataFrame', symbols: 'List[str]', initial_capital: 'float', leverage: 'float', liquidated: 'bool' = False, liquidation_bar: 'int' = -1, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Immutable output of a single backtest run.",
+          "module": "quantbt.core.types",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/types.py",
+          "source_line": 17,
+          "dataclass_fields": [
+            "closes",
+            "equity",
+            "initial_capital",
+            "leverage",
+            "liquidated",
+            "liquidation_bar",
+            "metadata",
+            "positions",
+            "returns",
+            "symbols"
+          ]
+        },
+        "BacktestResultV2": {
+          "kind": "type",
+          "signature": "(equity: 'pd.Series', returns: 'pd.Series', positions: 'pd.DataFrame', closes: 'pd.DataFrame', symbols: 'List[str]', initial_capital: 'float', leverage: 'float' = 1.0, liquidated: 'bool' = False, liquidation_bar: 'int' = -1, orders: 'Sequence[OrderIntent]' = <factory>, fills: 'Sequence[Fill]' = <factory>, trades: 'Sequence[Trade]' = <factory>, fees: 'pd.Series' = <factory>, funding: 'pd.Series' = <factory>, margin: 'pd.DataFrame' = <factory>, diagnostics: 'pd.DataFrame' = <factory>, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "BacktestResultV2(equity: 'pd.Series', returns: 'pd.Series', positions: 'pd.DataFrame', closes: 'pd.DataFrame', symbols: 'List[str]', initial_capital: 'float', leverage: 'float' = 1.0, liquidated: 'bool' = False, liquidation_bar: 'int' = -1, orders: 'Sequence[OrderIntent]' = <factory>, fills: 'Sequence[Fill]' = <factory>, trades: 'Sequence[Trade]' = <factory>, fees: 'pd.Series' = <factory>, funding: 'pd.Series' = <factory>, margin: 'pd.DataFrame' = <factory>, diagnostics: 'pd.DataFrame' = <factory>, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.results",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/results.py",
+          "source_line": 19,
+          "dataclass_fields": [
+            "closes",
+            "diagnostics",
+            "equity",
+            "fees",
+            "fills",
+            "funding",
+            "initial_capital",
+            "leverage",
+            "liquidated",
+            "liquidation_bar",
+            "margin",
+            "metadata",
+            "orders",
+            "positions",
+            "returns",
+            "symbols",
+            "trades"
+          ]
+        },
+        "metrics_from_result": {
+          "kind": "function",
+          "signature": "(result: 'Any', *, names: 'Sequence[str]' = ('sharpe', 'max_drawdown_pct', 'num_trades', 'profit_factor'), trading_days: 'int' = 365, scope: 'str' = 'auto') -> 'dict[str, float]'",
+          "doc_first_line": "Extract optional display metrics from a QuantBT result.",
+          "module": "quantbt.optimization.objectives",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/objectives.py",
+          "source_line": 87
+        },
+        "metric_from_result": {
+          "kind": "function",
+          "signature": "(result: 'Any', name: 'str', *, trading_days: 'int' = 365, scope: 'str' = 'auto', required: 'bool' = True, default: 'Optional[float]' = None) -> 'float'",
+          "doc_first_line": "Read a common objective metric from report, diagnostics, or metadata.",
+          "module": "quantbt.optimization.objectives",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/objectives.py",
+          "source_line": 49
+        },
+        "result_full_report": {
+          "kind": "function",
+          "signature": "(result: 'Any', *, trading_days: 'int' = 365, scope: 'str' = 'auto') -> 'dict[str, Any]'",
+          "doc_first_line": "Extract the standard metrics report from a QuantBT result-like object.",
+          "module": "quantbt.optimization.objectives",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/optimization/objectives.py",
+          "source_line": 36
+        },
+        "full_report": {
+          "kind": "function",
+          "signature": "(result: 'BacktestResult', trading_days: 'int' = 365) -> 'Dict'",
+          "doc_first_line": "Returns an ordered dict of all key metrics.",
+          "module": "quantbt.metrics.performance",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/metrics/performance.py",
+          "source_line": 526
+        },
+        "format_metrics_report": {
+          "kind": "function",
+          "signature": "(report: 'Dict') -> 'str'",
+          "doc_first_line": "Format a metrics dictionary as a legacy-style text report.",
+          "module": "quantbt.endpoint",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+          "source_line": 4408
+        },
+        "strategy_return_series": {
+          "kind": "function",
+          "signature": "(data, output: 'StrategyOutput', index: 'pd.DatetimeIndex') -> 'pd.Series'",
+          "doc_first_line": "Return the transparent position return proxy used by WFO scoring.",
+          "module": "quantbt.walkforward",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+          "source_line": 3286
+        },
+        "build_canonical_execution_trace": {
+          "kind": "function",
+          "signature": "(result, *, run_id: 'str' = 'native-event-run', materialize: 'bool' = True) -> 'CanonicalTraceArtifact'",
+          "doc_first_line": "Project a backend result into the versioned backend-neutral trace.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 197
+        },
+        "CanonicalTraceArtifact": {
+          "kind": "type",
+          "signature": "(trace: 'pd.DataFrame', fingerprint: 'str', row_count: 'int', event_counts: 'Mapping[str, int]', column_store: 'TraceColumns | None' = None) -> None",
+          "doc_first_line": "CanonicalTraceArtifact(trace: 'pd.DataFrame', fingerprint: 'str', row_count: 'int', event_counts: 'Mapping[str, int]', column_store: 'TraceColumns | None' = None)",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 38,
+          "dataclass_fields": [
+            "column_store",
+            "event_counts",
+            "fingerprint",
+            "row_count",
+            "trace"
+          ]
+        },
+        "canonical_trace_fingerprint": {
+          "kind": "function",
+          "signature": "(trace: 'pd.DataFrame | Iterable[Mapping[str, object]]') -> 'str'",
+          "doc_first_line": "Hash normalized fields with canonical NaN and little-endian floats.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 334
+        },
+        "compare_canonical_traces": {
+          "kind": "function",
+          "signature": "(left: 'pd.DataFrame', right: 'pd.DataFrame') -> 'dict[str, object]'",
+          "doc_first_line": "Return the first divergent field with bar/phase/event context.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 352
+        },
+        "TraceReplayer": {
+          "kind": "type",
+          "signature": "()",
+          "doc_first_line": "Verify a trace without re-running order matching or market simulation.",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 70
+        },
+        "TraceReplayResult": {
+          "kind": "type",
+          "signature": "(final_positions: 'Mapping[str, float]', final_equity: 'float', transitions_valid: 'bool', terminal_orders_valid: 'bool', package_reconciliation_valid: 'bool', errors: 'tuple[str, ...]') -> None",
+          "doc_first_line": "TraceReplayResult(final_positions: 'Mapping[str, float]', final_equity: 'float', transitions_valid: 'bool', terminal_orders_valid: 'bool', package_reconciliation_valid: 'bool', errors: 'tuple[str, ...]')",
+          "module": "quantbt.core.execution_trace",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/execution_trace.py",
+          "source_line": 56,
+          "dataclass_fields": [
+            "errors",
+            "final_equity",
+            "final_positions",
+            "package_reconciliation_valid",
+            "terminal_orders_valid",
+            "transitions_valid"
+          ]
+        },
+        "TRACE_FIELDS": {
+          "kind": "tuple",
+          "signature": null,
+          "doc_first_line": "Built-in immutable sequence.",
+          "module": null,
+          "defined_in": null,
+          "source_line": null
+        },
+        "TRACE_SCHEMA_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "canonical-execution-trace-v1"
+        },
+        "ResearchAuditWriterV1": {
+          "kind": "type",
+          "signature": "(*, plan: 'ResearchRetentionPlanV1', export_hook: 'AuditExportHookV1 | None' = None) -> 'None'",
+          "doc_first_line": "Bounded, synchronous, idempotent owner for immutable audit chunks.",
+          "module": "quantbt.core.research_audit",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/research_audit.py",
+          "source_line": 479
+        },
+        "ResearchAuditArtifactV1": {
+          "kind": "type",
+          "signature": "(*, plan: 'ResearchRetentionPlanV1', run_manifest: 'Mapping[str, Any]', search_space_manifest: 'Mapping[str, Any]', instrument_manifest: 'Mapping[str, Any]', writer: 'ResearchAuditWriterV1') -> 'None'",
+          "doc_first_line": "Cold-path research product attached to a WFO result.",
+          "module": "quantbt.core.research_audit_artifact",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/research_audit_artifact.py",
+          "source_line": 37
+        },
+        "ResearchRetentionPlanV1": {
+          "kind": "type",
+          "signature": "(financial_retention: 'str' = 'score', research_retention: 'str' = 'none', financial_scope: 'str' = 'selected_final_execution', chunk_rows: 'int' = 256, max_retained_chunks: 'int' = 4096, max_materialized_frames: 'int' = 3) -> None",
+          "doc_first_line": "Independent financial and research-retention contract for one WFO run.",
+          "module": "quantbt.core.research_audit",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/research_audit.py",
+          "source_line": 195,
+          "dataclass_fields": [
+            "chunk_rows",
+            "financial_retention",
+            "financial_scope",
+            "max_materialized_frames",
+            "max_retained_chunks",
+            "research_retention"
+          ]
+        },
+        "certify_result_metadata": {
+          "kind": "function",
+          "signature": "(metadata: 'Dict') -> 'Dict'",
+          "doc_first_line": null,
+          "module": "quantbt.core.certification",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/certification.py",
+          "source_line": 164
+        }
+      },
+      "absent": [],
+      "bound_count": 20
+    },
+    "account_and_instrument": {
+      "bound": {
+        "AccountConfig": {
+          "kind": "type",
+          "signature": "(initial_capital: 'float', base_currency: 'str' = 'USD', leverage: 'float' = 1.0, maintenance_ratio: 'float' = 0.005, margin_mode: 'MarginMode' = <MarginMode.CROSS: 'cross'>, oms_mode: 'OmsMode' = <OmsMode.NETTING: 'netting'>, margin_buffer: 'float' = 0.0, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "AccountConfig(initial_capital: 'float', base_currency: 'str' = 'USD', leverage: 'float' = 1.0, maintenance_ratio: 'float' = 0.005, margin_mode: 'MarginMode' = <MarginMode.CROSS: 'cross'>, oms_mode: 'OmsMode' = <OmsMode.NETTING: 'netting'>, margin_buffer: 'float' = 0.0, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 126,
+          "dataclass_fields": [
+            "base_currency",
+            "initial_capital",
+            "leverage",
+            "maintenance_ratio",
+            "margin_buffer",
+            "margin_mode",
+            "metadata",
+            "oms_mode"
+          ]
+        },
+        "ExecutionConfig": {
+          "kind": "type",
+          "signature": "(fill_price_policy: 'FillPricePolicy' = <FillPricePolicy.CLOSE: 'close'>, same_bar_policy: 'SameBarPolicy' = <SameBarPolicy.CONSERVATIVE: 'conservative'>, slippage_bps: 'float' = 0.0, allow_partial_fill: 'bool' = False, reject_on_insufficient_margin: 'bool' = True, min_order_notional: 'float' = 0.0, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "ExecutionConfig(fill_price_policy: 'FillPricePolicy' = <FillPricePolicy.CLOSE: 'close'>, same_bar_policy: 'SameBarPolicy' = <SameBarPolicy.CONSERVATIVE: 'conservative'>, slippage_bps: 'float' = 0.0, allow_partial_fill: 'bool' = False, reject_on_insufficient_margin: 'bool' = True, min_order_notional: 'float' = 0.0, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 152,
+          "dataclass_fields": [
+            "allow_partial_fill",
+            "fill_price_policy",
+            "metadata",
+            "min_order_notional",
+            "reject_on_insufficient_margin",
+            "same_bar_policy",
+            "slippage_bps"
+          ]
+        },
+        "EndpointConfig": {
+          "kind": "type",
+          "signature": "(mode: 'str' = 'single_signal', backend: 'str' = 'auto', native_backend: 'Optional[str]' = None, backend_policy: 'Optional[str]' = None, native_static_abi: 'str' = '0.5', target_runtime: 'str' = 'numba', sizing: 'str' = 'signal_notional', account: 'AccountConfig' = <factory>, execution: 'ExecutionConfig' = <factory>, fee: 'float' = 0.0004, fee_rate: 'Optional[float]' = None, alloc_per_trade: 'Union[float, Dict[str, float]]' = 100000.0, use_pyramiding: 'bool' = True, use_funding: 'bool' = True, funding_rate: 'Union[float, pd.Series, Dict]' = 0.0, contract_size: 'Union[float, Dict[str, float]]' = 1.0, instruments: 'Optional[Union[Dict[str, InstrumentSpec], Sequence[InstrumentSpec]]]' = None, qty_step: 'Optional[Union[float, Dict[str, float]]]' = None, lot_size: 'Optional[Union[float, Dict[str, float]]]' = None, slot_size: 'Optional[Union[float, Dict[str, float]]]' = None, min_qty: 'Optional[Union[float, Dict[str, float]]]' = None, min_notional: 'Optional[Union[float, Dict[str, float]]]' = None, slippage: 'float' = 0.0001, portfolio_mode: 'str' = 'longshort', betas: 'Union[float, Dict[str, float], None]' = None, risk_lookback: 'int' = 60, asset_type: 'str' = 'crypto', basket: 'Optional[BasketSpec]' = None, arbitrage_spec: 'object' = None, structured_order_spec: 'object' = None, event_engine_version: 'str' = 'v1', execution_contract: 'object' = None, reactive_execution_mode: 'str' = 'fast', reactive_kernel_mode: 'str' = 'replay_certified', reactive_runtime: 'str' = 'legacy_python_loop', reactive_gil_policy: 'str' = 'held_for_session', audit_mode: 'Optional[str]' = None, oracle_sample_rate: 'float' = 0.0, oracle_sample_seed: 'int' = 0, symbols: 'Optional[Sequence[str]]' = None, dca_kwargs: 'Dict' = <factory>, nautilus_config: 'object' = None, nautilus_depth_config: 'Optional[NautilusExecutionDepthConfig]' = None, option_config: 'object' = None, report_level: 'str' = 'full', audit_sink: 'str' = 'memory', audit_sink_path: 'Optional[str]' = None, runtime_budget: 'RuntimeBudgetV1' = <factory>, shadow_evidence_dir: 'Optional[str]' = None, strategy_class: 'object' = None, walkforward_config: 'Optional[WalkForwardConfig]' = None, walkforward_target_mode: 'str' = 'signal_notional', metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "Configuration for `QuantBTEndpoint`.",
+          "module": "quantbt.endpoint",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+          "source_line": 209,
+          "dataclass_fields": [
+            "account",
+            "alloc_per_trade",
+            "arbitrage_spec",
+            "asset_type",
+            "audit_mode",
+            "audit_sink",
+            "audit_sink_path",
+            "backend",
+            "backend_policy",
+            "basket",
+            "betas",
+            "contract_size",
+            "dca_kwargs",
+            "event_engine_version",
+            "execution",
+            "execution_contract",
+            "fee",
+            "fee_rate",
+            "funding_rate",
+            "instruments",
+            "lot_size",
+            "metadata",
+            "min_notional",
+            "min_qty",
+            "mode",
+            "native_backend",
+            "native_static_abi",
+            "nautilus_config",
+            "nautilus_depth_config",
+            "option_config",
+            "oracle_sample_rate",
+            "oracle_sample_seed",
+            "portfolio_mode",
+            "qty_step",
+            "reactive_execution_mode",
+            "reactive_gil_policy",
+            "reactive_kernel_mode",
+            "reactive_runtime",
+            "report_level",
+            "risk_lookback",
+            "runtime_budget",
+            "shadow_evidence_dir",
+            "sizing",
+            "slippage",
+            "slot_size",
+            "strategy_class",
+            "structured_order_spec",
+            "symbols",
+            "target_runtime",
+            "use_funding",
+            "use_pyramiding",
+            "walkforward_config",
+            "walkforward_target_mode"
+          ]
+        },
+        "MarginMode": {
+          "kind": "EnumType",
+          "signature": "(*values)",
+          "doc_first_line": "str(object='') -> str",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 26
+        },
+        "MarginModel": {
+          "kind": "type",
+          "signature": "(kind: 'MarginModelKind' = <MarginModelKind.GROSS: 'gross'>, hedged_margin_offset: 'float' = 0.0, maintenance_ratio: 'Optional[float]' = None, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "MarginModel(kind: 'MarginModelKind' = <MarginModelKind.GROSS: 'gross'>, hedged_margin_offset: 'float' = 0.0, maintenance_ratio: 'Optional[float]' = None, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 187,
+          "dataclass_fields": [
+            "hedged_margin_offset",
+            "kind",
+            "maintenance_ratio",
+            "metadata"
+          ]
+        },
+        "FeeModel": {
+          "kind": "type",
+          "signature": "(maker: 'float' = 0.0, taker: 'float' = 0.0) -> None",
+          "doc_first_line": "FeeModel(maker: 'float' = 0.0, taker: 'float' = 0.0)",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 84,
+          "dataclass_fields": [
+            "maker",
+            "taker"
+          ]
+        },
+        "CostModel": {
+          "kind": "type",
+          "signature": "(kind: 'CostModelKind' = <CostModelKind.PER_LEG_FEE: 'per_leg_fee'>, fee_bps: 'float' = 0.0, slippage_bps: 'float' = 0.0, spread_bps: 'float' = 0.0, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "CostModel(kind: 'CostModelKind' = <CostModelKind.PER_LEG_FEE: 'per_leg_fee'>, fee_bps: 'float' = 0.0, slippage_bps: 'float' = 0.0, spread_bps: 'float' = 0.0, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 157,
+          "dataclass_fields": [
+            "fee_bps",
+            "kind",
+            "metadata",
+            "slippage_bps",
+            "spread_bps"
+          ]
+        },
+        "CarryModel": {
+          "kind": "type",
+          "signature": "(kind: 'CarryModelKind' = <CarryModelKind.NONE: 'none'>, funding_interval_hours: 'Optional[float]' = None, borrow_rate: 'float' = 0.0, cash_yield: 'float' = 0.0, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "CarryModel(kind: 'CarryModelKind' = <CarryModelKind.NONE: 'none'>, funding_interval_hours: 'Optional[float]' = None, borrow_rate: 'float' = 0.0, cash_yield: 'float' = 0.0, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 171,
+          "dataclass_fields": [
+            "borrow_rate",
+            "cash_yield",
+            "funding_interval_hours",
+            "kind",
+            "metadata"
+          ]
+        },
+        "SizingPolicy": {
+          "kind": "type",
+          "signature": "(kind: 'SizingPolicyKind', notional: 'Optional[float]' = None, base_qty: 'Optional[float]' = None, equity_fraction: 'Optional[float]' = None, reference_symbol: 'Optional[str]' = None, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "SizingPolicy(kind: 'SizingPolicyKind', notional: 'Optional[float]' = None, base_qty: 'Optional[float]' = None, equity_fraction: 'Optional[float]' = None, reference_symbol: 'Optional[str]' = None, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.arbitrage",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/arbitrage.py",
+          "source_line": 278,
+          "dataclass_fields": [
+            "base_qty",
+            "equity_fraction",
+            "kind",
+            "metadata",
+            "notional",
+            "reference_symbol"
+          ]
+        },
+        "InstrumentSpec": {
+          "kind": "type",
+          "signature": "(symbol: 'str', asset_type: 'AssetType' = <AssetType.CRYPTO: 'crypto'>, contract_size: 'float' = 1.0, tick_size: 'float' = 0.0, lot_size: 'float' = 0.0, min_qty: 'float' = 0.0, min_notional: 'float' = 0.0, price_precision: 'Optional[int]' = None, qty_precision: 'Optional[int]' = None, fee_model: 'FeeModel' = <factory>, metadata: 'Dict' = <factory>) -> None",
+          "doc_first_line": "InstrumentSpec(symbol: 'str', asset_type: 'AssetType' = <AssetType.CRYPTO: 'crypto'>, contract_size: 'float' = 1.0, tick_size: 'float' = 0.0, lot_size: 'float' = 0.0, min_qty: 'float' = 0.0, min_notional: 'float' = 0.0, price_precision: 'Optional[int]' = None, qty_precision: 'Optional[int]' = None, fee_model: 'FeeModel' = <factory>, metadata: 'Dict' = <factory>)",
+          "module": "quantbt.core.schema",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/schema.py",
+          "source_line": 97,
+          "dataclass_fields": [
+            "asset_type",
+            "contract_size",
+            "fee_model",
+            "lot_size",
+            "metadata",
+            "min_notional",
+            "min_qty",
+            "price_precision",
+            "qty_precision",
+            "symbol",
+            "tick_size"
+          ]
+        },
+        "InstrumentRegistryV2": {
+          "kind": "type",
+          "signature": "(rules: 'tuple[InstrumentRuleV2, ...]', fingerprint: 'str', schema: 'str' = 'instrument-registry-v2') -> None",
+          "doc_first_line": "Canonical immutable registry used by all V2 certified adapters.",
+          "module": "quantbt.core.instrument_registry_v2",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/instrument_registry_v2.py",
+          "source_line": 193,
+          "dataclass_fields": [
+            "fingerprint",
+            "rules",
+            "schema"
+          ]
+        },
+        "compile_instrument_table": {
+          "kind": "function",
+          "signature": "(symbols: 'Sequence[str]', instruments: 'Mapping[str, InstrumentSpec] | Sequence[InstrumentSpec] | None' = None, *, default_contract_size: 'float' = 1.0, default_venue: 'str' = 'SIM', default_settlement: 'str' = 'USD', fee_model_id: 'int | Mapping[str, int]' = 0, margin_model_id: 'int | Mapping[str, int]' = 0) -> 'PreparedInstrumentTable'",
+          "doc_first_line": "Compile Python instrument objects into immutable contiguous columns.",
+          "module": "quantbt.core.instrument_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/instrument_contracts.py",
+          "source_line": 104
+        },
+        "QuantityConstraints": {
+          "kind": "type",
+          "signature": "(symbols: 'tuple[str, ...]', qty_step: 'np.ndarray', min_qty: 'np.ndarray', min_notional: 'np.ndarray') -> None",
+          "doc_first_line": "Per-symbol exchange quantity rules.",
+          "module": "quantbt.core.constraints",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/constraints.py",
+          "source_line": 16,
+          "dataclass_fields": [
+            "min_notional",
+            "min_qty",
+            "qty_step",
+            "symbols"
+          ]
+        },
+        "build_quantity_constraints": {
+          "kind": "function",
+          "signature": "(symbols: 'Sequence[str]', *, instruments: 'Optional[Union[Dict[str, InstrumentSpec], Sequence[InstrumentSpec]]]' = None, qty_step: 'NumberOrMap' = None, lot_size: 'NumberOrMap' = None, slot_size: 'NumberOrMap' = None, min_qty: 'NumberOrMap' = None, min_notional: 'NumberOrMap' = None) -> 'QuantityConstraints'",
+          "doc_first_line": "Resolve quantity constraints from explicit kwargs and InstrumentSpec.",
+          "module": "quantbt.core.constraints",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/constraints.py",
+          "source_line": 51
+        },
+        "quantize_order_value": {
+          "kind": "function",
+          "signature": "(*, side: 'OrderSide | str', order_type: 'OrderType | str', price: 'float', qty: 'float', tick_size: 'float', qty_step: 'float', min_qty: 'float' = 0.0, max_qty: 'float' = 0.0, min_notional: 'float' = 0.0, contract_size: 'float' = 1.0) -> 'QuantizedOrderValue'",
+          "doc_first_line": "Quantize once, then run all venue minima against the quantized values.",
+          "module": "quantbt.core.instrument_contracts",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/instrument_contracts.py",
+          "source_line": 186
+        }
+      },
+      "absent": [],
+      "bound_count": 15
+    }
+  },
+  "wfo_modes": {
+    "optimization_modes_found_in_source": [
+      "mode_1_decay",
+      "mode_2_sbb",
+      "mode_3_flat_minima",
+      "mode_4_is_only_robust",
+      "mode_5_full_robust"
+    ],
+    "optimization_schedules_probed": [
+      "global",
+      "per_fold",
+      "per_fold_decay"
+    ],
+    "causality_resolution": {
+      "mode_1_decay|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "mode_1_decay|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "mode_1_decay|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      },
+      "mode_2_sbb|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "mode_2_sbb|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "mode_2_sbb|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      },
+      "mode_3_flat_minima|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "mode_3_flat_minima|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "mode_3_flat_minima|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      },
+      "mode_4_is_only_robust|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "mode_4_is_only_robust|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "mode_4_is_only_robust|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      },
+      "mode_5_full_robust|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "mode_5_full_robust|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "mode_5_full_robust|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      },
+      "none|global": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.RETROSPECTIVE_GLOBAL: 'retrospective_global_v2'>",
+        "fields": {}
+      },
+      "none|per_fold": {
+        "status": "REJECTED",
+        "error": "ValueError: unsupported WFO optimization_schedule='per_fold'"
+      },
+      "none|per_fold_decay": {
+        "status": "RESOLVED",
+        "repr": "<WfoCausalityScheduleV2.ENGINE_ENFORCED_PER_FOLD: 'engine_enforced_per_fold_v2'>",
+        "fields": {}
+      }
+    },
+    "walkforward_support_matrix": [
+      {
+        "target_mode": "signal_notional",
+        "expected_output": "pd.Series scalar signal",
+        "final_engine": "native_vectorized or native_event",
+        "status": "supported",
+        "notes": "Recommended default for single-symbol systematic alpha."
+      },
+      {
+        "target_mode": "notional",
+        "expected_output": "pd.Series scalar target",
+        "final_engine": "native_vectorized or native_event",
+        "status": "supported",
+        "notes": "Explicit notional sizing route."
+      },
+      {
+        "target_mode": "unit",
+        "expected_output": "pd.Series scalar target",
+        "final_engine": "native_vectorized or native_event",
+        "status": "supported",
+        "notes": "Explicit unit sizing route."
+      },
+      {
+        "target_mode": "pct_equity",
+        "expected_output": "pd.Series scalar weight",
+        "final_engine": "legacy BacktestEngine",
+        "status": "supported",
+        "notes": "Legacy `%_equity` accounting route."
+      },
+      {
+        "target_mode": "dca_ladder",
+        "expected_output": "pd.Series structural ladder level",
+        "final_engine": "legacy BacktestEngine",
+        "status": "supported",
+        "notes": "Requires high/low data for intrabar ladder fills."
+      },
+      {
+        "target_mode": "portfolio",
+        "expected_output": "pd.DataFrame or dict[str, pd.Series]",
+        "final_engine": "PortfolioBacktestEngine",
+        "status": "supported",
+        "notes": "Multi-symbol portfolio positions stitched across OOS folds."
+      },
+      {
+        "target_mode": "basket",
+        "expected_output": "pd.Series scalar basket signal",
+        "final_engine": "native_event basket route",
+        "status": "supported",
+        "notes": "Requires BasketSpec on the endpoint."
+      },
+      {
+        "target_mode": "arbitrage",
+        "expected_output": "pd.Series scalar package signal",
+        "final_engine": "supported arbitrage package route",
+        "status": "partial",
+        "notes": "Current supported arbitrage specs only; future specialized engines reserved."
+      },
+      {
+        "target_mode": "nautilus_validation",
+        "expected_output": "pd.Series scalar signal",
+        "final_engine": "Nautilus adapter",
+        "status": "reserved",
+        "notes": "Reserved for future WFO parity validation, not routed by walk-forward today."
+      }
+    ],
+    "note": "modes are read from the installed module source; causality comes from the installed resolver, not from naming"
+  },
+  "native_capability": {
+    "symbols": {
+      "bound": {
+        "NATIVE_EVENT_CAPABILITY_MATRIX": {
+          "kind": "mappingproxy",
+          "signature": null,
+          "doc_first_line": null,
+          "module": null,
+          "defined_in": null,
+          "source_line": null
+        },
+        "NATIVE_EVENT_CAPABILITY_MATRIX_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "full-contract-v2-0.4"
+        },
+        "NATIVE_EVENT_CONTRACT_FINGERPRINT": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "601d639f1c398ac81f3c8231c30d067372c80e71ae4e5f097182f00c5c91f05d"
+        },
+        "NATIVE_EVENT_CORE_PROTOCOL_VERSION": {
+          "kind": "int",
+          "signature": null,
+          "doc_first_line": "int([x]) -> integer",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": 1
+        },
+        "NATIVE_EVENT_COMMAND_ABI_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "full-command-v1"
+        },
+        "NATIVE_EVENT_SEMANTIC_DESCRIPTOR_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "native-event-semantics-v1"
+        },
+        "native_event_capability_matrix": {
+          "kind": "function",
+          "signature": "() -> 'dict[str, bool]'",
+          "doc_first_line": "Return a mutable copy of the canonical capability matrix.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 47
+        },
+        "native_event_semantic_descriptor": {
+          "kind": "function",
+          "signature": "() -> 'dict[str, object]'",
+          "doc_first_line": "Return the structured execution semantics required from API 0.4 Rust.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 64
+        },
+        "capability_matrix_fingerprint": {
+          "kind": "function",
+          "signature": "() -> 'str'",
+          "doc_first_line": "Return a reproducible SHA-256 fingerprint for the capability contract.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 53
+        },
+        "semantic_descriptor_fingerprint": {
+          "kind": "function",
+          "signature": "(descriptor: 'Mapping[str, object] | None' = None) -> 'str'",
+          "doc_first_line": null,
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 80
+        },
+        "validate_native_event_capability_matrix": {
+          "kind": "function",
+          "signature": "(matrix: 'Mapping[str, object]') -> 'None'",
+          "doc_first_line": "Raise if a consumer attempts to advertise an unknown capability.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 118
+        },
+        "assert_native_event_full_parity": {
+          "kind": "function",
+          "signature": "(candidate: 'object', oracle: 'object', *, numeric_atol: 'float' = 1e-12, capabilities: 'Mapping[str, object] | None' = None, command_tape: 'object | tuple[object, object] | None' = None, require_full: 'bool' = True) -> 'dict[str, object]'",
+          "doc_first_line": "Compare complete observable lifecycle and accounting artifacts.",
+          "module": "quantbt.core.native_event_parity",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_parity.py",
+          "source_line": 268
+        }
+      },
+      "absent": [],
+      "bound_count": 12
+    },
+    "capability_matrix": {
+      "amend": true,
+      "cancel": true,
+      "fok": true,
+      "funding": true,
+      "gtc": true,
+      "gtd": true,
+      "ioc": true,
+      "limit": true,
+      "liquidation": true,
+      "market": true,
+      "multi_symbol": true,
+      "oco": true,
+      "parent_child": true,
+      "place": true,
+      "quantity_constraints": true,
+      "reduce_only": true,
+      "replace": true,
+      "single_symbol": true,
+      "stop_limit": true,
+      "stop_market": true
+    },
+    "native_event_capability_matrix_version": "full-contract-v2-0.4",
+    "native_event_contract_fingerprint": "601d639f1c398ac81f3c8231c30d067372c80e71ae4e5f097182f00c5c91f05d",
+    "native_event_core_protocol_version": 1,
+    "native_event_command_abi_version": "full-command-v1",
+    "native_event_semantic_descriptor_version": "native-event-semantics-v1",
+    "required_fixture_capabilities": {
+      "oco": true,
+      "amend": true,
+      "cancel": true,
+      "limit": true,
+      "market": true,
+      "funding": true,
+      "liquidation": true,
+      "multi_symbol": true,
+      "ioc": true,
+      "fok": true,
+      "gtc": true,
+      "gtd": true
+    },
+    "missing_required_capabilities": []
+  },
+  "loader_static_map": {
+    "status": "MAPPED_STATICALLY",
+    "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/vendor_readonly/loader_snapshot/data_loader.py",
+    "method": "ast.parse of the read-only snapshot; the module was never imported",
+    "class_count": 20,
+    "classes": {
+      "MarketDataLoaderBase": {
+        "bases": [],
+        "constants": {
+          "DATASET_NAME": "",
+          "NEW_PATH_PARTS": [],
+          "IS_OPTION": false,
+          "TZ_INFO": "UTC",
+          "DEFAULT_COLUMNS": null,
+          "RESAMPLE_SUPPORTED": false,
+          "TIME_COLUMN": "time",
+          "RESAMPLE_VOLUME_DTYPE": "int64"
+        },
+        "methods": [
+          "_discover_symbols",
+          "_filter_time_column",
+          "_get_new_path",
+          "_load_resampled_duckdb",
+          "_load_resampled_pandas",
+          "_normalize",
+          "_resampled_files",
+          "_resolve_symbol_list",
+          "load",
+          "load_resampled"
+        ],
+        "lineno": 258
+      },
+      "VnStock1m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_stock_1m",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "equity",
+            "1m"
+          ],
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>",
+          "RESAMPLE_SUPPORTED": true
+        },
+        "methods": [],
+        "lineno": 655
+      },
+      "VnStockDaily": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_stock_daily",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "equity",
+            "1d"
+          ],
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>"
+        },
+        "methods": [],
+        "lineno": 665
+      },
+      "VnFutures1m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_futures_1m",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "futures",
+            "1m"
+          ],
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>",
+          "RESAMPLE_SUPPORTED": true
+        },
+        "methods": [],
+        "lineno": 674
+      },
+      "VnDerivativesContracts1m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_derivatives_contracts_1m",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "futures",
+            "contracts",
+            "1m"
+          ],
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>",
+          "RESAMPLE_SUPPORTED": true
+        },
+        "methods": [],
+        "lineno": 684
+      },
+      "VnDerivativesContractsDaily": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_derivatives_contracts_1d",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "futures",
+            "contracts",
+            "1d"
+          ],
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>"
+        },
+        "methods": [],
+        "lineno": 694
+      },
+      "VnDerivativesContinuousBase": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "VERSION": "v1",
+          "TZ_INFO": "Asia/Ho_Chi_Minh",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>"
+        },
+        "methods": [
+          "_discover_symbols",
+          "_files_for_symbol",
+          "_resampled_files",
+          "load"
+        ],
+        "lineno": 703
+      },
+      "VnDerivativesContinuous1m": {
+        "bases": [
+          "VnDerivativesContinuousBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_derivatives_continuous_1m",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "futures",
+            "continuous",
+            "1m"
+          ],
+          "RESAMPLE_SUPPORTED": true
+        },
+        "methods": [],
+        "lineno": 783
+      },
+      "VnDerivativesContinuousDaily": {
+        "bases": [
+          "VnDerivativesContinuousBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_derivatives_continuous_1d",
+          "NEW_PATH_PARTS": [
+            "vn",
+            "futures",
+            "continuous",
+            "1d"
+          ]
+        },
+        "methods": [],
+        "lineno": 791
+      },
+      "CryptoBinance1m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "crypto_1m",
+          "NEW_PATH_PARTS": [
+            "crypto",
+            "binance_futures",
+            "1m"
+          ],
+          "TZ_INFO": "UTC",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>",
+          "RESAMPLE_SUPPORTED": true
+        },
+        "methods": [],
+        "lineno": 798
+      },
+      "CryptoBinanceQuarterly1m": {
+        "bases": [
+          "CryptoBinance1m"
+        ],
+        "constants": {
+          "DATASET_NAME": "crypto_binance_quarterly_1m"
+        },
+        "methods": [],
+        "lineno": 808
+      },
+      "CryptoBinanceSpot1m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "crypto_binance_spot_1m",
+          "NEW_PATH_PARTS": [
+            "crypto",
+            "binance_spot",
+            "1m"
+          ],
+          "TZ_INFO": "UTC",
+          "DEFAULT_COLUMNS": "<non-literal: Name(id='OHLCV_COLUMNS', ctx=Load())>",
+          "RESAMPLE_SUPPORTED": true,
+          "RESAMPLE_VOLUME_DTYPE": "float64"
+        },
+        "methods": [
+          "_normalize"
+        ],
+        "lineno": 814
+      },
+      "BinanceOptions5m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "options_5m",
+          "NEW_PATH_PARTS": [
+            "options",
+            "binance",
+            "snapshot_5m"
+          ],
+          "IS_OPTION": true,
+          "TZ_INFO": "UTC",
+          "TIME_COLUMN": "snapshot_time"
+        },
+        "methods": [
+          "_normalize"
+        ],
+        "lineno": 847
+      },
+      "BinanceOrderBookSnapshot1h": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "crypto_binance_orderbook_snapshot_1h",
+          "NEW_PATH_PARTS": [
+            "crypto",
+            "binance_orderbook_snapshot",
+            "1h"
+          ],
+          "TZ_INFO": "UTC"
+        },
+        "methods": [
+          "_normalize",
+          "load_features"
+        ],
+        "lineno": 879
+      },
+      "BinanceFuturesMetrics5m": {
+        "bases": [
+          "MarketDataLoaderBase"
+        ],
+        "constants": {
+          "DATASET_NAME": "crypto_binance_futures_metrics_5m",
+          "NEW_PATH_PARTS": [
+            "crypto",
+            "binance_futures_metrics",
+            "5m"
+          ],
+          "TZ_INFO": "UTC"
+        },
+        "methods": [
+          "_normalize",
+          "load_long_short_ratios",
+          "load_open_interest"
+        ],
+        "lineno": 913
+      },
+      "DeribitOptionTrades": {
+        "bases": [],
+        "constants": {
+          "DATASET_NAME": "deribit_option_trades",
+          "TZ_INFO": "UTC"
+        },
+        "methods": [
+          "__init__",
+          "load"
+        ],
+        "lineno": 969
+      },
+      "DeribitOptionSnapshots5m": {
+        "bases": [],
+        "constants": {
+          "DATASET_NAME": "deribit_option_snapshots_5m",
+          "TZ_INFO": "UTC"
+        },
+        "methods": [
+          "__init__",
+          "load"
+        ],
+        "lineno": 1007
+      },
+      "DeribitOptionOverlay": {
+        "bases": [],
+        "constants": {
+          "DATASET_NAME": "deribit_option_overlay",
+          "TZ_INFO": "UTC"
+        },
+        "methods": [
+          "__init__",
+          "load"
+        ],
+        "lineno": 1039
+      },
+      "CryptoDailyMatrix": {
+        "bases": [],
+        "constants": {
+          "DATASET_NAME": "binance_daily_matrix",
+          "OHLCV_DATASET_NAME": "crypto_daily_ohlcv",
+          "TZ_INFO": "UTC",
+          "FEATURES": [
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume"
+          ]
+        },
+        "methods": [
+          "_get_path",
+          "_normalize_ohlcv",
+          "_read_matrix",
+          "load",
+          "load_features",
+          "load_ohlcv",
+          "load_ohlcv_frame"
+        ],
+        "lineno": 1067
+      },
+      "VNDailyMatrix": {
+        "bases": [
+          "CryptoDailyMatrix"
+        ],
+        "constants": {
+          "DATASET_NAME": "vn_daily_matrix",
+          "OHLCV_DATASET_NAME": "vn_daily_ohlcv",
+          "TZ_INFO": "Asia/Ho_Chi_Minh"
+        },
+        "methods": [
+          "_get_path",
+          "_normalize_ohlcv"
+        ],
+        "lineno": 1303
+      }
+    },
+    "crypto_readers": [
+      "BinanceFuturesMetrics5m",
+      "BinanceOptions5m",
+      "BinanceOrderBookSnapshot1h",
+      "CryptoBinance1m",
+      "CryptoBinanceQuarterly1m",
+      "CryptoBinanceSpot1m",
+      "CryptoDailyMatrix",
+      "DeribitOptionOverlay",
+      "DeribitOptionSnapshots5m",
+      "DeribitOptionTrades"
+    ],
+    "module_level_constants": {
+      "OHLCV_COLUMNS": [
+        "time",
+        "symbol",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    }
+  },
+  "unknowns": {
+    "api": [],
+    "data": [
+      {
+        "kind": "DATA_UNKNOWN",
+        "name": "instrument_registry_digest",
+        "handling": "tick/lot/min-notional not pinned until LAB-03 reads actual instrument metadata"
+      },
+      {
+        "kind": "DATA_UNKNOWN",
+        "name": "funding_history_coverage",
+        "handling": "unknown per symbol; missing funding is never treated as zero on a net-carry claim"
+      },
+      {
+        "kind": "DATA_UNKNOWN",
+        "name": "perp_listing_dates",
+        "handling": "per-symbol evaluation start cannot be fixed until LAB-03 coverage report"
+      },
+      {
+        "kind": "DATA_UNKNOWN",
+        "name": "orderbook_snapshot_coverage",
+        "handling": "SERVER_LIQUIDITY cohort eligibility unresolved until LAB-03"
+      },
+      {
+        "kind": "DATA_UNKNOWN",
+        "name": "data_roles",
+        "handling": "discovery/confirmation role assignment blocked on LAB-03 inventory"
+      }
+    ],
+    "policy": "an unknown is listed, never filled with an imagined API or a fabricated default"
+  },
+  "unknown_counts": {
+    "api": 0,
+    "data": 5
+  },
+  "lab_run_id": "run-20260909T171910Z-119241eb",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T17:19:13.450171+00:00"
+}

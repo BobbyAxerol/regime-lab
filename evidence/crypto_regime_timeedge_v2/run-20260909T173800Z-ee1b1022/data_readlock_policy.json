@@ -1,0 +1,37 @@
+{
+  "schema": "crypto_regime_lab.data_readlock_policy.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "registered_at_utc": "2026-09-09T17:38:00.840709+00:00",
+  "scope": "every mutable data partition that lives OUTSIDE LAB_ROOT",
+  "known_mutable_roots": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage",
+      "why_mutable": "collectors append new partitions and may repair existing ones",
+      "lab_access": "read-only; mounted ro inside the worker namespace"
+    }
+  ],
+  "rules": [
+    "The lab never runs a collector, scheduler, trading adapter or repair job. If coverage is missing it is reported as missing, never fetched.",
+    "A partition enters the lab only as a snapshot copied under LAB_ROOT/snapshots/{snapshot_id}/, with a manifest recording per-file sha256, byte size, row count, closed/partial state, time range and the read timestamp.",
+    "The read-lock is the manifest: a run declares the snapshot_id it used, and re-verifies every digest before and after the run.",
+    "Digest drift between declaration and completion invalidates the run (status EXTERNAL_DATA_DRIFT), it does not silently continue on the new bytes.",
+    "Only closed partitions are eligible for a primary run; an open/partial tail is excluded with an explicit reason rather than truncated silently.",
+    "A failed partition read becomes explicit missing coverage. It must never be turned into a backtest on 'the rest' that is then reported as a full sample.",
+    "No file, mode, ownership or metadata under a mutable root is ever modified, and no symlink or hardlink from the lab aliases one."
+  ],
+  "enforcement_now": [
+    "protected roots are read-only bind mounts inside the worker namespace (measured each preflight)",
+    "SandboxPolicy.assert_readable refuses reads outside the declared roots",
+    "the lab has no collector code and no network in run/certify/report stages"
+  ],
+  "execution_owner": "LAB-03 (L03.2 primary snapshots, L03.3 availability builder)",
+  "artifacts_lab03_must_produce": [
+    "snapshots/{snapshot_id}/manifest.json",
+    "data_product_inventory.json",
+    "availability_rules.json",
+    "evidence/{study_id}/{run_id}/data_access_log.jsonl"
+  ],
+  "status": "POLICY_REGISTERED_EXECUTION_PENDING_LAB03",
+  "lab_run_id": "run-20260909T173800Z-ee1b1022",
+  "written_at_utc": "2026-09-09T17:38:00.842461+00:00"
+}

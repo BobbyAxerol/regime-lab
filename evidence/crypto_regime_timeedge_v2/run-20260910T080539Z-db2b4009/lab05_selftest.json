@@ -1,0 +1,1125 @@
+{
+  "schema": "crypto_regime_lab.lab05_selftest.v1",
+  "acceptance_checks": {
+    "T37": {
+      "schema": "crypto_regime_lab.t37_dp_oracle.v1",
+      "trials": [
+        {
+          "n_obs": 6,
+          "n_states": 3,
+          "lambda_jump": 0.25194149357640416,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 7,
+          "n_states": 3,
+          "lambda_jump": 1.1143337856774242,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 5,
+          "n_states": 2,
+          "lambda_jump": 0.9947436346246603,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 7,
+          "n_states": 3,
+          "lambda_jump": 0.9127343616057659,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 4,
+          "n_states": 3,
+          "lambda_jump": 1.3211849520707457,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": false
+        },
+        {
+          "n_obs": 7,
+          "n_states": 2,
+          "lambda_jump": 1.3348411314483504,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 4,
+          "n_states": 2,
+          "lambda_jump": 0.6870495975203155,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        },
+        {
+          "n_obs": 5,
+          "n_states": 3,
+          "lambda_jump": 1.2229466256892143,
+          "endpoint_costs_match": true,
+          "online_states_match": true,
+          "best_path_match": true,
+          "normalisation_preserves_argmin": true,
+          "normalisation_preserves_differences": true,
+          "online_differs_from_offline": true
+        }
+      ],
+      "all_endpoint_costs_match": true,
+      "all_online_states_match": true,
+      "all_best_paths_match": true,
+      "normalisation_is_safe": true,
+      "cases_where_causal_and_offline_disagree": 7,
+      "why_that_matters": "where they disagree, the offline path rewrote a label using data that did not exist when the decision was taken. That is why the offline path carries decision_eligible=false (guide 8.4)"
+    },
+    "T38": {
+      "schema": "crypto_regime_lab.t38_batch_stream.v1",
+      "cases": [
+        {
+          "schema": "crypto_regime_lab.batch_stream_parity.v1",
+          "observations": 20,
+          "states_identical": true,
+          "costs_identical": true,
+          "prefix_vintages_stable": true,
+          "prefix_mismatches_at": [],
+          "rule": "a label emitted at t must be the same whether the provider was run live, restarted on the prefix, or run in one batch. Otherwise 'the model said X at time t' has no fixed meaning (guide 8.4, T38)"
+        },
+        {
+          "schema": "crypto_regime_lab.batch_stream_parity.v1",
+          "observations": 150,
+          "states_identical": true,
+          "costs_identical": true,
+          "prefix_vintages_stable": true,
+          "prefix_mismatches_at": [],
+          "rule": "a label emitted at t must be the same whether the provider was run live, restarted on the prefix, or run in one batch. Otherwise 'the model said X at time t' has no fixed meaning (guide 8.4, T38)"
+        },
+        {
+          "schema": "crypto_regime_lab.batch_stream_parity.v1",
+          "observations": 500,
+          "states_identical": true,
+          "costs_identical": true,
+          "prefix_vintages_stable": true,
+          "prefix_mismatches_at": [],
+          "rule": "a label emitted at t must be the same whether the provider was run live, restarted on the prefix, or run in one batch. Otherwise 'the model said X at time t' has no fixed meaning (guide 8.4, T38)"
+        }
+      ],
+      "all_states_identical": true,
+      "all_costs_identical": true,
+      "all_prefix_vintages_stable": true
+    },
+    "T39": {
+      "schema": "crypto_regime_lab.mutation_detector_control.v1",
+      "causal_fit": {
+        "schema": "crypto_regime_lab.future_suffix_mutation.v1",
+        "cutoff": 250,
+        "observations": 500,
+        "mutation_effective": true,
+        "training_prefix_untouched": true,
+        "probe_valid": true,
+        "centroids_identical": true,
+        "scaler_identical": true,
+        "leak_detected": false,
+        "verdict": "CAUSAL",
+        "digest_before": "efe90327a74b129c",
+        "digest_after": "efe90327a74b129c",
+        "scaler_digest_before": "fcd2c92d2a30b086",
+        "scaler_digest_after": "fcd2c92d2a30b086",
+        "rule": "a fit that declares a cutoff must be bit-identical when everything after that cutoff is replaced. Anything else means the scaler or the model read data it declared it could not see (T39)"
+      },
+      "deliberately_leaky_fit": {
+        "schema": "crypto_regime_lab.future_suffix_mutation.v1",
+        "cutoff": 250,
+        "observations": 500,
+        "mutation_effective": true,
+        "training_prefix_untouched": true,
+        "probe_valid": true,
+        "centroids_identical": false,
+        "scaler_identical": false,
+        "leak_detected": true,
+        "verdict": "LEAK_DETECTED",
+        "digest_before": "cd5bb69d8739ef32",
+        "digest_after": "461b4f998f8787d8",
+        "scaler_digest_before": "45445fb6eaf7b38a",
+        "scaler_digest_after": "e062e0e6c0e45b25",
+        "rule": "a fit that declares a cutoff must be bit-identical when everything after that cutoff is replaced. Anything else means the scaler or the model read data it declared it could not see (T39)"
+      },
+      "detector_passes_clean_fit": true,
+      "detector_catches_known_leak": true,
+      "detector_is_meaningful": true,
+      "why_the_control_exists": "a detector that always returns CAUSAL would pass the clean fit too. The known-leaky fit is the only thing that shows the check can fail"
+    },
+    "T40": {
+      "schema": "crypto_regime_lab.t40_degeneracy.v1",
+      "all_weights_zero": {
+        "schema": "crypto_regime_lab.regime_degeneracy.v1",
+        "weight_sum": 0.0,
+        "collapsed_weights": true,
+        "identical_centroid_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "empty_states": [],
+        "is_degenerate": true,
+        "usable_for_decisions": false,
+        "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+        "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+      },
+      "identical_centroids": {
+        "schema": "crypto_regime_lab.regime_degeneracy.v1",
+        "weight_sum": 1.0,
+        "collapsed_weights": false,
+        "identical_centroid_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "empty_states": [],
+        "is_degenerate": true,
+        "usable_for_decisions": false,
+        "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+        "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+      },
+      "empty_state": {
+        "schema": "crypto_regime_lab.regime_degeneracy.v1",
+        "weight_sum": 1.0,
+        "collapsed_weights": false,
+        "identical_centroid_pairs": [],
+        "empty_states": [
+          1
+        ],
+        "is_degenerate": true,
+        "usable_for_decisions": false,
+        "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+        "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+      },
+      "healthy_model": {
+        "schema": "crypto_regime_lab.regime_degeneracy.v1",
+        "weight_sum": 1.0,
+        "collapsed_weights": false,
+        "identical_centroid_pairs": [],
+        "empty_states": [],
+        "is_degenerate": false,
+        "usable_for_decisions": true,
+        "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+        "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+      },
+      "degenerate_model_emits": {
+        "status": "UNKNOWN_STATE",
+        "decision_eligible": false,
+        "reason": "the model is degenerate and cannot discriminate between states",
+        "novelty_score": 0.0,
+        "ambiguity": 0.0,
+        "detail": {
+          "degeneracy": {
+            "schema": "crypto_regime_lab.regime_degeneracy.v1",
+            "weight_sum": 0.0,
+            "collapsed_weights": true,
+            "identical_centroid_pairs": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "empty_states": [],
+            "is_degenerate": true,
+            "usable_for_decisions": false,
+            "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+            "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+          }
+        }
+      },
+      "healthy_is_usable": true,
+      "degenerate_is_blocked": true,
+      "no_fake_confidence": true
+    },
+    "T41": {
+      "schema": "crypto_regime_lab.t41_namespace_permutation.v1",
+      "true_permutation": [
+        2,
+        0,
+        1
+      ],
+      "recovered_permutation": [
+        2,
+        0,
+        1
+      ],
+      "permutation_recovered": true,
+      "all_states_mapped": true,
+      "declared_market_transition": false,
+      "triggers_parameter_search": false,
+      "transition_event": {
+        "schema": "crypto_regime_lab.model_transition.v1",
+        "from_version": "model_A",
+        "to_version": "model_B",
+        "from_namespace": "model_A",
+        "to_namespace": "model_B",
+        "training_cutoff": "2021-01-01",
+        "mapping_confident": true,
+        "unmapped_states": [],
+        "event_type": "MODEL_TRANSITION",
+        "is_market_event": false,
+        "requires_parameter_search": false,
+        "prior_emissions_rewritten": false,
+        "prior_emissions_rule": "decision-vintage emissions stay exactly as they were emitted; the new model's view of the same past is a separate asof_<cutoff>_training_labels series (guide 8.4)"
+      },
+      "genuinely_moved_state_is_unmapped": true,
+      "far_mapping_unmapped_states": [
+        "1"
+      ],
+      "why_both_cases": "a permutation must map cleanly, and a state that really moved must NOT be quietly mapped onto its nearest neighbour. Only checking the first would pass a mapper that maps everything"
+    },
+    "T42": {
+      "schema": "crypto_regime_lab.t42_membership.v1",
+      "state_costs": [
+        0.1,
+        0.35,
+        2.4
+      ],
+      "membership_score": [
+        0.532181089807172,
+        0.41446304947761925,
+        0.05335586071520865
+      ],
+      "sums_to_one": true,
+      "field_name": "membership_score",
+      "is_named_probability": false,
+      "calibrated": false,
+      "calibration_evidence": null,
+      "rule": "softmax(-cost) sums to one, which is exactly why it is tempting to call it a probability. Nothing here relates it to realised outcomes, so the schema names it a membership score and carries membership_is_calibrated=false (guide 8.5)"
+    },
+    "T43": {
+      "schema": "crypto_regime_lab.t43_no_auto_retrain.v1",
+      "fit_functions_watched": [
+        "causal_fit",
+        "choose_k",
+        "fit_jump_model",
+        "fit_scaler",
+        "multi_start_fit"
+      ],
+      "calls_found": {
+        "emissions.py": [],
+        "quality.py": [],
+        "jump_model.py": [
+          "fit_jump_model"
+        ]
+      },
+      "inference_path_calls_no_fit": true,
+      "note": "jump_model.py legitimately contains the fit itself; what matters is that the INFERENCE modules cannot reach it. A regime change therefore cannot start a retrain, and a retrain is a scheduled event (guide 8.6, T43)"
+    },
+    "T44": {
+      "schema": "crypto_regime_lab.t44_novelty_vs_missing.v1",
+      "novel_observation": {
+        "status": "UNKNOWN_STATE",
+        "decision_eligible": false,
+        "reason": "the observation sits outside the support the model was trained on: its fit residual (5.0000) exceeds the training threshold (1.0000). The inputs are PRESENT, which is what separates this from MISSING_DATA (T44)",
+        "novelty_score": 5.0,
+        "ambiguity": 0.7,
+        "detail": {
+          "fit_residual": 5.0,
+          "novelty_threshold": 1.0
+        }
+      },
+      "same_residual_but_missing_input": {
+        "status": "MISSING_DATA",
+        "decision_eligible": false,
+        "reason": "required features absent: ['g2_taker_imbalance']. This is an INPUT failure and is deliberately not reported as a novel market state (T44)",
+        "novelty_score": 0.0,
+        "ambiguity": 0.0,
+        "detail": {
+          "missing_features": [
+            "g2_taker_imbalance"
+          ]
+        }
+      },
+      "stale_model": {
+        "status": "STALE_MODEL",
+        "decision_eligible": false,
+        "reason": "the model was fitted 1000000000s ago, beyond the declared 1000000s. A stale model is not a novel market",
+        "novelty_score": 0.0,
+        "ambiguity": 0.0,
+        "detail": {
+          "model_age_seconds": 1000000000.0,
+          "max_model_age_seconds": 1000000.0
+        }
+      },
+      "healthy": {
+        "status": "OK",
+        "decision_eligible": true,
+        "reason": "within training support with present inputs",
+        "novelty_score": 0.1,
+        "ambiguity": 0.7,
+        "detail": {
+          "observation_age_seconds": 0.0
+        }
+      },
+      "statuses_are_distinct": true,
+      "missing_wins_over_novelty": true,
+      "key_case": "the novel and the missing case are given the IDENTICAL fit residual. Only the presence of inputs separates them, which is precisely the confusion T44 asks the lab to rule out"
+    }
+  },
+  "synthetic_worlds": {
+    "schema": "crypto_regime_lab.synthetic_worlds.v1",
+    "worlds": [
+      {
+        "name": "no_regime",
+        "observations": 600,
+        "features": 4,
+        "n_states_true": 1,
+        "description": "one distribution throughout; any persistent state structure reported here is manufactured",
+        "latent_switches": 0,
+        "ground_truth_is_diagnostic_only": "the latent label is generated by the simulator. It scores detection quality and never enters a feature, a model fit, or a policy input (guide L05.7)",
+        "emitted_switches": 18,
+        "detection": {
+          "true_switches": 0,
+          "detected": 0,
+          "undetected": 0,
+          "delay_median": null,
+          "delay_p90": null,
+          "delay_max": null,
+          "delays": [],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        },
+        "agreement": {
+          "best_permutation_agreement": 0.006666666666666667,
+          "emitted_states_used": [
+            0,
+            1,
+            2
+          ],
+          "true_states": [
+            0
+          ],
+          "diagnostic_only": true,
+          "note": "agreement with a simulator's latent label is a technical check. It is not evidence of predictive or financial value (guide L05 exit)"
+        },
+        "states_used": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "name": "recurring_state",
+        "observations": 900,
+        "features": 4,
+        "n_states_true": 3,
+        "description": "3 states cycling with a dwell of 60; tests whether a returning state is re-identified rather than invented",
+        "latent_switches": 14,
+        "ground_truth_is_diagnostic_only": "the latent label is generated by the simulator. It scores detection quality and never enters a feature, a model fit, or a policy input (guide L05.7)",
+        "emitted_switches": 24,
+        "detection": {
+          "true_switches": 14,
+          "detected": 14,
+          "undetected": 0,
+          "delay_median": 1.0,
+          "delay_p90": 1.0,
+          "delay_max": 1,
+          "delays": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        },
+        "agreement": {
+          "best_permutation_agreement": 0.9833333333333333,
+          "emitted_states_used": [
+            0,
+            1,
+            2
+          ],
+          "true_states": [
+            0,
+            1,
+            2
+          ],
+          "diagnostic_only": true,
+          "note": "agreement with a simulator's latent label is a technical check. It is not evidence of predictive or financial value (guide L05 exit)"
+        },
+        "states_used": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "name": "structural_break",
+        "observations": 800,
+        "features": 4,
+        "n_states_true": 2,
+        "description": "a one-way shift of 3.0 sigma at observation 400; tests detection delay, not reversion",
+        "latent_switches": 1,
+        "ground_truth_is_diagnostic_only": "the latent label is generated by the simulator. It scores detection quality and never enters a feature, a model fit, or a policy input (guide L05.7)",
+        "emitted_switches": 14,
+        "detection": {
+          "true_switches": 1,
+          "detected": 1,
+          "undetected": 0,
+          "delay_median": 0.0,
+          "delay_p90": 0.0,
+          "delay_max": 0,
+          "delays": [
+            0
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        },
+        "agreement": {
+          "best_permutation_agreement": 0.99,
+          "emitted_states_used": [
+            0,
+            1,
+            2
+          ],
+          "true_states": [
+            0,
+            1
+          ],
+          "diagnostic_only": true,
+          "note": "agreement with a simulator's latent label is a technical check. It is not evidence of predictive or financial value (guide L05 exit)"
+        },
+        "states_used": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "negative_control": {
+      "world": "no_regime",
+      "true_switches": 0,
+      "emitted_switches": 18,
+      "finding": "a K=3 jump model fitted on structureless noise still emitted 18 state changes where the truth has 0. Persistent-looking states are NOT evidence of regimes, and no chart of these labels should be read as one"
+    },
+    "ground_truth_use": "the latent label is generated by the simulator. It scores detection quality and never enters a feature, a model fit, or a policy input (guide L05.7)"
+  },
+  "noise_sensitivity": {
+    "schema": "crypto_regime_lab.noise_sensitivity.v1",
+    "levels": [
+      {
+        "noise": 0.5,
+        "agreement": 0.9944444444444445,
+        "emitted_switches": 14,
+        "true_switches": 14,
+        "detection": {
+          "true_switches": 14,
+          "detected": 14,
+          "undetected": 0,
+          "delay_median": 0.0,
+          "delay_p90": 1.0,
+          "delay_max": 1,
+          "delays": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        }
+      },
+      {
+        "noise": 1.0,
+        "agreement": 0.9844444444444445,
+        "emitted_switches": 23,
+        "true_switches": 14,
+        "detection": {
+          "true_switches": 14,
+          "detected": 14,
+          "undetected": 0,
+          "delay_median": 0.0,
+          "delay_p90": 1.700000000000001,
+          "delay_max": 2,
+          "delays": [
+            0,
+            2,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        }
+      },
+      {
+        "noise": 2.0,
+        "agreement": 0.7755555555555556,
+        "emitted_switches": 266,
+        "true_switches": 14,
+        "detection": {
+          "true_switches": 14,
+          "detected": 14,
+          "undetected": 0,
+          "delay_median": 0.0,
+          "delay_p90": 1.700000000000001,
+          "delay_max": 2,
+          "delays": [
+            0,
+            2,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        }
+      },
+      {
+        "noise": 4.0,
+        "agreement": 0.41888888888888887,
+        "emitted_switches": 526,
+        "true_switches": 14,
+        "detection": {
+          "true_switches": 14,
+          "detected": 14,
+          "undetected": 0,
+          "delay_median": 0.0,
+          "delay_p90": 1.0,
+          "delay_max": 1,
+          "delays": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "measure": "observations between a true latent switch and the first emitted state change after it; a change to ANY other state counts as detection, because the provider is not being asked to guess the simulator's integer labels"
+        }
+      }
+    ],
+    "reading": "separation is held fixed while noise rises, so this traces where the model stops resolving states that really are there"
+  },
+  "online_algorithm_versions": {
+    "schema": "crypto_regime_lab.online_versions.v1",
+    "comparisons": [
+      {
+        "lambda_jump": 0.5,
+        "endpoint_dp": {
+          "model_version_suffix": "endpoint_dp",
+          "states": [
+            2,
+            2,
+            1,
+            0,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "switches": 37,
+          "uses_history": true,
+          "uses_jump_penalty": true
+        },
+        "greedy": {
+          "model_version_suffix": "greedy",
+          "states": [
+            2,
+            1,
+            1,
+            0,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            0,
+            2,
+            2,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1
+          ],
+          "switches": 160,
+          "uses_history": false,
+          "uses_jump_penalty": false
+        },
+        "label_agreement": 0.6766666666666666,
+        "identical": false,
+        "switch_ratio_greedy_over_dp": 4.324324324324325,
+        "are_two_model_versions": true,
+        "mixing_rule": "these are two models, not two settings of one. A study declares which it uses and the emitted tape carries that version; blending them, or falling back from one to the other, would make 'the model said X' meaningless (guide L05.2)"
+      },
+      {
+        "lambda_jump": 2.0,
+        "endpoint_dp": {
+          "model_version_suffix": "endpoint_dp",
+          "states": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "switches": 14,
+          "uses_history": true,
+          "uses_jump_penalty": true
+        },
+        "greedy": {
+          "model_version_suffix": "greedy",
+          "states": [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "switches": 102,
+          "uses_history": false,
+          "uses_jump_penalty": false
+        },
+        "label_agreement": 0.8066666666666666,
+        "identical": false,
+        "switch_ratio_greedy_over_dp": 7.285714285714286,
+        "are_two_model_versions": true,
+        "mixing_rule": "these are two models, not two settings of one. A study declares which it uses and the emitted tape carries that version; blending them, or falling back from one to the other, would make 'the model said X' meaningless (guide L05.2)"
+      },
+      {
+        "lambda_jump": 6.0,
+        "endpoint_dp": {
+          "model_version_suffix": "endpoint_dp",
+          "states": [
+            0,
+            0,
+            1,
+            1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            2,
+            0,
+            2,
+            0
+          ],
+          "switches": 21,
+          "uses_history": true,
+          "uses_jump_penalty": true
+        },
+        "greedy": {
+          "model_version_suffix": "greedy",
+          "states": [
+            0,
+            0,
+            1,
+            2,
+            2,
+            0,
+            1,
+            0,
+            2,
+            2,
+            0,
+            0,
+            0,
+            2,
+            0,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1,
+            1,
+            1,
+            2,
+            0,
+            2,
+            1,
+            0,
+            1,
+            2,
+            1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            2,
+            1,
+            1,
+            1,
+            2,
+            2,
+            0,
+            1,
+            2,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "switches": 204,
+          "uses_history": false,
+          "uses_jump_penalty": false
+        },
+        "label_agreement": 0.3333333333333333,
+        "identical": false,
+        "switch_ratio_greedy_over_dp": 9.714285714285714,
+        "are_two_model_versions": true,
+        "mixing_rule": "these are two models, not two settings of one. A study declares which it uses and the emitted tape carries that version; blending them, or falling back from one to the other, would make 'the model said X' meaningless (guide L05.2)"
+      }
+    ],
+    "greedy_always_switches_at_least_as_much": true,
+    "never_identical_at_a_real_penalty": true,
+    "reading": "the jump penalty is exactly what separates them: at lambda_J = 0 the DP reduces to greedy, and as lambda_J grows the DP holds states the greedy labeller abandons. Reporting one and calling it the other would misstate how often the provider changed its mind"
+  },
+  "m0_comparator": {
+    "schema": "crypto_regime_lab.m0_comparator.v1",
+    "m0": {
+      "model_id": "M0",
+      "role": "explainable control (guide 8.1)",
+      "states": [
+        "low_vol",
+        "mid_vol",
+        "high_vol"
+      ],
+      "is_fallback_for_m1": false,
+      "fallback_note": "M0 is a comparator. It is never silently substituted when M1 reports UNKNOWN_STATE -- that would change models without a model transition event",
+      "naming_note": "these names describe the FEATURE the rule reads (realised volatility), not an outcome. They are not bull/neutral/bear (guide 8.1)",
+      "thresholds": {
+        "schema": "crypto_regime_lab.m0_thresholds.v1",
+        "quantiles": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "cuts": [
+          0.5938370311715518,
+          1.4012875628839703
+        ],
+        "train_n": 540,
+        "fitted_on": "training window only",
+        "rule": "thresholds are frozen with the model. Recomputing a quantile over the window being labelled would use that window's own future (guide 8.1 'threshold train-only')"
+      },
+      "switches": 504,
+      "agreement": 0.5466666666666666
+    },
+    "m1": {
+      "model_id": "M1_discrete_jump_model",
+      "switches": 22,
+      "agreement": 0.9833333333333333
+    },
+    "thresholds_fitted_on": "the first 60% of the world only, then frozen",
+    "m0_is_a_control_not_a_fallback": true,
+    "reading": "M0 reads one feature through frozen quantile cuts. Where M1 does better, the gain is attributable to using the whole feature vector with persistence; where it does not, the extra machinery bought nothing on this fixture"
+  },
+  "library_method_probe": {
+    "module": "quantbt",
+    "method": "volatility_regime_labels",
+    "status": "PRESENT",
+    "signature": "(returns: 'np.ndarray', regime_count: 'int' = 3, lookback: 'int' = 20) -> 'np.ndarray'",
+    "source_available": true,
+    "source_digest": "6f28072c9c7a3cf6",
+    "safe_to_call": false,
+    "rule": "presence is not semantics. A method is used only after its pinned source has been read and shown to implement the recurrence this lab specifies (guide L05.1); until then the lab uses its own verified implementation."
+  },
+  "exit_claim_limits": "these are TECHNICAL checks. A causal provider that passes them has a reproducible state vocabulary and nothing more; no predictive or financial value is claimed from fit loss, agreement with a simulator, or visually clean labels (guide L05 exit)",
+  "lab_run_id": "run-20260910T080539Z-db2b4009",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T08:05:48.170450+00:00"
+}

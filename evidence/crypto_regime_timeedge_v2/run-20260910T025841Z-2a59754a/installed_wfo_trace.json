@@ -1,0 +1,1716 @@
+{
+  "schema": "crypto_regime_lab.installed_wfo_trace.v1",
+  "modes": {
+    "schema": "crypto_regime_lab.installed_wfo_trace.v1",
+    "modes_declared": [
+      "none",
+      "mode_1_decay",
+      "mode_2_sbb",
+      "mode_3_flat_minima",
+      "mode_4_is_only_robust",
+      "mode_5_full_robust"
+    ],
+    "mode_metric_requirements": {
+      "none": [
+        "robust_decay"
+      ],
+      "mode_1_decay": [
+        "robust_decay"
+      ],
+      "mode_2_sbb": [
+        "robust_decay",
+        "mean_oos_sharpe"
+      ],
+      "mode_3_flat_minima": [
+        "robust_decay"
+      ],
+      "mode_4_is_only_robust": [
+        "is_only_robust"
+      ],
+      "mode_5_full_robust": [
+        "full_robust",
+        "full_plateau_robust",
+        "full_temporal_robust",
+        "full_best"
+      ]
+    },
+    "modes_that_ran": [
+      "none",
+      "mode_1_decay",
+      "mode_2_sbb",
+      "mode_3_flat_minima",
+      "mode_4_is_only_robust",
+      "mode_5_full_robust"
+    ],
+    "modes_that_failed": {},
+    "traces": {
+      "none": {
+        "mode": "none",
+        "metric": "robust_decay",
+        "ok": true,
+        "selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "trial_count": 1,
+        "fold_count": 3,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "none",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "robust_decay",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 2.2110806303163293,
+            "mean_is_sharpe": 2.2147021744800273,
+            "mean_oos_sharpe": 2.450693234217709,
+            "mean_decay": -0.2359910597376821,
+            "std_decay": 0.4792252078027592,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 10,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      },
+      "mode_1_decay": {
+        "mode": "mode_1_decay",
+        "metric": "robust_decay",
+        "ok": true,
+        "selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "trial_count": 14,
+        "fold_count": 3,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "mode_1_decay",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "robust_decay",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 0.0860094094296356,
+            "mean_is_sharpe": 0.0860094094296356,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 17,
+              "slow": 115,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 1,
+            "objective": 0.05528160843249954,
+            "mean_is_sharpe": 0.05528160843249954,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 30,
+              "slow": 75,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.7046308689692878,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 3,
+            "objective": 0.3870639503435805,
+            "mean_is_sharpe": 0.3870639503435805,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 5,
+              "slow": 105,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 4,
+            "objective": 0.22922560384378013,
+            "mean_is_sharpe": 0.22922560384378013,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 25,
+              "slow": 90,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 5,
+            "objective": 0.6364940702680223,
+            "mean_is_sharpe": 0.6364940702680223,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 120,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 6,
+            "objective": -0.026165954092829475,
+            "mean_is_sharpe": -0.026165954092829475,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 34,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 7,
+            "objective": 0.5626700390105563,
+            "mean_is_sharpe": 0.5626700390105563,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 9,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 8,
+            "objective": 0.15842112507985887,
+            "mean_is_sharpe": 0.15842112507985887,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 14,
+              "slow": 70,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 9,
+            "objective": -0.07946737678928907,
+            "mean_is_sharpe": -0.07946737678928907,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 19,
+              "slow": 40,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 10,
+            "objective": 0.6305062022385098,
+            "mean_is_sharpe": 0.6305062022385098,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 12,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0783848901572277,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0800608364985718,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 1.320264410793668,
+            "mean_decay": -0.24187952063644017,
+            "std_decay": 0.48040714859019246,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 1.005389567672709,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 1.069445112527036,
+            "mean_decay": -0.36481424355774833,
+            "std_decay": 0.1281110897086537,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      },
+      "mode_2_sbb": {
+        "mode": "mode_2_sbb",
+        "metric": "robust_decay",
+        "ok": true,
+        "selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "trial_count": 14,
+        "fold_count": 3,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "mode_2_sbb",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "robust_decay",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 0.061063234223110066,
+            "mean_is_sharpe": 0.0860094094296356,
+            "mean_oos_sharpe": 0.09045644688323047,
+            "mean_decay": -0.004447037453594861,
+            "std_decay": 0.009316058306474658,
+            "pruned": false,
+            "params": {
+              "fast": 17,
+              "slow": 115,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 1,
+            "objective": 0.014464016780346152,
+            "mean_is_sharpe": 0.05528160843249954,
+            "mean_oos_sharpe": 0.0479920570362968,
+            "mean_decay": 0.007289551396202738,
+            "std_decay": 0.014462081736687364,
+            "pruned": false,
+            "params": {
+              "fast": 30,
+              "slow": 75,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.694310028009099,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 0.7205174610978721,
+            "mean_decay": -0.015886592128584415,
+            "std_decay": 0.02013686310417369,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 3,
+            "objective": 0.3479467128952045,
+            "mean_is_sharpe": 0.3870639503435805,
+            "mean_oos_sharpe": 0.3801902615913422,
+            "mean_decay": 0.006873688752238223,
+            "std_decay": 0.012807421185144144,
+            "pruned": false,
+            "params": {
+              "fast": 5,
+              "slow": 105,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 4,
+            "objective": 0.19698069237245566,
+            "mean_is_sharpe": 0.22922560384378013,
+            "mean_oos_sharpe": 0.22649362369103318,
+            "mean_decay": 0.0027319801527470045,
+            "std_decay": 0.014107235781876322,
+            "pruned": false,
+            "params": {
+              "fast": 25,
+              "slow": 90,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 5,
+            "objective": 0.598095142767837,
+            "mean_is_sharpe": 0.6364940702680223,
+            "mean_oos_sharpe": 0.6284545226241514,
+            "mean_decay": 0.008039547643870862,
+            "std_decay": 0.0073786044437535,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 120,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 6,
+            "objective": -0.0443495965325712,
+            "mean_is_sharpe": -0.026165954092829475,
+            "mean_oos_sharpe": -0.014651956349404284,
+            "mean_decay": -0.01151399774342519,
+            "std_decay": 0.01709418573557569,
+            "pruned": false,
+            "params": {
+              "fast": 34,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 7,
+            "objective": 0.4940681074986121,
+            "mean_is_sharpe": 0.5626700390105563,
+            "mean_oos_sharpe": 0.5335612804333092,
+            "mean_decay": 0.029108758577247058,
+            "std_decay": 0.0220288023417333,
+            "pruned": false,
+            "params": {
+              "fast": 9,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 8,
+            "objective": 0.13168265692030715,
+            "mean_is_sharpe": 0.15842112507985887,
+            "mean_oos_sharpe": 0.15991157531023145,
+            "mean_decay": -0.0014904502303725586,
+            "std_decay": 0.009910980100566548,
+            "pruned": false,
+            "params": {
+              "fast": 14,
+              "slow": 70,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 9,
+            "objective": -0.12179763406000829,
+            "mean_is_sharpe": -0.07946737678928907,
+            "mean_oos_sharpe": -0.08679124531504738,
+            "mean_decay": 0.007323868525758312,
+            "std_decay": 0.006865508207785764,
+            "pruned": false,
+            "params": {
+              "fast": 19,
+              "slow": 40,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 10,
+            "objective": 0.5842594387054333,
+            "mean_is_sharpe": 0.6305062022385098,
+            "mean_oos_sharpe": 0.617129512969207,
+            "mean_decay": 0.013376689269302763,
+            "std_decay": 0.018864838118989494,
+            "pruned": false,
+            "params": {
+              "fast": 12,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0509150942474292,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 1.0770077696743747,
+            "mean_decay": 0.0013771204828532113,
+            "std_decay": 0.010284820588680623,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0800608364985718,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 1.320264410793668,
+            "mean_decay": -0.24187952063644017,
+            "std_decay": 0.48040714859019246,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 1.005389567672709,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 1.069445112527036,
+            "mean_decay": -0.36481424355774833,
+            "std_decay": 0.1281110897086537,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      },
+      "mode_3_flat_minima": {
+        "mode": "mode_3_flat_minima",
+        "metric": "robust_decay",
+        "ok": true,
+        "selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "trial_count": 14,
+        "fold_count": 3,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "mode_3_flat_minima",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "robust_decay",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 0.0860094094296356,
+            "mean_is_sharpe": 0.0860094094296356,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 17,
+              "slow": 115,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 1,
+            "objective": 0.05528160843249954,
+            "mean_is_sharpe": 0.05528160843249954,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 30,
+              "slow": 75,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.7046308689692878,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 3,
+            "objective": 0.3870639503435805,
+            "mean_is_sharpe": 0.3870639503435805,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 5,
+              "slow": 105,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 4,
+            "objective": 0.22922560384378013,
+            "mean_is_sharpe": 0.22922560384378013,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 25,
+              "slow": 90,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 5,
+            "objective": 0.6364940702680223,
+            "mean_is_sharpe": 0.6364940702680223,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 120,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 6,
+            "objective": -0.026165954092829475,
+            "mean_is_sharpe": -0.026165954092829475,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 34,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 7,
+            "objective": 0.5626700390105563,
+            "mean_is_sharpe": 0.5626700390105563,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 9,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 8,
+            "objective": 0.15842112507985887,
+            "mean_is_sharpe": 0.15842112507985887,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 14,
+              "slow": 70,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 9,
+            "objective": -0.07946737678928907,
+            "mean_is_sharpe": -0.07946737678928907,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 19,
+              "slow": 40,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 10,
+            "objective": 0.6305062022385098,
+            "mean_is_sharpe": 0.6305062022385098,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 12,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0783848901572277,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0800608364985718,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 1.320264410793668,
+            "mean_decay": -0.24187952063644017,
+            "std_decay": 0.48040714859019246,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 1.005389567672709,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 1.069445112527036,
+            "mean_decay": -0.36481424355774833,
+            "std_decay": 0.1281110897086537,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      },
+      "mode_4_is_only_robust": {
+        "mode": "mode_4_is_only_robust",
+        "metric": "is_only_robust",
+        "ok": true,
+        "selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "trial_count": 14,
+        "fold_count": 3,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "is_only_robust",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 0.0860094094296356,
+            "mean_is_sharpe": 0.0860094094296356,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 17,
+              "slow": 115,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 1,
+            "objective": 0.05528160843249954,
+            "mean_is_sharpe": 0.05528160843249954,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 30,
+              "slow": 75,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.7046308689692878,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 3,
+            "objective": 0.3870639503435805,
+            "mean_is_sharpe": 0.3870639503435805,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 5,
+              "slow": 105,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 4,
+            "objective": 0.22922560384378013,
+            "mean_is_sharpe": 0.22922560384378013,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 25,
+              "slow": 90,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 5,
+            "objective": 0.6364940702680223,
+            "mean_is_sharpe": 0.6364940702680223,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 120,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 6,
+            "objective": -0.026165954092829475,
+            "mean_is_sharpe": -0.026165954092829475,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 34,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 7,
+            "objective": 0.5626700390105563,
+            "mean_is_sharpe": 0.5626700390105563,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 9,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 8,
+            "objective": 0.15842112507985887,
+            "mean_is_sharpe": 0.15842112507985887,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 14,
+              "slow": 70,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 9,
+            "objective": -0.07946737678928907,
+            "mean_is_sharpe": -0.07946737678928907,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 19,
+              "slow": 40,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 10,
+            "objective": 0.6305062022385098,
+            "mean_is_sharpe": 0.6305062022385098,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 12,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0783848901572277,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.0800608364985718,
+            "mean_is_sharpe": 1.0783848901572277,
+            "mean_oos_sharpe": 1.320264410793668,
+            "mean_decay": -0.24187952063644017,
+            "std_decay": 0.48040714859019246,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 50,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 1.005389567672709,
+            "mean_is_sharpe": 0.7046308689692878,
+            "mean_oos_sharpe": 1.069445112527036,
+            "mean_decay": -0.36481424355774833,
+            "std_decay": 0.1281110897086537,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      },
+      "mode_5_full_robust": {
+        "mode": "mode_5_full_robust",
+        "metric": "full_robust",
+        "ok": true,
+        "selected_params": {
+          "fast": 11,
+          "slow": 10,
+          "dev": 50
+        },
+        "trial_count": 15,
+        "fold_count": 1,
+        "config_trace": {
+          "split_frequency": "quarterly",
+          "window_mode": "expanding",
+          "optimization_mode": "mode_5_full_robust",
+          "optimization_schedule": "global",
+          "fold_account_policy": "carry_position",
+          "random_seed": 42,
+          "top_is_fraction": 0.1,
+          "top_is_k": null,
+          "candidate_selection_metric": "full_robust",
+          "sbb_samples": 256,
+          "sbb_block_length": 20,
+          "plateau_quantile": 0.25,
+          "dispersion_penalty": 0.5,
+          "temporal_weight": 0.65,
+          "plateau_weight": 0.35,
+          "use_bootstrap_penalty": false,
+          "use_complexity_penalty": false,
+          "scoring_backend": "proxy",
+          "numba_enabled": true
+        },
+        "selection_metadata": {},
+        "trial_records": [
+          {
+            "trial_id": 0,
+            "objective": 0.05343315830778548,
+            "mean_is_sharpe": 0.05343315830778548,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 17,
+              "slow": 115,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 1,
+            "objective": 0.11469350040804736,
+            "mean_is_sharpe": 0.11469350040804736,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 30,
+              "slow": 75,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.7565859868759115,
+            "mean_is_sharpe": 0.7565859868759115,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 3,
+            "objective": 0.4056745427425403,
+            "mean_is_sharpe": 0.4056745427425403,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 5,
+              "slow": 105,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 4,
+            "objective": 0.23971895354418954,
+            "mean_is_sharpe": 0.23971895354418954,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 25,
+              "slow": 90,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 5,
+            "objective": 0.6573956120773264,
+            "mean_is_sharpe": 0.6573956120773264,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 3,
+              "slow": 120,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 6,
+            "objective": 0.019039429857540757,
+            "mean_is_sharpe": 0.019039429857540757,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 34,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 7,
+            "objective": 0.6221067478165346,
+            "mean_is_sharpe": 0.6221067478165346,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 9,
+              "slow": 30,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 8,
+            "objective": 0.17929119156985024,
+            "mean_is_sharpe": 0.17929119156985024,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 14,
+              "slow": 70,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 9,
+            "objective": 0.04445976720486494,
+            "mean_is_sharpe": 0.04445976720486494,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 19,
+              "slow": 40,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 10,
+            "objective": 0.717462837436937,
+            "mean_is_sharpe": 0.717462837436937,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 12,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.011925119549886,
+            "mean_is_sharpe": 1.011925119549886,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 11,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.011925119549886,
+            "mean_is_sharpe": 1.011925119549886,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 11,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 11,
+            "objective": 1.011925119549886,
+            "mean_is_sharpe": 1.011925119549886,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 11,
+              "slow": 10,
+              "dev": 50
+            }
+          },
+          {
+            "trial_id": 2,
+            "objective": 0.7565859868759115,
+            "mean_is_sharpe": 0.7565859868759115,
+            "mean_oos_sharpe": 0.0,
+            "mean_decay": 0.0,
+            "std_decay": 0.0,
+            "pruned": false,
+            "params": {
+              "fast": 8,
+              "slow": 25,
+              "dev": 50
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    "oos_usage": {
+      "none": {
+        "mode": "none",
+        "metric": "robust_decay",
+        "schedule": "global",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": true,
+        "uses_oos_for_selection": false,
+        "arm_label": "A_causal",
+        "trial_count": 1,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 2.450693234217709,
+        "mutated_max_abs_oos_sharpe": 2.323931382378059,
+        "interpretation": "the chosen parameters did not move when only the out-of-sample segment changed, so this mode's selection is in-sample only on this fixture"
+      },
+      "mode_1_decay": {
+        "mode": "mode_1_decay",
+        "metric": "robust_decay",
+        "schedule": "global",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": false,
+        "uses_oos_for_selection": true,
+        "arm_label": "A_legacy_selection_adjusted",
+        "trial_count": 14,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 1.320264410793668,
+        "mutated_max_abs_oos_sharpe": 2.323931382378059,
+        "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+      },
+      "mode_2_sbb": {
+        "mode": "mode_2_sbb",
+        "metric": "robust_decay",
+        "schedule": "global",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": false,
+        "uses_oos_for_selection": true,
+        "arm_label": "A_legacy_selection_adjusted",
+        "trial_count": 14,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 1.320264410793668,
+        "mutated_max_abs_oos_sharpe": 2.323931382378059,
+        "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+      },
+      "mode_3_flat_minima": {
+        "mode": "mode_3_flat_minima",
+        "metric": "robust_decay",
+        "schedule": "global",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": false,
+        "uses_oos_for_selection": true,
+        "arm_label": "A_legacy_selection_adjusted",
+        "trial_count": 14,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 1.320264410793668,
+        "mutated_max_abs_oos_sharpe": 2.323931382378059,
+        "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+      },
+      "mode_4_is_only_robust": {
+        "mode": "mode_4_is_only_robust",
+        "metric": "is_only_robust",
+        "schedule": "global",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 3,
+          "slow": 50,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 3,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": false,
+        "uses_oos_for_selection": true,
+        "arm_label": "A_legacy_selection_adjusted",
+        "trial_count": 14,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 1.320264410793668,
+        "mutated_max_abs_oos_sharpe": 2.323931382378059,
+        "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+      },
+      "mode_5_full_robust": {
+        "mode": "mode_5_full_robust",
+        "metric": "full_robust",
+        "schedule": "global",
+        "status": "INCONCLUSIVE_MUTATION_HAD_NO_EFFECT",
+        "baseline_max_abs_oos_sharpe": 0.0,
+        "mutated_max_abs_oos_sharpe": 0.0,
+        "detail": "the OOS scores did not move, so the mutation could not have changed a selection either way; this run is not evidence about OOS usage"
+      },
+      "mode_1_decay@per_fold_decay": {
+        "mode": "mode_1_decay",
+        "metric": "robust_decay",
+        "schedule": "per_fold_decay",
+        "status": "MEASURED",
+        "baseline_selected_params": {
+          "fast": 4,
+          "slow": 10,
+          "dev": 50
+        },
+        "mutated_selected_params": {
+          "fast": 4,
+          "slow": 10,
+          "dev": 50
+        },
+        "selection_unchanged_after_oos_mutation": true,
+        "uses_oos_for_selection": false,
+        "arm_label": "A_causal",
+        "trial_count": 42,
+        "fold_count": 3,
+        "mutation_effective": true,
+        "baseline_max_abs_oos_sharpe": 2.649248741608326,
+        "mutated_max_abs_oos_sharpe": 1.8733279443908446,
+        "interpretation": "the chosen parameters did not move when only the out-of-sample segment changed, so this mode's selection is in-sample only on this fixture"
+      },
+      "mode_1_decay@per_fold_causal": {
+        "mode": "mode_1_decay",
+        "metric": "robust_decay",
+        "schedule": "per_fold_causal",
+        "status": "INCONCLUSIVE_MUTATION_HAD_NO_EFFECT",
+        "baseline_max_abs_oos_sharpe": 2.9803143945696684,
+        "mutated_max_abs_oos_sharpe": 2.9803143945696684,
+        "detail": "the OOS scores did not move, so the mutation could not have changed a selection either way; this run is not evidence about OOS usage"
+      }
+    },
+    "modes_using_oos_for_selection": [
+      "mode_1_decay",
+      "mode_2_sbb",
+      "mode_3_flat_minima",
+      "mode_4_is_only_robust"
+    ],
+    "strategy_receives_full_frame": true,
+    "strategy_contract_note": "the engine hands the strategy the WHOLE frame plus train_index/test_index, so a strategy that ignores those indices can read OOS bars. Causality is the strategy's responsibility here, and the lab's adapters enforce it themselves.",
+    "selector_families": {
+      "CandidateSelector": [
+        "best",
+        "feasible_best",
+        "pareto_first",
+        "robust_plateau"
+      ],
+      "wfo_record_selectors": [
+        "select_flat_minima_record",
+        "select_is_only_robust_record",
+        "select_is_plateau_robust_record",
+        "select_full_sample_robust_record"
+      ],
+      "note": "two distinct families exist; a mode does not necessarily call the generic one"
+    }
+  },
+  "oos_usage_probes": {
+    "none": {
+      "mode": "none",
+      "metric": "robust_decay",
+      "schedule": "global",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": true,
+      "uses_oos_for_selection": false,
+      "arm_label": "A_causal",
+      "trial_count": 1,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 2.450693234217709,
+      "mutated_max_abs_oos_sharpe": 2.323931382378059,
+      "interpretation": "the chosen parameters did not move when only the out-of-sample segment changed, so this mode's selection is in-sample only on this fixture"
+    },
+    "mode_1_decay": {
+      "mode": "mode_1_decay",
+      "metric": "robust_decay",
+      "schedule": "global",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": false,
+      "uses_oos_for_selection": true,
+      "arm_label": "A_legacy_selection_adjusted",
+      "trial_count": 14,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 1.320264410793668,
+      "mutated_max_abs_oos_sharpe": 2.323931382378059,
+      "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+    },
+    "mode_2_sbb": {
+      "mode": "mode_2_sbb",
+      "metric": "robust_decay",
+      "schedule": "global",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": false,
+      "uses_oos_for_selection": true,
+      "arm_label": "A_legacy_selection_adjusted",
+      "trial_count": 14,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 1.320264410793668,
+      "mutated_max_abs_oos_sharpe": 2.323931382378059,
+      "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+    },
+    "mode_3_flat_minima": {
+      "mode": "mode_3_flat_minima",
+      "metric": "robust_decay",
+      "schedule": "global",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": false,
+      "uses_oos_for_selection": true,
+      "arm_label": "A_legacy_selection_adjusted",
+      "trial_count": 14,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 1.320264410793668,
+      "mutated_max_abs_oos_sharpe": 2.323931382378059,
+      "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+    },
+    "mode_4_is_only_robust": {
+      "mode": "mode_4_is_only_robust",
+      "metric": "is_only_robust",
+      "schedule": "global",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": false,
+      "uses_oos_for_selection": true,
+      "arm_label": "A_legacy_selection_adjusted",
+      "trial_count": 14,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 1.320264410793668,
+      "mutated_max_abs_oos_sharpe": 2.323931382378059,
+      "interpretation": "the chosen parameters MOVED when only the out-of-sample segment changed: this mode consumes OOS information to select, so an arm using it must be labelled A_legacy_selection_adjusted and never reported as an untouched baseline (guide 10.1)"
+    },
+    "mode_5_full_robust": {
+      "mode": "mode_5_full_robust",
+      "metric": "full_robust",
+      "schedule": "global",
+      "status": "INCONCLUSIVE_MUTATION_HAD_NO_EFFECT",
+      "baseline_max_abs_oos_sharpe": 0.0,
+      "mutated_max_abs_oos_sharpe": 0.0,
+      "detail": "the OOS scores did not move, so the mutation could not have changed a selection either way; this run is not evidence about OOS usage"
+    },
+    "mode_1_decay@per_fold_decay": {
+      "mode": "mode_1_decay",
+      "metric": "robust_decay",
+      "schedule": "per_fold_decay",
+      "status": "MEASURED",
+      "baseline_selected_params": {
+        "fast": 4,
+        "slow": 10,
+        "dev": 50
+      },
+      "mutated_selected_params": {
+        "fast": 4,
+        "slow": 10,
+        "dev": 50
+      },
+      "selection_unchanged_after_oos_mutation": true,
+      "uses_oos_for_selection": false,
+      "arm_label": "A_causal",
+      "trial_count": 42,
+      "fold_count": 3,
+      "mutation_effective": true,
+      "baseline_max_abs_oos_sharpe": 2.649248741608326,
+      "mutated_max_abs_oos_sharpe": 1.8733279443908446,
+      "interpretation": "the chosen parameters did not move when only the out-of-sample segment changed, so this mode's selection is in-sample only on this fixture"
+    },
+    "mode_1_decay@per_fold_causal": {
+      "mode": "mode_1_decay",
+      "metric": "robust_decay",
+      "schedule": "per_fold_causal",
+      "status": "INCONCLUSIVE_MUTATION_HAD_NO_EFFECT",
+      "baseline_max_abs_oos_sharpe": 2.9803143945696684,
+      "mutated_max_abs_oos_sharpe": 2.9803143945696684,
+      "detail": "the OOS scores did not move, so the mutation could not have changed a selection either way; this run is not evidence about OOS usage"
+    }
+  },
+  "search_behaviour": {
+    "none": {
+      "trial_count": 1,
+      "fold_count": 3,
+      "selected_params": {
+        "fast": 3,
+        "slow": 10,
+        "dev": 50
+      },
+      "searched": false
+    },
+    "mode_1_decay": {
+      "trial_count": 14,
+      "fold_count": 3,
+      "selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "searched": true
+    },
+    "mode_2_sbb": {
+      "trial_count": 14,
+      "fold_count": 3,
+      "selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "searched": true
+    },
+    "mode_3_flat_minima": {
+      "trial_count": 14,
+      "fold_count": 3,
+      "selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "searched": true
+    },
+    "mode_4_is_only_robust": {
+      "trial_count": 14,
+      "fold_count": 3,
+      "selected_params": {
+        "fast": 3,
+        "slow": 50,
+        "dev": 50
+      },
+      "searched": true
+    },
+    "mode_5_full_robust": {
+      "trial_count": 15,
+      "fold_count": 1,
+      "selected_params": {
+        "fast": 11,
+        "slow": 10,
+        "dev": 50
+      },
+      "searched": true
+    }
+  },
+  "search_finding": "optimization_mode='none' -- the public default -- ran ONE trial on this fixture and simply evaluated the supplied parameters, while every other mode ran 14-15. So the default route performs no parameter search; a selector only exists once a mode is chosen. Arm A therefore instantiates the rule the installed code applies to trial records (_select_oos_candidate_record under the default candidate_selection_metric), and the lab supplies the trial records.",
+  "mode_5_note": "mode_5_full_robust collapsed to a single fold: it is full-sample calibration, not walk-forward, and its selection is not an out-of-sample claim.",
+  "public_route_default": {
+    "optimization_mode": "none",
+    "candidate_selection_metric": "robust_decay",
+    "resolved_by": "quantbt.walkforward._select_oos_candidate_record",
+    "rule": "max(records, key=record.objective)",
+    "meaning": "the default public route picks the best in-sample objective; the robust selectors engage only when a mode or metric asks for them"
+  },
+  "lab_run_id": "run-20260910T025841Z-2a59754a",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T02:58:59.695864+00:00"
+}

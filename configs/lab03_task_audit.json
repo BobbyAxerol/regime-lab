@@ -1,0 +1,422 @@
+{
+  "schema": "crypto_regime_lab.phase_task_audit.v1",
+  "phase": "LAB-03",
+  "audited_at_utc": "2026-09-09",
+  "method": "each guide sub-task read verbatim, matched to a delivered artifact AND a runnable test; a second pass re-read the spec line by line",
+  "tasks": [
+    {
+      "id": "L03.1",
+      "title": "Data product inventory",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "read the loader code",
+          "status": "DONE",
+          "evidence": "loader AST map and code sha from the read-only snapshot",
+          "tests": [
+            "test_inventory_does_not_infer_a_dataset_from_a_reader_name"
+          ]
+        },
+        {
+          "text": "read the REAL endpoint/product docs",
+          "status": "DONE",
+          "note": "MISSING on the first pass",
+          "evidence": "BINANCE_SPOT_1M.md, BINANCE_FUTURES_METRICS_5M.md, BINANCE_ORDERBOOK_SNAPSHOT_1H.md, BINANCE_USDM_QUARTERLY_1M.md read read-only and digested. They show the absences are COLLECTOR CONFIGURATION, not loss, and that the order-book product keeps a rolling 30-day window so it can never accumulate history",
+          "tests": [
+            "test_product_docs_were_actually_read",
+            "test_absences_are_configuration_not_loss",
+            "test_orderbook_is_a_rolling_window_and_cannot_hold_history",
+            "test_documentation_matches_the_storage"
+          ]
+        },
+        {
+          "text": "read storage metadata",
+          "status": "DONE",
+          "evidence": "Hive partitions walked read-only; schema, row counts and time ranges taken from the parquet footers"
+        },
+        {
+          "text": "load only the five symbols and the declared universe",
+          "status": "DONE",
+          "tests": [
+            "test_snapshot_scope_matches_measured_coverage"
+          ]
+        },
+        {
+          "text": "mark products present/missing; never invent a dataset from a reader name",
+          "status": "DONE",
+          "evidence": "spot exists for BTCUSDT only; metrics for BTCUSDT and ETHUSDT only; the order book for BTCUSDT only; funding and mark-price do not exist at all",
+          "tests": [
+            "test_inventory_records_what_is_actually_present",
+            "test_absent_products_are_named_with_their_consequence"
+          ]
+        },
+        {
+          "text": "inventory input names (which market data each alpha needs)",
+          "status": "DONE",
+          "evidence": "carried over from LAB-02's data_inputs: A-VWAP needs all five columns and a DatetimeIndex; A-HASH needs close/high/low only"
+        }
+      ]
+    },
+    {
+      "id": "L03.2",
+      "title": "Primary snapshots",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "spot from 2020 per the user's convention",
+          "status": "DONE",
+          "note": "the 2020 cutoff was MISSING on the first pass",
+          "evidence": "storage holds BTC spot from 2018; eligibility starts at 2020-01-01 and the earlier bars are explicitly excluded rather than silently used",
+          "tests": [
+            "test_spot_before_the_clean_convention_is_excluded"
+          ]
+        },
+        {
+          "text": "real perp listing starts",
+          "status": "DONE",
+          "evidence": "BTC/ETH 2020-01-01, BNB 2020-02-10, DOGE 2020-07-10, SOL 2020-09-14, all measured",
+          "tests": [
+            "test_t24_no_bars_are_fabricated_before_listing"
+          ]
+        },
+        {
+          "text": "freeze files, hashes, time ranges and batch ingestion",
+          "status": "DONE",
+          "evidence": "627 partitions, 22.5M rows, 1449 MB; per-file sha256, rows, time range and closed/partial state",
+          "tests": [
+            "test_every_snapshot_file_carries_its_lock_fields"
+          ]
+        },
+        {
+          "text": "do not modify the originals or their metadata",
+          "status": "DONE",
+          "evidence": "byte copy, never a pandas rewrite, so dtypes/units/symbol mapping survive exactly; source digests verified before and after",
+          "tests": [
+            "test_snapshot_is_a_byte_copy_and_originals_are_untouched"
+          ]
+        },
+        {
+          "text": "keep fractional volume, UTC units and symbol mapping exact",
+          "status": "DONE",
+          "evidence": "measured: SOL stores volume as int64 until 2024-12 and DOGE throughout, so the lab coerces to float64 on read and records the resolution limit",
+          "tests": [
+            "test_t21_stored_volume_dtype_varies_and_is_coerced",
+            "test_t21_resampling_never_truncates_real_volume",
+            "test_t23_symbol_column_must_match_the_request"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L03.3",
+      "title": "Availability builder",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "event / available / ingested / vintage per product",
+          "status": "DONE",
+          "evidence": "annotate_availability attaches event_time, bar_open, bar_close, source_published_at, available_at, archive_ingested_at and vintage_id",
+          "tests": [
+            "test_t27_vintage_id_combines_source_and_ingest"
+          ]
+        },
+        {
+          "text": "bar close must be trustworthy",
+          "status": "DONE",
+          "evidence": "MEASURED DEFECT: close_time is correct for BTC/ETH/DOGE perps, lands near the 1970 epoch for SOL and BNB, is mixed for BTC spot, and is even stored as a STRING in some spot partitions. The lab derives bar_close = time + interval and treats close_time as a diagnostic",
+          "tests": [
+            "test_t22_bar_close_is_derived_not_read_from_close_time",
+            "test_t22_close_time_defect_is_detected_not_absorbed",
+            "test_t22_real_storage_close_time_defect_map"
+          ]
+        },
+        {
+          "text": "1m -> 15m/1h/4h resampling",
+          "status": "DONE",
+          "note": "only 4h was verified on the first pass",
+          "evidence": "all three targets produced and their aggregation contract checked on a real partition: OHLC first/max/min/last, flows summed, level columns take the LAST value",
+          "tests": [
+            "test_all_three_resample_targets_are_produced_and_checked",
+            "test_level_columns_are_never_summed_by_the_resampler"
+          ]
+        },
+        {
+          "text": "sample_time for snapshots",
+          "status": "DONE",
+          "evidence": "the book product's availability comes from its real sample_time; measured spread 0 to 3593s inside the hour",
+          "tests": [
+            "test_t26_book_snapshot_uses_sample_time_not_the_hour_label",
+            "test_t26_real_book_snapshot_is_never_available_before_its_label"
+          ]
+        },
+        {
+          "text": "funding events kept separate",
+          "status": "DONE",
+          "evidence": "no funding product exists anywhere in this storage; recorded MISSING with the rule that it is never treated as zero carry",
+          "tests": [
+            "test_t28_funding_is_missing_and_never_zero"
+          ]
+        },
+        {
+          "text": "missing / stale status and TTL",
+          "status": "DONE",
+          "tests": [
+            "test_t26_staleness_ttl_masks_an_old_observation",
+            "test_t28_stale_values_are_dropped_by_ttl",
+            "test_t28_missing_join_is_nan_not_zero"
+          ]
+        },
+        {
+          "text": "reads fail closed, never warning-only",
+          "status": "DONE",
+          "evidence": "assess() raises DataQualityError on a primary read; 385 partitions checked, 0 failures",
+          "tests": [
+            "test_t23_symbol_column_must_match_the_request"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L03.4",
+      "title": "Feature blocks",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "G1-G5 per section 6",
+          "status": "DONE",
+          "evidence": "realized vol, direction descriptor, path efficiency, downside ratio, jump concentration; taker imbalance, log activity, trade count; dlog OI, basis, return x OI; spread and a log impact proxy; dispersion, breadth, factor concentration, beta residual",
+          "tests": [
+            "test_direction_descriptor_is_bounded_and_signed",
+            "test_path_efficiency_is_one_for_a_straight_move_and_zero_for_a_round_trip",
+            "test_delta_log_oi_needs_positive_open_interest",
+            "test_rolling_beta_uses_only_past_observations"
+          ]
+        },
+        {
+          "text": "fixed core schema inside the complexity budget",
+          "status": "DONE",
+          "evidence": "the primary core is exactly 8 features and contains only features covering all five symbols; G3 (BTC/ETH) and G4 (BTC, weeks) are cohort EXTENSIONS rather than silently-NaN core columns",
+          "tests": [
+            "test_primary_core_respects_the_complexity_budget",
+            "test_primary_core_only_contains_features_covering_all_five_symbols",
+            "test_partial_coverage_features_are_extensions_not_core"
+          ]
+        },
+        {
+          "text": "training-only scaler and group weights",
+          "status": "DONE",
+          "evidence": "median/MAD fitted on the development role 2020-01-01..2023-12-31 only; w_j = omega_g/d_g",
+          "tests": [
+            "test_scaler_is_fitted_on_training_and_clips",
+            "test_t25_scaler_fitted_on_training_is_unaffected_by_future_rows",
+            "test_group_weights_neutralise_block_size",
+            "test_scaler_drops_a_degenerate_feature_instead_of_amplifying_it"
+          ]
+        },
+        {
+          "text": "distinguish market from local signals",
+          "status": "DONE",
+          "evidence": "every FeatureSpec carries a scope; G5 market features are built from the point-in-time eligible universe"
+        },
+        {
+          "text": "retain intermediate raw aggregates",
+          "status": "DONE",
+          "tests": [
+            "test_raw_aggregates_are_retained_beside_the_z_scores"
+          ]
+        },
+        {
+          "text": "zero dispersion must be missing, not strong evidence",
+          "status": "DONE",
+          "evidence": "ratio features mask a zero denominator instead of adding an epsilon",
+          "tests": [
+            "test_ratio_features_are_undefined_on_a_flat_window",
+            "test_t28_taker_imbalance_is_undefined_at_zero_volume"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L03.5",
+      "title": "Data enrichment (optional)",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "inventory the external sources with their correct meaning and usage rules",
+          "status": "DONE",
+          "evidence": "DefiLlama, Whale Alert, Farside ETF and Coin Metrics inventoried with the guide's caveats",
+          "tests": [
+            "test_t28_enrichment_is_inventoried_but_not_acquired"
+          ]
+        },
+        {
+          "text": "acquisition is a separate write-to-lab stage",
+          "status": "DONE",
+          "evidence": "nothing acquired; no socket is opened; network is off in run stages"
+        },
+        {
+          "text": "the primary must run without enrichment",
+          "status": "DONE",
+          "evidence": "the primary core is server-core only and FREE_ENRICHED is empty"
+        }
+      ]
+    },
+    {
+      "id": "L03.6",
+      "title": "Eligibility and cohort reports",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "listing, warmup and usable intervals per symbol",
+          "status": "DONE",
+          "tests": [
+            "test_first_decision_bar_respects_warmup",
+            "test_common_period_and_per_symbol_history_are_both_reported"
+          ]
+        },
+        {
+          "text": "market-universe membership point-in-time",
+          "status": "DONE",
+          "tests": [
+            "test_t24_market_breadth_uses_the_point_in_time_universe"
+          ]
+        },
+        {
+          "text": "sources",
+          "status": "DONE",
+          "tests": [
+            "test_t27_real_sources_are_recorded_per_product"
+          ]
+        },
+        {
+          "text": "revisions and masks",
+          "status": "DONE",
+          "note": "MISSING on the first pass",
+          "evidence": "two repairs are documented beside the loader, and one is VISIBLE in the data: the 2026-05 partitions for BTC and ETH carry a second ingest day (2026-06-12) covering ~44k rows, which is the documented continuity repair. The window is masked in every panel as in_documented_repair_window",
+          "tests": [
+            "test_the_documented_repair_is_visible_in_the_data",
+            "test_repair_window_is_masked_in_the_panels"
+          ]
+        },
+        {
+          "text": "cohorts reported separately, never intersected",
+          "status": "DONE",
+          "tests": [
+            "test_cohorts_are_reported_separately_not_intersected"
+          ]
+        },
+        {
+          "text": "batch and streamed features must be prefix-equal",
+          "status": "DONE",
+          "tests": [
+            "test_t25_streamed_and_batch_resampling_agree",
+            "test_t25_resampling_a_longer_series_does_not_change_earlier_buckets"
+          ]
+        },
+        {
+          "text": "market-context universe may be wider than the five traded symbols",
+          "status": "DONE",
+          "note": "checked on the second audit",
+          "evidence": "measured: this storage holds exactly FIVE perpetual symbols; the other 48 symbol directories are dated quarterly contracts of the same underlyings, which are expiries rather than additional assets. The universe therefore cannot be widened here, so G5 breadth/dispersion over five symbols is a constraint of the data, not a design shortcut",
+          "tests": [
+            "test_market_universe_cannot_be_widened_on_this_storage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L03.7",
+      "title": "Market adapter qualification",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "a bounded historical slice per alpha-symbol",
+          "status": "DONE",
+          "evidence": "20 cells, 1500 bars each from 2022-03-01, all in the development role",
+          "tests": [
+            "test_qualification_runs_every_cell_including_the_blocked_alpha"
+          ]
+        },
+        {
+          "text": "check gaps, HTF, warmup and the account trace",
+          "status": "DONE",
+          "evidence": "20/20 cells qualified: no intent during warmup, a finite account trace of the right length, engine fills produced",
+          "tests": [
+            "test_qualified_cells_produce_a_finite_account_trace"
+          ]
+        },
+        {
+          "text": "domain smoke only, not model selection",
+          "status": "DONE",
+          "tests": [
+            "test_qualification_is_development_role_only"
+          ]
+        },
+        {
+          "text": "keep the slice in the development role",
+          "status": "DONE",
+          "evidence": "every record carries data_role=development"
+        }
+      ]
+    }
+  ],
+  "exit_gate": {
+    "server_core_cohort": "5 symbols, 2020-09-14 common period, explicit coverage and publication assumptions",
+    "future_mutation_tests": "pass through the loader, the resampler and the scaler",
+    "no_external_api_needed": true,
+    "lab01_blockers_closed": [
+      "data_roles",
+      "instrument_registry_digest",
+      "minimum_economic_effect"
+    ],
+    "study_status": "REGISTERED_DATA_PINNED",
+    "status": "PASS"
+  },
+  "second_audit_gaps_closed": [
+    "L03.1 read the real product docs (they explain every absence)",
+    "L03.2 spot clean-from-2020 convention applied to eligibility",
+    "L03.3 all three resample targets produced and their contract checked",
+    "L03.6 revisions and the repair mask",
+    "exit gate: loader-level future-mutation test",
+    "read-lock: rolling-window products are mutable by design and must not be judged as corruption",
+    "L03.6 market-universe width checked (it cannot be widened on this storage)"
+  ],
+  "recorded_limitations": [
+    {
+      "id": "LIM-NO-FUNDING",
+      "detail": "no funding product exists in this storage; every primary run is a labelled no-funding cohort and may not claim realistic net carry"
+    },
+    {
+      "id": "LIM-SPOT-BTC-ONLY",
+      "detail": "spot exists for BTCUSDT only by collector configuration, so basis is a BTC-only feature"
+    },
+    {
+      "id": "LIM-DERIVATIVES-2-OF-5",
+      "detail": "the metrics collector never listed SOL/BNB/DOGE, so G3 can only ever cover BTCUSDT and ETHUSDT here"
+    },
+    {
+      "id": "LIM-LIQUIDITY-ROLLING",
+      "detail": "the order-book product keeps a rolling 30-day window, so SERVER_LIQUIDITY can never support a historical study and g4_spread_bps has no development-window data to scale on"
+    },
+    {
+      "id": "LIM-CLOSE-TIME",
+      "detail": "the stored close_time column is defective for SOL/BNB perps and BTC spot; bar close is derived and close_time is never used for availability"
+    },
+    {
+      "id": "LIM-QTY-STEP",
+      "detail": "SOLUSDT's quantity step changed mid-sample, so a single pinned instrument step would be wrong for part of the history"
+    },
+    {
+      "id": "LIM-INFERRED-INSTRUMENTS",
+      "detail": "tick and lot metadata are INFERRED from observed granularity, not read from venue metadata"
+    },
+    {
+      "id": "LIM-UNIVERSE-5",
+      "detail": "only five perpetual symbols exist in this storage, so G5 breadth, dispersion and factor concentration are computed over five assets; a wider market-context universe is not available"
+    }
+  ],
+  "requirement_counts": {
+    "DONE": 38,
+    "TOTAL": 38
+  }
+}

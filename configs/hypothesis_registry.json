@@ -1,0 +1,69 @@
+{
+  "schema": "crypto_regime_lab.hypothesis_registry.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "registered_at_utc": "2026-09-09T18:48:15.264005+00:00",
+  "primary_contrasts": [
+    {
+      "id": "H1",
+      "contrast": "B-A",
+      "question": "does independent-neighborhood selection beat the installed selector on the same calendar?"
+    },
+    {
+      "id": "H2",
+      "contrast": "C-A",
+      "question": "does regime-triggered refresh timing beat the frozen calendar with the same selector?"
+    },
+    {
+      "id": "H3",
+      "contrast": "D-B",
+      "question": "does regime timing add anything on top of the new selector?"
+    },
+    {
+      "id": "H4",
+      "contrast": "D-C",
+      "question": "does the new selector add anything on top of regime timing?"
+    },
+    {
+      "id": "H5",
+      "contrast": "(D-C)-(B-A)",
+      "question": "is there a selector x timing interaction?"
+    }
+  ],
+  "extension_contrasts": [
+    {
+      "id": "H6",
+      "contrast": "E-B",
+      "question": "does bank + response switching beat the same selector without switching?"
+    },
+    {
+      "id": "H7",
+      "contrast": "E-BANK_CALENDAR",
+      "question": "is the gain from regime information or merely from having a bank?"
+    }
+  ],
+  "conclusion_levels": [
+    "DESCRIPTIVE_VALUE",
+    "CONDITIONAL_RESPONSE_EVIDENCE",
+    "NET_PARAMETER_SELECTION_EDGE",
+    "NET_TIMING_EDGE",
+    "NET_POLICY_EDGE",
+    "NO_INCREMENTAL_VALUE",
+    "INCONCLUSIVE_SAMPLE",
+    "FAILED_VALIDITY"
+  ],
+  "falsification_commitments": [
+    "a negative or inconclusive result is a valid outcome and is published, not rerun until it wins",
+    "risk-only improvement is never recorded as a parameter-selection edge",
+    "zero switches because no challenger qualified is a valid technical pass",
+    "an alpha that cannot be certified is reported NOT_READY with null metrics, never PnL=0"
+  ],
+  "forbidden_claims": [
+    "regime work from full-sample-fit state correlation",
+    "no leakage from a .shift(1)",
+    "out-of-sample for full-set presets or a holdout used to tune policy",
+    "better on every dimension from one improved metric",
+    "Rust parity from close final equity",
+    "all four alphas certified from a successful AST parse",
+    "absolute production safety from path naming without OS-level isolation"
+  ]
+}

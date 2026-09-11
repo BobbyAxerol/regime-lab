@@ -1,0 +1,61 @@
+{
+  "schema": "crypto_regime_lab.freeze_holdout_policy.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "registered_at_utc": "2026-09-09T17:19:27.724187+00:00",
+  "two_stage_information": {
+    "discovery": {
+      "permits": [
+        "adapter repair and versioning",
+        "feature/model/K/penalty/cadence hypotheses",
+        "selector and probe-design tuning on development splits",
+        "inner chronological validation"
+      ],
+      "requires": "the full search history is retained, including negative and pruned runs"
+    },
+    "confirmation": {
+      "permits": [
+        "executing the frozen protocol exactly as registered"
+      ],
+      "forbids": [
+        "any code, config, cost, cadence or data-role change",
+        "re-running after seeing the outcome",
+        "human adjustment mid-run",
+        "choosing the confirmatory design from outer results"
+      ]
+    }
+  },
+  "freeze_procedure": {
+    "trigger": "LAB-08 exit with a selected confirmatory design",
+    "frozen_objects": [
+      "alpha adapter versions and digests",
+      "selector and probe design + radii",
+      "regime model K, lambda, features, scaler, cadence",
+      "response estimator bandwidth, shrinkage, gates",
+      "economic contract: capital, notional, leverage, fees, slippage, funding cohort",
+      "evaluation interval, seeds, compute budget"
+    ],
+    "freeze_artifact": "configs/confirmation_spec.json (written at LAB-08 exit, absent until then)",
+    "validator_rule": "a study may not move to FROZEN while any required field is null"
+  },
+  "holdout_status": {
+    "claim_level": "RETROSPECTIVE_NESTED_CAUSAL_RESEARCH",
+    "untouched_holdout_exists": false,
+    "reason": "the supplied presets were TPE-tuned on the full sample and the tuning cutoff is unknown, so no interval of this dataset can be declared untouched",
+    "forbidden": [
+      "labelling the final year 'untouched' without an exposure audit",
+      "calling the provided full-set presets out-of-sample",
+      "re-tuning after a holdout has been unlocked"
+    ],
+    "path_to_a_strong_claim": "a prospective observation protocol registered after the freeze, evaluated on data that did not exist at freeze time; the lab writes the protocol artifact but does not execute live"
+  },
+  "access_logging": {
+    "rule": "every read of a confirmation-role data range is logged with run id and purpose",
+    "artifact": "evidence/{study_id}/{run_id}/data_access_log.jsonl (from LAB-03 onward)"
+  },
+  "unlock_gates": {
+    "market_execution": "LAB-02 certification AND LAB-03 data qualification",
+    "confirmation_run": "LAB-08 design freeze committed"
+  },
+  "lab_run_id": "run-20260909T171926Z-7ca20b6a",
+  "written_at_utc": "2026-09-09T17:19:27.728038+00:00"
+}

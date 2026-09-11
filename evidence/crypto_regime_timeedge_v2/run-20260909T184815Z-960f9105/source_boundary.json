@@ -1,0 +1,70 @@
+{
+  "schema": "crypto_regime_lab.source_boundary.v1",
+  "recorded_at_utc": "2026-09-09T18:48:15.800386+00:00",
+  "purpose": "guide L01.2: record the boundary between the lab and the upstream sources it read",
+  "repositories": {
+    "/root/bobby/pool_alpha/quantbt": {
+      "path": "/root/bobby/pool_alpha/quantbt",
+      "is_git_repo": true,
+      "branch": "fix/public-native-consumer-proof-contract",
+      "head_commit": "880025f44d45120d9349472097489fab1751fce7",
+      "dirty": false,
+      "dirty_entry_count": 0,
+      "dirty_entries": [],
+      "git_index_sha256_before": "e036cf9d08219011706ad07d5c1b1604f14730875554a90336f6ebafe57389f8",
+      "git_index_sha256_after": "e036cf9d08219011706ad07d5c1b1604f14730875554a90336f6ebafe57389f8",
+      "probe_left_repo_unmodified": true,
+      "read_method": "GIT_OPTIONAL_LOCKS=0; no write command issued"
+    },
+    "/root/bobby/pool_alpha/alphas_storage": {
+      "path": "/root/bobby/pool_alpha/alphas_storage",
+      "is_git_repo": true,
+      "branch": "dev",
+      "head_commit": "b3b6107a0c9ae07bac6e20e99c4f8e207419b667",
+      "dirty": true,
+      "dirty_entry_count": 17,
+      "dirty_entries": [
+        "M TA/adaptive_hma_cpp.ipynb",
+        " M TA/bb_scalping.ipynb",
+        " M TA/dynamic_grid_native_event_quantbt.ipynb",
+        " M TA/fib_sl_tp_strength_quantbt_migration.ipynb",
+        " M TA/gradient_rsi.ipynb",
+        " M TA/gradient_rsi_interpretation.ipynb",
+        " M TA/mcginley_t3_endpoint.ipynb",
+        " M TA/vwap_sl_tp_hft.ipynb",
+        " D standardize_simulation/signal_combine.py",
+        " D standardize_simulation/zigzag.py",
+        "?? TA/dynamic_grid_native_event_quantbt_rust.ipynb",
+        "?? TA/gradient_rsi_holdout_live.ipynb",
+        "?? TA/gradient_rsi_test.ipynb",
+        "?? TA/hamster_mrs_quantbt_event.py",
+        "?? TA/hamster_mrs_quantbt_event_v1.ipynb",
+        "?? TA/hamster_mrs_quantbt_event_v2.ipynb",
+        "?? alpha_to_tes_regime_model/"
+      ],
+      "git_index_sha256_before": "58ac4139e3a286fcce8594f35b874e40e109b5d5994c65bbbb164a7632a30fe9",
+      "git_index_sha256_after": "58ac4139e3a286fcce8594f35b874e40e109b5d5994c65bbbb164a7632a30fe9",
+      "probe_left_repo_unmodified": true,
+      "read_method": "GIT_OPTIONAL_LOCKS=0; no write command issued"
+    }
+  },
+  "quantbt_boundary": {
+    "the_lab_does_not_consume_this_repo": true,
+    "consumed_instead": "quantbt-engine==1.1.1 / quantbt-native==0.4.2 wheels from PyPI, retained at vendor_readonly/quantbt_1_1_1_dist/",
+    "consequence": "upstream working-tree state, dirty or clean, cannot influence any lab result"
+  },
+  "alpha_source_boundary": {
+    "root": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+    "digest_manifest": {
+      "adaptive_hma_cpp.py": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+      "hash_momentum.py": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+      "signal_combine.py": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+      "vwap.py": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84"
+    },
+    "authoritative_copy": "vendor_readonly/alphas_raw (extracted from the retained archive)"
+  },
+  "write_operations_issued_against_protected_roots": 0,
+  "lab_run_id": "run-20260909T184815Z-960f9105",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:48:15.801478+00:00"
+}

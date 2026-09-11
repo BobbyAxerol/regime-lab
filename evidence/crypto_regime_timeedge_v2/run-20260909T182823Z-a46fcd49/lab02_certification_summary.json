@@ -1,0 +1,63 @@
+{
+  "schema": "crypto_regime_lab.lab02_certification_summary.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "engine_contract": {
+    "engine_id": "intrabar_bracket_v1",
+    "signal_phase": "bar_close",
+    "entry_fill_phase": "next_open",
+    "market_fill_policy": "next_open",
+    "stop_gap_policy": "open_worse_than_trigger",
+    "take_profit_gap_policy": "limit_price_conservative",
+    "same_bar_policy": "conservative",
+    "trailing_update_phase": "next_bar",
+    "funding_phase": "position_at_event",
+    "liquidation_priority": "liquidation_first_at_gap",
+    "close_on_last_bar": true,
+    "ambiguity_policy": "flag_and_conservative",
+    "strict_data": true
+  },
+  "suites": {
+    "appendix_b_probes": "21/21 CONFIRMED",
+    "reference_parity": "PASS",
+    "execution_fixtures": "13/13 PASS",
+    "engine_parity": "PASS",
+    "fill_trace_parity": "BLOCKED_CAPABILITY"
+  },
+  "certifications": {
+    "A-SC": {
+      "status": "READY_FOR_RESEARCH",
+      "blockers": []
+    },
+    "A-HMA": {
+      "status": "READY_FOR_RESEARCH",
+      "blockers": []
+    },
+    "A-VWAP": {
+      "status": "READY_FOR_RESEARCH",
+      "blockers": []
+    },
+    "A-HASH": {
+      "status": "NOT_READY_SPECIFIC_BLOCKER",
+      "blockers": [
+        "BLOCKED_CAPABILITY: the canonical three-rung partial ladder needs a next-open entry, a protective stop and partial reduce-only exits on ONE route. intrabar_bracket_v1 provides the first two but a single take-profit level; the orders route provides the ladder but fills the entry at the stamped bar's close and rejects stop_market. Measured, not assumed."
+      ]
+    }
+  },
+  "ready_for_research": [
+    "A-SC",
+    "A-HMA",
+    "A-VWAP"
+  ],
+  "not_ready": [
+    "A-HASH"
+  ],
+  "matrix_rule": "an alpha that is not ready keeps all five of its cells in the 20-cell matrix with null metrics and a reason; it is never replaced by another alpha and never removed from the denominator of any conclusion",
+  "market_optimization_allowed_for": [
+    "A-SC",
+    "A-HMA",
+    "A-VWAP"
+  ],
+  "exit": "PASS",
+  "lab_run_id": "run-20260909T182823Z-a46fcd49",
+  "written_at_utc": "2026-09-09T18:28:25.540800+00:00"
+}

@@ -1,0 +1,1151 @@
+{
+  "schema": "crypto_regime_lab.alpha_registry.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "method": "static AST of the read-only snapshots; no alpha module is imported or executed",
+  "alphas": {
+    "A-VWAP": {
+      "alpha_id": "A-VWAP",
+      "filename": "vwap.py",
+      "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+      "line_count": 249,
+      "imports": [
+        "numpy as np",
+        "pandas as pd",
+        "from numba import njit"
+      ],
+      "functions": [
+        {
+          "name": "n_sma",
+          "lineno": 8,
+          "end_lineno": 17,
+          "args": [
+            "src",
+            "length"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "len",
+            "np.zeros_like",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_stdev",
+          "lineno": 20,
+          "end_lineno": 40,
+          "args": [
+            "src",
+            "length"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "len",
+            "max",
+            "np.sqrt",
+            "np.zeros_like",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_rsi",
+          "lineno": 43,
+          "end_lineno": 65,
+          "args": [
+            "close",
+            "length"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "len",
+            "max",
+            "np.mean",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_atr",
+          "lineno": 68,
+          "end_lineno": 77,
+          "args": [
+            "high",
+            "low",
+            "close",
+            "length"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "abs",
+            "len",
+            "max",
+            "np.mean",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_vwap_daily",
+          "lineno": 80,
+          "end_lineno": 93,
+          "args": [
+            "high",
+            "low",
+            "close",
+            "volume",
+            "new_day"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "len",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "core_vwap_mean_reversion_logic",
+          "lineno": 98,
+          "end_lineno": 178,
+          "args": [
+            "open_p",
+            "high_p",
+            "low_p",
+            "close_p",
+            "vwap_p",
+            "rsi_p",
+            "atr_p",
+            "htf_ema_p",
+            "rsi_os",
+            "rsi_ob",
+            "dev_mult",
+            "stop_atr",
+            "target_r",
+            "exit_at_vwap",
+            "time_stop_on",
+            "time_stop_bars"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "len",
+            "max",
+            "n_sma",
+            "n_stdev",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "generate_vwap_signals",
+          "lineno": 182,
+          "end_lineno": 228,
+          "args": [
+            "df",
+            "p"
+          ],
+          "decorators": [],
+          "calls": [
+            "core_vwap_mean_reversion_logic",
+            "df.copy",
+            "df.resample",
+            "df.resample(p['htf_tf']).agg",
+            "df.sort_index",
+            "df_htf.dropna",
+            "df_htf['close'].ewm",
+            "df_htf['close'].ewm(span=p['htf_ema_len'], adjust=False).mean",
+            "df_htf['ema'].shift",
+            "df_htf[['ema_shifted']].copy",
+            "len",
+            "merged['ema_shifted'].ffill",
+            "n_atr",
+            "n_rsi",
+            "n_vwap_daily",
+            "np.zeros",
+            "pd.merge_asof"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameter_schema": [
+        "atr_len",
+        "dev_mult",
+        "exit_at_vwap",
+        "htf_ema_len",
+        "htf_tf",
+        "rsi_len",
+        "rsi_ob",
+        "rsi_os",
+        "stop_atr",
+        "target_r",
+        "time_stop_bars",
+        "time_stop_on"
+      ],
+      "parameter_reads": {
+        "atr_len": [
+          198
+        ],
+        "dev_mult": [
+          223
+        ],
+        "exit_at_vwap": [
+          224
+        ],
+        "htf_ema_len": [
+          202
+        ],
+        "htf_tf": [
+          201
+        ],
+        "rsi_len": [
+          197
+        ],
+        "rsi_ob": [
+          223
+        ],
+        "rsi_os": [
+          223
+        ],
+        "stop_atr": [
+          223
+        ],
+        "target_r": [
+          223
+        ],
+        "time_stop_bars": [
+          224
+        ],
+        "time_stop_on": [
+          224
+        ]
+      },
+      "literal_dict_count": 15,
+      "undefined_globals": [],
+      "module_level_effects": [],
+      "adapter": "crypto_regime_lab.alphas.a_vwap.VwapMeanReversionEventAdapterV1",
+      "adapter_version": "canonical_v1",
+      "version_tiers": {
+        "raw_supplied": "vendor_readonly/alphas_raw/vwap.py",
+        "legacy_reproduction": "reference indicators tagged *_legacy plus the source harness",
+        "canonical_v1": "crypto_regime_lab.alphas.a_vwap.VwapMeanReversionEventAdapterV1",
+        "research_revision_N": []
+      },
+      "unused_knobs": {
+        "unused_function_arguments": {
+          "core_vwap_mean_reversion_logic": [
+            "open_p"
+          ]
+        },
+        "preset_keys_never_read_by_the_alpha": [
+          "atr_mult",
+          "body_weight",
+          "capital_risk_pct",
+          "cetp_bins",
+          "cetp_k",
+          "cetp_window",
+          "decay_factor",
+          "long_threshold_base",
+          "lower_weight",
+          "max_hold_bars",
+          "max_pos_size",
+          "min_price_move_mult",
+          "min_score_strength",
+          "min_vol_mult",
+          "mom_scale",
+          "short_threshold_base",
+          "sl_pct",
+          "stop_loss_pct",
+          "stop_loss_pct_short",
+          "tp_pct",
+          "trail_mult",
+          "trail_offset_pct",
+          "upper_weight",
+          "vol_threshold_limit"
+        ],
+        "note": "an unused argument or an unread preset key must be dropped from the active search space and flagged deprecated, never re-implemented under the old name (guide HM-05)"
+      },
+      "finding_count": 7,
+      "findings": [
+        {
+          "id": "AV-01",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L8-17, L43-53, L67-77, L193",
+          "observation": "n_sma/n_rsi/n_atr index past the end for inputs shorter than their window and n_stdev silently returns zeros; new_day[0] is forced True",
+          "handling": "fail fast, or return a valid no-signal warmup; never crash and never emit a silent zero",
+          "reproducer": "a 10-row frame with SMA(50) raises IndexError"
+        },
+        {
+          "id": "AV-02",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L98-103, L176-178",
+          "observation": "open_p is passed into the core but never read; the only output is a position state array",
+          "handling": "the position array is an intent, not a fill; SL/TP correctness cannot be claimed from it",
+          "reproducer": "replacing the entire open series after entry leaves pos unchanged"
+        },
+        {
+          "id": "AV-03",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L125-151",
+          "observation": "the time stop is evaluated before the price stop and the take profit, although the time condition is a boundary event rather than an intrabar price event",
+          "handling": "a frozen event sequence: resting protection at price phases, time stop submitted at the close or the next phase",
+          "reproducer": "a bar that hits the stop AND satisfies the time stop exits as a time stop"
+        },
+        {
+          "id": "AV-04",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L134, L146",
+          "observation": "the dynamic VWAP exit compares the same bar's high/low against that bar's completed VWAP",
+          "handling": "either a resting order at the previously observed VWAP, or a close decision with a next-open market exit; a full-bar VWAP is never treated as known at the open",
+          "reproducer": "the VWAP used at bar t depends on bar t's own volume"
+        },
+        {
+          "id": "AV-05",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L159-174",
+          "observation": "entry is assumed at the close and the stop/target are derived from that assumed price",
+          "handling": "next-open entry, levels from the actual fill and the ATR available at the decision",
+          "reproducer": "a gap between close[t] and open[t+1] moves every level"
+        },
+        {
+          "id": "AV-06",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L200-217",
+          "observation": "the HTF EMA is resampled, shifted by one and merged backward; availability then depends on the resample label convention and a trailing ffill",
+          "handling": "closed-HTF prefix fixtures and an available_at join, not a label timestamp join",
+          "reproducer": "a right-labelled resample makes the shift(1) correct; a left-labelled one does not"
+        },
+        {
+          "id": "AV-07",
+          "alpha_id": "A-VWAP",
+          "source_lines": "L231-249",
+          "observation": "the module-level default merges the tete preset, annotated 5m VN30F1M, with base",
+          "handling": "never run the default; only an explicit config for the five crypto symbols",
+          "reproducer": "params == {**tete, **base} at import time"
+        }
+      ],
+      "semantic_delta_ids": [
+        "SD-VWAP-01",
+        "SD-VWAP-02",
+        "SD-VWAP-03",
+        "SD-VWAP-04",
+        "SD-VWAP-05",
+        "SD-VWAP-06"
+      ],
+      "preset_count": 5,
+      "unmapped_count": 10
+    },
+    "A-HASH": {
+      "alpha_id": "A-HASH",
+      "filename": "hash_momentum.py",
+      "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+      "line_count": 166,
+      "imports": [
+        "from numba import njit"
+      ],
+      "functions": [
+        {
+          "name": "calculate_indicators",
+          "lineno": 5,
+          "end_lineno": 38,
+          "args": [
+            "close",
+            "mom_len",
+            "ema_len"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "abs",
+            "len",
+            "max",
+            "np.mean",
+            "np.std",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "execute_hash_momentum_backtest",
+          "lineno": 42,
+          "end_lineno": 128,
+          "args": [
+            "close",
+            "high",
+            "low",
+            "mom0",
+            "mom_norm",
+            "atr",
+            "ema",
+            "initial_capital",
+            "trading_fee",
+            "cooldown_bars",
+            "stop_loss_perc",
+            "rr_ratio",
+            "tp1_ratio",
+            "tp1_qty_perc",
+            "tp2_ratio",
+            "tp2_qty_perc",
+            "mom_threshold_mult",
+            "usd_per_trade"
+          ],
+          "decorators": [
+            "njit"
+          ],
+          "calls": [
+            "abs",
+            "len",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "run_hash_strategy",
+          "lineno": 130,
+          "end_lineno": 155,
+          "args": [
+            "df",
+            "params"
+          ],
+          "decorators": [],
+          "calls": [
+            "calculate_indicators",
+            "df['close'].values.astype",
+            "df['high'].values.astype",
+            "df['low'].values.astype",
+            "execute_hash_momentum_backtest",
+            "float",
+            "int",
+            "np.where"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameter_schema": [
+        "cooldown_bars",
+        "ema_len",
+        "initial_capital",
+        "mom_len",
+        "mom_threshold_mult",
+        "rr_ratio",
+        "stop_loss_perc",
+        "tp1_qty_perc",
+        "tp1_ratio",
+        "tp2_qty_perc",
+        "tp2_ratio",
+        "trading_fee",
+        "usd_per_trade"
+      ],
+      "parameter_reads": {
+        "cooldown_bars": [
+          141
+        ],
+        "ema_len": [
+          135
+        ],
+        "initial_capital": [
+          139
+        ],
+        "mom_len": [
+          135
+        ],
+        "mom_threshold_mult": [
+          148
+        ],
+        "rr_ratio": [
+          143
+        ],
+        "stop_loss_perc": [
+          142
+        ],
+        "tp1_qty_perc": [
+          145
+        ],
+        "tp1_ratio": [
+          144
+        ],
+        "tp2_qty_perc": [
+          147
+        ],
+        "tp2_ratio": [
+          146
+        ],
+        "trading_fee": [
+          140
+        ],
+        "usd_per_trade": [
+          149
+        ]
+      },
+      "literal_dict_count": 6,
+      "undefined_globals": [
+        "np@L8"
+      ],
+      "module_level_effects": [],
+      "adapter": "crypto_regime_lab.alphas.a_hash.HashMomentumEventAdapterV1",
+      "adapter_version": "canonical_v1",
+      "version_tiers": {
+        "raw_supplied": "vendor_readonly/alphas_raw/hash_momentum.py",
+        "legacy_reproduction": "reference indicators tagged *_legacy plus the source harness",
+        "canonical_v1": "crypto_regime_lab.alphas.a_hash.HashMomentumEventAdapterV1",
+        "research_revision_N": [
+          "SD-HASH-05"
+        ]
+      },
+      "unused_knobs": {
+        "unused_function_arguments": {},
+        "preset_keys_never_read_by_the_alpha": [],
+        "note": "an unused argument or an unread preset key must be dropped from the active search space and flagged deprecated, never re-implemented under the old name (guide HM-05)"
+      },
+      "finding_count": 7,
+      "findings": [
+        {
+          "id": "AH-01",
+          "alpha_id": "A-HASH",
+          "source_lines": "L1, L8, L131-133",
+          "observation": "uses np.* throughout but only imports njit from numba; the module cannot be imported",
+          "handling": "add the import in the lab copy only; the original digest is untouched",
+          "reproducer": "static: undefined global np@L8; dynamic: NameError on import"
+        },
+        {
+          "id": "AH-02",
+          "alpha_id": "A-HASH",
+          "source_lines": "L21-29",
+          "observation": "the variable called ATR is max(close_diff, |close_diff|) = |close-to-close move|; it never reads high/low, and atr[14] = mean(tr[1:15]) is unguarded for short input",
+          "handling": "legacy keeps close_move_rma14; a true-range ATR is a separate versioned variant",
+          "reproducer": "constant closes with a wide high/low range yield 0.0; a 10-row input raises IndexError"
+        },
+        {
+          "id": "AH-03",
+          "alpha_id": "A-HASH",
+          "source_lines": "L64-94, L112",
+          "observation": "equity accumulates realized PnL and fees only; an open position is never marked to market",
+          "handling": "never used as the equity curve or an objective; the engine ledger is authoritative",
+          "reproducer": "10 units entered at 100 with last close 110 reports equity 10000 while wallet+UPnL is 10100"
+        },
+        {
+          "id": "AH-04",
+          "alpha_id": "A-HASH",
+          "source_lines": "L72-94",
+          "observation": "the if/elif chain handles at most one TP stage per bar, and the final TP branch is only reachable once tp1_done and tp2_done are both True",
+          "handling": "the canonical ladder is explicit and ordered; the stage-lock chain is a labelled legacy reproduction",
+          "reproducer": "a bar spanning TP1, TP2 and the final TP fills only TP1: units 10 -> 5"
+        },
+        {
+          "id": "AH-05",
+          "alpha_id": "A-HASH",
+          "source_lines": "L104, L108-125",
+          "observation": "entry is booked at the same close that produced the signal; no open, latency or gap model",
+          "handling": "close decision, next-open fill; SL/TP levels derive from the actual fill price",
+          "reproducer": "the fill price equals close[t] regardless of the next bar's open"
+        },
+        {
+          "id": "AH-06",
+          "alpha_id": "A-HASH",
+          "source_lines": "L79-89",
+          "observation": "TP2 quantity is a percentage of the REMAINING units, not of the entry quantity",
+          "handling": "locked as fraction_of_remaining; never silently re-based to the original quantity",
+          "reproducer": "tp1 55% then tp2 65% of the remainder leaves 0.1575 of the entry, not 0.30 (units 10 -> 1.575)"
+        },
+        {
+          "id": "AH-07",
+          "alpha_id": "A-HASH",
+          "source_lines": "L157-162",
+          "observation": "4 of the 6 supplied presets violate tp1 < tp2 < final",
+          "handling": "rejected for the canonical simultaneous ladder; the raw order is kept, never silently sorted",
+          "reproducer": "huhu 2.4/2.1/3.2, bubu 2.9/3.8/1.1, haft 2.1/1.4/3.1, kuku 1.3/3.7/2.7"
+        }
+      ],
+      "semantic_delta_ids": [
+        "SD-HASH-01",
+        "SD-HASH-02",
+        "SD-HASH-03",
+        "SD-HASH-04",
+        "SD-HASH-05",
+        "SD-HASH-06"
+      ],
+      "preset_count": 6,
+      "unmapped_count": 0
+    },
+    "A-HMA": {
+      "alpha_id": "A-HMA",
+      "filename": "adaptive_hma_cpp.py",
+      "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+      "line_count": 349,
+      "imports": [
+        "numpy as np",
+        "pandas as pd",
+        "from numba import njit"
+      ],
+      "functions": [
+        {
+          "name": "n_ema",
+          "lineno": 8,
+          "end_lineno": 14,
+          "args": [
+            "src",
+            "length"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "len",
+            "njit",
+            "np.zeros_like",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_atr",
+          "lineno": 17,
+          "end_lineno": 22,
+          "args": [
+            "h",
+            "l",
+            "c",
+            "length"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "abs",
+            "len",
+            "max",
+            "n_ema",
+            "njit",
+            "np.zeros_like",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "n_rsi",
+          "lineno": 25,
+          "end_lineno": 58,
+          "args": [
+            "src",
+            "length"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "len",
+            "max",
+            "njit",
+            "np.zeros_like",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_xhma_at_t",
+          "lineno": 61,
+          "end_lineno": 102,
+          "args": [
+            "src",
+            "t",
+            "length"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "int",
+            "njit",
+            "np.floor",
+            "np.sqrt",
+            "range"
+          ],
+          "docstring": "T\u00ednh to\u00e1n Hull Moving Average \u0111\u1ed9ng t\u1ea1i \u0111i\u1ec3m t v\u1edbi chu k\u1ef3 length thay \u0111\u1ed5i li\u00ean t\u1ee5c"
+        },
+        {
+          "name": "_calcslope_at_t",
+          "lineno": 105,
+          "end_lineno": 129,
+          "args": [
+            "ma_arr",
+            "t",
+            "high_arr",
+            "low_arr",
+            "close_arr"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "njit",
+            "np.arccos",
+            "np.round",
+            "np.sqrt",
+            "range"
+          ],
+          "docstring": "T\u00ednh \u0111\u1ed9 d\u1ed1c chu\u1ea9n h\u00f3a g\u00f3c h\u00ecnh h\u1ecdc (G\u00f3c t\u1eeb -180 \u0111\u1ebfn 180 th\u1ef1c t\u1ebf)"
+        },
+        {
+          "name": "core_adaptive_hma_signals",
+          "lineno": 135,
+          "end_lineno": 293,
+          "args": [
+            "time_ms",
+            "close",
+            "high",
+            "low",
+            "volume",
+            "minLength",
+            "maxLength",
+            "minorMin",
+            "minorMax",
+            "flat",
+            "atrFast",
+            "atrSlow",
+            "mult",
+            "maxSL",
+            "takeProfit",
+            "minProfit",
+            "sl_input_mode",
+            "double_up"
+          ],
+          "decorators": [
+            "njit(fastmath=True)"
+          ],
+          "calls": [
+            "_calcslope_at_t",
+            "_xhma_at_t",
+            "int",
+            "len",
+            "max",
+            "min",
+            "n_atr",
+            "n_rsi",
+            "njit",
+            "np.zeros",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "generate_adaptive_hma_signals",
+          "lineno": 298,
+          "end_lineno": 328,
+          "args": [
+            "df",
+            "p"
+          ],
+          "decorators": [],
+          "calls": [
+            "bool",
+            "core_adaptive_hma_signals",
+            "df.copy",
+            "df.index.values.astype",
+            "df['close'].values.astype",
+            "df['high'].values.astype",
+            "df['low'].values.astype",
+            "df['volume'].values.astype",
+            "float",
+            "int",
+            "p.get",
+            "sl_mode_map.get"
+          ],
+          "docstring": "df: DataFrame OHLCV ch\u1ee9a c\u00e1c c\u1ed9t d\u1eef li\u1ec7u ['high', 'low', 'close', 'volume']\np: dictionary ch\u1ee9a c\u00e1c tham s\u1ed1 t\u1ed1i \u01b0u h\u00f3a c\u1ee7a h\u1ec7 th\u1ed1ng"
+        }
+      ],
+      "parameter_schema": [
+        "atr_fast",
+        "atr_slow",
+        "double_up",
+        "flat",
+        "max_length",
+        "max_sl",
+        "min_length",
+        "min_profit",
+        "minor_max",
+        "minor_min",
+        "mult",
+        "sl_input",
+        "take_profit"
+      ],
+      "parameter_reads": {
+        "atr_fast": [
+          318
+        ],
+        "atr_slow": [
+          318
+        ],
+        "double_up": [
+          320
+        ],
+        "flat": [
+          318
+        ],
+        "max_length": [
+          317
+        ],
+        "max_sl": [
+          319
+        ],
+        "min_length": [
+          317
+        ],
+        "min_profit": [
+          319
+        ],
+        "minor_max": [
+          317
+        ],
+        "minor_min": [
+          317
+        ],
+        "mult": [
+          318
+        ],
+        "sl_input": [
+          312
+        ],
+        "take_profit": [
+          319
+        ]
+      },
+      "literal_dict_count": 14,
+      "undefined_globals": [],
+      "module_level_effects": [],
+      "adapter": "crypto_regime_lab.alphas.a_hma.AdaptiveHmaEventAdapterV1",
+      "adapter_version": "canonical_v1",
+      "version_tiers": {
+        "raw_supplied": "vendor_readonly/alphas_raw/adaptive_hma_cpp.py",
+        "legacy_reproduction": "reference indicators tagged *_legacy plus the source harness",
+        "canonical_v1": "crypto_regime_lab.alphas.a_hma.AdaptiveHmaEventAdapterV1",
+        "research_revision_N": []
+      },
+      "unused_knobs": {
+        "unused_function_arguments": {
+          "core_adaptive_hma_signals": [
+            "volume",
+            "double_up"
+          ]
+        },
+        "preset_keys_never_read_by_the_alpha": [
+          "ATR Only",
+          "Half Distance Zone",
+          "Last High/Low",
+          "One Distance Zone",
+          "sl_mult"
+        ],
+        "note": "an unused argument or an unread preset key must be dropped from the active search space and flagged deprecated, never re-implemented under the old name (guide HM-05)"
+      },
+      "finding_count": 9,
+      "findings": [
+        {
+          "id": "HM-01",
+          "alpha_id": "A-HMA",
+          "source_lines": "L283",
+          "observation": "a comment asserts the next open equals the current close; the core never receives open",
+          "handling": "the actual fill comes from the engine; no equality assumption",
+          "reproducer": "the core signature has no open argument"
+        },
+        {
+          "id": "HM-02",
+          "alpha_id": "A-HMA",
+          "source_lines": "L204, L214-249",
+          "observation": "pos_weight[t] is the position carried INTO bar t, while exit_type/exit_price for the same index are intrabar events of bar t",
+          "handling": "a pre-bar weight and a post-close target are separate fields; never summed or lagged twice",
+          "reproducer": "an exit at bar t leaves pos_weight[t] == 1 with exit_type[t] == 1"
+        },
+        {
+          "id": "HM-03",
+          "alpha_id": "A-HMA",
+          "source_lines": "L214-246, L284-291",
+          "observation": "stop and target prices are closed inside the alpha with no gap, slippage or fill model",
+          "handling": "levels are intents; the fill price is the engine's decision",
+          "reproducer": "exit_price is set to buySL exactly, whatever the bar's open was"
+        },
+        {
+          "id": "HM-04",
+          "alpha_id": "A-HMA",
+          "source_lines": "L332-349",
+          "observation": "4 of the 13 presets have min_length > max_length",
+          "handling": "raw references retained; the canonical adapter rejects them and never silently swaps",
+          "reproducer": "hfhf 292>232, hjhj 320>204, hoho 248>200, hbhb 308>280"
+        },
+        {
+          "id": "HM-05",
+          "alpha_id": "A-HMA",
+          "source_lines": "L136, L139, L317-320, L332-349",
+          "observation": "time_ms, volume and double_up are accepted but never read, and sl_mult appears in all 13 presets while the code never reads it",
+          "handling": "dropped from the active search space and flagged deprecated; never re-implemented under the old name",
+          "reproducer": "AST: no Load of time_ms/volume/double_up; sl_mult is absent from the parameter schema"
+        },
+        {
+          "id": "HM-06",
+          "alpha_id": "A-HMA",
+          "source_lines": "L161-162",
+          "observation": "mintick is hardcoded to 0.0001 for every instrument, and the pip buffer is 10x that",
+          "handling": "use instrument tick metadata; the pip-buffer semantics are versioned",
+          "reproducer": "a 5-pip buffer is 0.005 absolute regardless of the symbol's real tick size"
+        },
+        {
+          "id": "HM-07",
+          "alpha_id": "A-HMA",
+          "source_lines": "L45-57",
+          "observation": "the RSI seed returns 50 when avg_gain and avg_loss are both zero, but every later bar returns 100 whenever avg_loss is zero, even with avg_gain zero",
+          "handling": "canonical keeps flat=50 at the seed; making the recursion consistent is an indicator repair applied before any A/B",
+          "reproducer": "a flat series seeds 50 then reports 100 on the next bar"
+        },
+        {
+          "id": "HM-08",
+          "alpha_id": "A-HMA",
+          "source_lines": "L7-129",
+          "observation": "every kernel is njit(fastmath=True) and the dynamic helpers clamp negative indices to 0, padding the start of the series with repeated values",
+          "handling": "the reference oracle runs fastmath=False; warmup convergence is explicit",
+          "reproducer": "_xhma_at_t at t=0 averages src[0] repeated"
+        },
+        {
+          "id": "HM-09",
+          "alpha_id": "A-HMA",
+          "source_lines": "L304",
+          "observation": "the epoch conversion divides by 10**6, assuming nanosecond index values",
+          "handling": "convert timezone and unit explicitly; time_ms is unused so no timestamp correctness is claimed",
+          "reproducer": "a second-resolution index would be scaled wrongly"
+        }
+      ],
+      "semantic_delta_ids": [
+        "SD-HMA-01",
+        "SD-HMA-02",
+        "SD-HMA-03",
+        "SD-HMA-04",
+        "SD-HMA-05",
+        "SD-HMA-06",
+        "SD-HMA-07"
+      ],
+      "preset_count": 13,
+      "unmapped_count": 1
+    },
+    "A-SC": {
+      "alpha_id": "A-SC",
+      "filename": "signal_combine.py",
+      "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+      "line_count": 145,
+      "imports": [
+        "pandas as pd",
+        "numpy as np",
+        "from ta.volatility import AverageTrueRange",
+        "from ta.trend import SMAIndicator",
+        "from ta.volume import MFIIndicator",
+        "from ta.momentum import RSIIndicator"
+      ],
+      "functions": [
+        {
+          "name": "cal_TA",
+          "lineno": 16,
+          "end_lineno": 60,
+          "args": [
+            "data",
+            "params"
+          ],
+          "decorators": [],
+          "calls": [
+            "AverageTrueRange",
+            "MFIIndicator",
+            "RSIIndicator",
+            "atr_indicator.average_true_range",
+            "condition_indicator.money_flow_index",
+            "condition_indicator.rsi",
+            "data.copy",
+            "int",
+            "len",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "generate_signals",
+          "lineno": 62,
+          "end_lineno": 112,
+          "args": [
+            "data"
+          ],
+          "decorators": [],
+          "calls": [
+            "alpha_trend.shift",
+            "data.copy",
+            "data['K1'].shift",
+            "data['K2'].shift",
+            "data['O1'].shift",
+            "data['O2'].shift",
+            "data['buy_signal'].shift",
+            "data['sell_signal'].shift",
+            "data['trend'].shift",
+            "len",
+            "pd.notna",
+            "range"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "main",
+          "lineno": 114,
+          "end_lineno": 117,
+          "args": [
+            "data",
+            "params"
+          ],
+          "decorators": [],
+          "calls": [
+            "cal_TA",
+            "generate_signals"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "apply_SigCombine_strategy",
+          "lineno": 119,
+          "end_lineno": 145,
+          "args": [
+            "data",
+            "params"
+          ],
+          "decorators": [],
+          "calls": [
+            "len",
+            "main",
+            "range"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameter_schema": [
+        "AP",
+        "coeff",
+        "novolumedata",
+        "regime_threshold",
+        "src_col"
+      ],
+      "parameter_reads": {
+        "AP": [
+          21
+        ],
+        "coeff": [
+          20
+        ],
+        "novolumedata": [
+          22
+        ],
+        "regime_threshold": [
+          24
+        ],
+        "src_col": [
+          23
+        ]
+      },
+      "literal_dict_count": 1,
+      "undefined_globals": [],
+      "module_level_effects": [],
+      "adapter": "crypto_regime_lab.alphas.a_sc.SignalCombineAdapterV1",
+      "adapter_version": "canonical_v1",
+      "version_tiers": {
+        "raw_supplied": "vendor_readonly/alphas_raw/signal_combine.py",
+        "legacy_reproduction": "reference indicators tagged *_legacy plus the source harness",
+        "canonical_v1": "crypto_regime_lab.alphas.a_sc.SignalCombineAdapterV1",
+        "research_revision_N": [
+          "SD-SC-05"
+        ]
+      },
+      "unused_knobs": {
+        "unused_function_arguments": {},
+        "preset_keys_never_read_by_the_alpha": [],
+        "note": "an unused argument or an unread preset key must be dropped from the active search space and flagged deprecated, never re-implemented under the old name (guide HM-05)"
+      },
+      "finding_count": 7,
+      "findings": [
+        {
+          "id": "SC-01",
+          "alpha_id": "A-SC",
+          "source_lines": "L39-48",
+          "observation": "the indicator is chosen by 'novolumedata or volume missing' but the method is dispatched on novolumedata alone, so a missing volume column calls money_flow_index on an RSIIndicator",
+          "handling": "resolve use_rsi once; the main crypto path requires volume and the fallback is explicit",
+          "reproducer": "a frame with no volume column and novolumedata=False raises AttributeError"
+        },
+        {
+          "id": "SC-02",
+          "alpha_id": "A-SC",
+          "source_lines": "L20",
+          "observation": "coeff is cast with int(), so fractional search values collapse onto integers",
+          "handling": "search coeff as an integer; never advertise fractional trials as distinct",
+          "reproducer": "coeff 4.0 and 4.9 both become 4"
+        },
+        {
+          "id": "SC-03",
+          "alpha_id": "A-SC",
+          "source_lines": "L66-69",
+          "observation": "the cross test compares trend[t] against trend[t-2] and trend[t-1] against trend[t-2], which is not the conventional crossover(trend, trend.shift(2))",
+          "handling": "the source convention is kept in canonical_v1; a standard crossover is an optional research revision, never a silent fix",
+          "reproducer": "a conventional crossover compares trend[t-1] against trend[t-3]"
+        },
+        {
+          "id": "SC-04",
+          "alpha_id": "A-SC",
+          "source_lines": "L104-110, L124-140",
+          "observation": "approved (shifted) signals are computed but execution consumes the unapproved ones",
+          "handling": "declare the decision timestamp and the intent timing once; never double-shift",
+          "reproducer": "buy_signal_approved is never referenced after being assigned"
+        },
+        {
+          "id": "SC-05",
+          "alpha_id": "A-SC",
+          "source_lines": "L119-145",
+          "observation": "position takes only 0 or 2; the short branch sets 0, so the strategy is long-flat",
+          "handling": "canonical stays long-flat; shorting is never enabled to improve a result",
+          "reproducer": "the observed position path is [0, 2, 0, 0, 2] with no negative value"
+        },
+        {
+          "id": "SC-07",
+          "alpha_id": "A-SC",
+          "source_lines": "L26, L53-57, L66-69",
+          "observation": "trend is seeded at 0.0, so the FIRST bar whose condition is true ratchets it from 0 up to a real price level; that jump always satisfies (trend > trend[-2]) and (trend[-1] <= trend[-2]), manufacturing a buy_signal that carries no information",
+          "handling": "warmup is not ready until the trend has been initialised and the 2-bar comparison window is clear of the seed; found by the lab, not listed in the guide",
+          "reproducer": "on any series the first condition-true bar emits buy_signal=True regardless of price action"
+        },
+        {
+          "id": "SC-06",
+          "alpha_id": "A-SC",
+          "source_lines": "L37-60, L79-102",
+          "observation": "average_true_range() and the condition indicator are recomputed inside the loop, and the bars-since counters are rebuilt row by row",
+          "handling": "may be vectorised in the lab AFTER output parity; the reset rules do not change",
+          "reproducer": "the indicator is recomputed on every one of n iterations"
+        }
+      ],
+      "semantic_delta_ids": [
+        "SD-SC-01",
+        "SD-SC-02",
+        "SD-SC-03",
+        "SD-SC-04",
+        "SD-SC-06",
+        "SD-SC-05"
+      ],
+      "preset_count": 1,
+      "unmapped_count": 0
+    }
+  },
+  "lab_run_id": "run-20260909T182008Z-44d94460",
+  "written_at_utc": "2026-09-09T18:20:09.051762+00:00"
+}

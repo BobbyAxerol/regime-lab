@@ -1,0 +1,315 @@
+{
+  "schema": "crypto_regime_lab.lab09_group_ablation.v1",
+  "generated_at_utc": "2026-09-11T04:26:49.713911+00:00",
+  "window_rule": "the LAST confirmation-role cutoff's training window, which lies entirely inside the confirmation interval. The fitter's own ablation uses the FIRST cutoff's window, which for this role is development data",
+  "requirement": "guide 8.3: the flow and market-coordination blocks must be shown to contribute BEYOND price and volatility",
+  "per_symbol": {
+    "BTCUSDT": {
+      "status": "MEASURED",
+      "model_id": "jm_k3_2026-08-10",
+      "training_window": [
+        "2025-08-10 00:00:00",
+        "2026-08-10 00:00:00"
+      ],
+      "window_is_inside_the_confirmation_interval": true,
+      "rows": 2190,
+      "blocks_that_improved_out_of_fold": [],
+      "blocks_that_did_not": [
+        "G2",
+        "G5"
+      ],
+      "ladder": [
+        {
+          "groups": [
+            "G1"
+          ],
+          "features_active": 3,
+          "mean_per_observation_objective": 0.44118820144487425,
+          "worst_fold": 0.4999988838362326,
+          "variance_resolved_out_of_fold": 0.20195953126553534,
+          "gain_over_previous": null,
+          "variance_resolved_gain": null,
+          "improved": null,
+          "improved_on_objective": null
+        },
+        {
+          "groups": [
+            "G1",
+            "G2"
+          ],
+          "features_active": 5,
+          "mean_per_observation_objective": 0.4983999714741434,
+          "worst_fold": 0.5367871644347095,
+          "variance_resolved_out_of_fold": 0.11801331963922301,
+          "gain_over_previous": -0.05721177002926914,
+          "variance_resolved_gain": -0.08394621162631233,
+          "improved": false,
+          "improved_on_objective": false
+        },
+        {
+          "groups": [
+            "G1",
+            "G2",
+            "G5"
+          ],
+          "features_active": 8,
+          "mean_per_observation_objective": 0.5273235112942841,
+          "worst_fold": 0.5949830753600232,
+          "variance_resolved_out_of_fold": 0.013066228657556134,
+          "gain_over_previous": -0.02892353982014073,
+          "variance_resolved_gain": -0.10494709098166688,
+          "improved": false,
+          "improved_on_objective": false
+        }
+      ],
+      "decided_on": "variance_resolved_out_of_fold"
+    },
+    "ETHUSDT": {
+      "status": "MEASURED",
+      "model_id": "jm_k3_2026-08-10",
+      "training_window": [
+        "2025-08-10 00:00:00",
+        "2026-08-10 00:00:00"
+      ],
+      "window_is_inside_the_confirmation_interval": true,
+      "rows": 2190,
+      "blocks_that_improved_out_of_fold": [],
+      "blocks_that_did_not": [
+        "G2",
+        "G5"
+      ],
+      "ladder": [
+        {
+          "groups": [
+            "G1"
+          ],
+          "features_active": 3,
+          "mean_per_observation_objective": 0.39344079066958315,
+          "worst_fold": 0.4340880423022463,
+          "variance_resolved_out_of_fold": 0.25792185726095124,
+          "gain_over_previous": null,
+          "variance_resolved_gain": null,
+          "improved": null,
+          "improved_on_objective": null
+        },
+        {
+          "groups": [
+            "G1",
+            "G2"
+          ],
+          "features_active": 5,
+          "mean_per_observation_objective": 0.49141392457924055,
+          "worst_fold": 0.5141153924037303,
+          "variance_resolved_out_of_fold": 0.0964069314271343,
+          "gain_over_previous": -0.0979731339096574,
+          "variance_resolved_gain": -0.16151492583381694,
+          "improved": false,
+          "improved_on_objective": false
+        },
+        {
+          "groups": [
+            "G1",
+            "G2",
+            "G5"
+          ],
+          "features_active": 8,
+          "mean_per_observation_objective": 0.5140853503063827,
+          "worst_fold": 0.5397263268817958,
+          "variance_resolved_out_of_fold": 0.03831593877633107,
+          "gain_over_previous": -0.022671425727142147,
+          "variance_resolved_gain": -0.05809099265080323,
+          "improved": false,
+          "improved_on_objective": false
+        }
+      ],
+      "decided_on": "variance_resolved_out_of_fold"
+    },
+    "SOLUSDT": {
+      "status": "MEASURED",
+      "model_id": "jm_k3_2026-08-10",
+      "training_window": [
+        "2025-08-10 00:00:00",
+        "2026-08-10 00:00:00"
+      ],
+      "window_is_inside_the_confirmation_interval": true,
+      "rows": 2190,
+      "blocks_that_improved_out_of_fold": [],
+      "blocks_that_did_not": [
+        "G2",
+        "G5"
+      ],
+      "ladder": [
+        {
+          "groups": [
+            "G1"
+          ],
+          "features_active": 3,
+          "mean_per_observation_objective": 0.3995223336646709,
+          "worst_fold": 0.43804592304492834,
+          "variance_resolved_out_of_fold": 0.2256038021482458,
+          "gain_over_previous": null,
+          "variance_resolved_gain": null,
+          "improved": null,
+          "improved_on_objective": null
+        },
+        {
+          "groups": [
+            "G1",
+            "G2"
+          ],
+          "features_active": 5,
+          "mean_per_observation_objective": 0.4987935240315832,
+          "worst_fold": 0.507354946831439,
+          "variance_resolved_out_of_fold": 0.07770987459748961,
+          "gain_over_previous": -0.09927119036691234,
+          "variance_resolved_gain": -0.1478939275507562,
+          "improved": false,
+          "improved_on_objective": false
+        },
+        {
+          "groups": [
+            "G1",
+            "G2",
+            "G5"
+          ],
+          "features_active": 8,
+          "mean_per_observation_objective": 0.5018853532819654,
+          "worst_fold": 0.5448418959065654,
+          "variance_resolved_out_of_fold": 0.03453067442011596,
+          "gain_over_previous": -0.00309182925038215,
+          "variance_resolved_gain": -0.04317920017737365,
+          "improved": false,
+          "improved_on_objective": false
+        }
+      ],
+      "decided_on": "variance_resolved_out_of_fold"
+    },
+    "BNBUSDT": {
+      "status": "MEASURED",
+      "model_id": "jm_k3_2026-08-10",
+      "training_window": [
+        "2025-08-10 00:00:00",
+        "2026-08-10 00:00:00"
+      ],
+      "window_is_inside_the_confirmation_interval": true,
+      "rows": 2190,
+      "blocks_that_improved_out_of_fold": [],
+      "blocks_that_did_not": [
+        "G2",
+        "G5"
+      ],
+      "ladder": [
+        {
+          "groups": [
+            "G1"
+          ],
+          "features_active": 3,
+          "mean_per_observation_objective": 0.4626216078512706,
+          "worst_fold": 0.5875201059561579,
+          "variance_resolved_out_of_fold": 0.24571877074394513,
+          "gain_over_previous": null,
+          "variance_resolved_gain": null,
+          "improved": null,
+          "improved_on_objective": null
+        },
+        {
+          "groups": [
+            "G1",
+            "G2"
+          ],
+          "features_active": 5,
+          "mean_per_observation_objective": 0.5319126549844011,
+          "worst_fold": 0.6047178115784488,
+          "variance_resolved_out_of_fold": 0.09487204485701743,
+          "gain_over_previous": -0.0692910471331305,
+          "variance_resolved_gain": -0.1508467258869277,
+          "improved": false,
+          "improved_on_objective": false
+        },
+        {
+          "groups": [
+            "G1",
+            "G2",
+            "G5"
+          ],
+          "features_active": 8,
+          "mean_per_observation_objective": 0.5609171762105438,
+          "worst_fold": 0.6949311165541535,
+          "variance_resolved_out_of_fold": 0.03342229898527427,
+          "gain_over_previous": -0.02900452122614272,
+          "variance_resolved_gain": -0.061449745871743164,
+          "improved": false,
+          "improved_on_objective": false
+        }
+      ],
+      "decided_on": "variance_resolved_out_of_fold"
+    },
+    "DOGEUSDT": {
+      "status": "MEASURED",
+      "model_id": "jm_k3_2026-08-10",
+      "training_window": [
+        "2025-08-10 00:00:00",
+        "2026-08-10 00:00:00"
+      ],
+      "window_is_inside_the_confirmation_interval": true,
+      "rows": 2190,
+      "blocks_that_improved_out_of_fold": [],
+      "blocks_that_did_not": [
+        "G2",
+        "G5"
+      ],
+      "ladder": [
+        {
+          "groups": [
+            "G1"
+          ],
+          "features_active": 3,
+          "mean_per_observation_objective": 0.42795226390118346,
+          "worst_fold": 0.5412586257180073,
+          "variance_resolved_out_of_fold": 0.17837808708653868,
+          "gain_over_previous": null,
+          "variance_resolved_gain": null,
+          "improved": null,
+          "improved_on_objective": null
+        },
+        {
+          "groups": [
+            "G1",
+            "G2"
+          ],
+          "features_active": 5,
+          "mean_per_observation_objective": 0.5327454359926799,
+          "worst_fold": 0.5503479482116389,
+          "variance_resolved_out_of_fold": 0.05179454981448243,
+          "gain_over_previous": -0.10479317209149641,
+          "variance_resolved_gain": -0.12658353727205626,
+          "improved": false,
+          "improved_on_objective": false
+        },
+        {
+          "groups": [
+            "G1",
+            "G2",
+            "G5"
+          ],
+          "features_active": 8,
+          "mean_per_observation_objective": 0.5141090051109621,
+          "worst_fold": 0.5784949869426825,
+          "variance_resolved_out_of_fold": 0.023744134595122923,
+          "gain_over_previous": 0.018636430881717736,
+          "variance_resolved_gain": -0.028050415219359505,
+          "improved": false,
+          "improved_on_objective": true
+        }
+      ],
+      "decided_on": "variance_resolved_out_of_fold"
+    }
+  },
+  "symbols_measured": 5,
+  "symbols_where_a_block_improved_out_of_fold": 0,
+  "symbols_improved": [],
+  "requirement_satisfied": false,
+  "finding": "no block beyond price and volatility improves out-of-fold variance resolved on any symbol inside the confirmation interval, which reproduces the development finding",
+  "registered_core_unchanged": true,
+  "why_unchanged": "selecting a feature set on this result would be choosing the model on an outcome. The finding is recorded; the core stays as registered"
+}

@@ -1,0 +1,401 @@
+{
+  "process_group": {
+    "pgid": 3396472,
+    "status": "OWNED"
+  },
+  "dependency_lock": {
+    "lockfile": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/requirements.lock",
+    "lockfile_sha256": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+    "installed_package_count": 31,
+    "wheelhouse_artifact_count": 31,
+    "unpinned_packages": [],
+    "fully_pinned": true,
+    "installed": {
+      "alembic": "1.19.2",
+      "colorlog": "6.12.0",
+      "greenlet": "3.5.5",
+      "iniconfig": "2.3.0",
+      "llvmlite": "0.47.0",
+      "Mako": "1.4.1",
+      "MarkupSafe": "3.0.3",
+      "numba": "0.65.1",
+      "numpy": "2.2.6",
+      "optuna": "4.8.0",
+      "packaging": "26.3",
+      "pandas": "2.3.3",
+      "pip": "25.0.1",
+      "pluggy": "1.6.0",
+      "pyarrow": "25.0.1",
+      "Pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.3.post1",
+      "PyYAML": "6.0.3",
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2",
+      "scipy": "1.18.1",
+      "setuptools": "84.0.0",
+      "six": "1.17.0",
+      "SQLAlchemy": "2.0.52",
+      "ta": "0.11.0",
+      "tqdm": "4.70.0",
+      "typing_extensions": "4.16.0",
+      "tzdata": "2026.3",
+      "wheel": "0.48.0"
+    }
+  },
+  "wheelhouse_artifacts": {
+    "alembic-1.19.2-py3-none-any.whl": {
+      "sha256": "32d553dcd577e6fe5c3c63e91468526d35e4dcecafe865d7db4e9b328fa93cb2",
+      "size_bytes": 267399
+    },
+    "colorlog-6.12.0-py3-none-any.whl": {
+      "sha256": "30d392604e9110045a2c2aeefc27d7a017abbab63f3a8aee594eac0801df784e",
+      "size_bytes": 12239
+    },
+    "greenlet-3.5.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "147b25a42e5ca5be3d42356e8f608b37af715a1c196e9bf9d1627f3341adfe1d",
+      "size_bytes": 621439
+    },
+    "iniconfig-2.3.0-py3-none-any.whl": {
+      "sha256": "f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12",
+      "size_bytes": 7484
+    },
+    "llvmlite-0.47.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl": {
+      "sha256": "5853bf26160857c0c2573415ff4efe01c4c651e59e2c55c2a088740acfee51cd",
+      "size_bytes": 56275178
+    },
+    "mako-1.4.1-py3-none-any.whl": {
+      "sha256": "a359d9a94a541213958742b2698d0a7757bb83551767bc468a74b9905aba9617",
+      "size_bytes": 80010
+    },
+    "markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "d6dd0be5b5b189d31db7cda48b91d7e0a9795f31430b7f271219ab30f1d3ac9d",
+      "size_bytes": 22947
+    },
+    "numba-0.65.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl": {
+      "sha256": "52bc6f3ceb8fcaff9b2ae26b4c6b1e9fee39db8d355534c0fe4f39a901246b84",
+      "size_bytes": 3802467
+    },
+    "numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+      "sha256": "fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249",
+      "size_bytes": 16527618
+    },
+    "optuna-4.8.0-py3-none-any.whl": {
+      "sha256": "c57a7682679c36bfc9bca0da430698179e513874074b71bebedb0334964ab930",
+      "size_bytes": 419456
+    },
+    "packaging-26.3-py3-none-any.whl": {
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "size_bytes": 129956
+    },
+    "pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "b3d11d2fda7eb164ef27ffc14b4fcab16a80e1ce67e9f57e19ec0afaf715ba89",
+      "size_bytes": 12362693
+    },
+    "pip-25.0.1-py3-none-any.whl": {
+      "sha256": "c46efd13b6aa8279f33f2864459c8ce587ea6a1a59ee20de055868d8f7688f7f",
+      "size_bytes": 1841526
+    },
+    "pluggy-1.6.0-py3-none-any.whl": {
+      "sha256": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+      "size_bytes": 20538
+    },
+    "pyarrow-25.0.1-cp312-cp312-manylinux_2_28_x86_64.whl": {
+      "sha256": "5389cdf79447ed1515c9e31620e6e1e2302249564d603f2ad727d4f6d313e4c3",
+      "size_bytes": 50102437
+    },
+    "pygments-2.21.0-py3-none-any.whl": {
+      "sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "size_bytes": 1250147
+    },
+    "pytest-9.1.1-py3-none-any.whl": {
+      "sha256": "37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c",
+      "size_bytes": 386536
+    },
+    "python_dateutil-2.9.0.post0-py2.py3-none-any.whl": {
+      "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+      "size_bytes": 229892
+    },
+    "pytz-2026.3.post1-py2.py3-none-any.whl": {
+      "sha256": "dd95840dd199baea12d9cc096a1d452caa6596a1c1e4b5f3dbd1541855d5e815",
+      "size_bytes": 508283
+    },
+    "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc",
+      "size_bytes": 807870
+    },
+    "quantbt_engine-1.1.1-py3-none-any.whl": {
+      "sha256": "9a1c7af724e543d8cba338206c0b2c64afe1fb3a621f21b2505454c4807b8587",
+      "size_bytes": 912472
+    },
+    "quantbt_native-0.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+      "sha256": "e56d204778d94101b49a1259a276abf9684c689af4277f6b8d08e9d9275376d5",
+      "size_bytes": 1163795
+    },
+    "scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "f55fa87b6c612ecd6b058f167c53231b1d14e412efe361d3d6e38b3631c73218",
+      "size_bytes": 35344199
+    },
+    "setuptools-84.0.0-py3-none-any.whl": {
+      "sha256": "51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670",
+      "size_bytes": 818216
+    },
+    "six-1.17.0-py2.py3-none-any.whl": {
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "size_bytes": 11050
+    },
+    "sqlalchemy-2.0.52-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "8738008376d22f30f411ea3efecf39b51110b6996d80bb73786f30bcfdd5fd3b",
+      "size_bytes": 3398577
+    },
+    "ta-0.11.0.tar.gz": {
+      "sha256": "de86af43418420bd6b088a2ea9b95483071bf453c522a8441bc2f12bcf8493fd",
+      "size_bytes": 25308
+    },
+    "tqdm-4.70.0-py3-none-any.whl": {
+      "sha256": "7f585706bfddbdebf89daac705b2dfcc16890130727d3197ca62c732b4310953",
+      "size_bytes": 80184
+    },
+    "typing_extensions-4.16.0-py3-none-any.whl": {
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "size_bytes": 45571
+    },
+    "tzdata-2026.3-py2.py3-none-any.whl": {
+      "sha256": "dc096730c87af6cab1b171c9d532be840741ff5d459015e7f6947bd7d7e54931",
+      "size_bytes": 348168
+    },
+    "wheel-0.48.0-py3-none-any.whl": {
+      "sha256": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "size_bytes": 33320
+    }
+  },
+  "native_capability": {
+    "symbols": {
+      "bound": {
+        "NATIVE_EVENT_CAPABILITY_MATRIX": {
+          "kind": "mappingproxy",
+          "signature": null,
+          "doc_first_line": null,
+          "module": null,
+          "defined_in": null,
+          "source_line": null
+        },
+        "NATIVE_EVENT_CAPABILITY_MATRIX_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "full-contract-v2-0.4"
+        },
+        "NATIVE_EVENT_CONTRACT_FINGERPRINT": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "601d639f1c398ac81f3c8231c30d067372c80e71ae4e5f097182f00c5c91f05d"
+        },
+        "NATIVE_EVENT_CORE_PROTOCOL_VERSION": {
+          "kind": "int",
+          "signature": null,
+          "doc_first_line": "int([x]) -> integer",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": 1
+        },
+        "NATIVE_EVENT_COMMAND_ABI_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "full-command-v1"
+        },
+        "NATIVE_EVENT_SEMANTIC_DESCRIPTOR_VERSION": {
+          "kind": "str",
+          "signature": null,
+          "doc_first_line": "str(object='') -> str",
+          "module": null,
+          "defined_in": null,
+          "source_line": null,
+          "value": "native-event-semantics-v1"
+        },
+        "native_event_capability_matrix": {
+          "kind": "function",
+          "signature": "() -> 'dict[str, bool]'",
+          "doc_first_line": "Return a mutable copy of the canonical capability matrix.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 47
+        },
+        "native_event_semantic_descriptor": {
+          "kind": "function",
+          "signature": "() -> 'dict[str, object]'",
+          "doc_first_line": "Return the structured execution semantics required from API 0.4 Rust.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 64
+        },
+        "capability_matrix_fingerprint": {
+          "kind": "function",
+          "signature": "() -> 'str'",
+          "doc_first_line": "Return a reproducible SHA-256 fingerprint for the capability contract.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 53
+        },
+        "semantic_descriptor_fingerprint": {
+          "kind": "function",
+          "signature": "(descriptor: 'Mapping[str, object] | None' = None) -> 'str'",
+          "doc_first_line": null,
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 80
+        },
+        "validate_native_event_capability_matrix": {
+          "kind": "function",
+          "signature": "(matrix: 'Mapping[str, object]') -> 'None'",
+          "doc_first_line": "Raise if a consumer attempts to advertise an unknown capability.",
+          "module": "quantbt.core.native_event_capabilities",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_capabilities.py",
+          "source_line": 118
+        },
+        "assert_native_event_full_parity": {
+          "kind": "function",
+          "signature": "(candidate: 'object', oracle: 'object', *, numeric_atol: 'float' = 1e-12, capabilities: 'Mapping[str, object] | None' = None, command_tape: 'object | tuple[object, object] | None' = None, require_full: 'bool' = True) -> 'dict[str, object]'",
+          "doc_first_line": "Compare complete observable lifecycle and accounting artifacts.",
+          "module": "quantbt.core.native_event_parity",
+          "defined_in": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/core/native_event_parity.py",
+          "source_line": 268
+        }
+      },
+      "absent": [],
+      "bound_count": 12
+    },
+    "capability_matrix": {
+      "amend": true,
+      "cancel": true,
+      "fok": true,
+      "funding": true,
+      "gtc": true,
+      "gtd": true,
+      "ioc": true,
+      "limit": true,
+      "liquidation": true,
+      "market": true,
+      "multi_symbol": true,
+      "oco": true,
+      "parent_child": true,
+      "place": true,
+      "quantity_constraints": true,
+      "reduce_only": true,
+      "replace": true,
+      "single_symbol": true,
+      "stop_limit": true,
+      "stop_market": true
+    },
+    "native_event_capability_matrix_version": "full-contract-v2-0.4",
+    "native_event_contract_fingerprint": "601d639f1c398ac81f3c8231c30d067372c80e71ae4e5f097182f00c5c91f05d",
+    "native_event_core_protocol_version": 1,
+    "native_event_command_abi_version": "full-command-v1",
+    "native_event_semantic_descriptor_version": "native-event-semantics-v1",
+    "required_fixture_capabilities": {
+      "oco": true,
+      "amend": true,
+      "cancel": true,
+      "limit": true,
+      "market": true,
+      "funding": true,
+      "liquidation": true,
+      "multi_symbol": true,
+      "ioc": true,
+      "fok": true,
+      "gtc": true,
+      "gtd": true
+    },
+    "missing_required_capabilities": []
+  },
+  "process_separation": {
+    "baseline": {
+      "status": "OK",
+      "pid": 2,
+      "sys_path_head": "",
+      "quantbt_file": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+      "quantbt_version_attr": "1.1.1",
+      "dist_version": "1.1.1"
+    },
+    "candidate": {
+      "status": "OK",
+      "pid": 2,
+      "sys_path_head": "/root/bobby/pool_alpha/lab_regime_model_quantbt/quantbt_candidate",
+      "quantbt_file": "/root/bobby/pool_alpha/lab_regime_model_quantbt/quantbt_candidate/quantbt/__init__.py",
+      "quantbt_version_attr": "1.1.1",
+      "dist_version": "1.1.1"
+    },
+    "separate_subprocess_invocations": true,
+    "pid_namespace_isolated": true,
+    "pid_note": "both workers report a low pid because each has its own pid namespace; that is isolation, not process sharing",
+    "different_import_origins": true,
+    "baseline_from_lab_venv": true,
+    "candidate_from_lab_copy": true,
+    "neither_imports_from_a_protected_root": true,
+    "status": "SEPARATED"
+  },
+  "environment": {
+    "python_version": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+    "numba": {
+      "numba_version": "0.65.1",
+      "llvmlite_version": "0.47.0",
+      "threading_layer": null,
+      "num_threads": 4,
+      "default_num_threads": 4,
+      "cache_dir": null,
+      "disable_jit": 0,
+      "fastmath_policy": "lab reference kernels must run fastmath=False; a fastmath variant is a separate recorded version, never a silent substitution (guide L02.2)"
+    },
+    "threads": {
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "NUMBA_NUM_THREADS": null,
+      "os_sched_affinity": 4
+    },
+    "python_executable": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+    "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "hostname": "Bobby",
+    "cpu_count": 4,
+    "packages": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "numba": "0.65.1",
+      "llvmlite": "0.47.0",
+      "scipy": "1.18.1",
+      "pyarrow": "25.0.1",
+      "ta": "0.11.0",
+      "optuna": "4.8.0",
+      "pytest": "9.1.1"
+    },
+    "quantbt_import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "env_flags": {
+      "PYTHONDONTWRITEBYTECODE": null,
+      "NUMBA_CACHE_DIR": null,
+      "MPLCONFIGDIR": null,
+      "TMPDIR": null
+    }
+  },
+  "editable_policy": "Development editable code lives only under LAB_ROOT/src and LAB_ROOT/quantbt_candidate. The baseline install in environments/lab_venv is never edited, and no editable install points at a protected root.",
+  "schema": "crypto_regime_lab.environment_pin.v1",
+  "lab_run_id": "run-20260909T171411Z-ddf65d5d",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T17:14:23.575282+00:00"
+}

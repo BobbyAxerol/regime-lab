@@ -1,0 +1,490 @@
+{
+  "schema": "crypto_regime_lab.provenance_report.v1",
+  "documents_read": {
+    "product_docs": {
+      "crypto_binance_spot_1m": {
+        "document": "BINANCE_SPOT_1M.md",
+        "found": true,
+        "sha256": "9dbf36417303deb7a8c2b2f8a0f1dd137c5e66598653875771a6440f13012f46",
+        "lines": 80,
+        "documented_config": {
+          "configured_symbols": [
+            "BTCUSDT"
+          ],
+          "configured_start": "2018-01-01",
+          "consequence": "the four other symbols were never COLLECTED; the data is not lost, it was never configured, so no amount of re-reading storage will produce it"
+        }
+      },
+      "crypto_binance_futures_metrics_5m": {
+        "document": "BINANCE_FUTURES_METRICS_5M.md",
+        "found": true,
+        "sha256": "f7c6fc010de15a06aa69254cc4806e1cae5cc7e0b9080807d5a4660ee7f08c68",
+        "lines": 107,
+        "documented_config": {
+          "configured_symbols": [
+            "BTCUSDT",
+            "ETHUSDT",
+            "LINKUSDT",
+            "ARBUSDT",
+            "OPUSDT",
+            "POLUSDT",
+            "AAVEUSDT"
+          ],
+          "configured_start": "auto-discover earliest on Binance Vision",
+          "consequence": "SOLUSDT, BNBUSDT and DOGEUSDT are not in the collector config, so the G3 derivatives block can only ever cover BTCUSDT and ETHUSDT here"
+        }
+      },
+      "crypto_binance_orderbook_snapshot_1h": {
+        "document": "BINANCE_ORDERBOOK_SNAPSHOT_1H.md",
+        "found": true,
+        "sha256": "9644b9046a1021f40336da1ef7a3d054e1837bf5a42970faeebeecf004899de9",
+        "lines": 122,
+        "documented_config": {
+          "configured_symbols": [
+            "BTCUSDT"
+          ],
+          "lookback_days": 30,
+          "consequence": "THIS PRODUCT IS A ROLLING 30-DAY WINDOW. It cannot accumulate history, so SERVER_LIQUIDITY can never support a historical study on this storage; treating its few weeks as a cohort would be a mistake, not a limitation"
+        }
+      },
+      "crypto_binance_futures_1m": {
+        "document": "BINANCE_USDM_QUARTERLY_1M.md",
+        "found": true,
+        "sha256": "f32b65b744fab79608aaf70776e298bc886389ac7fc60891e0791b481b46250e",
+        "lines": 113,
+        "documented_config": {
+          "configured_symbols": "USD-M perpetuals plus discovered quarterly contracts",
+          "consequence": "the five trade symbols are all present"
+        }
+      }
+    },
+    "revision_docs": [
+      {
+        "document": "CONTINUITY_REPAIR_2026-06-12.md",
+        "found": true,
+        "sha256": "af7537dd5a3c3544ae75c0b1ffbfcff7344bc33a261322200cf9517319e59545"
+      },
+      {
+        "document": "BINANCE_DAILY_MATRIX_REPAIR_2026-06-16.md",
+        "found": true,
+        "sha256": "6f557ae8de5c810f707f612cfbd8b8c8e8138cc2d4a743315e2dc4de7176b144"
+      }
+    ]
+  },
+  "documented_revisions": [
+    {
+      "id": "CONTINUITY_REPAIR_2026-06-12",
+      "affects": "crypto 1m storage",
+      "window": [
+        "2026-05-01",
+        "2026-06-06"
+      ],
+      "what_happened": "the seeded history ended in early May while the live service resumed on 2026-06-06, leaving a real gap in the raw 1m data",
+      "remedy": "the missing range was re-fetched from the Binance futures API and appended, deduplicated on (symbol, time)",
+      "lab_consequence": "bars in that window carry a later ingest vintage; they are masked REPAIRED so a study can flag or exclude them"
+    },
+    {
+      "id": "BINANCE_DAILY_MATRIX_REPAIR_2026-06-16",
+      "affects": "crypto/binance_daily_matrix",
+      "window": null,
+      "what_happened": "the matrix only ever held 16 rows because the collector read a global latest index and never backfilled the head",
+      "remedy": "history-first backfill policy; only fully closed daily candles are written",
+      "lab_consequence": "this lab does not consume the daily matrix, so nothing here depends on it; recorded for completeness"
+    }
+  ],
+  "observed_vintages": {
+    "BTCUSDT": [
+      {
+        "symbol": "BTCUSDT",
+        "partition": "2026-03",
+        "ingest_days": [
+          "2026-06-06"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-06": 44640
+        },
+        "repaired_rows": 0,
+        "seed_like": true,
+        "classification": "bulk_seed"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "partition": "2026-04",
+        "ingest_days": [
+          "2026-06-06"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-06": 43200
+        },
+        "repaired_rows": 0,
+        "seed_like": true,
+        "classification": "bulk_seed"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "partition": "2026-05",
+        "ingest_days": [
+          "2026-06-06",
+          "2026-06-12"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-12": 44020,
+          "2026-06-06": 620
+        },
+        "repaired_rows": 44020,
+        "seed_like": false,
+        "classification": "repair_or_partial_backfill"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "partition": "2026-06",
+        "ingest_days": [
+          "2026-06-06",
+          "2026-06-07",
+          "2026-06-08",
+          "2026-06-09",
+          "2026-06-10",
+          "2026-06-11",
+          "2026-06-12",
+          "2026-06-13",
+          "2026-06-14",
+          "2026-06-15",
+          "2026-06-16",
+          "2026-06-17",
+          "2026-06-18",
+          "2026-06-19",
+          "2026-06-20",
+          "2026-06-21",
+          "2026-06-22",
+          "2026-06-23",
+          "2026-06-24",
+          "2026-06-25",
+          "2026-06-26",
+          "2026-06-27",
+          "2026-06-28",
+          "2026-06-29",
+          "2026-06-30",
+          "2026-07-01"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-12": 9094,
+          "2026-06-14": 1442,
+          "2026-06-11": 1441,
+          "2026-06-10": 1441,
+          "2026-06-20": 1441,
+          "2026-06-28": 1441,
+          "2026-06-26": 1441,
+          "2026-06-23": 1441,
+          "2026-06-18": 1441,
+          "2026-06-15": 1440,
+          "2026-06-30": 1440,
+          "2026-06-24": 1440,
+          "2026-06-21": 1440,
+          "2026-06-19": 1440,
+          "2026-06-08": 1440,
+          "2026-06-29": 1440,
+          "2026-06-07": 1439,
+          "2026-06-09": 1439,
+          "2026-06-22": 1439,
+          "2026-06-25": 1439,
+          "2026-06-17": 1439,
+          "2026-06-16": 1439,
+          "2026-06-27": 1439,
+          "2026-06-13": 1438,
+          "2026-06-06": 974,
+          "2026-07-01": 12
+        },
+        "repaired_rows": 0,
+        "seed_like": false,
+        "classification": "live_daily_append"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "partition": "2026-07",
+        "ingest_days": [
+          "2026-07-01",
+          "2026-07-02",
+          "2026-07-03",
+          "2026-07-04",
+          "2026-07-05",
+          "2026-07-06",
+          "2026-07-07",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-10",
+          "2026-07-11",
+          "2026-07-12",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17",
+          "2026-07-18",
+          "2026-07-19",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-23",
+          "2026-07-24",
+          "2026-07-25",
+          "2026-07-26",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30",
+          "2026-07-31",
+          "2026-08-01"
+        ],
+        "rows_by_ingest_day": {
+          "2026-07-02": 1441,
+          "2026-07-07": 1441,
+          "2026-07-14": 1441,
+          "2026-07-10": 1441,
+          "2026-07-28": 1441,
+          "2026-07-17": 1441,
+          "2026-07-06": 1440,
+          "2026-07-11": 1440,
+          "2026-07-12": 1440,
+          "2026-07-15": 1440,
+          "2026-07-09": 1440,
+          "2026-07-21": 1440,
+          "2026-07-18": 1440,
+          "2026-07-19": 1440,
+          "2026-07-05": 1440,
+          "2026-07-03": 1440,
+          "2026-07-24": 1440,
+          "2026-07-25": 1440,
+          "2026-07-27": 1440,
+          "2026-07-29": 1440,
+          "2026-07-30": 1440,
+          "2026-07-22": 1440,
+          "2026-07-23": 1440,
+          "2026-07-20": 1440,
+          "2026-07-04": 1439,
+          "2026-07-16": 1439,
+          "2026-07-08": 1439,
+          "2026-07-13": 1439,
+          "2026-07-31": 1439,
+          "2026-07-26": 1439,
+          "2026-07-01": 1427,
+          "2026-08-01": 13
+        },
+        "repaired_rows": 0,
+        "seed_like": false,
+        "classification": "live_daily_append"
+      }
+    ],
+    "ETHUSDT": [
+      {
+        "symbol": "ETHUSDT",
+        "partition": "2026-03",
+        "ingest_days": [
+          "2026-06-06"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-06": 44640
+        },
+        "repaired_rows": 0,
+        "seed_like": true,
+        "classification": "bulk_seed"
+      },
+      {
+        "symbol": "ETHUSDT",
+        "partition": "2026-04",
+        "ingest_days": [
+          "2026-06-06"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-06": 43200
+        },
+        "repaired_rows": 0,
+        "seed_like": true,
+        "classification": "bulk_seed"
+      },
+      {
+        "symbol": "ETHUSDT",
+        "partition": "2026-05",
+        "ingest_days": [
+          "2026-06-06",
+          "2026-06-12"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-12": 43939,
+          "2026-06-06": 701
+        },
+        "repaired_rows": 43939,
+        "seed_like": false,
+        "classification": "repair_or_partial_backfill"
+      },
+      {
+        "symbol": "ETHUSDT",
+        "partition": "2026-06",
+        "ingest_days": [
+          "2026-06-06",
+          "2026-06-07",
+          "2026-06-08",
+          "2026-06-09",
+          "2026-06-10",
+          "2026-06-11",
+          "2026-06-12",
+          "2026-06-13",
+          "2026-06-14",
+          "2026-06-15",
+          "2026-06-16",
+          "2026-06-17",
+          "2026-06-18",
+          "2026-06-19",
+          "2026-06-20",
+          "2026-06-21",
+          "2026-06-22",
+          "2026-06-23",
+          "2026-06-24",
+          "2026-06-25",
+          "2026-06-26",
+          "2026-06-27",
+          "2026-06-28",
+          "2026-06-29",
+          "2026-06-30",
+          "2026-07-01"
+        ],
+        "rows_by_ingest_day": {
+          "2026-06-12": 9094,
+          "2026-06-08": 1441,
+          "2026-06-14": 1441,
+          "2026-06-11": 1441,
+          "2026-06-27": 1441,
+          "2026-06-20": 1441,
+          "2026-06-28": 1441,
+          "2026-06-17": 1440,
+          "2026-06-15": 1440,
+          "2026-06-10": 1440,
+          "2026-06-30": 1440,
+          "2026-06-23": 1440,
+          "2026-06-29": 1440,
+          "2026-06-24": 1440,
+          "2026-06-22": 1440,
+          "2026-06-21": 1440,
+          "2026-06-19": 1440,
+          "2026-06-18": 1440,
+          "2026-06-16": 1439,
+          "2026-06-13": 1439,
+          "2026-06-07": 1439,
+          "2026-06-09": 1439,
+          "2026-06-26": 1439,
+          "2026-06-25": 1439,
+          "2026-06-06": 974,
+          "2026-07-01": 12
+        },
+        "repaired_rows": 0,
+        "seed_like": false,
+        "classification": "live_daily_append"
+      },
+      {
+        "symbol": "ETHUSDT",
+        "partition": "2026-07",
+        "ingest_days": [
+          "2026-07-01",
+          "2026-07-02",
+          "2026-07-03",
+          "2026-07-04",
+          "2026-07-05",
+          "2026-07-06",
+          "2026-07-07",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-10",
+          "2026-07-11",
+          "2026-07-12",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17",
+          "2026-07-18",
+          "2026-07-19",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-23",
+          "2026-07-24",
+          "2026-07-25",
+          "2026-07-26",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30",
+          "2026-07-31",
+          "2026-08-01"
+        ],
+        "rows_by_ingest_day": {
+          "2026-07-15": 1442,
+          "2026-07-02": 1441,
+          "2026-07-10": 1441,
+          "2026-07-07": 1441,
+          "2026-07-13": 1441,
+          "2026-07-28": 1441,
+          "2026-07-05": 1440,
+          "2026-07-06": 1440,
+          "2026-07-16": 1440,
+          "2026-07-11": 1440,
+          "2026-07-09": 1440,
+          "2026-07-21": 1440,
+          "2026-07-18": 1440,
+          "2026-07-19": 1440,
+          "2026-07-17": 1440,
+          "2026-07-03": 1440,
+          "2026-07-24": 1440,
+          "2026-07-25": 1440,
+          "2026-07-27": 1440,
+          "2026-07-29": 1440,
+          "2026-07-30": 1440,
+          "2026-07-22": 1440,
+          "2026-07-23": 1440,
+          "2026-07-20": 1440,
+          "2026-07-04": 1439,
+          "2026-07-26": 1439,
+          "2026-07-08": 1439,
+          "2026-07-14": 1439,
+          "2026-07-31": 1439,
+          "2026-07-12": 1438,
+          "2026-07-01": 1427,
+          "2026-08-01": 13
+        },
+        "repaired_rows": 0,
+        "seed_like": false,
+        "classification": "live_daily_append"
+      }
+    ]
+  },
+  "vintage_classification_counts": {
+    "bulk_seed": 4,
+    "repair_or_partial_backfill": 2,
+    "live_daily_append": 4
+  },
+  "repaired_partitions": [
+    {
+      "symbol": "BTCUSDT",
+      "partition": "2026-05",
+      "ingest_days": [
+        "2026-06-06",
+        "2026-06-12"
+      ],
+      "rows_from_the_later_ingest": 44020
+    },
+    {
+      "symbol": "ETHUSDT",
+      "partition": "2026-05",
+      "ingest_days": [
+        "2026-06-06",
+        "2026-06-12"
+      ],
+      "rows_from_the_later_ingest": 43939
+    }
+  ],
+  "documentation_matches_storage": true,
+  "documentation_mismatches": [],
+  "reading": "the absences in this storage are CONFIGURATION, not loss: spot tracks BTCUSDT only, the metrics collector never listed SOL/BNB/DOGE, and the order-book product keeps a rolling 30-day window so it can never accumulate history. The 2026-05 partitions carry two ingest days, which is the documented continuity repair visible in the data.",
+  "lab_run_id": "run-20260909T195038Z-5c977e09",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:52:17.209939+00:00"
+}

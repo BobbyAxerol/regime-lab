@@ -1,0 +1,29 @@
+{
+  "schema": "crypto_regime_lab.minimum_economic_effect.v1",
+  "registered_at_utc": "2026-09-09T20:11:32.125140+00:00",
+  "registered_before_any_arm_comparison": true,
+  "definition": "the smallest mean daily net-return difference the lab will call economically meaningful for the primary endpoint",
+  "derivation": {
+    "taker_fee": 0.0004,
+    "slippage": 0.0001,
+    "round_trip_cost": 0.001,
+    "cost_stress_multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "cost_uncertainty_per_round_trip": 0.001,
+    "round_trips_per_day_by_alpha": {
+      "A-SC": 0.064,
+      "A-HMA": 0.016,
+      "A-VWAP": 0.0256,
+      "A-HASH": 0.064
+    },
+    "busiest_alpha_round_trips_per_day": 0.064,
+    "formula": "cost_uncertainty_per_round_trip * busiest_round_trips_per_day"
+  },
+  "minimum_daily_net_return_difference": 6.4e-05,
+  "minimum_daily_net_return_bps": 0.64,
+  "rule": "an improvement smaller than this sits inside the registered cost-stress band and is reported as inconclusive, not as an edge. The threshold is fixed now, before any arm has been compared, so it can never be chosen to fit an observed delta (guide 11.2).",
+  "turnover_source": "market qualification on development slices; a smoke measurement, not a performance claim"
+}

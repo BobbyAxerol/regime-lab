@@ -1,0 +1,241 @@
+{
+  "schema": "crypto_regime_lab.correction_ledger.v1",
+  "guide_section": "13.7",
+  "built_at_utc": "2026-09-11T00:52:41.825055+00:00",
+  "rule": "guide 13.7: when validity fails, fix it in the lab, version it and INVALIDATE the affected results -- do not carry on taking headlines. Prose in a report does not let a reader check which published number a defect killed",
+  "method": "the numeric history is DERIVED from every evidence run that wrote the artifact, in timestamp order. The evidence tree is append-only, so the run that produced the superseded number is still there to be read",
+  "defects": [
+    {
+      "id": "COR-01",
+      "phase": "LAB-07",
+      "defect": "the intent tape was built from the FINAL adapter's decision list, so every trade made under an earlier parameter version vanished while still counting as an entry",
+      "invalidated": "the first continuous-account return",
+      "changed": "lab07_continuous_trace.json",
+      "guarded_by": "tests/test_lab07_integration.py::test_the_tape_is_built_from_the_active_adapter_at_every_bar",
+      "numeric_change": [
+        {
+          "from": {
+            "total_return": 0.021052071167515063,
+            "entries": 75,
+            "fills": 18,
+            "warm_source": null
+          },
+          "to": {
+            "total_return": 0.0017171592602391872,
+            "entries": 75,
+            "fills": 150,
+            "warm_source": null
+          },
+          "superseded_run": "run-20260910T120600Z-02130c64",
+          "superseding_run": "run-20260910T120812Z-64cab435"
+        }
+      ],
+      "verification": "DERIVED_FROM_EVIDENCE"
+    },
+    {
+      "id": "COR-02",
+      "phase": "LAB-07",
+      "defect": "the warm-bar requirement before an activation was a hardcoded 64, an unregistered free parameter of the switching policy; it is now derived from each adapter's own warmup_bars()",
+      "invalidated": "the return measured under the arbitrary delay",
+      "changed": "lab07_continuous_trace.json",
+      "guarded_by": "tests/test_lab07_integration.py::test_the_warm_requirement_is_the_adapters_own_declaration",
+      "numeric_change": [
+        {
+          "from": {
+            "total_return": 0.0017171592602391872,
+            "entries": 75,
+            "fills": 150,
+            "warm_source": null
+          },
+          "to": {
+            "total_return": 0.004523948540733791,
+            "entries": 74,
+            "fills": 148,
+            "warm_source": "derived_from_adapter_warmup_bars"
+          },
+          "superseded_run": "run-20260910T122902Z-8048e687",
+          "superseding_run": "run-20260910T123348Z-1fe865bf"
+        }
+      ],
+      "verification": "DERIVED_FROM_EVIDENCE"
+    },
+    {
+      "id": "COR-03",
+      "phase": "LAB-07",
+      "defect": "the continuous account was driven from the 4h feature panel with no signals, so it made zero trades and every exit gate passed on an empty account",
+      "invalidated": "the first run entirely (no fills, flat equity, one segment)",
+      "changed": "lab07_continuous_trace.json",
+      "guarded_by": "tests/test_lab07_integration.py::test_the_run_actually_traded",
+      "numeric_change": [
+        {
+          "from": {
+            "total_return": null,
+            "entries": null,
+            "fills": null,
+            "warm_source": null
+          },
+          "to": {
+            "total_return": 0.021052071167515063,
+            "entries": 75,
+            "fills": 18,
+            "warm_source": null
+          },
+          "superseded_run": "run-20260910T115825Z-75d5a47d",
+          "superseding_run": "run-20260910T120600Z-02130c64"
+        }
+      ],
+      "verification": "DERIVED_FROM_EVIDENCE"
+    },
+    {
+      "id": "COR-04",
+      "phase": "LAB-06",
+      "defect": "every_switch_has_supporting_episodes was reported True over ZERO switches and quoted as evidence that every switch carried its evidence",
+      "invalidated": "the claim, not a number: the switch count was always 0 and stays 0",
+      "changed": null,
+      "guarded_by": "tests/test_contingency_paths.py::test_a_ledger_verdict_over_an_empty_population_is_labelled_vacuous",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-05",
+      "phase": "LAB-06",
+      "defect": "a leaked loop variable gave every bank entry the LAST discovery's timestamp, so the lineage field T46 protects was wrong on all of them",
+      "invalidated": "the first bank build (sizes [0,0,0,0,0,8])",
+      "changed": null,
+      "guarded_by": "tests/test_lab06_policy.py::test_t46_every_entry_carries_its_own_discovery_time",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-06",
+      "phase": "LAB-06",
+      "defect": "the contiguous-block support gate counted blocks over every episode with weight > 1e-9, and a Gaussian kernel never reaches zero, so every estimate looked like one unbroken run and every recommendation was refused for the wrong reason",
+      "invalidated": "the first response panel (0 SUPPORTED estimates)",
+      "changed": null,
+      "guarded_by": "tests/test_lab06_policy.py::test_t48_a_single_contiguous_block_is_not_enough_support",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-07",
+      "phase": "LAB-06",
+      "defect": "switch assessment ran on the 7-day episode boundary instead of the registered 4h regime observation, tying two of the four clocks together",
+      "invalidated": "the first decision ledger (155 decisions instead of 6566)",
+      "changed": null,
+      "guarded_by": "tests/test_lab06_policy.py::test_t52_the_four_clocks_are_distinct",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-08",
+      "phase": "LAB-05",
+      "defect": "the model was fitted at a 6-month cadence against a registered 28-day one",
+      "invalidated": "the first emission tape (762 of 1099 emissions STALE_MODEL)",
+      "changed": null,
+      "guarded_by": "tests/test_lab05_regime.py::test_t43_a_stale_model_is_reported_not_hidden",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-09",
+      "phase": "LAB-04",
+      "defect": "the probe design used hash() on strings and unsorted set iteration, both salted by PYTHONHASHSEED, so a design did not reproduce across processes",
+      "invalidated": "the first probe designs",
+      "changed": null,
+      "guarded_by": "tests/test_lab04_selector.py::test_t32_probe_design_is_reproducible_across_processes",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-10",
+      "phase": "LAB-04",
+      "defect": "the space-filling anchor required by guide 7.2 step 1 was missing from the candidate design",
+      "invalidated": "the whole first 20-cell matrix, which was re-run",
+      "changed": null,
+      "guarded_by": "tests/test_lab04_legacy_labelling.py::test_the_audit_refuses_a_matrix_built_with_the_wrong_design",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-11",
+      "phase": "cross-phase",
+      "defect": "configs/data_eligibility.json was written from an earlier read of the snapshot than the one the study pins, under-counting every symbol",
+      "invalidated": "the published per-symbol row counts",
+      "changed": null,
+      "guarded_by": "tests/test_lab03_pipeline.py::test_data_eligibility_reproduces_from_the_pinned_manifest",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-12",
+      "phase": "cross-phase",
+      "defect": "the read-lock classified drift by file digest alone, so it invalidated a cohort whose measurements were provably unchanged",
+      "invalidated": "the EXTERNAL_DATA_DRIFT verdict on the G3 cohort",
+      "changed": null,
+      "guarded_by": "tests/test_lab03_pipeline.py::test_measured_metrics_drift_is_a_restamp_and_the_shallow_check_still_fails_closed",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    }
+  ],
+  "defects_total": 12,
+  "numeric_history": {
+    "lab07_continuous_trace.json": [
+      {
+        "from": {
+          "total_return": null,
+          "entries": null,
+          "fills": null,
+          "warm_source": null
+        },
+        "to": {
+          "total_return": 0.021052071167515063,
+          "entries": 75,
+          "fills": 18,
+          "warm_source": null
+        },
+        "superseded_run": "run-20260910T115825Z-75d5a47d",
+        "superseding_run": "run-20260910T120600Z-02130c64"
+      },
+      {
+        "from": {
+          "total_return": 0.021052071167515063,
+          "entries": 75,
+          "fills": 18,
+          "warm_source": null
+        },
+        "to": {
+          "total_return": 0.0017171592602391872,
+          "entries": 75,
+          "fills": 150,
+          "warm_source": null
+        },
+        "superseded_run": "run-20260910T120600Z-02130c64",
+        "superseding_run": "run-20260910T120812Z-64cab435"
+      },
+      {
+        "from": {
+          "total_return": 0.0017171592602391872,
+          "entries": 75,
+          "fills": 150,
+          "warm_source": null
+        },
+        "to": {
+          "total_return": 0.004523948540733791,
+          "entries": 74,
+          "fills": 148,
+          "warm_source": "derived_from_adapter_warmup_bars"
+        },
+        "superseded_run": "run-20260910T122902Z-8048e687",
+        "superseding_run": "run-20260910T123348Z-1fe865bf"
+      }
+    ],
+    "lab06_decision_ledger.json": [],
+    "lab05_k_selection.json": []
+  },
+  "unverifiable": [],
+  "evidence_is_append_only": true,
+  "status": "EVERY_CORRECTION_TRACEABLE",
+  "lab_run_id": "run-20260911T005241Z-e6c86771",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T00:52:41.826582+00:00"
+}

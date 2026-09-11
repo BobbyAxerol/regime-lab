@@ -1,0 +1,110 @@
+{
+  "schema": "crypto_regime_lab.group_ablation.v1",
+  "ladder": [
+    {
+      "groups": [
+        "G1"
+      ],
+      "features_active": 3,
+      "mean_per_observation_objective": 0.41678967922239357,
+      "worst_fold": 0.48227617996492694,
+      "variance_resolved_out_of_fold": 0.28992609853335966,
+      "gain_over_previous": null,
+      "variance_resolved_gain": null,
+      "improved": null,
+      "improved_on_objective": null
+    },
+    {
+      "groups": [
+        "G1",
+        "G2"
+      ],
+      "features_active": 5,
+      "mean_per_observation_objective": 0.4946179444517845,
+      "worst_fold": 0.5278900018501075,
+      "variance_resolved_out_of_fold": 0.14771140780297307,
+      "gain_over_previous": -0.0778282652293909,
+      "variance_resolved_gain": -0.1422146907303866,
+      "improved": false,
+      "improved_on_objective": false
+    },
+    {
+      "groups": [
+        "G1",
+        "G2",
+        "G5"
+      ],
+      "features_active": 8,
+      "mean_per_observation_objective": 0.5587052170804337,
+      "worst_fold": 0.6061693828856989,
+      "variance_resolved_out_of_fold": 0.09757150303994926,
+      "gain_over_previous": -0.06408727262864927,
+      "variance_resolved_gain": -0.05013990476302381,
+      "improved": false,
+      "improved_on_objective": false
+    }
+  ],
+  "blocks_that_improved_out_of_fold": [],
+  "blocks_that_did_not": [
+    "G2",
+    "G5"
+  ],
+  "scored_on": "held-out inner chronological blocks of the development window",
+  "holdout_used": false,
+  "weights_renormalised": true,
+  "decided_on": "variance_resolved_out_of_fold",
+  "why_not_the_objective": "a different feature set is a DIFFERENT objective function, so its value is not comparable across rows -- a higher number can mean worse states or simply noisier features. variance_resolved is within-state over total weighted variance subtracted from one, which means the same thing at 3 features and at 8. The objective column is kept for reference and is not what the verdict rests on",
+  "requirement": "guide 8.3: flow and market-coordination blocks must be shown to contribute BEYOND price/volatility. A block that does not is reported as not contributing, not quietly retained",
+  "interpretation_limit": "this measures contribution to the FIT objective out of fold. It says nothing about whether the extra block improves a trading decision, which is a LAB-06+ question",
+  "model_ladder": {
+    "schema": "crypto_regime_lab.model_ladder.v1",
+    "rungs": {
+      "M0": {
+        "model": "rule-based volatility/path-direction/activity",
+        "role": "explainable control, thresholds train-only",
+        "implemented": true,
+        "module": "regime/m0_rules.py"
+      },
+      "M1": {
+        "model": "regularized discrete statistical jump model",
+        "role": "primary state model",
+        "implemented": true,
+        "module": "regime/jump_model.py"
+      },
+      "M1S": {
+        "model": "sparse JM or group-regularized features",
+        "role": "extension when there are MANY blocks; ablation against M1",
+        "implemented": false,
+        "why_not": "the primary core is 8 features in 3 blocks (G1 3, G2 2, G5 3). Guide 8.1 scopes M1S to 'khi nhi\u1ec1u blocks', and 3 is not that. Guide 8.3 also forbids writing a naive sparse objective and requires a pinned research implementation or a verified constrained one; none is pinned in this environment, so writing one would be exactly the move 8.3 warns against.",
+        "what_would_change_it": "G3 (leverage) and G4 (liquidity) becoming available for all five symbols would take the core past 3 blocks. Then M1S needs a pinned implementation with its weight normalisation and penalty conventions recorded, plus the nondegeneracy guard that already exists in quality.check_degeneracy."
+      },
+      "M2": {
+        "model": "small HMM or GMM",
+        "role": "comparator; guide 8.1 says do NOT sweep every model family",
+        "implemented": false,
+        "why_not": "LAB-05's task list (L05.2) asks for M0 and M1 references. M2 is a comparator the guide explicitly declines to make mandatory, and adding it would widen the model family sweep 8.1 warns against.",
+        "what_would_change_it": "a claim that the state structure is specific to a jump model rather than to the features would need M2 to be falsifiable."
+      },
+      "M3": {
+        "model": "online novelty/change detector",
+        "role": "diagnostic/secondary trigger, explicitly not wired in by default",
+        "implemented": false,
+        "why_not": "guide 8.1 marks it 'ch\u01b0a gh\u00e9p default'. The novelty AXIS it would feed is already measured -- fit residual against the training-residual quantile in quality.assess -- without introducing a second detector whose disagreements with M1 would then need their own policy.",
+        "what_would_change_it": "a decision to use novelty as a trigger rather than as a status."
+      }
+    },
+    "implemented": [
+      "M0",
+      "M1"
+    ],
+    "not_implemented": [
+      "M1S",
+      "M2",
+      "M3"
+    ],
+    "scope_rule": "LAB-05 L05.2 asks for M0 and M1 references. The other rungs are declared unbuilt with a reason and a condition that would reopen them, so an omission cannot be mistaken for an oversight (guide 8.1)",
+    "k_policy": "primary K=3; K=2 parsimonious; K=4 only on an explicit discovery decision"
+  },
+  "requirement_satisfied": false,
+  "finding": "guide 8.3 asks the ablation to DEMONSTRATE that the flow and market-coordination blocks contribute beyond price/volatility. On this symbol and window it does not: out of fold, both the fit objective and the scale-free variance-resolved measure get worse as blocks are added, and at the full 8-feature core the state assignment resolves essentially no variance on held-out blocks. The registered core is NOT changed in response -- selecting a feature set on this result would be choosing the model on an outcome. It is recorded as a finding."
+}

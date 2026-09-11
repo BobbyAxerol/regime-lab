@@ -1,0 +1,275 @@
+{
+  "schema": "crypto_regime_lab.snapshot_verification.v1",
+  "snapshot_id": "server_core_v1",
+  "files_checked": 627,
+  "missing": [],
+  "snapshot_files_changed": [],
+  "source_files_changed": [
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=08/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=09/part.parquet"
+  ],
+  "closed_partition_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=09/part.parquet",
+      "partition": "2020-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=10/part.parquet",
+      "partition": "2020-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2020/month=11/part.parquet",
+      "partition": "2020-11",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=01/part.parquet",
+      "partition": "2021-01",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=02/part.parquet",
+      "partition": "2021-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=03/part.parquet",
+      "partition": "2021-03",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=04/part.parquet",
+      "partition": "2021-04",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=05/part.parquet",
+      "partition": "2021-05",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=06/part.parquet",
+      "partition": "2021-06",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=08/part.parquet",
+      "partition": "2021-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=09/part.parquet",
+      "partition": "2021-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=10/part.parquet",
+      "partition": "2021-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=11/part.parquet",
+      "partition": "2021-11",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2021/month=12/part.parquet",
+      "partition": "2021-12",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2023/month=09/part.parquet",
+      "partition": "2023-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=02/part.parquet",
+      "partition": "2024-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2024/month=10/part.parquet",
+      "partition": "2024-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2025/month=08/part.parquet",
+      "partition": "2025-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2021/month=12/part.parquet",
+      "partition": "2021-12",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2023/month=09/part.parquet",
+      "partition": "2023-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=02/part.parquet",
+      "partition": "2024-02",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2024/month=10/part.parquet",
+      "partition": "2024-10",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2025/month=08/part.parquet",
+      "partition": "2025-08",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    }
+  ],
+  "drift_by_product": {
+    "crypto_binance_futures_metrics_5m": {
+      "closed_partitions_changed": 23,
+      "partition_range": [
+        "2020-09",
+        "2025-08"
+      ],
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "in_primary_core": false
+    }
+  },
+  "primary_core_products": [
+    "crypto_binance_futures_1m"
+  ],
+  "primary_core_closed_drift": [],
+  "products_invalidated": [
+    "crypto_binance_futures_metrics_5m"
+  ],
+  "open_partition_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=DOGEUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_1m",
+      "symbol": "DOGEUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "symbol": "ETHUSDT"
+    }
+  ],
+  "rolling_window_drift": [
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=08/part.parquet",
+      "partition": "2026-08",
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+      "partition": "2026-09",
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "symbol": "BTCUSDT"
+    }
+  ],
+  "rolling_window_products": [
+    "crypto_binance_orderbook_snapshot_1h"
+  ],
+  "status": "EXTERNAL_DATA_DRIFT",
+  "consequence": "a CLOSED partition changed upstream: any run declaring this snapshot is invalidated and must be re-registered against a fresh snapshot",
+  "primary_run_valid": true,
+  "primary_run_valid_rule": "a primary run stays valid while the lab's own snapshot bytes match the manifest and no CLOSED partition of a product the primary core reads has changed upstream. Drift in any other product invalidates the cohorts that read THAT product and is listed in products_invalidated; it is never downgraded to a warning.",
+  "cohort_runs_invalidated": [
+    "crypto_binance_futures_metrics_5m"
+  ],
+  "rolling_window_note": "a rolling-window product can never be part of an immutable snapshot; its cohort is reported separately and is not in the primary core (see feature tiers)",
+  "checked_at_utc": "2026-09-10T08:05:38.817394+00:00",
+  "lab_run_id": "run-20260910T080526Z-2767e849",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T08:05:38.821678+00:00"
+}

@@ -1,0 +1,1078 @@
+{
+  "schema": "crypto_regime_lab.guide_section_coverage.v1",
+  "generated_at_utc": "2026-09-11T06:46:35.598594+00:00",
+  "guide": "QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md",
+  "question": "which numbered guide subsection does nothing in this lab reference? That is the blind spot the phase audits cannot see, and four findings have come out of it",
+  "sections_total": 55,
+  "referenced": 50,
+  "enforced_via_condition_map": [
+    "0.1"
+  ],
+  "prose_only": [
+    "0.3",
+    "1.2",
+    "1.3",
+    "12",
+    "5.1"
+  ],
+  "unclaimed": [],
+  "referenced_but_no_test_mentions_it": [
+    "1.1",
+    "2.2",
+    "2.3",
+    "3.1",
+    "3.2",
+    "3.3",
+    "3.4",
+    "4.1",
+    "4.2",
+    "4.4",
+    "6.1",
+    "6.2",
+    "6.4",
+    "6.5",
+    "7.1",
+    "7.4",
+    "8.2",
+    "8.5",
+    "8.6",
+    "9.1",
+    "9.2",
+    "9.4",
+    "10.2",
+    "10.3",
+    "10.4",
+    "11.1",
+    "11.2",
+    "11.3",
+    "13.2",
+    "13.3"
+  ],
+  "approved_conditions": {
+    "source": "guide 0.1, the user's own list of twelve approved conditions",
+    "why_here": "every line is a standing constraint and none is a phase task, so nothing claimed it -- the same blind spot that hid the compute budget, the CLI contract and the identity taxonomy",
+    "conditions": [
+      {
+        "id": "0.1.1",
+        "condition": "run as .py and CLI; a notebook is not the harness",
+        "pointer": "src/crypto_regime_lab/cli.py",
+        "status": "ENFORCED",
+        "detail": "path exists"
+      },
+      {
+        "id": "0.1.2",
+        "condition": "a new lab directory, separate from QuantBT and the production alpha directory",
+        "pointer": "configs/sandbox_policy.json:protected_roots",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.3",
+        "condition": "strategy/model/features stay in the research layer; QuantBT does simulation",
+        "pointer": "configs/api_binding_map.json:operations",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.4",
+        "condition": "the jump model is primary; rule-based and HMM/GMM are budgeted comparators",
+        "pointer": "configs/lab08_data_ablation.json:complexity_ladder",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.5",
+        "condition": "inference, parameter switching, bank refresh and retraining are four clocks",
+        "pointer": "configs/lab06_policy_spec.json:clocks",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.6",
+        "condition": "use the informative blocks with coverage, not every column",
+        "pointer": "configs/feature_schema.json:primary_core_features",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.7",
+        "condition": "spot from 2020-01-01 is treated as clean; operational checks only",
+        "pointer": "configs/study_registration.json:spot_clean_from",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.8",
+        "condition": "the market-context universe is point-in-time eligible",
+        "pointer": "configs/data_eligibility.json:per_symbol",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.9",
+        "condition": "the supplied presets are retrospective reference, never an OOS claim",
+        "pointer": "configs/lab08_pilot_protocol.json:preset_role",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.10",
+        "condition": "the four alpha copies are versioned, and execution repair is separated from a thesis change",
+        "pointer": "configs/semantic_delta.json:change_kinds",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.11",
+        "condition": "every report, JSON and chart source is kept; negatives are not dropped",
+        "pointer": "configs/lab08_discovery.json:design_selection",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      },
+      {
+        "id": "0.1.12",
+        "condition": "nothing is published, merged, sent live, or upgraded in production",
+        "pointer": "configs/study_registration.json:live_execution_allowed",
+        "status": "ENFORCED",
+        "detail": "resolved"
+      }
+    ],
+    "enforced": 12,
+    "total": 12,
+    "broken": []
+  },
+  "not_a_pass_fail_gate": "a referenced section is not a verified one, and an unclaimed section is not necessarily unimplemented. This is a worklist, and the prose-only decisions are listed by name so they cannot hide in a silent absence",
+  "sections": [
+    {
+      "section": "0.1",
+      "title": "\u0110i\u1ec1u \u0111\u00e3 \u0111\u01b0\u1ee3c ph\u00ea duy\u1ec7t",
+      "referenced_by": [],
+      "reference_count": 0,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "ENFORCED_VIA_CONDITION_MAP",
+      "prose_reason": null
+    },
+    {
+      "section": "0.2",
+      "title": "Safety l\u00e0 \u0111i\u1ec1u ki\u1ec7n b\u1eaft \u0111\u1ea7u, kh\u00f4ng ph\u1ea3i checklist cu\u1ed1i",
+      "referenced_by": [
+        "configs/acceptance_test_coverage.json",
+        "configs/sandbox_policy.json",
+        "src/crypto_regime_lab/safety/__pycache__/paths.cpython-312.pyc",
+        "src/crypto_regime_lab/safety/__pycache__/sandbox.cpython-312.pyc",
+        "src/crypto_regime_lab/safety/paths.py",
+        "src/crypto_regime_lab/safety/sandbox.py",
+        "tests/__pycache__/test_lab01_isolation.cpython-312-pytest-9.1.1.pyc",
+        "tests/test_lab01_isolation.py"
+      ],
+      "reference_count": 8,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "0.3",
+      "title": "Resource policy \u0111\u1ec1 xu\u1ea5t ban \u0111\u1ea7u",
+      "referenced_by": [
+        "src/crypto_regime_lab/safety/__pycache__/process.cpython-312.pyc",
+        "src/crypto_regime_lab/safety/process.py"
+      ],
+      "reference_count": 2,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "PROSE_ONLY",
+      "prose_reason": "how to read the document"
+    },
+    {
+      "section": "1.1",
+      "title": "Archive \u0111\u00e3 \u0111\u1ecdc \u0111\u1ea7y \u0111\u1ee7",
+      "referenced_by": [
+        "configs/lab01_task_audit.json",
+        "reports/lab01_report.md",
+        "scripts/ingest_archive.py",
+        "scripts/unpack_alphas_inplace.py"
+      ],
+      "reference_count": 4,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "1.2",
+      "title": "Ki\u1ec3m ch\u1ee9ng \u0111\u00e3 th\u1ef1c hi\u1ec7n khi vi\u1ebft guide",
+      "referenced_by": [],
+      "reference_count": 0,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "PROSE_ONLY",
+      "prose_reason": "what was verified while WRITING the guide, in an environment that was not the pinned one. Its one actionable line -- confirm the installed signatures, lockfiles and source SHA -- is LAB-01's and was discharged there"
+    },
+    {
+      "section": "1.3",
+      "title": "Repo \u0111\u00e3 \u0111\u1ed1i chi\u1ebfu \u0111\u01b0\u1ee3c",
+      "referenced_by": [],
+      "reference_count": 0,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "PROSE_ONLY",
+      "prose_reason": "which repository pages were cross-read while writing the guide, explicitly not a consistent checkout. Its actionable line is the same one, and the guide says so"
+    },
+    {
+      "section": "2.1",
+      "title": "B\u1ed1n t\u1ea7ng alpha version b\u1eaft bu\u1ed9c",
+      "referenced_by": [
+        "configs/acceptance_test_coverage.json",
+        "configs/lab02_task_audit.json",
+        "reports/lab02_report.md",
+        "src/crypto_regime_lab/alphas/__pycache__/legacy.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/legacy.py",
+        "tests/test_lab02_gaps.py"
+      ],
+      "reference_count": 6,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "2.2",
+      "title": "Presets kh\u00f4ng ph\u1ea3i clean warm-start cho qu\u00e1 kh\u1ee9",
+      "referenced_by": [
+        "configs/preset_quarantine_catalog.json",
+        "scripts/quarantine_presets.py"
+      ],
+      "reference_count": 2,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "2.3",
+      "title": "Kh\u00f4ng t\u1ef1 \u0111\u1ed9ng nh\u1eadn c\u00e1c dictionary kh\u00f4ng thu\u1ed9c alpha",
+      "referenced_by": [
+        "configs/unmapped_presets.json",
+        "scripts/catalog_alphas.py"
+      ],
+      "reference_count": 2,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "3.1",
+      "title": "A-HASH \u2014 Momentum v\u1edbi partial TP ladder",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/a_hash.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/a_hash.py",
+        "src/crypto_regime_lab/alphas/findings.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "3.2",
+      "title": "A-VWAP \u2014 Daily VWAP mean reversion v\u1edbi HTF filter",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/a_vwap.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/a_vwap.py",
+        "src/crypto_regime_lab/alphas/findings.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "3.3",
+      "title": "A-HMA \u2014 Adaptive HMA trend strategy",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/a_hma.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/a_hma.py",
+        "src/crypto_regime_lab/alphas/findings.py",
+        "src/crypto_regime_lab/alphas/reference/__pycache__/indicators.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/reference/indicators.py"
+      ],
+      "reference_count": 5,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "3.4",
+      "title": "A-SC \u2014 SignalCombine / AlphaTrend-like long-flat",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/a_sc.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/a_sc.py",
+        "src/crypto_regime_lab/alphas/findings.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "4.1",
+      "title": "Primary economic setup",
+      "referenced_by": [
+        "configs/availability_rules.json",
+        "configs/data_eligibility.json",
+        "configs/data_product_inventory.json",
+        "configs/study_registration.json",
+        "reports/data_eligibility.md",
+        "reports/data_sources_used.md",
+        "scripts/preregister_study.py",
+        "src/crypto_regime_lab/alphas/__pycache__/fixtures.cpython-312.pyc"
+      ],
+      "reference_count": 15,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "4.2",
+      "title": "M\u1ed9t signal-close kh\u00f4ng th\u1ec3 fill l\u1ea1i ch\u00ednh close v\u1eeba quan s\u00e1t",
+      "referenced_by": [
+        "configs/lab07_continuous_trace.json",
+        "src/crypto_regime_lab/alphas/__pycache__/contracts.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/contracts.py",
+        "src/crypto_regime_lab/integration/events.py"
+      ],
+      "reference_count": 4,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "4.3",
+      "title": "Protective-order fidelity",
+      "referenced_by": [
+        "configs/protective_order_fidelity.json",
+        "scripts/verify_execution_resolution.py",
+        "tests/test_guide_contracts.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "4.4",
+      "title": "Minimum engine adapter facade \u2014 API lab, kh\u00f4ng gi\u1ea3 API QuantBT m\u1edbi",
+      "referenced_by": [
+        "configs/acceptance_test_coverage.json",
+        "configs/lab02_task_audit.json",
+        "reports/lab01_report.md",
+        "reports/lab02_report.md",
+        "src/crypto_regime_lab/quantbt_bridge/__pycache__/capabilities.cpython-312.pyc",
+        "src/crypto_regime_lab/quantbt_bridge/__pycache__/capability_probe.cpython-312.pyc",
+        "src/crypto_regime_lab/quantbt_bridge/__pycache__/intent_tape.cpython-312.pyc",
+        "src/crypto_regime_lab/quantbt_bridge/capabilities.py"
+      ],
+      "reference_count": 10,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "5.1",
+      "title": "Quy\u1ec1n s\u1eeda alpha r\u1ed9ng nh\u01b0ng c\u00f3 causal attribution",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/findings.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/findings.py"
+      ],
+      "reference_count": 2,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "PROSE_ONLY",
+      "prose_reason": "the target directory tree, realised as the tree itself"
+    },
+    {
+      "section": "6.1",
+      "title": "Inventory theo data products, kh\u00f4ng theo c\u00e1c t\u00ean class gi\u1ea3 \u0111\u1ecbnh",
+      "referenced_by": [
+        "configs/acceptance_test_coverage.json",
+        "reports/data_sources_used.md",
+        "reports/improvement_opinions.md",
+        "reports/lab04_report.md",
+        "reports/lab05_report.md",
+        "reports/lab06_report.md",
+        "reports/lab07_report.md",
+        "reports/lab08_report.md"
+      ],
+      "reference_count": 12,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "6.2",
+      "title": "Cohorts v\u00e0 ph\u1ea1m vi l\u1ecbch s\u1eed",
+      "referenced_by": [
+        "configs/acceptance_test_coverage.json",
+        "configs/feature_schema.json",
+        "reports/data_eligibility.md",
+        "reports/lab03_report.md",
+        "reports/lab04_report.md",
+        "reports/lab05_report.md",
+        "reports/lab06_report.md",
+        "reports/lab07_report.md"
+      ],
+      "reference_count": 18,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "6.3",
+      "title": "Timestamp v\u00e0 resampling",
+      "referenced_by": [
+        "configs/lab07_continuous_trace.json",
+        "scripts/run_lab07.py",
+        "src/crypto_regime_lab/alphas/__pycache__/a_vwap.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/a_vwap.py",
+        "src/crypto_regime_lab/data/__pycache__/availability.cpython-312.pyc",
+        "src/crypto_regime_lab/data/__pycache__/quality.cpython-312.pyc",
+        "src/crypto_regime_lab/data/availability.py",
+        "src/crypto_regime_lab/data/quality.py"
+      ],
+      "reference_count": 10,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "6.4",
+      "title": "Feature blocks v\u00e0 to\u00e1n h\u1ecdc",
+      "referenced_by": [
+        "configs/feature_schema.json",
+        "scripts/build_feature_panels.py",
+        "src/crypto_regime_lab/data/__pycache__/features.cpython-312.pyc",
+        "src/crypto_regime_lab/data/features.py",
+        "src/crypto_regime_lab/data/panel.py"
+      ],
+      "reference_count": 5,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "6.5",
+      "title": "External free data \u2014 optional enrichment, kh\u00f4ng th\u00e0nh scope creep",
+      "referenced_by": [
+        "configs/enrichment_inventory.json",
+        "src/crypto_regime_lab/data/__pycache__/enrichment.cpython-312.pyc",
+        "src/crypto_regime_lab/data/enrichment.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "7.1",
+      "title": "Definition v\u00e0 geometry",
+      "referenced_by": [
+        "src/crypto_regime_lab/selector/__pycache__/alpha_schemas.cpython-312.pyc",
+        "src/crypto_regime_lab/selector/__pycache__/probe_design.cpython-312.pyc",
+        "src/crypto_regime_lab/selector/__pycache__/schema_distance.cpython-312.pyc",
+        "src/crypto_regime_lab/selector/alpha_schemas.py",
+        "src/crypto_regime_lab/selector/probe_design.py",
+        "src/crypto_regime_lab/selector/schema_distance.py"
+      ],
+      "reference_count": 6,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "7.2",
+      "title": "Candidate discovery \u2192 independent local probes",
+      "referenced_by": [
+        "configs/correction_ledger.json",
+        "configs/lab04_anchor_design_sensitivity.json",
+        "configs/lab04_calendar_baseline.json",
+        "configs/lab04_installed_wfo_trace.json",
+        "configs/lab04_task_audit.json",
+        "reports/improvement_opinions.md",
+        "reports/lab04_report.md",
+        "scripts/audit_lab04.py"
+      ],
+      "reference_count": 21,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "7.3",
+      "title": "M\u1ed9t robust score minh b\u1ea1ch \u0111\u1ec3 tri\u1ec3n khai tr\u01b0\u1edbc",
+      "referenced_by": [
+        "configs/lab04_calendar_baseline.json",
+        "configs/lab04_task_audit.json",
+        "configs/lab08_factorial_full.json",
+        "configs/lab08_factorial_pilot.json",
+        "scripts/audit_lab04.py",
+        "src/crypto_regime_lab/experiments/__pycache__/calendar_baseline.cpython-312.pyc",
+        "src/crypto_regime_lab/experiments/__pycache__/evaluator.cpython-312.pyc",
+        "src/crypto_regime_lab/experiments/calendar_baseline.py"
+      ],
+      "reference_count": 15,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "7.4",
+      "title": "Candidate bank cho regime policy",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_bank_registry.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_task_audit.json",
+        "reports/lab06_report.md",
+        "scripts/audit_lab06.py",
+        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc",
+        "src/crypto_regime_lab/evidence/glossary.py"
+      ],
+      "reference_count": 10,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.1",
+      "title": "Model ladder c\u00f3 gi\u1edbi h\u1ea1n",
+      "referenced_by": [
+        "configs/lab05_group_ablation.json",
+        "configs/lab05_k_selection.json",
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "configs/lab05_task_audit.json",
+        "configs/lab08_bnbusdt_group_ablation.json",
+        "configs/lab08_bnbusdt_k_selection.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json"
+      ],
+      "reference_count": 51,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.2",
+      "title": "Objective discrete JM",
+      "referenced_by": [
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json",
+        "configs/lab08_dogeusdt_regime_model_registry.json",
+        "configs/lab08_ethusdt_regime_model_registry.json",
+        "configs/lab08_solusdt_regime_model_registry.json",
+        "configs/lab09_bnbusdt_regime_model_registry.json",
+        "configs/lab09_btcusdt_regime_model_registry.json",
+        "configs/lab09_dogeusdt_regime_model_registry.json"
+      ],
+      "reference_count": 21,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.3",
+      "title": "Sparse extension kh\u00f4ng \u0111\u01b0\u1ee3c c\u00f3 nghi\u1ec7m weights=0 v\u00f4 ngh\u0129a",
+      "referenced_by": [
+        "configs/lab05_group_ablation.json",
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "configs/lab05_task_audit.json",
+        "configs/lab08_bnbusdt_group_ablation.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json",
+        "configs/lab08_data_ablation.json",
+        "configs/lab08_discovery.json"
+      ],
+      "reference_count": 52,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.4",
+      "title": "Online inference causal",
+      "referenced_by": [
+        "configs/lab05_emission_tape.json",
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "configs/lab08_bnbusdt_emission_tape.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json",
+        "configs/lab08_dogeusdt_emission_tape.json",
+        "configs/lab08_dogeusdt_regime_model_registry.json",
+        "configs/lab08_ethusdt_emission_tape.json"
+      ],
+      "reference_count": 38,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.5",
+      "title": "Output v\u00e0 uncertainty",
+      "referenced_by": [
+        "configs/lab05_emission_tape.json",
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "configs/lab08_bnbusdt_emission_tape.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json",
+        "configs/lab08_dogeusdt_emission_tape.json",
+        "configs/lab08_dogeusdt_regime_model_registry.json",
+        "configs/lab08_ethusdt_emission_tape.json"
+      ],
+      "reference_count": 33,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "8.6",
+      "title": "Training v\u00e0 model selection cadence",
+      "referenced_by": [
+        "configs/lab05_regime_model_registry.json",
+        "configs/lab05_selftest.json",
+        "configs/lab06_policy_spec.json",
+        "configs/lab08_bnbusdt_regime_model_registry.json",
+        "configs/lab08_dogeusdt_regime_model_registry.json",
+        "configs/lab08_ethusdt_regime_model_registry.json",
+        "configs/lab08_solusdt_regime_model_registry.json",
+        "configs/lab09_bnbusdt_regime_model_registry.json"
+      ],
+      "reference_count": 21,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "9.1",
+      "title": "\u0110\u00e2y l\u00e0 l\u1edbp n\u1ed1i regime v\u1edbi quy\u1ebft \u0111\u1ecbnh",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_task_audit.json",
+        "scripts/audit_lab06.py",
+        "src/crypto_regime_lab/policy/__pycache__/episodes.cpython-312.pyc",
+        "src/crypto_regime_lab/policy/episodes.py"
+      ],
+      "reference_count": 6,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "9.2",
+      "title": "Historical similarity v\u00e0 shrinkage",
+      "referenced_by": [
+        "configs/compute_budget_registration.json",
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_response_model.json",
+        "configs/lab06_task_audit.json",
+        "reports/lab06_report.md",
+        "scripts/audit_lab06.py",
+        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc"
+      ],
+      "reference_count": 11,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "9.3",
+      "title": "Utility v\u00e0 transition cost c\u00f9ng \u0111\u01a1n v\u1ecb",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_decision_ledger.json",
+        "configs/lab06_policy_spec.json",
+        "configs/lab06_response_model.json",
+        "configs/lab06_task_audit.json",
+        "reports/lab06_report.md",
+        "scripts/audit_lab06.py"
+      ],
+      "reference_count": 13,
+      "in_a_checklist": true,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "9.4",
+      "title": "B\u1ed1n clocks kh\u00f4ng g\u1ed9p",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_policy_spec.json",
+        "configs/lab06_task_audit.json",
+        "reports/lab06_report.md",
+        "scripts/audit_lab06.py",
+        "scripts/run_response_policy.py",
+        "src/crypto_regime_lab/policy/__pycache__/clocks.cpython-312.pyc"
+      ],
+      "reference_count": 9,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "9.5",
+      "title": "Campaign and bank migration",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab06_checklist.json",
+        "configs/lab06_policy_spec.json",
+        "configs/lab06_task_audit.json",
+        "configs/lab07_checklist.json",
+        "configs/lab07_task_audit.json",
+        "configs/parameter_activation_tape.json",
+        "reports/lab06_report.md"
+      ],
+      "reference_count": 26,
+      "in_a_checklist": true,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "10.1",
+      "title": "Tr\u1ee5c so s\u00e1nh A/B/C/D",
+      "referenced_by": [
+        "configs/lab04_installed_wfo_trace.json",
+        "configs/lab07_continuous_trace.json",
+        "configs/lab08_discovery.json",
+        "configs/lab08_factorial_full.json",
+        "configs/lab08_factorial_pilot.json",
+        "configs/lab08_pilot_protocol.json",
+        "reports/lab04_report.md",
+        "reports/lab07_report.md"
+      ],
+      "reference_count": 23,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "10.2",
+      "title": "Controls b\u1eaft bu\u1ed9c",
+      "referenced_by": [
+        "configs/lab08_checklist.json",
+        "configs/lab08_control_arms.json",
+        "configs/lab08_discovery.json",
+        "configs/lab08_factorial_full.json",
+        "configs/lab08_factorial_pilot.json",
+        "configs/lab08_pilot_protocol.json",
+        "reports/lab08_report.md",
+        "scripts/__pycache__/run_lab08_factorial.cpython-312.pyc"
+      ],
+      "reference_count": 17,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "10.3",
+      "title": "C\u00f9ng economic engine v\u00e0 account path",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab07_checklist.json",
+        "configs/lab07_continuous_trace.json",
+        "configs/lab07_task_audit.json",
+        "configs/lab08_checklist.json",
+        "configs/lab08_pilot_protocol.json",
+        "configs/lab08_task_audit.json",
+        "configs/lab09_confirmation_spec.json"
+      ],
+      "reference_count": 21,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "10.4",
+      "title": "Twenty primary cells v\u00e0 l\u1ecbch ch\u1ea1y",
+      "referenced_by": [
+        "configs/data_eligibility.json",
+        "configs/evidence_pointer_audit.json",
+        "configs/lab01_task_audit.json",
+        "configs/lab08_pilot_protocol.json",
+        "reports/data_sources_used.md",
+        "reports/lab01_report.md",
+        "reports/lab06_report.md",
+        "reports/lab07_report.md"
+      ],
+      "reference_count": 15,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "10.5",
+      "title": "Compute budgets v\u00e0 baselines",
+      "referenced_by": [
+        "configs/compute_budget_registration.json",
+        "configs/lab08_checklist.json",
+        "configs/lab08_discovery.json",
+        "configs/lab08_factorial_full.json",
+        "configs/lab08_factorial_pilot.json",
+        "configs/lab08_task_audit.json",
+        "reports/guide_compliance_inspection.md",
+        "reports/lab07_report.md"
+      ],
+      "reference_count": 16,
+      "in_a_checklist": true,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "11.1",
+      "title": "Hai giai \u0111o\u1ea1n th\u00f4ng tin",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab08_checklist.json",
+        "configs/lab08_task_audit.json",
+        "configs/lab09_checklist.json",
+        "configs/lab09_task_audit.json",
+        "scripts/analyse_lab09_confirmation.py",
+        "scripts/audit_lab08.py",
+        "scripts/audit_lab09.py"
+      ],
+      "reference_count": 8,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "11.2",
+      "title": "Primary outcome v\u00e0 kh\u00f4ng \u00e9p \u201ct\u1ed1t h\u01a1n m\u1ecdi m\u1eb7t\u201d",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab08_checklist.json",
+        "configs/lab08_pilot_protocol.json",
+        "configs/lab08_task_audit.json",
+        "configs/lab09_checklist.json",
+        "configs/lab09_task_audit.json",
+        "configs/minimum_economic_effect.json",
+        "reports/data_eligibility.md"
+      ],
+      "reference_count": 11,
+      "in_a_checklist": true,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "11.3",
+      "title": "Paired uncertainty v\u00e0 multiple comparisons",
+      "referenced_by": [
+        "configs/lab08_discovery.json",
+        "configs/lab09_task_audit.json",
+        "reports/lab08_report.md",
+        "scripts/analyse_lab08_discovery.py",
+        "scripts/audit_lab09.py",
+        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc",
+        "src/crypto_regime_lab/evidence/glossary.py",
+        "src/crypto_regime_lab/experiments/__pycache__/factorial.cpython-312.pyc"
+      ],
+      "reference_count": 10,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "11.4",
+      "title": "Transition-specific diagnostics",
+      "referenced_by": [
+        "configs/evidence_pointer_audit.json",
+        "configs/lab09_checklist.json",
+        "configs/lab09_task_audit.json",
+        "scripts/audit_lab09.py",
+        "scripts/run_lab09_support.py",
+        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc",
+        "src/crypto_regime_lab/evidence/glossary.py",
+        "src/crypto_regime_lab/experiments/uncertainty.py"
+      ],
+      "reference_count": 10,
+      "in_a_checklist": true,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "11.5",
+      "title": "Data/report artifacts",
+      "referenced_by": [
+        "src/crypto_regime_lab/evidence/__pycache__/audit_queue.cpython-312.pyc",
+        "src/crypto_regime_lab/evidence/audit_queue.py",
+        "tests/test_guide_publishing_discipline.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.1",
+      "title": "Research record identities",
+      "referenced_by": [
+        "configs/id_taxonomy.json",
+        "configs/lab08_discovery.json",
+        "reports/guide_compliance_inspection.md",
+        "scripts/analyse_lab08_discovery.py",
+        "scripts/write_guide_compliance_report.py",
+        "src/crypto_regime_lab/evidence/identities.py",
+        "tests/test_guide_contracts.py"
+      ],
+      "reference_count": 7,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.2",
+      "title": "Study registration example \u2014 schema \u0111\u00edch, kh\u00f4ng k\u1ebft qu\u1ea3 \u0111\u00e3 \u0111i\u1ec1n",
+      "referenced_by": [
+        "configs/lab01_task_audit.json",
+        "reports/lab01_report.md",
+        "reports/lab08_report.md",
+        "scripts/write_lab08_report.py",
+        "src/crypto_regime_lab/experiments/__pycache__/factorial.cpython-312.pyc",
+        "src/crypto_regime_lab/experiments/factorial.py"
+      ],
+      "reference_count": 6,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.3",
+      "title": "Alpha certification record",
+      "referenced_by": [
+        "src/crypto_regime_lab/alphas/__pycache__/contracts.cpython-312.pyc",
+        "src/crypto_regime_lab/alphas/contracts.py"
+      ],
+      "reference_count": 2,
+      "in_a_checklist": false,
+      "in_a_test": false,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.4",
+      "title": "Decision evidence t\u1ed1i thi\u1ec3u",
+      "referenced_by": [
+        "configs/correction_ledger.json",
+        "configs/lab06_decision_ledger.json",
+        "scripts/build_correction_ledger.py",
+        "scripts/run_response_policy.py",
+        "src/crypto_regime_lab/policy/decision.py",
+        "tests/test_lab06_policy.py"
+      ],
+      "reference_count": 6,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.5",
+      "title": "CLI \u0111\u00edch \u0111\u1ec3 agent implement",
+      "referenced_by": [
+        "reports/guide_compliance_inspection.md",
+        "scripts/snapshot_data.py",
+        "scripts/verify_causality.py",
+        "scripts/write_guide_compliance_report.py",
+        "src/crypto_regime_lab/__pycache__/cli.cpython-312.pyc",
+        "src/crypto_regime_lab/cli.py",
+        "tests/__pycache__/test_lab04_legacy_labelling.cpython-312-pytest-9.1.1.pyc",
+        "tests/test_guide_contracts.py"
+      ],
+      "reference_count": 9,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.6",
+      "title": "Nh\u1eefng claim kh\u00f4ng \u0111\u01b0\u1ee3c ph\u00e1t h\u00e0nh",
+      "referenced_by": [
+        "configs/forbidden_claims_audit.json",
+        "configs/lab04_calendar_baseline.json",
+        "configs/lab07_continuous_trace.json",
+        "configs/lab08_discovery.json",
+        "reports/lab04_report.md",
+        "reports/lab07_report.md",
+        "reports/lab08_report.md",
+        "scripts/analyse_lab08_discovery.py"
+      ],
+      "reference_count": 17,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    },
+    {
+      "section": "13.7",
+      "title": "Stop/continue rules",
+      "referenced_by": [
+        "configs/correction_ledger.json",
+        "scripts/build_correction_ledger.py",
+        "tests/test_guide_publishing_discipline.py"
+      ],
+      "reference_count": 3,
+      "in_a_checklist": false,
+      "in_a_test": true,
+      "status": "REFERENCED",
+      "prose_reason": null
+    }
+  ],
+  "lab_run_id": "run-20260911T064546Z-5d22a0cc",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T06:46:35.606113+00:00"
+}

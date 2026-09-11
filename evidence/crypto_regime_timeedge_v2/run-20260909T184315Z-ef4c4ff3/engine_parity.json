@@ -1,0 +1,356 @@
+{
+  "schema": "crypto_regime_lab.engine_parity.v1",
+  "contract": {
+    "engine_id": "intrabar_bracket_v1",
+    "signal_phase": "bar_close",
+    "entry_fill_phase": "next_open",
+    "market_fill_policy": "next_open",
+    "stop_gap_policy": "open_worse_than_trigger",
+    "take_profit_gap_policy": "limit_price_conservative",
+    "same_bar_policy": "conservative",
+    "trailing_update_phase": "next_bar",
+    "funding_phase": "position_at_event",
+    "liquidation_priority": "liquidation_first_at_gap",
+    "close_on_last_bar": true,
+    "ambiguity_policy": "flag_and_conservative",
+    "strict_data": true
+  },
+  "backends": [
+    "intrabar_bracket_reference (python)",
+    "intrabar_bracket_rust"
+  ],
+  "case_count": 7,
+  "account_trace_failures": [],
+  "cases": [
+    {
+      "case_id": "trend_long_tp",
+      "description": "long entry, take profit reached",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 103.5,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 19,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 120.0,
+          "fee": 0.0,
+          "reason": "take_profit"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "trend_short_tp",
+      "description": "short entry, take profit reached",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 136.5,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 24,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 115.0,
+          "fee": 0.0,
+          "reason": "take_profit"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "gap_entry",
+      "description": "a 30% gap on the fill bar",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 130.0,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 39,
+          "sequence": 99,
+          "side": -1,
+          "qty": 1.0,
+          "price": 100.0,
+          "fee": 0.0,
+          "reason": "final_close"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "ambiguous_bar",
+      "description": "a bar touching both the stop and the take profit",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 100.0,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 6,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 90.0,
+          "fee": 0.0,
+          "reason": "stop_loss"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "random_walk_technical_exit",
+      "description": "random walk with a technical exit",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 5,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 102.20213932695084,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 21,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 101.56895365422378,
+          "fee": 0.0,
+          "reason": "technical_exit"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "terminal_open_mark",
+      "description": "terminal open position, mark mode",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 1,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 100.0,
+          "fee": 0.0,
+          "reason": "entry"
+        }
+      ],
+      "liquidated_match": true
+    },
+    {
+      "case_id": "with_costs",
+      "description": "same tape with fees and slippage enabled",
+      "account_trace_exact": true,
+      "trace_diffs": {
+        "equity": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "positions": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "fees": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        },
+        "funding": {
+          "max_abs_diff": 0.0,
+          "exact": true
+        }
+      },
+      "reference_fill_count": 2,
+      "rust_fill_count": 0,
+      "fill_trace_comparable": false,
+      "reference_fills": [
+        {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 103.51035,
+          "fee": 0.020702070000000003,
+          "reason": "entry"
+        },
+        {
+          "bar_index": 19,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 120.0,
+          "fee": 0.024,
+          "reason": "take_profit"
+        }
+      ],
+      "liquidated_match": true
+    }
+  ],
+  "fill_trace_parity": {
+    "comparable_cases": [],
+    "status": "BLOCKED_CAPABILITY",
+    "detail": "The rust backend returns an empty fill sequence at every report level tried (standard and full, with and without audit_detail_limit), so a fill-by-fill comparison is not available on this install. The ACCOUNT trace \u2014 equity, positions, fees, funding \u2014 is compared exactly and matches. Recorded as a blocked capability rather than described as full-trace parity (guide L02.8)."
+  },
+  "status": "PASS",
+  "claim_boundary": "This establishes account-trace parity between two implementations of one contract. It is NOT a claim of Rust parity from final equity alone: every bar of equity, position, fee and funding is compared, and the missing fill-level trace is disclosed.",
+  "lab_run_id": "run-20260909T184315Z-ef4c4ff3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:43:23.137858+00:00"
+}

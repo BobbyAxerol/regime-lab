@@ -1,0 +1,191 @@
+{
+  "schema": "crypto_regime_lab.lab07_leakage_audit.v1",
+  "checked_at_utc": "2026-09-10T13:07:22.588217+00:00",
+  "scope": "LAB-07 and everything it inherits: the snapshot (LAB-03), the selections (LAB-04), the state provider (LAB-05) and the decision ledger (LAB-06)",
+  "checks": [
+    {
+      "check": "the run stays inside the development role",
+      "window": [
+        "2021-01-01",
+        "2023-12-31"
+      ],
+      "development": [
+        "2020-01-01",
+        "2023-12-31"
+      ],
+      "outer_evaluation_starts": "2024-01-01",
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "every parameter version was selected before it was requested",
+      "folds": [
+        {
+          "fold": 1,
+          "trained_to": "2021-06-29",
+          "cutoff": "2021-06-30",
+          "requested_at_bar": 17280,
+          "effective_at_bar": 17486,
+          "train_end_at_or_before_cutoff": true,
+          "effective_at_or_after_request": true
+        },
+        {
+          "fold": 2,
+          "trained_to": "2021-12-26",
+          "cutoff": "2021-12-27",
+          "requested_at_bar": 34560,
+          "effective_at_bar": 34596,
+          "train_end_at_or_before_cutoff": true,
+          "effective_at_or_after_request": true
+        },
+        {
+          "fold": 3,
+          "trained_to": "2022-06-24",
+          "cutoff": "2022-06-25",
+          "requested_at_bar": 51840,
+          "effective_at_bar": 52208,
+          "train_end_at_or_before_cutoff": true,
+          "effective_at_or_after_request": true
+        },
+        {
+          "fold": 4,
+          "trained_to": "2022-12-21",
+          "cutoff": "2022-12-22",
+          "requested_at_bar": 69120,
+          "effective_at_bar": 69181,
+          "train_end_at_or_before_cutoff": true,
+          "effective_at_or_after_request": true
+        },
+        {
+          "fold": 5,
+          "trained_to": "2023-06-19",
+          "cutoff": "2023-06-20",
+          "requested_at_bar": 86400,
+          "effective_at_bar": 86433,
+          "train_end_at_or_before_cutoff": true,
+          "effective_at_or_after_request": true
+        }
+      ],
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "replacing every input after a cutoff leaves the prefix bit-identical",
+      "columns_mutated": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "cutoff_bar": 52560,
+      "trades_before_the_cutoff": 118,
+      "had_something_to_detect": true,
+      "passed": true,
+      "note": "this is also the empirical proof that the adapters' whole-slice indicator precomputation is causal: if a value at bar t depended on any bar after the cutoff, the prefix would move"
+    },
+    {
+      "check": "no activation event carries its own end",
+      "activations_checked": 5,
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "no decision carries the length, end or total return of its own segment",
+      "decisions_checked": 6566,
+      "open_segment_has_null_end": true,
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "regime observations on the stream reach no decision in this calendar arm",
+      "arm": "A_calendar_on_one_account",
+      "observations_on_the_stream": 6566,
+      "activation_sources": {
+        "act-fold1": "calendar_cutoff",
+        "act-fold2": "calendar_cutoff",
+        "act-fold3": "calendar_cutoff",
+        "act-fold4": "calendar_cutoff",
+        "act-fold5": "calendar_cutoff"
+      },
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "a refit reads nothing after its cutoff and pays a measured latency",
+      "jobs": 40,
+      "latency_source": "measured_benchmark",
+      "zero_latency_jobs": 0,
+      "min_delay_seconds": 1.462667,
+      "deployment_account_reachable": false,
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "protective exits are iterated to a fixed point, not taken from one pass",
+      "sweeps": 1,
+      "protective_exits": 0,
+      "applied_exit_count": 0,
+      "converged": true,
+      "had_something_to_detect": false,
+      "passed": true,
+      "note": "A-SC rests no protective orders, so this converges trivially on THIS cell. The property is exercised on A-HMA, which does, in test_the_fixed_point_holds_on_an_alpha_that_rests_protective_orders"
+    },
+    {
+      "check": "a regime observation is published no earlier than LAB-05 says it is knowable",
+      "regime_interval_seconds": 14400.0,
+      "lab07_lag_seconds": 14400.0,
+      "lab05_emission_lag_seconds": 14400.0,
+      "had_something_to_detect": true,
+      "passed": true,
+      "note": "bars are left-labelled, so an observation stamped at a bar open is knowable only when that bar closes. Publishing it sooner is a false availability that the arms consuming regime information would inherit"
+    },
+    {
+      "check": "the parity surfaces compare something that actually moved",
+      "canonical_fills": 238,
+      "integrated_fills": 238,
+      "inert_hook_fills_compared": 238,
+      "metrics_fields_compared": [
+        "daily_observations",
+        "daily_sharpe",
+        "final_equity",
+        "max_drawdown",
+        "total_return"
+      ],
+      "no_op_switch_fills": 238,
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "loader, resampler, scaler, model and stream are each causal",
+      "verdicts": {
+        "resampler": true,
+        "scaler": true,
+        "model": true,
+        "online_filter": true
+      },
+      "leaky_control_detected": true,
+      "had_something_to_detect": true,
+      "passed": true
+    },
+    {
+      "check": "the bytes the run read still are what the manifest recorded",
+      "status": "EXTERNAL_VINTAGE_RESTAMP_ONLY",
+      "snapshot_files_changed": 0,
+      "content_revisions": 0,
+      "had_something_to_detect": true,
+      "passed": true
+    }
+  ],
+  "checks_total": 12,
+  "checks_passed": 12,
+  "checks_failed": [],
+  "checks_with_nothing_to_detect": [
+    "protective exits are iterated to a fixed point, not taken from one pass"
+  ],
+  "vacuity_rule": "a probe that had nothing to detect is reported, not counted as evidence. Every defect found in LAB-06 and LAB-07 was a gate that passed because nothing happened",
+  "status": "CLEAN",
+  "lab_run_id": "run-20260910T130721Z-621322a1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T13:07:22.590192+00:00"
+}

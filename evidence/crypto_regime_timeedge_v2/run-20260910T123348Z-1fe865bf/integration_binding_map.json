@@ -1,0 +1,89 @@
+{
+  "schema": "crypto_regime_lab.integration_binding_map.v1",
+  "installed_version": "1.1.1",
+  "installed_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+  "bindings": {
+    "execution_contract": {
+      "lab_operation": "execution_contract",
+      "installed_symbol": "quantbt.QuantBTEndpoint.intrabar_bracket_reference",
+      "why": "the one route with next-open entry plus intrabar protective handling",
+      "status": "BOUND",
+      "resolved_kind": "method",
+      "error": null
+    },
+    "execution_contract_native": {
+      "lab_operation": "execution_contract_native",
+      "installed_symbol": "quantbt.QuantBTEndpoint.intrabar_bracket_rust",
+      "why": "the same contract on the native backend, for L07.1 fixed-intent parity",
+      "status": "BOUND",
+      "resolved_kind": "method",
+      "error": null
+    },
+    "walkforward": {
+      "lab_operation": "walkforward",
+      "installed_symbol": "quantbt.walkforward",
+      "why": "the installed calendar WFO that arm A reproduces",
+      "status": "BOUND",
+      "resolved_kind": "module",
+      "error": null
+    },
+    "walkforward_config": {
+      "lab_operation": "walkforward_config",
+      "installed_symbol": "quantbt.WalkForwardConfig",
+      "why": "the config object whose modes LAB-04 traced; arm A must pin one of them",
+      "status": "BOUND",
+      "resolved_kind": "type",
+      "error": null
+    },
+    "walkforward_support_matrix": {
+      "lab_operation": "walkforward_support_matrix",
+      "installed_symbol": "quantbt.walkforward_support_matrix",
+      "why": "declares which modes the install actually supports, instead of assuming five",
+      "status": "BOUND",
+      "resolved_kind": "function",
+      "error": null
+    },
+    "candidate_selection": {
+      "lab_operation": "candidate_selection",
+      "installed_symbol": "quantbt.optimization.candidate_selection",
+      "why": "the installed selection rule arm A is labelled against",
+      "status": "BOUND",
+      "resolved_kind": "module",
+      "error": null
+    },
+    "volatility_regime_labels": {
+      "lab_operation": "volatility_regime_labels",
+      "installed_symbol": "quantbt.volatility_regime_labels",
+      "why": "the registered M0 comparator (in-sample by construction, never an estimator)",
+      "status": "BOUND",
+      "resolved_kind": "function",
+      "error": null
+    }
+  },
+  "bound": [
+    "candidate_selection",
+    "execution_contract",
+    "execution_contract_native",
+    "volatility_regime_labels",
+    "walkforward",
+    "walkforward_config",
+    "walkforward_support_matrix"
+  ],
+  "blocked": [],
+  "known_blockers": {
+    "engine_fill_trace_native": {
+      "consequence": "the rust backend exposes no per-fill trace, so Python/Rust parity is established on account path and orders, and full event-trace parity is never claimed",
+      "lab_patch": "handoff/lab_only_patch.diff would expose the fill vector; NOT applied"
+    },
+    "scheduler_callback": {
+      "consequence": "the installed engine has no refit-scheduler callback, so the lab drives the schedule from OUTSIDE the engine and feeds it fixed intents. The engine's economics are untouched, which is the point",
+      "lab_patch": "none needed: driving from outside is the contract-preserving option"
+    }
+  },
+  "reroute_policy": "an integration point that does not resolve is BLOCKED_CAPABILITY. It is never rerouted to a similar-looking symbol: a reroute succeeds, and a run that completes on economics the study did not register is worse than one that stops",
+  "engine_owns": "matching and accounting",
+  "lab_owns": "when a parameter version becomes effective",
+  "lab_run_id": "run-20260910T123348Z-1fe865bf",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T12:34:03.954595+00:00"
+}

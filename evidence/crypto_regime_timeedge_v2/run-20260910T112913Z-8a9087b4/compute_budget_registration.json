@@ -1,0 +1,145 @@
+{
+  "schema": "crypto_regime_lab.compute_budget_registration.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "guide_section": "10.5",
+  "registered_at_utc": "2026-09-10T11:29:13.393947+00:00",
+  "registered_before": "LAB-07. No arm beyond A and B exists yet, so no definition here can have been chosen to favour an arm whose cost is already known",
+  "os_resource_budget": {
+    "workers": 1,
+    "cpu_limit": 2,
+    "working_memory_gib": 4
+  },
+  "os_budget_is_not_the_comparison_contract": "resource_budget pins workers/CPU/memory. It says nothing about whether two arms were given the same number of chances to find a good parameter set, which is the thing a comparison can be gamed on",
+  "reports": {
+    "MATCHED_TOTAL_COMPUTE": {
+      "question": "given the SAME total search effort, does the new method win?",
+      "counted_units": [
+        "unique strategy evaluations (candidate x market x economics x seed)",
+        "fold-bar visits",
+        "independent local probes",
+        "regime model fits, including every multi-start",
+        "response evaluations"
+      ],
+      "rule": "every arm is allotted the same total, and a unit is counted wherever it is spent. A regime arm that spends its budget on model fits instead of on alpha trials has still spent it",
+      "reported_per": "arm x cell"
+    },
+    "OPERATIONAL_POLICY": {
+      "question": "at an equivalent per-refit budget, what does each method actually cost to run?",
+      "counted_units": [
+        "wall seconds per refit",
+        "total wall seconds",
+        "network calls (zero by policy during run/certify/report)",
+        "activation latency"
+      ],
+      "rule": "real measured cost, never a modelled one. Guide L07.3 forbids taking a refit latency of zero in order to fill earlier",
+      "reported_per": "arm x refit"
+    }
+  },
+  "baseline_protection_rule": "the baseline's time interval, fees, outputs and number of attempts are never reduced to make the new method look better (guide 10.5). A change to any of them is a change to BOTH arms or it is not made",
+  "sequencing_rule": "the primary comparison runs on a deterministic sequential schedule or a fixed candidate matrix that reproduces. Adaptive batch and sequential have different semantics and are never reported as the same sequence [S10]",
+  "what_counts_as_search": [
+    "optimizer trials on alpha parameters",
+    "state-count (K) choices",
+    "jump penalties",
+    "response bandwidth and shrinkage",
+    "switching thresholds",
+    "alpha revisions"
+  ],
+  "what_counts_as_search_rule": "guide 10.5: 'Kh\u00f4ng ch\u1ec9 log Optuna alpha trials.' A method whose tuning happens outside the optimizer is not cheaper, it is accounted for elsewhere -- and if that elsewhere is nowhere, the comparison is wrong in the new method's favour",
+  "ledger_opened_with": {
+    "schema": "crypto_regime_lab.experiment_search_ledger.v1",
+    "entries": [
+      {
+        "phase": "LAB-04",
+        "kind": "candidate_evaluation",
+        "what_was_searched": "robust-neighborhood probes around anchors, per cutoff",
+        "unique_executions": 9155,
+        "candidate_episode_visits": 54930,
+        "wall_seconds": 10788.0,
+        "design": {
+          "anchors": 2,
+          "discovery_trials": 64,
+          "nominal_total": 96,
+          "probes_per_anchor": 8,
+          "radius": 0.12,
+          "seed": 20260910,
+          "space_filling_anchors": 1,
+          "module_default_now": {
+            "discovery_trials": 64,
+            "anchors": 2,
+            "space_filling_anchors": 1,
+            "probes_per_anchor": 8,
+            "radius": 0.12,
+            "seed": 20260910,
+            "nominal_total": 96
+          },
+          "differs_from_module_default": {},
+          "provenance_rule": "these values are read back out of the cells themselves. A field reported as null was not recorded by the run that produced them, which means those cells predate that design field and were NOT built with it."
+        },
+        "counts_against": "MATCHED_TOTAL_COMPUTE"
+      },
+      {
+        "phase": "LAB-05",
+        "kind": "model_fit",
+        "what_was_searched": "jump-model fits on a rolling training memory",
+        "fits": 40,
+        "starts_per_fit": 4,
+        "observation_interval": "4h",
+        "counts_against": "MATCHED_TOTAL_COMPUTE"
+      },
+      {
+        "phase": "LAB-05",
+        "kind": "state_count_choice",
+        "what_was_searched": "K",
+        "candidates_considered": [
+          2,
+          3
+        ],
+        "registered_starting_k": 3,
+        "k_used": 3,
+        "chart_inspection_used": false,
+        "counts_against": "MATCHED_TOTAL_COMPUTE",
+        "note": "guide 10.5 names state-count choices as search. Counting only the alpha trials would make the regime arm look cheaper than it is"
+      },
+      {
+        "phase": "LAB-05",
+        "kind": "jump_penalty",
+        "what_was_searched": "lambda_jump",
+        "value_used": 1.0,
+        "counts_against": "MATCHED_TOTAL_COMPUTE"
+      },
+      {
+        "phase": "LAB-06",
+        "kind": "response_hyperparameters",
+        "what_was_searched": "bandwidth h, recency tau, shrinkage kappa, support gates",
+        "values": {
+          "bandwidth_h": 1.0,
+          "recency_tau_days": 180.0,
+          "shrink_kappa": 8.0,
+          "min_effective_episodes": 4.0,
+          "min_contiguous_blocks": 2,
+          "dominance_share": 0.5,
+          "support_coverage": 0.9,
+          "chosen_on": "inner development only, registered before any recommendation (guide 9.2)",
+          "outcome_information_used_in_weights": false
+        },
+        "response_estimates": 51944,
+        "counts_against": "MATCHED_TOTAL_COMPUTE"
+      },
+      {
+        "phase": "LAB-06",
+        "kind": "switching_threshold",
+        "what_was_searched": "z_alpha, delta margin, minimum spacing",
+        "decisions_assessed": 6566,
+        "counts_against": "MATCHED_TOTAL_COMPUTE"
+      }
+    ]
+  },
+  "status": "REGISTERED_BEFORE_LAB07",
+  "owed_by": {
+    "LAB-07": "per-refit wall seconds and activation latency, measured not assumed",
+    "LAB-08": "the per-arm MATCHED_TOTAL_COMPUTE table across the 20 cells"
+  },
+  "lab_run_id": "run-20260910T112913Z-8a9087b4",
+  "written_at_utc": "2026-09-10T11:29:13.635429+00:00"
+}

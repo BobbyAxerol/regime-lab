@@ -1,0 +1,202 @@
+{
+  "schema": "crypto_regime_lab.numba_parity.v1",
+  "policy": "the oracle is fastmath-free. A compiled kernel is only enabled when it reproduces the oracle's DECISIONS exactly; a sub-threshold value difference is recorded, a different signal blocks the kernel (guide L02.2, finding HM-08).",
+  "kernel_count": 14,
+  "results": [
+    {
+      "kernel": "vwap.n_sma",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "vwap.n_stdev",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "vwap.n_rsi",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "vwap.n_atr",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "vwap.n_vwap_daily",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hma.n_ema[fastmath]",
+      "fastmath": true,
+      "max_abs_error": 7.105427357601002e-14,
+      "max_rel_error": 7.68696718051002e-16,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hma.n_atr[fastmath]",
+      "fastmath": true,
+      "max_abs_error": 1.1102230246251565e-15,
+      "max_rel_error": 9.838446333927793e-16,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hma.n_rsi[fastmath]",
+      "fastmath": true,
+      "max_abs_error": 1.4210854715202004e-14,
+      "max_rel_error": 4.4285851855594824e-16,
+      "values_within_tolerance": true,
+      "decisions_identical": true,
+      "decision_note": "decision arrays are identical",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hma._xhma_at_t[fastmath]",
+      "fastmath": true,
+      "max_abs_error": 5.684341886080802e-14,
+      "max_rel_error": 6.129679489053297e-16,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hma._calcslope_at_t[fastmath]",
+      "fastmath": true,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": true,
+      "decision_note": "decision arrays are identical",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hash.mom0",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hash.mom_norm",
+      "fastmath": false,
+      "max_abs_error": 6.661338147750939e-16,
+      "max_rel_error": 4.587822927270703e-16,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hash.atr",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    },
+    {
+      "kernel": "hash.ema",
+      "fastmath": false,
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "values_within_tolerance": true,
+      "decisions_identical": null,
+      "decision_note": "",
+      "tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-09
+      }
+    }
+  ],
+  "value_failures": [],
+  "decision_failures": [],
+  "fastmath_kernels": [
+    "hma.n_ema[fastmath]",
+    "hma.n_atr[fastmath]",
+    "hma.n_rsi[fastmath]",
+    "hma._xhma_at_t[fastmath]",
+    "hma._calcslope_at_t[fastmath]"
+  ],
+  "status": "PASS",
+  "lab_run_id": "run-20260909T184724Z-76ac1ff4",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:29.698239+00:00"
+}

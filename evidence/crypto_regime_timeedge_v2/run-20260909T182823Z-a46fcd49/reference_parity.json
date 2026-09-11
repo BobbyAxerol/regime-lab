@@ -1,0 +1,294 @@
+{
+  "schema": "crypto_regime_lab.parity_report.v1",
+  "tolerance_classes": {
+    "exact": {
+      "atol": 0.0,
+      "rtol": 0.0
+    },
+    "accumulation": {
+      "atol": 1e-09,
+      "rtol": 1e-12
+    },
+    "loose": {
+      "atol": 1e-06,
+      "rtol": 1e-09
+    },
+    "documented_divergence": {
+      "atol": null,
+      "rtol": null,
+      "max_early_error": 5.0,
+      "required_decay_ratio": 0.1
+    }
+  },
+  "fastmath": "disabled \u2014 the oracle is pure Python/NumPy; source @njit decorators are stripped by the AST harness so no fastmath reassociation is exercised (HM-08, SD-HMA-07)",
+  "source_vs_oracle": [
+    {
+      "pair_id": "vwap.n_sma",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 351,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "vwap.n_stdev",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "accumulation",
+      "tolerance": {
+        "atol": 1e-09,
+        "rtol": 1e-12
+      },
+      "max_abs_error": 6.764144799831229e-12,
+      "max_rel_error": 5.6788535837226775e-12,
+      "compared_points": 351,
+      "passed": true,
+      "note": "source uses running sums of x and x^2; the oracle recomputes the window, so a small accumulation difference is expected and bounded"
+    },
+    {
+      "pair_id": "vwap.n_rsi",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 386,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "vwap.n_atr",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 386,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "vwap.n_vwap_daily",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hma.n_ema",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hma.n_atr",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": "this alpha smooths true range with an EMA, not Wilder; preserved"
+    },
+    {
+      "pair_id": "hma.n_rsi_legacy",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 386,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hma._xhma_at_t",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 58,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hma._calcslope_at_t",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 58,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hash.mom0",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hash.mom_norm",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "pair_id": "hash.atr_close_move",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 386,
+      "passed": true,
+      "note": "the source's ATR is the absolute close-to-close move (AH-02); the oracle reproduces it rather than repairing it"
+    },
+    {
+      "pair_id": "hash.ema",
+      "kind": "source_vs_oracle",
+      "tolerance_class": "exact",
+      "tolerance": {
+        "atol": 0.0,
+        "rtol": 0.0
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 400,
+      "passed": true,
+      "note": ""
+    }
+  ],
+  "oracle_vs_library": [
+    {
+      "pair_id": "ta.SMAIndicator",
+      "kind": "oracle_vs_library",
+      "tolerance_class": "accumulation",
+      "tolerance": {
+        "atol": 1e-09,
+        "rtol": 1e-12
+      },
+      "max_abs_error": 9.947598300641403e-14,
+      "max_rel_error": 1.173899801228022e-15,
+      "compared_points": 340,
+      "passed": true,
+      "note": "same definition; only float accumulation order differs"
+    },
+    {
+      "pair_id": "ta.RSIIndicator",
+      "kind": "oracle_vs_library",
+      "tolerance_class": "documented_divergence",
+      "tolerance": {
+        "atol": null,
+        "rtol": null,
+        "max_early_error": 5.0,
+        "required_decay_ratio": 0.1
+      },
+      "max_abs_error": 0.19892947096217029,
+      "max_rel_error": 0.002982551305114635,
+      "compared_points": 340,
+      "passed": true,
+      "note": "ta seeds Wilder's average differently from the alpha's SMA seed; the residual is a documented convention divergence, and the alpha's convention is the one that ships | early_max=1.989e-01 late_max=3.587e-07 decay_ok=True bounded=True"
+    },
+    {
+      "pair_id": "ta.AverageTrueRange",
+      "kind": "oracle_vs_library",
+      "tolerance_class": "documented_divergence",
+      "tolerance": {
+        "atol": null,
+        "rtol": null,
+        "max_early_error": 5.0,
+        "required_decay_ratio": 0.1
+      },
+      "max_abs_error": 0.000509465688490307,
+      "max_rel_error": 0.00040949672239852297,
+      "compared_points": 340,
+      "passed": true,
+      "note": "ta uses its own smoothing seed; A-SC consumes ta directly so ta is authoritative THERE, while A-VWAP keeps its own n_atr convention | early_max=5.095e-04 late_max=1.721e-09 decay_ok=True bounded=True"
+    },
+    {
+      "pair_id": "ta.MFIIndicator",
+      "kind": "oracle_vs_library",
+      "tolerance_class": "accumulation",
+      "tolerance": {
+        "atol": 1e-09,
+        "rtol": 1e-12
+      },
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "compared_points": 340,
+      "passed": true,
+      "note": "A-SC's condition indicator; the oracle must track ta here because ta is what the alpha runs"
+    }
+  ],
+  "failures": [],
+  "documented_divergences": [
+    "ta.RSIIndicator",
+    "ta.AverageTrueRange"
+  ],
+  "divergence_policy": "A documented divergence is a real difference in convention between the alpha and the library. Neither side is edited to make them agree. The alpha's own convention is what ships wherever the alpha computes the indicator itself; ta is authoritative only where the alpha actually calls ta (A-SC). The requirement is that the seed difference decays.",
+  "status": "PASS",
+  "lab_run_id": "run-20260909T182823Z-a46fcd49",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:28:23.875881+00:00"
+}

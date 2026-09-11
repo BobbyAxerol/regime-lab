@@ -1,0 +1,362 @@
+{
+  "schema": "crypto_regime_lab.lab08_data_ablation.v1",
+  "generated_at_utc": "2026-09-10T16:51:02.319648+00:00",
+  "cohorts": {
+    "server_core": {
+      "groups": [
+        "g1",
+        "g2",
+        "g5"
+      ],
+      "why": "price, path shape, activity and market coordination"
+    },
+    "server_derivatives": {
+      "groups": [
+        "g1",
+        "g2",
+        "g5",
+        "g3"
+      ],
+      "why": "adds leverage and crowding (open interest)"
+    },
+    "server_liquidity": {
+      "groups": [
+        "g1",
+        "g2",
+        "g5",
+        "g4"
+      ],
+      "why": "adds spread and impact from the order book"
+    }
+  },
+  "per_symbol": [
+    {
+      "symbol": "BTCUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_derivatives",
+        "server_liquidity"
+      ],
+      "cohorts_unavailable": {},
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 12,
+          "variance_resolved_out_of_fold": -0.015889702896878743,
+          "interval_rows": 7187
+        },
+        "server_derivatives": {
+          "observations": 7181,
+          "features": 15,
+          "variance_resolved_out_of_fold": -0.01987824870925259,
+          "interval_rows": 7181
+        },
+        "server_liquidity": {
+          "observations": 7187,
+          "features": 13,
+          "variance_resolved_out_of_fold": -0.06159794664973428,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_derivatives": -0.003988545812373845,
+        "server_liquidity": -0.04570824375285554
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_direction_6",
+            "z_g1_downside_ratio_6",
+            "z_g1_efficiency_6",
+            "z_g1_jump_concentration_6",
+            "z_g1_rv_6",
+            "z_g2_log_activity_30",
+            "z_g2_taker_imbalance",
+            "z_g2_trade_count_30",
+            "z_g3_basis",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g5_breadth_6",
+            "z_g5_dispersion_6",
+            "z_g5_factor_concentration_30",
+            "z_g5_residual_return_30"
+          ],
+          "reason": "no usable rows on the development window; the collector never covered this product for this symbol, or it is a rolling window that cannot accumulate history"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 12,
+          "variance_resolved_out_of_fold": -0.005822079074231379,
+          "interval_rows": 7187
+        },
+        "server_liquidity": {
+          "observations": 7187,
+          "features": 13,
+          "variance_resolved_out_of_fold": -0.10863809534113011,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity": -0.10281601626689874
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_direction_6",
+            "z_g1_downside_ratio_6",
+            "z_g1_efficiency_6",
+            "z_g1_jump_concentration_6",
+            "z_g1_rv_6",
+            "z_g2_log_activity_30",
+            "z_g2_taker_imbalance",
+            "z_g2_trade_count_30",
+            "z_g3_basis",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g5_breadth_6",
+            "z_g5_dispersion_6",
+            "z_g5_factor_concentration_30",
+            "z_g5_residual_return_30"
+          ],
+          "reason": "no usable rows on the development window; the collector never covered this product for this symbol, or it is a rolling window that cannot accumulate history"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 12,
+          "variance_resolved_out_of_fold": 0.008736808267314822,
+          "interval_rows": 7187
+        },
+        "server_liquidity": {
+          "observations": 7187,
+          "features": 13,
+          "variance_resolved_out_of_fold": 0.0021201570421135463,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity": -0.0066166512252012755
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_direction_6",
+            "z_g1_downside_ratio_6",
+            "z_g1_efficiency_6",
+            "z_g1_jump_concentration_6",
+            "z_g1_rv_6",
+            "z_g2_log_activity_30",
+            "z_g2_taker_imbalance",
+            "z_g2_trade_count_30",
+            "z_g3_basis",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g5_breadth_6",
+            "z_g5_dispersion_6",
+            "z_g5_factor_concentration_30",
+            "z_g5_residual_return_30"
+          ],
+          "reason": "no usable rows on the development window; the collector never covered this product for this symbol, or it is a rolling window that cannot accumulate history"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 12,
+          "variance_resolved_out_of_fold": -0.02071005088092015,
+          "interval_rows": 7187
+        },
+        "server_liquidity": {
+          "observations": 7187,
+          "features": 13,
+          "variance_resolved_out_of_fold": -0.057382789032120796,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity": -0.036672738151200646
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "cohorts_available": [
+        "server_core",
+        "server_liquidity"
+      ],
+      "cohorts_unavailable": {
+        "server_derivatives": {
+          "rows": 0,
+          "features": [
+            "z_g1_direction_6",
+            "z_g1_downside_ratio_6",
+            "z_g1_efficiency_6",
+            "z_g1_jump_concentration_6",
+            "z_g1_rv_6",
+            "z_g2_log_activity_30",
+            "z_g2_taker_imbalance",
+            "z_g2_trade_count_30",
+            "z_g3_basis",
+            "z_g3_dlog_oi",
+            "z_g3_return_oi_interaction",
+            "z_g5_breadth_6",
+            "z_g5_dispersion_6",
+            "z_g5_factor_concentration_30",
+            "z_g5_residual_return_30"
+          ],
+          "reason": "no usable rows on the development window; the collector never covered this product for this symbol, or it is a rolling window that cannot accumulate history"
+        }
+      },
+      "comparable_interval": [
+        "2020-09-19 08:00:00",
+        "2023-12-31 00:00:00"
+      ],
+      "scores": {
+        "server_core": {
+          "observations": 7187,
+          "features": 12,
+          "variance_resolved_out_of_fold": 0.04939986966294352,
+          "interval_rows": 7187
+        },
+        "server_liquidity": {
+          "observations": 7187,
+          "features": 13,
+          "variance_resolved_out_of_fold": -0.007897373251225526,
+          "interval_rows": 7187
+        }
+      },
+      "gain_over_core": {
+        "server_core": 0.0,
+        "server_liquidity": -0.057297242914169044
+      },
+      "reading": "every cohort scored on the SAME rows. Scoring each on its own longest window would credit a feature group for the period it happens to cover"
+    }
+  ],
+  "cohort_gains_over_core": [
+    {
+      "symbol": "BTCUSDT",
+      "cohort": "server_derivatives",
+      "gain": -0.003988545812373845
+    },
+    {
+      "symbol": "BTCUSDT",
+      "cohort": "server_liquidity",
+      "gain": -0.04570824375285554
+    },
+    {
+      "symbol": "ETHUSDT",
+      "cohort": "server_liquidity",
+      "gain": -0.10281601626689874
+    },
+    {
+      "symbol": "SOLUSDT",
+      "cohort": "server_liquidity",
+      "gain": -0.0066166512252012755
+    },
+    {
+      "symbol": "BNBUSDT",
+      "cohort": "server_liquidity",
+      "gain": -0.036672738151200646
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "cohort": "server_liquidity",
+      "gain": -0.057297242914169044
+    }
+  ],
+  "any_cohort_beats_core": false,
+  "comparable_interval_rule": "a cohort is only compared on rows every cohort in that comparison has. Guide L08.4 forbids attributing an improvement that comes from a short recent window to a feature group",
+  "complexity_ladder": [
+    {
+      "rung": "M0",
+      "model": "rule-based volatility/direction/activity thresholds",
+      "question": "does an explainable rule already separate the states a jump model finds?",
+      "expected_failure": "M0 tracks volatility only and misses coordinated moves",
+      "stop_condition": "if M0 resolves as much variance out of fold as M1, M1 is unjustified"
+    },
+    {
+      "rung": "M1",
+      "model": "regularized discrete jump model",
+      "question": "does persistence-penalised clustering resolve out-of-fold variance?",
+      "expected_failure": "states are volatility buckets with extra steps",
+      "stop_condition": "if M1 does not beat M0 out of fold, the ladder stops here"
+    },
+    {
+      "rung": "M1S",
+      "model": "sparse or group-regularized features",
+      "question": "with many blocks, does sparsity find the ones that matter?",
+      "expected_failure": "with three blocks there is nothing to select",
+      "stop_condition": "guide 8.1 scopes M1S to 'many blocks'; with 3 it is not attempted, and guide 8.3 forbids writing a naive sparse objective without a pinned research implementation"
+    },
+    {
+      "rung": "M2",
+      "model": "small HMM or GMM comparator",
+      "question": "is the structure specific to a jump model or to the features?",
+      "expected_failure": "a different family finds the same partition",
+      "stop_condition": "guide 8.1 declines to make M2 mandatory and warns against sweeping model families; not attempted"
+    }
+  ],
+  "ladder_rule": "each rung states its question, its expected failure and its stop condition BEFORE it runs. A ladder without those is a sweep (guide L08.5)",
+  "ladder_implemented": [
+    "M0",
+    "M1"
+  ],
+  "ladder_declared_unbuilt": [
+    "M1S",
+    "M2"
+  ],
+  "tuning_stage": "development only; K, lambda, training memory and cadence are never tuned against the outer window",
+  "lab_run_id": "run-20260910T165008Z-52168067",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T16:51:02.322738+00:00"
+}

@@ -1,0 +1,239 @@
+{
+  "schema": "crypto_regime_lab.instrument_registry.v1",
+  "source": "inferred from the server_core_v1 snapshot",
+  "instruments": {
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "eras_sampled": [
+        {
+          "partition": "2021-06",
+          "tick_size": 0.01,
+          "qty_step": 0.001,
+          "min_observed_volume": 37.848,
+          "min_observed_price": 28780.01
+        },
+        {
+          "partition": "2023-06",
+          "tick_size": 0.1,
+          "qty_step": 0.001,
+          "min_observed_volume": 5.072,
+          "min_observed_price": 24777.0
+        },
+        {
+          "partition": "2025-06",
+          "tick_size": 0.1,
+          "qty_step": 0.001,
+          "min_observed_volume": 0.615,
+          "min_observed_price": 98115.4
+        },
+        {
+          "partition": "2026-06",
+          "tick_size": 0.1,
+          "qty_step": 0.001,
+          "min_observed_volume": 1.911,
+          "min_observed_price": 58030.0
+        }
+      ],
+      "tick_sizes_observed": [
+        0.01,
+        0.1
+      ],
+      "qty_steps_observed": [
+        0.001
+      ],
+      "tick_stable": false,
+      "qty_step_stable": true,
+      "conservative_tick_size": 0.1,
+      "conservative_qty_step": 0.001,
+      "note": "inferred from observed price and quantity granularity in the frozen snapshot; the venue's published metadata would be authoritative if it were available here"
+    },
+    "ETHUSDT": {
+      "symbol": "ETHUSDT",
+      "eras_sampled": [
+        {
+          "partition": "2021-06",
+          "tick_size": 0.01,
+          "qty_step": 0.001,
+          "min_observed_volume": 75.794,
+          "min_observed_price": 1698.64
+        },
+        {
+          "partition": "2023-06",
+          "tick_size": 0.01,
+          "qty_step": 0.001,
+          "min_observed_volume": 32.359,
+          "min_observed_price": 1625.5
+        },
+        {
+          "partition": "2025-06",
+          "tick_size": 0.01,
+          "qty_step": 0.001,
+          "min_observed_volume": 33.973,
+          "min_observed_price": 2111.0
+        },
+        {
+          "partition": "2026-06",
+          "tick_size": 0.01,
+          "qty_step": 0.001,
+          "min_observed_volume": 42.324,
+          "min_observed_price": 1503.6
+        }
+      ],
+      "tick_sizes_observed": [
+        0.01
+      ],
+      "qty_steps_observed": [
+        0.001
+      ],
+      "tick_stable": true,
+      "qty_step_stable": true,
+      "conservative_tick_size": 0.01,
+      "conservative_qty_step": 0.001,
+      "note": "inferred from observed price and quantity granularity in the frozen snapshot; the venue's published metadata would be authoritative if it were available here"
+    },
+    "SOLUSDT": {
+      "symbol": "SOLUSDT",
+      "eras_sampled": [
+        {
+          "partition": "2021-06",
+          "tick_size": 0.001,
+          "qty_step": 1.0,
+          "min_observed_volume": 91.0,
+          "min_observed_price": 20.098
+        },
+        {
+          "partition": "2023-06",
+          "tick_size": 0.001,
+          "qty_step": 1.0,
+          "min_observed_volume": 65.0,
+          "min_observed_price": 12.6
+        },
+        {
+          "partition": "2025-06",
+          "tick_size": 0.01,
+          "qty_step": 0.01,
+          "min_observed_volume": 277.37,
+          "min_observed_price": 125.83
+        },
+        {
+          "partition": "2026-06",
+          "tick_size": 0.01,
+          "qty_step": 0.01,
+          "min_observed_volume": 241.34,
+          "min_observed_price": 60.03
+        }
+      ],
+      "tick_sizes_observed": [
+        0.001,
+        0.01
+      ],
+      "qty_steps_observed": [
+        0.01,
+        1.0
+      ],
+      "tick_stable": false,
+      "qty_step_stable": false,
+      "conservative_tick_size": 0.01,
+      "conservative_qty_step": 1.0,
+      "note": "inferred from observed price and quantity granularity in the frozen snapshot; the venue's published metadata would be authoritative if it were available here"
+    },
+    "BNBUSDT": {
+      "symbol": "BNBUSDT",
+      "eras_sampled": [
+        {
+          "partition": "2021-06",
+          "tick_size": 0.001,
+          "qty_step": 0.01,
+          "min_observed_volume": 95.57,
+          "min_observed_price": 225.0
+        },
+        {
+          "partition": "2023-06",
+          "tick_size": 0.01,
+          "qty_step": 0.01,
+          "min_observed_volume": 2.75,
+          "min_observed_price": 220.0
+        },
+        {
+          "partition": "2025-06",
+          "tick_size": 0.01,
+          "qty_step": 0.01,
+          "min_observed_volume": 1.58,
+          "min_observed_price": 600.91
+        },
+        {
+          "partition": "2026-06",
+          "tick_size": 0.01,
+          "qty_step": 0.01,
+          "min_observed_volume": 6.1,
+          "min_observed_price": 540.5
+        }
+      ],
+      "tick_sizes_observed": [
+        0.001,
+        0.01
+      ],
+      "qty_steps_observed": [
+        0.01
+      ],
+      "tick_stable": false,
+      "qty_step_stable": true,
+      "conservative_tick_size": 0.01,
+      "conservative_qty_step": 0.01,
+      "note": "inferred from observed price and quantity granularity in the frozen snapshot; the venue's published metadata would be authoritative if it were available here"
+    },
+    "DOGEUSDT": {
+      "symbol": "DOGEUSDT",
+      "eras_sampled": [
+        {
+          "partition": "2021-06",
+          "tick_size": 1e-06,
+          "qty_step": 1.0,
+          "min_observed_volume": 40736.0,
+          "min_observed_price": 0.16275
+        },
+        {
+          "partition": "2023-06",
+          "tick_size": 1e-05,
+          "qty_step": 1.0,
+          "min_observed_volume": 1025.0,
+          "min_observed_price": 0.05258
+        },
+        {
+          "partition": "2025-06",
+          "tick_size": 1e-05,
+          "qty_step": 1.0,
+          "min_observed_volume": 32477.0,
+          "min_observed_price": 0.14258
+        },
+        {
+          "partition": "2026-06",
+          "tick_size": 1e-05,
+          "qty_step": 1.0,
+          "min_observed_volume": 14390.0,
+          "min_observed_price": 0.06946
+        }
+      ],
+      "tick_sizes_observed": [
+        1e-06,
+        1e-05
+      ],
+      "qty_steps_observed": [
+        1.0
+      ],
+      "tick_stable": false,
+      "qty_step_stable": true,
+      "conservative_tick_size": 1e-05,
+      "conservative_qty_step": 1.0,
+      "note": "inferred from observed price and quantity granularity in the frozen snapshot; the venue's published metadata would be authoritative if it were available here"
+    }
+  },
+  "quantity_step_unstable_symbols": [
+    "SOLUSDT"
+  ],
+  "policy": "a single pinned step would be wrong for a symbol whose step changed mid-sample; the conservative (largest) observed step is used and the instability is recorded so an execution study can split the sample by era",
+  "registry_digest": "85ae389330d104d80a581e0970275fd983212ead062270d70b908f8efe5bf484",
+  "lab_run_id": "run-20260909T201131Z-844a5a05",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T20:11:32.119686+00:00"
+}

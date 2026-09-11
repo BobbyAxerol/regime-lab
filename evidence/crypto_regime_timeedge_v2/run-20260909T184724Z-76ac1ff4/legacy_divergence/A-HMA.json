@@ -1,0 +1,168 @@
+{
+  "schema": "crypto_regime_lab.legacy_divergence.v1",
+  "alpha_id": "A-HMA",
+  "fixture": "random_walk_small_lengths",
+  "legacy": {
+    "alpha_id": "A-HMA",
+    "tier": "legacy_reproduction",
+    "entry_bars": [
+      82,
+      116,
+      125
+    ],
+    "exit_bars": [
+      86,
+      121,
+      136
+    ],
+    "entry_count": 3,
+    "minimal_fixes": [
+      "none: adaptive_hma_cpp.py imports everything it uses"
+    ],
+    "eligibility": {
+      "eligible_for_diagnostics": true,
+      "eligible_for_in_sample_reference": true,
+      "eligible_for_ab_comparison": false,
+      "eligible_for_any_arm": false,
+      "reason": "guide 2.1: legacy_reproduction is diagnostic / in-sample reference only"
+    },
+    "extras": {
+      "exit_type_counts": {
+        "0": 157,
+        "1": 2,
+        "3": 1
+      }
+    }
+  },
+  "canonical": {
+    "entry_bars": [
+      81,
+      115,
+      124
+    ],
+    "exit_bars": [
+      85
+    ],
+    "entry_count": 3,
+    "warmup_blocked_through_bar": 57,
+    "protective_exit_bars": [
+      120,
+      135
+    ],
+    "fixed_point_converged": true,
+    "fixed_point_passes": 3
+  },
+  "divergence": {
+    "legacy_only_entries": [
+      82,
+      116,
+      125
+    ],
+    "canonical_only_entries": [
+      81,
+      115,
+      124
+    ],
+    "legacy_only_inside_canonical_warmup": [],
+    "identical": false
+  },
+  "attribution": {
+    "kind": "CONSTANT_OFFSET",
+    "offset": 1,
+    "explained": true,
+    "attributed_delta": "SD-HMA-02",
+    "detail": "legacy pos_weight[t] is the position ENTERING bar t, so an entry decided at t appears one bar later in the legacy array; the canonical adapter records the decision bar itself (finding HM-02)"
+  },
+  "attributed_to": {
+    "SD-HMA-01": {
+      "delta_id": "SD-HMA-01",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the comment treats the next open as equal to the current close",
+      "after_semantics": "the engine supplies the actual fill; entry-dependent levels are re-derived from it",
+      "source_line_refs": "L283",
+      "reproducer": "fixtures/gap_entry",
+      "expected_effect": "levels move whenever the next open gaps",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-01",
+        "HM-03"
+      ]
+    },
+    "SD-HMA-02": {
+      "delta_id": "SD-HMA-02",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "a single pos_weight array mixes the pre-bar position with intrabar exit events",
+      "after_semantics": "separate fields: position_entering_bar and target_after_close, plus a typed exit event",
+      "source_line_refs": "L204, L214-249",
+      "reproducer": "fixtures/weight_vs_target_no_double_count",
+      "expected_effect": "removes a lag/double-count ambiguity",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-02"
+      ]
+    },
+    "SD-HMA-03": {
+      "delta_id": "SD-HMA-03",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "indicator_repair",
+      "before_semantics": "the RSI recursion returns 100 whenever avg_loss is zero, even when avg_gain is also zero, while the seed returns 50 in that case",
+      "after_semantics": "the flat case stays 50 throughout the recursion, consistent with the seed",
+      "source_line_refs": "L45-57",
+      "reproducer": "probes/HMA_RSI_FLAT",
+      "expected_effect": "affects only flat segments; applied before any A/B and to every arm identically",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-07"
+      ]
+    },
+    "SD-HMA-04": {
+      "delta_id": "SD-HMA-04",
+      "alpha_id": "A-HMA",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "mintick is hardcoded to 0.0001 for every instrument",
+      "after_semantics": "the instrument's real tick size is used; the pip buffer keeps the 10x semantics, versioned",
+      "source_line_refs": "L161-162",
+      "reproducer": "fixtures/instrument_tick",
+      "expected_effect": "changes the 48-bar high/low buffer per symbol",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "HM-06"
+      ]
+    }
+  },
+  "attribution_rule": "every difference must map to a semantic delta. A legacy entry that falls inside the canonical warmup window is attributed to the readiness repairs; an unattributed difference is a defect in the adapter, not a result.",
+  "claim_boundary": "the legacy tier is diagnostic and in-sample only. Neither side is a performance claim, and a canonical result is never compared against a legacy number as if they were arms.",
+  "lab_run_id": "run-20260909T184724Z-76ac1ff4",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:30.798422+00:00"
+}

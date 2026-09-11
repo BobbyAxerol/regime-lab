@@ -1,0 +1,486 @@
+{
+  "schema": "crypto_regime_lab.lab04_task_audit.v1",
+  "guide_section": "LAB-04 -- Calendar baseline va robust-neighborhood selection",
+  "tasks_total": 64,
+  "tasks_done": 64,
+  "tasks_blocked": 0,
+  "artifacts_present": [
+    "lab04_calendar_baseline.json",
+    "lab04_cutoff_reproducibility.json",
+    "lab04_incumbent_parity.json",
+    "lab04_installed_wfo_trace.json",
+    "lab04_probe_designs.json",
+    "lab04_probe_radius_sensitivity.json",
+    "lab04_selector_counterexamples.json"
+  ],
+  "artifacts_missing": [],
+  "acceptance_tests": "71 passed in 25.30s",
+  "acceptance_tests_passed": true,
+  "acceptance_ids_covered": [
+    "T29",
+    "T30",
+    "T31",
+    "T32",
+    "T33",
+    "T34",
+    "T35",
+    "T36"
+  ],
+  "primary_matrix_complete": true,
+  "primary_matrix": "20/20 cells, cells_dir=lab04_cells, space_filling_anchors=1",
+  "primary_matrix_design_matches_spec": true,
+  "design_rule": "L04.5/L04.6 are DONE only when the committed matrix is both complete AND produced by the anchor design guide 7.2 step 1 specifies (TPE + incumbent + space-filling)",
+  "tasks": [
+    {
+      "task_id": "L04.1.1",
+      "requirement": "fixed parameter matrix traced before the search",
+      "artifact": "configs/lab04_installed_wfo_trace.json:installed_defaults.optuna_sampler",
+      "note": "optuna_trials defaults to 0 and mode 'none' ran ONE trial: the fixed matrix is the default",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.2",
+      "requirement": "current selected mode traced",
+      "artifact": "configs/lab04_installed_wfo_trace.json:search_behaviour",
+      "note": "mode 'none', 1 trial, no search",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.3",
+      "requirement": "optuna sampler identified",
+      "artifact": "installed_defaults.optuna_sampler",
+      "note": "TPESampler(seed=study_seed) + DuplicatePruner",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.4",
+      "requirement": "proxy vs native objective resolved",
+      "artifact": "installed_defaults.objective_backend",
+      "note": "endpoint backend returned all-zero Sharpes for this strategy shape; proxy used, divergence recorded",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.5",
+      "requirement": "candidate freeze traced",
+      "artifact": "installed_defaults.candidate_freeze",
+      "note": "_select_is_candidate_records then _select_oos_candidate_record, before outer evaluation",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.6",
+      "requirement": "OOS usage measured, not assumed",
+      "artifact": "lab04_installed_wfo_trace.json:oos_usage_probes",
+      "note": "mutation probe with an IS-invariance precondition; per_fold_decay moves the selection",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.7",
+      "requirement": "baseline floor traced",
+      "artifact": "installed_defaults.baseline_floor",
+      "note": "min_trades_per_year and trade_penalty_factor both default to None: no floor unless configured",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.8",
+      "requirement": "retention traced",
+      "artifact": "installed_defaults.retention",
+      "note": "financial=score, research=none, scope=selected_final_execution",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.9",
+      "requirement": "modes 1-5 of the PINNED version distinguished",
+      "artifact": "lab04_installed_wfo_trace.json:modes.traces",
+      "note": "all six settings run; mode_5 collapses to one fold and is full-sample calibration",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.1.10",
+      "requirement": "no assumption that every mode calls the generic selector",
+      "artifact": "lab04_installed_wfo_trace.json:modes.selector_families",
+      "note": "two families measured separately; the WFO record selectors are not CandidateSelector",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.1",
+      "requirement": "sharp peak vs broad plateau",
+      "artifact": "CE-01",
+      "note": "T29",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.2",
+      "requirement": "bad neighbors retained",
+      "artifact": "CE-11",
+      "note": "a losing valid neighbour raises F and lowers R and P_survive; measured both ways",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.3",
+      "requirement": "duplicate samples",
+      "artifact": "CE-03",
+      "note": "probe ids unique inside a tight radius",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.4",
+      "requirement": "fixed dimensions",
+      "artifact": "CE-04",
+      "note": "DEFECT_CONFIRMED on candidate_selection",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.5",
+      "requirement": "sampled-span scaling",
+      "artifact": "CE-05",
+      "note": "DEFECT_CONFIRMED, 98x collapse measured",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.6",
+      "requirement": "missing consensus",
+      "artifact": "CE-07",
+      "note": "INSUFFICIENT_LOCAL_EVIDENCE, no fabricated plateau",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.7",
+      "requirement": "invalid centroid",
+      "artifact": "CE-08",
+      "note": "T33, deployment refused",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.8",
+      "requirement": "raw baseline override",
+      "artifact": "CE-09",
+      "note": "T35, guard disagreement logged",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.9",
+      "requirement": "actual source symbols and reproducers attached",
+      "artifact": "lab04_selector_counterexamples.json:source_symbols",
+      "note": "_param_distance / _numeric_span with file:line, each with a runnable reproducer",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.2.10",
+      "requirement": "already-correct behaviour recorded as verified-existing",
+      "artifact": "counterexamples.by_verdict",
+      "note": "the WFO family is VERIFIED_EXISTING_CORRECT; only the CandidateSelector family is accused",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.1",
+      "requirement": "geometry from a per-alpha schema",
+      "artifact": "selector/alpha_schemas.py",
+      "note": "four schemas",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.2",
+      "requirement": "dependent params ordered by construction",
+      "artifact": "test_t32_dependencies_are_parameterised_not_repaired",
+      "note": "no post-hoc repair",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.3",
+      "requirement": "inactive flags excluded from distance",
+      "artifact": "test_t31_inactive_parameter_creates_no_false_distance",
+      "note": "0 distance when the branch is off",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.4",
+      "requirement": "seed and design frozen and reproducible",
+      "artifact": "test_t32_probe_design_is_reproducible_across_processes",
+      "note": "identical probe ids under three PYTHONHASHSEED values",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.5",
+      "requirement": "every valid bad probe kept in the denominator",
+      "artifact": "test_t29_valid_bad_probes_stay_in_the_denominator",
+      "note": "measured",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.6",
+      "requirement": "runtime error means incomplete evidence",
+      "artifact": "test_t29_runtime_error_is_incomplete_evidence_not_a_loss",
+      "note": "INCOMPLETE_PANEL",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.9",
+      "requirement": "anchors come from TPE, the incumbent AND space-filling coverage (7.2 step 1)",
+      "artifact": "tests/test_lab04_evaluator.py::test_anchors_are_drawn_from_tpe_incumbent_and_space_filling",
+      "note": "4 anchor slots: 2 TPE + 1 farthest-point + 1 incumbent, total budget still 96",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.8",
+      "requirement": "probe radius is a registered sensitivity, not tuned after an outer result",
+      "artifact": "configs/lab04_probe_radius_sensitivity.json",
+      "note": "radii 0.06/0.12/0.24 declared before the run; the primary stays 0.12 regardless",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.3.7",
+      "requirement": "structurally invalid is not bad performance",
+      "artifact": "test_t29_structurally_invalid_is_not_bad_performance",
+      "note": "excluded, not penalised",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.4.1",
+      "requirement": "score follows guide 7.3",
+      "artifact": "selector/robust_score.py",
+      "note": "G=Q0.25, F=median_e Q0.75 regret, R=G-lambda_F*F, P_survive",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.4.2",
+      "requirement": "same episode lengths, risk and cost",
+      "artifact": "test_inner_episodes_have_equal_length + evaluator.ACCOUNT",
+      "note": "equal-length episodes; one frozen account contract for every candidate and arm",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.4.3",
+      "requirement": "incumbent gets the same validation budget",
+      "artifact": "test_t35_incumbent_receives_the_same_validation_budget",
+      "note": "same episodes and neighbours",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.4.4",
+      "requirement": "before/after guard logged",
+      "artifact": "configs/lab04_incumbent_parity.json:guard_before,guard_after",
+      "note": "both recorded",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.4.5",
+      "requirement": "centroid/medoid only over feasible evaluated candidates with traceable panels",
+      "artifact": "representative.choose_representative + test_t33/T34",
+      "note": "medoid over ELIGIBLE only; centroid is a proposal until evaluated",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.1",
+      "requirement": "same calendar, training memory, engine, retention and eval budget",
+      "artifact": "calendar_baseline.summarize:matched_conditions",
+      "note": "seven matched conditions listed",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.2",
+      "requirement": "no regime information in either arm",
+      "artifact": "calendar_baseline:regime_information_used=false",
+      "note": "neither arm reads a feature panel",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.3",
+      "requirement": "pilot one cell then expand to all 20",
+      "artifact": "scripts/run_calendar_baseline.py:PILOT_ORDER",
+      "note": "A-SC/BTCUSDT first, then the full 4x5 matrix",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.4",
+      "requirement": "no claiming full scope from the winning symbol",
+      "artifact": "calendar_baseline:cells + console_table",
+      "note": "every cell status reported, winners and losers",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.5",
+      "requirement": "selection frozen before outer evaluation (guide 7.2 step 7)",
+      "artifact": "tests/test_lab04_evaluator.py::test_selection_is_frozen_before_the_test_window_is_touched",
+      "note": "the test window is mutated and both arms' selections stay byte-identical",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.6",
+      "requirement": "the fast evaluator equals a whole-window fixed point",
+      "artifact": "tests/test_lab04_evaluator.py::test_the_fast_sweep_matches_a_whole_window_fixed_point",
+      "note": "identical fills, reasons and equity against the slow reference loop",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.5.7",
+      "requirement": "entries are sized to the frozen entry notional",
+      "artifact": "tests/test_lab04_evaluator.py::test_entries_are_sized_to_the_frozen_entry_notional",
+      "note": "2000 USDT per entry, not one whole unit; this is what LAB-03's zero-fill smoke missed",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.1",
+      "requirement": "actual local coverage reported",
+      "artifact": "calendar_baseline:local_coverage",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.2",
+      "requirement": "lower tail reported",
+      "artifact": "calendar_baseline:lower_tail",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.3",
+      "requirement": "survival reported",
+      "artifact": "robust_scores[*].p_survive per cutoff",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.4",
+      "requirement": "trade counts reported",
+      "artifact": "arms[*].trades",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.5",
+      "requirement": "period concentration reported",
+      "artifact": "arms[*].period_concentration",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.6",
+      "requirement": "parameter-behaviour fingerprint reported",
+      "artifact": "calendar_baseline:parameter_behaviour_fingerprint",
+      "note": "turnover, distinct sets, trades",
+      "status": "DONE"
+    },
+    {
+      "task_id": "L04.6.7",
+      "requirement": "A and B both kept for the factorial regardless of the result",
+      "artifact": "calendar_baseline:factorial_rule",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.1",
+      "requirement": "no dead code, unused imports or undefined names in lab source",
+      "artifact": "tests/test_lab04_evaluator.py::test_no_dead_code_or_undefined_names_in_lab_source",
+      "note": "pyflakes gate; raw-supplied/ is excluded because its lint IS the evidence (SD-HASH-01)",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.2",
+      "requirement": "the four supplied alphas remain byte-identical",
+      "artifact": "tests/test_lab04_evaluator.py::test_the_raw_alphas_are_still_byte_identical",
+      "note": "the lint exclusion is only safe while the originals are untouched",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.3",
+      "requirement": "dev tooling declared and kept out of the runtime lock",
+      "artifact": "configs/dev_tools.json",
+      "note": "pyflakes/autoflake added after the LAB-01 pin; engine pin 1.1.1/0.4.2 unchanged",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.4",
+      "requirement": "one source of truth for blocked alphas and decision intervals",
+      "artifact": "tests/test_lab04_evaluator.py::test_blocked_alphas_come_from_the_certification_not_a_literal",
+      "note": "NOT_READY reads the LAB-02 certification; DECISION_INTERVAL is the LAB-03 object itself",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.5",
+      "requirement": "centroid geometry matches the distance that selected it",
+      "artifact": "tests/test_lab04_selector.py::test_centroid_of_a_log_parameter_is_the_geometric_mean",
+      "note": "log kinds use the geometric mean; ints snap to the declared grid",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.6",
+      "requirement": "centroid of an ordered pair cannot collapse into an infeasible point",
+      "artifact": "tests/test_lab04_selector.py::test_centroid_of_an_ordered_pair_stays_feasible",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.7",
+      "requirement": "no selector output depends on PYTHONHASHSEED",
+      "artifact": "tests/test_lab04_selector.py::test_centroid_categorical_tie_break_is_process_stable",
+      "note": "probe design and centroid tie-break both checked under three salts",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.8",
+      "requirement": "trade counts distinguish engine fills from entries",
+      "artifact": "tests/test_lab04_evaluator.py::test_trade_counts_distinguish_fills_from_entries",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.9",
+      "requirement": "a partial matrix is labelled partial and blocks the L04.5/L04.6 rows",
+      "artifact": "tests/test_lab04_evaluator.py::test_a_partial_matrix_is_labelled_partial",
+      "note": "",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.10",
+      "requirement": "retention reasons name the constraint that actually bound",
+      "artifact": "configs/lab04_calendar_baseline.json:retention_events[*].reasons",
+      "note": "ALL_FAIL_ECONOMIC_QUALITY vs NO_LOCAL_PANEL vs ALL_FAIL_SURVIVAL, not one status for all",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.11",
+      "requirement": "the B-A contrast states its confound before it is read",
+      "artifact": "configs/lab04_calendar_baseline.json:confounds",
+      "note": "asymmetric switching rate; the HOLD control that would separate it is named and not run",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.12",
+      "requirement": "the committed code still reproduces a committed cutoff decision",
+      "artifact": "configs/lab04_cutoff_reproducibility.json",
+      "note": "a multi-hour run executes the modules loaded at launch; this re-runs one real cutoff",
+      "status": "DONE"
+    },
+    {
+      "task_id": "DEBT.13",
+      "requirement": "confirmed engine defects recorded as a bounded proposal, never applied",
+      "artifact": "handoff/lab_only_patch.diff + handoff/README.md",
+      "note": "CLAUDE.md rule 1; a test proves the installed wheel still has the original body",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.1",
+      "requirement": "which selector the public route actually uses is known",
+      "artifact": "lab04_installed_wfo_trace.json:public_route_default",
+      "note": "_select_oos_candidate_record under metric robust_decay = argmax objective",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.2",
+      "requirement": "honest A/B result and search budget reported",
+      "artifact": "calendar_baseline:contrast_B_minus_A + search_effort",
+      "note": "unique executions and candidate-episode visits, not a trial count",
+      "status": "DONE"
+    },
+    {
+      "task_id": "EXIT.3",
+      "requirement": "legacy OOS-selected modes labelled, never reused as an untouched claim",
+      "artifact": "lab04_installed_wfo_trace.json:legacy_oos_labelling",
+      "note": "",
+      "status": "DONE"
+    }
+  ],
+  "lab_run_id": "run-20260910T124429Z-fb073862",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T12:44:56.229791+00:00"
+}

@@ -1,0 +1,469 @@
+{
+  "schema": "crypto_regime_lab.data_product_inventory.v1",
+  "market_universe": {
+    "symbol_directories": 53,
+    "perpetual_symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "DOGEUSDT",
+      "ETHUSDT",
+      "SOLUSDT"
+    ],
+    "quarterly_contract_count": 48,
+    "quarterly_examples": [
+      "BTCUSDT_210326",
+      "BTCUSDT_210625",
+      "BTCUSDT_210924",
+      "BTCUSDT_211231"
+    ],
+    "wider_universe_available": [],
+    "can_widen_market_context": false,
+    "consequence": "G5 breadth, dispersion and factor concentration are computed over five symbols because five is the entire perpetual universe here. Dated quarterly contracts are expiries of the same underlyings and would inflate breadth without adding an asset."
+  },
+  "storage_root": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage",
+  "read_only": true,
+  "loader_code_sha256": "99612d99ada25732e457740c129fadf808725474d7647097253d919bb984bd4e",
+  "loader_reader_classes": [
+    "BinanceFuturesMetrics5m",
+    "BinanceOptions5m",
+    "BinanceOrderBookSnapshot1h",
+    "CryptoBinance1m",
+    "CryptoBinanceQuarterly1m",
+    "CryptoBinanceSpot1m",
+    "CryptoDailyMatrix",
+    "DeribitOptionOverlay",
+    "DeribitOptionSnapshots5m",
+    "DeribitOptionTrades"
+  ],
+  "trade_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "DOGEUSDT"
+  ],
+  "products": {
+    "crypto_binance_spot_1m": {
+      "product_id": "crypto_binance_spot_1m",
+      "exists": true,
+      "actual_reader_symbol": "CryptoBinanceSpot1m",
+      "storage_paths": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_spot/1m",
+      "bar_interval": "1min",
+      "kind": "ohlcv_bars",
+      "measurement_method": "Binance Vision monthly spot klines",
+      "role": "SERVER_CORE_LONG spot leg; basis and spot-activity context",
+      "schema": {
+        "time": "timestamp[ns]",
+        "symbol": "string",
+        "open": "double",
+        "high": "double",
+        "low": "double",
+        "close": "double",
+        "volume": "double",
+        "close_time": "timestamp[ns]",
+        "quote_volume": "double",
+        "number_of_trades": "int64",
+        "taker_buy_base_volume": "double",
+        "taker_buy_quote_volume": "double",
+        "source": "string",
+        "ingested_at": "timestamp[ns]"
+      },
+      "sources_observed": [
+        "binance_vision_spot_monthly",
+        "binance_spot_rest"
+      ],
+      "coverage_by_symbol": {
+        "BTCUSDT": {
+          "file_count": 104,
+          "bytes": 343730514,
+          "years": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 104,
+          "first_partition": "2018-01",
+          "last_partition": "2026-08",
+          "rows_first_partition": 44515,
+          "rows_last_partition": 8894,
+          "earliest_observed": "2018-01-01 00:00:00",
+          "latest_observed": "2026-08-07 04:13:00"
+        }
+      },
+      "trade_symbols_absent": [
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ],
+      "non_trade_symbols_present": 0,
+      "notes": [
+        "4 of the 5 trade symbols have no partition in this product: ['ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'DOGEUSDT']. Recorded as absent; never inferred present from the reader name."
+      ],
+      "read_only_verified": true
+    },
+    "crypto_binance_futures_1m": {
+      "product_id": "crypto_binance_futures_1m",
+      "exists": true,
+      "actual_reader_symbol": "CryptoBinance1m",
+      "storage_paths": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m",
+      "bar_interval": "1min",
+      "kind": "ohlcv_bars",
+      "measurement_method": "Binance USD-M perpetual klines",
+      "role": "PRIMARY: signal and execution venue (guide 4.1)",
+      "schema": {
+        "time": "timestamp[ns]",
+        "symbol": "string",
+        "open": "double",
+        "high": "double",
+        "low": "double",
+        "close": "double",
+        "volume": "double",
+        "close_time": "timestamp[ns]",
+        "quote_volume": "double",
+        "number_of_trades": "int64",
+        "taker_buy_base_volume": "double",
+        "taker_buy_quote_volume": "double",
+        "source": "string",
+        "ingested_at": "timestamp[ns]"
+      },
+      "sources_observed": [
+        "binance_futures"
+      ],
+      "coverage_by_symbol": {
+        "BTCUSDT": {
+          "file_count": 81,
+          "bytes": 241868712,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 81,
+          "first_partition": "2020-01",
+          "last_partition": "2026-09",
+          "rows_first_partition": 44640,
+          "rows_last_partition": 12731,
+          "earliest_observed": "2020-01-01 00:00:00",
+          "latest_observed": "2026-09-09 20:10:00"
+        },
+        "ETHUSDT": {
+          "file_count": 81,
+          "bytes": 243133472,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 81,
+          "first_partition": "2020-01",
+          "last_partition": "2026-09",
+          "rows_first_partition": 44640,
+          "rows_last_partition": 12731,
+          "earliest_observed": "2020-01-01 00:00:00",
+          "latest_observed": "2026-09-09 20:10:00"
+        },
+        "SOLUSDT": {
+          "file_count": 73,
+          "bytes": 170047966,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 73,
+          "first_partition": "2020-09",
+          "last_partition": "2026-09",
+          "rows_first_partition": 24060,
+          "rows_last_partition": 12732,
+          "earliest_observed": "2020-09-14 07:00:00",
+          "latest_observed": "2026-09-09 20:11:00"
+        },
+        "BNBUSDT": {
+          "file_count": 80,
+          "bytes": 192993318,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 80,
+          "first_partition": "2020-02",
+          "last_partition": "2026-09",
+          "rows_first_partition": 28319,
+          "rows_last_partition": 12732,
+          "earliest_observed": "2020-02-10 08:01:00",
+          "latest_observed": "2026-09-09 20:11:00"
+        },
+        "DOGEUSDT": {
+          "file_count": 75,
+          "bytes": 190544696,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 75,
+          "first_partition": "2020-07",
+          "last_partition": "2026-09",
+          "rows_first_partition": 31140,
+          "rows_last_partition": 12732,
+          "earliest_observed": "2020-07-10 09:00:00",
+          "latest_observed": "2026-09-09 20:11:00"
+        }
+      },
+      "trade_symbols_absent": [],
+      "non_trade_symbols_present": 48,
+      "notes": [],
+      "read_only_verified": true
+    },
+    "crypto_binance_futures_metrics_5m": {
+      "product_id": "crypto_binance_futures_metrics_5m",
+      "exists": true,
+      "actual_reader_symbol": "BinanceFuturesMetrics5m",
+      "storage_paths": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures_metrics/5m",
+      "bar_interval": "5min",
+      "kind": "derivatives_metrics",
+      "measurement_method": "Binance Vision USD-M metrics (open interest and trader ratios)",
+      "role": "SERVER_DERIVATIVES: G3 leverage/crowding",
+      "schema": {
+        "time": "timestamp[ns]",
+        "market": "string",
+        "symbol": "string",
+        "contract_type": "string",
+        "sum_open_interest": "double",
+        "sum_open_interest_value": "double",
+        "count_toptrader_long_short_ratio": "double",
+        "sum_toptrader_long_short_ratio": "double",
+        "count_long_short_ratio": "double",
+        "sum_taker_long_short_vol_ratio": "double",
+        "source": "string",
+        "ingested_at": "timestamp[ns]"
+      },
+      "sources_observed": [
+        "binance_futures_data_rest",
+        "binance_vision_usdm_metrics"
+      ],
+      "coverage_by_symbol": {
+        "BTCUSDT": {
+          "file_count": 73,
+          "bytes": 36662580,
+          "years": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 73,
+          "first_partition": "2020-09",
+          "last_partition": "2026-09",
+          "rows_first_partition": 8636,
+          "rows_last_partition": 2494,
+          "earliest_observed": "2020-09-01 00:00:00",
+          "latest_observed": "2026-09-09 15:45:00"
+        },
+        "ETHUSDT": {
+          "file_count": 58,
+          "bytes": 29475984,
+          "years": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025,
+            2026
+          ],
+          "partition_count": 58,
+          "first_partition": "2021-12",
+          "last_partition": "2026-09",
+          "rows_first_partition": 8921,
+          "rows_last_partition": 2495,
+          "earliest_observed": "2021-12-01 00:00:00",
+          "latest_observed": "2026-09-09 15:50:00"
+        }
+      },
+      "trade_symbols_absent": [
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ],
+      "non_trade_symbols_present": 9,
+      "notes": [
+        "3 of the 5 trade symbols have no partition in this product: ['SOLUSDT', 'BNBUSDT', 'DOGEUSDT']. Recorded as absent; never inferred present from the reader name."
+      ],
+      "read_only_verified": true
+    },
+    "crypto_binance_orderbook_snapshot_1h": {
+      "product_id": "crypto_binance_orderbook_snapshot_1h",
+      "exists": true,
+      "actual_reader_symbol": "BinanceOrderBookSnapshot1h",
+      "storage_paths": "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_orderbook_snapshot/1h",
+      "bar_interval": "1h",
+      "kind": "book_snapshot",
+      "measurement_method": "REST depth snapshot, sampled once per hour",
+      "role": "SERVER_LIQUIDITY: G4 spread/depth",
+      "schema": {
+        "time": "timestamp[ns]",
+        "sample_time": "timestamp[ns]",
+        "market": "string",
+        "symbol": "string",
+        "contract_type": "string",
+        "mid_price": "double",
+        "best_bid": "double",
+        "best_ask": "double",
+        "spread": "double",
+        "spread_bps": "double",
+        "bid_depth_0_2pct": "double",
+        "ask_depth_0_2pct": "double",
+        "q_bid_depth_0_2pct": "double",
+        "q_ask_depth_0_2pct": "double",
+        "imbalance_0_2pct": "double",
+        "bid_depth_1pct": "double",
+        "ask_depth_1pct": "double",
+        "q_bid_depth_1pct": "double",
+        "q_ask_depth_1pct": "double",
+        "imbalance_1pct": "double",
+        "bid_depth_2pct": "double",
+        "ask_depth_2pct": "double",
+        "q_bid_depth_2pct": "double",
+        "q_ask_depth_2pct": "double",
+        "imbalance_2pct": "double",
+        "bid_depth_5pct": "double",
+        "ask_depth_5pct": "double",
+        "q_bid_depth_5pct": "double",
+        "q_ask_depth_5pct": "double",
+        "imbalance_5pct": "double",
+        "primary_bid_depth": "double",
+        "primary_ask_depth": "double",
+        "primary_q_bid_depth": "double",
+        "primary_q_ask_depth": "double",
+        "primary_imbalance": "double",
+        "depth_limit": "int64",
+        "source": "string",
+        "ingested_at": "timestamp[ns]"
+      },
+      "sources_observed": [
+        "binance_usdm_depth_rest"
+      ],
+      "coverage_by_symbol": {
+        "BTCUSDT": {
+          "file_count": 2,
+          "bytes": 220629,
+          "years": [
+            2026
+          ],
+          "partition_count": 2,
+          "first_partition": "2026-08",
+          "last_partition": "2026-09",
+          "rows_first_partition": 507,
+          "rows_last_partition": 212,
+          "earliest_observed": "2026-08-10 19:00:00",
+          "latest_observed": "2026-09-09 19:00:00"
+        }
+      },
+      "trade_symbols_absent": [
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ],
+      "non_trade_symbols_present": 2,
+      "notes": [
+        "4 of the 5 trade symbols have no partition in this product: ['ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'DOGEUSDT']. Recorded as absent; never inferred present from the reader name."
+      ],
+      "read_only_verified": true
+    }
+  },
+  "coverage_summary": {
+    "crypto_binance_spot_1m": {
+      "present": [
+        "BTCUSDT"
+      ],
+      "absent": [
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ]
+    },
+    "crypto_binance_futures_1m": {
+      "present": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "absent": []
+    },
+    "crypto_binance_futures_metrics_5m": {
+      "present": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "absent": [
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ]
+    },
+    "crypto_binance_orderbook_snapshot_1h": {
+      "present": [
+        "BTCUSDT"
+      ],
+      "absent": [
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "DOGEUSDT"
+      ]
+    }
+  },
+  "expected_but_absent": {
+    "funding_rate_history": {
+      "needed_for": "guide 4.1 realistic net carry, and the G3 funding features",
+      "searched": "storage tree and the loader's class list",
+      "found": false,
+      "consequence": "no funding series exists in this storage, so a realistic net-carry claim cannot be made and the funding cohort is MISSING, never silently zero (guide 4.1)"
+    },
+    "basis_or_mark_price": {
+      "needed_for": "G3 basis B_t = F_t/S_t - 1 without a spot proxy",
+      "searched": "storage tree",
+      "found": false,
+      "consequence": "basis must be derived from synchronised spot and perp closes where spot exists, and is unavailable for the four symbols with no spot product"
+    }
+  },
+  "policy": "a reader class in the loader is not evidence that a dataset exists; every product here was confirmed by walking real partitions, and anything not found is recorded as absent",
+  "lab_run_id": "run-20260909T201224Z-2f185d7c",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T20:12:26.130017+00:00"
+}

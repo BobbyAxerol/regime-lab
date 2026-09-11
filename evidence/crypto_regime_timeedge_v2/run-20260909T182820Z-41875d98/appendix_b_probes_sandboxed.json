@@ -1,0 +1,257 @@
+{
+  "evidence_type": "LOCAL_SOURCE_DIAGNOSTICS_NOT_MARKET_BACKTEST",
+  "scope": "AST-loaded source functions only; no QuantBT, no market data, no certification",
+  "probe_count": 21,
+  "confirmed_count": 21,
+  "results": [
+    {
+      "id": "PARSE_vwap.py",
+      "status": "CONFIRMED",
+      "observed": 249,
+      "scope": "synthetic_or_static_source",
+      "expectation": "AST parses without import/execution"
+    },
+    {
+      "id": "PARSE_hash_momentum.py",
+      "status": "CONFIRMED",
+      "observed": 166,
+      "scope": "synthetic_or_static_source",
+      "expectation": "AST parses without import/execution"
+    },
+    {
+      "id": "PARSE_adaptive_hma_cpp.py",
+      "status": "CONFIRMED",
+      "observed": 349,
+      "scope": "synthetic_or_static_source",
+      "expectation": "AST parses without import/execution"
+    },
+    {
+      "id": "PARSE_signal_combine.py",
+      "status": "CONFIRMED",
+      "observed": 145,
+      "scope": "synthetic_or_static_source",
+      "expectation": "AST parses without import/execution"
+    },
+    {
+      "id": "HASH_MISSING_NUMPY",
+      "status": "CONFIRMED",
+      "observed": "NameError: name 'np' is not defined",
+      "scope": "synthetic_or_static_source",
+      "expectation": "unbound np raises before indicator call"
+    },
+    {
+      "id": "HASH_SHORT_ARRAY",
+      "status": "CONFIRMED",
+      "observed": "IndexError",
+      "scope": "synthetic_or_static_source",
+      "expectation": "atr[14] fails for length 10"
+    },
+    {
+      "id": "HASH_ATR_CLOSE_ONLY",
+      "status": "CONFIRMED",
+      "observed": 0.0,
+      "scope": "synthetic_or_static_source",
+      "expectation": "constant closes yield 0 regardless of any high/low range"
+    },
+    {
+      "id": "HASH_EQUITY_NO_MTM",
+      "status": "CONFIRMED",
+      "observed": {
+        "units": [
+          0.0,
+          10.0,
+          10.0
+        ],
+        "reported_equity": [
+          10000.0,
+          10000.0,
+          10000.0
+        ],
+        "terminal_wallet_plus_unrealized": 10100.0
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "open-position equity omits unrealized +100"
+    },
+    {
+      "id": "HASH_ONE_TP_BRANCH_PER_BAR",
+      "status": "CONFIRMED",
+      "observed": {
+        "units": [
+          0.0,
+          10.0,
+          5.0
+        ],
+        "reported_equity": [
+          10000.0,
+          10000.0,
+          10005.0
+        ]
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "bar crosses tp1,tp2,final but only tp1 executes"
+    },
+    {
+      "id": "HASH_UNORDERED_TP_PRESETS",
+      "status": "CONFIRMED",
+      "observed": [
+        "huhu",
+        "bubu",
+        "haft",
+        "kuku"
+      ],
+      "scope": "synthetic_or_static_source",
+      "expectation": "invalid for a simultaneous increasing TP ladder"
+    },
+    {
+      "id": "HMA_FLAT_RSI",
+      "status": "CONFIRMED",
+      "observed": {
+        "at_seed": 50.0,
+        "next": 100.0
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "flat series changes 50 -> 100 in implementation"
+    },
+    {
+      "id": "HMA_INVERTED_LENGTH_PRESETS",
+      "status": "CONFIRMED",
+      "observed": [
+        "hfhf",
+        "hjhj",
+        "hoho",
+        "hbhb"
+      ],
+      "scope": "synthetic_or_static_source",
+      "expectation": "must not silently repair known-tuned presets"
+    },
+    {
+      "id": "HMA_UNUSED_ARGUMENTS",
+      "status": "CONFIRMED",
+      "observed": [
+        "time_ms",
+        "volume",
+        "double_up"
+      ],
+      "scope": "synthetic_or_static_source",
+      "expectation": "time_ms,volume,double_up do not affect core outputs"
+    },
+    {
+      "id": "HMA_NO_OPEN_INPUT",
+      "status": "CONFIRMED",
+      "observed": [
+        "time_ms",
+        "close",
+        "high",
+        "low",
+        "volume",
+        "minLength",
+        "maxLength",
+        "minorMin",
+        "minorMax",
+        "flat",
+        "atrFast",
+        "atrSlow",
+        "mult",
+        "maxSL",
+        "takeProfit",
+        "minProfit",
+        "sl_input_mode",
+        "double_up"
+      ],
+      "scope": "synthetic_or_static_source",
+      "expectation": "open price absent from core signature"
+    },
+    {
+      "id": "HMA_IGNORED_SL_MULT",
+      "status": "CONFIRMED",
+      "observed": 13,
+      "scope": "synthetic_or_static_source",
+      "expectation": "sl_mult present only in presets, not parameter reads"
+    },
+    {
+      "id": "VWAP_SHORT_ARRAY",
+      "status": "CONFIRMED",
+      "observed": "IndexError",
+      "scope": "synthetic_or_static_source",
+      "expectation": "n_sma assumes >=length input"
+    },
+    {
+      "id": "VWAP_OPEN_IGNORED",
+      "status": "CONFIRMED",
+      "observed": {
+        "p200": 1.0,
+        "p201": 0.0,
+        "same_output_after_open_change": true
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "open input never used; output cannot represent gap fill economics"
+    },
+    {
+      "id": "SIGCOMBINE_LONG_FLAT_ONLY",
+      "status": "CONFIRMED",
+      "observed": [
+        0,
+        2,
+        0,
+        0,
+        2
+      ],
+      "scope": "synthetic_or_static_source",
+      "expectation": "short signal makes pos=0, never negative"
+    },
+    {
+      "id": "SIGCOMBINE_FALLBACK_DISPATCH",
+      "status": "CONFIRMED",
+      "observed": "AttributeError: '_StubRsi' object has no attribute 'money_flow_index'",
+      "scope": "synthetic_or_static_source",
+      "expectation": "RSI fallback still calls money_flow_index when flag false; API-minimal stubs only"
+    },
+    {
+      "id": "SIGCOMBINE_CROSSOVER_DIFF",
+      "status": "CONFIRMED",
+      "observed": {
+        "actual": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "standard_shifted_operand": [
+          false,
+          false,
+          false,
+          true
+        ]
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "current formula differs from conventional crossover against trend.shift(2); specification needed"
+    },
+    {
+      "id": "JM_FORWARD_DP_ORACLE",
+      "status": "CONFIRMED",
+      "observed": {
+        "max_abs_error": 2.220446049250313e-16,
+        "prefix_endpoint_states": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "scope": "synthetic_or_static_source",
+      "expectation": "causal endpoint DP matches brute force best-prefix-ending-state cost"
+    }
+  ],
+  "note": "This is a NEW run record. The appendix E record from the guide's review session is provenance and is not overwritten. CONFIRMED means the stated property was observed, not that an alpha is certified.",
+  "execution_context": {
+    "contained": true,
+    "mechanism": "bubblewrap mount+net+pid namespace, read-only root, LAB_ROOT writable",
+    "network_blocked": true,
+    "protected_roots_read_only": true,
+    "note": "alpha source functions were executed inside the sandbox, never in the orchestrator"
+  },
+  "schema": "crypto_regime_lab.probes_sandboxed.v1",
+  "lab_run_id": "run-20260909T182820Z-41875d98",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:28:23.076614+00:00"
+}

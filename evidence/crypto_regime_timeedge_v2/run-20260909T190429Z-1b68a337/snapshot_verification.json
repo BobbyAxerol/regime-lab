@@ -1,0 +1,18 @@
+{
+  "schema": "crypto_regime_lab.snapshot_verification.v1",
+  "snapshot_id": "server_core_v1",
+  "files_checked": 627,
+  "missing": [],
+  "snapshot_files_changed": [],
+  "source_files_changed": [
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BTCUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=ETHUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=SOLUSDT/year=2026/month=09/part.parquet",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data/storage/crypto/binance_futures/1m/symbol=BNBUSDT/year=2026/month=09/part.parquet"
+  ],
+  "status": "EXTERNAL_DATA_DRIFT",
+  "consequence": "any run declaring this snapshot is invalidated",
+  "lab_run_id": "run-20260909T190429Z-1b68a337",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T19:08:23.999872+00:00"
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "crypto_regime_lab.alpha_certification.v1",
+  "alpha_id": "A-HMA",
+  "raw_source_digest": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+  "adapter_version": "canonical_v1",
+  "status": "READY_FOR_RESEARCH",
+  "indicator_convention": "true range smoothed by an EMA (2/(n+1)), NOT Wilder; RSI flat case repaired to 50 (SD-HMA-03); dynamic Hull MA with the source's index clamping preserved",
+  "timing_contract": "intrabar_bracket_v1",
+  "partial_quantity_convention": "not applicable (single bracket)",
+  "engine_capabilities_verified": [
+    "next_open_entry_fill",
+    "protective_stop",
+    "single_take_profit",
+    "partial_reduce_only_ladder",
+    "same_bar_stop_and_tp_conservative",
+    "funding_at_event",
+    "terminal_forced_flat",
+    "terminal_mark_open"
+  ],
+  "semantic_delta_refs": [
+    "SD-HMA-01",
+    "SD-HMA-02",
+    "SD-HMA-03",
+    "SD-HMA-04",
+    "SD-HMA-05",
+    "SD-HMA-06",
+    "SD-HMA-07"
+  ],
+  "golden_trace_refs": [
+    "golden_traces/A-HMA.json#a214e01f5667ebc1"
+  ],
+  "market_test_evidence_refs": [],
+  "blockers": [],
+  "market_test_evidence_note": "empty by design: LAB-02 runs synthetic fixtures only. Market qualification is LAB-03.",
+  "synthetic_suite": {
+    "decisions": 160,
+    "entries": 2,
+    "technical_exits": 1,
+    "engine_fills": 4,
+    "warmup_blocked_bars": 58
+  },
+  "lab_run_id": "run-20260909T182823Z-a46fcd49",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:28:25.530265+00:00"
+}

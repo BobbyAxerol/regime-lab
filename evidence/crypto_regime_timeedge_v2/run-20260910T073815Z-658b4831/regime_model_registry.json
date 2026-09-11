@@ -1,0 +1,1988 @@
+{
+  "schema": "crypto_regime_lab.regime_model_registry.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "symbol": "BTCUSDT",
+  "observation_interval": "4h",
+  "train_memory_days": 365,
+  "lambda_jump": 1.0,
+  "n_states": 3,
+  "data_role": "development",
+  "outer_evaluation_touched": false,
+  "models": [
+    {
+      "model_id": "jm_k3_2022-01-01",
+      "state_namespace": "jm@2022-01-01",
+      "training_start": "2021-01-01 00:00:00",
+      "training_cutoff": "2022-01-01",
+      "fit_ready_at": "2026-09-10T07:38:22.638935+00:00",
+      "n_states": 3,
+      "lambda_jump": 1.0,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {
+        "g1_rv_6": 0.1111111111111111,
+        "g1_direction_6": 0.1111111111111111,
+        "g1_efficiency_6": 0.1111111111111111,
+        "g2_taker_imbalance": 0.16666666666666666,
+        "g2_log_activity_30": 0.16666666666666666,
+        "g5_dispersion_6": 0.1111111111111111,
+        "g5_breadth_6": 0.1111111111111111,
+        "g5_residual_return_30": 0.1111111111111111
+      },
+      "centroids": [
+        [
+          2.786749628563897,
+          -0.29312401294983886,
+          0.21003801718344342,
+          0.16198207763485292,
+          0.5567444173315733,
+          1.02676973387478,
+          -0.4004788884385521,
+          0.1264943512904615
+        ],
+        [
+          0.882323573885134,
+          0.12886129630905083,
+          0.0883157575580301,
+          -0.1196642237500075,
+          0.3519596008809218,
+          3.3060436837811435,
+          0.019837963513984144,
+          -0.20735118930471305
+        ],
+        [
+          -0.08819118898592376,
+          0.0007917511492084423,
+          0.0700886199471862,
+          0.012461682242838208,
+          0.02596007137126289,
+          -0.10377772397881169,
+          -0.1162021609852809,
+          0.03427937899955758
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.03423487213291208,
+          0.06540835943224446,
+          0.3868393764559496,
+          -0.008684778104218083,
+          0.0027348137882653714,
+          0.012307949996582367,
+          0.6,
+          -0.0004719236877430812
+        ],
+        "scale": [
+          0.01731618331261733,
+          1.107458342327276,
+          0.31382803767110656,
+          0.03472562350393799,
+          0.4166758947784974,
+          0.0071011762372493355,
+          0.5930400000009999,
+          0.00661813512563079
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the training window ending at this cutoff, nothing after"
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "selected_seed": 51,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "multi_start": {
+          "selected_seed": 51,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 8,
+              "converged": true,
+              "objective_trace": [
+                1637.1403484318455,
+                1089.2219640839871,
+                1066.5033835890267,
+                1053.9776183438532,
+                1051.0649999959153,
+                1049.7812220773883,
+                1049.5636045123365,
+                1049.5636045123365
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1049.5636045123365
+            },
+            {
+              "seed": 23,
+              "iterations": 8,
+              "converged": true,
+              "objective_trace": [
+                1813.5035024513945,
+                1108.9123229403872,
+                1061.7329881806163,
+                1053.2148048141948,
+                1052.1959245458663,
+                1051.9627422942924,
+                1051.9597175105446,
+                1051.9597175105446
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1051.9597175105446
+            },
+            {
+              "seed": 37,
+              "iterations": 12,
+              "converged": true,
+              "objective_trace": [
+                1681.1814480175594,
+                1197.1773514908375,
+                1140.527192693828,
+                1110.528613040858,
+                1087.2478748044955,
+                1080.8500997127599,
+                1078.9370772443945,
+                1077.2336641268564,
+                1076.3031077646579,
+                1075.6679801718901,
+                1075.6581991760406,
+                1075.6581991760406
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1075.6581991760406
+            },
+            {
+              "seed": 51,
+              "iterations": 8,
+              "converged": true,
+              "objective_trace": [
+                1847.3892184612328,
+                1116.1297927463747,
+                1064.060848974069,
+                1051.2133684554246,
+                1047.5865517696964,
+                1047.41317862202,
+                1047.3557062000395,
+                1047.3557062000395
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1047.3557062000395
+            }
+          ],
+          "objective_spread": {
+            "min": 1047.3557062000395,
+            "max": 1075.6581991760406,
+            "range": 28.302492976001076
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        },
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.8423709112697984,
+          "train_median": 0.3546153937686134,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          265,
+          317,
+          1608
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "lambda_units": {
+          "lambda_jump": 1.0,
+          "observation_interval": "4h",
+          "units": "standardized-loss units per switch, at this sampling frequency",
+          "transferable_across_frequencies": false,
+          "rule": "changing 4h to 1h requires retuning lambda_J in train/validation, or freezing a normalized policy. Carrying the same raw penalty across and comparing is not a model comparison (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "afe14b221202324e",
+        "emissions.py": "1ece10418d865eb1",
+        "causality.py": "bf8bb860a0554852"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "fitted on the development role only; no outer-evaluation data was read",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "6e5bc85887e3b426",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    },
+    {
+      "model_id": "jm_k3_2022-07-01",
+      "state_namespace": "jm@2022-07-01",
+      "training_start": "2021-07-01 00:00:00",
+      "training_cutoff": "2022-07-01",
+      "fit_ready_at": "2026-09-10T07:38:32.517403+00:00",
+      "n_states": 3,
+      "lambda_jump": 1.0,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {
+        "g1_rv_6": 0.1111111111111111,
+        "g1_direction_6": 0.1111111111111111,
+        "g1_efficiency_6": 0.1111111111111111,
+        "g2_taker_imbalance": 0.16666666666666666,
+        "g2_log_activity_30": 0.16666666666666666,
+        "g5_dispersion_6": 0.1111111111111111,
+        "g5_breadth_6": 0.1111111111111111,
+        "g5_residual_return_30": 0.1111111111111111
+      },
+      "centroids": [
+        [
+          -0.08489161509019842,
+          -1.2287794438192322e-05,
+          0.030828269609166663,
+          -0.009758233403104952,
+          -0.013270887553475103,
+          -0.06761286222342644,
+          0.1433619110106771,
+          0.0015392388284714777
+        ],
+        [
+          2.690496927567496,
+          -0.10108628403581825,
+          0.4881335220344995,
+          0.23306345884744642,
+          0.9145906162965793,
+          1.109771492390494,
+          0.05941942404902847,
+          0.018882847356852424
+        ],
+        [
+          0.27909968110314276,
+          0.11958872461049419,
+          -0.05653200429734717,
+          -0.05300673027921913,
+          0.16865370925366935,
+          3.3670368815787293,
+          0.34118977014401747,
+          -0.2831540080259076
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.028529708961691998,
+          -0.02839056072816083,
+          0.41087010630352105,
+          -0.0031459835181843476,
+          -0.0011655835978165684,
+          0.008179336420786526,
+          0.4,
+          5.80756266295745e-05
+        ],
+        "scale": [
+          0.013687808910543773,
+          1.1483604319627607,
+          0.33133546182313495,
+          0.036611648221010235,
+          0.508723737446513,
+          0.0032642827424531947,
+          0.593040000001,
+          0.004725458932275992
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the training window ending at this cutoff, nothing after"
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "selected_seed": 37,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "multi_start": {
+          "selected_seed": 37,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 18,
+              "converged": true,
+              "objective_trace": [
+                1465.6521974330954,
+                1115.3537137592893,
+                1102.732524755336,
+                1099.4307719146746,
+                1098.3621025415382,
+                1097.6756564350926,
+                1096.680056141839,
+                1095.7440998640513,
+                1095.0918702652625,
+                1094.9395615779295,
+                1094.439072620156,
+                1093.0376630703347,
+                1091.7766436071452,
+                1090.615726303697,
+                1090.5038307221307,
+                1090.4438428148815,
+                1090.4419291675738,
+                1090.4419291675738
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1090.4419291675738
+            },
+            {
+              "seed": 23,
+              "iterations": 11,
+              "converged": true,
+              "objective_trace": [
+                1563.6688861010084,
+                1121.7237213669491,
+                1108.3828476686645,
+                1102.1524798567825,
+                1098.9542210782924,
+                1095.7653165989962,
+                1092.3740721138493,
+                1090.6705490853024,
+                1090.0212917599938,
+                1090.01794985712,
+                1090.01794985712
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1090.01794985712
+            },
+            {
+              "seed": 37,
+              "iterations": 25,
+              "converged": true,
+              "objective_trace": [
+                1725.6085092787657,
+                1130.0474720181908,
+                1102.9986420237178,
+                1099.29878323288,
+                1093.704130282936,
+                1090.2724936582417,
+                1084.6119627659918,
+                1080.5240993377286,
+                1076.4236665022436,
+                1074.1227224800766,
+                1072.5368852203771,
+                1071.7358523754551,
+                1071.313646219057,
+                1070.4113940462978,
+                1068.6607795142886,
+                1065.9433932794266,
+                1065.4607941228303,
+                1065.1144495544277,
+                1064.8699846963048,
+                1064.7726336130145,
+                1064.6520724612365,
+                1064.6407304162406,
+                1064.5394088702283,
+                1064.5051563104414,
+                1064.5051563104414
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1064.5051563104414
+            },
+            {
+              "seed": 51,
+              "iterations": 19,
+              "converged": true,
+              "objective_trace": [
+                1583.8578570724217,
+                1103.7274712257838,
+                1086.3781890277187,
+                1077.3480644599747,
+                1073.8721854477012,
+                1071.4903730448132,
+                1070.7253534642612,
+                1070.563265879465,
+                1067.842168307366,
+                1065.9854137053496,
+                1065.4817056851557,
+                1065.118136538264,
+                1064.9419724092859,
+                1064.7775571092598,
+                1064.6520724612365,
+                1064.6407304162406,
+                1064.5394088702283,
+                1064.5051563104414,
+                1064.5051563104414
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1064.5051563104414
+            }
+          ],
+          "objective_spread": {
+            "min": 1064.5051563104414,
+            "max": 1090.4419291675738,
+            "range": 25.936772857132382
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        },
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.7105610975755179,
+          "train_median": 0.3630002044045125,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          1666,
+          314,
+          210
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "lambda_units": {
+          "lambda_jump": 1.0,
+          "observation_interval": "4h",
+          "units": "standardized-loss units per switch, at this sampling frequency",
+          "transferable_across_frequencies": false,
+          "rule": "changing 4h to 1h requires retuning lambda_J in train/validation, or freezing a normalized policy. Carrying the same raw penalty across and comparing is not a model comparison (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "afe14b221202324e",
+        "emissions.py": "1ece10418d865eb1",
+        "causality.py": "bf8bb860a0554852"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "fitted on the development role only; no outer-evaluation data was read",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "c26fc96f9f7f05fc",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    },
+    {
+      "model_id": "jm_k3_2023-01-01",
+      "state_namespace": "jm@2023-01-01",
+      "training_start": "2022-01-01 00:00:00",
+      "training_cutoff": "2023-01-01",
+      "fit_ready_at": "2026-09-10T07:38:48.922803+00:00",
+      "n_states": 3,
+      "lambda_jump": 1.0,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {
+        "g1_rv_6": 0.1111111111111111,
+        "g1_direction_6": 0.1111111111111111,
+        "g1_efficiency_6": 0.1111111111111111,
+        "g2_taker_imbalance": 0.16666666666666666,
+        "g2_log_activity_30": 0.16666666666666666,
+        "g5_dispersion_6": 0.1111111111111111,
+        "g5_breadth_6": 0.1111111111111111,
+        "g5_residual_return_30": 0.1111111111111111
+      },
+      "centroids": [
+        [
+          0.016067506887182822,
+          0.04664291749231579,
+          0.04884147932171447,
+          0.021187805066927527,
+          0.028684579424974176,
+          -0.14409684109529383,
+          0.12574937553098203,
+          0.03307390793652084
+        ],
+        [
+          2.8226344717597462,
+          -0.2774596895771809,
+          0.395932590044135,
+          0.03412480708947998,
+          0.8067822586765004,
+          2.355328762369778,
+          -0.06955685957090625,
+          -0.09291137394509019
+        ],
+        [
+          -0.08395323431824483,
+          -0.04363557189414334,
+          0.11398465698377044,
+          -0.1324198163399403,
+          -0.12105158447968915,
+          2.845386969332193,
+          0.20976985342538104,
+          -0.3475688682656254
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.023916010927459055,
+          -0.10433588030164379,
+          0.4009357754777412,
+          0.0015936212175412523,
+          -0.0031409706153348524,
+          0.007021551284408096,
+          0.4,
+          -1.989866857398558e-05
+        ],
+        "scale": [
+          0.015214615628885961,
+          1.109780258569376,
+          0.34780970932719607,
+          0.041295848244749744,
+          0.6023431689993701,
+          0.0029710537760039815,
+          0.593040000001,
+          0.0035506487307011025
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the training window ending at this cutoff, nothing after"
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "selected_seed": 37,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "multi_start": {
+          "selected_seed": 37,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 6,
+              "converged": true,
+              "objective_trace": [
+                1353.7392961339808,
+                1058.718023666686,
+                1051.1889138898957,
+                1050.3698517393043,
+                1050.2928284073212,
+                1050.2928284073212
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1050.2928284073212
+            },
+            {
+              "seed": 23,
+              "iterations": 10,
+              "converged": true,
+              "objective_trace": [
+                1393.7666239449732,
+                1070.5836254591306,
+                1062.114444848793,
+                1058.009073993083,
+                1056.136577162744,
+                1054.6428840574094,
+                1052.0144071047964,
+                1051.0820681117812,
+                1050.92356072373,
+                1050.92356072373
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1050.92356072373
+            },
+            {
+              "seed": 37,
+              "iterations": 15,
+              "converged": true,
+              "objective_trace": [
+                1668.4003937320854,
+                1163.154997604685,
+                1099.5852366644515,
+                1058.869280781482,
+                1049.074361047,
+                1044.1025079249855,
+                1040.8443012906891,
+                1039.08312099033,
+                1038.3926398237543,
+                1037.6260066156033,
+                1037.3132429506593,
+                1037.0385837688807,
+                1037.0353948590127,
+                1037.0312847710527,
+                1037.0312847710527
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1037.0312847710527
+            },
+            {
+              "seed": 51,
+              "iterations": 17,
+              "converged": true,
+              "objective_trace": [
+                1469.0465230122084,
+                1102.3200522220986,
+                1070.325054414685,
+                1053.5286417803813,
+                1045.3181580723653,
+                1041.8880622219554,
+                1039.5460052952913,
+                1038.6839126901386,
+                1038.5274604687775,
+                1037.892924563985,
+                1037.3377759520333,
+                1037.2971148560773,
+                1037.286431108078,
+                1037.2810954716879,
+                1037.048870975869,
+                1037.0450209669025,
+                1037.0450209669025
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1037.0450209669025
+            }
+          ],
+          "objective_spread": {
+            "min": 1037.0312847710527,
+            "max": 1050.92356072373,
+            "range": 13.89227595267721
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        },
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.8026588100065397,
+          "train_median": 0.35644104353074657,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          1716,
+          218,
+          256
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "lambda_units": {
+          "lambda_jump": 1.0,
+          "observation_interval": "4h",
+          "units": "standardized-loss units per switch, at this sampling frequency",
+          "transferable_across_frequencies": false,
+          "rule": "changing 4h to 1h requires retuning lambda_J in train/validation, or freezing a normalized policy. Carrying the same raw penalty across and comparing is not a model comparison (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "afe14b221202324e",
+        "emissions.py": "1ece10418d865eb1",
+        "causality.py": "bf8bb860a0554852"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "fitted on the development role only; no outer-evaluation data was read",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "531ff7a9d528f749",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    },
+    {
+      "model_id": "jm_k3_2023-07-01",
+      "state_namespace": "jm@2023-07-01",
+      "training_start": "2022-07-01 00:00:00",
+      "training_cutoff": "2023-07-01",
+      "fit_ready_at": "2026-09-10T07:38:59.435291+00:00",
+      "n_states": 3,
+      "lambda_jump": 1.0,
+      "feature_names": [
+        "g1_rv_6",
+        "g1_direction_6",
+        "g1_efficiency_6",
+        "g2_taker_imbalance",
+        "g2_log_activity_30",
+        "g5_dispersion_6",
+        "g5_breadth_6",
+        "g5_residual_return_30"
+      ],
+      "feature_weights": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ],
+      "group_weights": {
+        "g1_rv_6": 0.1111111111111111,
+        "g1_direction_6": 0.1111111111111111,
+        "g1_efficiency_6": 0.1111111111111111,
+        "g2_taker_imbalance": 0.16666666666666666,
+        "g2_log_activity_30": 0.16666666666666666,
+        "g5_dispersion_6": 0.1111111111111111,
+        "g5_breadth_6": 0.1111111111111111,
+        "g5_residual_return_30": 0.1111111111111111
+      },
+      "centroids": [
+        [
+          0.09775210242246342,
+          -0.12047654078895852,
+          0.036149184934671764,
+          -0.1283501399393012,
+          0.016443074071578308,
+          3.238736214051877,
+          0.15690025688332865,
+          -0.3889370442537207
+        ],
+        [
+          -0.005828675889269831,
+          -0.05279096772199727,
+          0.03238089450611516,
+          -0.0433242084309268,
+          -0.02353887983479238,
+          -0.06566044986607773,
+          0.11387013384504058,
+          -0.02703199660228552
+        ],
+        [
+          3.178895454880814,
+          0.5701606200764145,
+          0.5487007090179142,
+          0.3522915502928691,
+          0.9739010332042805,
+          1.3322685863315984,
+          0.5446662106383657,
+          0.6344662879263927
+        ]
+      ],
+      "scaler_ref": {
+        "median": [
+          0.01788207104874488,
+          0.007265855890189531,
+          0.4032465058342264,
+          -0.00017266414887157078,
+          0.00042619168545293825,
+          0.005969475198828227,
+          0.4,
+          0.00011372795899126454
+        ],
+        "scale": [
+          0.011024778003061115,
+          1.1317579485269773,
+          0.3587438953788829,
+          0.041761587569106084,
+          0.6487664023079222,
+          0.002845327494837011,
+          0.593040000001,
+          0.003057108598865412
+        ],
+        "clip": 5.0,
+        "fitted_rows": 2190,
+        "fitted_on": "the training window ending at this cutoff, nothing after"
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "selected_seed": 11,
+      "observation_interval": "4h",
+      "fit_diagnostics": {
+        "multi_start": {
+          "selected_seed": 11,
+          "selection_criterion": "lowest TRAIN objective; ties broken on the lowest seed",
+          "outer_information_used": false,
+          "runs": [
+            {
+              "seed": 11,
+              "iterations": 19,
+              "converged": true,
+              "objective_trace": [
+                1743.6619726722847,
+                1185.169851055029,
+                1163.8931781139686,
+                1156.55887991361,
+                1152.3876589921615,
+                1149.0385736163264,
+                1145.1450963197078,
+                1118.1653878535528,
+                1090.4568291157454,
+                1080.5940140830012,
+                1074.5376750884202,
+                1071.8035217580862,
+                1070.3482406578928,
+                1068.4927452187057,
+                1066.6785241748696,
+                1066.4399697738932,
+                1066.3493982629682,
+                1066.3385239216936,
+                1066.3385239216936
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1066.3385239216936
+            },
+            {
+              "seed": 23,
+              "iterations": 17,
+              "converged": true,
+              "objective_trace": [
+                1594.245607533077,
+                1155.8430238817273,
+                1118.7604508078384,
+                1099.1529597035137,
+                1085.0444781304002,
+                1077.3823530892428,
+                1074.8952513229683,
+                1074.51644503312,
+                1073.361086613014,
+                1072.1179345395672,
+                1070.9489887379748,
+                1069.4815750350172,
+                1067.5639219451562,
+                1067.0761806928708,
+                1066.9469022952076,
+                1066.9358685753384,
+                1066.9358685753384
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1066.9358685753384
+            },
+            {
+              "seed": 37,
+              "iterations": 12,
+              "converged": true,
+              "objective_trace": [
+                1760.8733548451783,
+                1128.037298655348,
+                1110.4025775034336,
+                1099.2087788338722,
+                1087.354860146747,
+                1075.948572644716,
+                1070.6022848509904,
+                1068.5051296298814,
+                1067.1082008951848,
+                1066.9660118003403,
+                1066.9358685753384,
+                1066.9358685753384
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1066.9358685753384
+            },
+            {
+              "seed": 51,
+              "iterations": 9,
+              "converged": true,
+              "objective_trace": [
+                1359.324071534701,
+                1076.4402409087854,
+                1070.6895439499444,
+                1069.47829622491,
+                1068.470061209452,
+                1066.9351629768237,
+                1066.7576606632788,
+                1066.7405550992432,
+                1066.7405550992432
+              ],
+              "objective_monotone_nonincreasing": true,
+              "empty_states": [],
+              "empty_state_policy": "retained_as_empty_and_reported",
+              "final_objective": 1066.7405550992432
+            }
+          ],
+          "objective_spread": {
+            "min": 1066.3385239216936,
+            "max": 1066.9358685753384,
+            "range": 0.5973446536447682
+          },
+          "local_minimum_only": "alternating minimisation reaches a LOCAL minimum; the spread across seeds is reported rather than claiming the best run found the global optimum (guide 8.2)"
+        },
+        "novelty_threshold": {
+          "quantile": 0.99,
+          "threshold": 1.7969500554936406,
+          "train_median": 0.3452177794656268,
+          "train_n": 2190,
+          "fitted_on": "training residuals only, before any inference is judged by it"
+        },
+        "state_counts": [
+          234,
+          1662,
+          294
+        ],
+        "degeneracy": {
+          "schema": "crypto_regime_lab.regime_degeneracy.v1",
+          "weight_sum": 1.0,
+          "collapsed_weights": false,
+          "identical_centroid_pairs": [],
+          "empty_states": [],
+          "is_degenerate": false,
+          "usable_for_decisions": true,
+          "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+          "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+        },
+        "lambda_units": {
+          "lambda_jump": 1.0,
+          "observation_interval": "4h",
+          "units": "standardized-loss units per switch, at this sampling frequency",
+          "transferable_across_frequencies": false,
+          "rule": "changing 4h to 1h requires retuning lambda_J in train/validation, or freezing a normalized policy. Carrying the same raw penalty across and comparing is not a model comparison (guide 8.2)"
+        }
+      },
+      "code_hashes": {
+        "jump_model.py": "afe14b221202324e",
+        "emissions.py": "1ece10418d865eb1",
+        "causality.py": "bf8bb860a0554852"
+      },
+      "library_versions": {
+        "python": "3.12.13",
+        "numpy": "2.2.6",
+        "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+        "scipy": "1.18.1"
+      },
+      "notes": "fitted on the development role only; no outer-evaluation data was read",
+      "schema": "crypto_regime_lab.regime_model.v1",
+      "centroid_digest": "7d98856e292efc5b",
+      "decision_rule": "online emission is argmin_k Q_t(k) from the forward recurrence, decided at t and never revised. The offline best path is diagnostic only (guide 8.4).",
+      "state_naming_rule": "states describe FEATURE STRUCTURE. They are not named from outer PnL and are not forced into bull/neutral/bear when the centroids do not support it (guide 8.1)."
+    }
+  ],
+  "namespace_mappings": [
+    {
+      "schema": "crypto_regime_lab.state_namespace_mapping.v1",
+      "old_namespace": "jm@2022-01-01",
+      "new_namespace": "jm@2022-07-01",
+      "old_centroid_digest": "6e5bc85887e3b426",
+      "new_centroid_digest": "c26fc96f9f7f05fc",
+      "reference_spread": 1.0643121922821628,
+      "max_relative_distance": 0.5,
+      "mapping": {
+        "0": {
+          "new_state": 0,
+          "old_state": 2,
+          "status": "MAPPED",
+          "distance": 0.0908939671844266,
+          "relative_distance": 0.08540160287887547,
+          "runner_up_distance": 1.0752272206675915
+        },
+        "1": {
+          "new_state": 1,
+          "old_state": 0,
+          "status": "MAPPED",
+          "distance": 0.2479058657415459,
+          "relative_distance": 0.23292589104891406,
+          "runner_up_distance": 1.001112536568405
+        },
+        "2": {
+          "new_state": 2,
+          "old_state": 1,
+          "status": "MAPPED",
+          "distance": 0.24827080816074873,
+          "relative_distance": 0.2332687814356344,
+          "runner_up_distance": 1.181267907690058
+        }
+      },
+      "unmapped_states": [],
+      "all_states_mapped": true,
+      "information_used": "training centroids and declared feature weights only",
+      "is_market_transition": false,
+      "triggers_parameter_search": false,
+      "rule": "a permuted or unmatched state ID after a refit is a MODEL event. It is emitted as a model-transition/uncertainty record and never as a market regime change, and it never triggers a parameter search or a market refit (guide 8.4)"
+    },
+    {
+      "schema": "crypto_regime_lab.state_namespace_mapping.v1",
+      "old_namespace": "jm@2022-07-01",
+      "new_namespace": "jm@2023-01-01",
+      "old_centroid_digest": "c26fc96f9f7f05fc",
+      "new_centroid_digest": "531ff7a9d528f749",
+      "reference_spread": 1.1606454784439766,
+      "max_relative_distance": 0.5,
+      "mapping": {
+        "0": {
+          "new_state": 0,
+          "old_state": 0,
+          "status": "MAPPED",
+          "distance": 0.05155928816026996,
+          "relative_distance": 0.04442294319656774,
+          "runner_up_distance": 1.0639936396323817
+        },
+        "1": {
+          "new_state": 1,
+          "old_state": 1,
+          "status": "MAPPED",
+          "distance": 0.4364520473574385,
+          "relative_distance": 0.3760425172573536,
+          "runner_up_distance": 0.9822083497760798
+        },
+        "2": {
+          "new_state": 2,
+          "old_state": 2,
+          "status": "MAPPED",
+          "distance": 0.26170764328815155,
+          "relative_distance": 0.2254845671212288,
+          "runner_up_distance": 0.9809670497337855
+        }
+      },
+      "unmapped_states": [],
+      "all_states_mapped": true,
+      "information_used": "training centroids and declared feature weights only",
+      "is_market_transition": false,
+      "triggers_parameter_search": false,
+      "rule": "a permuted or unmatched state ID after a refit is a MODEL event. It is emitted as a model-transition/uncertainty record and never as a market regime change, and it never triggers a parameter search or a market refit (guide 8.4)"
+    },
+    {
+      "schema": "crypto_regime_lab.state_namespace_mapping.v1",
+      "old_namespace": "jm@2023-01-01",
+      "new_namespace": "jm@2023-07-01",
+      "old_centroid_digest": "531ff7a9d528f749",
+      "new_centroid_digest": "7d98856e292efc5b",
+      "reference_spread": 1.06970247548133,
+      "max_relative_distance": 0.5,
+      "mapping": {
+        "0": {
+          "new_state": 0,
+          "old_state": 2,
+          "status": "MAPPED",
+          "distance": 0.1607592707707551,
+          "relative_distance": 0.15028409717236454,
+          "runner_up_distance": 1.0260466572553368
+        },
+        "1": {
+          "new_state": 1,
+          "old_state": 0,
+          "status": "MAPPED",
+          "distance": 0.058573059021186015,
+          "relative_distance": 0.05475640223682769,
+          "runner_up_distance": 0.9789537665543747
+        },
+        "2": {
+          "new_state": 2,
+          "old_state": null,
+          "status": "UNMAPPED_REFIT_STATE",
+          "distance": 0.5788358704512121,
+          "relative_distance": 0.5411185668152778,
+          "runner_up_distance": 1.280139983651325
+        }
+      },
+      "unmapped_states": [
+        "2"
+      ],
+      "all_states_mapped": false,
+      "information_used": "training centroids and declared feature weights only",
+      "is_market_transition": false,
+      "triggers_parameter_search": false,
+      "rule": "a permuted or unmatched state ID after a refit is a MODEL event. It is emitted as a model-transition/uncertainty record and never as a market regime change, and it never triggers a parameter search or a market refit (guide 8.4)"
+    }
+  ],
+  "model_transitions": [
+    {
+      "schema": "crypto_regime_lab.model_transition.v1",
+      "from_version": "jm_k3_2022-01-01",
+      "to_version": "jm_k3_2022-07-01",
+      "from_namespace": "jm@2022-01-01",
+      "to_namespace": "jm@2022-07-01",
+      "training_cutoff": "2022-07-01",
+      "mapping_confident": true,
+      "unmapped_states": [],
+      "event_type": "MODEL_TRANSITION",
+      "is_market_event": false,
+      "requires_parameter_search": false,
+      "prior_emissions_rewritten": false,
+      "prior_emissions_rule": "decision-vintage emissions stay exactly as they were emitted; the new model's view of the same past is a separate asof_<cutoff>_training_labels series (guide 8.4)"
+    },
+    {
+      "schema": "crypto_regime_lab.model_transition.v1",
+      "from_version": "jm_k3_2022-07-01",
+      "to_version": "jm_k3_2023-01-01",
+      "from_namespace": "jm@2022-07-01",
+      "to_namespace": "jm@2023-01-01",
+      "training_cutoff": "2023-01-01",
+      "mapping_confident": true,
+      "unmapped_states": [],
+      "event_type": "MODEL_TRANSITION",
+      "is_market_event": false,
+      "requires_parameter_search": false,
+      "prior_emissions_rewritten": false,
+      "prior_emissions_rule": "decision-vintage emissions stay exactly as they were emitted; the new model's view of the same past is a separate asof_<cutoff>_training_labels series (guide 8.4)"
+    },
+    {
+      "schema": "crypto_regime_lab.model_transition.v1",
+      "from_version": "jm_k3_2023-01-01",
+      "to_version": "jm_k3_2023-07-01",
+      "from_namespace": "jm@2023-01-01",
+      "to_namespace": "jm@2023-07-01",
+      "training_cutoff": "2023-07-01",
+      "mapping_confident": false,
+      "unmapped_states": [
+        "2"
+      ],
+      "event_type": "MODEL_TRANSITION_WITH_UNMAPPED_STATES",
+      "is_market_event": false,
+      "requires_parameter_search": false,
+      "prior_emissions_rewritten": false,
+      "prior_emissions_rule": "decision-vintage emissions stay exactly as they were emitted; the new model's view of the same past is a separate asof_<cutoff>_training_labels series (guide 8.4)"
+    }
+  ],
+  "robustness": {
+    "2022-01-01": {
+      "constant_features": {
+        "constant_features": [],
+        "any_constant": false,
+        "effect": "a constant feature adds a fixed amount to every state's loss, so it cannot separate states. It is reported, not dropped silently, because its presence usually means an upstream source went flat",
+        "spread": {
+          "g1_rv_6": 6.540728202483007,
+          "g1_direction_6": 3.8654103827174966,
+          "g1_efficiency_6": 3.18312712061689,
+          "g2_taker_imbalance": 7.488209058227428,
+          "g2_log_activity_30": 7.037786102131003,
+          "g5_dispersion_6": 6.282597029923947,
+          "g5_breadth_6": 1.6862268986886448,
+          "g5_residual_return_30": 10.0
+        }
+      },
+      "convergence": {
+        "schema": "crypto_regime_lab.fit_convergence.v1",
+        "starts": [
+          {
+            "seed": 11,
+            "iterations": 8,
+            "converged": true,
+            "objective_trace": [
+              1637.1403484318455,
+              1089.2219640839871,
+              1066.5033835890267,
+              1053.9776183438532,
+              1051.0649999959153,
+              1049.7812220773883,
+              1049.5636045123365,
+              1049.5636045123365
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1049.5636045123365,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 23,
+            "iterations": 8,
+            "converged": true,
+            "objective_trace": [
+              1813.5035024513945,
+              1108.9123229403872,
+              1061.7329881806163,
+              1053.2148048141948,
+              1052.1959245458663,
+              1051.9627422942924,
+              1051.9597175105446,
+              1051.9597175105446
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1051.9597175105446,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 37,
+            "iterations": 12,
+            "converged": true,
+            "objective_trace": [
+              1681.1814480175594,
+              1197.1773514908375,
+              1140.527192693828,
+              1110.528613040858,
+              1087.2478748044955,
+              1080.8500997127599,
+              1078.9370772443945,
+              1077.2336641268564,
+              1076.3031077646579,
+              1075.6679801718901,
+              1075.6581991760406,
+              1075.6581991760406
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1075.6581991760406,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 51,
+            "iterations": 8,
+            "converged": true,
+            "objective_trace": [
+              1847.3892184612328,
+              1116.1297927463747,
+              1064.060848974069,
+              1051.2133684554246,
+              1047.5865517696964,
+              1047.41317862202,
+              1047.3557062000395,
+              1047.3557062000395
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1047.3557062000395,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          }
+        ],
+        "all_monotone": true,
+        "all_finite": true,
+        "all_converged": true,
+        "seeds_bounded": 4,
+        "local_minimum_note": "monotone descent proves each alternation improves the objective. It does not prove the result is a global optimum, and the lab does not claim it is (guide 8.2)"
+      },
+      "outlier_sensitivity": {
+        "injected_at": 1095,
+        "magnitude": 25.0,
+        "max_centroid_shift": 25.207351189304713,
+        "objective_before": 1047.3557062000395,
+        "objective_after": 1094.852992692327,
+        "note": "reported, not thresholded: how much movement is acceptable depends on the feature scaling, and the lab clips at +/-5 upstream"
+      }
+    },
+    "2022-07-01": {
+      "constant_features": {
+        "constant_features": [],
+        "any_constant": false,
+        "effect": "a constant feature adds a fixed amount to every state's loss, so it cannot separate states. It is reported, not dropped silently, because its presence usually means an upstream source went flat",
+        "spread": {
+          "g1_rv_6": 6.776296065894957,
+          "g1_direction_6": 3.9743773391800614,
+          "g1_efficiency_6": 3.016640864234607,
+          "g2_taker_imbalance": 7.566357825805325,
+          "g2_log_activity_30": 6.600740243101189,
+          "g5_dispersion_6": 6.749743773508946,
+          "g5_breadth_6": 1.6862268986886446,
+          "g5_residual_return_30": 10.0
+        }
+      },
+      "convergence": {
+        "schema": "crypto_regime_lab.fit_convergence.v1",
+        "starts": [
+          {
+            "seed": 11,
+            "iterations": 18,
+            "converged": true,
+            "objective_trace": [
+              1465.6521974330954,
+              1115.3537137592893,
+              1102.732524755336,
+              1099.4307719146746,
+              1098.3621025415382,
+              1097.6756564350926,
+              1096.680056141839,
+              1095.7440998640513,
+              1095.0918702652625,
+              1094.9395615779295,
+              1094.439072620156,
+              1093.0376630703347,
+              1091.7766436071452,
+              1090.615726303697,
+              1090.5038307221307,
+              1090.4438428148815,
+              1090.4419291675738,
+              1090.4419291675738
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1090.4419291675738,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 23,
+            "iterations": 11,
+            "converged": true,
+            "objective_trace": [
+              1563.6688861010084,
+              1121.7237213669491,
+              1108.3828476686645,
+              1102.1524798567825,
+              1098.9542210782924,
+              1095.7653165989962,
+              1092.3740721138493,
+              1090.6705490853024,
+              1090.0212917599938,
+              1090.01794985712,
+              1090.01794985712
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1090.01794985712,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 37,
+            "iterations": 25,
+            "converged": true,
+            "objective_trace": [
+              1725.6085092787657,
+              1130.0474720181908,
+              1102.9986420237178,
+              1099.29878323288,
+              1093.704130282936,
+              1090.2724936582417,
+              1084.6119627659918,
+              1080.5240993377286,
+              1076.4236665022436,
+              1074.1227224800766,
+              1072.5368852203771,
+              1071.7358523754551,
+              1071.313646219057,
+              1070.4113940462978,
+              1068.6607795142886,
+              1065.9433932794266,
+              1065.4607941228303,
+              1065.1144495544277,
+              1064.8699846963048,
+              1064.7726336130145,
+              1064.6520724612365,
+              1064.6407304162406,
+              1064.5394088702283,
+              1064.5051563104414,
+              1064.5051563104414
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1064.5051563104414,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 51,
+            "iterations": 19,
+            "converged": true,
+            "objective_trace": [
+              1583.8578570724217,
+              1103.7274712257838,
+              1086.3781890277187,
+              1077.3480644599747,
+              1073.8721854477012,
+              1071.4903730448132,
+              1070.7253534642612,
+              1070.563265879465,
+              1067.842168307366,
+              1065.9854137053496,
+              1065.4817056851557,
+              1065.118136538264,
+              1064.9419724092859,
+              1064.7775571092598,
+              1064.6520724612365,
+              1064.6407304162406,
+              1064.5394088702283,
+              1064.5051563104414,
+              1064.5051563104414
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1064.5051563104414,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          }
+        ],
+        "all_monotone": true,
+        "all_finite": true,
+        "all_converged": true,
+        "seeds_bounded": 4,
+        "local_minimum_note": "monotone descent proves each alternation improves the objective. It does not prove the result is a global optimum, and the lab does not claim it is (guide 8.2)"
+      },
+      "outlier_sensitivity": {
+        "injected_at": 1095,
+        "magnitude": 25.0,
+        "max_centroid_shift": 2.9068802453357243,
+        "objective_before": 1064.5051563104414,
+        "objective_after": 1360.889953309849,
+        "note": "reported, not thresholded: how much movement is acceptable depends on the feature scaling, and the lab clips at +/-5 upstream"
+      }
+    },
+    "2023-01-01": {
+      "constant_features": {
+        "constant_features": [],
+        "any_constant": false,
+        "effect": "a constant feature adds a fixed amount to every state's loss, so it cannot separate states. It is reported, not dropped silently, because its presence usually means an upstream source went flat",
+        "spread": {
+          "g1_rv_6": 6.509860255710759,
+          "g1_direction_6": 4.0716587471525925,
+          "g1_efficiency_6": 2.8739739304754917,
+          "g2_taker_imbalance": 6.827875087692542,
+          "g2_log_activity_30": 7.2779997886527115,
+          "g5_dispersion_6": 6.843967565031267,
+          "g5_breadth_6": 1.6862268986886446,
+          "g5_residual_return_30": 10.0
+        }
+      },
+      "convergence": {
+        "schema": "crypto_regime_lab.fit_convergence.v1",
+        "starts": [
+          {
+            "seed": 11,
+            "iterations": 6,
+            "converged": true,
+            "objective_trace": [
+              1353.7392961339808,
+              1058.718023666686,
+              1051.1889138898957,
+              1050.3698517393043,
+              1050.2928284073212,
+              1050.2928284073212
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1050.2928284073212,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 23,
+            "iterations": 10,
+            "converged": true,
+            "objective_trace": [
+              1393.7666239449732,
+              1070.5836254591306,
+              1062.114444848793,
+              1058.009073993083,
+              1056.136577162744,
+              1054.6428840574094,
+              1052.0144071047964,
+              1051.0820681117812,
+              1050.92356072373,
+              1050.92356072373
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1050.92356072373,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 37,
+            "iterations": 15,
+            "converged": true,
+            "objective_trace": [
+              1668.4003937320854,
+              1163.154997604685,
+              1099.5852366644515,
+              1058.869280781482,
+              1049.074361047,
+              1044.1025079249855,
+              1040.8443012906891,
+              1039.08312099033,
+              1038.3926398237543,
+              1037.6260066156033,
+              1037.3132429506593,
+              1037.0385837688807,
+              1037.0353948590127,
+              1037.0312847710527,
+              1037.0312847710527
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1037.0312847710527,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 51,
+            "iterations": 17,
+            "converged": true,
+            "objective_trace": [
+              1469.0465230122084,
+              1102.3200522220986,
+              1070.325054414685,
+              1053.5286417803813,
+              1045.3181580723653,
+              1041.8880622219554,
+              1039.5460052952913,
+              1038.6839126901386,
+              1038.5274604687775,
+              1037.892924563985,
+              1037.3377759520333,
+              1037.2971148560773,
+              1037.286431108078,
+              1037.2810954716879,
+              1037.048870975869,
+              1037.0450209669025,
+              1037.0450209669025
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1037.0450209669025,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          }
+        ],
+        "all_monotone": true,
+        "all_finite": true,
+        "all_converged": true,
+        "seeds_bounded": 4,
+        "local_minimum_note": "monotone descent proves each alternation improves the objective. It does not prove the result is a global optimum, and the lab does not claim it is (guide 8.2)"
+      },
+      "outlier_sensitivity": {
+        "injected_at": 1095,
+        "magnitude": 25.0,
+        "max_centroid_shift": 25.27745968957718,
+        "objective_before": 1037.0312847710527,
+        "objective_after": 1077.2963078247515,
+        "note": "reported, not thresholded: how much movement is acceptable depends on the feature scaling, and the lab clips at +/-5 upstream"
+      }
+    },
+    "2023-07-01": {
+      "constant_features": {
+        "constant_features": [],
+        "any_constant": false,
+        "effect": "a constant feature adds a fixed amount to every state's loss, so it cannot separate states. It is reported, not dropped silently, because its presence usually means an upstream source went flat",
+        "spread": {
+          "g1_rv_6": 6.536357789749012,
+          "g1_direction_6": 3.978807923015263,
+          "g1_efficiency_6": 2.7867564581051143,
+          "g2_taker_imbalance": 7.185005210699006,
+          "g2_log_activity_30": 6.757214062070256,
+          "g5_dispersion_6": 6.601868345699689,
+          "g5_breadth_6": 1.6862268986886446,
+          "g5_residual_return_30": 10.0
+        }
+      },
+      "convergence": {
+        "schema": "crypto_regime_lab.fit_convergence.v1",
+        "starts": [
+          {
+            "seed": 11,
+            "iterations": 19,
+            "converged": true,
+            "objective_trace": [
+              1743.6619726722847,
+              1185.169851055029,
+              1163.8931781139686,
+              1156.55887991361,
+              1152.3876589921615,
+              1149.0385736163264,
+              1145.1450963197078,
+              1118.1653878535528,
+              1090.4568291157454,
+              1080.5940140830012,
+              1074.5376750884202,
+              1071.8035217580862,
+              1070.3482406578928,
+              1068.4927452187057,
+              1066.6785241748696,
+              1066.4399697738932,
+              1066.3493982629682,
+              1066.3385239216936,
+              1066.3385239216936
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1066.3385239216936,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 23,
+            "iterations": 17,
+            "converged": true,
+            "objective_trace": [
+              1594.245607533077,
+              1155.8430238817273,
+              1118.7604508078384,
+              1099.1529597035137,
+              1085.0444781304002,
+              1077.3823530892428,
+              1074.8952513229683,
+              1074.51644503312,
+              1073.361086613014,
+              1072.1179345395672,
+              1070.9489887379748,
+              1069.4815750350172,
+              1067.5639219451562,
+              1067.0761806928708,
+              1066.9469022952076,
+              1066.9358685753384,
+              1066.9358685753384
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1066.9358685753384,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 37,
+            "iterations": 12,
+            "converged": true,
+            "objective_trace": [
+              1760.8733548451783,
+              1128.037298655348,
+              1110.4025775034336,
+              1099.2087788338722,
+              1087.354860146747,
+              1075.948572644716,
+              1070.6022848509904,
+              1068.5051296298814,
+              1067.1082008951848,
+              1066.9660118003403,
+              1066.9358685753384,
+              1066.9358685753384
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1066.9358685753384,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          },
+          {
+            "seed": 51,
+            "iterations": 9,
+            "converged": true,
+            "objective_trace": [
+              1359.324071534701,
+              1076.4402409087854,
+              1070.6895439499444,
+              1069.47829622491,
+              1068.470061209452,
+              1066.9351629768237,
+              1066.7576606632788,
+              1066.7405550992432,
+              1066.7405550992432
+            ],
+            "objective_monotone_nonincreasing": true,
+            "empty_states": [],
+            "empty_state_policy": "retained_as_empty_and_reported",
+            "final_objective": 1066.7405550992432,
+            "all_finite": true,
+            "final_objective_recomputes": true,
+            "degeneracy": {
+              "schema": "crypto_regime_lab.regime_degeneracy.v1",
+              "weight_sum": 1.0,
+              "collapsed_weights": false,
+              "identical_centroid_pairs": [],
+              "empty_states": [],
+              "is_degenerate": false,
+              "usable_for_decisions": true,
+              "rule": "a degenerate model emits UNKNOWN_STATE with decision_eligible=false. It never emits state 0 with a 1/K membership score, because that is a tie dressed up as a finding (guide 8.5, T40)",
+              "sparse_extension_note": "all-zero weights are the specific failure guide 8.3 warns about: an objective that is trivially minimised by discarding every feature is not a sparse solution"
+            }
+          }
+        ],
+        "all_monotone": true,
+        "all_finite": true,
+        "all_converged": true,
+        "seeds_bounded": 4,
+        "local_minimum_note": "monotone descent proves each alternation improves the objective. It does not prove the result is a global optimum, and the lab does not claim it is (guide 8.2)"
+      },
+      "outlier_sensitivity": {
+        "injected_at": 1095,
+        "magnitude": 25.0,
+        "max_centroid_shift": 25.065660449866076,
+        "objective_before": 1066.3385239216936,
+        "objective_after": 1145.7380910310749,
+        "note": "reported, not thresholded: how much movement is acceptable depends on the feature scaling, and the lab clips at +/-5 upstream"
+      }
+    }
+  },
+  "clock_separation": {
+    "model_fit_cadence": "4 refits at ['2022-01-01', '2022-07-01', '2023-01-01', '2023-07-01']",
+    "inference_cadence": "4h",
+    "bank_refresh_triggered_by_this": false,
+    "parameter_search_triggered_by_this": false,
+    "rule": "model retraining, bank refresh and switch frequency are three separate counters. A state change does not trigger a fit and a fit does not trigger a parameter search (guide 8.6, L05.5)"
+  },
+  "lab_run_id": "run-20260910T073815Z-658b4831",
+  "written_at_utc": "2026-09-10T07:39:08.013496+00:00"
+}

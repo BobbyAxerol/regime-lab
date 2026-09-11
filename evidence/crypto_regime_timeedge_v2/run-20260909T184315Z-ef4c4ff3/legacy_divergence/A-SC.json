@@ -1,0 +1,147 @@
+{
+  "schema": "crypto_regime_lab.legacy_divergence.v1",
+  "alpha_id": "A-SC",
+  "fixture": "rally_reversal_recovery",
+  "legacy": {
+    "alpha_id": "A-SC",
+    "tier": "legacy_reproduction",
+    "entry_bars": [
+      215
+    ],
+    "exit_bars": [],
+    "entry_count": 1,
+    "minimal_fixes": [
+      "inject the ta classes the module imports at module scope"
+    ],
+    "eligibility": {
+      "eligible_for_diagnostics": true,
+      "eligible_for_in_sample_reference": true,
+      "eligible_for_ab_comparison": false,
+      "eligible_for_any_arm": false,
+      "reason": "guide 2.1: legacy_reproduction is diagnostic / in-sample reference only"
+    },
+    "extras": {
+      "amplitude_values": [
+        0.0,
+        2.0
+      ],
+      "buy_signals": 17,
+      "sell_signals": 2,
+      "long_signals": 1,
+      "short_signals": 0
+    }
+  },
+  "canonical": {
+    "entry_bars": [
+      215
+    ],
+    "exit_bars": [],
+    "entry_count": 1,
+    "warmup_blocked_through_bar": 13,
+    "protective_exit_bars": [],
+    "fixed_point_converged": true,
+    "fixed_point_passes": 1
+  },
+  "divergence": {
+    "legacy_only_entries": [],
+    "canonical_only_entries": [],
+    "legacy_only_inside_canonical_warmup": [],
+    "identical": true
+  },
+  "attribution": {
+    "kind": "IDENTICAL",
+    "explained": true,
+    "detail": "the legacy reproduction and canonical_v1 enter on exactly the same bars; the repairs on this fixture change timing and accounting, not the signal"
+  },
+  "attributed_to": {
+    "SD-SC-01": {
+      "delta_id": "SD-SC-01",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "the indicator choice and the method dispatch disagree when volume is absent",
+      "after_semantics": "use_rsi is resolved once and both the construction and the call follow it; the crypto primary path requires volume and a missing column is an explicit rejection",
+      "source_line_refs": "L39-48",
+      "reproducer": "probes/SC_FALLBACK",
+      "expected_effect": "removes an AttributeError path; no decision change when volume is present",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-01"
+      ]
+    },
+    "SD-SC-02": {
+      "delta_id": "SD-SC-02",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "execution consumes the unapproved signals while the approved ones are computed and dropped",
+      "after_semantics": "one declared decision timestamp with a next-open fill; no second shift is applied",
+      "source_line_refs": "L104-110, L124-140",
+      "reproducer": "fixtures/no_double_shift",
+      "expected_effect": "fixes the intent timing without changing the signal definition",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-04"
+      ]
+    },
+    "SD-SC-03": {
+      "delta_id": "SD-SC-03",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "packaging_fix",
+      "before_semantics": "position amplitude is 2 with no account contract attached",
+      "after_semantics": "direction is normalised to 0/1 against the fixed experiment notional as sizing_mapping_v1; the legacy amplitude path is a separate labelled reproduction",
+      "source_line_refs": "L133-143",
+      "reproducer": "fixtures/sizing_mapping_v1",
+      "expected_effect": "2 is never interpreted as 2x leverage",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-05"
+      ]
+    },
+    "SD-SC-06": {
+      "delta_id": "SD-SC-06",
+      "alpha_id": "A-SC",
+      "adapter_version": "canonical_v1",
+      "change_kind": "execution_repair",
+      "before_semantics": "the zero-seeded trend emits a spurious buy_signal on the first condition-true bar",
+      "after_semantics": "warmup_ready stays False until 3 bars after the trend leaves its seed, so the seed jump and its comparison window can never produce a decision",
+      "source_line_refs": "L26, L53-57, L66-69",
+      "reproducer": "fixtures/sc_seed_jump_not_tradable",
+      "expected_effect": "removes one manufactured entry per series; identical treatment for every arm",
+      "applies_to_experiment_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "finding_refs": [
+        "SC-07"
+      ]
+    }
+  },
+  "attribution_rule": "every difference must map to a semantic delta. A legacy entry that falls inside the canonical warmup window is attributed to the readiness repairs; an unattributed difference is a defect in the adapter, not a result.",
+  "claim_boundary": "the legacy tier is diagnostic and in-sample only. Neither side is a performance claim, and a canonical result is never compared against a legacy number as if they were arms.",
+  "lab_run_id": "run-20260909T184315Z-ef4c4ff3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:43:22.288629+00:00"
+}

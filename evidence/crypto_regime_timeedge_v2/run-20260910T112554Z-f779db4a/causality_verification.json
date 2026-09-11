@@ -1,0 +1,100 @@
+{
+  "schema": "crypto_regime_lab.causality_verification.v1",
+  "checked_at_utc": "2026-09-10T11:25:55.379094+00:00",
+  "cutoff_index": 300,
+  "layers": [
+    {
+      "layer": "resampler",
+      "suffix_actually_changed": true,
+      "buckets_compared": 20,
+      "prefix_identical_when_tape_is_longer": true,
+      "prefix_identical_under_mutated_future": true
+    },
+    {
+      "layer": "scaler",
+      "suffix_actually_changed": true,
+      "median_identical": true,
+      "scale_identical": true,
+      "fitted_rows": 300
+    },
+    {
+      "layer": "model",
+      "test": {
+        "schema": "crypto_regime_lab.future_suffix_mutation.v1",
+        "cutoff": 300,
+        "observations": 500,
+        "mutation_effective": true,
+        "training_prefix_untouched": true,
+        "probe_valid": true,
+        "centroids_identical": true,
+        "scaler_identical": true,
+        "leak_detected": false,
+        "verdict": "CAUSAL",
+        "digest_before": "c43aa4dbd0d8238a",
+        "digest_after": "c43aa4dbd0d8238a",
+        "scaler_digest_before": "b53b5ac84b04f787",
+        "scaler_digest_after": "b53b5ac84b04f787",
+        "rule": "a fit that declares a cutoff must be bit-identical when everything after that cutoff is replaced. Anything else means the scaler or the model read data it declared it could not see (T39)"
+      },
+      "leaky_control": {
+        "schema": "crypto_regime_lab.mutation_detector_control.v1",
+        "causal_fit": {
+          "schema": "crypto_regime_lab.future_suffix_mutation.v1",
+          "cutoff": 300,
+          "observations": 500,
+          "mutation_effective": true,
+          "training_prefix_untouched": true,
+          "probe_valid": true,
+          "centroids_identical": true,
+          "scaler_identical": true,
+          "leak_detected": false,
+          "verdict": "CAUSAL",
+          "digest_before": "c43aa4dbd0d8238a",
+          "digest_after": "c43aa4dbd0d8238a",
+          "scaler_digest_before": "b53b5ac84b04f787",
+          "scaler_digest_after": "b53b5ac84b04f787",
+          "rule": "a fit that declares a cutoff must be bit-identical when everything after that cutoff is replaced. Anything else means the scaler or the model read data it declared it could not see (T39)"
+        },
+        "deliberately_leaky_fit": {
+          "schema": "crypto_regime_lab.future_suffix_mutation.v1",
+          "cutoff": 300,
+          "observations": 500,
+          "mutation_effective": true,
+          "training_prefix_untouched": true,
+          "probe_valid": true,
+          "centroids_identical": false,
+          "scaler_identical": false,
+          "leak_detected": true,
+          "verdict": "LEAK_DETECTED",
+          "digest_before": "313ebcfd7e988c21",
+          "digest_after": "a5e61c1a05545da4",
+          "scaler_digest_before": "6937e6f235fa934b",
+          "scaler_digest_after": "a48ebea0d6185ef6",
+          "rule": "a fit that declares a cutoff must be bit-identical when everything after that cutoff is replaced. Anything else means the scaler or the model read data it declared it could not see (T39)"
+        },
+        "detector_passes_clean_fit": true,
+        "detector_catches_known_leak": true,
+        "detector_is_meaningful": true,
+        "why_the_control_exists": "a detector that always returns CAUSAL would pass the clean fit too. The known-leaky fit is the only thing that shows the check can fail"
+      }
+    },
+    {
+      "layer": "online_filter",
+      "observations": 120,
+      "suffix_actually_changed": true,
+      "prefix_identical_when_stream_continues": true
+    }
+  ],
+  "verdicts": {
+    "resampler": true,
+    "scaler": true,
+    "model": true,
+    "online_filter": true
+  },
+  "leaky_control_is_detected": true,
+  "control_rule": "a passing causality suite means nothing unless the same probe FAILS on a deliberately leaky fit. The leaky control is run alongside and must be detected",
+  "status": "CAUSAL",
+  "lab_run_id": "run-20260910T112554Z-f779db4a",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-10T11:25:55.383734+00:00"
+}

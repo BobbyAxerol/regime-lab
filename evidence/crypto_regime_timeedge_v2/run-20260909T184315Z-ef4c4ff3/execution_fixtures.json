@@ -1,0 +1,260 @@
+{
+  "schema": "crypto_regime_lab.execution_fixtures.v1",
+  "engine": "quantbt intrabar_bracket_v1 (installed); the lab implements no matching engine",
+  "fixture_count": 13,
+  "passed": 13,
+  "status": "PASS",
+  "results": [
+    {
+      "fixture_id": "L02.7-01-long-entry",
+      "requirement": "long entry",
+      "expectation": "a decision at the close of bar 3 fills at the OPEN of bar 4, never at close[3]",
+      "observed": {
+        "fill": {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 103.5,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        "expected_price": 103.5,
+        "close_of_decision_bar": 103.0
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-02-short-entry",
+      "requirement": "short entry",
+      "expectation": "a short decision fills at the next open with side -1",
+      "observed": {
+        "fill": {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": -1,
+          "qty": 1.0,
+          "price": 116.5,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        "expected_price": 116.5
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-03-gap-entry",
+      "requirement": "actual gap",
+      "expectation": "the fill price is the gapped open (130), not the decision close (100)",
+      "observed": {
+        "fill": {
+          "bar_index": 4,
+          "sequence": 0,
+          "side": 1,
+          "qty": 1.0,
+          "price": 130.0,
+          "fee": 0.0,
+          "reason": "entry"
+        },
+        "decision_close": 100.0,
+        "gapped_open": 130.0
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-04-stop-and-tp-same-bar",
+      "requirement": "both stop and TP hit",
+      "expectation": "same_bar_policy=conservative resolves an ambiguous bar to the STOP, never the profit",
+      "observed": {
+        "exits": [
+          {
+            "bar_index": 6,
+            "sequence": 0,
+            "side": -1,
+            "qty": 1.0,
+            "price": 90.0,
+            "fee": 0.0,
+            "reason": "stop_loss"
+          }
+        ],
+        "contract_same_bar_policy": "conservative"
+      },
+      "passed": true,
+      "detail": {
+        "note": "an alpha that books the take profit here would be inventing a favourable intrabar path the data cannot support (findings AH-04, HM-03)"
+      }
+    },
+    {
+      "fixture_id": "L02.7-05-oco-over-close",
+      "requirement": "partials / OCO / over-close",
+      "expectation": "the take profit fills once, the stop is cancelled, and total closed quantity never exceeds the position",
+      "observed": {
+        "exits": [
+          {
+            "bar_index": 6,
+            "sequence": 0,
+            "side": -1,
+            "qty": 1.0,
+            "price": 110.0,
+            "fee": 0.0,
+            "reason": "take_profit"
+          }
+        ],
+        "closed_qty": 1.0,
+        "max_abs_position": 1.0
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-05b-partial-ladder",
+      "requirement": "partials",
+      "expectation": "an A-HASH multi-rung ladder is recorded as BLOCKED_CAPABILITY on this route rather than silently collapsed to a single exit",
+      "observed": {
+        "unmapped": [
+          {
+            "index": 3,
+            "kind": "set_protection",
+            "reason": "ladder_rungs_beyond_final_not_expressible_in_intent_tape",
+            "rungs": [
+              [
+                105.0,
+                0.5
+              ],
+              [
+                108.0,
+                0.5
+              ],
+              [
+                110.0,
+                1.0
+              ]
+            ],
+            "handling": "BLOCKED_CAPABILITY for partial ladders on this route"
+          }
+        ],
+        "final_rung_used_as_tp": 110.0
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-06-rejected-order",
+      "requirement": "rejected order",
+      "expectation": "a zero-quantity intent yields no fill and no position",
+      "observed": {
+        "fills": [],
+        "max_abs_position": 0.0
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-07-insufficient-margin",
+      "requirement": "insufficient margin",
+      "expectation": "an oversized entry is either rejected or filled at full size; it is never silently resized",
+      "observed": {
+        "max_abs_position": 0.0,
+        "liquidated": false,
+        "final_equity": 1000.0,
+        "fills": [],
+        "interpretation": "rejected"
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-08-funding-boundary",
+      "requirement": "funding boundary",
+      "expectation": "funding is applied exactly at the two declared events while the position is open, and never inferred as zero when it is missing",
+      "observed": {
+        "charged_bars": [
+          6,
+          10
+        ],
+        "funding_total": 0.2,
+        "funding_phase": "position_at_event"
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-08b-funding-missing",
+      "requirement": "funding boundary",
+      "expectation": "requesting funding without supplying events is refused, so a missing history can never be silently treated as zero carry (guide 4.1)",
+      "observed": "ValueError: strict funding requires funding events or an aligned Series; use_funding=False or missing_funding_policy='zero' for no funding",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-09-terminal-position",
+      "requirement": "final open position",
+      "expectation": "forced-flat and mark-open-exposure are two DECLARED modes, not one default",
+      "observed": {
+        "forced_flat_terminal_position": 0.0,
+        "mark_open_terminal_position": 1.0,
+        "forced_flat_final_equity": 20005.5,
+        "mark_open_final_equity": 20005.5
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-10-submitted-not-filled",
+      "requirement": "adapter must not set a position on a submitted order",
+      "expectation": "after staging an entry the adapter's position is still 0 and only pending_entry_side is set",
+      "observed": {
+        "staged_bar": 17,
+        "position_when_staged": 0.0,
+        "pending_entry_side": 1
+      },
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "fixture_id": "L02.7-11-levels-from-fill",
+      "requirement": "levels come from the actual fill",
+      "expectation": "a fill at 130 instead of 100 moves the stop from 90 to 117 and every ladder rung with it",
+      "observed": {
+        "stop_at_fill_100": 90.0,
+        "stop_at_fill_130": 117.0,
+        "ladder_at_100": [
+          [
+            110.0,
+            0.5
+          ],
+          [
+            120.0,
+            0.5
+          ],
+          [
+            130.0,
+            1.0
+          ]
+        ],
+        "ladder_at_130": [
+          [
+            143.0,
+            0.5
+          ],
+          [
+            156.0,
+            0.5
+          ],
+          [
+            169.0,
+            1.0
+          ]
+        ]
+      },
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "lab_run_id": "run-20260909T184315Z-ef4c4ff3",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:43:22.897779+00:00"
+}

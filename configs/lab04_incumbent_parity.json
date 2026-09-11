@@ -1,0 +1,55 @@
+{
+  "schema": "crypto_regime_lab.incumbent_parity.v1",
+  "hyperparameters": {
+    "lambda_f": 1.0,
+    "g_quantile": 0.25,
+    "f_quantile": 0.75,
+    "min_quality": 0.0,
+    "survive_threshold": 0.6,
+    "note": "selection hyperparameters chosen on development; not universal constants"
+  },
+  "lambda_f": 1.0,
+  "survive_threshold": 0.6,
+  "incumbent": {
+    "candidate_id": "incumbent",
+    "params": {
+      "fast": 5
+    },
+    "g": 0.9,
+    "f": 0.050000000000000044,
+    "r": 0.85,
+    "p_survive": 1.0,
+    "episodes_used": 6,
+    "neighbours_used": 8,
+    "complete_panel": true,
+    "status": "ELIGIBLE",
+    "reason": null
+  },
+  "challenger": {
+    "candidate_id": "challenger",
+    "params": {
+      "fast": 20
+    },
+    "g": 1.4,
+    "f": 1.2999999999999998,
+    "r": 0.10000000000000009,
+    "p_survive": 1.0,
+    "episodes_used": 6,
+    "neighbours_used": 8,
+    "complete_panel": true,
+    "status": "ELIGIBLE",
+    "reason": null
+  },
+  "same_episode_count": true,
+  "same_neighbour_budget": true,
+  "guard_before": {
+    "metric": "raw quality G",
+    "winner": "challenger"
+  },
+  "guard_after": {
+    "metric": "robust objective R",
+    "winner": "incumbent"
+  },
+  "policy_visible": true,
+  "rule": "the incumbent is scored on the same episodes, the same neighbourhood budget and the same utility as any challenger; when the raw guard and the robust objective disagree, both are logged"
+}

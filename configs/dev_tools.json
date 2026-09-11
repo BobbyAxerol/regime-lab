@@ -1,0 +1,25 @@
+{
+  "schema": "crypto_regime_lab.dev_tools.v1",
+  "added_at_phase": "LAB-04",
+  "added_on": "2026-09-10",
+  "rule": "development-only tooling, installed into the lab venv AFTER the LAB-01 pin. It is deliberately NOT in configs/requirements.lock: the runtime baseline is what a confirmation run reproduces, and a lint tool must never be part of it.",
+  "constraints": [
+    "no module under src/crypto_regime_lab may import these",
+    "they may not appear in configs/requirements.lock",
+    "the engine pin quantbt-engine==1.1.1 / quantbt-native==0.4.2 is unchanged"
+  ],
+  "engine_pin_unchanged": {
+    "quantbt-engine": "1.1.1",
+    "quantbt-native": "0.4.2"
+  },
+  "tools": {
+    "pyflakes": {
+      "version": "3.4.0",
+      "purpose": "static check for dead code, unused imports and undefined names"
+    },
+    "autoflake": {
+      "version": "2.4.0",
+      "purpose": "removes the unused imports pyflakes reports"
+    }
+  }
+}

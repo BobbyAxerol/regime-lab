@@ -1,0 +1,52 @@
+{
+  "schema": "crypto_regime_lab.alpha_certification.v1",
+  "alpha_id": "A-SC",
+  "raw_source_digest": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+  "adapter_version": "canonical_v1",
+  "status": "READY_FOR_RESEARCH",
+  "indicator_convention": "ta.AverageTrueRange + ta.MFIIndicator (or RSIIndicator when volume is declared absent); the library is authoritative because the alpha calls it directly",
+  "timing_contract": "intrabar_bracket_v1",
+  "partial_quantity_convention": "not applicable (long-flat, single exit)",
+  "engine_capabilities_verified": [
+    "next_open_entry_fill",
+    "protective_stop",
+    "single_take_profit",
+    "partial_reduce_only_ladder",
+    "same_bar_stop_and_tp_conservative",
+    "funding_at_event",
+    "terminal_forced_flat",
+    "terminal_mark_open"
+  ],
+  "semantic_delta_refs": [
+    "SD-SC-01",
+    "SD-SC-02",
+    "SD-SC-03",
+    "SD-SC-04",
+    "SD-SC-06",
+    "SD-SC-05"
+  ],
+  "golden_trace_refs": [
+    "golden_traces/A-SC.json#40202b90d34e8763"
+  ],
+  "market_test_evidence_refs": [],
+  "blockers": [],
+  "market_test_evidence_note": "empty by design: LAB-02 runs synthetic fixtures only. Market qualification is LAB-03.",
+  "legacy_divergence": {
+    "kind": "IDENTICAL",
+    "explained": true,
+    "attributed_to": null,
+    "artifact": "legacy_divergence/A-SC.json"
+  },
+  "version_tiers_built": [
+    "raw_supplied",
+    "legacy_reproduction",
+    "canonical_v1"
+  ],
+  "synthetic_suite": {
+    "decisions": 260,
+    "entries": 1,
+    "technical_exits": 0,
+    "engine_fills": 2,
+    "warmup_blocked_bars": 14
+  }
+}

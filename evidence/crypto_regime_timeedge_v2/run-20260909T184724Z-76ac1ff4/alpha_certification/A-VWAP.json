@@ -1,0 +1,55 @@
+{
+  "schema": "crypto_regime_lab.alpha_certification.v1",
+  "alpha_id": "A-VWAP",
+  "raw_source_digest": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+  "adapter_version": "canonical_v1",
+  "status": "READY_FOR_RESEARCH",
+  "indicator_convention": "session VWAP on hlc3 with a UTC daily reset; Wilder-style RSI and ATR seeded by an SMA, exactly as this file defines them",
+  "timing_contract": "intrabar_bracket_v1",
+  "partial_quantity_convention": "not applicable (single bracket)",
+  "engine_capabilities_verified": [
+    "next_open_entry_fill",
+    "protective_stop",
+    "single_take_profit",
+    "partial_reduce_only_ladder",
+    "same_bar_stop_and_tp_conservative",
+    "funding_at_event",
+    "terminal_forced_flat",
+    "terminal_mark_open"
+  ],
+  "semantic_delta_refs": [
+    "SD-VWAP-01",
+    "SD-VWAP-02",
+    "SD-VWAP-03",
+    "SD-VWAP-04",
+    "SD-VWAP-05",
+    "SD-VWAP-06"
+  ],
+  "golden_trace_refs": [
+    "golden_traces/A-VWAP.json#88dc56f718d67dcc"
+  ],
+  "market_test_evidence_refs": [],
+  "blockers": [],
+  "market_test_evidence_note": "empty by design: LAB-02 runs synthetic fixtures only. Market qualification is LAB-03.",
+  "legacy_divergence": {
+    "kind": "IDENTICAL",
+    "explained": true,
+    "attributed_to": null,
+    "artifact": "legacy_divergence/A-VWAP.json"
+  },
+  "version_tiers_built": [
+    "raw_supplied",
+    "legacy_reproduction",
+    "canonical_v1"
+  ],
+  "synthetic_suite": {
+    "decisions": 1200,
+    "entries": 6,
+    "technical_exits": 4,
+    "engine_fills": 12,
+    "warmup_blocked_bars": 284
+  },
+  "lab_run_id": "run-20260909T184724Z-76ac1ff4",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-09T18:47:31.768555+00:00"
+}

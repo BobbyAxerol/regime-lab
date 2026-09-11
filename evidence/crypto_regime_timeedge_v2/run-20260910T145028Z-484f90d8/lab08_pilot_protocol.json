@@ -1,0 +1,351 @@
+{
+  "schema": "crypto_regime_lab.lab08_pilot_protocol.v1",
+  "study_id": "crypto_regime_timeedge_v2",
+  "frozen_at_utc": "2026-09-10T14:50:28.446136+00:00",
+  "frozen_before": "any LAB-08 arm run. scripts/audit_lab08.py checks the ordering.",
+  "immutable": "this file is never overwritten. Re-running the freeze script prints the existing stamp and exits. A protocol that can be rewritten after a result is not frozen (guide L08.1)",
+  "timeframes": {
+    "A-SC": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "1h"
+    },
+    "A-VWAP": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "5m"
+    },
+    "A-HMA": {
+      "decision_bars": "1h",
+      "execution_bars": "1m",
+      "secondary_registered": "15m"
+    },
+    "A-HASH": {
+      "decision_bars": "15m",
+      "execution_bars": "1m",
+      "secondary_registered": "1h"
+    }
+  },
+  "evaluation_interval": "daily UTC on the continuous account (guide 10.3)",
+  "seeds": {
+    "probe_design": 20260910,
+    "model_multi_start": [
+      11,
+      23,
+      37,
+      51
+    ],
+    "placebo": 20260911,
+    "rule": "every seed is fixed here; a seed chosen later is a search decision"
+  },
+  "primary_matrix": {
+    "cells": [
+      {
+        "alpha_id": "A-HASH",
+        "symbol": "BTCUSDT",
+        "runnable": false,
+        "status_if_not_runnable": "NOT_READY_SPECIFIC_BLOCKER",
+        "blocker": "see alpha_certification",
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HASH",
+        "symbol": "ETHUSDT",
+        "runnable": false,
+        "status_if_not_runnable": "NOT_READY_SPECIFIC_BLOCKER",
+        "blocker": "see alpha_certification",
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HASH",
+        "symbol": "SOLUSDT",
+        "runnable": false,
+        "status_if_not_runnable": "NOT_READY_SPECIFIC_BLOCKER",
+        "blocker": "see alpha_certification",
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HASH",
+        "symbol": "BNBUSDT",
+        "runnable": false,
+        "status_if_not_runnable": "NOT_READY_SPECIFIC_BLOCKER",
+        "blocker": "see alpha_certification",
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HASH",
+        "symbol": "DOGEUSDT",
+        "runnable": false,
+        "status_if_not_runnable": "NOT_READY_SPECIFIC_BLOCKER",
+        "blocker": "see alpha_certification",
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "1h",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "1h",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "1h",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "1h",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "DOGEUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "1h",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "ETHUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "SOLUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "BNBUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "DOGEUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "BTCUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "ETHUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "SOLUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "BNBUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "DOGEUSDT",
+        "runnable": true,
+        "status_if_not_runnable": null,
+        "blocker": null,
+        "decision_bars": "15m",
+        "execution_bars": "1m"
+      }
+    ],
+    "total": 20,
+    "runnable": 15,
+    "not_runnable": 5,
+    "reporting_rule": "all 20 cell statuses are reported. A NOT_READY cell keeps null metrics and stays in the denominator; it is never dropped and never recorded as a PnL of 0 (guide 10.4)"
+  },
+  "arms": {
+    "A": "installed WFO selector, frozen calendar \u2014 the baseline",
+    "B": "neighborhood selector, same calendar \u2014 the robustness contribution",
+    "C": "installed selector, regime-triggered refresh \u2014 the timing contribution",
+    "D": "neighborhood selector, regime-triggered refresh \u2014 the interaction",
+    "E": "selector + bank + response policy \u2014 an EXTENSION, not a substitute for C or D"
+  },
+  "registered_contrasts": [
+    "B-A",
+    "C-A",
+    "D-B",
+    "D-C",
+    "(D-C)-(B-A)"
+  ],
+  "arm_e_rule": "E is compared against B and against BANK_CALENDAR. Using E in place of C or D without saying so is forbidden (guide 10.1)",
+  "controls": {
+    "RISK_ONLY": "same regime context, risk scaling only, parameters unchanged",
+    "CALENDAR_MATCHED": "calendar cadence with compute equivalent to the dynamic policy",
+    "BANK_CALENDAR": "same bank size and candidate identities, calendar switching, no regime",
+    "STATE_PLACEBO": "fake labels with approximately the real dwell and switch frequency, generated from the past only",
+    "DELAYED_STATE": "one registered observation of extra delay, for transition sensitivity",
+    "EXPOST_DIAGNOSTIC": "hindsight labels, diagnostic only, never an eligible trade result",
+    "USER_PRESET_REFERENCE": "the supplied full-sample presets, labelled retrospective"
+  },
+  "control_rule": "no control is dropped because it beats the proposed method. Controls are staged rather than run as a full Cartesian product (guide 10.2)",
+  "economics": {
+    "source": "configs/study_registration.json execution block, frozen at LAB-01",
+    "identical_across_arms": true,
+    "rule": "fees, slippage, funding treatment and gross exposure constraints are the same for every arm and every control (guide 10.3)"
+  },
+  "account_rule": "each arm holds ONE continuous account in chronological order. No reset at a fold or regime boundary, and no splicing of segments from independent runs (guide 10.3, T56)",
+  "data_roles": {
+    "development": {
+      "start": "2020-01-01",
+      "end": "2023-12-31",
+      "permits": [
+        "scaler fitting",
+        "hyperparameter and design choices",
+        "inner chronological validation"
+      ]
+    },
+    "outer_evaluation": {
+      "start": "2024-01-01",
+      "end": null,
+      "permits": [
+        "frozen-protocol evaluation"
+      ],
+      "contamination": "NOT an untouched holdout: the supplied presets were TPE-tuned on the full sample with an unknown cutoff"
+    }
+  },
+  "stage": "discovery",
+  "outer_window_is_not_consumed": true,
+  "contamination": {
+    "claim_level": "RETROSPECTIVE_NESTED_CAUSAL_RESEARCH",
+    "reason": "supplied presets were TPE-tuned on the full sample and the tuning cutoff is unknown, so no interval of this dataset can be called an untouched holdout",
+    "prospective_protocol_required_for_strong_claim": true
+  },
+  "preset_role": "retrospective_reference_only",
+  "primary_endpoint": {
+    "statistic": "mean daily net-return difference between arms on the same risk budget",
+    "aggregation": "daily UTC paired differences on a common evaluation interval",
+    "guardrails": [
+      "max_drawdown",
+      "expected_shortfall",
+      "exposure",
+      "turnover",
+      "costs",
+      "trade_count"
+    ],
+    "registered_before_results": true
+  },
+  "minimum_economic_effect": {
+    "schema": "crypto_regime_lab.minimum_economic_effect.v1",
+    "registered_at_utc": "2026-09-09T20:11:32.125140+00:00",
+    "registered_before_any_arm_comparison": true,
+    "definition": "the smallest mean daily net-return difference the lab will call economically meaningful for the primary endpoint",
+    "derivation": {
+      "taker_fee": 0.0004,
+      "slippage": 0.0001,
+      "round_trip_cost": 0.001,
+      "cost_stress_multipliers": [
+        1.0,
+        1.5,
+        2.0
+      ],
+      "cost_uncertainty_per_round_trip": 0.001,
+      "round_trips_per_day_by_alpha": {
+        "A-SC": 0.064,
+        "A-HMA": 0.016,
+        "A-VWAP": 0.0256,
+        "A-HASH": 0.064
+      },
+      "busiest_alpha_round_trips_per_day": 0.064,
+      "formula": "cost_uncertainty_per_round_trip * busiest_round_trips_per_day"
+    },
+    "minimum_daily_net_return_difference": 6.4e-05,
+    "minimum_daily_net_return_bps": 0.64,
+    "rule": "an improvement smaller than this sits inside the registered cost-stress band and is reported as inconclusive, not as an edge. The threshold is fixed now, before any arm has been compared, so it can never be chosen to fit an observed delta (guide 11.2).",
+    "turnover_source": "market qualification on development slices; a smoke measurement, not a performance claim"
+  },
+  "conclusion_vocabulary_source": "configs/hypothesis_registry.json",
+  "compute_budget": {
+    "source": "configs/compute_budget_registration.json",
+    "registered_at_utc": "2026-09-10T11:29:13.393947+00:00",
+    "reports": [
+      "MATCHED_TOTAL_COMPUTE",
+      "OPERATIONAL_POLICY"
+    ],
+    "resource_budget": {
+      "workers": 1,
+      "cpu_limit": 2,
+      "working_memory_gib": 4
+    },
+    "rule": "no arm gets more CPU than the registered budget in order to finish before the baseline (guide L08.6)"
+  },
+  "exit_options": [
+    "DESIGN_FROZEN",
+    "NO_PROMISING_DESIGN"
+  ],
+  "exit_rule": "profit is not required to close discovery, and a negative result is not a technical failure to be re-run until it wins (guide L08 exit)",
+  "lab_run_id": "run-20260910T145028Z-484f90d8",
+  "written_at_utc": "2026-09-10T14:50:28.455558+00:00"
+}

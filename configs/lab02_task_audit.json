@@ -1,0 +1,471 @@
+{
+  "schema": "crypto_regime_lab.phase_task_audit.v1",
+  "phase": "LAB-02",
+  "audited_at_utc": "2026-09-09 (second pass)",
+  "method": "each guide sub-task read verbatim, matched to a delivered artifact AND a runnable test",
+  "tasks": [
+    {
+      "id": "L02.1",
+      "title": "Catalog alpha/presets",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "AST inventory of INPUT NAMES (the market data each alpha reads)",
+          "status": "DONE",
+          "note": "MISSING on the first pass \u2014 only parameters and functions were inventoried",
+          "evidence": "catalog records data_inputs and index_uses per alpha: A-VWAP needs open/high/low/close/volume + a DatetimeIndex, A-HASH needs close/high/low and never touches the index, A-SC and A-HMA need volume and the index. These are the concrete data requirements LAB-03 must satisfy.",
+          "tests": [
+            "test_market_columns_are_inventoried_per_alpha",
+            "test_datetime_index_requirement_is_detected",
+            "test_registry_publishes_the_data_requirements"
+          ]
+        },
+        {
+          "text": "AST inventory of input names, parameter reads, unused knobs and presets",
+          "status": "DONE",
+          "evidence": "alphas/catalog.py -> configs/alpha_registry.json; parameter schema derived from actual params['x']/p.get('x') reads; scope-aware unused-argument detection independently found open_p (AV-02) and time_ms/volume/double_up (HM-05)",
+          "tests": [
+            "test_parameter_schema_is_derived_from_actual_reads",
+            "test_unused_knobs_are_detected"
+          ]
+        },
+        {
+          "text": "run the appendix B probes",
+          "status": "DONE",
+          "evidence": "alphas/probes.py: all 21 probe ids from appendix E re-implemented and re-run, 21/21 CONFIRMED, executed inside the bubblewrap sandbox",
+          "tests": [
+            "test_all_21_appendix_b_probes_confirm",
+            "test_probe_observations_match_the_guide_appendix_e"
+          ]
+        },
+        {
+          "text": "source-line findings and semantic deltas per section 3",
+          "status": "DONE",
+          "evidence": "alphas/findings.py: 29 findings (AH 7, AV 7, HM 9, SC 6 + SC-07 found by the lab) each with source lines and a reproducer; 25 semantic deltas with change_kind, before/after semantics and arm applicability",
+          "tests": [
+            "test_every_guide_section_3_finding_is_registered",
+            "test_semantic_deltas_reference_real_findings",
+            "test_thesis_changes_are_excluded_from_every_arm"
+          ]
+        },
+        {
+          "text": "do not import unrelated preset logic or another alpha",
+          "status": "DONE",
+          "evidence": "configs/unmapped_presets.json holds the 9 cetp_* dictionaries, keke and sl_mode_map; none is executed and none is eligible for reference",
+          "tests": [
+            "test_preset_classification_matches_the_guide_appendix_a1",
+            "test_unmapped_presets_are_not_eligible_for_anything"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L02.2",
+      "title": "Reference drivers",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "scalar Python reference for the chosen signal/indicator decisions",
+          "status": "DONE",
+          "evidence": "alphas/reference/indicators.py: SMA, sample stdev, EMA, WMA, dynamic Hull MA, slope, three RSI conventions, four ATR conventions, momentum block, session VWAP, MFI",
+          "tests": [
+            "test_reference_oracle_reproduces_every_source_kernel"
+          ]
+        },
+        {
+          "text": "the legacy exact formula kept separately",
+          "status": "DONE",
+          "evidence": "*_legacy vs *_canonical functions; rsi_hma_legacy keeps the 50->100 flat inconsistency while rsi_hma_canonical repairs it",
+          "tests": [
+            "test_t15_rsi_flat_repair_and_legacy_are_both_available",
+            "test_t10_atr_conventions_do_not_mix"
+          ]
+        },
+        {
+          "text": "ta/Numba numeric parity and tolerance contract",
+          "status": "DONE",
+          "evidence": "reference/parity.py: 14 source-vs-oracle pairs (13 bit-exact, 1 at an accumulation tolerance) and 4 oracle-vs-ta pairs; ta RSI/ATR are DOCUMENTED DIVERGENCES whose seed error must decay (0.199 -> 3.6e-7 and 5.1e-4 -> 1.7e-9)",
+          "tests": [
+            "test_library_divergences_are_documented_and_decay"
+          ]
+        },
+        {
+          "text": "do not repair Wilder/EMA/padding conventions",
+          "status": "DONE",
+          "evidence": "A-HMA keeps its EMA-smoothed ATR, A-VWAP keeps its SMA-seeded Wilder, A-HASH keeps the close-move ATR, and the Hull index clamping is reproduced exactly",
+          "tests": [
+            "test_t15_hull_padding_convention_is_preserved"
+          ]
+        },
+        {
+          "text": "fastmath=False for the oracle",
+          "status": "DONE",
+          "evidence": "the AST harness strips @njit so the oracle is pure Python/NumPy; recorded in the parity report's fastmath field"
+        },
+        {
+          "text": "Numba parity: an accelerated kernel may not change decisions",
+          "status": "DONE",
+          "note": "MISSING on the first pass \u2014 @njit was stripped and the compiled kernels were never run",
+          "evidence": "reference/numba_parity.py compiles the ACTUAL source kernels (keeping @njit and fastmath=True) and compares them against the interpreted oracle: 14 kernels, every non-fastmath kernel bit-exact, fastmath kernels within 7.1e-14, and the two decision-bearing comparisons (RSI band membership, rounded slope angle) IDENTICAL. fastmath does not change a decision on this fixture \u2014 measured, not assumed.",
+          "tests": [
+            "test_compiled_kernels_are_compared_not_assumed",
+            "test_fastmath_kernels_are_identified_and_do_not_change_decisions",
+            "test_non_fastmath_kernels_are_bit_exact"
+          ]
+        },
+        {
+          "text": "guide 2.1: build the legacy_reproduction tier, not just declare it",
+          "status": "DONE",
+          "note": "MISSING on the first pass \u2014 the tier was named in the registry but never built",
+          "evidence": "alphas/legacy.py runs all four originals end to end with the minimum fix each needs (numpy for A-HASH, the ta classes for A-SC, nothing for A-HMA/A-VWAP) and tags the tier diagnostic/in-sample only, never eligible for an arm",
+          "tests": [
+            "test_legacy_tier_runs_the_original_end_to_end",
+            "test_legacy_tier_is_never_eligible_for_an_arm",
+            "test_only_hash_needs_a_dependency_fix"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L02.3",
+      "title": "A-SC adapter",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "resolve the volume fallback",
+          "status": "DONE",
+          "evidence": "use_rsi resolved once in _resolve_condition_source; a missing volume series is an explicit VolumeUnavailable on the primary path",
+          "tests": [
+            "test_t19_missing_volume_is_an_explicit_rejection",
+            "test_t19_fallback_is_available_but_must_be_asked_for"
+          ]
+        },
+        {
+          "text": "keep long-flat, the original crossover and a versioned amplitude mapping",
+          "status": "DONE",
+          "tests": [
+            "test_t20_position_is_long_flat_and_never_short",
+            "test_t20_crossover_convention_is_the_source_one",
+            "test_t20_amplitude_is_normalised_and_the_legacy_value_is_retained"
+          ]
+        },
+        {
+          "text": "intent after close and a next-open fill",
+          "status": "DONE",
+          "tests": [
+            "test_t20_no_double_shift",
+            "test_golden_trace_entry_fills_at_the_next_open"
+          ]
+        },
+        {
+          "text": "input is not mutated in place",
+          "status": "DONE",
+          "tests": [
+            "test_adapters_never_mutate_their_input"
+          ]
+        },
+        {
+          "text": "an all-no-signal path",
+          "status": "DONE",
+          "tests": [
+            "test_adapters_produce_an_all_no_signal_path"
+          ]
+        },
+        {
+          "text": "bars-since state preserved",
+          "status": "DONE",
+          "evidence": "K1/K2/O1/O2 and the buy/sell/long signals compared element-wise against the raw generate_signals, including the source's NaN prefix",
+          "tests": [
+            "test_bars_since_counters_match_the_raw_source",
+            "test_t20_vectorised_and_loop_paths_agree"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L02.4",
+      "title": "A-HMA adapter",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "actual entry fills",
+          "status": "DONE",
+          "tests": [
+            "test_t13_levels_move_when_the_open_gaps_away_from_the_close"
+          ]
+        },
+        {
+          "text": "resting SL/TP and a next-open technical exit",
+          "status": "DONE",
+          "evidence": "SET_PROTECTION rests intrabar; the technical exit is a close decision staged for the next open"
+        },
+        {
+          "text": "fixed entry params and the instrument tick",
+          "status": "DONE",
+          "tests": [
+            "test_t14_tick_size_is_required_and_replaces_the_hardcoded_mintick"
+          ]
+        },
+        {
+          "text": "RSI flat repair",
+          "status": "DONE",
+          "tests": [
+            "test_t15_rsi_flat_repair_and_legacy_are_both_available"
+          ]
+        },
+        {
+          "text": "feature/decision diagnostics instead of handcrafted fills",
+          "status": "DONE",
+          "evidence": "every bar reports dynamic_hma, minor_hma, slope, charged, rsi, atr_base, band levels and the signal flags; the adapter emits no fill price at all"
+        },
+        {
+          "text": "pre-bar weight distinct from the post-close target",
+          "status": "DONE",
+          "evidence": "BarDecision.position_entering_bar vs target_after_close, enforced in AlphaAdapter._validate",
+          "tests": [
+            "test_adapters_never_set_a_position_without_a_fill"
+          ]
+        },
+        {
+          "text": "a documented policy when a gap puts a level on the wrong side",
+          "status": "DONE",
+          "evidence": "gap_policy reject|normalize, registered before results",
+          "tests": [
+            "test_t13_normalize_policy_keeps_the_entry_distance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L02.5",
+      "title": "A-VWAP adapter",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "UTC daily reset",
+          "status": "DONE",
+          "tests": [
+            "test_t17_utc_day_reset_and_htf_availability"
+          ]
+        },
+        {
+          "text": "closed HTF EMA",
+          "status": "DONE",
+          "tests": [
+            "test_t17_htf_join_uses_available_at_not_the_resample_label",
+            "test_t17_publication_delay_pushes_availability_later"
+          ]
+        },
+        {
+          "text": "true warmup readiness",
+          "status": "DONE",
+          "evidence": "HTF warmup comes from (1-2/(L+1))^n <= epsilon, 70 buckets for span 20 at 1e-3, not a hardcoded 200 bars; zero dispersion blocks the decision instead of yielding z=0"
+        },
+        {
+          "text": "original entry logic",
+          "status": "DONE",
+          "evidence": "z <= -dev_mult with rsi <= rsi_os and the HTF trend gate, unchanged"
+        },
+        {
+          "text": "explicit time-stop event",
+          "status": "DONE",
+          "tests": [
+            "test_t18_exit_precedence_is_frozen_and_identical_for_every_arm"
+          ]
+        },
+        {
+          "text": "lagged dynamic VWAP when enabled",
+          "status": "DONE",
+          "tests": [
+            "test_t16_dynamic_vwap_exit_is_off_by_default_and_lagged_when_enabled"
+          ]
+        },
+        {
+          "text": "frozen SL/TP/time precedence",
+          "status": "DONE",
+          "evidence": "EXIT_PRECEDENCE = (stop_loss, take_profit, time_stop), carried in every exit intent's metadata",
+          "tests": [
+            "test_t18_raw_source_puts_the_time_stop_first"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L02.6",
+      "title": "A-HASH adapter",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "fix the import and the short-input crash",
+          "status": "DONE",
+          "tests": [
+            "test_t09_canonical_adapter_runs",
+            "test_t10_adapter_fails_fast_instead_of_indexing_past_the_end"
+          ]
+        },
+        {
+          "text": "separate the account configuration",
+          "status": "DONE",
+          "tests": [
+            "test_t12_account_config_cannot_enter_the_alpha"
+          ]
+        },
+        {
+          "text": "ATR convention variants",
+          "status": "DONE",
+          "tests": [
+            "test_t10_variant_selection_is_explicit"
+          ]
+        },
+        {
+          "text": "an ordered ladder",
+          "status": "DONE",
+          "tests": [
+            "test_t12_unordered_ladder_presets_are_rejected"
+          ]
+        },
+        {
+          "text": "partial quantity and cooldown depend on the actual fill",
+          "status": "DONE",
+          "evidence": "build_ladder prices every rung off the fill; the cooldown restarts from the flattening fill index, not from a partial; quantize_ladder turns the fractions into real order quantities via QuantBT's quantize_signed_quantity, keeps fraction_of_remaining exactly, rejects a rung below the minimum notional instead of resizing it, and reports leftover DUST explicitly",
+          "tests": [
+            "test_t12_tp2_is_a_fraction_of_the_remaining_quantity",
+            "test_ladder_quantisation_respects_the_instrument_step",
+            "test_ladder_never_over_closes_after_quantisation",
+            "test_dust_is_explicit_when_the_step_is_coarse",
+            "test_a_rung_below_the_minimum_notional_is_rejected_not_resized",
+            "test_fraction_of_remaining_survives_quantisation"
+          ]
+        },
+        {
+          "text": "the engine owns equity; the legacy column stays a diagnostic",
+          "status": "DONE",
+          "tests": [
+            "test_legacy_equity_is_diagnostic_only",
+            "test_legacy_equity_column_is_flat_while_a_position_is_open"
+          ],
+          "evidence": "the diagnostic helper reproduces the source's shape faithfully \u2014 flat while a position is open, realising only at the closing fill"
+        }
+      ]
+    },
+    {
+      "id": "L02.7",
+      "title": "Common execution fixtures",
+      "status": "DONE",
+      "requirements": [
+        {
+          "text": "long/short entry, gap, both stop and TP hit, partials/OCO/over-close, rejected order, insufficient margin, funding boundary, terminal open position",
+          "status": "DONE",
+          "evidence": "alphas/fixtures.py: 13 fixtures, all executed by the INSTALLED engine (the lab builds no second matching engine, guide 4.4)",
+          "tests": [
+            "test_all_execution_fixtures_pass"
+          ]
+        },
+        {
+          "text": "the adapter must not set a position on a submitted-but-unfilled order",
+          "status": "DONE",
+          "tests": [
+            "test_adapters_never_set_a_position_without_a_fill"
+          ]
+        },
+        {
+          "text": "end-of-tape mark and forced-flat are two modes",
+          "status": "DONE",
+          "evidence": "close_on_last_bar True/False compared side by side in fixture L02.7-09"
+        }
+      ]
+    },
+    {
+      "id": "L02.8",
+      "title": "Engine parity",
+      "status": "DONE_WITH_RECORDED_BLOCKER",
+      "requirements": [
+        {
+          "text": "fixed intents on Python and Rust under one supported contract",
+          "status": "DONE",
+          "evidence": "quantbt_bridge/parity.py: 7 cases on intrabar_bracket_reference vs intrabar_bracket_rust; equity, positions, fees and funding are bit-identical in every case",
+          "tests": [
+            "test_python_and_rust_account_traces_are_identical"
+          ]
+        },
+        {
+          "text": "compare the FULL event/account trace",
+          "status": "PARTIAL_RECORDED_BLOCKER",
+          "evidence": "the account trace is compared bar by bar; the rust backend returns an empty fill sequence at every report level tried, so a fill-by-fill comparison is unavailable on this install and is recorded as BLOCKED_CAPABILITY rather than described as full-trace parity",
+          "tests": [
+            "test_fill_trace_parity_is_disclosed_as_blocked"
+          ]
+        },
+        {
+          "text": "the original alpha and the corrected adapter may differ, but only by DOCUMENTED repairs",
+          "status": "DONE",
+          "evidence": "legacy.divergence_report compares the legacy reproduction with canonical_v1 on the same fixture, driving the adapter to a FIXED POINT against the engine's own protective fills. A-SC and A-VWAP enter on exactly the same bars; A-HMA differs by a constant +1 bar attributed to SD-HMA-02; A-HASH matches for 6 entries then separates, attributed to BLOCK-HASH-LADDER. Every difference is explained; an unattributed one would be an adapter defect.",
+          "note": "MISSING on the first pass \u2014 the two sides were never compared",
+          "tests": [
+            "test_every_legacy_canonical_difference_is_attributed",
+            "test_sc_and_vwap_reproduce_the_legacy_entries_exactly",
+            "test_hma_divergence_is_exactly_the_one_bar_weight_offset",
+            "test_hash_divergence_is_attributed_to_the_recorded_blocker",
+            "test_canonical_replay_reaches_a_fixed_point_where_it_can"
+          ]
+        },
+        {
+          "text": "keep ONE corrected alpha version shared by A/B/C/D/E",
+          "status": "DONE",
+          "evidence": "every alpha's adapter_version is canonical_v1; every canonical semantic delta applies to all five arms and every non-canonical delta applies to none, asserted rather than described",
+          "tests": [
+            "test_one_canonical_version_is_shared_by_all_arms"
+          ]
+        }
+      ]
+    }
+  ],
+  "exit_gate": {
+    "per_alpha_status": {
+      "A-SC": "READY_FOR_RESEARCH",
+      "A-HMA": "READY_FOR_RESEARCH",
+      "A-VWAP": "READY_FOR_RESEARCH",
+      "A-HASH": "NOT_READY_SPECIFIC_BLOCKER"
+    },
+    "all_four_have_adapter_and_synthetic_suite": true,
+    "no_alpha_swapped_or_dropped": true,
+    "market_optimization_allowed_for": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP"
+    ],
+    "no_metric_marketing_from_legacy_equity": true,
+    "status": "PASS"
+  },
+  "recorded_blockers": [
+    {
+      "id": "BLOCK-HASH-LADDER",
+      "alpha": "A-HASH",
+      "detail": "a next-open entry, a protective stop and partial reduce-only exits are not available together on any single route of this install: intrabar_bracket_v1 has the first two with a single take profit, the orders route has the ladder but fills the entry at the stamped bar's close and rejects stop_market",
+      "consequence": "A-HASH keeps all five cells in the 20-cell matrix with null metrics; a declared reduced-fidelity single-TP variant exists but is never reported as the canonical alpha",
+      "owner": "LAB-07 (a lab-only engine patch with tests, or a supported route that appears later)"
+    },
+    {
+      "id": "BLOCK-RUST-FILLS",
+      "alpha": null,
+      "detail": "the rust intrabar backend exposes no fill sequence, so engine parity is account-trace only",
+      "consequence": "no claim of full event-trace parity is made",
+      "owner": "LAB-07"
+    }
+  ],
+  "requirement_counts": {
+    "DONE": 44,
+    "PARTIAL_RECORDED_BLOCKER": 1,
+    "TOTAL": 45
+  },
+  "second_audit_gaps_closed": [
+    "L02.1 market input-name inventory",
+    "L02.2 Numba/fastmath parity",
+    "guide 2.1 legacy_reproduction tier built",
+    "L02.3 bars-since compared against the source",
+    "L02.6 lot quantisation and explicit dust (T12)",
+    "L02.6 faithful legacy equity reproduction",
+    "L02.8 original-vs-corrected divergence attribution",
+    "L02.8 one shared canonical version asserted"
+  ]
+}
