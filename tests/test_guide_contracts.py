@@ -399,3 +399,42 @@ def test_all_twelve_approved_conditions_resolve_to_an_enforcing_artifact(lab_roo
     for entry in conditions["conditions"]:
         assert entry["condition"], f"{entry['id']} has no text"
         assert entry["pointer"], f"{entry['id']} has no pointer"
+
+
+def test_a_budget_revision_is_appended_and_never_restamped(lab_root):
+    """Guide 10.5 — `registered_at_utc` is the evidence the contract pre-dated the arm.
+
+    A revision that re-stamped it would destroy exactly that. So a change to the
+    budget appends, with its reason and with what it does and does not affect.
+    """
+    path = lab_root / "configs" / "compute_budget_registration.json"
+    if not path.is_file():
+        pytest.skip("run scripts/register_compute_budget.py")
+    document = json.loads(path.read_text())
+    revisions = document.get("os_resource_budget_revisions") or []
+    if not revisions:
+        pytest.skip("no budget revision has been recorded")
+
+    assert document["registered_at_utc"] < revisions[0]["revised_at_utc"], (
+        "the registration stamp is not older than its own revision, so it was re-stamped")
+    for revision in revisions:
+        assert revision["from"] != revision["to"], "a revision that changes nothing"
+        assert revision["what_it_changes"] and revision["what_it_does_not_change"]
+        assert revision["what_it_costs"], "a revision with no stated cost"
+        assert revision["measured_reason"], "a revision with no measurement behind it"
+        # The guard here used to be `cpu_limit must not change`. That was a PROXY,
+        # and the wrong one: it would block a recorded, justified revision while
+        # permitting an unrecorded change that actually breaks the rule. What
+        # guide L08.6 forbids is raising CPU *so that one arm finishes before
+        # another*, and what 10.5 protects is the baseline's own conditions. The
+        # invariant is therefore about ARMS, not about a number.
+        assert revision.get("per_arm_compute_is_unchanged") is True, (
+            "a budget revision must state that no arm receives more compute than another; "
+            "guide L08.6 forbids raising CPU to let one policy finish ahead of the baseline")
+        assert revision.get("how_arms_stay_equal"), (
+            "and must say HOW they stay equal, not merely that they do")
+        if revision["to"]["cpu_limit"] != revision["from"]["cpu_limit"]:
+            assert revision.get("cpu_limit_change_justification"), (
+                "a change to the CPU limit needs its own justification on the record")
+    assert document["os_resource_budget"] == revisions[-1]["to"], (
+        "the live budget does not match the latest revision")

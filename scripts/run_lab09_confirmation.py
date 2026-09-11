@@ -90,7 +90,20 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cells", type=int, default=None,
                         help="run only the first N runnable cells (debugging; never a result)")
+    parser.add_argument("--shard", default=None, metavar="K/N",
+                        help="compute only runnable cells whose index mod N equals K, and write "
+                             "their checkpoints. Cells are INDEPENDENT and deterministic, so "
+                             "sharding changes no number -- only the wall clock and the worker "
+                             "count. A shard never writes the results document; a final "
+                             "unsharded pass assembles it from every checkpoint.")
     args = parser.parse_args(argv)
+    shard = None
+    if args.shard:
+        k, _, n = args.shard.partition("/")
+        shard = (int(k), int(n))
+        if not 0 <= shard[0] < shard[1]:
+            print(f"BLOCKED: --shard K/N needs 0 <= K < N, got {args.shard}")
+            return 1
 
     policy = SandboxPolicy.load(CONFIGS / "sandbox_policy.json")
     policy.assert_lab_root_ok()
@@ -154,6 +167,10 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {key[0]}/{key[1]} (checkpoint)", flush=True)
             records.append(json.loads(checkpoint.read_text()))
             continue
+        if shard is not None and runnable.index(entry) % shard[1] != shard[0]:
+            print(f"  {key[0]}/{key[1]} (other shard)", flush=True)
+            records.append({"alpha_id": key[0], "symbol": key[1], "status": "OTHER_SHARD"})
+            continue
         print(f"  {key[0]}/{key[1]} ...", flush=True)
         record = run_cell(key[0], key[1], protocol, baseline_cells, cache,
                           progress=lambda m: print(m, flush=True),
@@ -162,6 +179,14 @@ def main(argv: list[str] | None = None) -> int:
                           calendar_cutoffs=cutoffs)
         checkpoint.write_text(json.dumps(record, indent=2, default=str))
         records.append(record)
+
+    if shard is not None:
+        # a shard computes checkpoints and stops. Writing a results document from
+        # a partial run is how a partial matrix gets reported as a complete one.
+        print(f"\nshard {shard[0]}/{shard[1]} done; "
+              f"{sum(1 for r in records if r['status'] == 'RUN')} cells computed here. "
+              "Run without --shard to assemble the results document.")
+        return 0
 
     code_after = code_state()
     unchanged = code_before == code_after

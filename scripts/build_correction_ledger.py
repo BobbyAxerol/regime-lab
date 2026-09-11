@@ -248,6 +248,40 @@ DEFECTS = [
      "changed": None,
      "guarded_by": "tests/test_lab08_factorial.py::"
                    "test_every_contrast_against_arm_a_carries_the_baseline_caveat"},
+    {"id": "COR-21", "phase": "LAB-09",
+     "defect": "not a defect in a result: two REVISIONS to a registered contract. The OS "
+               "resource budget registered one worker and a CPU limit of 2. The confirmation was "
+               "measured at 24 min per cell -- twelve selector cutoffs at 97 strategy "
+               "evaluations each -- and the remaining twelve cells would have taken close to "
+               "five hours on one core while three sat idle. The user asked for it to be faster, "
+               "twice: workers 1 -> 2 with the CPU limit untouched, then 2 -> 3 with the limit "
+               "raised to 3",
+     "invalidated": "the COMPARABILITY of the confirmation's wall seconds against LAB-08's, "
+                    "which were measured at one worker. No measured RESULT is affected: cells "
+                    "are independent, deterministic and checkpointed, so a shard decides only "
+                    "which process computes a cell. A shard is a CELL boundary and never an arm "
+                    "boundary -- all five arms of a cell still run sequentially in one process "
+                    "on one core -- so no arm can finish ahead of another, which is the thing "
+                    "guide L08.6 forbids buying with CPU. Peak memory is 0.40 GiB per worker "
+                    "against a 4 GiB budget, and the lab processes are niced so the user's live "
+                    "collectors preempt them",
+     "changed": None,
+     "guarded_by": "tests/test_guide_contracts.py::"
+                   "test_a_budget_revision_is_appended_and_never_restamped"},
+    {"id": "COR-22", "phase": "LAB-09",
+     "defect": "the guard written for COR-21 asserted the wrong invariant. It required "
+               "`cpu_limit` to be identical across a budget revision, as a proxy for 'the "
+               "conditions a baseline was measured under must not change'. The proxy fails in "
+               "both directions: it blocks a recorded and justified revision, and it permits any "
+               "unrecorded change that does not happen to touch that one number",
+     "invalidated": "nothing measured. What it weakened is the guard itself. Guide L08.6 forbids "
+                    "raising CPU SO THAT one policy finishes ahead of the baseline, so the "
+                    "invariant is about ARMS: a revision must now state that per-arm compute is "
+                    "unchanged, say HOW the arms stay equal, and justify any change to the CPU "
+                    "limit separately",
+     "changed": None,
+     "guarded_by": "tests/test_guide_contracts.py::"
+                   "test_a_budget_revision_is_appended_and_never_restamped"},
 ]
 
 
