@@ -1,0 +1,105 @@
+{
+  "schema": "regime_lab.corrective_phase_report.v3",
+  "phase_id": "RF-02",
+  "status": "PARTIAL_TECHNICAL_CLOSURE",
+  "study_id": "corrective_mode4_v3",
+  "generated_at_utc": "2026-09-11T16:03:04.023999+00:00",
+  "objective": "actual QuantBT execution, public Mode 4 baseline, HTF->1m clock, route qualification",
+  "registered_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "findings_fixed": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08"
+  ],
+  "tests": {
+    "before_repair_suite_failed_remaining": [
+      "A10"
+    ],
+    "mode4_corrective": "20 passed / 1 failed (A10 owned by RF-03)"
+  },
+  "market_runs": {
+    "real_snapshot_pilot": {
+      "source": "snapshots/server_core_v1",
+      "product": "crypto_binance_futures_1m",
+      "symbol": "BTCUSDT",
+      "window": "2021-01-05 00:00..2021-01-20 00:00",
+      "is_synthetic": false,
+      "partitions": [
+        "2021-01",
+        "2021-02",
+        "2021-03"
+      ],
+      "bars_1m": 21601,
+      "bars_15m": 1441
+    },
+    "engine_fills": 1,
+    "route_matrix_counts": {
+      "QUALIFIED_EVENT": 5,
+      "QUALIFIED_FAST": 5,
+      "BLOCKED_CAPABILITY": 10
+    }
+  },
+  "metrics": {
+    "raw_quantbt_ref": null,
+    "canonical_ref": null,
+    "decay_panel_ref": null
+  },
+  "performance": {
+    "baseline_wall_seconds": 32.391,
+    "native_probe_wall_seconds": 1.115,
+    "pilot_cold_warm": {
+      "A-SC": {
+        "cold_seconds": 1.313,
+        "warm_seconds": 0.161
+      },
+      "A-HMA": {
+        "cold_seconds": 0.163,
+        "warm_seconds": 0.163
+      }
+    }
+  },
+  "proof_capability": {
+    "technical_validity": "PARTIAL_TECHNICAL_CLOSURE",
+    "positive_control": "A-HMA protection fills returned by engine",
+    "treatment_reached_execution": "A-SC real-snapshot 1m fills"
+  },
+  "potential": {
+    "level": "UNASSESSED",
+    "falsifiable_next_step": "RF-03 causal schedule"
+  },
+  "claim": {
+    "validity": "PASS_FOR_PROVEN_PATHS",
+    "statistical_status": "NOT_EVALUABLE",
+    "scope": "A-SC and A-HMA routes; A-VWAP/A-HASH blocked"
+  },
+  "limitations": [
+    "A-VWAP/A-HASH blocked",
+    "one real pilot window",
+    "signal_causality_scope=legacy_series_adapter_timing_unverified"
+  ],
+  "review": {
+    "author": "OpenCode",
+    "reviewer": null,
+    "disagreements": []
+  },
+  "handoff": {
+    "next_phase": "RF-03",
+    "blocking_findings": [
+      "A10"
+    ]
+  },
+  "report_md": {
+    "path": "report.md",
+    "sha256": "366afb37e5ab3e07d95a26c28fce8f4b27bc802362c3e49500fab44d596a2ab6"
+  },
+  "lab_run_id": "RF-02",
+  "written_at_utc": "2026-09-11T16:03:04.024191+00:00"
+}

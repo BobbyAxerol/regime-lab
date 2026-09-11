@@ -1,0 +1,31 @@
+{
+  "data": {
+    "source": "snapshots/server_core_v1",
+    "product": "crypto_binance_futures_1m",
+    "symbol": "BTCUSDT",
+    "window": "2021-01-05 00:00..2021-01-20 00:00",
+    "is_synthetic": false,
+    "partitions": [
+      "2021-01",
+      "2021-02",
+      "2021-03"
+    ],
+    "bars_1m": 21601,
+    "bars_15m": 1441
+  },
+  "mapped_intents": 1,
+  "mapped_exec_bars": 1,
+  "entries_emitted": 1,
+  "engine_fills": 1,
+  "equity_last": 19896.520544583196,
+  "wall_seconds": 5.668,
+  "fee_binding": {
+    "fee": 0.0008,
+    "fee_rate": 0.0004
+  },
+  "resolution": "A-SC decides on 15m bars; orders execute on the 1m engine clock (A06)",
+  "schema": "crypto_regime_lab.evidence.v1",
+  "lab_run_id": "RF-02",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T16:02:20.097227+00:00"
+}
