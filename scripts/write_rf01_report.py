@@ -127,6 +127,10 @@ def render_markdown(identity, binding, invalidation, disposition, spec, regressi
         f"{spec['budgets']['search_trials_per_cutoff']['pilot_max']} trials/cutoff) is frozen after an RF-02 "
         "dry-run coverage review; it is not spent here.")
     add("")
+    add("Acceptance registry: `configs/rf_acceptance_registry.json` holds the corrective **T01–T70** set, "
+        "extracted from the plan and registered separately; the historical T01–T64 registry "
+        "(`configs/acceptance_test_coverage.json`) is untouched. A requirement is not a passing test.")
+    add("")
     add("## 5. Technical vs market vs synthetic")
     add("")
     add("- Market experiments: **none**.")
@@ -234,6 +238,7 @@ def main() -> int:
                                       identity["quantbt_installed"].get("native_import_origin")],
         },
         "registered_arms": spec["arms"]["primary"],
+        "acceptance_registry": "configs/rf_acceptance_registry.json",
         "findings_disposition": disposition["counts"],
         "tests": {
             "passed": regression["before_tests"]["counts"].get("PASSED", 0),

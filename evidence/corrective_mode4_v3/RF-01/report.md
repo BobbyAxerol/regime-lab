@@ -89,6 +89,8 @@ All **12 restored audit probes (P01, P02, P03, P04, P05, P06, P07, P08, P09, P10
 
 RF-01 ran no candidates, trials or market bars. The registered discovery budget (32–64 trials/cutoff) is frozen after an RF-02 dry-run coverage review; it is not spent here.
 
+Acceptance registry: `configs/rf_acceptance_registry.json` holds the corrective **T01–T70** set, extracted from the plan and registered separately; the historical T01–T64 registry (`configs/acceptance_test_coverage.json`) is untouched. A requirement is not a passing test.
+
 ## 5. Technical vs market vs synthetic
 
 - Market experiments: **none**.
