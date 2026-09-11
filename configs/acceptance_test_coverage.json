@@ -3,8 +3,7 @@
   "note": "Guide section 14 lists 64 REQUIREMENTS. This file records which are implemented as running tests. A requirement with no test is NOT_YET_IMPLEMENTED, never assumed passing.",
   "as_of_phase": "LAB-09",
   "counts": {
-    "COVERED": 62,
-    "PARTIAL": 1,
+    "COVERED": 63,
     "NOT_YET_IMPLEMENTED": 1
   },
   "requirements": [
@@ -656,13 +655,15 @@
     {
       "id": "T54",
       "title": "Current WFO uses OOS for selection",
-      "owning_phase": "LAB-08",
-      "status": "PARTIAL",
+      "owning_phase": "LAB-09",
+      "status": "COVERED",
       "tests": [
-        "tests/test_lab04_legacy_labelling.py::test_modes_declaring_oos_selection_are_named_and_labelled"
-      ],
-      "partial_reason": "LAB-04 measured which installed modes consume OOS to select and fixed the label. LAB-07 carries that label into the run record. Applying it to a reported ARM COMPARISON is LAB-08's, because there is no arm comparison yet.",
-      "partially_discharged_by": "LAB-04 + LAB-07"
+        "tests/test_lab04_legacy_labelling.py::test_modes_declaring_oos_selection_are_named_and_labelled",
+        "tests/test_lab08_factorial.py::test_arm_a_carries_the_legacy_label_it_earned",
+        "tests/test_lab08_factorial.py::test_every_contrast_against_arm_a_carries_the_baseline_caveat",
+        "tests/test_lab09_confirmation.py::test_the_confirmation_contrasts_carry_the_baseline_caveat_too",
+        "tests/test_guide_contracts.py::test_guide_10_1_captures_all_six_fields_from_the_installed_selector"
+      ]
     },
     {
       "id": "T55",

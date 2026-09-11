@@ -462,3 +462,114 @@ def test_the_transition_diagnostics_cover_every_metric_guide_11_4_names():
     assert diagnostics["wrong_switch_loss"]["not_reported_as_zero"] is True
     assert diagnostics["wrong_switch_loss"]["what_stands_in"]
     assert diagnostics["unknown_and_fallback_usage"]["emissions"] > 0
+
+
+def test_the_seeds_are_read_back_from_what_the_run_stamped():
+    """L09.2.2 — copying the frozen seeds into the results proves nothing.
+
+    The confirmation document carries `seeds: protocol["seeds"]`, which says the
+    document was written, not that the run used them. What the run used is
+    stamped by the code that used it: every selector cutoff records the base seed
+    it was handed, and every regime refit records its multi-start list.
+    """
+    reconciliation = load("lab09_reconciliation.json", "scripts/analyse_lab09_confirmation.py")
+    seeds = reconciliation["seeds"]
+    protocol = json.loads((CONFIGS / "lab08_pilot_protocol.json").read_text())
+
+    probe = seeds["probe_design"]
+    assert probe["cutoffs_stamped"] > 0, "no cutoff stamped a seed, so nothing was measured"
+    assert probe["registered_base"] == protocol["seeds"]["probe_design"]
+    assert probe["seeds_that_are_not_the_registered_base"] == []
+    assert probe["matches"] is True
+
+    model = seeds["model_multi_start"]
+    assert model["refits_stamped"] > 0
+    assert model["registered"] == protocol["seeds"]["model_multi_start"]
+    assert model["distinct_seed_lists"] == [protocol["seeds"]["model_multi_start"]], (
+        "a refit ran with a seed list the freeze does not name")
+    assert seeds["all_measured_sources_match"] is True
+
+
+def test_the_engine_is_rehashed_rather_than_declared_untouched():
+    """L09.2.4 — 'untouched' written into an artifact is a sentence."""
+    reconciliation = load("lab09_reconciliation.json", "scripts/analyse_lab09_confirmation.py")
+    engine = reconciliation["engine"]
+    assert engine["installed_versions"] == engine["expected_versions"]
+    assert engine["wheels"], "no quantbt wheel was found to hash"
+    for wheel in engine["wheels"]:
+        assert wheel.get("matches") is True, (
+            f"{wheel['wheel']} no longer matches the digest LAB-01 pinned")
+        assert wheel["measured_sha256"] != "", "a digest was recorded empty"
+    assert engine["lockfile_sha256"]["matches"] is True
+    assert engine["untouched"] is True
+    assert engine["pin_source"], "the pin this was compared against is not named"
+
+
+def test_nothing_the_confirmation_deploys_was_registered_after_the_unlock():
+    """L09.1.5 — `no_retuning_after_unlock: true` is a boolean an author typed.
+
+    What can be measured is that every threshold, seed, contrast and economic
+    assumption the confirmation deploys carries a stamp that PRECEDES the unlock.
+    One stamped after it would be a choice made with the interval in view.
+    """
+    reconciliation = load("lab09_reconciliation.json", "scripts/analyse_lab09_confirmation.py")
+    unlock = load("lab09_confirmation_spec.json", "scripts/unlock_lab09_confirmation.py")
+    check = reconciliation["provenance"]["no_retuning_after_unlock"]
+    assert check["unlocked_at_utc"] == unlock["unlocked_at_utc"]
+    assert len(check["registrations"]) >= 5, "too few registrations were checked to mean anything"
+    for row in check["registrations"]:
+        assert row["stamped_at"], f"{row['artifact']} carries no stamp at all"
+        assert row["stamped_at"] < unlock["unlocked_at_utc"], (
+            f"{row['artifact']} was registered AFTER the interval was unlocked")
+    assert check["all_precede_the_unlock"] is True
+
+
+def test_the_lab_cannot_execute_rather_than_merely_choosing_not_to():
+    """L09.1.3 — a prospective protocol that is 'not self-executed' by choice is weaker."""
+    reconciliation = load("lab09_reconciliation.json", "scripts/analyse_lab09_confirmation.py")
+    check = reconciliation["provenance"]["prospective_protocol_not_self_executed"]
+    gates = check["execution_gates_in_the_registration"]
+    assert set(gates) == {"live_execution_allowed", "market_experiments_allowed",
+                          "production_mutations_allowed"}
+    assert all(value is False for value in gates.values()), gates
+    assert check["no_execution_path_exists"] is True
+
+
+def test_the_costs_did_not_move_between_discovery_and_confirmation():
+    """L09.2.3 — read off the confirmation's own fills, not copied from the protocol.
+
+    'Untouched' has to mean the economics did not move BETWEEN the two phases,
+    because the binding itself is known to be wrong (COR-13). The caveat has to
+    say so, or the check reads as a clean bill of health.
+    """
+    reconciliation = load("lab09_reconciliation.json", "scripts/analyse_lab09_confirmation.py")
+    check = reconciliation["provenance"]["costs_untouched_between_discovery_and_confirmation"]
+    charged = check["one_way_fee_rate_charged_in_the_confirmation"]
+    assert charged, "no arm reported the rate it was charged"
+    assert check["single_rate_across_every_arm"] is True, (
+        f"the arms were charged different rates: {charged}")
+    assert check["matches_the_discovery_rate"] is True
+    assert "half the registered" in check["caveat"]
+
+
+def test_the_confirmation_contrasts_carry_the_baseline_caveat_too():
+    """T54, on this phase's own contrasts and on the contributions built from them."""
+    uncertainty = load("lab09_uncertainty.json", "scripts/analyse_lab09_confirmation.py")
+    for name, record in uncertainty["contrasts"].items():
+        if record.get("status") != "OK":
+            continue
+        involves_a = "A" in name.replace("(", "").replace(")", "").split("-")
+        assert record.get("baseline_is_not_untouched", False) is involves_a, (
+            f"{name}: baseline caveat present={record.get('baseline_is_not_untouched')} "
+            f"but involves arm A={involves_a}")
+        if involves_a:
+            assert record["baseline_caveat"]
+
+    claim = load("lab09_claim_report.json", "scripts/analyse_lab09_confirmation.py")
+    for name in ("SELECTION", "TIMING"):
+        entry = claim["contributions"][name]
+        if entry["verdict"] == "NOT_MEASURED":
+            continue
+        assert entry["baseline_is_not_untouched"] is True, (
+            f"the {name} contribution is measured against arm A and does not say so")
+        assert entry["baseline_caveat"]

@@ -1,7 +1,7 @@
 # What each phase actually measures, and what "better" means
 
 The honest headline first: **most of what this lab checks is not a "better/worse" number at all.**
-The large majority of the 456 tests are binary correctness gates — a thing either holds exactly or
+The large majority of the 781 tests are binary correctness gates — a thing either holds exactly or
 it does not. Only LAB-04 produces a number that answers "did this improve anything", and that
 number came back **inconclusive**.
 
@@ -86,6 +86,33 @@ These have no scale. They hold exactly, or the phase is blocked.
 | T43 | the inference modules cannot reach a fit function at all | structural |
 | LAB-02 | Python and Rust account traces bit-identical; numba kernels bit-exact | exact |
 | LAB-04 | the fast evaluator gives identical fills, reasons and equity to a whole-window fixed point | exact |
+
+---
+
+## Group E — contrast and confirmation metrics (LAB-07, LAB-08, LAB-09)
+
+The arms exist from LAB-08 on, so this is where a difference between two ways of running the
+study becomes measurable. Every number here is a PAIRED daily difference on the days both arms
+were live; none of them is a portfolio.
+
+| metric | what it is | where it is measured |
+|---|---|---|
+| **paired daily difference** | THE registered primary endpoint, arm minus arm on the same dates. A day either arm was not live is excluded, never filled with a zero | LAB-08 `contrast_panel`, LAB-09 `lab09_uncertainty.json` |
+| **block-bootstrap interval** | a 95% interval from resampling contiguous runs of DATES, one sequence per draw applied to every cell so the symbols move together | LAB-09 L09.3 |
+| block length | chosen on development from the first autocorrelation lag inside ±2/√n, applied unchanged to the confirmation | `lab09_development_replay.json` |
+| **concentration** | share of the total ABSOLUTE daily contribution carried by the biggest days, so two offsetting days count as two big days | LAB-09 L09.3 |
+| episode counts | how many days each cell contributed, and how many were shared. A short cell gets an equal vote on less evidence | LAB-09 L09.3 |
+| Holm-adjusted p | the sign-test or bootstrap p raised for the size of the registered family. **This is the number that counts**, not the nominal one | LAB-08, LAB-09 |
+| cost-stress levels | the same deployment re-run at 1×, 1.5×, 2× the configured costs, plus AS_DECLARED | LAB-09 L09.4 |
+| activation delay | bars a requested parameter version waited, split by WHAT it waited for | LAB-07, LAB-09 `switch_delays` |
+| transition turnover | schema distance between consecutive deployed parameter sets — the selector's own metric | LAB-09 `transition_diagnostics` |
+| parameter rank stability | how often the selector re-chose the same point at the next cutoff | LAB-09 `transition_diagnostics` |
+| one-way fee rate implied | fees charged ÷ gross notional, read off the fills. **Measured 0.0002 against a registered 0.0004** | LAB-09 `accounting`, COR-13 |
+| cash-identity residual | `equity[-1] − equity[0] − (−Σ side·qty·price − Σ fee)`. Not a performance number: a non-zero value means the fills, fees and equity are not the same account | LAB-09 L09.6.1 |
+
+Two of these are NOT comparisons and are easy to misread as one: the one-way fee rate and the
+cash-identity residual are **accounting checks**. A good residual says the books close, not that
+the strategy made money.
 
 ---
 

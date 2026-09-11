@@ -384,7 +384,20 @@ def main(argv: list[str] | None = None) -> int:
         "refit_latency": refit_latency_panel(protocol),
         "no_retuning_after_a_stress": {
             "rule": "L09.4.6. A stress that loses is a result, not a reason to change a setting",
-            "settings_changed_after_seeing_a_stress_result": [],
+            "this_is_a_COMMITMENT_not_a_measurement": (
+                "no artifact can prove a setting was not changed after a result was seen; a "
+                "rerun would simply overwrite it. What makes the commitment checkable is that "
+                "every setting is recorded HERE with the seeds, and that any change to one after "
+                "a stress ran would have to appear in configs/correction_ledger.json with what "
+                "it invalidated. Claiming this as verified would be the same overreach the "
+                "forbidden-claims audit exists to catch"),
+            "settings_recorded_in_this_artifact": "information_stress.settings",
+            "where_a_change_would_have_to_appear": "configs/correction_ledger.json",
+            "changes_recorded_so_far": (
+                "COR-19 changed MISSING_ENRICHMENT from a random 20% drop to contiguous outages. "
+                "That change was made BEFORE the stress ran, because a smoke test showed the "
+                "random version produced a schedule identical to the real one on all six cutoffs "
+                "and therefore could not have produced a different answer"),
         },
         "wall_seconds": time.perf_counter() - started,
     }

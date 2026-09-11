@@ -21,6 +21,21 @@ C = "tests/test_lab09_confirmation.py::"
 U = "tests/test_lab09_uncertainty.py::"
 
 COVERED = {
+    # T54 was PARTIAL with the reason "applying it to a reported ARM COMPARISON is
+    # LAB-08's, because there is no arm comparison yet". LAB-08 ran the comparison,
+    # and the reason went stale without anyone noticing. The remaining half is now
+    # discharged: every contrast measured against arm A carries the label ON THE
+    # CONTRAST, so one lifted out of the panel cannot lose it.
+    "T54": ["tests/test_lab04_legacy_labelling.py::"
+            "test_modes_declaring_oos_selection_are_named_and_labelled",
+            "tests/test_lab08_factorial.py::"
+            "test_arm_a_carries_the_legacy_label_it_earned",
+            "tests/test_lab08_factorial.py::"
+            "test_every_contrast_against_arm_a_carries_the_baseline_caveat",
+            "tests/test_lab09_confirmation.py::"
+            "test_the_confirmation_contrasts_carry_the_baseline_caveat_too",
+            "tests/test_guide_contracts.py::"
+            "test_guide_10_1_captures_all_six_fields_from_the_installed_selector"],
     "T62": [f"{C}test_no_untested_cell_is_presented_as_evidence",
             f"{C}test_the_confirmation_runs_the_same_matrix",
             f"{C}test_a_missing_measurement_is_never_reported_as_a_negative_result",
@@ -31,7 +46,9 @@ COVERED = {
             f"{U}test_the_interval_refuses_a_window_too_short_for_its_blocks",
             f"{C}test_the_block_length_came_from_development"],
 }
-FILES = ["tests/test_lab09_confirmation.py", "tests/test_lab09_uncertainty.py"]
+FILES = ["tests/test_lab09_confirmation.py", "tests/test_lab09_uncertainty.py",
+         "tests/test_lab04_legacy_labelling.py", "tests/test_lab08_factorial.py",
+         "tests/test_guide_contracts.py"]
 
 
 def main() -> int:

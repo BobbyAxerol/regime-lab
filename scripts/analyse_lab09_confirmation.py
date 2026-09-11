@@ -124,6 +124,17 @@ def uncertainty_panel(cells: list[dict], contrasts: list[str], block_length: int
             "clears_minimum_effect": bool(result["ci_lower"] > minimum_effect),
             "registered": name in contrasts,
         }
+        # T54: a contrast against arm A carries its own caveat, because a reader
+        # who lifts this record out of the panel gets nothing else
+        # strip the parentheses first: "(D-C)-(B-A)" contains B-A, so the
+        # interaction is partly measured against arm A too
+        if "A" in name.replace("(", "").replace(")", "").split("-"):
+            panel[name]["baseline_is_not_untouched"] = True
+            panel[name]["baseline_label"] = "A_legacy_selection_adjusted"
+            panel[name]["baseline_caveat"] = (
+                "measured against A_legacy_selection_adjusted. The installed public route "
+                "declares OOS-adjusted selection, so this difference is evidence about the new "
+                "selector versus THAT baseline, not versus a causal one (guide 13.6, T54)")
     family = {name: panel[name]["p_value"] for name in contrasts
               if panel.get(name, {}).get("status") == "OK"}
     holm = holm_adjust(family)
@@ -158,7 +169,7 @@ def uncertainty_panel(cells: list[dict], contrasts: list[str], block_length: int
 
 # --------------------------------------------------------------- L09.6
 def reconcile(confirmation: dict, replay: dict | None, stress: dict | None,
-              binding: dict | None) -> dict:
+              binding: dict | None, unlock: dict | None = None) -> dict:
     cells = [c for c in confirmation["cells"] if c["status"] == "RUN"]
 
     identities, worst = [], 0.0
@@ -240,6 +251,10 @@ def reconcile(confirmation: dict, replay: dict | None, stress: dict | None,
         }
 
     return {
+        "provenance": (provenance_checks(confirmation, unlock, binding) if unlock
+                       else {"status": "NOT_CHECKED", "reason": "no unlock artifact supplied"}),
+        "seeds": seeds_actually_used(confirmation, load("lab08_pilot_protocol.json") or {}),
+        "engine": engine_untouched(),
         "financial_identity": {
             "arms_checked": len(identities),
             "arms_holding": sum(1 for row in identities if row["holds"]),
@@ -294,6 +309,205 @@ def reconcile(confirmation: dict, replay: dict | None, stress: dict | None,
             "confirmation": replay_confirmation,
         },
         "audits_retained": audits_retained(),
+    }
+
+
+#: Every registration the confirmation deploys, and the field that stamps when it
+#: was fixed. All of them must pre-date the unlock, or something was chosen after
+#: the interval was opened.
+REGISTRATIONS = {
+    "lab08_pilot_protocol.json": "frozen_at_utc",
+    "minimum_economic_effect.json": "registered_at_utc",
+    "hypothesis_registry.json": "registered_at_utc",
+    "study_registration.json": "registered_at_utc",
+    "compute_budget_registration.json": "registered_at_utc",
+}
+
+
+def provenance_checks(confirmation: dict, unlock: dict, binding: dict | None) -> dict:
+    """L09.1.3, L09.1.5 and L09.2.3 — measured rather than asserted.
+
+    Each of the three was a boolean sitting in an artifact. A boolean an author
+    typed is not evidence of the thing it names, and this lab has already found
+    six checks that passed for exactly that reason.
+    """
+    unlocked_at = unlock["unlocked_at_utc"]
+    stamps = []
+    for name, field in REGISTRATIONS.items():
+        document = load(name) or {}
+        stamp = document.get(field)
+        stamps.append({"artifact": f"configs/{name}", "field": field, "stamped_at": stamp,
+                       "precedes_the_unlock": bool(stamp) and stamp < unlocked_at})
+
+    registration = load("study_registration.json") or {}
+    execution_gates = {
+        "live_execution_allowed": registration.get("live_execution_allowed"),
+        "market_experiments_allowed": registration.get("market_experiments_allowed"),
+        "production_mutations_allowed": registration.get("production_mutations_allowed"),
+    }
+
+    # L09.2.3: the costs the CONFIRMATION actually charged, read off its own
+    # fills, against the ones LAB-08 charged. Equal means the economics did not
+    # move between discovery and confirmation -- which is what "untouched costs"
+    # has to mean when the binding itself is known to be wrong (COR-13).
+    charged = sorted({record["accounting"]["one_way_fee_rate_implied"]
+                      for cell in confirmation["cells"] if cell.get("status") == "RUN"
+                      for record in (cell.get("arms") or {}).values()
+                      if isinstance(record.get("accounting"), dict)
+                      and record["accounting"].get("one_way_fee_rate_implied") is not None})
+    measured_rate = (binding or {}).get("measurement", {}).get("measured_one_way_fee_rate")
+
+    return {
+        "no_retuning_after_unlock": {
+            "unlocked_at_utc": unlocked_at,
+            "registrations": stamps,
+            "all_precede_the_unlock": all(row["precedes_the_unlock"] for row in stamps),
+            "meaning": ("every threshold, seed, contrast and economic assumption the confirmation "
+                        "deploys was fixed before the interval was opened. A registration stamped "
+                        "after the unlock would be a choice made with the interval in view"),
+        },
+        "prospective_protocol_not_self_executed": {
+            "declared": unlock["prospective_protocol"]["not_self_executed"],
+            "execution_gates_in_the_registration": execution_gates,
+            "no_execution_path_exists": all(value is False for value in execution_gates.values()),
+            "meaning": ("the claim is not that the lab chose not to trade, but that it cannot: "
+                        "live execution, market experiments and production mutation are all "
+                        "refused at the registration, and LAB-01 measured the refusal against a "
+                        "read-only mount rather than inferring it from path naming"),
+        },
+        "costs_untouched_between_discovery_and_confirmation": {
+            "one_way_fee_rate_charged_in_the_confirmation": charged,
+            "one_way_fee_rate_measured_by_the_binding_probe": measured_rate,
+            "single_rate_across_every_arm": len(charged) == 1,
+            "matches_the_discovery_rate": bool(charged) and charged[0] == measured_rate,
+            "slippage_bps": "unchanged; the binding was measured correct at 1 bp per side",
+            "caveat": ("the rate both phases charged is HALF the registered one-way fee "
+                       "(COR-13). 'Untouched' here means the economics did not move BETWEEN the "
+                       "two phases, which is what keeps the confirmation comparable to the "
+                       "discovery it confirms. It does not mean the rate is the registered one"),
+        },
+    }
+
+
+def seeds_actually_used(confirmation: dict, protocol: dict) -> dict:
+    """L09.2.2 — were the declared seeds USED, or only copied into the artifact?
+
+    The confirmation document carries `seeds: protocol["seeds"]`, which is a copy
+    and proves nothing about what ran. The seeds that ran are recorded by the
+    code that used them: every selector cutoff stamps the probe-design seed it
+    was given, and every regime refit stamps its multi-start seed list. Both are
+    read back here and compared against the freeze.
+    """
+    declared = protocol["seeds"]
+    probe_seeds, probe_cutoffs = set(), 0
+    for cell in confirmation["cells"]:
+        if cell.get("status") != "RUN":
+            continue
+        for source in ("calendar_cutoff_evidence", "regime_cutoff_evidence"):
+            for entry in (cell.get("notes") or {}).get(source, []):
+                evidence = entry.get("cutoff_evidence")
+                if not evidence:
+                    continue
+                probe_cutoffs += 1
+                probe_seeds.add((evidence.get("budget") or {}).get("seed"))
+
+    model_seeds, refits = set(), 0
+    symbols = sorted({c["symbol"] for c in confirmation["cells"] if c["status"] == "RUN"})
+    for symbol in symbols:
+        registry = load(f"lab09_{symbol.lower()}_regime_model_registry.json")
+        for model in (registry or {}).get("models", []):
+            refits += 1
+            model_seeds.add(tuple(model.get("seeds") or ()))
+
+    # Each cutoff record stamps the registered BASE seed it was handed; the
+    # selector then derives its per-fold seed as base + fold * 101 inside
+    # run_cutoff, deterministically. So the invariant that can be MEASURED from
+    # the artifacts is that every stamped seed is the registered base -- a cutoff
+    # stamped with anything else was handed a seed the freeze does not name.
+    base = declared["probe_design"]
+    unexplained = sorted(seed for seed in probe_seeds if seed != base)
+    expected_model = tuple(declared["model_multi_start"])
+    return {
+        "declared": {k: v for k, v in declared.items() if k != "rule"},
+        "probe_design": {
+            "cutoffs_stamped": probe_cutoffs,
+            "distinct_seeds_stamped": sorted(s for s in probe_seeds if s is not None),
+            "registered_base": base,
+            "derivation": ("each cutoff is handed the registered base and derives its own "
+                           "per-fold seed as base + fold * 101 inside "
+                           "experiments/calendar_baseline.run_cutoff. The record stamps the "
+                           "base, so what is measurable here is that no cutoff was handed a "
+                           "seed the freeze does not name"),
+            "seeds_that_are_not_the_registered_base": unexplained,
+            "matches": not unexplained and probe_cutoffs > 0,
+        },
+        "model_multi_start": {
+            "refits_stamped": refits,
+            "distinct_seed_lists": [list(t) for t in sorted(model_seeds)],
+            "registered": list(expected_model),
+            "matches": bool(model_seeds) and model_seeds == {expected_model},
+        },
+        "placebo": {
+            "registered": declared["placebo"],
+            "where_used": "configs/lab09_stress.json information_stress.settings.seeds, and the "
+                          "STATE_PLACEBO control in each cell",
+            "matches": None,
+            "why_null": ("the placebo seed is consumed by the control and the stress runner, "
+                         "which stamp it in their own artifacts rather than in a cutoff record"),
+        },
+        "all_measured_sources_match": bool(probe_cutoffs) and not unexplained
+        and model_seeds == {expected_model},
+        "why_measured": ("copying the frozen seeds into the results document proves the document "
+                         "was written, not that the run used them (L09.2.2)"),
+    }
+
+
+def engine_untouched() -> dict:
+    """L09.2.4 — is the engine the one LAB-01 pinned? Re-hashed, not restated."""
+    import hashlib
+    import importlib.metadata as metadata
+
+    pins = sorted((LAB_ROOT / "evidence").rglob("environment_pin.json"))
+    pin = json.loads(pins[-1].read_text()) if pins else {}
+    recorded = pin.get("wheelhouse_artifacts") or {}
+    wheels = []
+    for name, entry in recorded.items():
+        if "quantbt" not in name.lower():
+            continue
+        path = LAB_ROOT / "wheelhouse" / name
+        if not path.is_file():
+            wheels.append({"wheel": name, "status": "MISSING_FROM_WHEELHOUSE"})
+            continue
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        wheels.append({"wheel": name, "recorded_sha256": entry["sha256"],
+                       "measured_sha256": digest,
+                       "matches": digest == entry["sha256"]})
+
+    lock = LAB_ROOT / "configs" / "requirements.lock"
+    lock_digest = hashlib.sha256(lock.read_bytes()).hexdigest() if lock.is_file() else None
+    recorded_lock = (pin.get("dependency_lock") or {}).get("lockfile_sha256")
+    versions = {}
+    for package in ("quantbt-engine", "quantbt-native"):
+        try:
+            versions[package] = metadata.version(package)
+        except metadata.PackageNotFoundError:
+            versions[package] = None
+    return {
+        "installed_versions": versions,
+        "expected_versions": {"quantbt-engine": "1.1.1", "quantbt-native": "0.4.2"},
+        "versions_match": versions == {"quantbt-engine": "1.1.1", "quantbt-native": "0.4.2"},
+        "wheels": wheels,
+        "wheel_digests_match": bool(wheels) and all(w.get("matches") for w in wheels),
+        "lockfile_sha256": {"recorded_at_lab01": recorded_lock, "measured_now": lock_digest,
+                            "matches": lock_digest == recorded_lock},
+        "pin_source": str(pins[-1].relative_to(LAB_ROOT)) if pins else None,
+        "execution_contract": "intrabar_bracket_v1",
+        "untouched": bool(wheels) and all(w.get("matches") for w in wheels)
+        and versions == {"quantbt-engine": "1.1.1", "quantbt-native": "0.4.2"}
+        and lock_digest == recorded_lock,
+        "why_measured": ("'the engine is untouched' written into an artifact is a sentence. The "
+                         "wheels LAB-01 pinned are re-hashed and the installed distributions are "
+                         "re-read (L09.2.4)"),
     }
 
 
@@ -530,6 +744,8 @@ def claim(confirmation: dict, uncertainty: dict, reconciliation: dict, support: 
         ruled_out = record["ci_upper"] < minimum_effect
         return {
             "contrast": name, "question": question,
+            "baseline_is_not_untouched": record.get("baseline_is_not_untouched", False),
+            "baseline_caveat": record.get("baseline_caveat"),
             "point_estimate": record["point_estimate"],
             "ci": [record["ci_lower"], record["ci_upper"]],
             "holm_adjusted_p": record.get("holm_adjusted_p"),
@@ -693,7 +909,7 @@ def main() -> int:
                         "window": confirmation["window"]})
 
     with writer.attempt("L09.6.reconcile") as att:
-        reconciliation = reconcile(confirmation, replay, stress, binding)
+        reconciliation = reconcile(confirmation, replay, stress, binding, unlock)
         att.detail = {"identity_holds": reconciliation["financial_identity"]["all_hold"]}
     reconciliation.update({"schema": "crypto_regime_lab.lab09_reconciliation.v1",
                            "generated_at_utc": utc_now_iso()})

@@ -111,18 +111,27 @@ def main() -> int:
     if discovery:
         add("## The registered contrasts")
         add("")
-        add("| contrast | mean daily difference | cells | sign test | direction |")
-        add("|---|---|---|---|---|")
+        add("| contrast | mean daily difference | cells | sign test | direction | baseline |")
+        add("|---|---|---|---|---|---|")
         for name, record in discovery["contrast_panel"].items():
             mean = record["mean_daily_difference"]
             test = record["sign_test"]
             p = test["p_value"]
+            baseline = ("**not untouched**" if record.get("baseline_is_not_untouched")
+                        else "—")
             add(f"| `{name}` | "
                 f"{'—' if mean is None else f'{mean:+.6f}'} | "
                 f"{record['cells_with_a_value']} | "
                 f"{'—' if p is None else f'p={p:.4f}'} | "
-                f"{test['positive']}+ / {test['negative']}− |")
+                f"{test['positive']}+ / {test['negative']}− | {baseline} |")
         add("")
+        caveated = [n for n, r in discovery["contrast_panel"].items()
+                    if r.get("baseline_is_not_untouched")]
+        if caveated:
+            add(f"`{', '.join(caveated)}` are measured against **A_legacy_selection_adjusted**. "
+                "The caveat is carried ON each of those contrasts, not only in the section below, "
+                "so a contrast lifted out of this table cannot lose it (T54).")
+            add("")
         selection = discovery["design_selection"]
         add(f"> {discovery['contrast_panel']['B-A']['sign_test']['reading']}")
         add("")

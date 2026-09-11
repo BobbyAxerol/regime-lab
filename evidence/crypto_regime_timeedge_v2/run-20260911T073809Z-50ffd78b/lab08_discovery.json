@@ -1,6 +1,6 @@
 {
   "schema": "crypto_regime_lab.lab08_discovery.v1",
-  "generated_at_utc": "2026-09-11T07:50:12.950451+00:00",
+  "generated_at_utc": "2026-09-11T07:38:09.616911+00:00",
   "experiments": [
     {
       "experiment_id": "ex-p-9e3738ca84ca4448",
@@ -1438,10 +1438,7 @@
           "value": -0.00012483878581017466,
           "status": "OK"
         }
-      ],
-      "baseline_is_not_untouched": true,
-      "baseline_label": "A_legacy_selection_adjusted",
-      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one, and guide 13.6 forbids calling it out-of-sample"
+      ]
     },
     "E-B": {
       "cells_with_a_value": 15,
@@ -1707,7 +1704,7 @@
       "working_memory_gib": 4
     },
     "workers_used": 1,
-    "peak_working_set_gib": 0.127,
+    "peak_working_set_gib": 0.129,
     "budget_exceeded": false,
     "measurement_note": "workers is the observed count of concurrent lab processes and the working set is this process's peak RSS. Both are read from the OS rather than declared",
     "budget_rule": "every arm is allotted the same total, and a unit is counted wherever it is spent. A regime arm that spends its budget on model fits instead of on alpha trials has still spent it",
@@ -1858,7 +1855,7 @@
   },
   "design_selection": {
     "schema": "crypto_regime_lab.lab08_design_selection.v1",
-    "decided_at_utc": "2026-09-11T07:50:12.949282+00:00",
+    "decided_at_utc": "2026-09-11T07:38:09.614921+00:00",
     "outcome": "NO_PROMISING_DESIGN",
     "selected_contrast": null,
     "interaction": {
@@ -1969,52 +1966,6 @@
     "optional_alpha_improvements_folded_in": false,
     "not_required_to_be_profitable": "guide L08 exit: profit is not required to close discovery, and a negative result is not a technical failure to be re-run until it wins"
   },
-  "variants_registered_and_not_run": {
-    "timeframe_variants": {
-      "primary_decision_bars": {
-        "A-SC": "15m",
-        "A-VWAP": "15m",
-        "A-HMA": "1h",
-        "A-HASH": "15m"
-      },
-      "secondary_registered": {
-        "A-SC": "1h",
-        "A-VWAP": "5m",
-        "A-HMA": "15m",
-        "A-HASH": "1h"
-      },
-      "secondary_variants_run": 0,
-      "meaning": "a secondary timeframe was pre-registered for every alpha and NOT ONE was run. No timeframe was tried and dropped, so the reported cells are not a survivor of a timeframe search"
-    },
-    "alpha_variants": {
-      "tiers": [
-        "raw_supplied",
-        "legacy_reproduction",
-        "canonical_v1",
-        "research_revision_N"
-      ],
-      "tier_used_by_every_arm": "canonical_v1",
-      "deltas_outside_every_arm": [
-        {
-          "delta_id": "SD-HASH-05",
-          "alpha_id": "A-HASH",
-          "change_kind": "indicator_repair",
-          "applies_to_experiment_arms": [],
-          "after_semantics": "a true-range ATR variant, offered as a SEPARATE version"
-        },
-        {
-          "delta_id": "SD-SC-05",
-          "alpha_id": "A-SC",
-          "change_kind": "thesis_change",
-          "applies_to_experiment_arms": [],
-          "after_semantics": "a conventional crossover(trend, trend.shift(2)) is available as a research revision only"
-        }
-      ],
-      "thesis_changes_entering_an_arm": 0,
-      "meaning": "the one thesis change (SD-SC-05) applies to NO experiment arm; it exists as a research revision and is excluded from every canonical arm by the semantic-delta rule. An improvement that never entered an arm cannot be credited to the arms"
-    },
-    "why_this_is_recorded": "guide 11.3 asks for the variants TRIED to be kept. The honest record here is that the alternatives were registered in advance and none was run, which is a stronger statement than an empty list nobody explains"
-  },
   "all_attempted_hypotheses": [
     {
       "id": "B-A",
@@ -2052,5 +2003,8 @@
       "cells_with_a_value": 15,
       "mean_daily_difference": -1.2516161467341783e-05
     }
-  ]
+  ],
+  "lab_run_id": "run-20260911T073809Z-50ffd78b",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T07:38:09.622552+00:00"
 }

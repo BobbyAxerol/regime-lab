@@ -36,6 +36,13 @@ STEPS = [
     ("L09.7a  group ablation inside the interval", ["scripts/ablate_lab09_states.py"], 3600),
     ("L09.5b  support and novelty", ["scripts/run_lab09_support.py"], 1800),
     ("L09.6   fee sensitivity of the SELECTION", ["scripts/probe_fee_sensitivity.py"], 7200),
+    # the cross-phase audits run BEFORE the analysis, because the reconciliation
+    # reads their verdicts. Running them after would have the reconciliation
+    # quoting the PREVIOUS run's answer -- stale in exactly the way COR-15 was.
+    ("audit   cross-phase evidence pointers (LAB-01..08)",
+     ["scripts/audit_evidence_pointers.py"], 3600),
+    ("audit   guide subsections nothing claims",
+     ["scripts/audit_guide_section_coverage.py"], 3600),
     ("L09.3/6/7 uncertainty, reconciliation and the claim",
      ["scripts/analyse_lab09_confirmation.py"], 7200),
     ("OUT.6/7 leakage/contamination and limitations",
@@ -43,12 +50,13 @@ STEPS = [
     ("audit   guide 4.3 execution resolution", ["scripts/verify_execution_resolution.py"], 3600),
     ("audit   T62-T63 coverage", ["scripts/update_coverage_lab09.py"], 1800),
     ("audit   corrections", ["scripts/build_correction_ledger.py"], 1800),
-    ("audit   cross-phase evidence pointers", ["scripts/audit_evidence_pointers.py"], 3600),
-    ("audit   guide subsections nothing claims",
-     ["scripts/audit_guide_section_coverage.py"], 3600),
     ("audit   assertion vacuity", ["scripts/audit_assertion_vacuity.py"], 7200),
     ("audit   clause-by-clause against the pre-written checklist",
      ["scripts/audit_lab09.py"], 3600),
+    # and once more, now that lab09_task_audit.json exists, so LAB-09's own
+    # pointers are resolved too rather than left to the next phase to discover
+    ("audit   evidence pointers again, LAB-09 included",
+     ["scripts/audit_evidence_pointers.py"], 3600),
     ("report  glossaries", ["scripts/ensure_report_glossaries.py"], 600),
     ("report  lab09_report.md", ["scripts/write_lab09_report.py"], 900),
 ]

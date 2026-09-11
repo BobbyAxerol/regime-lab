@@ -307,6 +307,48 @@ def main() -> int:
         add("")
 
     # ---------------------------------------------------------------- L09.6
+    if reconciliation and reconciliation.get("provenance", {}).get("no_retuning_after_unlock"):
+        provenance = reconciliation["provenance"]
+        add("## Was anything chosen after the interval was opened?")
+        add("")
+        retune = provenance["no_retuning_after_unlock"]
+        add(f"Every registration the confirmation deploys carries a stamp that **precedes the "
+            f"unlock** ({retune['unlocked_at_utc'][:19]}): "
+            f"**{retune['all_precede_the_unlock']}**. One stamped after it would be a choice "
+            "made with the interval in view.")
+        add("")
+        add("| registration | fixed at | precedes the unlock |")
+        add("|---|---|---|")
+        for row in retune["registrations"]:
+            add(f"| `{row['artifact']}` | {str(row['stamped_at'])[:19]} | "
+                f"**{row['precedes_the_unlock']}** |")
+        add("")
+        seeds = reconciliation["seeds"]
+        add(f"**Seeds, read back from what the run stamped** rather than copied from the freeze: "
+            f"{seeds['probe_design']['cutoffs_stamped']} selector cutoffs were each handed the "
+            f"registered base `{seeds['probe_design']['registered_base']}` "
+            f"(seeds that are not the base: `{seeds['probe_design']['seeds_that_are_not_the_registered_base']}`), "
+            f"and {seeds['model_multi_start']['refits_stamped']} regime refits each used "
+            f"`{seeds['model_multi_start']['registered']}`. All measured sources match: "
+            f"**{seeds['all_measured_sources_match']}**.")
+        add("")
+        engine = reconciliation["engine"]
+        add(f"**Engine, re-hashed** rather than declared untouched: "
+            f"`{engine['installed_versions']}`, and both wheels LAB-01 pinned still match their "
+            f"SHA-256 (`{engine['wheel_digests_match']}`), as does the lockfile "
+            f"(`{engine['lockfile_sha256']['matches']}`). Untouched: **{engine['untouched']}**.")
+        add("")
+        execution = provenance["prospective_protocol_not_self_executed"]
+        add(f"**The prospective protocol is not executed because the lab cannot execute**, not "
+            f"because it chose not to: `{json.dumps(execution['execution_gates_in_the_registration'])}`.")
+        add("")
+        costs = provenance["costs_untouched_between_discovery_and_confirmation"]
+        add(f"**Costs between the two phases**: the confirmation charged a one-way fee of "
+            f"`{costs['one_way_fee_rate_charged_in_the_confirmation']}` on every arm, the same "
+            f"rate the discovery charged (`{costs['matches_the_discovery_rate']}`). "
+            f"{costs['caveat']}")
+        add("")
+
     if reconciliation:
         add("## L09.6 — reconciliation, and one accounting defect")
         add("")

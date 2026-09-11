@@ -275,6 +275,20 @@ def contrast_panel(cells: list[dict]) -> dict:
             "sign_test": sign_test(values),
             "per_cell": per_cell,
         }
+        # T54: the label belongs on the COMPARISON, not only on the document.
+        # A contrast lifted out of this panel -- which is exactly what LAB-09's
+        # claim report does for the selection and timing contributions -- would
+        # otherwise arrive with no hint that its baseline is not untouched.
+        # strip the parentheses first: "(D-C)-(B-A)" contains B-A, so the
+        # interaction is partly measured against arm A too
+        if "A" in name.replace("(", "").replace(")", "").split("-"):
+            panel[name]["baseline_is_not_untouched"] = True
+            panel[name]["baseline_label"] = "A_legacy_selection_adjusted"
+            panel[name]["baseline_caveat"] = (
+                "measured against A_legacy_selection_adjusted. The installed public route "
+                "declares OOS-adjusted selection, so this difference is evidence about the new "
+                "selector versus THAT baseline, not versus a causal one, and guide 13.6 forbids "
+                "calling it out-of-sample")
         if derived:
             panel[name]["equals_D_B_by_construction"] = True
             panel[name]["carries_no_independent_information"] = (
@@ -545,6 +559,58 @@ def common_period_capture(cells: list[dict]) -> dict:
     }
 
 
+def variants_not_run() -> dict:
+    """Guide 11.3 / L08 outputs — the variants that were REGISTERED and never tried.
+
+    "keep all 20 cells and the alpha/timeframe variants tried" is a rule against
+    hiding a variant that produced a worse answer. The strongest form of that
+    record is the one nobody writes: the alternatives were declared in advance
+    and NONE of them was run, so there is no dropped variant to hide.
+
+    Stating it is the point. An empty list of attempted variants and an unstated
+    one look identical in an artifact, and only one of them is evidence.
+    """
+    protocol = load("lab08_pilot_protocol.json") or {}
+    deltas = (load("semantic_delta.json") or {}).get("deltas", [])
+    secondary = {alpha: frames.get("secondary_registered")
+                 for alpha, frames in (protocol.get("timeframes") or {}).items()}
+    research = [
+        {"delta_id": d.get("delta_id"), "alpha_id": d.get("alpha_id"),
+         "change_kind": d.get("change_kind"),
+         "applies_to_experiment_arms": d.get("applies_to_experiment_arms"),
+         "after_semantics": d.get("after_semantics")}
+        for d in deltas
+        if d.get("change_kind") == "thesis_change" or not d.get("applies_to_experiment_arms")]
+    return {
+        "timeframe_variants": {
+            "primary_decision_bars": {a: f.get("decision_bars")
+                                      for a, f in (protocol.get("timeframes") or {}).items()},
+            "secondary_registered": secondary,
+            "secondary_variants_run": 0,
+            "meaning": ("a secondary timeframe was pre-registered for every alpha and NOT ONE "
+                        "was run. No timeframe was tried and dropped, so the reported cells are "
+                        "not a survivor of a timeframe search"),
+        },
+        "alpha_variants": {
+            "tiers": ["raw_supplied", "legacy_reproduction", "canonical_v1",
+                      "research_revision_N"],
+            "tier_used_by_every_arm": "canonical_v1",
+            "deltas_outside_every_arm": research,
+            "thesis_changes_entering_an_arm": sum(
+                1 for d in deltas if d.get("change_kind") == "thesis_change"
+                and d.get("applies_to_experiment_arms")),
+            "meaning": ("the one thesis change (SD-SC-05) applies to NO experiment arm; it exists "
+                        "as a research revision and is excluded from every canonical arm by the "
+                        "semantic-delta rule. An improvement that never entered an arm cannot be "
+                        "credited to the arms"),
+        },
+        "why_this_is_recorded": ("guide 11.3 asks for the variants TRIED to be kept. The honest "
+                                 "record here is that the alternatives were registered in advance "
+                                 "and none was run, which is a stronger statement than an empty "
+                                 "list nobody explains"),
+    }
+
+
 def compute_capture(document: dict, cells: list[dict]) -> dict:
     """L08.6 — what the phase actually cost, measured not estimated."""
     budget = load("compute_budget_registration.json") or {}
@@ -750,6 +816,7 @@ def main() -> int:
         "control_arms": control_verdict(control_arms),
         "compute": compute,
         "design_selection": selection,
+        "variants_registered_and_not_run": variants_not_run(),
         "all_attempted_hypotheses": [
             {"id": name, "question": record.get("reading", name),
              "cells_with_a_value": record["cells_with_a_value"],

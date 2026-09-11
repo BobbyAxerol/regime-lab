@@ -233,6 +233,21 @@ DEFECTS = [
      "changed": None,
      "guarded_by": "tests/test_lab09_stress.py::"
                    "test_missing_enrichment_drops_contiguous_stretches_not_scattered_rows"},
+    {"id": "COR-20", "phase": "cross-phase",
+     "defect": "T54 stayed PARTIAL with the reason 'applying it to a reported ARM COMPARISON is "
+               "LAB-08's, because there is no arm comparison yet'. LAB-08 ran the comparison and "
+               "the reason went stale. Worse, the `A_legacy_selection_adjusted` label lived on "
+               "the DOCUMENT and in the report's prose, not on the contrasts -- so a contrast "
+               "lifted out of the panel, which is exactly what LAB-09's claim report does for "
+               "the selection and timing contributions, arrived with no hint that its baseline "
+               "is not untouched",
+     "invalidated": "no number. It left the guide 13.6 caveat one indirection away from the "
+                    "comparison it qualifies. Every contrast measured against arm A now carries "
+                    "the label itself, the interaction included because it contains B-A, and "
+                    "T54 moves to COVERED",
+     "changed": None,
+     "guarded_by": "tests/test_lab08_factorial.py::"
+                   "test_every_contrast_against_arm_a_carries_the_baseline_caveat"},
 ]
 
 

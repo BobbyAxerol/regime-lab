@@ -54,20 +54,39 @@ EVIDENCE: dict[str, tuple[str, str]] = {
                 "every completed phase's declared window is checked against the boundary"),
     "L09.1.2": (f"{U}:holdout_status + {U}:why_not_a_clean_holdout",
                 "NESTED_RETROSPECTIVE, stated rather than implied"),
-    "L09.1.3": (f"{U}:prospective_protocol.status + {U}:prospective_protocol.not_self_executed",
-                "specified, not executed; the lab has no market execution path"),
+    "L09.1.3": (f"{U}:prospective_protocol.status + "
+                f"{K}:provenance.prospective_protocol_not_self_executed.no_execution_path_exists "
+                f"+ {K}:provenance.prospective_protocol_not_self_executed"
+                ".execution_gates_in_the_registration",
+                "not that the lab chose not to trade, but that it cannot: live execution, market "
+                "experiments and production mutation are all refused at the registration"),
     "L09.1.4": (f"{U}:access_log + {R}:stamp_ordering",
                 "every access carries a lab_run_id in evidence/**/attempts.jsonl"),
-    "L09.1.5": (f"{U}:no_retuning_after_unlock + {U}:retuning_rule", ""),
+    "L09.1.5": (f"{K}:provenance.no_retuning_after_unlock.all_precede_the_unlock + "
+                f"{K}:provenance.no_retuning_after_unlock.registrations + {U}:retuning_rule",
+                "every registration the confirmation deploys carries a stamp that PRECEDES the "
+                "unlock; one stamped after it would be a choice made with the interval in view"),
     "L09.1.6": (f"{R}:stamp_ordering.unlock_precedes_run + "
                 f"{T}test_the_unlock_precedes_the_confirmation_run", ""),
     # ---- L09.2 run the frozen protocol
     "L09.2.1": (f"{R}:cells_planned + {R}:cells + {T}test_the_confirmation_runs_the_same_matrix",
                 "20 planned, the same NOT_READY rows carrying null metrics"),
-    "L09.2.2": (f"{R}:seeds", "carried from the frozen protocol, not re-chosen"),
-    "L09.2.3": (f"{R}:economics + {K}:financial_identity.cost_binding",
-                "the contract is carried unchanged; the binding defect is measured and reported"),
-    "L09.2.4": (f"{R}:engine_untouched + {R}:no_human_adjustment.unchanged_during_run", ""),
+    "L09.2.2": (f"{K}:seeds.all_measured_sources_match + "
+                f"{K}:seeds.probe_design.cutoffs_stamped + "
+                f"{K}:seeds.model_multi_start.distinct_seed_lists",
+                "read back from what the run STAMPED, not copied from the freeze: every cutoff "
+                "was handed the registered base and every refit the registered seed list"),
+    "L09.2.3": (f"{K}:provenance.costs_untouched_between_discovery_and_confirmation"
+                ".matches_the_discovery_rate + "
+                f"{K}:provenance.costs_untouched_between_discovery_and_confirmation.caveat + "
+                f"{K}:financial_identity.cost_binding",
+                "the rate the confirmation CHARGED, read off its own fills, equals the one the "
+                "discovery charged. The caveat records that both are half the registered fee"),
+    "L09.2.4": (f"{K}:engine.untouched + {K}:engine.wheel_digests_match + "
+                f"{K}:engine.lockfile_sha256.matches + "
+                f"{R}:no_human_adjustment.unchanged_during_run",
+                "the wheels LAB-01 pinned are re-hashed and the installed distributions re-read; "
+                "'untouched' written into an artifact is a sentence"),
     "L09.2.5": (f"{R}:cells[].notes.regime_schedule + {R}:cells[].arms[].switch_delays",
                 "the stateful part adapts through the frozen policy's own gates"),
     "L09.2.6": (f"{R}:no_human_adjustment + {T}test_a_mid_run_edit_is_detected",
@@ -101,7 +120,12 @@ EVIDENCE: dict[str, tuple[str, str]] = {
                 f"{TS}test_a_stale_feed_holds_a_value_and_keeps_the_tape_length", ""),
     "L09.4.5": (f"{S}:information_stress.per_cell[].stresses.MISSING_ENRICHMENT + "
                 f"{TS}test_missing_enrichment_drops_rows_rather_than_zeroing_them", ""),
-    "L09.4.6": (f"{S}:no_retuning_after_a_stress", ""),
+    "L09.4.6": (f"{S}:no_retuning_after_a_stress.this_is_a_COMMITMENT_not_a_measurement + "
+                f"{S}:no_retuning_after_a_stress.changes_recorded_so_far + "
+                "correction_ledger.json:defects",
+                "a commitment, labelled as one: no artifact can prove a setting was not changed "
+                "after a result was seen, so the settings are recorded and any change has to "
+                "appear in the correction ledger"),
     # ---- L09.5 support and novelty
     "L09.5.1": (f"{P}:situations.NEW_REGIME_EPISODE.a_new_episode_was_exercised", ""),
     "L09.5.2": (f"{P}:situations.MIXED_AMBIGUOUS_STATES.per_symbol", ""),

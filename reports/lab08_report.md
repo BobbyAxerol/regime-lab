@@ -142,14 +142,16 @@ Wall time **10942s**. A cell that is NOT_READY keeps null metrics — never a Pn
 
 ## The registered contrasts
 
-| contrast | mean daily difference | cells | sign test | direction |
-|---|---|---|---|---|
-| `B-A` | +0.000046 | 15 | p=0.1796 | 10+ / 4− |
-| `C-A` | +0.000038 | 15 | p=0.6072 | 9+ / 6− |
-| `D-B` | -0.000013 | 15 | p=0.2668 | 4+ / 9− |
-| `D-C` | -0.000004 | 15 | p=1.0000 | 8+ / 7− |
-| `(D-C)-(B-A)` | -0.000050 | 15 | p=0.0352 | 3+ / 12− |
-| `E-B` | -0.000013 | 15 | p=0.2668 | 4+ / 9− |
+| contrast | mean daily difference | cells | sign test | direction | baseline |
+|---|---|---|---|---|---|
+| `B-A` | +0.000046 | 15 | p=0.1796 | 10+ / 4− | **not untouched** |
+| `C-A` | +0.000038 | 15 | p=0.6072 | 9+ / 6− | **not untouched** |
+| `D-B` | -0.000013 | 15 | p=0.2668 | 4+ / 9− | — |
+| `D-C` | -0.000004 | 15 | p=1.0000 | 8+ / 7− | — |
+| `(D-C)-(B-A)` | -0.000050 | 15 | p=0.0352 | 3+ / 12− | **not untouched** |
+| `E-B` | -0.000013 | 15 | p=0.2668 | 4+ / 9− | — |
+
+`B-A, C-A, (D-C)-(B-A)` are measured against **A_legacy_selection_adjusted**. The caveat is carried ON each of those contrasts, not only in the section below, so a contrast lifted out of this table cannot lose it (T54).
 
 > a paired sign test over cells: it asks only whether the direction is consistent, because daily crypto returns are not iid (guide 11.3)
 
@@ -329,7 +331,7 @@ Implemented: `['M0', 'M1']`. Declared deliberately unbuilt: `['M1S', 'M2']`. dev
 - clauses with no evidence pointer: **none**
 - acceptance tests: **30 passed in 2.72s**
 
-Guide §14 coverage as of LAB-09: **62 COVERED, 1 PARTIAL, 1 NOT_YET_IMPLEMENTED** of 64.
+Guide §14 coverage as of LAB-09: **63 COVERED, 0 PARTIAL, 1 NOT_YET_IMPLEMENTED** of 64.
 
 ## Corrections made during LAB-08
 

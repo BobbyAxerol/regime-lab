@@ -562,3 +562,75 @@ def test_arm_e_is_compared_against_both_things_the_guide_asks_for(lab_root):
     assert arm_e["versus_BANK_CALENDAR"]["control_status"]
     assert arm_e["versus_BANK_CALENDAR"]["comparison"]
     assert arm_e["versus_BANK_CALENDAR"]["what_would_make_it_informative"]
+
+
+def test_every_contrast_against_arm_a_carries_the_baseline_caveat(lab_root):
+    """T54 — the label has to reach the reported COMPARISON, not just the document.
+
+    LAB-04 measured that the installed public route declares OOS-adjusted
+    selection and labelled arm A `A_legacy_selection_adjusted`. That label sat on
+    the document and in the report's prose. A contrast lifted out of the panel —
+    which is exactly what LAB-09's claim report does for the selection and timing
+    contributions — arrived with no hint that its baseline is not untouched.
+    """
+    path = lab_root / "configs" / "lab08_discovery.json"
+    if not path.is_file():
+        pytest.skip("run scripts/analyse_lab08_discovery.py")
+    document = json.loads(path.read_text())
+    label = document["legacy_arm_label"]
+    if not label["mode_declares_oos_selection"]:
+        pytest.skip("the installed route does not declare OOS selection on this install")
+
+    against_a, clean = [], []
+    for name, record in document["contrast_panel"].items():
+        involves_a = "A" in name.replace("(", "").replace(")", "").split("-")
+        (against_a if involves_a else clean).append((name, record))
+
+    assert against_a, "no contrast is measured against arm A, which cannot be right"
+    for name, record in against_a:
+        assert record.get("baseline_is_not_untouched") is True, (
+            f"{name} is measured against arm A and does not say its baseline is not untouched")
+        assert record.get("baseline_label") == "A_legacy_selection_adjusted"
+        assert "out-of-sample" in record["baseline_caveat"]
+    for name, record in clean:
+        assert not record.get("baseline_is_not_untouched"), (
+            f"{name} does not involve arm A but carries the baseline caveat")
+
+    # the interaction contains B-A, so it is partly against arm A too
+    interaction = dict(document["contrast_panel"]).get("(D-C)-(B-A)")
+    if interaction:
+        assert interaction.get("baseline_is_not_untouched") is True
+
+
+def test_the_variants_that_were_registered_and_never_run_are_recorded(lab_root):
+    """Guide 11.3 / L08 outputs — keep the alpha and timeframe variants TRIED.
+
+    The rule exists to stop a variant that produced a worse answer from being
+    quietly dropped. The strongest form of that record is the one nobody writes:
+    the alternatives were pre-registered and NONE was run, so there is nothing
+    dropped to hide. An empty list of attempted variants and an unstated one look
+    identical in an artifact, and only one of them is evidence.
+    """
+    path = lab_root / "configs" / "lab08_discovery.json"
+    if not path.is_file():
+        pytest.skip("run scripts/analyse_lab08_discovery.py")
+    variants = json.loads(path.read_text())["variants_registered_and_not_run"]
+    protocol = json.loads((lab_root / "configs" / "lab08_pilot_protocol.json").read_text())
+
+    timeframes = variants["timeframe_variants"]
+    assert timeframes["secondary_registered"] == {
+        alpha: frames["secondary_registered"]
+        for alpha, frames in protocol["timeframes"].items()}
+    assert timeframes["primary_decision_bars"] == {
+        alpha: frames["decision_bars"] for alpha, frames in protocol["timeframes"].items()}
+    assert timeframes["secondary_variants_run"] == 0
+    for alpha, secondary in timeframes["secondary_registered"].items():
+        assert secondary != timeframes["primary_decision_bars"][alpha], (
+            f"{alpha}'s secondary timeframe is the same as its primary, so nothing was reserved")
+
+    alphas = variants["alpha_variants"]
+    assert alphas["tier_used_by_every_arm"] == "canonical_v1"
+    assert alphas["thesis_changes_entering_an_arm"] == 0, (
+        "a thesis change entered an experiment arm; guide 2.1 keeps those in a separate tier")
+    for delta in alphas["deltas_outside_every_arm"]:
+        assert delta["applies_to_experiment_arms"] == [], delta["delta_id"]

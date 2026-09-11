@@ -138,9 +138,9 @@ All 19 corrections across every phase are traceable: `guide 13.7: when validity 
 
 ## Audit and acceptance coverage
 
-- clause audit: **9/65 DONE**, from a checklist written before the code (`configs/lab09_checklist.json`)
+- clause audit: **7/65 DONE**, from a checklist written before the code (`configs/lab09_checklist.json`)
 - every evidence pointer is RESOLVED, not merely present: every pointer is walked in the artifact, collected by pytest, or found in the source. A clause whose pointer names a field that does not exist is UNRESOLVED_EVIDENCE, not DONE -- earlier phases counted the presence of the string
-- clauses without resolved evidence: `['L09.1.4', 'L09.1.6', 'L09.2.1', 'L09.2.2', 'L09.2.3', 'L09.2.4', 'L09.2.5', 'L09.2.6', 'L09.2.7', 'L09.3.1', 'L09.3.2', 'L09.3.3', 'L09.3.4', 'L09.3.5', 'L09.3.6', 'L09.3.7', 'L09.3.8', 'L09.4.1', 'L09.4.2', 'L09.4.3', 'L09.4.4', 'L09.4.5', 'L09.4.6', 'L09.5.1', 'L09.5.2', 'L09.5.3', 'L09.5.4', 'L09.5.5', 'L09.5.6', 'L09.5.7', 'L09.6.1', 'L09.6.2', 'L09.6.3', 'L09.6.4', 'L09.6.5', 'L09.6.6', 'L09.7.1', 'L09.7.2', 'L09.7.3', 'L09.7.4', 'L09.7.5', 'L09.7.6', 'L09.7.7', 'G11.2.4', 'G11.4.1', 'G11.4.2', 'G11.4.3', 'T62.1', 'T63.1', 'OUT.2', 'OUT.3', 'OUT.4', 'OUT.5', 'EXIT.1', 'EXIT.2', 'EXIT.3']`
-- acceptance tests: 36 passed, 27 skipped in 1.75s
+- clauses without resolved evidence: `['L09.1.3', 'L09.1.4', 'L09.1.5', 'L09.1.6', 'L09.2.1', 'L09.2.2', 'L09.2.3', 'L09.2.4', 'L09.2.5', 'L09.2.6', 'L09.2.7', 'L09.3.1', 'L09.3.2', 'L09.3.3', 'L09.3.4', 'L09.3.5', 'L09.3.6', 'L09.3.7', 'L09.3.8', 'L09.4.1', 'L09.4.2', 'L09.4.3', 'L09.4.4', 'L09.4.5', 'L09.4.6', 'L09.5.1', 'L09.5.2', 'L09.5.3', 'L09.5.4', 'L09.5.5', 'L09.5.6', 'L09.5.7', 'L09.6.1', 'L09.6.2', 'L09.6.3', 'L09.6.4', 'L09.6.5', 'L09.6.6', 'L09.7.1', 'L09.7.2', 'L09.7.3', 'L09.7.4', 'L09.7.5', 'L09.7.6', 'L09.7.7', 'G11.2.4', 'G11.4.1', 'G11.4.2', 'G11.4.3', 'T62.1', 'T63.1', 'OUT.2', 'OUT.3', 'OUT.4', 'OUT.5', 'EXIT.1', 'EXIT.2', 'EXIT.3']`
+- acceptance tests: 38 passed, 31 skipped in 1.66s
 - acceptance requirements: `{"COVERED": 62, "PARTIAL": 1, "NOT_YET_IMPLEMENTED": 1}`
 
