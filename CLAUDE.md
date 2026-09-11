@@ -22,7 +22,7 @@ These override any convenience default. They restate and tighten the guide.
 5. **Test thoroughly.** Every behavioural claim needs a runnable test or a committed evidence artifact. Map tests back to the T01–T64 IDs in guide §14 and record which of the 64 are covered, which are not, and why.
 6. **Follow the guide's method, and understand the intent behind it.** When the guide and reality disagree (e.g. an API that does not exist), record the gap explicitly and propose a revision — do not improvise a substitute and call it the plan.
 7. **Report in detail at the end of each LAB phase** — what was built, what was tested, what passed/failed, what is still open, and the honest status of the phase exit gate.
-8. **This is a test/research stage: no local git yet.** Do not `git init`, stage, or commit inside the lab unless the user asks. Evidence lives in files under `evidence/`, not in commits.
+8. **Commit finished work inside the lab** (user rule, 2026-09-11; supersedes the earlier "no local git yet"). The lab has its own repo (`main`, remote `regime-lab`). Commit every completed piece of work as a small scoped commit instead of leaving it uncommitted: run `git status` + `git diff`, stage only the intended files, never commit the venv or secrets, and do not push unless the user asks. Evidence still lives in files under `evidence/`; a commit never replaces an artifact, and superseding runs are still recorded in `configs/correction_ledger.json`.
 9. **Every phase that runs tests or evaluates a hypothesis MUST have a markdown report with the
    REAL measured numbers** (set by the user, 2026-09-10). `reports/lab0N_report.md` is written by a
    `scripts/write_lab0N_report.py` that reads only committed artifacts and never reruns an
