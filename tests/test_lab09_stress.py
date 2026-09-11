@@ -293,3 +293,48 @@ def test_the_arm_record_separates_waiting_for_a_campaign_from_waiting_to_warm_up
     assert "did not wait" not in delays["final_reason_note"]
     assert delays["blocked_bars_by_reason"] == {
         "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 4, "WAITING_FOR_WARM_INDICATORS": 4}
+
+
+def test_a_shard_never_writes_the_results_document():
+    """Assembling a panel from a partial run is how an incomplete one is reported as complete.
+
+    Both sharded runners return before writing their document. The guard is
+    structural — the early return is in the source — because a test that merely
+    checks the document's cell count would pass on a partial run that happened to
+    have every cell checkpointed by someone else.
+    """
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    for name in ("run_lab09_confirmation.py", "run_lab09_stress.py"):
+        source = (root / "scripts" / name).read_text()
+        assert "if shard is not None:" in source, name
+        # the early return must come BEFORE anything that writes a config artifact
+        guard = source.index("if shard is not None:\n        # ") if "if shard is not None:\n        # " in source else source.rindex("if shard is not None:")
+        write = source.index("writer.write_config")
+        assert guard < write, (
+            f"{name}: a shard can reach write_config, so a partial run could publish a document")
+        assert "--shard" in source and "0 <= K < N" in source, name
+
+
+def test_sharding_partitions_the_cells_and_never_the_arms():
+    """A shard is a CELL boundary. Guide L08.6 forbids buying an arm a head start with CPU.
+
+    All five arms of a cell run sequentially inside one process, so no arm can
+    finish ahead of another however many shards there are. This is the property
+    the budget revision claims, so it is checked rather than asserted.
+    """
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    source = (root / "scripts" / "run_lab09_confirmation.py").read_text()
+    # the shard filter is applied to the CELL loop, and run_cell is untouched by it
+    assert "runnable.index(entry) % shard[1] != shard[0]" in source
+    factorial = (root / "src" / "crypto_regime_lab" / "experiments" / "factorial.py").read_text()
+    assert "shard" not in factorial, (
+        "the arm runner knows about shards; a shard must be invisible below the cell")
+    budget = json.loads((root / "configs" / "compute_budget_registration.json").read_text())
+    for revision in budget.get("os_resource_budget_revisions", []):
+        assert revision["per_arm_compute_is_unchanged"] is True
+        assert "cell" in revision["how_arms_stay_equal"].lower()

@@ -1,0 +1,4542 @@
+{
+  "schema": "crypto_regime_lab.lab09_stress.v1",
+  "generated_at_utc": "2026-09-11T10:53:23.982273+00:00",
+  "window": [
+    "2024-01-01",
+    "2026-08-31"
+  ],
+  "cost_stress": {
+    "multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "levels": [
+      {
+        "name": "1x",
+        "fee_multiplier": 1.0,
+        "slippage_multiplier": 1.0
+      },
+      {
+        "name": "1.5x",
+        "fee_multiplier": 1.5,
+        "slippage_multiplier": 1.5
+      },
+      {
+        "name": "2x",
+        "fee_multiplier": 2.0,
+        "slippage_multiplier": 2.0
+      },
+      {
+        "name": "AS_DECLARED",
+        "fee_multiplier": 2.0,
+        "slippage_multiplier": 1.0
+      }
+    ],
+    "registered_in": "configs/minimum_economic_effect.json",
+    "registered_at_utc": "2026-09-09T20:11:32.125140+00:00",
+    "base_economics": {
+      "taker_fee_rate": 0.0004,
+      "slippage_bps": 1.0,
+      "use_funding": false
+    },
+    "applied_to": "the DEPLOYMENT. Selections are held at the ones the 1.0x run made; re-selecting under stressed costs is a different and larger experiment, and the guide permits a frozen sensitivity (L09.4)",
+    "limitation": "a selector that re-scored its candidates at 2x costs might have chosen differently, usually towards lower turnover. This panel therefore bounds the damage to a FIXED schedule, not to an adaptive one",
+    "harness_control": {
+      "one_x_reproduces_every_arm": true,
+      "why_it_matters": "the 1.0x level is the only check that the stress harness is wired to the same account as the run it stresses. A harness running a different account would still produce a plausible panel"
+    },
+    "per_cell": [
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.0008531330233035872,
+                "daily_sharpe": -0.02981748732003672,
+                "max_drawdown": -0.020671015139954618,
+                "trades": 64,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.001762212743196323,
+                "daily_sharpe": -0.06657924109585674,
+                "max_drawdown": -0.020956137285511267,
+                "trades": 64,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.002671292839473982,
+                "daily_sharpe": -0.10337891340247932,
+                "max_drawdown": -0.02128490614831613,
+                "trades": 64,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0021318750866128333,
+                "daily_sharpe": -0.08159031981738658,
+                "max_drawdown": -0.021066114740267428,
+                "trades": 64,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.0008531330233035872,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0021318750866128333,
+            "cost_of_the_binding_defect": -0.0012787420633092461
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.0009876848348864264,
+                "daily_sharpe": 0.030935701463182703,
+                "max_drawdown": -0.021639823077698073,
+                "trades": 110,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.000584450933213021,
+                "daily_sharpe": -0.005411520173757557,
+                "max_drawdown": -0.022198938133998314,
+                "trades": 110,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.0021565887632463143,
+                "daily_sharpe": -0.04176718332340093,
+                "max_drawdown": -0.022758557064167184,
+                "trades": 110,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0012089358484197454,
+                "daily_sharpe": -0.01986718771270184,
+                "max_drawdown": -0.022405416669646572,
+                "trades": 110,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.0009876848348864264,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0012089358484197454,
+            "cost_of_the_binding_defect": -0.002196620683306172
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.010830373654082681,
+                "daily_sharpe": -0.7386457539053075,
+                "max_drawdown": -0.017495271440538307,
+                "trades": 22,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.011160400513630542,
+                "daily_sharpe": -0.7617272041754981,
+                "max_drawdown": -0.01763179150198757,
+                "trades": 22,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.011490424693139212,
+                "daily_sharpe": -0.7847596049371405,
+                "max_drawdown": -0.017812083218942565,
+                "trades": 22,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.01127040364639198,
+                "daily_sharpe": -0.7694352591197238,
+                "max_drawdown": -0.017691828923384834,
+                "trades": 22,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.010830373654082681,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.01127040364639198,
+            "cost_of_the_binding_defect": -0.00044002999230929873
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.03775361914538611,
+                "daily_sharpe": -0.7717140344476631,
+                "max_drawdown": -0.046215141194978826,
+                "trades": 128,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.03962001230059997,
+                "daily_sharpe": -0.8101551205920761,
+                "max_drawdown": -0.04763823148980517,
+                "trades": 128,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.041486384568191315,
+                "daily_sharpe": -0.8485476036159286,
+                "max_drawdown": -0.04906258044083689,
+                "trades": 128,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.04030423324881571,
+                "daily_sharpe": -0.8244655693039817,
+                "max_drawdown": -0.04816087513285627,
+                "trades": 128,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.03775361914538611,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.04030423324881571,
+            "cost_of_the_binding_defect": -0.002550614103429605
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.03775361914538611,
+                "daily_sharpe": -0.7717140344476631,
+                "max_drawdown": -0.046215141194978826,
+                "trades": 128,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.03962001230059997,
+                "daily_sharpe": -0.8101551205920761,
+                "max_drawdown": -0.04763823148980517,
+                "trades": 128,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.041486384568191315,
+                "daily_sharpe": -0.8485476036159286,
+                "max_drawdown": -0.04906258044083689,
+                "trades": 128,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.04030423324881571,
+                "daily_sharpe": -0.8244655693039817,
+                "max_drawdown": -0.04816087513285627,
+                "trades": 128,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.03775361914538611,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.04030423324881571,
+            "cost_of_the_binding_defect": -0.002550614103429605
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.014860756030507183,
+                "daily_sharpe": 0.6019075120534644,
+                "max_drawdown": -0.007939262397753666,
+                "trades": 68,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.013851621508509382,
+                "daily_sharpe": 0.5616298779725338,
+                "max_drawdown": -0.008194350604874612,
+                "trades": 68,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.012842487229057342,
+                "daily_sharpe": 0.5212491461704309,
+                "max_drawdown": -0.00846046037502779,
+                "trades": 68,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.013501888161432163,
+                "daily_sharpe": 0.5478160522486065,
+                "max_drawdown": -0.008279873092150725,
+                "trades": 68,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.014860756030507183,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.013501888161432163,
+            "cost_of_the_binding_defect": -0.00135886786907502
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.0014491964057259388,
+                "daily_sharpe": -0.06526202039765755,
+                "max_drawdown": -0.011327478477935138,
+                "trades": 24,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.001806779552137594,
+                "daily_sharpe": -0.08233892150988219,
+                "max_drawdown": -0.011444717232973245,
+                "trades": 24,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.002164370285018591,
+                "daily_sharpe": -0.09941283440798591,
+                "max_drawdown": -0.011561961132095178,
+                "trades": 24,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0019319332414403645,
+                "daily_sharpe": -0.08833630665348272,
+                "max_drawdown": -0.011489375361469212,
+                "trades": 24,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.0014491964057259388,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0019319332414403645,
+            "cost_of_the_binding_defect": -0.0004827368357144257
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.00106892002514547,
+                "daily_sharpe": -0.04862592411232118,
+                "max_drawdown": -0.011327478477935138,
+                "trades": 20,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0013664361171309425,
+                "daily_sharpe": -0.06323726798073379,
+                "max_drawdown": -0.011444717232973245,
+                "trades": 20,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.001663953785076222,
+                "daily_sharpe": -0.07785064266983534,
+                "max_drawdown": -0.011561961132095178,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0014715968175925687,
+                "daily_sharpe": -0.06841957092685629,
+                "max_drawdown": -0.011489375361469212,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.00106892002514547,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0014715968175925687,
+            "cost_of_the_binding_defect": -0.00040267679244709864
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.00106892002514547,
+                "daily_sharpe": -0.04862592411232118,
+                "max_drawdown": -0.011327478477935138,
+                "trades": 20,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0013664361171309425,
+                "daily_sharpe": -0.06323726798073379,
+                "max_drawdown": -0.011444717232973245,
+                "trades": 20,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.001663953785076222,
+                "daily_sharpe": -0.07785064266983534,
+                "max_drawdown": -0.011561961132095178,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0014715968175925687,
+                "daily_sharpe": -0.06841957092685629,
+                "max_drawdown": -0.011489375361469212,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.00106892002514547,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0014715968175925687,
+            "cost_of_the_binding_defect": -0.00040267679244709864
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.00106892002514547,
+                "daily_sharpe": -0.04862592411232118,
+                "max_drawdown": -0.011327478477935138,
+                "trades": 20,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0013664361171309425,
+                "daily_sharpe": -0.06323726798073379,
+                "max_drawdown": -0.011444717232973245,
+                "trades": 20,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.001663953785076222,
+                "daily_sharpe": -0.07785064266983534,
+                "max_drawdown": -0.011561961132095178,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0014715968175925687,
+                "daily_sharpe": -0.06841957092685629,
+                "max_drawdown": -0.011489375361469212,
+                "trades": 20,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.00106892002514547,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0014715968175925687,
+            "cost_of_the_binding_defect": -0.00040267679244709864
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.0370462517539929,
+                "daily_sharpe": 0.7694521282427735,
+                "max_drawdown": -0.019972296862028283,
+                "trades": 72,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.0360123353102173,
+                "daily_sharpe": 0.7488337404665166,
+                "max_drawdown": -0.02010142723475472,
+                "trades": 72,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.03497843570204218,
+                "daily_sharpe": 0.7281655553805858,
+                "max_drawdown": -0.02023066106260829,
+                "trades": 72,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.03560930680432084,
+                "daily_sharpe": 0.7409925867473541,
+                "max_drawdown": -0.020143030222052105,
+                "trades": 72,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.0370462517539929,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.03560930680432084,
+            "cost_of_the_binding_defect": -0.0014369449496720588
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.01881256706785628,
+                "daily_sharpe": -0.6606865779415289,
+                "max_drawdown": -0.04322504915955849,
+                "trades": 60,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.019694113222118892,
+                "daily_sharpe": -0.6904646667374812,
+                "max_drawdown": -0.04358913158153288,
+                "trades": 60,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.020575648203256414,
+                "daily_sharpe": -0.7200733864497844,
+                "max_drawdown": -0.0439533524902288,
+                "trades": 60,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.020014109739617147,
+                "daily_sharpe": -0.7015205303038138,
+                "max_drawdown": -0.04371101011870704,
+                "trades": 60,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.01881256706785628,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.020014109739617147,
+            "cost_of_the_binding_defect": -0.001201542671760869
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.01748744954708492,
+                "daily_sharpe": -0.43442377710847624,
+                "max_drawdown": -0.04005058887081281,
+                "trades": 96,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.018910267343940745,
+                "daily_sharpe": -0.4698593369062533,
+                "max_drawdown": -0.04122421069992066,
+                "trades": 96,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.02033306198853424,
+                "daily_sharpe": -0.5051910768937827,
+                "max_drawdown": -0.042398141134776024,
+                "trades": 96,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.019410506915061743,
+                "daily_sharpe": -0.4824000271285375,
+                "max_drawdown": -0.041642076715195486,
+                "trades": 96,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.01748744954708492,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.019410506915061743,
+            "cost_of_the_binding_defect": -0.0019230573679768215
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.004293468728911565,
+                "daily_sharpe": 0.5505612112203705,
+                "max_drawdown": -0.003082729858742028,
+                "trades": 4,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.004234879621965559,
+                "daily_sharpe": 0.5439745878032067,
+                "max_drawdown": -0.003083020964824268,
+                "trades": 4,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.004176290644732461,
+                "daily_sharpe": 0.5373373104211153,
+                "max_drawdown": -0.0030833121045680256,
+                "trades": 4,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.004214879469569999,
+                "daily_sharpe": 0.5417369150343797,
+                "max_drawdown": -0.0030829135408966257,
+                "trades": 4,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.004293468728911565,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.004214879469569999,
+            "cost_of_the_binding_defect": -7.858925934156602e-05
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.004293468728911565,
+                "daily_sharpe": 0.5505612112203705,
+                "max_drawdown": -0.003082729858742028,
+                "trades": 4,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.004234879621965559,
+                "daily_sharpe": 0.5439745878032067,
+                "max_drawdown": -0.003083020964824268,
+                "trades": 4,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.004176290644732461,
+                "daily_sharpe": 0.5373373104211153,
+                "max_drawdown": -0.0030833121045680256,
+                "trades": 4,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.004214879469569999,
+                "daily_sharpe": 0.5417369150343797,
+                "max_drawdown": -0.0030829135408966257,
+                "trades": 4,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.004293468728911565,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.004214879469569999,
+            "cost_of_the_binding_defect": -7.858925934156602e-05
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.020251896983754736,
+                "daily_sharpe": -0.39077730981865294,
+                "max_drawdown": -0.052067213925311884,
+                "trades": 68,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.02122180852391553,
+                "daily_sharpe": -0.40986881614374093,
+                "max_drawdown": -0.05248618842931252,
+                "trades": 68,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.022191724536186674,
+                "daily_sharpe": -0.42894413015952776,
+                "max_drawdown": -0.05290544195501168,
+                "trades": 68,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.021623317073325987,
+                "daily_sharpe": -0.4179178319977325,
+                "max_drawdown": -0.052645290973947545,
+                "trades": 68,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.020251896983754736,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.021623317073325987,
+            "cost_of_the_binding_defect": -0.0013714200895712514
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.05228454552369566,
+                "daily_sharpe": -1.1472242065261948,
+                "max_drawdown": -0.05419214818240792,
+                "trades": 64,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0531923807421536,
+                "daily_sharpe": -1.1665959242543307,
+                "max_drawdown": -0.054913761391290006,
+                "trades": 64,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.054100239229603386,
+                "daily_sharpe": -1.1859178445589558,
+                "max_drawdown": -0.05563541774788405,
+                "trades": 64,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.05357180159478536,
+                "daily_sharpe": -1.175202050298638,
+                "max_drawdown": -0.05519837097165703,
+                "trades": 64,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.05228454552369566,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.05357180159478536,
+            "cost_of_the_binding_defect": -0.001287256071089704
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.025140567341013442,
+                "daily_sharpe": -0.4701412805181661,
+                "max_drawdown": -0.052833860584649894,
+                "trades": 76,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.026246120459851974,
+                "daily_sharpe": -0.4910846325433743,
+                "max_drawdown": -0.05337314591401998,
+                "trades": 76,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.027351685576746054,
+                "daily_sharpe": -0.5120036679850106,
+                "max_drawdown": -0.053912793086236976,
+                "trades": 76,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.026671932946973342,
+                "daily_sharpe": -0.49928201094152475,
+                "max_drawdown": -0.05357187950296971,
+                "trades": 76,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.025140567341013442,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.026671932946973342,
+            "cost_of_the_binding_defect": -0.0015313656059599001
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.09094437218917883,
+                "daily_sharpe": -1.3089559355602698,
+                "max_drawdown": -0.11152951269546696,
+                "trades": 186,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0935386230102857,
+                "daily_sharpe": -1.3460558261212814,
+                "max_drawdown": -0.11409867947966235,
+                "trades": 186,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.0961329038548685,
+                "daily_sharpe": -1.3830808896080522,
+                "max_drawdown": -0.11666795316845047,
+                "trades": 186,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.09468324594752253,
+                "daily_sharpe": -1.3630971732010537,
+                "max_drawdown": -0.11522714318214622,
+                "trades": 186,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.09094437218917883,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.09468324594752253,
+            "cost_of_the_binding_defect": -0.003738873758343697
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.09094437218917883,
+                "daily_sharpe": -1.3089559355602698,
+                "max_drawdown": -0.11152951269546696,
+                "trades": 186,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.0935386230102857,
+                "daily_sharpe": -1.3460558261212814,
+                "max_drawdown": -0.11409867947966235,
+                "trades": 186,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.0961329038548685,
+                "daily_sharpe": -1.3830808896080522,
+                "max_drawdown": -0.11666795316845047,
+                "trades": 186,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.09468324594752253,
+                "daily_sharpe": -1.3630971732010537,
+                "max_drawdown": -0.11522714318214622,
+                "trades": 186,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.09094437218917883,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.09468324594752253,
+            "cost_of_the_binding_defect": -0.003738873758343697
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "DOGEUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.06730231808601483,
+                "daily_sharpe": 0.8305975975750993,
+                "max_drawdown": -0.022472107570331135,
+                "trades": 56,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.06648694508463748,
+                "daily_sharpe": 0.8211779615650284,
+                "max_drawdown": -0.022576083134434155,
+                "trades": 56,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.06567155501193822,
+                "daily_sharpe": 0.8117422147718708,
+                "max_drawdown": -0.02268006187227556,
+                "trades": 56,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.06617719550425138,
+                "daily_sharpe": 0.8176772746131471,
+                "max_drawdown": -0.0226109112953784,
+                "trades": 56,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.06730231808601483,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.06617719550425138,
+            "cost_of_the_binding_defect": -0.0011251225817634491
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.06435224565800013,
+                "daily_sharpe": 0.7971085226742514,
+                "max_drawdown": -0.022472107570331135,
+                "trades": 54,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.06356746718639616,
+                "daily_sharpe": 0.7879803670489944,
+                "max_drawdown": -0.022576083134434155,
+                "trades": 54,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.06278266855452275,
+                "daily_sharpe": 0.7788375603906678,
+                "max_drawdown": -0.02268006187227556,
+                "trades": 54,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.06326772121034918,
+                "daily_sharpe": 0.7845697918299879,
+                "max_drawdown": -0.0226109112953784,
+                "trades": 54,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.06435224565800013,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.06326772121034918,
+            "cost_of_the_binding_defect": -0.0010845244476509475
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.027536629807589308,
+                "daily_sharpe": -0.5849554714850579,
+                "max_drawdown": -0.03856492079481888,
+                "trades": 58,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.02838984886909679,
+                "daily_sharpe": -0.6029447044712495,
+                "max_drawdown": -0.03930359671721306,
+                "trades": 58,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.029243099198843492,
+                "daily_sharpe": -0.620898265530517,
+                "max_drawdown": -0.04012948824852203,
+                "trades": 58,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.028700741121290285,
+                "daily_sharpe": -0.6096640776184286,
+                "max_drawdown": -0.039598577492157894,
+                "trades": 58,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.027536629807589308,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.028700741121290285,
+            "cost_of_the_binding_defect": -0.0011641113137009773
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.01990860911160308,
+                "daily_sharpe": -0.5102912237750011,
+                "max_drawdown": -0.030507448402469772,
+                "trades": 10,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.020061692107563034,
+                "daily_sharpe": -0.5140642674205185,
+                "max_drawdown": -0.03057318279667387,
+                "trades": 10,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.020214786375363114,
+                "daily_sharpe": -0.5178319509351768,
+                "max_drawdown": -0.030638924966020387,
+                "trades": 10,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.02011726957840454,
+                "daily_sharpe": -0.5155210993986553,
+                "max_drawdown": -0.03059320539974575,
+                "trades": 10,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.01990860911160308,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.02011726957840454,
+            "cost_of_the_binding_defect": -0.000208660466801458
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.01990860911160308,
+                "daily_sharpe": -0.5102912237750011,
+                "max_drawdown": -0.030507448402469772,
+                "trades": 10,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.020061692107563034,
+                "daily_sharpe": -0.5140642674205185,
+                "max_drawdown": -0.03057318279667387,
+                "trades": 10,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.020214786375363114,
+                "daily_sharpe": -0.5178319509351768,
+                "max_drawdown": -0.030638924966020387,
+                "trades": 10,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.02011726957840454,
+                "daily_sharpe": -0.5155210993986553,
+                "max_drawdown": -0.03059320539974575,
+                "trades": 10,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.01990860911160308,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.02011726957840454,
+            "cost_of_the_binding_defect": -0.000208660466801458
+          }
+        }
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.08702999311984017,
+                "daily_sharpe": 0.9760023723386692,
+                "max_drawdown": -0.03473790344494587,
+                "trades": 102,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.08548235715890828,
+                "daily_sharpe": 0.9589045026848058,
+                "max_drawdown": -0.03510598686997468,
+                "trades": 102,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.08393487683171408,
+                "daily_sharpe": 0.9418037428458677,
+                "max_drawdown": -0.03547441708532384,
+                "trades": 102,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.08497217555770886,
+                "daily_sharpe": 0.9532062759305592,
+                "max_drawdown": -0.03523089174545457,
+                "trades": 102,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.08702999311984017,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.08497217555770886,
+            "cost_of_the_binding_defect": -0.0020578175621313033
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.055795832099647225,
+                "daily_sharpe": 0.5880810951050849,
+                "max_drawdown": -0.04036910575477304,
+                "trades": 336,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.05074391656581967,
+                "daily_sharpe": 0.5360875387970927,
+                "max_drawdown": -0.04364799360571192,
+                "trades": 336,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.045692506781413345,
+                "daily_sharpe": 0.4841770537060106,
+                "max_drawdown": -0.04693569336145664,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.04906332643211275,
+                "daily_sharpe": 0.51877635014316,
+                "max_drawdown": -0.04474568118290245,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.055795832099647225,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.04906332643211275,
+            "cost_of_the_binding_defect": -0.006732505667534472
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.02910581273544466,
+                "daily_sharpe": 0.374279406743047,
+                "max_drawdown": -0.06284666864365995,
+                "trades": 210,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.025949518872112387,
+                "daily_sharpe": 0.3350443321295052,
+                "max_drawdown": -0.06435403731022782,
+                "trades": 210,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.02279354092917263,
+                "daily_sharpe": 0.29588311492780756,
+                "max_drawdown": -0.06586560435580935,
+                "trades": 210,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.02489915024041056,
+                "daily_sharpe": 0.32198364375476424,
+                "max_drawdown": -0.0648614218721213,
+                "trades": 210,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.02910581273544466,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.02489915024041056,
+            "cost_of_the_binding_defect": -0.004206662495034097
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.055795832099647225,
+                "daily_sharpe": 0.5880810951050849,
+                "max_drawdown": -0.04036910575477304,
+                "trades": 336,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.05074391656581967,
+                "daily_sharpe": 0.5360875387970927,
+                "max_drawdown": -0.04364799360571192,
+                "trades": 336,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.045692506781413345,
+                "daily_sharpe": 0.4841770537060106,
+                "max_drawdown": -0.04693569336145664,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.04906332643211275,
+                "daily_sharpe": 0.51877635014316,
+                "max_drawdown": -0.04474568118290245,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.055795832099647225,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.04906332643211275,
+            "cost_of_the_binding_defect": -0.006732505667534472
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.055795832099647225,
+                "daily_sharpe": 0.5880810951050849,
+                "max_drawdown": -0.04036910575477304,
+                "trades": 336,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.05074391656581967,
+                "daily_sharpe": 0.5360875387970927,
+                "max_drawdown": -0.04364799360571192,
+                "trades": 336,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.045692506781413345,
+                "daily_sharpe": 0.4841770537060106,
+                "max_drawdown": -0.04693569336145664,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.04906332643211275,
+                "daily_sharpe": 0.51877635014316,
+                "max_drawdown": -0.04474568118290245,
+                "trades": 336,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.055795832099647225,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.04906332643211275,
+            "cost_of_the_binding_defect": -0.006732505667534472
+          }
+        }
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "ETHUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.02913514888895441,
+                "daily_sharpe": 0.2750711863275287,
+                "max_drawdown": -0.07167493506549161,
+                "trades": 172,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.026548934668261914,
+                "daily_sharpe": 0.2523628066724495,
+                "max_drawdown": -0.07225262020396084,
+                "trades": 172,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.023962979360240055,
+                "daily_sharpe": 0.22969718118153543,
+                "max_drawdown": -0.07283197838719613,
+                "trades": 172,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.025688632555919133,
+                "daily_sharpe": 0.24480426525883847,
+                "max_drawdown": -0.07245011408382984,
+                "trades": 172,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.02913514888895441,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.025688632555919133,
+            "cost_of_the_binding_defect": -0.0034465163330352766
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.06722513196359658,
+                "daily_sharpe": 0.5315589223584302,
+                "max_drawdown": -0.08471091568600542,
+                "trades": 328,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.06229094851470873,
+                "daily_sharpe": 0.4938854797934035,
+                "max_drawdown": -0.08681842816478735,
+                "trades": 328,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.05735725915624057,
+                "daily_sharpe": 0.4562924542585944,
+                "max_drawdown": -0.08892665702648328,
+                "trades": 328,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.06065037198522516,
+                "daily_sharpe": 0.48134671724241335,
+                "max_drawdown": -0.08752665304187401,
+                "trades": 328,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.06722513196359658,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.06065037198522516,
+            "cost_of_the_binding_defect": -0.006574759978371425
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.06276330074092096,
+                "daily_sharpe": 0.5239729169446057,
+                "max_drawdown": -0.0819349352399209,
+                "trades": 162,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.06032038322419031,
+                "daily_sharpe": 0.5041396131107796,
+                "max_drawdown": -0.08249583079379907,
+                "trades": 162,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.057877710626685897,
+                "daily_sharpe": 0.4843356668617899,
+                "max_drawdown": -0.08305850691800998,
+                "trades": 162,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.05951009744012192,
+                "daily_sharpe": 0.4975370443020743,
+                "max_drawdown": -0.08268813143071951,
+                "trades": 162,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.06276330074092096,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.05951009744012192,
+            "cost_of_the_binding_defect": -0.0032532033007990346
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.07988302247741896,
+                "daily_sharpe": 0.732340445194395,
+                "max_drawdown": -0.05878813473201572,
+                "trades": 446,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.07317604185611737,
+                "daily_sharpe": 0.6721146441350953,
+                "max_drawdown": -0.062157400460641,
+                "trades": 446,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.06646973273150492,
+                "daily_sharpe": 0.6119793682099516,
+                "max_drawdown": -0.06554028799648937,
+                "trades": 446,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.07094525832011667,
+                "daily_sharpe": 0.6520609451976057,
+                "max_drawdown": -0.06328733086725302,
+                "trades": 446,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.07988302247741896,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.07094525832011667,
+            "cost_of_the_binding_defect": -0.008937764157302297
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.07988302247741896,
+                "daily_sharpe": 0.732340445194395,
+                "max_drawdown": -0.05878813473201572,
+                "trades": 446,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.07317604185611737,
+                "daily_sharpe": 0.6721146441350953,
+                "max_drawdown": -0.062157400460641,
+                "trades": 446,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.06646973273150492,
+                "daily_sharpe": 0.6119793682099516,
+                "max_drawdown": -0.06554028799648937,
+                "trades": 446,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.07094525832011667,
+                "daily_sharpe": 0.6520609451976057,
+                "max_drawdown": -0.06328733086725302,
+                "trades": 446,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.07988302247741896,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.07094525832011667,
+            "cost_of_the_binding_defect": -0.008937764157302297
+          }
+        }
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "SOLUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.007919192584813772,
+                "daily_sharpe": -0.07506904642366265,
+                "max_drawdown": -0.057413940676484976,
+                "trades": 120,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.009717878738160879,
+                "daily_sharpe": -0.09577091906065412,
+                "max_drawdown": -0.057941240737610866,
+                "trades": 120,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.011516385102064985,
+                "daily_sharpe": -0.11645954238334955,
+                "max_drawdown": -0.058468504668734544,
+                "trades": 120,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.010318088525478553,
+                "daily_sharpe": -0.10266730698867245,
+                "max_drawdown": -0.05812085013928936,
+                "trades": 120,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.007919192584813772,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.010318088525478553,
+            "cost_of_the_binding_defect": -0.0023988959406647803
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.04359623298405091,
+                "daily_sharpe": -0.296060845692864,
+                "max_drawdown": -0.08311878219764546,
+                "trades": 1698,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.06906133446496099,
+                "daily_sharpe": -0.4832176970241655,
+                "max_drawdown": -0.10567533492101866,
+                "trades": 1698,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.09452388987168125,
+                "daily_sharpe": -0.6699294669917143,
+                "max_drawdown": -0.12835374181596926,
+                "trades": 1698,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.07755430535183461,
+                "daily_sharpe": -0.5455039385836695,
+                "max_drawdown": -0.11323079006626113,
+                "trades": 1698,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.04359623298405091,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.07755430535183461,
+            "cost_of_the_binding_defect": -0.0339580723677837
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.06395849682937427,
+                "daily_sharpe": 0.4317490356792069,
+                "max_drawdown": -0.08538395422777256,
+                "trades": 194,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.061035268259004516,
+                "daily_sharpe": 0.41341943638428935,
+                "max_drawdown": -0.08620832691478941,
+                "trades": 194,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.058112332650982035,
+                "daily_sharpe": 0.39508580277916583,
+                "max_drawdown": -0.08703465692824897,
+                "trades": 194,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.06006492641593564,
+                "daily_sharpe": 0.40731131083077937,
+                "max_drawdown": -0.08648856941465577,
+                "trades": 194,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.06395849682937427,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.06006492641593564,
+            "cost_of_the_binding_defect": -0.0038935704134386295
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.058083403768675046,
+                "daily_sharpe": 0.41006279181481436,
+                "max_drawdown": -0.07555897611220197,
+                "trades": 418,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.051800846187555205,
+                "daily_sharpe": 0.3688280694626454,
+                "max_drawdown": -0.0788587084948259,
+                "trades": 418,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.04551891744285608,
+                "daily_sharpe": 0.32758296444191987,
+                "max_drawdown": -0.08216959888290609,
+                "trades": 418,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.04971011242967549,
+                "daily_sharpe": 0.3550833074440863,
+                "max_drawdown": -0.07996584106234605,
+                "trades": 418,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.058083403768675046,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.04971011242967549,
+            "cost_of_the_binding_defect": -0.008373291338999556
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.058083403768675046,
+                "daily_sharpe": 0.41006279181481436,
+                "max_drawdown": -0.07555897611220197,
+                "trades": 418,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.051800846187555205,
+                "daily_sharpe": 0.3688280694626454,
+                "max_drawdown": -0.0788587084948259,
+                "trades": 418,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.04551891744285608,
+                "daily_sharpe": 0.32758296444191987,
+                "max_drawdown": -0.08216959888290609,
+                "trades": 418,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.04971011242967549,
+                "daily_sharpe": 0.3550833074440863,
+                "max_drawdown": -0.07996584106234605,
+                "trades": 418,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.058083403768675046,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.04971011242967549,
+            "cost_of_the_binding_defect": -0.008373291338999556
+          }
+        }
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "BNBUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.106154321683394,
+                "daily_sharpe": 1.0534983017549922,
+                "max_drawdown": -0.026911183925399818,
+                "trades": 466,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.09914204166553442,
+                "daily_sharpe": 0.9856692488359888,
+                "max_drawdown": -0.02759581708968073,
+                "trades": 466,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.09213046393699975,
+                "daily_sharpe": 0.9177311476893943,
+                "max_drawdown": -0.028281407784169543,
+                "trades": 466,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.09681122219918725,
+                "daily_sharpe": 0.9630361149923938,
+                "max_drawdown": -0.027825959467430827,
+                "trades": 466,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.106154321683394,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.09681122219918725,
+            "cost_of_the_binding_defect": -0.009343099484206752
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.062277956260373246,
+                "daily_sharpe": 0.6862589245634658,
+                "max_drawdown": -0.050880523552103374,
+                "trades": 496,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.05482438422727376,
+                "daily_sharpe": 0.6063614972746614,
+                "max_drawdown": -0.0516236809892302,
+                "trades": 496,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.04737155817405658,
+                "daily_sharpe": 0.5264018144597931,
+                "max_drawdown": -0.05236717067472674,
+                "trades": 496,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.05234351378065227,
+                "daily_sharpe": 0.579715853565423,
+                "max_drawdown": -0.05187472075824162,
+                "trades": 496,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.062277956260373246,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.05234351378065227,
+            "cost_of_the_binding_defect": -0.009934442479720973
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.05632318735351838,
+                "daily_sharpe": 0.43568474822743297,
+                "max_drawdown": -0.10826169654546647,
+                "trades": 232,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.05283140037328349,
+                "daily_sharpe": 0.41002372311636204,
+                "max_drawdown": -0.10867028244890009,
+                "trades": 232,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.04933996313490341,
+                "daily_sharpe": 0.3843954223252346,
+                "max_drawdown": -0.10908119422855012,
+                "trades": 232,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.05167099227704597,
+                "daily_sharpe": 0.40148002225258544,
+                "max_drawdown": -0.10881322942698468,
+                "trades": 232,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.05632318735351838,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.05167099227704597,
+            "cost_of_the_binding_defect": -0.00465219507647241
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.04138599230282369,
+                "daily_sharpe": 0.4024093179658906,
+                "max_drawdown": -0.07415956842674387,
+                "trades": 188,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.03855729184793111,
+                "daily_sharpe": 0.3761068270657599,
+                "max_drawdown": -0.0749666769889491,
+                "trades": 188,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.03572887467684871,
+                "daily_sharpe": 0.34983297764401355,
+                "max_drawdown": -0.0757766970204089,
+                "trades": 188,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.03761696129817138,
+                "daily_sharpe": 0.3673474094185455,
+                "max_drawdown": -0.07524090739524225,
+                "trades": 188,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.04138599230282369,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.03761696129817138,
+            "cost_of_the_binding_defect": -0.0037690310046523123
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.04138599230282369,
+                "daily_sharpe": 0.4024093179658906,
+                "max_drawdown": -0.07415956842674387,
+                "trades": 188,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.03855729184793111,
+                "daily_sharpe": 0.3761068270657599,
+                "max_drawdown": -0.0749666769889491,
+                "trades": 188,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.03572887467684871,
+                "daily_sharpe": 0.34983297764401355,
+                "max_drawdown": -0.0757766970204089,
+                "trades": 188,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.03761696129817138,
+                "daily_sharpe": 0.3673474094185455,
+                "max_drawdown": -0.07524090739524225,
+                "trades": 188,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.04138599230282369,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.03761696129817138,
+            "cost_of_the_binding_defect": -0.0037690310046523123
+          }
+        }
+      },
+      {
+        "alpha_id": "A-SC",
+        "symbol": "DOGEUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.07170869785037515,
+                "daily_sharpe": 0.4000428848799886,
+                "max_drawdown": -0.08808731124462044,
+                "trades": 594,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.06278301909604855,
+                "daily_sharpe": 0.35515943297743824,
+                "max_drawdown": -0.08979833640624224,
+                "trades": 594,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.05385823362652653,
+                "daily_sharpe": 0.3101700380691963,
+                "max_drawdown": -0.09151979465845861,
+                "trades": 594,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.059811976766618535,
+                "daily_sharpe": 0.340177639790067,
+                "max_drawdown": -0.09037619482211112,
+                "trades": 594,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.07170869785037515,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.059811976766618535,
+            "cost_of_the_binding_defect": -0.011896721083756612
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.20627266587000648,
+                "daily_sharpe": 0.9405180550948574,
+                "max_drawdown": -0.09600124925218045,
+                "trades": 604,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.1971700511460175,
+                "daily_sharpe": 0.9022524392809976,
+                "max_drawdown": -0.09694048916446985,
+                "trades": 604,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.18806834874579903,
+                "daily_sharpe": 0.8638674245469972,
+                "max_drawdown": -0.09788016974951486,
+                "trades": 604,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.19414898660101154,
+                "daily_sharpe": 0.8894737665315854,
+                "max_drawdown": -0.09725946724750312,
+                "trades": 604,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.20627266587000648,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.19414898660101154,
+            "cost_of_the_binding_defect": -0.012123679268994936
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.02059516854296528,
+                "daily_sharpe": 0.16245738967976703,
+                "max_drawdown": -0.11758292940458825,
+                "trades": 156,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.018250698365253948,
+                "daily_sharpe": 0.14727832125754028,
+                "max_drawdown": -0.11878455093879359,
+                "trades": 156,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.015906462840485025,
+                "daily_sharpe": 0.13208432534943132,
+                "max_drawdown": -0.11998621922380615,
+                "trades": 156,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.01747042456046799,
+                "daily_sharpe": 0.14221741147725872,
+                "max_drawdown": -0.1191921468591588,
+                "trades": 156,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.02059516854296528,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.01747042456046799,
+            "cost_of_the_binding_defect": -0.003124743982497291
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.1939279515586534,
+                "daily_sharpe": 0.8811630816896803,
+                "max_drawdown": -0.09600124925218045,
+                "trades": 470,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.1868381073744887,
+                "daily_sharpe": 0.8514095960907719,
+                "max_drawdown": -0.09694048916446985,
+                "trades": 470,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.17974897411363155,
+                "daily_sharpe": 0.8215924390215396,
+                "max_drawdown": -0.09788016974951486,
+                "trades": 470,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.18448727783362262,
+                "daily_sharpe": 0.841480794668518,
+                "max_drawdown": -0.09725946724750312,
+                "trades": 470,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.1939279515586534,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.18448727783362262,
+            "cost_of_the_binding_defect": -0.009440673725030768
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.1939279515586534,
+                "daily_sharpe": 0.8811630816896803,
+                "max_drawdown": -0.09600124925218045,
+                "trades": 470,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.1868381073744887,
+                "daily_sharpe": 0.8514095960907719,
+                "max_drawdown": -0.09694048916446985,
+                "trades": 470,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.17974897411363155,
+                "daily_sharpe": 0.8215924390215396,
+                "max_drawdown": -0.09788016974951486,
+                "trades": 470,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.18448727783362262,
+                "daily_sharpe": 0.841480794668518,
+                "max_drawdown": -0.09725946724750312,
+                "trades": 470,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.1939279515586534,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.18448727783362262,
+            "cost_of_the_binding_defect": -0.009440673725030768
+          }
+        }
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "BTCUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.022184209207616545,
+                "daily_sharpe": -0.4862686913566103,
+                "max_drawdown": -0.03543636329682498,
+                "trades": 144,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.024294993964082412,
+                "daily_sharpe": -0.5320708139065766,
+                "max_drawdown": -0.03577938327534558,
+                "trades": 144,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.026405743960961403,
+                "daily_sharpe": -0.5776244531160657,
+                "max_drawdown": -0.03612363934924889,
+                "trades": 144,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.025065929128590847,
+                "daily_sharpe": -0.5488645939639868,
+                "max_drawdown": -0.03589789387249531,
+                "trades": 144,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.022184209207616545,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.025065929128590847,
+            "cost_of_the_binding_defect": -0.0028817199209743016
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.029311322499439352,
+                "daily_sharpe": -0.7154508794807575,
+                "max_drawdown": -0.044893319108157304,
+                "trades": 266,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.03327083631840011,
+                "daily_sharpe": -0.8101214537370497,
+                "max_drawdown": -0.04761696968835483,
+                "trades": 266,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.03723036322559581,
+                "daily_sharpe": -0.903995387242366,
+                "max_drawdown": -0.05034344113379707,
+                "trades": 266,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.03463055349269906,
+                "daily_sharpe": -0.842625194770911,
+                "max_drawdown": -0.04855110988003952,
+                "trades": 266,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.029311322499439352,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.03463055349269906,
+            "cost_of_the_binding_defect": -0.005319230993259705
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.037521014202370306,
+                "daily_sharpe": -0.750532099967636,
+                "max_drawdown": -0.04902877711563114,
+                "trades": 32,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.037996051088486804,
+                "daily_sharpe": -0.7595643093733748,
+                "max_drawdown": -0.049483478617922905,
+                "trades": 32,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.03847104709296467,
+                "daily_sharpe": -0.7685709258884644,
+                "max_drawdown": -0.049938154274387636,
+                "trades": 32,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.038156098792350934,
+                "daily_sharpe": -0.7625756423564003,
+                "max_drawdown": -0.04963748840160964,
+                "trades": 32,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.037521014202370306,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.038156098792350934,
+            "cost_of_the_binding_defect": -0.0006350845899806279
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.015207821599246052,
+                "daily_sharpe": -0.4392539409377468,
+                "max_drawdown": -0.02496307680314469,
+                "trades": 16,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.015444815963028824,
+                "daily_sharpe": -0.44578279613418886,
+                "max_drawdown": -0.02506790635037559,
+                "trades": 16,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.015681786779397355,
+                "daily_sharpe": -0.45229315400589337,
+                "max_drawdown": -0.025172752453757496,
+                "trades": 16,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.015524843439293168,
+                "daily_sharpe": -0.44795469331307364,
+                "max_drawdown": -0.025104511659243656,
+                "trades": 16,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.015207821599246052,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.015524843439293168,
+            "cost_of_the_binding_defect": -0.00031702184004711587
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.015207821599246052,
+                "daily_sharpe": -0.4392539409377468,
+                "max_drawdown": -0.02496307680314469,
+                "trades": 16,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.015444815963028824,
+                "daily_sharpe": -0.44578279613418886,
+                "max_drawdown": -0.02506790635037559,
+                "trades": 16,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.015681786779397355,
+                "daily_sharpe": -0.45229315400589337,
+                "max_drawdown": -0.025172752453757496,
+                "trades": 16,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.015524843439293168,
+                "daily_sharpe": -0.44795469331307364,
+                "max_drawdown": -0.025104511659243656,
+                "trades": 16,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.015207821599246052,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.015524843439293168,
+            "cost_of_the_binding_defect": -0.00031702184004711587
+          }
+        }
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "ETHUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.005809276018997167,
+                "daily_sharpe": -0.10348285890613787,
+                "max_drawdown": -0.03901414346971421,
+                "trades": 46,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.006486949880915027,
+                "daily_sharpe": -0.11656764152405918,
+                "max_drawdown": -0.039254931261894055,
+                "trades": 46,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.007164618415335666,
+                "daily_sharpe": -0.1296291260378618,
+                "max_drawdown": -0.03949572737447904,
+                "trades": 46,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.006725258808708667,
+                "daily_sharpe": -0.12117666676463569,
+                "max_drawdown": -0.0393349386006594,
+                "trades": 46,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.005809276018997167,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.006725258808708667,
+            "cost_of_the_binding_defect": -0.0009159827897115003
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.004575557509295725,
+                "daily_sharpe": -0.391085339801366,
+                "max_drawdown": -0.006707447804905842,
+                "trades": 14,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.004785473532782247,
+                "daily_sharpe": -0.4079561113273519,
+                "max_drawdown": -0.006873028435159911,
+                "trades": 14,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.004995398690390007,
+                "daily_sharpe": -0.4247025895630494,
+                "max_drawdown": -0.00703863524356152,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0048554628801622535,
+                "daily_sharpe": -0.4135738598450874,
+                "max_drawdown": -0.006927774723579194,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.004575557509295725,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0048554628801622535,
+            "cost_of_the_binding_defect": -0.0002799053708665289
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.007170920062321562,
+                "daily_sharpe": 0.23984971809543304,
+                "max_drawdown": -0.011178393777573792,
+                "trades": 76,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.006083816073919168,
+                "daily_sharpe": 0.2038098328667051,
+                "max_drawdown": -0.011682192750143261,
+                "trades": 76,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.004996631085586012,
+                "daily_sharpe": 0.16795302267738935,
+                "max_drawdown": -0.012186742080751212,
+                "trades": 76,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.0056546967991277786,
+                "daily_sharpe": 0.18971609099961387,
+                "max_drawdown": -0.011876021155084904,
+                "trades": 76,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.007170920062321562,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.0056546967991277786,
+            "cost_of_the_binding_defect": -0.0015162232631937833
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.004575557509295725,
+                "daily_sharpe": -0.391085339801366,
+                "max_drawdown": -0.006707447804905842,
+                "trades": 14,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.004785473532782247,
+                "daily_sharpe": -0.4079561113273519,
+                "max_drawdown": -0.006873028435159911,
+                "trades": 14,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.004995398690390007,
+                "daily_sharpe": -0.4247025895630494,
+                "max_drawdown": -0.00703863524356152,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0048554628801622535,
+                "daily_sharpe": -0.4135738598450874,
+                "max_drawdown": -0.006927774723579194,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.004575557509295725,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0048554628801622535,
+            "cost_of_the_binding_defect": -0.0002799053708665289
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.004575557509295725,
+                "daily_sharpe": -0.391085339801366,
+                "max_drawdown": -0.006707447804905842,
+                "trades": 14,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.004785473532782247,
+                "daily_sharpe": -0.4079561113273519,
+                "max_drawdown": -0.006873028435159911,
+                "trades": 14,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.004995398690390007,
+                "daily_sharpe": -0.4247025895630494,
+                "max_drawdown": -0.00703863524356152,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.0048554628801622535,
+                "daily_sharpe": -0.4135738598450874,
+                "max_drawdown": -0.006927774723579194,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.004575557509295725,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.0048554628801622535,
+            "cost_of_the_binding_defect": -0.0002799053708665289
+          }
+        }
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "SOLUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.06286537441355722,
+                "daily_sharpe": -0.6686921433080372,
+                "max_drawdown": -0.0868838845453932,
+                "trades": 114,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.06455608073978569,
+                "daily_sharpe": -0.6868210374434525,
+                "max_drawdown": -0.08847375941025726,
+                "trades": 114,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.06624672944503385,
+                "daily_sharpe": -0.7049233697522185,
+                "max_drawdown": -0.09006371543139358,
+                "trades": 114,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.06513441654053365,
+                "daily_sharpe": -0.6930352170552097,
+                "max_drawdown": -0.08901307729794161,
+                "trades": 114,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.06286537441355722,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.06513441654053365,
+            "cost_of_the_binding_defect": -0.0022690421269764283
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.033596567187670234,
+                "daily_sharpe": -0.2623651926232321,
+                "max_drawdown": -0.07546136032911266,
+                "trades": 242,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.03720044214174467,
+                "daily_sharpe": -0.2928787547322256,
+                "max_drawdown": -0.07577874502424686,
+                "trades": 242,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.04080413672740468,
+                "daily_sharpe": -0.32338259221699456,
+                "max_drawdown": -0.07609612632229712,
+                "trades": 242,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.03843172348761914,
+                "daily_sharpe": -0.30330969174253675,
+                "max_drawdown": -0.07588952961437179,
+                "trades": 242,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.033596567187670234,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.03843172348761914,
+            "cost_of_the_binding_defect": -0.004835156299948906
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.09768597383415167,
+                "daily_sharpe": -0.7340797647804321,
+                "max_drawdown": -0.10276245281376273,
+                "trades": 70,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.09870448002481758,
+                "daily_sharpe": -0.7415936706232276,
+                "max_drawdown": -0.10373625406133502,
+                "trades": 70,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.09972292104458824,
+                "daily_sharpe": -0.7490965181894681,
+                "max_drawdown": -0.10471007811032407,
+                "trades": 70,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.09907760971147728,
+                "daily_sharpe": -0.7443472666639637,
+                "max_drawdown": -0.10409464839696025,
+                "trades": 70,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.09768597383415167,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.09907760971147728,
+            "cost_of_the_binding_defect": -0.0013916358773256032
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.009115122187247637,
+                "daily_sharpe": -1.0806487975145602,
+                "max_drawdown": -0.011631848915229726,
+                "trades": 8,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.009234566911304531,
+                "daily_sharpe": -1.0853044647919825,
+                "max_drawdown": -0.01172120492178752,
+                "trades": 8,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.009354005907012297,
+                "daily_sharpe": -1.0898549779326965,
+                "max_drawdown": -0.011810560904097378,
+                "trades": 8,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.00927457359656636,
+                "daily_sharpe": -1.086837075840157,
+                "max_drawdown": -0.011751348007695173,
+                "trades": 8,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.009115122187247637,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.00927457359656636,
+            "cost_of_the_binding_defect": -0.0001594514093187227
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.009115122187247637,
+                "daily_sharpe": -1.0806487975145602,
+                "max_drawdown": -0.011631848915229726,
+                "trades": 8,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.009234566911304531,
+                "daily_sharpe": -1.0853044647919825,
+                "max_drawdown": -0.01172120492178752,
+                "trades": 8,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.009354005907012297,
+                "daily_sharpe": -1.0898549779326965,
+                "max_drawdown": -0.011810560904097378,
+                "trades": 8,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.00927457359656636,
+                "daily_sharpe": -1.086837075840157,
+                "max_drawdown": -0.011751348007695173,
+                "trades": 8,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.009115122187247637,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.00927457359656636,
+            "cost_of_the_binding_defect": -0.0001594514093187227
+          }
+        }
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "BNBUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.014852053295355105,
+                "daily_sharpe": -0.3854552576911281,
+                "max_drawdown": -0.02632977307276918,
+                "trades": 162,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.01724248206259349,
+                "daily_sharpe": -0.44695752938429045,
+                "max_drawdown": -0.02678227867298877,
+                "trades": 162,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.019632691258284818,
+                "daily_sharpe": -0.5079369989453736,
+                "max_drawdown": -0.027236100916086303,
+                "trades": 162,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.018089478688540495,
+                "daily_sharpe": -0.46880470355148685,
+                "max_drawdown": -0.02693650648115098,
+                "trades": 162,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.014852053295355105,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.018089478688540495,
+            "cost_of_the_binding_defect": -0.003237425393185389
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.013203805326323703,
+                "daily_sharpe": -0.45563644068322384,
+                "max_drawdown": -0.03271281175035967,
+                "trades": 84,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.014460508503568725,
+                "daily_sharpe": -0.49742660515181697,
+                "max_drawdown": -0.033470191014527195,
+                "trades": 84,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.015717117752938048,
+                "daily_sharpe": -0.5388143787400714,
+                "max_drawdown": -0.034228221544661874,
+                "trades": 84,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.014886269144756992,
+                "daily_sharpe": -0.5115402973899666,
+                "max_drawdown": -0.03372377225384515,
+                "trades": 84,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.013203805326323703,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.014886269144756992,
+            "cost_of_the_binding_defect": -0.0016824638184332885
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.0297208000994047,
+                "daily_sharpe": 0.43959750476031084,
+                "max_drawdown": -0.033987539767969976,
+                "trades": 126,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.02786386840605748,
+                "daily_sharpe": 0.4124665401654827,
+                "max_drawdown": -0.03418918858200848,
+                "trades": 126,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.02600705990817298,
+                "daily_sharpe": 0.38538921189956027,
+                "max_drawdown": -0.03439145473999228,
+                "trades": 126,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.02721417242757207,
+                "daily_sharpe": 0.4030224963450114,
+                "max_drawdown": -0.03425792078409984,
+                "trades": 126,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.0297208000994047,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.02721417242757207,
+            "cost_of_the_binding_defect": -0.0025066276718326286
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.04228209389701787,
+                "daily_sharpe": 0.9332077534345938,
+                "max_drawdown": -0.014273311771045516,
+                "trades": 12,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.04210991490386906,
+                "daily_sharpe": 0.9292113440189192,
+                "max_drawdown": -0.014276233588647047,
+                "trades": 12,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.041937743181828635,
+                "daily_sharpe": 0.9252103403287625,
+                "max_drawdown": -0.014279156263307002,
+                "trades": 12,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.042049906417642724,
+                "daily_sharpe": 0.9278781542416459,
+                "max_drawdown": -0.014276302388500306,
+                "trades": 12,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.04228209389701787,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.042049906417642724,
+            "cost_of_the_binding_defect": -0.0002321874793751455
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.04228209389701787,
+                "daily_sharpe": 0.9332077534345938,
+                "max_drawdown": -0.014273311771045516,
+                "trades": 12,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.04210991490386906,
+                "daily_sharpe": 0.9292113440189192,
+                "max_drawdown": -0.014276233588647047,
+                "trades": 12,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.041937743181828635,
+                "daily_sharpe": 0.9252103403287625,
+                "max_drawdown": -0.014279156263307002,
+                "trades": 12,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.042049906417642724,
+                "daily_sharpe": 0.9278781542416459,
+                "max_drawdown": -0.014276302388500306,
+                "trades": 12,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.04228209389701787,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.042049906417642724,
+            "cost_of_the_binding_defect": -0.0002321874793751455
+          }
+        }
+      },
+      {
+        "alpha_id": "A-VWAP",
+        "symbol": "DOGEUSDT",
+        "arms": {
+          "A": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.020042973129432262,
+                "daily_sharpe": 0.40003728078986983,
+                "max_drawdown": -0.02371416783449498,
+                "trades": 60,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.01918222055795127,
+                "daily_sharpe": 0.3831727593590958,
+                "max_drawdown": -0.02380889585324031,
+                "trades": 60,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.018321416819985448,
+                "daily_sharpe": 0.36631079801422795,
+                "max_drawdown": -0.023903692748600713,
+                "trades": 60,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.018854891652522854,
+                "daily_sharpe": 0.3768610409221365,
+                "max_drawdown": -0.023842538086482623,
+                "trades": 60,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.020042973129432262,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.018854891652522854,
+            "cost_of_the_binding_defect": -0.0011880814769094084
+          },
+          "B": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.0,
+                "daily_sharpe": null,
+                "max_drawdown": 0.0,
+                "trades": 0,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.0,
+                "daily_sharpe": null,
+                "max_drawdown": 0.0,
+                "trades": 0,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.0,
+                "daily_sharpe": null,
+                "max_drawdown": 0.0,
+                "trades": 0,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.0,
+                "daily_sharpe": null,
+                "max_drawdown": 0.0,
+                "trades": 0,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.0,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": 0.0,
+            "cost_of_the_binding_defect": 0.0
+          },
+          "C": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": 0.032325107127647135,
+                "daily_sharpe": 0.7777068146992068,
+                "max_drawdown": -0.01573704619864058,
+                "trades": 88,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": 0.03103042426463154,
+                "daily_sharpe": 0.7462591005108052,
+                "max_drawdown": -0.015913238354201442,
+                "trades": 88,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": 0.029735771537519495,
+                "daily_sharpe": 0.7148077081406405,
+                "max_drawdown": -0.01608944676643853,
+                "trades": 88,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": 0.030557857644165853,
+                "daily_sharpe": 0.7350988968571315,
+                "max_drawdown": -0.01597324976922565,
+                "trades": 88,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": 0.032325107127647135,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": true,
+            "as_declared_net_return": 0.030557857644165853,
+            "cost_of_the_binding_defect": -0.0017672494834812813
+          },
+          "D": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.018644095041571385,
+                "daily_sharpe": -1.7746936992737454,
+                "max_drawdown": -0.02080970199834098,
+                "trades": 14,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.018855834624422974,
+                "daily_sharpe": -1.778200069766096,
+                "max_drawdown": -0.02100621357633825,
+                "trades": 14,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.019067589763459014,
+                "daily_sharpe": -1.7816023680799327,
+                "max_drawdown": -0.02120274710168979,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.01892581647943592,
+                "daily_sharpe": -1.7793303661093265,
+                "max_drawdown": -0.021071266377819642,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.018644095041571385,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.01892581647943592,
+            "cost_of_the_binding_defect": -0.00028172143786453496
+          },
+          "E": {
+            "status": "RUN",
+            "levels": {
+              "1x": {
+                "net_return": -0.018644095041571385,
+                "daily_sharpe": -1.7746936992737454,
+                "max_drawdown": -0.02080970199834098,
+                "trades": 14,
+                "taker_fee_rate": 0.0004,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 1.0,
+                "slippage_multiplier": 1.0
+              },
+              "1.5x": {
+                "net_return": -0.018855834624422974,
+                "daily_sharpe": -1.778200069766096,
+                "max_drawdown": -0.02100621357633825,
+                "trades": 14,
+                "taker_fee_rate": 0.0006000000000000001,
+                "slippage_bps": 1.5,
+                "fee_multiplier": 1.5,
+                "slippage_multiplier": 1.5
+              },
+              "2x": {
+                "net_return": -0.019067589763459014,
+                "daily_sharpe": -1.7816023680799327,
+                "max_drawdown": -0.02120274710168979,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 2.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 2.0
+              },
+              "AS_DECLARED": {
+                "net_return": -0.01892581647943592,
+                "daily_sharpe": -1.7793303661093265,
+                "max_drawdown": -0.021071266377819642,
+                "trades": 14,
+                "taker_fee_rate": 0.0008,
+                "slippage_bps": 1.0,
+                "fee_multiplier": 2.0,
+                "slippage_multiplier": 1.0
+              }
+            },
+            "recorded_net_return": -0.018644095041571385,
+            "one_x_reproduces_the_confirmation_run": true,
+            "reproduction_gap": 0.0,
+            "survives_2x": false,
+            "as_declared_net_return": -0.01892581647943592,
+            "cost_of_the_binding_defect": -0.00028172143786453496
+          }
+        }
+      }
+    ],
+    "pooled": {
+      "1x": {
+        "A": {
+          "cells": 15,
+          "mean_net_return": 0.019903021667674183,
+          "cells_positive": 8
+        },
+        "B": {
+          "cells": 15,
+          "mean_net_return": 0.017338781478830154,
+          "cells_positive": 6
+        },
+        "C": {
+          "cells": 15,
+          "mean_net_return": 0.005646124338677275,
+          "cells_positive": 8
+        },
+        "D": {
+          "cells": 15,
+          "mean_net_return": 0.018562243201631565,
+          "cells_positive": 7
+        },
+        "E": {
+          "cells": 15,
+          "mean_net_return": 0.018562243201631565,
+          "cells_positive": 7
+        }
+      },
+      "1.5x": {
+        "A": {
+          "cells": 15,
+          "mean_net_return": 0.01761380455982795,
+          "cells_positive": 8
+        },
+        "B": {
+          "cells": 15,
+          "mean_net_return": 0.01296936321527573,
+          "cells_positive": 5
+        },
+        "C": {
+          "cells": 15,
+          "mean_net_return": 0.004039451561433164,
+          "cells_positive": 8
+        },
+        "D": {
+          "cells": 15,
+          "mean_net_return": 0.016303569586041896,
+          "cells_positive": 7
+        },
+        "E": {
+          "cells": 15,
+          "mean_net_return": 0.016303569586041896,
+          "cells_positive": 7
+        }
+      },
+      "2x": {
+        "A": {
+          "cells": 15,
+          "mean_net_return": 0.015324750864077481,
+          "cells_positive": 8
+        },
+        "B": {
+          "cells": 15,
+          "mean_net_return": 0.008600305910859852,
+          "cells_positive": 5
+        },
+        "C": {
+          "cells": 15,
+          "mean_net_return": 0.00243288528890769,
+          "cells_positive": 8
+        },
+        "D": {
+          "cells": 15,
+          "mean_net_return": 0.014045081989937192,
+          "cells_positive": 7
+        },
+        "E": {
+          "cells": 15,
+          "mean_net_return": 0.014045081989937192,
+          "cells_positive": 7
+        }
+      },
+      "AS_DECLARED": {
+        "A": {
+          "cells": 15,
+          "mean_net_return": 0.016822595023344666,
+          "cells_positive": 8
+        },
+        "B": {
+          "cells": 15,
+          "mean_net_return": 0.011492588348534416,
+          "cells_positive": 5
+        },
+        "C": {
+          "cells": 15,
+          "mean_net_return": 0.0034855618569139767,
+          "cells_positive": 8
+        },
+        "D": {
+          "cells": 15,
+          "mean_net_return": 0.015528712014207906,
+          "cells_positive": 7
+        },
+        "E": {
+          "cells": 15,
+          "mean_net_return": 0.015528712014207906,
+          "cells_positive": 7
+        }
+      }
+    },
+    "as_declared": {
+      "what_it_is": "the account the study registered at LAB-01: a one-way taker fee of 0.0004 and 1 bp of slippage per side. It is reached at fee x2 because the lab passes the registered ONE-WAY rate into an engine parameter documented as ROUND-TRIP, so the engine halves it (measured in configs/cost_binding_verification.json)",
+      "not_a_stress": "this level is not a hypothetical. It is what the frozen account contract says, and the 1x level is the defect",
+      "slippage_left_at_1x": "the slippage binding was measured correct -- 1 bp per side, exactly as declared -- so doubling it too would overstate the correction"
+    }
+  },
+  "information_stress": {
+    "staged": true,
+    "staging_rule": "the first 3 RUN cells in protocol order, chosen before any stress result was read",
+    "cells_covered": 3,
+    "cells_total_run": 15,
+    "settings": {
+      "mislabel_fraction": 0.5,
+      "mislabel_shift_observations": 6,
+      "stale_stretches": 6,
+      "stale_observations_each": 42,
+      "missing_outages": 6,
+      "missing_observations_per_outage": 42,
+      "seeds": {
+        "mislabelled": 20260912,
+        "stale": 20260913,
+        "missing": 20260914,
+        "permutation": 20260915
+      },
+      "registered_before_the_stress_ran": true
+    },
+    "per_cell": [
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "arm_D_net_return": -0.03775361914538611,
+        "arm_D_cutoffs": [
+          "2024-01-02T04:00:00+00:00",
+          "2024-06-12T20:00:00+00:00",
+          "2024-11-21T00:00:00+00:00",
+          "2025-05-09T12:00:00+00:00",
+          "2025-10-11T00:00:00+00:00",
+          "2026-03-23T04:00:00+00:00"
+        ],
+        "stresses": {
+          "MISLABELLED_TRANSITIONS": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "transitions": 219,
+              "transitions_after": 171,
+              "selected": 110,
+              "moved": 106,
+              "positions_that_differ": 563,
+              "shift_observations": 6,
+              "fraction": 0.5,
+              "state_values_unchanged": true,
+              "what_it_isolates": "the model finds the right regimes and dates them wrong. Only the timing of each change moves; the sequence of states does not"
+            },
+            "cutoffs": [
+              "2024-01-02T04:00:00+00:00",
+              "2024-06-14T00:00:00+00:00",
+              "2024-11-22T12:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-12T04:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 3,
+            "net_return": -0.020856503709243968,
+            "difference_vs_arm_D": 0.01689711543614214,
+            "trades": 188
+          },
+          "STALE_FEED": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "stale_stretches": 6,
+              "observations_per_stretch": 42,
+              "observations_frozen": 226,
+              "share_of_tape_frozen": 0.03870525774961466,
+              "what_it_isolates": "a provider that stops updating and then catches up in one step. The catch-up looks like a transition to any arm that acts on one"
+            },
+            "cutoffs": [
+              "2024-01-02T04:00:00+00:00",
+              "2024-06-12T20:00:00+00:00",
+              "2024-11-21T00:00:00+00:00",
+              "2025-05-10T08:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": -0.03279801507388658,
+            "difference_vs_arm_D": 0.004955604071499531,
+            "trades": 186
+          },
+          "MISSING_ENRICHMENT": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "outages": 6,
+              "observations_per_outage": 42,
+              "rows_before": 5839,
+              "rows_after": 5587,
+              "rows_dropped": 252,
+              "share_dropped": 0.04315807501284467,
+              "outage_starts": [
+                1,
+                1203,
+                2661,
+                3759,
+                4421,
+                5240
+              ],
+              "contiguous": true,
+              "dropped_not_zeroed": true,
+              "what_it_isolates": "the provider is silent for a stretch. The arm sees a gap, never a fabricated value, and a gap that covers a transition moves the refresh that would have followed it"
+            },
+            "cutoffs": [
+              "2024-01-08T20:00:00+00:00",
+              "2024-06-12T20:00:00+00:00",
+              "2024-11-21T00:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": -0.03775361914538611,
+            "difference_vs_arm_D": 0.0,
+            "trades": 128
+          },
+          "LABEL_PERMUTATION": {
+            "status": "CONTROL",
+            "fidelity": {
+              "namespaces_permuted": 35,
+              "transition_positions_unchanged": true,
+              "expected": "a schedule built from WHERE the state changes must be identical. A difference means something downstream reads the label itself"
+            },
+            "cutoffs": [
+              "2024-01-02T04:00:00+00:00",
+              "2024-06-12T20:00:00+00:00",
+              "2024-11-21T00:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "schedule_identical_to_arm_D": true,
+            "expected": true,
+            "reading": "a jump model's state ids are arbitrary. A refresh schedule built from WHERE the state changes must be unchanged by a permutation of the labels; a difference would mean a decision reads the label"
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "arm_D_net_return": -0.00106892002514547,
+        "arm_D_cutoffs": [
+          "2024-01-03T16:00:00+00:00",
+          "2024-06-13T04:00:00+00:00",
+          "2024-11-21T08:00:00+00:00",
+          "2025-05-08T20:00:00+00:00",
+          "2025-10-11T00:00:00+00:00",
+          "2026-03-23T04:00:00+00:00"
+        ],
+        "stresses": {
+          "MISLABELLED_TRANSITIONS": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "transitions": 228,
+              "transitions_after": 188,
+              "selected": 114,
+              "moved": 111,
+              "positions_that_differ": 654,
+              "shift_observations": 6,
+              "fraction": 0.5,
+              "state_values_unchanged": true,
+              "what_it_isolates": "the model finds the right regimes and dates them wrong. Only the timing of each change moves; the sequence of states does not"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-17T04:00:00+00:00",
+              "2024-11-20T08:00:00+00:00",
+              "2025-05-10T00:00:00+00:00",
+              "2025-10-12T20:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 4,
+            "net_return": -0.00106892002514547,
+            "difference_vs_arm_D": 0.0,
+            "trades": 20
+          },
+          "STALE_FEED": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "stale_stretches": 6,
+              "observations_per_stretch": 42,
+              "observations_frozen": 226,
+              "share_of_tape_frozen": 0.03870525774961466,
+              "what_it_isolates": "a provider that stops updating and then catches up in one step. The catch-up looks like a transition to any arm that acts on one"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-13T04:00:00+00:00",
+              "2024-11-21T08:00:00+00:00",
+              "2025-05-10T08:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": -0.00106892002514547,
+            "difference_vs_arm_D": 0.0,
+            "trades": 20
+          },
+          "MISSING_ENRICHMENT": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "outages": 6,
+              "observations_per_outage": 42,
+              "rows_before": 5839,
+              "rows_after": 5587,
+              "rows_dropped": 252,
+              "share_dropped": 0.04315807501284467,
+              "outage_starts": [
+                1,
+                1203,
+                2661,
+                3759,
+                4421,
+                5240
+              ],
+              "contiguous": true,
+              "dropped_not_zeroed": true,
+              "what_it_isolates": "the provider is silent for a stretch. The arm sees a gap, never a fabricated value, and a gap that covers a transition moves the refresh that would have followed it"
+            },
+            "cutoffs": [
+              "2024-01-08T20:00:00+00:00",
+              "2024-06-13T04:00:00+00:00",
+              "2024-11-21T08:00:00+00:00",
+              "2025-05-08T20:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": 0.014662957707303415,
+            "difference_vs_arm_D": 0.015731877732448885,
+            "trades": 40
+          },
+          "LABEL_PERMUTATION": {
+            "status": "CONTROL",
+            "fidelity": {
+              "namespaces_permuted": 35,
+              "transition_positions_unchanged": true,
+              "expected": "a schedule built from WHERE the state changes must be identical. A difference means something downstream reads the label itself"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-13T04:00:00+00:00",
+              "2024-11-21T08:00:00+00:00",
+              "2025-05-08T20:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "schedule_identical_to_arm_D": true,
+            "expected": true,
+            "reading": "a jump model's state ids are arbitrary. A refresh schedule built from WHERE the state changes must be unchanged by a permutation of the labels; a difference would mean a decision reads the label"
+          }
+        }
+      },
+      {
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "arm_D_net_return": 0.004293468728911565,
+        "arm_D_cutoffs": [
+          "2024-01-03T16:00:00+00:00",
+          "2024-06-13T12:00:00+00:00",
+          "2024-11-28T16:00:00+00:00",
+          "2025-05-09T12:00:00+00:00",
+          "2025-10-11T00:00:00+00:00",
+          "2026-03-23T04:00:00+00:00"
+        ],
+        "stresses": {
+          "MISLABELLED_TRANSITIONS": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "transitions": 186,
+              "transitions_after": 147,
+              "selected": 93,
+              "moved": 90,
+              "positions_that_differ": 431,
+              "shift_observations": 6,
+              "fraction": 0.5,
+              "state_values_unchanged": true,
+              "what_it_isolates": "the model finds the right regimes and dates them wrong. Only the timing of each change moves; the sequence of states does not"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-13T12:00:00+00:00",
+              "2024-11-28T16:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 0,
+            "net_return": 0.004293468728911565,
+            "difference_vs_arm_D": 0.0,
+            "trades": 4
+          },
+          "STALE_FEED": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "stale_stretches": 6,
+              "observations_per_stretch": 42,
+              "observations_frozen": 226,
+              "share_of_tape_frozen": 0.03870525774961466,
+              "what_it_isolates": "a provider that stops updating and then catches up in one step. The catch-up looks like a transition to any arm that acts on one"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-13T12:00:00+00:00",
+              "2024-11-28T16:00:00+00:00",
+              "2025-05-10T08:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": 0.004293468728911565,
+            "difference_vs_arm_D": 0.0,
+            "trades": 4
+          },
+          "MISSING_ENRICHMENT": {
+            "status": "RUN",
+            "arm_mirrored": "D",
+            "fidelity": {
+              "outages": 6,
+              "observations_per_outage": 42,
+              "rows_before": 5839,
+              "rows_after": 5587,
+              "rows_dropped": 252,
+              "share_dropped": 0.04315807501284467,
+              "outage_starts": [
+                1,
+                1203,
+                2661,
+                3759,
+                4421,
+                5240
+              ],
+              "contiguous": true,
+              "dropped_not_zeroed": true,
+              "what_it_isolates": "the provider is silent for a stretch. The arm sees a gap, never a fabricated value, and a gap that covers a transition moves the refresh that would have followed it"
+            },
+            "cutoffs": [
+              "2024-01-08T16:00:00+00:00",
+              "2024-06-13T12:00:00+00:00",
+              "2024-11-28T16:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "cutoffs_moved_vs_arm_D": 1,
+            "net_return": -0.004945983194783676,
+            "difference_vs_arm_D": -0.009239451923695241,
+            "trades": 42
+          },
+          "LABEL_PERMUTATION": {
+            "status": "CONTROL",
+            "fidelity": {
+              "namespaces_permuted": 35,
+              "transition_positions_unchanged": true,
+              "expected": "a schedule built from WHERE the state changes must be identical. A difference means something downstream reads the label itself"
+            },
+            "cutoffs": [
+              "2024-01-03T16:00:00+00:00",
+              "2024-06-13T12:00:00+00:00",
+              "2024-11-28T16:00:00+00:00",
+              "2025-05-09T12:00:00+00:00",
+              "2025-10-11T00:00:00+00:00",
+              "2026-03-23T04:00:00+00:00"
+            ],
+            "schedule_identical_to_arm_D": true,
+            "expected": true,
+            "reading": "a jump model's state ids are arbitrary. A refresh schedule built from WHERE the state changes must be unchanged by a permutation of the labels; a difference would mean a decision reads the label"
+          }
+        }
+      }
+    ],
+    "did_each_stress_actually_bite": {
+      "MISLABELLED_TRANSITIONS": {
+        "cells_run": 3,
+        "cells_where_the_schedule_moved": 2,
+        "cells_where_the_RESULT_moved": 1,
+        "bit_somewhere": true,
+        "vacuous_on": [
+          "A-HMA/SOLUSDT"
+        ],
+        "reading": "a cell whose schedule did not move contributes no evidence about this stress: the arm was re-run to the same number because it deployed the same parameters at the same times"
+      },
+      "STALE_FEED": {
+        "cells_run": 3,
+        "cells_where_the_schedule_moved": 3,
+        "cells_where_the_RESULT_moved": 1,
+        "bit_somewhere": true,
+        "vacuous_on": [],
+        "reading": "a cell whose schedule did not move contributes no evidence about this stress: the arm was re-run to the same number because it deployed the same parameters at the same times"
+      },
+      "MISSING_ENRICHMENT": {
+        "cells_run": 3,
+        "cells_where_the_schedule_moved": 3,
+        "cells_where_the_RESULT_moved": 2,
+        "bit_somewhere": true,
+        "vacuous_on": [],
+        "reading": "a cell whose schedule did not move contributes no evidence about this stress: the arm was re-run to the same number because it deployed the same parameters at the same times"
+      },
+      "LABEL_PERMUTATION": {
+        "is_a_control_that_must_change_nothing": true,
+        "cells_checked": 3,
+        "schedules_identical": 3,
+        "holds_everywhere": true,
+        "reading": "the only one of the four that is SUPPOSED to change nothing. If it ever moved a cutoff, something downstream would be reading a state id as though the integer meant something"
+      }
+    }
+  },
+  "refit_latency": {
+    "measured_seconds_per_fit": 1.462667,
+    "source": "measured_benchmark",
+    "zero_latency_jobs": 0,
+    "per_alpha": {
+      "A-SC": {
+        "decision_bars": "15m",
+        "bar_seconds": 900.0,
+        "refit_latency_in_bars": 0.0016251855555555555,
+        "rounds_to_bars": 0
+      },
+      "A-VWAP": {
+        "decision_bars": "15m",
+        "bar_seconds": 900.0,
+        "refit_latency_in_bars": 0.0016251855555555555,
+        "rounds_to_bars": 0
+      },
+      "A-HMA": {
+        "decision_bars": "1h",
+        "bar_seconds": 3600.0,
+        "refit_latency_in_bars": 0.00040629638888888887,
+        "rounds_to_bars": 0
+      },
+      "A-HASH": {
+        "decision_bars": "15m",
+        "bar_seconds": 900.0,
+        "refit_latency_in_bars": 0.0016251855555555555,
+        "rounds_to_bars": 0
+      }
+    },
+    "rounds_to_zero_bars_on_every_alpha": true,
+    "why_that_is_not_a_free_option": "a fit that costs less than one decision bar still cannot be taken as free: the ACTIVATION delay is separate and is paid in bars, and the arms pay it. Guide L07.3 forbids taking a refit latency of zero in order to fill earlier, and the difference between measuring zero and assuming zero is the whole clause",
+    "activation_delays_are_reported_separately": "configs/lab09_confirmation_results.json cells[].arms[].switch_delays"
+  },
+  "no_retuning_after_a_stress": {
+    "rule": "L09.4.6. A stress that loses is a result, not a reason to change a setting",
+    "this_is_a_COMMITMENT_not_a_measurement": "no artifact can prove a setting was not changed after a result was seen; a rerun would simply overwrite it. What makes the commitment checkable is that every setting is recorded HERE with the seeds, and that any change to one after a stress ran would have to appear in configs/correction_ledger.json with what it invalidated. Claiming this as verified would be the same overreach the forbidden-claims audit exists to catch",
+    "settings_recorded_in_this_artifact": "information_stress.settings",
+    "where_a_change_would_have_to_appear": "configs/correction_ledger.json",
+    "changes_recorded_so_far": "COR-19 changed MISSING_ENRICHMENT from a random 20% drop to contiguous outages. That change was made BEFORE the stress ran, because a smoke test showed the random version produced a schedule identical to the real one on all six cutoffs and therefore could not have produced a different answer"
+  },
+  "wall_seconds": 0.0210484080016613,
+  "lab_run_id": "run-20260911T105323Z-5fcb6b93",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T10:53:24.008983+00:00"
+}

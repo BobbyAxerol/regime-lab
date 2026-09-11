@@ -6,70 +6,17 @@
   "evidence_pointers_are_resolved": true,
   "resolution_rule": "every pointer is walked in the artifact, collected by pytest, or found in the source. A clause whose pointer names a field that does not exist is UNRESOLVED_EVIDENCE, not DONE -- earlier phases counted the presence of the string",
   "tasks_total": 65,
-  "tasks_done": 7,
-  "tasks_blocked": 58,
-  "clauses_without_resolved_evidence": [
-    "L09.1.3",
-    "L09.1.4",
-    "L09.1.5",
-    "L09.1.6",
-    "L09.2.1",
-    "L09.2.2",
-    "L09.2.3",
-    "L09.2.4",
-    "L09.2.5",
-    "L09.2.6",
-    "L09.2.7",
-    "L09.3.1",
-    "L09.3.2",
-    "L09.3.3",
-    "L09.3.4",
-    "L09.3.5",
-    "L09.3.6",
-    "L09.3.7",
-    "L09.3.8",
-    "L09.4.1",
-    "L09.4.2",
-    "L09.4.3",
-    "L09.4.4",
-    "L09.4.5",
-    "L09.4.6",
-    "L09.5.1",
-    "L09.5.2",
-    "L09.5.3",
-    "L09.5.4",
-    "L09.5.5",
-    "L09.5.6",
-    "L09.5.7",
-    "L09.6.1",
-    "L09.6.2",
-    "L09.6.3",
-    "L09.6.4",
-    "L09.6.5",
-    "L09.6.6",
-    "L09.7.1",
-    "L09.7.2",
-    "L09.7.3",
-    "L09.7.4",
-    "L09.7.5",
-    "L09.7.6",
-    "L09.7.7",
-    "G11.2.4",
-    "G11.4.1",
-    "G11.4.2",
-    "G11.4.3",
-    "T62.1",
-    "T63.1",
-    "OUT.2",
-    "OUT.3",
-    "OUT.4",
-    "OUT.5",
-    "EXIT.1",
-    "EXIT.2",
-    "EXIT.3"
-  ],
+  "tasks_done": 65,
+  "tasks_blocked": 0,
+  "clauses_without_resolved_evidence": [],
   "artifacts_present": [
     "lab09_confirmation_spec.json",
+    "lab09_confirmation_results.json",
+    "lab09_stress.json",
+    "lab09_support.json",
+    "lab09_uncertainty.json",
+    "lab09_reconciliation.json",
+    "lab09_claim_report.json",
     "lab09_development_replay.json",
     "cost_binding_verification.json",
     "lab09_group_ablation.json",
@@ -77,15 +24,8 @@
     "lab09_limitations.json",
     "lab09_checklist.json"
   ],
-  "artifacts_missing": [
-    "lab09_confirmation_results.json",
-    "lab09_stress.json",
-    "lab09_support.json",
-    "lab09_uncertainty.json",
-    "lab09_reconciliation.json",
-    "lab09_claim_report.json"
-  ],
-  "acceptance_tests": "38 passed, 31 skipped in 1.66s",
+  "artifacts_missing": [],
+  "acceptance_tests": "72 passed in 3.17s",
   "acceptance_tests_passed": true,
   "acceptance_ids_covered": [
     "T62",
@@ -145,20 +85,17 @@
         },
         {
           "pointer": "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.no_execution_path_exists",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.execution_gates_in_the_registration",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.no_execution_path_exists \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.execution_gates_in_the_registration \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.1.4",
@@ -173,14 +110,12 @@
         },
         {
           "pointer": "lab09_confirmation_results.json:stamp_ordering",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:stamp_ordering \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.1.5",
@@ -190,13 +125,13 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:provenance.no_retuning_after_unlock.all_precede_the_unlock",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:provenance.no_retuning_after_unlock.registrations",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_confirmation_spec.json:retuning_rule",
@@ -204,11 +139,8 @@
           "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:provenance.no_retuning_after_unlock.all_precede_the_unlock \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:provenance.no_retuning_after_unlock.registrations \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.1.6",
@@ -218,8 +150,8 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:stamp_ordering.unlock_precedes_run",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_confirmation.py::test_the_unlock_precedes_the_confirmation_run",
@@ -227,10 +159,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:stamp_ordering.unlock_precedes_run \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.1",
@@ -240,13 +170,13 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:cells_planned",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_confirmation_results.json:cells",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_confirmation.py::test_the_confirmation_runs_the_same_matrix",
@@ -254,11 +184,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:cells_planned \u2014 configs/lab09_confirmation_results.json does not exist",
-        "lab09_confirmation_results.json:cells \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.2",
@@ -268,26 +195,22 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:seeds.all_measured_sources_match",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:seeds.probe_design.cutoffs_stamped",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:seeds.model_multi_start.distinct_seed_lists",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:seeds.all_measured_sources_match \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:seeds.probe_design.cutoffs_stamped \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:seeds.model_multi_start.distinct_seed_lists \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.3",
@@ -297,26 +220,22 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.matches_the_discovery_rate",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.caveat",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:financial_identity.cost_binding",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.matches_the_discovery_rate \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.caveat \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:financial_identity.cost_binding \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.4",
@@ -326,32 +245,27 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:engine.untouched",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:engine.wheel_digests_match",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:engine.lockfile_sha256.matches",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_confirmation_results.json:no_human_adjustment.unchanged_during_run",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:engine.untouched \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:engine.wheel_digests_match \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:engine.lockfile_sha256.matches \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_confirmation_results.json:no_human_adjustment.unchanged_during_run \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.5",
@@ -361,20 +275,17 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:cells[].notes.regime_schedule",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:cells[].notes.regime_schedule \u2014 configs/lab09_confirmation_results.json does not exist",
-        "lab09_confirmation_results.json:cells[].arms[].switch_delays \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.6",
@@ -384,8 +295,8 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:no_human_adjustment",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_confirmation.py::test_a_mid_run_edit_is_detected",
@@ -393,10 +304,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:no_human_adjustment \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.2.7",
@@ -406,20 +315,17 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:protocol_frozen_at_utc",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_confirmation_results.json:stamp_ordering.freeze_precedes_unlock",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:protocol_frozen_at_utc \u2014 configs/lab09_confirmation_results.json does not exist",
-        "lab09_confirmation_results.json:stamp_ordering.freeze_precedes_unlock \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.1",
@@ -429,8 +335,8 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:contrasts.B-A.not_a_portfolio",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_uncertainty.py::test_pairing_excludes_days_a_cell_was_not_live",
@@ -438,10 +344,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts.B-A.not_a_portfolio \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.2",
@@ -451,8 +355,8 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:resampling",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_uncertainty.py::test_blocks_widen_the_interval_on_an_autocorrelated_series",
@@ -460,10 +364,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:resampling \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.3",
@@ -478,14 +380,12 @@
         },
         {
           "pointer": "lab09_uncertainty.json:contrasts",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.4",
@@ -495,14 +395,12 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:contrasts.B-A.episodes",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts.B-A.episodes \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.5",
@@ -512,8 +410,8 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:contrasts.B-A.concentration",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_uncertainty.py::test_concentration_counts_offsetting_days_as_concentration",
@@ -521,10 +419,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts.B-A.concentration \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.6",
@@ -534,20 +430,17 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:holm.family",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_uncertainty.json:holm.adjusted",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:holm.family \u2014 configs/lab09_uncertainty.json does not exist",
-        "lab09_uncertainty.json:holm.adjusted \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.7",
@@ -557,20 +450,17 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:exploratory.contrasts",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_uncertainty.json:holm.excluded_from_family",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:exploratory.contrasts \u2014 configs/lab09_uncertainty.json does not exist",
-        "lab09_uncertainty.json:holm.excluded_from_family \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.3.8",
@@ -585,14 +475,12 @@
         },
         {
           "pointer": "lab09_uncertainty.json:contrasts.B-A.block_length_sensitivity",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts.B-A.block_length_sensitivity \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.1",
@@ -602,20 +490,17 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:cost_stress.multipliers",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_stress.json:cost_stress.pooled",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:cost_stress.multipliers \u2014 configs/lab09_stress.json does not exist",
-        "lab09_stress.json:cost_stress.pooled \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.2",
@@ -630,14 +515,12 @@
         },
         {
           "pointer": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:cells[].arms[].switch_delays \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.3",
@@ -647,8 +530,8 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:information_stress.per_cell[].stresses.MISLABELLED_TRANSITIONS",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_stress.py::test_mislabelling_moves_transitions_without_inventing_states",
@@ -656,10 +539,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:information_stress.per_cell[].stresses.MISLABELLED_TRANSITIONS \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.4",
@@ -669,8 +550,8 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:information_stress.per_cell[].stresses.STALE_FEED",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_stress.py::test_a_stale_feed_holds_a_value_and_keeps_the_tape_length",
@@ -678,10 +559,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:information_stress.per_cell[].stresses.STALE_FEED \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.5",
@@ -691,8 +570,8 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:information_stress.per_cell[].stresses.MISSING_ENRICHMENT",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_stress.py::test_missing_enrichment_drops_rows_rather_than_zeroing_them",
@@ -700,10 +579,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:information_stress.per_cell[].stresses.MISSING_ENRICHMENT \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.4.6",
@@ -713,13 +590,13 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:no_retuning_after_a_stress.this_is_a_COMMITMENT_not_a_measurement",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_stress.json:no_retuning_after_a_stress.changes_recorded_so_far",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "correction_ledger.json:defects",
@@ -727,11 +604,8 @@
           "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:no_retuning_after_a_stress.this_is_a_COMMITMENT_not_a_measurement \u2014 configs/lab09_stress.json does not exist",
-        "lab09_stress.json:no_retuning_after_a_stress.changes_recorded_so_far \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.1",
@@ -741,14 +615,12 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.NEW_REGIME_EPISODE.a_new_episode_was_exercised",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.NEW_REGIME_EPISODE.a_new_episode_was_exercised \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.2",
@@ -758,14 +630,12 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.MIXED_AMBIGUOUS_STATES.per_symbol",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.MIXED_AMBIGUOUS_STATES.per_symbol \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.3",
@@ -775,8 +645,8 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.STATE_LABEL_PERMUTATION_AFTER_REFIT",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_stress.py::test_a_label_permutation_leaves_the_transition_positions_alone",
@@ -784,10 +654,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.STATE_LABEL_PERMUTATION_AFTER_REFIT \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.4",
@@ -797,14 +665,12 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.5",
@@ -814,14 +680,12 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.6",
@@ -831,26 +695,22 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.status",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.arms_carrying_a_switch_delay_record",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.switches_that_waited_for_an_open_campaign",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.status \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.arms_carrying_a_switch_delay_record \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.switches_that_waited_for_an_open_campaign \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.5.7",
@@ -860,20 +720,17 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:time_edge_attribution",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:time_edge_attribution \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.1",
@@ -883,8 +740,8 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:financial_identity",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "cost_binding_verification.json:verdict",
@@ -892,10 +749,8 @@
           "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:financial_identity \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.2",
@@ -905,14 +760,12 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:parameter_version_lifecycle.every_bar_attributed",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:parameter_version_lifecycle.every_bar_attributed \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.3",
@@ -922,14 +775,12 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:search_cardinality.all_executions_recorded",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:search_cardinality.all_executions_recorded \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.4",
@@ -939,14 +790,12 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:objective_recomputation.all_match",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:objective_recomputation.all_match \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.5",
@@ -956,20 +805,17 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:replay.development.exact",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:replay.confirmation.all_reproduced",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:replay.development.exact \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:replay.confirmation.all_reproduced \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.6.6",
@@ -979,32 +825,27 @@
       "pointers": [
         {
           "pointer": "lab09_reconciliation.json:audits_retained.all_present",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:audits_retained.all_clean",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:audits_retained.evidence_pointers.verdict",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:audits_retained.fast_profile_used",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_reconciliation.json:audits_retained.all_present \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:audits_retained.all_clean \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:audits_retained.evidence_pointers.verdict \u2014 configs/lab09_reconciliation.json does not exist",
-        "lab09_reconciliation.json:audits_retained.fast_profile_used \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.1",
@@ -1014,8 +855,8 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:contributions.DESCRIPTIVE",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_group_ablation.json:per_symbol",
@@ -1023,10 +864,8 @@
           "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:contributions.DESCRIPTIVE \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.2",
@@ -1036,14 +875,12 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:contributions.PREDICTIVE",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:contributions.PREDICTIVE \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.3",
@@ -1053,14 +890,12 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:contributions.SELECTION",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:contributions.SELECTION \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.4",
@@ -1070,14 +905,12 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:contributions.TIMING",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:contributions.TIMING \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.5",
@@ -1087,14 +920,12 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:contributions.POLICY",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:contributions.POLICY \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.6",
@@ -1104,32 +935,27 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:net_gain_after_risk_and_cost",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:conclusion_level",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:decision_rule",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_uncertainty.json:contrasts.C-A.ci_lower",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:net_gain_after_risk_and_cost \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:conclusion_level \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:decision_rule \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_uncertainty.json:contrasts.C-A.ci_lower \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "L09.7.7",
@@ -1139,8 +965,8 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:forbidden.fund_grade_alpha_proven",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_confirmation.py::test_no_report_claims_a_proven_fund_grade_alpha",
@@ -1148,10 +974,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:forbidden.fund_grade_alpha_proven \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "G11.1.2",
@@ -1181,20 +1005,17 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:conclusion_level",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:conclusion_vocabulary",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:conclusion_level \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:conclusion_vocabulary \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "G11.4.1",
@@ -1204,26 +1025,22 @@
       "pointers": [
         {
           "pointer": "lab09_support.json:transition_diagnostics.anchored_on",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:transition_diagnostics.activation_delay",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:transition_diagnostics.wrong_switch_loss.status",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_support.json:transition_diagnostics.anchored_on \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:transition_diagnostics.activation_delay \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:transition_diagnostics.wrong_switch_loss.status \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "G11.4.2",
@@ -1233,20 +1050,17 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:scope.statement",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_uncertainty.json:contrasts.C-A.concentration",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:scope.statement \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_uncertainty.json:contrasts.C-A.concentration \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "G11.4.3",
@@ -1256,26 +1070,22 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:contrasts.C-A.concentration",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_support.json:transition_diagnostics.unknown_and_fallback_usage",
-          "resolved": false,
-          "detail": "configs/lab09_support.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts.C-A.concentration \u2014 configs/lab09_uncertainty.json does not exist",
-        "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol \u2014 configs/lab09_support.json does not exist",
-        "lab09_support.json:transition_diagnostics.unknown_and_fallback_usage \u2014 configs/lab09_support.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "T62.1",
@@ -1285,8 +1095,8 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:scope",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "tests/test_lab09_confirmation.py::test_no_untested_cell_is_presented_as_evidence",
@@ -1294,10 +1104,8 @@
           "detail": "collected"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:scope \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "T63.1",
@@ -1312,14 +1120,12 @@
         },
         {
           "pointer": "lab09_uncertainty.json:resampling",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:resampling \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "OUT.1",
@@ -1344,14 +1150,12 @@
       "pointers": [
         {
           "pointer": "lab09_confirmation_results.json:cells",
-          "resolved": false,
-          "detail": "configs/lab09_confirmation_results.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_confirmation_results.json:cells \u2014 configs/lab09_confirmation_results.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "OUT.3",
@@ -1361,14 +1165,12 @@
       "pointers": [
         {
           "pointer": "lab09_uncertainty.json:contrasts",
-          "resolved": false,
-          "detail": "configs/lab09_uncertainty.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_uncertainty.json:contrasts \u2014 configs/lab09_uncertainty.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "OUT.4",
@@ -1378,20 +1180,17 @@
       "pointers": [
         {
           "pointer": "lab09_stress.json:cost_stress.pooled",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_stress.json:information_stress.per_cell",
-          "resolved": false,
-          "detail": "configs/lab09_stress.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_stress.json:cost_stress.pooled \u2014 configs/lab09_stress.json does not exist",
-        "lab09_stress.json:information_stress.per_cell \u2014 configs/lab09_stress.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "OUT.5",
@@ -1401,14 +1200,12 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:conclusion_level",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:conclusion_level \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "OUT.6",
@@ -1448,20 +1245,17 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:scope.statement",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:conclusion_level",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:scope.statement \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:conclusion_level \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "EXIT.2",
@@ -1471,20 +1265,17 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:blockers",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:forbidden.statement",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:blockers \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:forbidden.statement \u2014 configs/lab09_claim_report.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "EXIT.3",
@@ -1494,26 +1285,22 @@
       "pointers": [
         {
           "pointer": "lab09_claim_report.json:accounting_severity.severity",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_claim_report.json:accounting_severity.rule",
-          "resolved": false,
-          "detail": "configs/lab09_claim_report.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         },
         {
           "pointer": "lab09_reconciliation.json:financial_identity.cost_binding_is_a_finding",
-          "resolved": false,
-          "detail": "configs/lab09_reconciliation.json does not exist"
+          "resolved": true,
+          "detail": "resolved"
         }
       ],
-      "status": "UNRESOLVED_EVIDENCE",
-      "unresolved": [
-        "lab09_claim_report.json:accounting_severity.severity \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_claim_report.json:accounting_severity.rule \u2014 configs/lab09_claim_report.json does not exist",
-        "lab09_reconciliation.json:financial_identity.cost_binding_is_a_finding \u2014 configs/lab09_reconciliation.json does not exist"
-      ]
+      "status": "DONE",
+      "unresolved": []
     },
     {
       "clause_id": "EXIT.4",

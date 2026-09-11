@@ -1,0 +1,1312 @@
+{
+  "schema": "crypto_regime_lab.lab09_support.v1",
+  "generated_at_utc": "2026-09-11T10:53:36.770177+00:00",
+  "window": [
+    "2024-01-01",
+    "2026-08-31"
+  ],
+  "situations": {
+    "NEW_REGIME_EPISODE": {
+      "per_symbol": {
+        "BTCUSDT": {
+          "status": "MEASURED",
+          "emissions": 5839,
+          "quality_status_counts": {
+            "OK": 5765,
+            "UNKNOWN_STATE": 74
+          },
+          "novel_share": 0.012673402979962322,
+          "development_novel_share": 0.015370567645716026,
+          "namespaces": 35,
+          "switches_within_namespaces": 219
+        },
+        "ETHUSDT": {
+          "status": "MEASURED",
+          "emissions": 5839,
+          "quality_status_counts": {
+            "OK": 5764,
+            "UNKNOWN_STATE": 75
+          },
+          "novel_share": 0.012844665182394245,
+          "development_novel_share": 0.01765332521686197,
+          "namespaces": 35,
+          "switches_within_namespaces": 228
+        },
+        "SOLUSDT": {
+          "status": "MEASURED",
+          "emissions": 5839,
+          "quality_status_counts": {
+            "OK": 5783,
+            "UNKNOWN_STATE": 56
+          },
+          "novel_share": 0.009590683336187704,
+          "development_novel_share": 0.014914016131486836,
+          "namespaces": 35,
+          "switches_within_namespaces": 186
+        },
+        "BNBUSDT": {
+          "status": "MEASURED",
+          "emissions": 5839,
+          "quality_status_counts": {
+            "OK": 5776,
+            "UNKNOWN_STATE": 63
+          },
+          "novel_share": 0.010789518753211167,
+          "development_novel_share": 0.020697001978389896,
+          "namespaces": 35,
+          "switches_within_namespaces": 214
+        },
+        "DOGEUSDT": {
+          "status": "MEASURED",
+          "emissions": 5839,
+          "quality_status_counts": {
+            "OK": 5765,
+            "UNKNOWN_STATE": 74
+          },
+          "novel_share": 0.012673402979962322,
+          "development_novel_share": 0.01430528077918125,
+          "namespaces": 35,
+          "switches_within_namespaces": 236
+        }
+      },
+      "symbols_with_more_novelty_than_development": 0,
+      "symbols_measured": 5,
+      "a_new_episode_was_exercised": true,
+      "rule": "UNKNOWN_STATE comes from the novelty threshold each model fitted on its own training window (LAB-05 L05.3). It is the model saying it has not seen this, not the lab deciding after the fact"
+    },
+    "MIXED_AMBIGUOUS_STATES": {
+      "per_symbol": {
+        "BTCUSDT": {
+          "observations": 5839,
+          "median_second_best_gap": 1.1558606809357241,
+          "p10_second_best_gap": 0.3425866360309957,
+          "quality_status_counts": {
+            "OK": 5765,
+            "UNKNOWN_STATE": 74
+          },
+          "reading": "the margin between the chosen state and the runner-up. The bottom decile is where the label is close to arbitrary, and a decision that reads the label is least supported there",
+          "reference_p10_from_development": 0.45894484372236455,
+          "share_below_development_p10": 0.14026374379174517,
+          "more_ambiguous_than_development": true
+        },
+        "ETHUSDT": {
+          "observations": 5839,
+          "median_second_best_gap": 1.1501582683318239,
+          "p10_second_best_gap": 0.3006224101336086,
+          "quality_status_counts": {
+            "OK": 5764,
+            "UNKNOWN_STATE": 75
+          },
+          "reading": "the margin between the chosen state and the runner-up. The bottom decile is where the label is close to arbitrary, and a decision that reads the label is least supported there",
+          "reference_p10_from_development": 0.3546019525288825,
+          "share_below_development_p10": 0.11834218188045899,
+          "more_ambiguous_than_development": true
+        },
+        "SOLUSDT": {
+          "observations": 5839,
+          "median_second_best_gap": 1.1608310277871168,
+          "p10_second_best_gap": 0.3629153887654052,
+          "quality_status_counts": {
+            "OK": 5783,
+            "UNKNOWN_STATE": 56
+          },
+          "reading": "the margin between the chosen state and the runner-up. The bottom decile is where the label is close to arbitrary, and a decision that reads the label is least supported there",
+          "reference_p10_from_development": 0.42353273141406056,
+          "share_below_development_p10": 0.11817091967802706,
+          "more_ambiguous_than_development": true
+        },
+        "BNBUSDT": {
+          "observations": 5839,
+          "median_second_best_gap": 1.112180368272496,
+          "p10_second_best_gap": 0.29376614725137157,
+          "quality_status_counts": {
+            "OK": 5776,
+            "UNKNOWN_STATE": 63
+          },
+          "reading": "the margin between the chosen state and the runner-up. The bottom decile is where the label is close to arbitrary, and a decision that reads the label is least supported there",
+          "reference_p10_from_development": 0.4341089504749951,
+          "share_below_development_p10": 0.14968316492550093,
+          "more_ambiguous_than_development": true
+        },
+        "DOGEUSDT": {
+          "observations": 5839,
+          "median_second_best_gap": 1.1779548083971283,
+          "p10_second_best_gap": 0.3126112273117594,
+          "quality_status_counts": {
+            "OK": 5765,
+            "UNKNOWN_STATE": 74
+          },
+          "reading": "the margin between the chosen state and the runner-up. The bottom decile is where the label is close to arbitrary, and a decision that reads the label is least supported there",
+          "reference_p10_from_development": 0.5449765701090734,
+          "share_below_development_p10": 0.17006336701489982,
+          "more_ambiguous_than_development": true
+        }
+      },
+      "symbols_more_ambiguous_than_development": 5,
+      "symbols_measured": 5,
+      "reference": "each symbol's own DEVELOPMENT tenth percentile of the second-best gap. Comparing a tape against its own decile would report 10% by construction and measure nothing"
+    },
+    "STATE_LABEL_PERMUTATION_AFTER_REFIT": {
+      "status": "CHECKED",
+      "cells_checked": 3,
+      "schedules_identical": 3,
+      "all_identical": true,
+      "where": "configs/lab09_stress.json information_stress LABEL_PERMUTATION",
+      "reading": "the refresh schedule is built from WHERE the state changes. Permuting the ids after a refit must leave it identical; a difference would mean a decision reads the integer"
+    },
+    "POLICY_ON_THE_CONFIRMATION_INTERVAL": {
+      "decisions": 5839,
+      "decision_counts": {
+        "FALLBACK_NOVEL_STATE": 74,
+        "KEEP_INCUMBENT": 37,
+        "NO_SUPPORTED_CANDIDATE": 5728
+      },
+      "no_challenger_qualified": {
+        "occurrences": 5728,
+        "share": 0.9809898955300566,
+        "exercised": true,
+        "reading": "the inaction region binding is a valid outcome, not a failure. It is reported with its share so a reader can see whether the policy ever had a decision to make"
+      },
+      "novel_state_fallback": {
+        "occurrences": 74,
+        "exercised": true,
+        "reading": "the policy met a state it could not use and fell back rather than acting"
+      },
+      "switches_executed": 0,
+      "bank": {
+        "cutoffs": 6,
+        "sizes": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "staleness_at_interval_end": {
+          "last_bank_cutoff": "2026-06-19 00:00:00+00:00",
+          "interval_end": "2026-08-31 23:45:00",
+          "age_at_interval_end_days": 73.0,
+          "older_than_the_registered_comparator_cadence": true,
+          "comparator_cadence_days": 56
+        }
+      }
+    },
+    "CAMPAIGN_NOT_FLAT": {
+      "status": "MEASURED",
+      "arms_run": 75,
+      "arms_carrying_a_switch_delay_record": 75,
+      "switches_requested_across_every_arm": 375,
+      "arms_with_a_delayed_switch": 75,
+      "blocked_bars_by_reason_across_every_arm": {
+        "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 387458,
+        "WAITING_FOR_WARM_INDICATORS": 46859
+      },
+      "switches_that_waited_for_an_open_campaign": 105,
+      "switches_that_waited_for_warm_indicators": 306,
+      "a_switch_waited_for_an_open_campaign": true,
+      "measured_from": "blocked_bars_by_reason, accumulated while each switch waited. The blocked_reason field is cleared on activation, so a histogram of final reasons cannot answer this",
+      "per_arm": [
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BTCUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1380,
+          "max_blocked_bars": 350,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 62,
+            "WAITING_FOR_WARM_INDICATORS": 1318
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BTCUSDT",
+          "arm": "B",
+          "blocked_bars_total": 1420,
+          "max_blocked_bars": 340,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 93,
+            "WAITING_FOR_WARM_INDICATORS": 1327
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BTCUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1422,
+          "max_blocked_bars": 390,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1422
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BTCUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1532,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 352,
+            "WAITING_FOR_WARM_INDICATORS": 1180
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BTCUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1532,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 352,
+            "WAITING_FOR_WARM_INDICATORS": 1180
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "ETHUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1810,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 29,
+            "WAITING_FOR_WARM_INDICATORS": 1781
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "ETHUSDT",
+          "arm": "B",
+          "blocked_bars_total": 1820,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 15,
+            "WAITING_FOR_WARM_INDICATORS": 1805
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "ETHUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1426,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1426
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "ETHUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1399,
+          "max_blocked_bars": 410,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1399
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "ETHUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1399,
+          "max_blocked_bars": 410,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1399
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "SOLUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1650,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 11,
+            "WAITING_FOR_WARM_INDICATORS": 1639
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "SOLUSDT",
+          "arm": "B",
+          "blocked_bars_total": 1790,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 27,
+            "WAITING_FOR_WARM_INDICATORS": 1763
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "SOLUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1680,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 2,
+            "WAITING_FOR_WARM_INDICATORS": 1678
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "SOLUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1780,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1780
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "SOLUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1780,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1780
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BNBUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1469,
+          "max_blocked_bars": 390,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 168,
+            "WAITING_FOR_WARM_INDICATORS": 1301
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BNBUSDT",
+          "arm": "B",
+          "blocked_bars_total": 1470,
+          "max_blocked_bars": 390,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 45,
+            "WAITING_FOR_WARM_INDICATORS": 1425
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BNBUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1950,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 267,
+            "WAITING_FOR_WARM_INDICATORS": 1683
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BNBUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1837,
+          "max_blocked_bars": 567,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 538,
+            "WAITING_FOR_WARM_INDICATORS": 1299
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "BNBUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1837,
+          "max_blocked_bars": 567,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 538,
+            "WAITING_FOR_WARM_INDICATORS": 1299
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "DOGEUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1952,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 135,
+            "WAITING_FOR_WARM_INDICATORS": 1817
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "DOGEUSDT",
+          "arm": "B",
+          "blocked_bars_total": 1890,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 118,
+            "WAITING_FOR_WARM_INDICATORS": 1772
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "DOGEUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1760,
+          "max_blocked_bars": 420,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 10,
+            "WAITING_FOR_WARM_INDICATORS": 1750
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "DOGEUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1760,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1760
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-HMA",
+          "symbol": "DOGEUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1760,
+          "max_blocked_bars": 430,
+          "blocked_bars_by_reason": {
+            "WAITING_FOR_WARM_INDICATORS": 1760
+          },
+          "switches_that_waited_for_an_open_campaign": 0,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "BTCUSDT",
+          "arm": "A",
+          "blocked_bars_total": 1187,
+          "max_blocked_bars": 694,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 1019,
+            "WAITING_FOR_WARM_INDICATORS": 168
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "BTCUSDT",
+          "arm": "B",
+          "blocked_bars_total": 983,
+          "max_blocked_bars": 689,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 937,
+            "WAITING_FOR_WARM_INDICATORS": 46
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 2,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "BTCUSDT",
+          "arm": "C",
+          "blocked_bars_total": 751,
+          "max_blocked_bars": 552,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 575,
+            "WAITING_FOR_WARM_INDICATORS": 176
+          },
+          "switches_that_waited_for_an_open_campaign": 2,
+          "switches_that_waited_for_warm_indicators": 4,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "BTCUSDT",
+          "arm": "D",
+          "blocked_bars_total": 744,
+          "max_blocked_bars": 352,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 698,
+            "WAITING_FOR_WARM_INDICATORS": 46
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 2,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "BTCUSDT",
+          "arm": "E",
+          "blocked_bars_total": 744,
+          "max_blocked_bars": 352,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 698,
+            "WAITING_FOR_WARM_INDICATORS": 46
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 2,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "ETHUSDT",
+          "arm": "A",
+          "blocked_bars_total": 4907,
+          "max_blocked_bars": 3430,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 4801,
+            "WAITING_FOR_WARM_INDICATORS": 106
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "ETHUSDT",
+          "arm": "B",
+          "blocked_bars_total": 662,
+          "max_blocked_bars": 363,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 616,
+            "WAITING_FOR_WARM_INDICATORS": 46
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 2,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "ETHUSDT",
+          "arm": "C",
+          "blocked_bars_total": 4704,
+          "max_blocked_bars": 4239,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 4583,
+            "WAITING_FOR_WARM_INDICATORS": 121
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "ETHUSDT",
+          "arm": "D",
+          "blocked_bars_total": 408,
+          "max_blocked_bars": 314,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 296,
+            "WAITING_FOR_WARM_INDICATORS": 112
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "ETHUSDT",
+          "arm": "E",
+          "blocked_bars_total": 408,
+          "max_blocked_bars": 314,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 296,
+            "WAITING_FOR_WARM_INDICATORS": 112
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 5,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "SOLUSDT",
+          "arm": "A",
+          "blocked_bars_total": 330,
+          "max_blocked_bars": 108,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 108,
+            "WAITING_FOR_WARM_INDICATORS": 222
+          },
+          "switches_that_waited_for_an_open_campaign": 1,
+          "switches_that_waited_for_warm_indicators": 4,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "SOLUSDT",
+          "arm": "B",
+          "blocked_bars_total": 163,
+          "max_blocked_bars": 79,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 124,
+            "WAITING_FOR_WARM_INDICATORS": 39
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "SOLUSDT",
+          "arm": "C",
+          "blocked_bars_total": 1167,
+          "max_blocked_bars": 708,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 1054,
+            "WAITING_FOR_WARM_INDICATORS": 113
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "SOLUSDT",
+          "arm": "D",
+          "blocked_bars_total": 1169,
+          "max_blocked_bars": 713,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 1081,
+            "WAITING_FOR_WARM_INDICATORS": 88
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        },
+        {
+          "alpha_id": "A-SC",
+          "symbol": "SOLUSDT",
+          "arm": "E",
+          "blocked_bars_total": 1169,
+          "max_blocked_bars": 713,
+          "blocked_bars_by_reason": {
+            "TRANSITION_BLOCKED_OPEN_CAMPAIGN": 1081,
+            "WAITING_FOR_WARM_INDICATORS": 88
+          },
+          "switches_that_waited_for_an_open_campaign": 3,
+          "switches_that_waited_for_warm_indicators": 3,
+          "final_reason_counts": {
+            "none": 5
+          },
+          "final_reason_note": "`none` here means the switch eventually activated, not that it never waited. The waiting is in blocked_bars_by_reason",
+          "never_effected": []
+        }
+      ],
+      "rule": "guide 9.5: an open campaign keeps the parameters it entered with and is never closed early to let a switch land. The wait is the evidence that the rule was exercised rather than merely written"
+    }
+  },
+  "time_edge_attribution": {
+    "pooled_mean_daily_difference": {
+      "B-A": -3.215308624969489e-06,
+      "C-A": -1.4165604039408482e-05,
+      "D-B": 1.0643344987484276e-06,
+      "D-C": 1.201462991318742e-05,
+      "(D-C)-(B-A)": 1.522993853815691e-05
+    },
+    "cells_per_contrast": {
+      "B-A": 15,
+      "C-A": 15,
+      "D-B": 15,
+      "D-C": 15,
+      "(D-C)-(B-A)": 15
+    },
+    "timing_contribution": -1.4165604039408482e-05,
+    "selection_contribution": -3.215308624969489e-06,
+    "timing_larger_than_selection": true,
+    "interaction": 1.522993853815691e-05,
+    "reading": "C-A isolates WHEN the parameters were refreshed, holding the selector fixed. B-A isolates WHICH parameters, holding the calendar fixed. A time-edge claim needs C-A, not the sum"
+  },
+  "transition_diagnostics": {
+    "anchored_on": "transitions the model DETECTED, which is what a deployment acts on. Nothing here is anchored on a retrospective true start, which is only knowable after the fact (guide 11.4)",
+    "activation_delay": {
+      "arms": 75,
+      "total_blocked_bars": 434317,
+      "max_blocked_bars": 46032
+    },
+    "transition_turnover": {
+      "parameter_moves_measured": 375,
+      "mean_schema_distance": 0.22844863815773722,
+      "max_schema_distance": 0.7701298701298701,
+      "units": "the selector's own schema distance, the same metric it uses to decide"
+    },
+    "avoided_or_refused_switches": {
+      "requested": 375,
+      "effected": 362,
+      "refused": 13,
+      "reading": "a requested version that never took effect is the flat-book or warm-up gate holding it, not a lost trade"
+    },
+    "stale_incumbent": {
+      "longest_run_on_one_version_bars": 93504,
+      "median_longest_run_bars": 18468.0,
+      "note": "each arm deploys its versions contiguously, so the bars on a version ARE its dwell"
+    },
+    "unknown_and_fallback_usage": {
+      "unknown_state_emissions": 342,
+      "emissions": 29195,
+      "share": 0.011714334646343551
+    },
+    "parameter_rank_stability": {
+      "same_point_as_previous_cutoff": 97,
+      "cutoff_pairs": 375,
+      "share_unchanged": 0.25866666666666666,
+      "reading": "how often the selector re-chose the same point at the next cutoff. A selector that never repeats is chasing noise; one that always repeats is not selecting"
+    },
+    "wrong_switch_loss": {
+      "status": "NOT_MEASURED_AT_SWITCH_LEVEL",
+      "why": "a per-switch loss needs a counterfactual account that held the incumbent through that switch and nothing else, which is one extra engine pass per switch",
+      "what_stands_in": "the arm-level contrasts. C-A and D-B already answer the same question in aggregate: whether switching on the regime beat not switching on it",
+      "not_reported_as_zero": true
+    },
+    "per_arm": [
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1380,
+        "activation_delay_bars_max": 350,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4520
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 1420,
+        "activation_delay_bars_max": 340,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 8850
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1422,
+        "activation_delay_bars_max": 390,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4172
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1532,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4202
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1532,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4202
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1810,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4680
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 1820,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4680
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1426,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4146
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1399,
+        "activation_delay_bars_max": 410,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4159
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1399,
+        "activation_delay_bars_max": 410,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4159
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1650,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4690
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 1790,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 8520
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1680,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4358
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1780,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4358
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1780,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4358
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1469,
+        "activation_delay_bars_max": 390,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4691
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 1470,
+        "activation_delay_bars_max": 390,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4660
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1950,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4336
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1837,
+        "activation_delay_bars_max": 567,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 8188
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1837,
+        "activation_delay_bars_max": 567,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 8188
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1952,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4722
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 1890,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 8940
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1760,
+        "activation_delay_bars_max": 420,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4318
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1760,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4308
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1760,
+        "activation_delay_bars_max": 430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 4308
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 1187,
+        "activation_delay_bars_max": 694,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 17649
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 983,
+        "activation_delay_bars_max": 689,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 93504
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 751,
+        "activation_delay_bars_max": 552,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 16784
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 744,
+        "activation_delay_bars_max": 352,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 93504
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 744,
+        "activation_delay_bars_max": 352,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 93504
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 4907,
+        "activation_delay_bars_max": 3430,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 19945
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 662,
+        "activation_delay_bars_max": 363,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 93504
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 4704,
+        "activation_delay_bars_max": 4239,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 20107
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 408,
+        "activation_delay_bars_max": 314,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 62328
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 408,
+        "activation_delay_bars_max": 314,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 62328
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "A",
+        "activation_delay_bars_total": 330,
+        "activation_delay_bars_max": 108,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 17388
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "B",
+        "activation_delay_bars_total": 163,
+        "activation_delay_bars_max": 79,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 93504
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "C",
+        "activation_delay_bars_total": 1167,
+        "activation_delay_bars_max": 708,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 16342
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "D",
+        "activation_delay_bars_total": 1169,
+        "activation_delay_bars_max": 713,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 31155
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "E",
+        "activation_delay_bars_total": 1169,
+        "activation_delay_bars_max": 713,
+        "refused_switches": 0,
+        "longest_run_on_one_version_bars": 31155
+      }
+    ]
+  },
+  "unchecked_is_not_absent": "every situation above reports MEASURED/CHECKED or a reason. A situation that did not occur is a finding; one that was not looked for is a gap, and the two are never merged"
+}

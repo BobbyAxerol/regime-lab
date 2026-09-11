@@ -1,6 +1,6 @@
 {
   "schema": "crypto_regime_lab.guide_section_coverage.v1",
-  "generated_at_utc": "2026-09-11T06:47:47.633641+00:00",
+  "generated_at_utc": "2026-09-11T10:54:44.836926+00:00",
   "guide": "QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md",
   "question": "which numbered guide subsection does nothing in this lab reference? That is the blind spot the phase audits cannot see, and four findings have come out of it",
   "sections_total": 55,
@@ -229,9 +229,10 @@
         "reports/lab02_report.md",
         "src/crypto_regime_lab/alphas/__pycache__/legacy.cpython-312.pyc",
         "src/crypto_regime_lab/alphas/legacy.py",
-        "tests/test_lab02_gaps.py"
+        "tests/test_lab02_gaps.py",
+        "tests/test_lab08_factorial.py"
       ],
-      "reference_count": 6,
+      "reference_count": 7,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -360,10 +361,12 @@
       "title": "Protective-order fidelity",
       "referenced_by": [
         "configs/protective_order_fidelity.json",
+        "reports/improvement_opinions.md",
+        "scripts/run_lab09.py",
         "scripts/verify_execution_resolution.py",
         "tests/test_guide_contracts.py"
       ],
-      "reference_count": 3,
+      "reference_count": 5,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -532,12 +535,12 @@
         "configs/lab04_task_audit.json",
         "configs/lab08_factorial_full.json",
         "configs/lab08_factorial_pilot.json",
+        "configs/lab09_confirmation_results.json",
         "scripts/audit_lab04.py",
         "src/crypto_regime_lab/experiments/__pycache__/calendar_baseline.cpython-312.pyc",
-        "src/crypto_regime_lab/experiments/__pycache__/evaluator.cpython-312.pyc",
-        "src/crypto_regime_lab/experiments/calendar_baseline.py"
+        "src/crypto_regime_lab/experiments/__pycache__/evaluator.cpython-312.pyc"
       ],
-      "reference_count": 15,
+      "reference_count": 16,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -551,12 +554,12 @@
         "configs/lab06_bank_registry.json",
         "configs/lab06_checklist.json",
         "configs/lab06_task_audit.json",
+        "configs/lab09_policy_bank_registry.json",
         "reports/lab06_report.md",
         "scripts/audit_lab06.py",
-        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc",
-        "src/crypto_regime_lab/evidence/glossary.py"
+        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc"
       ],
-      "reference_count": 10,
+      "reference_count": 11,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -613,7 +616,7 @@
         "configs/lab08_data_ablation.json",
         "configs/lab08_discovery.json"
       ],
-      "reference_count": 52,
+      "reference_count": 53,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -670,7 +673,7 @@
         "configs/lab08_solusdt_regime_model_registry.json",
         "configs/lab09_bnbusdt_regime_model_registry.json"
       ],
-      "reference_count": 21,
+      "reference_count": 22,
       "in_a_checklist": false,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -702,11 +705,11 @@
         "configs/lab06_checklist.json",
         "configs/lab06_response_model.json",
         "configs/lab06_task_audit.json",
+        "configs/lab09_policy_response_model.json",
         "reports/lab06_report.md",
-        "scripts/audit_lab06.py",
-        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc"
+        "scripts/audit_lab06.py"
       ],
-      "reference_count": 11,
+      "reference_count": 12,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -722,10 +725,10 @@
         "configs/lab06_policy_spec.json",
         "configs/lab06_response_model.json",
         "configs/lab06_task_audit.json",
-        "reports/lab06_report.md",
-        "scripts/audit_lab06.py"
+        "configs/lab09_policy_decision_ledger.json",
+        "configs/lab09_policy_policy_spec.json"
       ],
-      "reference_count": 13,
+      "reference_count": 16,
       "in_a_checklist": true,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -739,12 +742,12 @@
         "configs/lab06_checklist.json",
         "configs/lab06_policy_spec.json",
         "configs/lab06_task_audit.json",
+        "configs/lab09_policy_policy_spec.json",
         "reports/lab06_report.md",
         "scripts/audit_lab06.py",
-        "scripts/run_response_policy.py",
-        "src/crypto_regime_lab/policy/__pycache__/clocks.cpython-312.pyc"
+        "scripts/run_response_policy.py"
       ],
-      "reference_count": 9,
+      "reference_count": 10,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -760,10 +763,10 @@
         "configs/lab06_task_audit.json",
         "configs/lab07_checklist.json",
         "configs/lab07_task_audit.json",
-        "configs/parameter_activation_tape.json",
-        "reports/lab06_report.md"
+        "configs/lab09_policy_policy_spec.json",
+        "configs/lab09_support.json"
       ],
-      "reference_count": 26,
+      "reference_count": 28,
       "in_a_checklist": true,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -779,10 +782,10 @@
         "configs/lab08_factorial_full.json",
         "configs/lab08_factorial_pilot.json",
         "configs/lab08_pilot_protocol.json",
-        "reports/lab04_report.md",
-        "reports/lab07_report.md"
+        "configs/lab09_confirmation_results.json",
+        "reports/lab04_report.md"
       ],
-      "reference_count": 23,
+      "reference_count": 24,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -798,10 +801,10 @@
         "configs/lab08_factorial_full.json",
         "configs/lab08_factorial_pilot.json",
         "configs/lab08_pilot_protocol.json",
-        "reports/lab08_report.md",
-        "scripts/__pycache__/run_lab08_factorial.cpython-312.pyc"
+        "configs/lab09_confirmation_results.json",
+        "reports/lab08_report.md"
       ],
-      "reference_count": 17,
+      "reference_count": 18,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -818,9 +821,9 @@
         "configs/lab08_checklist.json",
         "configs/lab08_pilot_protocol.json",
         "configs/lab08_task_audit.json",
-        "configs/lab09_confirmation_spec.json"
+        "configs/lab09_confirmation_results.json"
       ],
-      "reference_count": 21,
+      "reference_count": 22,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -855,10 +858,10 @@
         "configs/lab08_factorial_full.json",
         "configs/lab08_factorial_pilot.json",
         "configs/lab08_task_audit.json",
-        "reports/guide_compliance_inspection.md",
-        "reports/lab07_report.md"
+        "configs/lab09_confirmation_results.json",
+        "reports/guide_compliance_inspection.md"
       ],
-      "reference_count": 16,
+      "reference_count": 17,
       "in_a_checklist": true,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -896,7 +899,7 @@
         "configs/minimum_economic_effect.json",
         "reports/data_eligibility.md"
       ],
-      "reference_count": 11,
+      "reference_count": 12,
       "in_a_checklist": true,
       "in_a_test": false,
       "status": "REFERENCED",
@@ -925,16 +928,16 @@
       "section": "11.4",
       "title": "Transition-specific diagnostics",
       "referenced_by": [
+        "configs/assertion_vacuity_audit.json",
         "configs/evidence_pointer_audit.json",
         "configs/lab09_checklist.json",
+        "configs/lab09_support.json",
         "configs/lab09_task_audit.json",
+        "reports/lab09_report.md",
         "scripts/audit_lab09.py",
-        "scripts/run_lab09_support.py",
-        "src/crypto_regime_lab/evidence/__pycache__/glossary.cpython-312.pyc",
-        "src/crypto_regime_lab/evidence/glossary.py",
-        "src/crypto_regime_lab/experiments/uncertainty.py"
+        "scripts/run_lab09_support.py"
       ],
-      "reference_count": 10,
+      "reference_count": 13,
       "in_a_checklist": true,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -1008,12 +1011,14 @@
       "referenced_by": [
         "configs/correction_ledger.json",
         "configs/lab06_decision_ledger.json",
+        "configs/lab09_policy_decision_ledger.json",
+        "reports/lab06_report.md",
         "scripts/build_correction_ledger.py",
         "scripts/run_response_policy.py",
-        "src/crypto_regime_lab/policy/decision.py",
-        "tests/test_lab06_policy.py"
+        "scripts/write_lab06_report.py",
+        "src/crypto_regime_lab/policy/decision.py"
       ],
-      "reference_count": 6,
+      "reference_count": 9,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -1042,16 +1047,16 @@
       "section": "13.6",
       "title": "Nh\u1eefng claim kh\u00f4ng \u0111\u01b0\u1ee3c ph\u00e1t h\u00e0nh",
       "referenced_by": [
+        "configs/correction_ledger.json",
         "configs/forbidden_claims_audit.json",
         "configs/lab04_calendar_baseline.json",
         "configs/lab07_continuous_trace.json",
         "configs/lab08_discovery.json",
         "reports/lab04_report.md",
         "reports/lab07_report.md",
-        "reports/lab08_report.md",
-        "scripts/analyse_lab08_discovery.py"
+        "reports/lab08_report.md"
       ],
-      "reference_count": 17,
+      "reference_count": 20,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",
@@ -1062,10 +1067,11 @@
       "title": "Stop/continue rules",
       "referenced_by": [
         "configs/correction_ledger.json",
+        "reports/lab09_report.md",
         "scripts/build_correction_ledger.py",
         "tests/test_guide_publishing_discipline.py"
       ],
-      "reference_count": 3,
+      "reference_count": 4,
       "in_a_checklist": false,
       "in_a_test": true,
       "status": "REFERENCED",

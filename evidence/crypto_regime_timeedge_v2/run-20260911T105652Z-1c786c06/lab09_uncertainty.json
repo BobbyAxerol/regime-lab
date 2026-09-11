@@ -1,0 +1,882 @@
+{
+  "common_period": {
+    "status": "MEASURED",
+    "cells": 15,
+    "per_cell_span": {
+      "A-HMA/BTCUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-HMA/ETHUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-HMA/SOLUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-HMA/BNBUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-HMA/DOGEUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-SC/BTCUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-SC/ETHUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-SC/SOLUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-SC/BNBUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-SC/DOGEUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-VWAP/BTCUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-VWAP/ETHUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-VWAP/SOLUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-VWAP/BNBUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ],
+      "A-VWAP/DOGEUSDT": [
+        "2024-01-02",
+        "2026-08-31"
+      ]
+    },
+    "distinct_start_dates": [
+      "2024-01-02"
+    ],
+    "distinct_end_dates": [
+      "2026-08-31"
+    ],
+    "common_period": [
+      "2024-01-02",
+      "2026-08-31"
+    ],
+    "union_period": [
+      "2024-01-02",
+      "2026-08-31"
+    ],
+    "every_cell_spans_the_same_interval": true,
+    "pooled_statistic_is_a_common_period_aggregate": true,
+    "declared_five_symbol_common_period": [
+      "2020-09-14 07:00:00",
+      "2026-09-09 20:10:00"
+    ],
+    "window_inside_the_declared_common_period": true,
+    "reading": "when every cell spans the same interval the common-period aggregate and the longest-history aggregate are the same number, and saying so is the point. When they differ, the pooled statistic mixes windows and only the common-period one is comparable across symbols (guide 10.4)",
+    "zeros_before_listing": "none: a day a cell was not live is excluded from the pairing, never filled with a zero"
+  },
+  "block_length_days": 2,
+  "block_length_source": "configs/lab09_development_replay.json, chosen on development",
+  "draws": 4000,
+  "seed": 20260911,
+  "resampling": "moving blocks of DATES, one sequence per draw applied to every cell. Symbols therefore move together and the common shocks survive (T63)",
+  "contrasts": {
+    "B-A": {
+      "status": "OK",
+      "point_estimate": -3.2153086249694897e-06,
+      "ci_lower": -2.755849174986665e-05,
+      "ci_upper": 2.2962209376875597e-05,
+      "confidence": 0.95,
+      "p_value": 0.806,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": -0.0031284952920953117,
+        "top_1_day_share_of_absolute": 0.008392336030165494,
+        "top_5_day_share_of_absolute": 0.04046781648599078,
+        "days_for_half_the_absolute_move": 177,
+        "share_of_days_that_are_half_the_move": 0.18191161356628982,
+        "largest_day": {
+          "date": "2024-03-16",
+          "value": 0.0021698001805029307
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": -9.88836537298408e-06,
+        "mean_with_all_days": -3.215308624969488e-06
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": -3.2153086249694897e-06,
+          "ci_lower": -2.7134543812844204e-05,
+          "ci_upper": 2.3229711303278353e-05,
+          "p_value": 0.8140000000000001,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": -3.2153086249694897e-06,
+          "ci_lower": -2.6887225532357653e-05,
+          "ci_upper": 2.2971025735573904e-05,
+          "p_value": 0.8,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": -3.2153086249694897e-06,
+          "ci_lower": -2.967514844137789e-05,
+          "ci_upper": 2.3538723572278643e-05,
+          "p_value": 0.8260000000000001,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": -3.2153086249694897e-06,
+          "ci_lower": -3.059613452727109e-05,
+          "ci_upper": 2.645179648484542e-05,
+          "p_value": 0.772,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": -3.2153086249694897e-06,
+          "ci_lower": -3.47347633792922e-05,
+          "ci_upper": 2.8271397538878905e-05,
+          "p_value": 0.796,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": true,
+      "baseline_is_not_untouched": true,
+      "baseline_label": "A_legacy_selection_adjusted",
+      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one (guide 13.6, T54)",
+      "holm_adjusted_p": 1.0
+    },
+    "C-A": {
+      "status": "OK",
+      "point_estimate": -1.4165604039408484e-05,
+      "ci_lower": -4.06823220261542e-05,
+      "ci_upper": 1.1446871628756412e-05,
+      "confidence": 0.95,
+      "p_value": 0.2835000000000001,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": -0.013783132730344457,
+        "top_1_day_share_of_absolute": 0.010158382265272435,
+        "top_5_day_share_of_absolute": 0.039709823800289666,
+        "days_for_half_the_absolute_move": 177,
+        "share_of_days_that_are_half_the_move": 0.18191161356628982,
+        "largest_day": {
+          "date": "2025-10-10",
+          "value": -0.0028125513485930545
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": -6.757767322703927e-06,
+        "mean_with_all_days": -1.4165604039408485e-05
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": -1.4165604039408484e-05,
+          "ci_lower": -3.9799895151502655e-05,
+          "ci_upper": 1.2474492937411431e-05,
+          "p_value": 0.29400000000000004,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": -1.4165604039408484e-05,
+          "ci_lower": -4.007204826404935e-05,
+          "ci_upper": 1.0622553832891506e-05,
+          "p_value": 0.246,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": -1.4165604039408484e-05,
+          "ci_lower": -3.8967347315709255e-05,
+          "ci_upper": 9.496290784951941e-06,
+          "p_value": 0.25,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": -1.4165604039408484e-05,
+          "ci_lower": -3.6135501312426215e-05,
+          "ci_upper": 1.1978635927446095e-05,
+          "p_value": 0.262,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": -1.4165604039408484e-05,
+          "ci_lower": -3.529864137039914e-05,
+          "ci_upper": 7.784058369249432e-06,
+          "p_value": 0.19799999999999995,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": true,
+      "baseline_is_not_untouched": true,
+      "baseline_label": "A_legacy_selection_adjusted",
+      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one (guide 13.6, T54)",
+      "holm_adjusted_p": 1.0
+    },
+    "D-B": {
+      "status": "OK",
+      "point_estimate": 1.0643344987484255e-06,
+      "ci_lower": -1.823206347581028e-05,
+      "ci_upper": 1.9723422141613418e-05,
+      "confidence": 0.95,
+      "p_value": 0.8995,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": 0.001035597467282219,
+        "top_1_day_share_of_absolute": 0.007010002518462183,
+        "top_5_day_share_of_absolute": 0.03155808887291771,
+        "days_for_half_the_absolute_move": 178,
+        "share_of_days_that_are_half_the_move": 0.1829393627954779,
+        "largest_day": {
+          "date": "2025-11-03",
+          "value": 0.0013995945045789456
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": 2.1662990262338717e-06,
+        "mean_with_all_days": 1.0643344987484266e-06
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.8113970164616382e-05,
+          "ci_upper": 1.8748075820527642e-05,
+          "p_value": 0.932,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.584577104539837e-05,
+          "ci_upper": 1.8155951634909984e-05,
+          "p_value": 0.938,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.6891406261453204e-05,
+          "ci_upper": 1.7986132257718896e-05,
+          "p_value": 0.89,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.5174632687247073e-05,
+          "ci_upper": 2.1168860336297393e-05,
+          "p_value": 0.844,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.771827364920579e-05,
+          "ci_upper": 1.946866466721055e-05,
+          "p_value": 0.9,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": true,
+      "holm_adjusted_p": 1.0
+    },
+    "D-C": {
+      "status": "OK",
+      "point_estimate": 1.2014629913187421e-05,
+      "ci_lower": -1.5215975887447113e-05,
+      "ci_upper": 4.037898767374171e-05,
+      "confidence": 0.95,
+      "p_value": 0.3835,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": 0.011690234905531364,
+        "top_1_day_share_of_absolute": 0.012117522295931847,
+        "top_5_day_share_of_absolute": 0.04698028514694916,
+        "days_for_half_the_absolute_move": 163,
+        "share_of_days_that_are_half_the_move": 0.16752312435765673,
+        "largest_day": {
+          "date": "2025-10-10",
+          "value": 0.003395786050202025
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": 3.071263602066301e-06,
+        "mean_with_all_days": 1.2014629913187424e-05
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": 1.2014629913187421e-05,
+          "ci_lower": -1.5374974357346124e-05,
+          "ci_upper": 3.798074248548536e-05,
+          "p_value": 0.402,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": 1.2014629913187421e-05,
+          "ci_lower": -1.4714742947026952e-05,
+          "ci_upper": 3.929777721492199e-05,
+          "p_value": 0.346,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": 1.2014629913187421e-05,
+          "ci_lower": -1.3330649819768691e-05,
+          "ci_upper": 4.10647367462556e-05,
+          "p_value": 0.382,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": 1.2014629913187421e-05,
+          "ci_lower": -1.559241364158741e-05,
+          "ci_upper": 4.1882695889039965e-05,
+          "p_value": 0.394,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": 1.2014629913187421e-05,
+          "ci_lower": -1.7905338038414252e-05,
+          "ci_upper": 4.007588453459348e-05,
+          "p_value": 0.466,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": true,
+      "holm_adjusted_p": 1.0
+    },
+    "(D-C)-(B-A)": {
+      "status": "OK",
+      "point_estimate": 1.5229938538156908e-05,
+      "ci_lower": -1.353716201613914e-05,
+      "ci_upper": 4.359189100466217e-05,
+      "confidence": 0.95,
+      "p_value": 0.2805,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": 0.01481873019762667,
+        "top_1_day_share_of_absolute": 0.010715548541045167,
+        "top_5_day_share_of_absolute": 0.04025463563403883,
+        "days_for_half_the_absolute_move": 190,
+        "share_of_days_that_are_half_the_move": 0.19527235354573483,
+        "largest_day": {
+          "date": "2025-10-10",
+          "value": 0.0032890638718886607
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": 1.250749635930739e-05,
+        "mean_with_all_days": 1.5229938538156906e-05
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": 1.5229938538156908e-05,
+          "ci_lower": -1.2682164721888888e-05,
+          "ci_upper": 4.2781266979100966e-05,
+          "p_value": 0.312,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": 1.5229938538156908e-05,
+          "ci_lower": -1.0706440390702865e-05,
+          "ci_upper": 4.1698980981866796e-05,
+          "p_value": 0.25,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": 1.5229938538156908e-05,
+          "ci_lower": -9.250344261821496e-06,
+          "ci_upper": 4.074446978120929e-05,
+          "p_value": 0.246,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": 1.5229938538156908e-05,
+          "ci_lower": -8.468211880818742e-06,
+          "ci_upper": 3.926787022218383e-05,
+          "p_value": 0.226,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": 1.5229938538156908e-05,
+          "ci_lower": -1.0664634426948032e-05,
+          "ci_upper": 4.0797739440365074e-05,
+          "p_value": 0.246,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": true,
+      "baseline_is_not_untouched": true,
+      "baseline_label": "A_legacy_selection_adjusted",
+      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one (guide 13.6, T54)",
+      "holm_adjusted_p": 1.0
+    },
+    "E-B": {
+      "status": "OK",
+      "point_estimate": 1.0643344987484255e-06,
+      "ci_lower": -1.823206347581028e-05,
+      "ci_upper": 1.9723422141613418e-05,
+      "confidence": 0.95,
+      "p_value": 0.8995,
+      "draws": 4000,
+      "block_length_days": 2,
+      "dates": 973,
+      "cells": [
+        "A-HMA/BNBUSDT",
+        "A-HMA/BTCUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/DOGEUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT"
+      ],
+      "cells_pooled": 15,
+      "resampling": "moving blocks of dates, drawn ONCE per draw and applied to every cell, so the cross-sectional dependence between symbols and the common market shocks survive the resample (T63)",
+      "statistic_name": "macro-average of per-cell mean paired daily differences",
+      "not_a_portfolio": "guide 11.3 forbids averaging cells into an implied portfolio without an explicit capital allocation and an actual account simulator. There is neither here: each cell is its own account at its own fixed notional, and this number is a DESCRIPTIVE macro-average across cells -- not the return of anything anyone could have held",
+      "ci_excludes_zero": false,
+      "episodes": {
+        "union_days": 973,
+        "days_all_cells_live": 973,
+        "per_cell_days": {
+          "A-HMA/BNBUSDT": 973,
+          "A-HMA/BTCUSDT": 973,
+          "A-HMA/DOGEUSDT": 973,
+          "A-HMA/ETHUSDT": 973,
+          "A-HMA/SOLUSDT": 973,
+          "A-SC/BNBUSDT": 973,
+          "A-SC/BTCUSDT": 973,
+          "A-SC/DOGEUSDT": 973,
+          "A-SC/ETHUSDT": 973,
+          "A-SC/SOLUSDT": 973,
+          "A-VWAP/BNBUSDT": 973,
+          "A-VWAP/BTCUSDT": 973,
+          "A-VWAP/DOGEUSDT": 973,
+          "A-VWAP/ETHUSDT": 973,
+          "A-VWAP/SOLUSDT": 973
+        },
+        "min_cell_days": 973,
+        "max_cell_days": 973,
+        "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+      },
+      "concentration": {
+        "days": 973,
+        "total": 0.001035597467282219,
+        "top_1_day_share_of_absolute": 0.007010002518462183,
+        "top_5_day_share_of_absolute": 0.03155808887291771,
+        "days_for_half_the_absolute_move": 178,
+        "share_of_days_that_are_half_the_move": 0.1829393627954779,
+        "largest_day": {
+          "date": "2025-11-03",
+          "value": 0.0013995945045789456
+        },
+        "reading": "the share of the total ABSOLUTE daily contribution carried by the biggest days. A small number of days carrying most of it means the result is about those days (guide 11.4)",
+        "mean_without_top_5_days": 2.1662990262338717e-06,
+        "mean_with_all_days": 1.0643344987484266e-06
+      },
+      "block_length_sensitivity": [
+        {
+          "block_length_days": 1,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.8113970164616382e-05,
+          "ci_upper": 1.8748075820527642e-05,
+          "p_value": 0.932,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 5,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.584577104539837e-05,
+          "ci_upper": 1.8155951634909984e-05,
+          "p_value": 0.938,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 10,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.6891406261453204e-05,
+          "ci_upper": 1.7986132257718896e-05,
+          "p_value": 0.89,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 20,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.5174632687247073e-05,
+          "ci_upper": 2.1168860336297393e-05,
+          "p_value": 0.844,
+          "ci_excludes_zero": false
+        },
+        {
+          "block_length_days": 40,
+          "status": "OK",
+          "point_estimate": 1.0643344987484255e-06,
+          "ci_lower": -1.771827364920579e-05,
+          "ci_upper": 1.946866466721055e-05,
+          "p_value": 0.9,
+          "ci_excludes_zero": false
+        }
+      ],
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "registered": false
+    }
+  },
+  "holm": {
+    "adjusted": {
+      "(D-C)-(B-A)": 1.0,
+      "C-A": 1.0,
+      "D-C": 1.0,
+      "B-A": 1.0,
+      "D-B": 1.0
+    },
+    "family_size": 5,
+    "rule": "Holm step-down over the registered primary contrast family, fixed in advance",
+    "family": [
+      "B-A",
+      "C-A",
+      "D-B",
+      "D-C",
+      "(D-C)-(B-A)"
+    ],
+    "excluded_from_family": [
+      "E-B"
+    ],
+    "exclusion_reason": "E-B is an EXTENSION contrast (guide 10.1), registered separately from the primary family. Including it would enlarge the family and weaken every adjusted p-value in it, which is a decision that has to be made before the results, not after"
+  },
+  "exploratory": {
+    "contrasts": [
+      "E-B"
+    ],
+    "disclosed_as_exploratory": true,
+    "why": "arm E is an extension of D and is compared against B by guide 10.1. It is reported with its interval and excluded from the primary family (L09.3.7)"
+  },
+  "schema": "crypto_regime_lab.lab09_uncertainty.v1",
+  "generated_at_utc": "2026-09-11T10:57:04.719554+00:00",
+  "window": [
+    "2024-01-01",
+    "2026-08-31"
+  ],
+  "lab_run_id": "run-20260911T105652Z-1c786c06",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T10:57:04.938302+00:00"
+}

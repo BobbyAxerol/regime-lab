@@ -1,14 +1,14 @@
 {
   "schema": "crypto_regime_lab.lab09_limitations.v1",
-  "generated_at_utc": "2026-09-11T06:48:31.087977+00:00",
-  "conclusion_level": null,
+  "generated_at_utc": "2026-09-11T10:55:24.148842+00:00",
+  "conclusion_level": "FAILED_VALIDITY",
   "limitations": [
     {
       "id": "LIM-01",
       "limitation": "one of the four alphas contributes no cell",
       "measured": {
-        "cells_not_ready": null,
-        "cells_planned": null
+        "cells_not_ready": 5,
+        "cells_planned": 20
       },
       "consequence": "the matrix is 15 of 20. Every aggregate is over three alphas, and A-HASH's blocker is unresolved rather than negative",
       "where": "configs/lab09_confirmation_results.json"
@@ -72,7 +72,30 @@
       "id": "LIM-08",
       "limitation": "the pooled statistic averages per-cell means over unequal day counts",
       "measured": {
-        "episodes": null
+        "episodes": {
+          "union_days": 973,
+          "days_all_cells_live": 973,
+          "per_cell_days": {
+            "A-HMA/BNBUSDT": 973,
+            "A-HMA/BTCUSDT": 973,
+            "A-HMA/DOGEUSDT": 973,
+            "A-HMA/ETHUSDT": 973,
+            "A-HMA/SOLUSDT": 973,
+            "A-SC/BNBUSDT": 973,
+            "A-SC/BTCUSDT": 973,
+            "A-SC/DOGEUSDT": 973,
+            "A-SC/ETHUSDT": 973,
+            "A-SC/SOLUSDT": 973,
+            "A-VWAP/BNBUSDT": 973,
+            "A-VWAP/BTCUSDT": 973,
+            "A-VWAP/DOGEUSDT": 973,
+            "A-VWAP/ETHUSDT": 973,
+            "A-VWAP/SOLUSDT": 973
+          },
+          "min_cell_days": 973,
+          "max_cell_days": 973,
+          "reading": "cells contribute unequal numbers of days. The pooled statistic averages per-cell means, so a short cell does not get a small vote -- it gets an equal one on less evidence"
+        }
       },
       "consequence": "a cell with few days gets an equal vote on less evidence. The counts are reported so the reader can see it rather than infer it",
       "where": "configs/lab09_uncertainty.json contrasts[].episodes"
@@ -81,8 +104,8 @@
       "id": "LIM-09",
       "limitation": "the information stress is staged, not exhaustive",
       "measured": {
-        "cells_covered": null,
-        "cells_total_run": null
+        "cells_covered": 3,
+        "cells_total_run": 15
       },
       "consequence": "the tape corruptions were run on a subset chosen in protocol order before any stress result was read. A cell outside the subset is UNCHECKED, not clear",
       "where": "configs/lab09_stress.json information_stress.staging_rule"
@@ -91,8 +114,11 @@
       "id": "LIM-10",
       "limitation": "the account stops before the data does",
       "measured": {
-        "window": null,
-        "window_note": null
+        "window": [
+          "2024-01-01",
+          "2026-08-31"
+        ],
+        "window_note": "the unlocked interval reaches 2026-09-09 in the 1-minute product; the account stops at the end of the 4h feature panel because the panel is the state provider's input. Trading 9 further days would leave the dynamic arms without a tape while the calendar arms kept refreshing"
       },
       "consequence": "the last days of the 1-minute product are not traded, because the 4h feature panel that feeds the state provider ends earlier",
       "where": "configs/lab09_confirmation_results.json window_note"
@@ -101,10 +127,20 @@
       "id": "LIM-11",
       "limitation": "three years of development and under three of confirmation is a small sample for a daily endpoint",
       "measured": {
-        "union_days": null
+        "union_days": 973
       },
       "consequence": "the intervals are wide relative to the minimum economic effect, which is why an inconclusive reading is the honest one rather than a negative one",
       "where": "configs/lab09_uncertainty.json"
+    },
+    {
+      "id": "LIM-14",
+      "limitation": "some auxiliary jobs ran concurrently with the registered one-worker budget",
+      "measured": {
+        "registered_workers": 1,
+        "peak_rss_gib_note": "see configs/lab09_confirmation_results.json wall_seconds and the run's own measured RSS"
+      },
+      "consequence": "the frozen confirmation run itself was executed single-process, so its wall time is a clean operational measurement. Audits and re-runs executed alongside earlier work were contended, and their wall times are NOT reported as performance figures. One such overlap exhausted memory and killed a run, which cost time and no evidence: the run is checkpointed per cell",
+      "where": "configs/compute_budget_registration.json os_resource_budget"
     },
     {
       "id": "LIM-13",
@@ -129,6 +165,6 @@
       "where": "configs/lab09_policy_decision_ledger.json"
     }
   ],
-  "count": 13,
+  "count": 14,
   "rule": "each limitation names the artifact that measured it. A limitation with no measurement behind it is an opinion, and opinions belong in reports/improvement_opinions.md"
 }

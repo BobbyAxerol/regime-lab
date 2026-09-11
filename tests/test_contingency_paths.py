@@ -435,3 +435,75 @@ def test_a_vacuity_declaration_survives_an_edit_above_it():
     for declaration, (reason, exercised) in A.ACCEPTED.items():
         assert reason and len(reason) > 20, declaration
         assert exercised and "::" in exercised, declaration
+
+
+def test_the_claim_rule_can_reach_every_verdict_it_declares():
+    """The branches LAB-09's own result never took.
+
+    The confirmation ruled every contribution OUT below the minimum economic
+    effect, so `claim()`'s SUPPORTED and INCONCLUSIVE branches never ran, and nor
+    did the NOT_MEASURED one. An untaken branch in a decision rule is exactly
+    where a rule can be wrong without anyone noticing, so all three are driven
+    here on synthetic intervals.
+    """
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    import analyse_lab09_confirmation as A
+
+    minimum = 6.4e-05
+
+    def contribution(lower, upper, status="OK"):
+        uncertainty = {"contrasts": {"B-A": {
+            "status": status, "point_estimate": (lower + upper) / 2,
+            "ci_lower": lower, "ci_upper": upper, "p_value": 0.5,
+            "holm_adjusted_p": 0.5, "baseline_is_not_untouched": True,
+            "baseline_caveat": "test"}}}
+        confirmation = {"cells": [], "window": ["2024-01-01", "2026-08-31"],
+                        "cells_not_ready": 0, "cells_planned": 20}
+        reconciliation = {"financial_identity": {"all_hold": True,
+                                                 "cost_binding_is_a_finding": False}}
+        unlock = {"holdout_status": "CLEAN"}
+        registry = ["DESCRIPTIVE_VALUE", "CONDITIONAL_RESPONSE_EVIDENCE",
+                    "NET_PARAMETER_SELECTION_EDGE", "NET_TIMING_EDGE", "NET_POLICY_EDGE",
+                    "NO_INCREMENTAL_VALUE", "INCONCLUSIVE_SAMPLE", "FAILED_VALIDITY"]
+        report = A.claim(confirmation, uncertainty, reconciliation, None, None, None,
+                         unlock, minimum, registry,
+                         accounting={"severity": "MATERIAL"})
+        return report
+
+    # 1. the whole interval above the minimum -> SUPPORTED, and an edge level
+    supported = contribution(minimum * 2, minimum * 3)
+    assert supported["contributions"]["SELECTION"]["verdict"] == "SUPPORTED"
+    assert supported["conclusion_level"].startswith("NET_"), supported["conclusion_level"]
+
+    # 2. an interval straddling the minimum -> INCONCLUSIVE, never a negative result
+    straddling = contribution(-minimum, minimum * 2)
+    assert straddling["contributions"]["SELECTION"]["verdict"] == "INCONCLUSIVE"
+    assert straddling["conclusion_level"] == "INCONCLUSIVE_SAMPLE"
+
+    # 3. the whole interval below -> RULED_OUT, which IS a negative result
+    ruled_out = contribution(-minimum * 2, minimum / 2)
+    assert ruled_out["contributions"]["SELECTION"]["verdict"] == "RULED_OUT"
+
+    # 4. a contrast with no interval -> NOT_MEASURED, and it must say why
+    missing = contribution(0.0, 0.0, status="NO_PAIRED_SERIES")
+    entry = missing["contributions"]["SELECTION"]
+    assert entry["verdict"] == "NOT_MEASURED"
+    assert entry["reason"], "NOT_MEASURED without a reason reads like a negative result"
+
+    # 5. and a MAJOR accounting error overrides all of it
+    uncertainty = {"contrasts": {"B-A": {
+        "status": "OK", "point_estimate": minimum * 2, "ci_lower": minimum * 2,
+        "ci_upper": minimum * 3, "p_value": 0.01, "holm_adjusted_p": 0.01}}}
+    overridden = A.claim(
+        {"cells": [], "window": ["2024-01-01", "2026-08-31"], "cells_not_ready": 0,
+         "cells_planned": 20},
+        uncertainty,
+        {"financial_identity": {"all_hold": True, "cost_binding_is_a_finding": True}},
+        None, None, None, {"holdout_status": "CLEAN"}, minimum,
+        ["NET_PARAMETER_SELECTION_EDGE", "FAILED_VALIDITY"],
+        accounting={"severity": "MAJOR"})
+    assert overridden["conclusion_level"] == "FAILED_VALIDITY", (
+        "a MAJOR accounting error must override an otherwise supported edge")

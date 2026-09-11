@@ -1,0 +1,1583 @@
+{
+  "provenance": {
+    "no_retuning_after_unlock": {
+      "unlocked_at_utc": "2026-09-11T03:45:26.023039+00:00",
+      "registrations": [
+        {
+          "artifact": "configs/lab08_pilot_protocol.json",
+          "field": "frozen_at_utc",
+          "stamped_at": "2026-09-10T14:50:28.446136+00:00",
+          "precedes_the_unlock": true
+        },
+        {
+          "artifact": "configs/minimum_economic_effect.json",
+          "field": "registered_at_utc",
+          "stamped_at": "2026-09-09T20:11:32.125140+00:00",
+          "precedes_the_unlock": true
+        },
+        {
+          "artifact": "configs/hypothesis_registry.json",
+          "field": "registered_at_utc",
+          "stamped_at": "2026-09-09T18:48:15.264005+00:00",
+          "precedes_the_unlock": true
+        },
+        {
+          "artifact": "configs/study_registration.json",
+          "field": "registered_at_utc",
+          "stamped_at": "2026-09-09T18:48:15.262517+00:00",
+          "precedes_the_unlock": true
+        },
+        {
+          "artifact": "configs/compute_budget_registration.json",
+          "field": "registered_at_utc",
+          "stamped_at": "2026-09-10T11:29:13.393947+00:00",
+          "precedes_the_unlock": true
+        }
+      ],
+      "all_precede_the_unlock": true,
+      "meaning": "every threshold, seed, contrast and economic assumption the confirmation deploys was fixed before the interval was opened. A registration stamped after the unlock would be a choice made with the interval in view"
+    },
+    "prospective_protocol_not_self_executed": {
+      "declared": true,
+      "execution_gates_in_the_registration": {
+        "live_execution_allowed": false,
+        "market_experiments_allowed": false,
+        "production_mutations_allowed": false
+      },
+      "no_execution_path_exists": true,
+      "meaning": "the claim is not that the lab chose not to trade, but that it cannot: live execution, market experiments and production mutation are all refused at the registration, and LAB-01 measured the refusal against a read-only mount rather than inferring it from path naming"
+    },
+    "code_stability_across_shards": {
+      "cells_checkpointed": 15,
+      "computation_window_utc": [
+        "2026-09-11T06:53:49.016000032+00:00",
+        "2026-09-11T09:44:11.900000095+00:00"
+      ],
+      "modules_watched": 9,
+      "modules_modified_during_the_window": [
+        "scripts/run_lab09_confirmation.py"
+      ],
+      "no_module_changed_while_cells_were_computed": false,
+      "changes_adjudicated": [
+        {
+          "module": "scripts/run_lab09_confirmation.py",
+          "compared_against": "a8c2186a7bd7",
+          "lines_removed": 0,
+          "lines_added": 25,
+          "purely_additive": true,
+          "run_cell_call_site_identical": true,
+          "cell_path_identical": true,
+          "reading": "the change added a CLI flag, a filter on the CELL loop and an early return. No line was removed and `run_cell`'s call site is byte-identical, so no cell computed before the change differs from one computed after it"
+        }
+      ],
+      "every_change_left_the_cell_path_identical": true,
+      "per_module": [
+        {
+          "module": "scripts/run_lab08_factorial.py",
+          "modified_at_utc": "2026-09-11T04:06:20.803999901+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "scripts/run_lab09_confirmation.py",
+          "modified_at_utc": "2026-09-11T08:02:37.048000097+00:00",
+          "modified_before_the_first_cell_finished": false,
+          "modified_during_the_computation_window": true
+        },
+        {
+          "module": "src/crypto_regime_lab/experiments/calendar_baseline.py",
+          "modified_at_utc": "2026-09-10T07:18:00.548000097+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/experiments/factorial.py",
+          "modified_at_utc": "2026-09-11T06:26:49.371999979+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/experiments/regime_schedule.py",
+          "modified_at_utc": "2026-09-10T16:21:37.344000101+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/experiments/controls.py",
+          "modified_at_utc": "2026-09-10T15:00:56.960000038+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/integration/continuous_account.py",
+          "modified_at_utc": "2026-09-11T06:26:35.971999884+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/integration/activation.py",
+          "modified_at_utc": "2026-09-10T11:53:58.880000114+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        },
+        {
+          "module": "src/crypto_regime_lab/quantbt_bridge/intent_tape.py",
+          "modified_at_utc": "2026-09-10T02:29:21.888000011+00:00",
+          "modified_before_the_first_cell_finished": true,
+          "modified_during_the_computation_window": false
+        }
+      ],
+      "why_this_exists": "the in-process hash guard spans ONE process. Sharding made the assembling pass a process that computes nothing, so its `unchanged_during_run` became trivially true. This check covers the window in which the cells were actually computed, whichever process computed them",
+      "weaker_than_a_hash": "an mtime can be set arbitrarily where a digest cannot. It is used here because the shards that ran predate this check and left no digests; a later sharded run should record per-shard digests instead, and that is written down rather than assumed to be someone's future problem"
+    },
+    "costs_untouched_between_discovery_and_confirmation": {
+      "one_way_fee_rate_charged_in_the_confirmation": [
+        0.0002
+      ],
+      "one_way_fee_rate_measured_by_the_binding_probe": 0.0002,
+      "arms_measured": 74,
+      "rounded_to_decimals": 10,
+      "spread_across_arms": 5.421010862427522e-20,
+      "single_rate_across_every_arm": true,
+      "matches_the_discovery_rate": true,
+      "slippage_bps": "unchanged; the binding was measured correct at 1 bp per side",
+      "caveat": "the rate both phases charged is HALF the registered one-way fee (COR-13). 'Untouched' here means the economics did not move BETWEEN the two phases, which is what keeps the confirmation comparable to the discovery it confirms. It does not mean the rate is the registered one"
+    }
+  },
+  "seeds": {
+    "declared": {
+      "probe_design": 20260910,
+      "model_multi_start": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "placebo": 20260911
+    },
+    "probe_design": {
+      "cutoffs_stamped": 180,
+      "distinct_seeds_stamped": [
+        20260910
+      ],
+      "registered_base": 20260910,
+      "derivation": "each cutoff is handed the registered base and derives its own per-fold seed as base + fold * 101 inside experiments/calendar_baseline.run_cutoff. The record stamps the base, so what is measurable here is that no cutoff was handed a seed the freeze does not name",
+      "seeds_that_are_not_the_registered_base": [],
+      "matches": true
+    },
+    "model_multi_start": {
+      "refits_stamped": 175,
+      "distinct_seed_lists": [
+        [
+          11,
+          23,
+          37,
+          51
+        ]
+      ],
+      "registered": [
+        11,
+        23,
+        37,
+        51
+      ],
+      "matches": true
+    },
+    "placebo": {
+      "registered": 20260911,
+      "where_used": "configs/lab09_stress.json information_stress.settings.seeds, and the STATE_PLACEBO control in each cell",
+      "matches": null,
+      "why_null": "the placebo seed is consumed by the control and the stress runner, which stamp it in their own artifacts rather than in a cutoff record"
+    },
+    "all_measured_sources_match": true,
+    "why_measured": "copying the frozen seeds into the results document proves the document was written, not that the run used them (L09.2.2)"
+  },
+  "engine": {
+    "installed_versions": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2"
+    },
+    "expected_versions": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2"
+    },
+    "versions_match": true,
+    "wheels": [
+      {
+        "wheel": "quantbt_engine-1.1.1-py3-none-any.whl",
+        "recorded_sha256": "9a1c7af724e543d8cba338206c0b2c64afe1fb3a621f21b2505454c4807b8587",
+        "measured_sha256": "9a1c7af724e543d8cba338206c0b2c64afe1fb3a621f21b2505454c4807b8587",
+        "matches": true
+      },
+      {
+        "wheel": "quantbt_native-0.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "recorded_sha256": "e56d204778d94101b49a1259a276abf9684c689af4277f6b8d08e9d9275376d5",
+        "measured_sha256": "e56d204778d94101b49a1259a276abf9684c689af4277f6b8d08e9d9275376d5",
+        "matches": true
+      }
+    ],
+    "wheel_digests_match": true,
+    "lockfile_sha256": {
+      "recorded_at_lab01": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+      "measured_now": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+      "matches": true
+    },
+    "pin_source": "evidence/crypto_regime_timeedge_v2/run-20260909T184802Z-82c5a408/environment_pin.json",
+    "execution_contract": "intrabar_bracket_v1",
+    "untouched": true,
+    "why_measured": "'the engine is untouched' written into an artifact is a sentence. The wheels LAB-01 pinned are re-hashed and the installed distributions are re-read (L09.2.4)"
+  },
+  "financial_identity": {
+    "arms_checked": 75,
+    "arms_holding": 75,
+    "all_hold": true,
+    "worst_absolute_residual": 1.655394044064451e-09,
+    "identity": "equity[-1] - equity[0] == -sum(side * qty * price) - sum(fee)",
+    "funding": "MISSING_NOT_ZERO; this cohort runs use_funding=False and says so",
+    "per_arm": [
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "A",
+        "residual": -3.369038381606515e-11,
+        "holds": true,
+        "fees": 25.574841266267374,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "B",
+        "residual": -1.6789414303275407e-10,
+        "holds": true,
+        "fees": 43.93241366625548,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "C",
+        "residual": 1.5432988220709376e-11,
+        "holds": true,
+        "fees": 8.800599846211036,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "D",
+        "residual": -7.901235221652314e-11,
+        "holds": true,
+        "fees": 51.01228206873103,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "E",
+        "residual": -7.901235221652314e-11,
+        "holds": true,
+        "fees": 51.01228206873103,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "A",
+        "residual": -2.2453150450019166e-11,
+        "holds": true,
+        "fees": 27.177357381550607,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "B",
+        "residual": -8.189005029635155e-12,
+        "holds": true,
+        "fees": 9.654736714314591,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "C",
+        "residual": -8.86757334228605e-12,
+        "holds": true,
+        "fees": 8.053535848965339,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "D",
+        "residual": -8.86757334228605e-12,
+        "holds": true,
+        "fees": 8.053535848965339,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "E",
+        "residual": -8.86757334228605e-12,
+        "holds": true,
+        "fees": 8.053535848965339,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "A",
+        "residual": -7.810285751475021e-11,
+        "holds": true,
+        "fees": 28.738898993514006,
+        "one_way_fee_rate_implied": 0.00019999999999999998
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "B",
+        "residual": -7.560174708487466e-11,
+        "holds": true,
+        "fees": 24.030853435277198,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "C",
+        "residual": -1.368221091979649e-10,
+        "holds": true,
+        "fees": 38.46114735964746,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "D",
+        "residual": -1.1581846592889633e-11,
+        "holds": true,
+        "fees": 1.5717851868346462,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "E",
+        "residual": -1.1581846592889633e-11,
+        "holds": true,
+        "fees": 1.5717851868346462,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "A",
+        "residual": 8.72546479513403e-11,
+        "holds": true,
+        "fees": 27.428401791493734,
+        "one_way_fee_rate_implied": 0.00019999999999999998
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "B",
+        "residual": -4.388311936054379e-11,
+        "holds": true,
+        "fees": 25.74512142186516,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "C",
+        "residual": 1.3642420526593924e-12,
+        "holds": true,
+        "fees": 30.62731211927937,
+        "one_way_fee_rate_implied": 0.00020000000000000004
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "D",
+        "residual": -1.9235812942497432e-10,
+        "holds": true,
+        "fees": 74.77747516706887,
+        "one_way_fee_rate_implied": 0.00020000000000000004
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "E",
+        "residual": -1.9235812942497432e-10,
+        "holds": true,
+        "fees": 74.77747516706887,
+        "one_way_fee_rate_implied": 0.00020000000000000004
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "A",
+        "residual": 9.094947017729282e-13,
+        "holds": true,
+        "fees": 22.502451635337984,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "B",
+        "residual": 7.048583938740194e-12,
+        "holds": true,
+        "fees": 21.690488953089474,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "C",
+        "residual": -1.1254996934439987e-10,
+        "holds": true,
+        "fees": 23.28222627408809,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "D",
+        "residual": -1.0061285138363019e-11,
+        "holds": true,
+        "fees": 4.173209336040104,
+        "one_way_fee_rate_implied": 0.00020000000000000004
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "E",
+        "residual": -1.0061285138363019e-11,
+        "holds": true,
+        "fees": 4.173209336040104,
+        "one_way_fee_rate_implied": 0.00020000000000000004
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "A",
+        "residual": -4.206412995699793e-11,
+        "holds": true,
+        "fees": 41.156351242727915,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "B",
+        "residual": -6.164100341266021e-10,
+        "holds": true,
+        "fees": 134.65011335106894,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "C",
+        "residual": 1.8189894035458565e-12,
+        "holds": true,
+        "fees": 84.13324990092197,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "D",
+        "residual": -6.164100341266021e-10,
+        "holds": true,
+        "fees": 134.65011335106894,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "E",
+        "residual": -6.164100341266021e-10,
+        "holds": true,
+        "fees": 134.65011335106894,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "A",
+        "residual": -5.306901584845036e-10,
+        "holds": true,
+        "fees": 68.9303266608881,
+        "one_way_fee_rate_implied": 0.00019999999999999998
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "B",
+        "residual": -1.6939338820520788e-10,
+        "holds": true,
+        "fees": 131.49519956776797,
+        "one_way_fee_rate_implied": 0.00019999999999999998
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "C",
+        "residual": -3.1104718800634146e-10,
+        "holds": true,
+        "fees": 65.06406601616699,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "D",
+        "residual": -5.102265276946127e-10,
+        "holds": true,
+        "fees": 178.75528314653909,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "E",
+        "residual": -5.102265276946127e-10,
+        "holds": true,
+        "fees": 178.75528314653909,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "A",
+        "residual": -2.2302515390038025e-10,
+        "holds": true,
+        "fees": 47.97791881342348,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "B",
+        "residual": -1.655394044064451e-09,
+        "holds": true,
+        "fees": 679.1614473575356,
+        "one_way_fee_rate_implied": 0.00019999999999999998
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "C",
+        "residual": -2.2782842279411852e-10,
+        "holds": true,
+        "fees": 77.87140826897134,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "D",
+        "residual": -3.4515323932282627e-10,
+        "holds": true,
+        "fees": 167.46582678043086,
+        "one_way_fee_rate_implied": 0.0002
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "E",
+        "residual": -3.4515323932282627e-10,
+        "holds": true,
+        "fees": 167.46582678043086,
+        "one_way_fee_rate_implied": 0.0002
+      }
+    ],
+    "cost_binding": {
+      "binding_charges_the_registered_rate": false,
+      "measured_over_registered": 0.5,
+      "finding": "the account is charged HALF the registered one-way taker fee, because the registered one-way rate is passed into a round-trip parameter. The engine behaves exactly as documented; the lab's binding to it does not",
+      "direction": "flattering: every account in every phase paid less than the study declared, so absolute returns are overstated",
+      "why_it_was_not_caught_earlier": "the engine's default for `fee` is 0.0004, which is also the registered one-way rate, so the call looked correct and produced no warning. LAB-01 recorded the SIGNATURE in api_binding_map.json and never probed the SEMANTIC -- the exact failure the guide's 'never assume a signature' rule names"
+    },
+    "cost_binding_is_a_finding": true
+  },
+  "parameter_version_lifecycle": {
+    "arms_checked": 75,
+    "every_bar_attributed": true,
+    "versions_requested_total": 450,
+    "versions_deployed_total": 316,
+    "requested_but_never_deployed": 134,
+    "note": "a requested version that never deployed is the warm-up or flat-book gate doing its job, and it is counted rather than dropped",
+    "per_arm": [
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 5,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 5,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 4,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 4,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 4,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 23376,
+        "bars": 23376,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 1,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 1,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 1,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 1,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 2,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 2,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "A",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "B",
+        "versions_requested": 6,
+        "versions_deployed": 1,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "C",
+        "versions_requested": 6,
+        "versions_deployed": 6,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "D",
+        "versions_requested": 6,
+        "versions_deployed": 4,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "arm": "E",
+        "versions_requested": 6,
+        "versions_deployed": 4,
+        "switches_requested": 5,
+        "switches_effected": 5,
+        "bars_accounted": 93504,
+        "bars": 93504,
+        "every_bar_has_a_version": true
+      }
+    ]
+  },
+  "search_cardinality": {
+    "cutoffs_checked": 180,
+    "all_executions_recorded": true,
+    "all_selections_in_the_pool": true,
+    "unique_executions_range": [
+      83,
+      106
+    ],
+    "nominal_total": 96,
+    "why_unique_is_below_nominal": "a probe that lands on an already-evaluated point is not re-evaluated. The nominal budget is the ceiling, not a quota to be spent",
+    "per_cutoff": [
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-01-01",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-06-29",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-12-26",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-06-24",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-12-21",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2026-06-19",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-01-02",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-06-12",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-11-21",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-05-09",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-10-11",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2026-03-23",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-01-01",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-06-29",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-12-26",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-06-24",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-12-21",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2026-06-19",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-01-03",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-06-13",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-11-21",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-05-08",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-10-11",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2026-03-23",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-01-01",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-06-29",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-12-26",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-06-24",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-12-21",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2026-06-19",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-01-03",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-06-13",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2024-11-28",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-05-09",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2025-10-11",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "source": "regime_cutoff_evidence",
+        "cutoff": "2026-03-23",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-01-01",
+        "nominal_total": 96,
+        "unique_executions": 97,
+        "evaluations_recorded": 97,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-06-29",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2024-12-26",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "source": "calendar_cutoff_evidence",
+        "cutoff": "2025-06-24",
+        "nominal_total": 96,
+        "unique_executions": 106,
+        "evaluations_recorded": 106,
+        "every_execution_recorded": true,
+        "selections_present_in_the_pool": true
+      }
+    ]
+  },
+  "objective_recomputation": {
+    "scores_checked": 7670,
+    "max_difference": 0.0,
+    "all_match": true,
+    "formula": "R = G - lambda_F * F, with lambda_F = 1.0 as registered"
+  },
+  "replay": {
+    "development": {
+      "arms_replayed": 75,
+      "arms_matching": 75,
+      "exact": true
+    },
+    "confirmation": {
+      "arms": 75,
+      "arms_reproduced": 75,
+      "all_reproduced": true,
+      "where": "the 1.0x level of the cost panel re-runs every confirmation arm through the engine and must return the recorded equity exactly"
+    }
+  },
+  "audits_retained": {
+    "audits": {
+      "LAB-01": {
+        "artifact": "configs/lab01_task_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "LAB-02": {
+        "artifact": "configs/lab02_task_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "LAB-03": {
+        "artifact": "configs/lab03_task_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "LAB-04": {
+        "artifact": "configs/lab04_task_audit.json",
+        "present": true,
+        "tasks_done": 64,
+        "tasks_total": 64,
+        "tasks_blocked": 0,
+        "clean": true
+      },
+      "LAB-05": {
+        "artifact": "configs/lab05_task_audit.json",
+        "present": true,
+        "tasks_done": 53,
+        "tasks_total": 53,
+        "tasks_blocked": 0,
+        "clean": true
+      },
+      "LAB-06": {
+        "artifact": "configs/lab06_task_audit.json",
+        "present": true,
+        "tasks_done": 79,
+        "tasks_total": 79,
+        "tasks_blocked": 0,
+        "clean": true
+      },
+      "LAB-07": {
+        "artifact": "configs/lab07_task_audit.json",
+        "present": true,
+        "tasks_done": 75,
+        "tasks_total": 75,
+        "tasks_blocked": 0,
+        "clean": true
+      },
+      "LAB-08": {
+        "artifact": "configs/lab08_task_audit.json",
+        "present": true,
+        "tasks_done": 74,
+        "tasks_total": 74,
+        "tasks_blocked": 0,
+        "clean": true
+      },
+      "leakage": {
+        "artifact": "configs/lab07_leakage_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "assertion vacuity": {
+        "artifact": "configs/assertion_vacuity_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "guard strength": {
+        "artifact": "configs/guard_strength_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "forbidden claims": {
+        "artifact": "configs/forbidden_claims_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "evidence pointers": {
+        "artifact": "configs/evidence_pointer_audit.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      },
+      "corrections": {
+        "artifact": "configs/correction_ledger.json",
+        "present": true,
+        "tasks_done": null,
+        "tasks_total": null,
+        "tasks_blocked": null,
+        "clean": true
+      }
+    },
+    "all_present": true,
+    "all_clean": true,
+    "audits_with_blocked_clauses": [],
+    "evidence_pointers": {
+      "verdict": "ALL_POINTERS_RESOLVE",
+      "broken_total": 0,
+      "why": "COR-15: an audit that counts the PRESENCE of an evidence string cannot tell a live pointer from one whose field was renamed"
+    },
+    "this_phases_own_audit": {
+      "artifact": "configs/lab09_task_audit.json",
+      "deliberately_excluded_from_the_list_above": true,
+      "why": "scripts/audit_lab09.py resolves pointers INTO this reconciliation, so reading its verdict here would be circular: the phase would be auditing itself into cleanliness. LAB-09's own audit is the gate ON this phase, not an input to it, and it is reported in the phase report and the exit gate"
+    },
+    "fast_profile_used": false,
+    "rule": "L09.6.6: no audit is skipped for speed. There is no fast profile in this lab, and every audit above reads a checklist written before the code it audits"
+  },
+  "schema": "crypto_regime_lab.lab09_reconciliation.v1",
+  "generated_at_utc": "2026-09-11T10:57:04.933800+00:00"
+}

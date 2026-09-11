@@ -668,14 +668,30 @@ accounting adjustment; it is a re-run of the search.
    one thing the minimum-economic-effect registration exists to prevent. Listed for completeness
    and **not recommended**.
 
-**What would settle it.** Re-run ONE cell of LAB-04 — A-SC/BTCUSDT, six cutoffs, about nine
-minutes — with `fee_rate=0.0004` and compare the selected parameter set at each cutoff against the
-committed one. If the selections are identical, option 1 is defensible and the AS_DECLARED panel is
-the whole correction. If they differ at any cutoff, the selection really is fee-sensitive and
-option 2 or 3 is the honest path.
+**It was settled, and the answer is the unwelcome one.** `scripts/probe_fee_sensitivity.py`
+re-selected A-SC/BTCUSDT at the registered fee, with the sampler seed fixed so the trial POINTS are
+identical and only the objective values move. **One of twelve arm-selections changed:**
 
-**Not run.** Nothing above is implemented. The binding is unchanged, and the confirmation was run
-on the same economics as the discovery it confirms, so the two remain comparable.
+| cutoff | arm | at the charged fee (0.0002) | at the registered fee (0.0004) |
+|---|---|---|---|
+| 2021-06-30 | A | `AP=36, threshold=55, coeff=4` | `AP=41, threshold=50, coeff=4` |
+
+Eleven of twelve were identical. One was not, and one is enough: the selector IS fee-sensitive, so
+this is a **design** defect and not only an accounting one. The candidate bank LAB-04 built — and
+therefore every arm LAB-08 and LAB-09 compared — was chosen under a cost the study did not register.
+
+**Option 1 is therefore no longer defensible.** The AS_DECLARED panel corrects the deployment
+accounting and cannot correct the selection. The honest paths are option 2 (re-run everything from
+LAB-04 at `fee_rate=`, ~20 h) or option 3 (re-run LAB-08 and LAB-09 only, leaving LAB-04's bank as
+it is, and describing the partial correction precisely).
+
+This is a decision for the user, not for the lab: it is hours of compute and a protocol revision,
+and guide L09's exit already records the consequence of not taking it — `FAILED_VALIDITY`, the
+affected runs invalidated, and no headline kept.
+
+**Still not run.** The binding is unchanged, and the confirmation was run on the same economics as
+the discovery it confirms, so the two remain comparable to each other even though neither matches
+the registered contract.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "schema": "crypto_regime_lab.correction_ledger.v1",
   "guide_section": "13.7",
-  "built_at_utc": "2026-09-11T08:08:38.434632+00:00",
+  "built_at_utc": "2026-09-11T10:55:25.814031+00:00",
   "rule": "guide 13.7: when validity fails, fix it in the lab, version it and INVALIDATE the affected results -- do not carry on taking headlines. Prose in a report does not let a reader check which published number a defect killed",
   "method": "the numeric history is DERIVED from every evidence run that wrote the artifact, in timestamp order. The evidence tree is append-only, so the run that produced the superseded number is still there to be read",
   "defects": [
@@ -180,7 +180,7 @@
       "id": "COR-13",
       "phase": "LAB-09",
       "defect": "the lab passed the registered ONE-WAY taker fee into the engine's `fee` parameter, which the installed quantbt documents as a LEGACY ROUND-TRIP fee and halves into the canonical one-way rate. Every account since LAB-04 was charged 0.0002 one-way where the study registered 0.0004. The engine default for `fee` is also 0.0004, so the call looked correct and raised nothing",
-      "invalidated": "the ABSOLUTE net-return level of every account in LAB-04, LAB-06, LAB-07 and LAB-08. Measured on the development window at the registered fee, the registered contrasts move by at most 5% and none crosses the minimum economic effect, so no CONCLUSION is invalidated -- that is a measurement (configs/lab09_development_replay.json as_declared_economics), not a reassurance",
+      "invalidated": "SUPERSEDED READING. This entry first said 'no CONCLUSION is invalidated', on the strength of the deployment-side measurement alone: at the registered fee the development contrasts move by at most 19% in relative terms and none crosses the minimum economic effect. That half still holds. The other half was never measured when the claim was made, and it now is: scripts/probe_fee_sensitivity.py re-selected A-SC/BTCUSDT at the registered fee and ONE of twelve arm-selections CHANGED -- arm A at cutoff 2021-06-30 chose AP=41/threshold=50 instead of AP=36/threshold=55. The selector is fee-sensitive, so the defect is a DESIGN defect and not only an accounting one: the candidate bank LAB-04 built, and every arm LAB-08 and LAB-09 compared, were chosen under a cost the study did not register. By the severity rule fixed BEFORE the probe ran, that is MAJOR, and guide L09's exit makes a major accounting error FAILED_VALIDITY: the affected runs are invalidated, a protocol revision is required before a retest, and the headline is not kept",
       "changed": null,
       "guarded_by": "tests/test_lab09_confirmation.py::test_the_fee_binding_defect_is_reported_not_absorbed",
       "numeric_change": null,
@@ -275,9 +275,19 @@
       "guarded_by": "tests/test_guide_contracts.py::test_a_budget_revision_is_appended_and_never_restamped",
       "numeric_change": null,
       "verification": "STRUCTURAL: the defect removed a false claim, not a value"
+    },
+    {
+      "id": "COR-23",
+      "phase": "cross-phase",
+      "defect": "two defects in the assertion-vacuity audit itself, found by running it. First, the skip detector filtered on `report.when == 'setup'`, but pytest.skip() called inside a test body -- how every artifact-dependent test here skips -- reports at `call`. It saw ZERO skipped tests and filed all 107 of their assertions as unreachable branches, which is the same conflation COR-18 had just fixed. Second, the gate that reads this audit's output was audited BY it: when the gate fails, pytest stops at its first assertion, so its later assertions go unreached, so the next run reports them undeclared, so the gate keeps failing -- a loop with no fixed point",
+      "invalidated": "the audit's own verdict while both were present: 107 assertions reported as unexamined checks when they were tests waiting for an artifact. After both fixes: 26 skipped tests detected, 102 assertions classified SKIPPED_TEST, 7 genuinely unreached branches and ALL of them declared, 0 undeclared, 0 stale declarations",
+      "changed": null,
+      "guarded_by": "tests/test_contingency_paths.py::test_a_vacuity_declaration_survives_an_edit_above_it",
+      "numeric_change": null,
+      "verification": "STRUCTURAL: the defect removed a false claim, not a value"
     }
   ],
-  "defects_total": 22,
+  "defects_total": 23,
   "numeric_history": {
     "lab07_continuous_trace.json": [
       {

@@ -1,0 +1,264 @@
+{
+  "schema": "crypto_regime_lab.fee_sensitivity_probe.v1",
+  "generated_at_utc": "2026-09-11T10:06:22.415353+00:00",
+  "cell": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT"
+  },
+  "question": "does correcting the one-way taker fee from 0.0002 to the registered 0.0004 change WHICH parameter set the selector chooses, or only what it earns?",
+  "economics": {
+    "as_run_one_way_fee": 0.0002,
+    "registered_one_way_fee": 0.0004,
+    "how": "the binding is untouched; the probe doubles ACCOUNT's rate so the engine's round-trip halving lands on the registered one-way rate",
+    "slippage_unchanged": true
+  },
+  "sampler_seed_unchanged": true,
+  "why_seed_matters": "the trial POINTS are identical, so a difference in the selection is the objective moving a ranking and nothing else",
+  "cutoffs": 6,
+  "comparisons": 12,
+  "selections_identical": 11,
+  "parameter_sets_identical": 11,
+  "all_identical": false,
+  "reading": "identical selections mean the fee defect is an ACCOUNTING one: it changed what the arms earned, not what they deployed. A difference at any cutoff would make it a DESIGN one, because the candidate bank itself would depend on the understated cost",
+  "scope": "one cell, six cutoffs, both arms. It is evidence about the MECHANISM, not a guarantee for the other fourteen cells",
+  "per_cutoff": [
+    {
+      "cutoff": "2021-01-01",
+      "arms": {
+        "A": {
+          "committed_point_id": "79821a846b9d4c6f",
+          "registered_fee_point_id": "79821a846b9d4c6f",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 47,
+            "alpha.condition_threshold": 70,
+            "coeff": 4,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 47,
+            "alpha.condition_threshold": 70,
+            "coeff": 4,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        },
+        "B": {
+          "committed_point_id": "cfaeb9f9e69d8da7",
+          "registered_fee_point_id": "cfaeb9f9e69d8da7",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "coeff": 4,
+            "AP": 20,
+            "alpha.condition_threshold": 55,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "coeff": 4,
+            "AP": 20,
+            "alpha.condition_threshold": 55,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        }
+      }
+    },
+    {
+      "cutoff": "2021-06-30",
+      "arms": {
+        "A": {
+          "committed_point_id": "97dee4df10d0ccaf",
+          "registered_fee_point_id": "812018f4f67c8ad3",
+          "same_point": false,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 36,
+            "alpha.condition_threshold": 55,
+            "coeff": 4,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 41,
+            "alpha.condition_threshold": 50,
+            "coeff": 4,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": false
+        },
+        "B": {
+          "committed_point_id": null,
+          "registered_fee_point_id": null,
+          "same_point": true,
+          "committed_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "registered_fee_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "committed_params": null,
+          "registered_fee_params": null,
+          "same_params": true
+        }
+      }
+    },
+    {
+      "cutoff": "2021-12-27",
+      "arms": {
+        "A": {
+          "committed_point_id": "7c125163c601a23e",
+          "registered_fee_point_id": "7c125163c601a23e",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 33,
+            "alpha.condition_threshold": 45,
+            "coeff": 7,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 33,
+            "alpha.condition_threshold": 45,
+            "coeff": 7,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        },
+        "B": {
+          "committed_point_id": null,
+          "registered_fee_point_id": null,
+          "same_point": true,
+          "committed_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "registered_fee_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "committed_params": null,
+          "registered_fee_params": null,
+          "same_params": true
+        }
+      }
+    },
+    {
+      "cutoff": "2022-06-25",
+      "arms": {
+        "A": {
+          "committed_point_id": "0cf9085054eadc23",
+          "registered_fee_point_id": "0cf9085054eadc23",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 57,
+            "alpha.condition_threshold": 80,
+            "coeff": 2,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 57,
+            "alpha.condition_threshold": 80,
+            "coeff": 2,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        },
+        "B": {
+          "committed_point_id": null,
+          "registered_fee_point_id": null,
+          "same_point": true,
+          "committed_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "registered_fee_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "committed_params": null,
+          "registered_fee_params": null,
+          "same_params": true
+        }
+      }
+    },
+    {
+      "cutoff": "2022-12-22",
+      "arms": {
+        "A": {
+          "committed_point_id": "99c5295d7df8ad2c",
+          "registered_fee_point_id": "99c5295d7df8ad2c",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 58,
+            "alpha.condition_threshold": 80,
+            "coeff": 1,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 58,
+            "alpha.condition_threshold": 80,
+            "coeff": 1,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        },
+        "B": {
+          "committed_point_id": null,
+          "registered_fee_point_id": null,
+          "same_point": true,
+          "committed_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "registered_fee_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "committed_params": null,
+          "registered_fee_params": null,
+          "same_params": true
+        }
+      }
+    },
+    {
+      "cutoff": "2023-06-20",
+      "arms": {
+        "A": {
+          "committed_point_id": "a2f49c7b8295a1e9",
+          "registered_fee_point_id": "a2f49c7b8295a1e9",
+          "same_point": true,
+          "committed_status": "SELECTED",
+          "registered_fee_status": "SELECTED",
+          "committed_params": {
+            "AP": 30,
+            "alpha.condition_threshold": 35,
+            "coeff": 7,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "registered_fee_params": {
+            "AP": 30,
+            "alpha.condition_threshold": 35,
+            "coeff": 7,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "same_params": true
+        },
+        "B": {
+          "committed_point_id": null,
+          "registered_fee_point_id": null,
+          "same_point": true,
+          "committed_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "registered_fee_status": "NO_ADMISSIBLE_CANDIDATE:ALL_FAIL_ECONOMIC_QUALITY",
+          "committed_params": null,
+          "registered_fee_params": null,
+          "same_params": true
+        }
+      }
+    }
+  ],
+  "wall_seconds": 681.8264058958739,
+  "lab_run_id": "run-20260911T095433Z-d844328f",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T10:06:22.422418+00:00"
+}

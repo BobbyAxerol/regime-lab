@@ -17,19 +17,19 @@
       "invariant": "the prefix stops surviving a future mutation",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_guard_strength_audit_found_no_unguarded_invariant"
+      "first_failure": "FAILED tests/test_lab07_integration.py::test_the_prefix_holds_when_the_future_is_replaced"
     },
     {
       "invariant": "an activation becomes regime-driven",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_guard_strength_audit_found_no_unguarded_invariant"
+      "first_failure": "FAILED tests/test_lab07_integration.py::test_the_run_records_that_regime_information_reached_nothing"
     },
     {
       "invariant": "the refit latency loses its provenance",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_guard_strength_audit_found_no_unguarded_invariant"
+      "first_failure": "FAILED tests/test_lab07_integration.py::test_refit_latency_is_measured_and_never_zero"
     },
     {
       "invariant": "the exit fixed point stops converging",
@@ -41,7 +41,7 @@
       "invariant": "a failure mode goes unexercised",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_guard_strength_audit_found_no_unguarded_invariant"
+      "first_failure": "FAILED tests/test_lab07_integration.py::test_all_nine_failure_modes_were_exercised"
     },
     {
       "invariant": "a decision loses its reason",
@@ -59,7 +59,7 @@
       "invariant": "an open segment gains an end",
       "artifact": "configs/operational_segments.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_guard_strength_audit_found_no_unguarded_invariant"
+      "first_failure": "FAILED tests/test_guide_publishing_discipline.py::test_no_completed_phase_has_a_broken_evidence_pointer"
     },
     {
       "invariant": "a requirement is COVERED with no tests",

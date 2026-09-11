@@ -1,0 +1,209 @@
+{
+  "contributions": {
+    "DESCRIPTIVE": {
+      "question": "do the states describe anything beyond price and volatility?",
+      "evidence": "guide 8.3 group ablation on a window inside the confirmation interval",
+      "symbols_measured": 5,
+      "symbols_where_a_block_improved_out_of_fold": 0,
+      "symbols_improved": [],
+      "verdict": "NOT_SUPPORTED",
+      "finding": "no block beyond price and volatility improves out-of-fold variance resolved on any symbol inside the confirmation interval, which reproduces the development finding",
+      "where": "configs/lab09_group_ablation.json"
+    },
+    "PREDICTIVE": {
+      "question": "do the states predict which parameter set will do better?",
+      "evidence": "the LAB-06 response policy, unchanged, over the confirmation interval",
+      "decisions": 5839,
+      "decision_counts": {
+        "FALLBACK_NOVEL_STATE": 74,
+        "KEEP_INCUMBENT": 37,
+        "NO_SUPPORTED_CANDIDATE": 5728
+      },
+      "switches_executed": 0,
+      "verdict": "NOT_SUPPORTED",
+      "reading": "zero switches because no challenger cleared the cost is a registered valid outcome, not a technical failure (hypothesis_registry falsification commitments)",
+      "where": "configs/lab09_policy_decision_ledger.json"
+    },
+    "SELECTION": {
+      "contrast": "B-A",
+      "question": "does the neighbourhood selector beat the installed one on the same calendar?",
+      "baseline_is_not_untouched": true,
+      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one (guide 13.6, T54)",
+      "point_estimate": -3.2153086249694897e-06,
+      "ci": [
+        -2.755849174986665e-05,
+        2.2962209376875597e-05
+      ],
+      "holm_adjusted_p": 1.0,
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "ruled_out_below_the_minimum": true,
+      "verdict": "RULED_OUT",
+      "reading": "this is the WHICH-parameters contribution, holding timing fixed"
+    },
+    "TIMING": {
+      "contrast": "C-A",
+      "question": "does regime-triggered refresh beat the frozen calendar with the same selector?",
+      "baseline_is_not_untouched": true,
+      "baseline_caveat": "measured against A_legacy_selection_adjusted. The installed public route declares OOS-adjusted selection, so this difference is evidence about the new selector versus THAT baseline, not versus a causal one (guide 13.6, T54)",
+      "point_estimate": -1.4165604039408484e-05,
+      "ci": [
+        -4.06823220261542e-05,
+        1.1446871628756412e-05
+      ],
+      "holm_adjusted_p": 1.0,
+      "minimum_economic_effect": 6.4e-05,
+      "clears_minimum_effect": false,
+      "ruled_out_below_the_minimum": true,
+      "verdict": "RULED_OUT",
+      "reading": "this is the WHEN contribution, holding the selector fixed. A time-edge claim rests here and nowhere else"
+    },
+    "POLICY": {
+      "question": "does the bank and response policy add anything beyond D?",
+      "evidence": "arm E deployed arm D's schedule; its own contribution is null by construction wherever LAB-06 measured zero switches",
+      "verdict": "NULL_BY_CONSTRUCTION",
+      "where": "configs/lab09_confirmation_results.json arms.E"
+    }
+  },
+  "contributions_judged_separately": true,
+  "why_separately": "a study that adds them up can call a risk-timing effect a parameter-selection edge and never notice (guide 11.1)",
+  "net_gain_after_risk_and_cost": {
+    "statistic": "mean daily net-return difference, paired on the same dates",
+    "primary_contrast": "C-A for a timing claim, B-A for a selection claim",
+    "interval_available": true,
+    "B-A": [
+      -2.755849174986665e-05,
+      2.2962209376875597e-05
+    ],
+    "C-A": [
+      -4.06823220261542e-05,
+      1.1446871628756412e-05
+    ],
+    "minimum_economic_effect": 6.4e-05
+  },
+  "blockers": [
+    "ACCOUNTING: the lab charged half the registered one-way taker fee in every phase, because the registered ONE-WAY rate was passed into an engine parameter documented as ROUND-TRIP. Measured, not inferred (configs/cost_binding_verification.json)",
+    "MATRIX: 5 of 20 cells are NOT_READY with null metrics, so the matrix is incomplete",
+    "CONTAMINATION: the confirmation interval is NESTED RETROSPECTIVE. The supplied presets were tuned on the full sample with an unknown cutoff, so no interval of this dataset is an untouched holdout"
+  ],
+  "accounting_severity": {
+    "severity": "MAJOR",
+    "rule": {
+      "MAJOR": "correcting the fee moves a registered contrast across the minimum economic effect, OR changes which parameter set the selector deployed",
+      "MATERIAL": "neither of those. The absolute levels are wrong and are disclosed; no registered conclusion depends on them",
+      "fixed_before": "the fee-sensitivity probe was run"
+    },
+    "contrasts_crossing_the_minimum_at_the_registered_fee": [],
+    "contrasts_checked": [
+      "(D-C)-(B-A)",
+      "B-A",
+      "C-A",
+      "D-B",
+      "D-C"
+    ],
+    "per_contrast": [
+      {
+        "contrast": "B-A",
+        "as_run": 4.585517417078732e-05,
+        "at_the_registered_fee": 4.38924622708323e-05,
+        "shift": -1.9627118999550143e-06,
+        "relative_shift": -0.0428024085710569,
+        "above_the_minimum_before": false,
+        "above_the_minimum_after": false,
+        "crosses": false
+      },
+      {
+        "contrast": "C-A",
+        "as_run": 3.7700566498753236e-05,
+        "at_the_registered_fee": 3.8269537640912905e-05,
+        "shift": 5.689711421596688e-07,
+        "relative_shift": 0.015091845958826235,
+        "above_the_minimum_before": false,
+        "above_the_minimum_after": false,
+        "crosses": false
+      },
+      {
+        "contrast": "D-B",
+        "as_run": -1.2516161467341783e-05,
+        "at_the_registered_fee": -1.0099079535080308e-05,
+        "shift": 2.417081932261474e-06,
+        "relative_shift": -0.19311687042136097,
+        "above_the_minimum_before": false,
+        "above_the_minimum_after": false,
+        "crosses": false
+      },
+      {
+        "contrast": "D-C",
+        "as_run": -4.361553795307697e-06,
+        "at_the_registered_fee": -4.476154905160901e-06,
+        "shift": -1.1460110985320467e-07,
+        "relative_shift": 0.026275294363329035,
+        "above_the_minimum_before": false,
+        "above_the_minimum_after": false,
+        "crosses": false
+      },
+      {
+        "contrast": "(D-C)-(B-A)",
+        "as_run": -5.021672796609501e-05,
+        "at_the_registered_fee": -4.83686171759932e-05,
+        "shift": 1.8481107901018105e-06,
+        "relative_shift": -0.0368026923488445,
+        "above_the_minimum_before": false,
+        "above_the_minimum_after": false,
+        "crosses": false
+      }
+    ],
+    "largest_relative_shift": 0.19311687042136097,
+    "selection_changed_at_the_registered_fee": true,
+    "selection_probe": {
+      "cell": {
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT"
+      },
+      "comparisons": 12,
+      "identical": 11
+    },
+    "minimum_economic_effect": 6.4e-05
+  },
+  "decision_rule": [
+    "1. a MAJOR accounting error yields FAILED_VALIDITY regardless of the contrasts",
+    "2. a contrast whose whole 95% interval sits above the minimum economic effect is the corresponding edge",
+    "3. every measured contrast ruled out BELOW the minimum is NO_INCREMENTAL_VALUE",
+    "4. anything else is INCONCLUSIVE_SAMPLE -- the sample failing to distinguish is not a negative result, and reporting it as one would overstate the evidence"
+  ],
+  "decision_rule_fixed_before": "the confirmation intervals were computed",
+  "conclusion_level": "FAILED_VALIDITY",
+  "conclusion_vocabulary": [
+    "DESCRIPTIVE_VALUE",
+    "CONDITIONAL_RESPONSE_EVIDENCE",
+    "NET_PARAMETER_SELECTION_EDGE",
+    "NET_TIMING_EDGE",
+    "NET_POLICY_EDGE",
+    "NO_INCREMENTAL_VALUE",
+    "INCONCLUSIVE_SAMPLE",
+    "FAILED_VALIDITY"
+  ],
+  "vocabulary_source": "configs/hypothesis_registry.json",
+  "development_outcome": "NO_PROMISING_DESIGN",
+  "confirms_the_development_outcome": true,
+  "forbidden": {
+    "fund_grade_alpha_proven": false,
+    "statement": "no claim of a proven fund-grade alpha is made or implied. This is a lab backtest on one cohort with no funding product, a nested retrospective interval, and an accounting defect disclosed above (L09.7.7)"
+  },
+  "scope": {
+    "symbols": 5,
+    "alphas_run": 3,
+    "alphas_blocked": 1,
+    "interval": [
+      "2024-01-01",
+      "2026-08-31"
+    ],
+    "cohort": "crypto_binance_futures_1m server core, no funding",
+    "statement": "everything above is about three alphas on five Binance USD-M perpetual symbols between 2024-01-01 and 2026-08-31, on a no-funding cohort, with parameters selected under an understated fee. It is not about crypto, about regime models in general, or about any other market"
+  },
+  "schema": "crypto_regime_lab.lab09_claim_report.v1",
+  "generated_at_utc": "2026-09-11T10:57:04.935990+00:00",
+  "study_id": "crypto_regime_timeedge_v2",
+  "lab_run_id": "run-20260911T105652Z-1c786c06",
+  "written_at_utc": "2026-09-11T10:57:04.947560+00:00"
+}

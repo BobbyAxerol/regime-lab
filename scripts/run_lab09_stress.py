@@ -270,11 +270,70 @@ def refit_latency_panel(protocol: dict) -> dict:
     }
 
 
+def stress_bite(information: list[dict]) -> dict:
+    """Did each stress change anything, and on how many cells?
+
+    A stress that moves no cutoff produces the same refresh schedule, so the arm
+    is re-run to the same number and the cell contributes NO evidence about that
+    stress. "No difference" then means "the stress did not fire here", not "the
+    arm is robust to it" -- and those read identically in a difference column.
+
+    COR-19 was the universal version of this: a stress that could not have
+    produced a different answer on any cell. This is the per-cell version, and it
+    is reported rather than averaged away.
+    """
+    out: dict = {}
+    for name in ("MISLABELLED_TRANSITIONS", "STALE_FEED", "MISSING_ENRICHMENT"):
+        rows = [entry["stresses"].get(name, {}) for entry in information]
+        ran = [r for r in rows if r.get("status") == "RUN"]
+        moved = [r for r in ran if (r.get("cutoffs_moved_vs_arm_D") or 0) > 0]
+        changed = [r for r in ran if r.get("difference_vs_arm_D") not in (None, 0.0)]
+        out[name] = {
+            "cells_run": len(ran),
+            "cells_where_the_schedule_moved": len(moved),
+            "cells_where_the_RESULT_moved": len(changed),
+            "bit_somewhere": bool(moved),
+            "vacuous_on": [entry["alpha_id"] + "/" + entry["symbol"]
+                           for entry, row in zip(information, rows)
+                           if row.get("status") == "RUN"
+                           and not (row.get("cutoffs_moved_vs_arm_D") or 0)],
+            "reading": ("a cell whose schedule did not move contributes no evidence about this "
+                        "stress: the arm was re-run to the same number because it deployed the "
+                        "same parameters at the same times"),
+        }
+    control = [entry["stresses"].get("LABEL_PERMUTATION", {}) for entry in information]
+    out["LABEL_PERMUTATION"] = {
+        "is_a_control_that_must_change_nothing": True,
+        "cells_checked": sum(1 for c in control if c.get("status") == "CONTROL"),
+        "schedules_identical": sum(1 for c in control
+                                   if c.get("schedule_identical_to_arm_D")),
+        "holds_everywhere": all(c.get("schedule_identical_to_arm_D")
+                                for c in control if c.get("status") == "CONTROL"),
+        "reading": ("the only one of the four that is SUPPOSED to change nothing. If it ever "
+                    "moved a cutoff, something downstream would be reading a state id as though "
+                    "the integer meant something"),
+    }
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--information-cells", type=int, default=3,
                         help="how many cells the staged information stress covers, in order")
+    parser.add_argument("--shard", default=None, metavar="K/N",
+                        help="compute only the cells whose index mod N equals K, and write their "
+                             "checkpoints. Cells are independent and deterministic, so a shard "
+                             "decides which process computes a cell and never what it computes. "
+                             "A shard never writes the stress document; a final unsharded pass "
+                             "assembles it from every checkpoint.")
     args = parser.parse_args(argv)
+    shard = None
+    if args.shard:
+        k, _, n = args.shard.partition("/")
+        shard = (int(k), int(n))
+        if not 0 <= shard[0] < shard[1]:
+            print(f"BLOCKED: --shard K/N needs 0 <= K < N, got {args.shard}")
+            return 1
 
     policy = SandboxPolicy.load(CONFIGS / "sandbox_policy.json")
     policy.assert_lab_root_ok()
@@ -296,17 +355,44 @@ def main(argv: list[str] | None = None) -> int:
     cache: dict = {}
     started = time.perf_counter()
 
-    costs = []
-    for cell in run_cells:
-        print(f"  cost  {cell['alpha_id']}/{cell['symbol']} ...", flush=True)
-        costs.append(cost_panel(cell, protocol, cache, levels,
-                                progress=lambda m: print(m, flush=True)))
+    # Per-cell checkpoints, for the same reason the confirmation has them: a crash
+    # or a kill costs one cell rather than the whole panel, and they are what makes
+    # sharding safe -- a shard writes checkpoints and nothing else.
+    cost_dir = LAB_ROOT / ".cache" / "lab09_stress_cost"
+    info_dir = LAB_ROOT / ".cache" / "lab09_stress_info"
+    cost_dir.mkdir(parents=True, exist_ok=True)
+    info_dir.mkdir(parents=True, exist_ok=True)
 
-    information = []
-    for cell in run_cells[:args.information_cells]:
-        print(f"  info  {cell['alpha_id']}/{cell['symbol']} ...", flush=True)
-        information.append(information_panel(cell, protocol, cache,
-                                             progress=lambda m: print(m, flush=True)))
+    def collect(cells, directory, label, compute):
+        out = []
+        for index, cell in enumerate(cells):
+            name = f"{cell['alpha_id']}_{cell['symbol']}.json"
+            checkpoint = directory / name
+            if checkpoint.is_file():
+                print(f"  {label} {cell['alpha_id']}/{cell['symbol']} (checkpoint)", flush=True)
+                out.append(json.loads(checkpoint.read_text()))
+                continue
+            if shard is not None and index % shard[1] != shard[0]:
+                print(f"  {label} {cell['alpha_id']}/{cell['symbol']} (other shard)", flush=True)
+                continue
+            print(f"  {label} {cell['alpha_id']}/{cell['symbol']} ...", flush=True)
+            record = compute(cell)
+            checkpoint.write_text(json.dumps(record, indent=2, default=str))
+            out.append(record)
+        return out
+
+    costs = collect(run_cells, cost_dir, "cost",
+                    lambda cell: cost_panel(cell, protocol, cache, levels,
+                                            progress=lambda m: print(m, flush=True)))
+    information = collect(run_cells[:args.information_cells], info_dir, "info",
+                          lambda cell: information_panel(cell, protocol, cache,
+                                                         progress=lambda m: print(m, flush=True)))
+
+    if shard is not None:
+        print(f"\nshard {shard[0]}/{shard[1]} done; {len(costs)} cost cells and "
+              f"{len(information)} information cells available here. "
+              "Run without --shard to assemble the stress document.")
+        return 0
 
     # ---- pooled reading of the cost panel
     def pooled(level: str) -> dict:
@@ -380,6 +466,7 @@ def main(argv: list[str] | None = None) -> int:
                          "seeds": SEEDS,
                          "registered_before_the_stress_ran": True},
             "per_cell": information,
+            "did_each_stress_actually_bite": stress_bite(information),
         },
         "refit_latency": refit_latency_panel(protocol),
         "no_retuning_after_a_stress": {

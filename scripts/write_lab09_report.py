@@ -289,8 +289,12 @@ def main() -> int:
         campaign = support["situations"]["CAMPAIGN_NOT_FLAT"]
         add(f"| campaign not flat at a switch | "
             f"**{campaign['a_switch_waited_for_an_open_campaign']}** | "
-            f"{campaign['arms_with_a_delayed_switch']} arms had a delayed switch; reasons "
-            f"`{json.dumps(campaign['blocked_reasons_across_every_arm'])}` |")
+            f"{campaign['status']}: {campaign['arms_with_a_delayed_switch']}/"
+            f"{campaign['arms_run']} arms had a delayed switch. "
+            f"{campaign['switches_that_waited_for_an_open_campaign']} switches waited for an "
+            f"OPEN CAMPAIGN and {campaign['switches_that_waited_for_warm_indicators']} for warm "
+            f"indicators; bars waited per reason "
+            f"`{json.dumps(campaign['blocked_bars_by_reason_across_every_arm'])}` |")
         add("")
         attribution = support["time_edge_attribution"]
         add(f"**Time-edge attribution.** {attribution['reading']} Pooled over the cells: "

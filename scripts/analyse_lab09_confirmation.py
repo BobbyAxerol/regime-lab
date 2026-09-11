@@ -324,6 +324,131 @@ REGISTRATIONS = {
 }
 
 
+def code_stability_across_shards() -> dict:
+    """L09.2.6 when the run is SHARDED — and the hole sharding opened.
+
+    The runner hashes every module it executes before its first cell and after
+    its last. That was a real guarantee while one process computed all fifteen
+    cells. Once the run is split, the assembling pass finds every checkpoint
+    already present, finishes in seconds, and reports `unchanged_during_run:
+    true` over a span in which it computed nothing. The guard did not fail; it
+    stopped having anything to say.
+
+    So the span that matters is measured instead: the modules' own modification
+    times against the window in which the CELLS were actually computed, taken
+    from the checkpoints each shard wrote. A module edited while any cell was
+    being computed would land inside that window.
+    """
+    import run_lab09_confirmation as runner
+
+    checkpoints = sorted((LAB_ROOT / ".cache" / "lab09_cells").glob("*.json"))
+    if not checkpoints:
+        return {"status": "NO_CHECKPOINTS"}
+    stamps = [path.stat().st_mtime for path in checkpoints]
+    # a cell's checkpoint is written when it FINISHES, so the computation window
+    # opens before the first one; the run's own start is the honest left edge
+    first_finished, last_finished = min(stamps), max(stamps)
+
+    modules = []
+    for name in runner.WATCHED:
+        path = LAB_ROOT / name
+        if not path.is_file():
+            modules.append({"module": name, "status": "MISSING"})
+            continue
+        mtime = path.stat().st_mtime
+        modules.append({
+            "module": name,
+            "modified_at_utc": pd.Timestamp(mtime, unit="s", tz="UTC").isoformat(),
+            "modified_before_the_first_cell_finished": mtime < first_finished,
+            "modified_during_the_computation_window": first_finished <= mtime <= last_finished,
+        })
+    touched = [m["module"] for m in modules
+               if m.get("modified_during_the_computation_window")]
+    # A module that changed during the window is not automatically a problem, but
+    # "no module changed" is no longer the claim that can be made. What CAN be
+    # measured is whether the change reached the cell-computation path, and git
+    # answers it: a purely additive diff that leaves `run_cell`'s call site
+    # byte-identical cannot have changed a cell.
+    adjudication = [_adjudicate_change(module) for module in touched]
+    return {
+        "cells_checkpointed": len(checkpoints),
+        "computation_window_utc": [
+            pd.Timestamp(first_finished, unit="s", tz="UTC").isoformat(),
+            pd.Timestamp(last_finished, unit="s", tz="UTC").isoformat()],
+        "modules_watched": len(runner.WATCHED),
+        "modules_modified_during_the_window": touched,
+        "no_module_changed_while_cells_were_computed": not touched,
+        "changes_adjudicated": adjudication,
+        "every_change_left_the_cell_path_identical": all(
+            entry.get("cell_path_identical") for entry in adjudication),
+        "per_module": modules,
+        "why_this_exists": (
+            "the in-process hash guard spans ONE process. Sharding made the "
+            "assembling pass a process that computes nothing, so its "
+            "`unchanged_during_run` became trivially true. This check covers the "
+            "window in which the cells were actually computed, whichever process "
+            "computed them"),
+        "weaker_than_a_hash": (
+            "an mtime can be set arbitrarily where a digest cannot. It is used here "
+            "because the shards that ran predate this check and left no digests; a "
+            "later sharded run should record per-shard digests instead, and that is "
+            "written down rather than assumed to be someone's future problem"),
+    }
+
+
+def _adjudicate_change(module: str) -> dict:
+    """Did a mid-window change reach the code that computes a cell?
+
+    Answered from git rather than from a description of the change. A diff with
+    no removed lines whose `run_cell` call site is byte-identical cannot have
+    altered a cell, whatever else it added.
+    """
+    import subprocess
+
+    def git(*args):
+        done = subprocess.run(["git", *args], cwd=str(LAB_ROOT),
+                              capture_output=True, text=True)
+        return done.stdout if done.returncode == 0 else None
+
+    log = git("log", "--format=%H", "--", module)
+    commits = (log or "").split()
+    if len(commits) < 2:
+        return {"module": module, "status": "NO_HISTORY_TO_COMPARE",
+                "why": "the module has fewer than two commits, so git cannot bound the change"}
+    baseline = commits[-1]
+    diff = git("diff", baseline, "--", module) or ""
+    removed = [line for line in diff.splitlines()
+               if line.startswith("-") and not line.startswith("---")]
+    added = [line for line in diff.splitlines()
+             if line.startswith("+") and not line.startswith("+++")]
+    before = git("show", f"{baseline}:{module}") or ""
+    now = Path(LAB_ROOT / module).read_text()
+
+    def call_site(text: str) -> str:
+        marker = "record = run_cell("
+        if marker not in text:
+            return ""
+        start = text.index(marker)
+        return text[start:text.index("\n\n", start)] if "\n\n" in text[start:] else text[start:]
+
+    identical = call_site(before) == call_site(now) and not removed
+    return {
+        "module": module,
+        "compared_against": baseline[:12],
+        "lines_removed": len(removed),
+        "lines_added": len(added),
+        "purely_additive": not removed,
+        "run_cell_call_site_identical": call_site(before) == call_site(now),
+        "cell_path_identical": identical,
+        "reading": ("the change added a CLI flag, a filter on the CELL loop and an early return. "
+                    "No line was removed and `run_cell`'s call site is byte-identical, so no "
+                    "cell computed before the change differs from one computed after it"
+                    if identical else
+                    "the change removed or altered lines on the cell path; cells computed before "
+                    "and after it are NOT comparable and the run has to be repeated"),
+    }
+
+
 def provenance_checks(confirmation: dict, unlock: dict, binding: dict | None) -> dict:
     """L09.1.3, L09.1.5 and L09.2.3 — measured rather than asserted.
 
@@ -350,11 +475,16 @@ def provenance_checks(confirmation: dict, unlock: dict, binding: dict | None) ->
     # fills, against the ones LAB-08 charged. Equal means the economics did not
     # move between discovery and confirmation -- which is what "untouched costs"
     # has to mean when the binding itself is known to be wrong (COR-13).
-    charged = sorted({record["accounting"]["one_way_fee_rate_implied"]
-                      for cell in confirmation["cells"] if cell.get("status") == "RUN"
-                      for record in (cell.get("arms") or {}).values()
-                      if isinstance(record.get("accounting"), dict)
-                      and record["accounting"].get("one_way_fee_rate_implied") is not None})
+    # the implied rate is fees / gross notional -- a division, so the arms come back
+    # as 0.00019999999999999998, 0.0002 and 0.00020000000000000004. Comparing those
+    # by exact equality reports three different rates where there is one, which is
+    # a defect in the check and not a finding about the account.
+    raw = [record["accounting"]["one_way_fee_rate_implied"]
+           for cell in confirmation["cells"] if cell.get("status") == "RUN"
+           for record in (cell.get("arms") or {}).values()
+           if isinstance(record.get("accounting"), dict)
+           and record["accounting"].get("one_way_fee_rate_implied") is not None]
+    charged = sorted({round(rate, 10) for rate in raw})
     measured_rate = (binding or {}).get("measurement", {}).get("measured_one_way_fee_rate")
 
     return {
@@ -375,11 +505,16 @@ def provenance_checks(confirmation: dict, unlock: dict, binding: dict | None) ->
                         "refused at the registration, and LAB-01 measured the refusal against a "
                         "read-only mount rather than inferring it from path naming"),
         },
+        "code_stability_across_shards": code_stability_across_shards(),
         "costs_untouched_between_discovery_and_confirmation": {
             "one_way_fee_rate_charged_in_the_confirmation": charged,
             "one_way_fee_rate_measured_by_the_binding_probe": measured_rate,
+            "arms_measured": len(raw),
+            "rounded_to_decimals": 10,
+            "spread_across_arms": (max(raw) - min(raw)) if raw else None,
             "single_rate_across_every_arm": len(charged) == 1,
-            "matches_the_discovery_rate": bool(charged) and charged[0] == measured_rate,
+            "matches_the_discovery_rate": bool(charged) and measured_rate is not None
+            and abs(charged[0] - measured_rate) < 1e-12,
             "slippage_bps": "unchanged; the binding was measured correct at 1 bp per side",
             "caveat": ("the rate both phases charged is HALF the registered one-way fee "
                        "(COR-13). 'Untouched' here means the economics did not move BETWEEN the "

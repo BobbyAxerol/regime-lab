@@ -1,6 +1,6 @@
 {
   "schema": "crypto_regime_lab.lab09_leakage_contamination.v1",
-  "generated_at_utc": "2026-09-11T06:48:31.087503+00:00",
+  "generated_at_utc": "2026-09-11T10:55:23.790301+00:00",
   "findings": [
     {
       "id": "LEAK-01",
@@ -136,8 +136,8 @@
       "title": "the confirmation selector's first training window reaches into development",
       "severity": "BY_DESIGN",
       "artifact": "configs/lab09_confirmation_results.json",
-      "verified": false,
-      "status": "UNVERIFIED_ARTIFACT_MISSING",
+      "verified": true,
+      "status": "MEASURED",
       "measured": {
         "first_calendar_cutoff": "2024-01-01",
         "training_memory_days": 180
@@ -163,11 +163,7 @@
     "MAJOR": 1,
     "MATERIAL": 4
   },
-  "unverified": [
-    "LEAK-05"
-  ],
-  "unverified_detail": {
-    "LEAK-05": "UNVERIFIED_ARTIFACT_MISSING"
-  },
+  "unverified": [],
+  "unverified_detail": {},
   "rule": "a finding whose artifact is missing, or whose measured fields all resolve to null, is UNVERIFIED -- never dropped and never assumed clear"
 }

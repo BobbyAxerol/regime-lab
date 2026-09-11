@@ -1,0 +1,172 @@
+{
+  "schema": "crypto_regime_lab.lab09_leakage_contamination.v1",
+  "generated_at_utc": "2026-09-11T10:55:23.790301+00:00",
+  "findings": [
+    {
+      "id": "LEAK-01",
+      "title": "the confirmation interval was not used to adjust the design",
+      "severity": "CLEAR",
+      "artifact": "configs/lab09_confirmation_spec.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "any_phase_read_the_outer_window": false,
+        "phases_checked": 4
+      },
+      "detail": "every completed phase's declared window is checked against the 2024-01-01 boundary. This is what the lab can verify about ITSELF; it says nothing about the supplied presets, which is the next finding"
+    },
+    {
+      "id": "CONTAM-01",
+      "title": "the supplied presets were tuned on the full sample",
+      "severity": "MATERIAL",
+      "artifact": "configs/lab09_confirmation_spec.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "holdout_status": "NESTED_RETROSPECTIVE"
+      },
+      "detail": "no interval of this dataset is an untouched holdout, because the presets' tuning cutoff is unknown. The USER_PRESET_REFERENCE control is the only arm that touches them and it is labelled retrospective; every other arm deploys selections made inside development"
+    },
+    {
+      "id": "ACCT-01",
+      "title": "the account was charged half the registered one-way taker fee",
+      "severity": "MAJOR",
+      "artifact": "configs/cost_binding_verification.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "measured_over_registered": 0.5
+      },
+      "detail": "the registered ONE-WAY rate is passed into an engine parameter documented as ROUND-TRIP, so the engine halves it. Present in every phase from LAB-04 onward",
+      "direction": "flattering: absolute returns are overstated. The contrasts move only through turnover differences between arms, which is measured in the AS_DECLARED panels"
+    },
+    {
+      "id": "DATA-01",
+      "title": "the pinned loader disagrees with the bytes on volume",
+      "severity": "MATERIAL",
+      "artifact": "configs/loader_endpoint_parity.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "partitions_compared": 15,
+        "partitions_that_disagree": 10,
+        "worst_volume_loss_share": 0.005145980653956174,
+        "bars_a_cast_would_zero": 192
+      },
+      "detail": "MarketDataLoaderBase._normalize casts volume to int64 and BTC/ETH/BNB store fractional quantities. The lab reads the byte-copied parquet directly and never calls the loader, so no lab result carries the defect -- it is recorded because anyone reproducing this through the loader would get different bars"
+    },
+    {
+      "id": "DATA-02",
+      "title": "closed metrics partitions drifted upstream",
+      "severity": "CLEAR",
+      "artifact": "configs/readlock_verification.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "status": "EXTERNAL_VINTAGE_RESTAMP_ONLY",
+        "files_checked": 627,
+        "closed_partition_drift": 23,
+        "content_revisions": 0,
+        "vintage_restamps": 23,
+        "cohort_runs_invalidated": 0
+      },
+      "detail": "reading both files proves every measured column identical; only ingested_at moved, because the collector re-ingests closed months. The drifted product feeds the G3 cohort, which no phase reads"
+    },
+    {
+      "id": "LEAK-02",
+      "title": "the LAB-07 leakage audit",
+      "severity": "CLEAR",
+      "artifact": "configs/lab07_leakage_audit.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "checks": 12,
+        "passed": 12
+      },
+      "detail": "availability ordering, warm-bar gating, the exit fixed point, and the four parity surfaces"
+    },
+    {
+      "id": "LEAK-03",
+      "title": "causality of the state tape",
+      "severity": "CLEAR",
+      "artifact": "configs/causality_verification.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "verdict": "CAUSAL"
+      },
+      "detail": "every emission carries available_at, and a decision reads only the emission whose available_at is at or before it"
+    },
+    {
+      "id": "LEAK-04",
+      "title": "the confirmation model's first training window reaches into development",
+      "severity": "BY_DESIGN",
+      "artifact": "configs/lab09_<symbol>_regime_model_registry.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "first_cutoff": "2024-01-01",
+        "training_memory_days": 365
+      },
+      "detail": "a model deployed on the first day of the interval refits on the history that existed then, which is development data. That is backward-looking and is what a deployment does; it would be leakage only if a model trained on data AFTER its own cutoff, and the fitter's mutation test covers that"
+    },
+    {
+      "id": "EXEC-01",
+      "title": "the protocol declares 1-minute execution bars and the account resolves protection on the decision bar",
+      "severity": "MATERIAL",
+      "artifact": "configs/protective_order_fidelity.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "declared": "1m",
+        "actual": "the decision bar",
+        "alphas_exposed": [
+          "A-HMA",
+          "A-VWAP"
+        ],
+        "alphas_not_exposed": [
+          "A-SC"
+        ]
+      },
+      "detail": "a stop and a take-profit inside the same 15-minute bar are resolved by the engine's ordering rule rather than by the minute path. Guide 4.3 asks for two cohorts when the resolution changes; neither is built, and the gap is recorded with the per-alpha exposure (COR-17, OP-19)",
+      "direction": "level only. Every arm and every control runs on the same frame through the same engine, so the resolution cancels in B-A, C-A, D-B and D-C"
+    },
+    {
+      "id": "LEAK-05",
+      "title": "the confirmation selector's first training window reaches into development",
+      "severity": "BY_DESIGN",
+      "artifact": "configs/lab09_confirmation_results.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "first_calendar_cutoff": "2024-01-01",
+        "training_memory_days": 180
+      },
+      "detail": "the selector at the interval's first cutoff trains on the 180 days before it, which are development data -- exactly as the calendar arm's first development fold trained from 2020-07-05. It is backward-looking, it is identical for the calendar and the dynamic arms, and it would be leakage only if a cutoff trained on data AFTER itself. The window bounds in cells[].notes.*_cutoff_evidence record each one"
+    },
+    {
+      "id": "SCOPE-01",
+      "title": "the fitter's own group ablation for the confirmation role is not in-interval",
+      "severity": "MATERIAL",
+      "artifact": "configs/lab09_group_ablation.json",
+      "verified": true,
+      "status": "MEASURED",
+      "measured": {
+        "fitter_window": "the FIRST cutoff's training window, which for this role is 2023-01-01..2024-01-01 -- development data"
+      },
+      "detail": "the fitter runs guide 8.3's ablation where LAB-05 chose K, on the first cutoff. For the confirmation role that is development. The descriptive claim therefore rests on scripts/ablate_lab09_states.py, which measures it on the LAST cutoff's window, entirely inside the interval"
+    }
+  ],
+  "counts": {
+    "BY_DESIGN": 2,
+    "CLEAR": 4,
+    "MAJOR": 1,
+    "MATERIAL": 4
+  },
+  "unverified": [],
+  "unverified_detail": {},
+  "rule": "a finding whose artifact is missing, or whose measured fields all resolve to null, is UNVERIFIED -- never dropped and never assumed clear",
+  "lab_run_id": "run-20260911T105523Z-f9281b41",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-11T10:55:24.169467+00:00"
+}

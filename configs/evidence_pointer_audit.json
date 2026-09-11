@@ -1,6 +1,6 @@
 {
   "schema": "crypto_regime_lab.evidence_pointer_audit.v1",
-  "generated_at_utc": "2026-09-11T06:17:23.843279+00:00",
+  "generated_at_utc": "2026-09-11T11:09:07.788190+00:00",
   "question": "does every phase audit's evidence pointer still resolve, or has some of it rotted since it was written?",
   "why": "COR-15: an audit that counts the PRESENCE of an evidence string cannot tell a real pointer from a stale one, and every phase report quotes its audit",
   "classification": {
@@ -6266,7 +6266,7 @@
             {
               "fragment": "evidence/**/attempts.jsonl",
               "verdict": "RESOLVED",
-              "detail": "401 paths match"
+              "detail": "479 paths match"
             }
           ]
         },
@@ -6385,69 +6385,10 @@
       "status": "CHECKED",
       "clauses": 65,
       "counts": {
-        "RESOLVED": 8,
-        "BROKEN": 57
+        "RESOLVED": 65
       },
-      "reported_done": 6,
-      "clauses_with_a_broken_pointer": [
-        "L09.1.4",
-        "L09.1.6",
-        "L09.2.1",
-        "L09.2.2",
-        "L09.2.3",
-        "L09.2.4",
-        "L09.2.5",
-        "L09.2.6",
-        "L09.2.7",
-        "L09.3.1",
-        "L09.3.2",
-        "L09.3.3",
-        "L09.3.4",
-        "L09.3.5",
-        "L09.3.6",
-        "L09.3.7",
-        "L09.3.8",
-        "L09.4.1",
-        "L09.4.2",
-        "L09.4.3",
-        "L09.4.4",
-        "L09.4.5",
-        "L09.4.6",
-        "L09.5.1",
-        "L09.5.2",
-        "L09.5.3",
-        "L09.5.4",
-        "L09.5.5",
-        "L09.5.6",
-        "L09.5.7",
-        "L09.6.1",
-        "L09.6.2",
-        "L09.6.3",
-        "L09.6.4",
-        "L09.6.5",
-        "L09.6.6",
-        "L09.7.1",
-        "L09.7.2",
-        "L09.7.3",
-        "L09.7.4",
-        "L09.7.5",
-        "L09.7.6",
-        "L09.7.7",
-        "G11.2.4",
-        "G11.4.1",
-        "G11.4.2",
-        "G11.4.3",
-        "T62.1",
-        "T63.1",
-        "OUT.2",
-        "OUT.3",
-        "OUT.4",
-        "OUT.5",
-        "EXIT.1",
-        "EXIT.2",
-        "EXIT.3",
-        "EXIT.4"
-      ],
+      "reported_done": 65,
+      "clauses_with_a_broken_pointer": [],
       "clauses_with_prose_only": [],
       "rows": [
         {
@@ -6492,7 +6433,12 @@
               "detail": "resolved (configs)"
             },
             {
-              "fragment": "lab09_confirmation_spec.json:prospective_protocol.not_self_executed",
+              "fragment": "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.no_execution_path_exists",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:provenance.prospective_protocol_not_self_executed.execution_gates_in_the_registration",
               "verdict": "RESOLVED",
               "detail": "resolved (configs)"
             }
@@ -6500,7 +6446,7 @@
         },
         {
           "clause_id": "L09.1.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_spec.json:access_log",
@@ -6509,8 +6455,8 @@
             },
             {
               "fragment": "lab09_confirmation_results.json:stamp_ordering",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
@@ -6519,7 +6465,12 @@
           "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_confirmation_spec.json:no_retuning_after_unlock",
+              "fragment": "lab09_reconciliation.json:provenance.no_retuning_after_unlock.all_precede_the_unlock",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:provenance.no_retuning_after_unlock.registrations",
               "verdict": "RESOLVED",
               "detail": "resolved (configs)"
             },
@@ -6532,12 +6483,12 @@
         },
         {
           "clause_id": "L09.1.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:stamp_ordering.unlock_precedes_run",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_confirmation.py::test_the_unlock_precedes_the_confirmation_run",
@@ -6548,17 +6499,17 @@
         },
         {
           "clause_id": "L09.2.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:cells_planned",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_confirmation_results.json:cells",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_confirmation.py::test_the_confirmation_runs_the_same_matrix",
@@ -6569,71 +6520,96 @@
         },
         {
           "clause_id": "L09.2.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_confirmation_results.json:seeds",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "fragment": "lab09_reconciliation.json:seeds.all_measured_sources_match",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:seeds.probe_design.cutoffs_stamped",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:seeds.model_multi_start.distinct_seed_lists",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.2.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_confirmation_results.json:economics",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "fragment": "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.matches_the_discovery_rate",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:provenance.costs_untouched_between_discovery_and_confirmation.caveat",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_reconciliation.json:financial_identity.cost_binding",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.2.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_confirmation_results.json:engine_untouched",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "fragment": "lab09_reconciliation.json:engine.untouched",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:engine.wheel_digests_match",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:engine.lockfile_sha256.matches",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_confirmation_results.json:no_human_adjustment.unchanged_during_run",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.2.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:cells[].notes.regime_schedule",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.2.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:no_human_adjustment",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_confirmation.py::test_a_mid_run_edit_is_detected",
@@ -6644,28 +6620,28 @@
         },
         {
           "clause_id": "L09.2.7",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:protocol_frozen_at_utc",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_confirmation_results.json:stamp_ordering.freeze_precedes_unlock",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.3.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:contrasts.B-A.not_a_portfolio",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_uncertainty.py::test_pairing_excludes_days_a_cell_was_not_live",
@@ -6676,12 +6652,12 @@
         },
         {
           "clause_id": "L09.3.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:resampling",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_uncertainty.py::test_blocks_widen_the_interval_on_an_autocorrelated_series",
@@ -6692,7 +6668,7 @@
         },
         {
           "clause_id": "L09.3.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "tests/test_lab09_uncertainty.py::test_symbols_are_resampled_together_so_common_shocks_survive",
@@ -6701,30 +6677,30 @@
             },
             {
               "fragment": "lab09_uncertainty.json:contrasts",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.3.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:contrasts.B-A.episodes",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.3.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:contrasts.B-A.concentration",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_uncertainty.py::test_concentration_counts_offsetting_days_as_concentration",
@@ -6735,39 +6711,39 @@
         },
         {
           "clause_id": "L09.3.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:holm.family",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_uncertainty.json:holm.adjusted",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.3.7",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:exploratory.contrasts",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_uncertainty.json:holm.excluded_from_family",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.3.8",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_development_replay.json:block_length_calibration",
@@ -6776,30 +6752,30 @@
             },
             {
               "fragment": "lab09_uncertainty.json:contrasts.B-A.block_length_sensitivity",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.4.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_stress.json:cost_stress.multipliers",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_stress.json:cost_stress.pooled",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.4.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab07_continuous_trace.json:training_jobs.benchmark.source",
@@ -6808,19 +6784,19 @@
             },
             {
               "fragment": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.4.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.MISLABELLED_TRANSITIONS",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_stress.py::test_mislabelling_moves_transitions_without_inventing_states",
@@ -6831,12 +6807,12 @@
         },
         {
           "clause_id": "L09.4.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.STALE_FEED",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_stress.py::test_a_stale_feed_holds_a_value_and_keeps_the_tape_length",
@@ -6847,12 +6823,12 @@
         },
         {
           "clause_id": "L09.4.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.MISSING_ENRICHMENT",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_stress.py::test_missing_enrichment_drops_rows_rather_than_zeroing_them",
@@ -6863,45 +6839,55 @@
         },
         {
           "clause_id": "L09.4.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_stress.json:no_retuning_after_a_stress",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "fragment": "lab09_stress.json:no_retuning_after_a_stress.this_is_a_COMMITMENT_not_a_measurement",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_stress.json:no_retuning_after_a_stress.changes_recorded_so_far",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "correction_ledger.json:defects",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.a_new_episode_was_exercised",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:situations.MIXED_AMBIGUOUS_STATES.per_symbol",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:situations.STATE_LABEL_PERMUTATION_AFTER_REFIT",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_stress.py::test_a_label_permutation_leaves_the_transition_positions_alone",
@@ -6912,61 +6898,71 @@
         },
         {
           "clause_id": "L09.5.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.blocked_reasons_across_every_arm",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "fragment": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.status",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.arms_carrying_a_switch_delay_record",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.switches_that_waited_for_an_open_campaign",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.5.7",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:time_edge_attribution",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.6.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:financial_identity",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "cost_binding_verification.json:verdict",
@@ -6977,77 +6973,87 @@
         },
         {
           "clause_id": "L09.6.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:parameter_version_lifecycle.every_bar_attributed",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.6.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:search_cardinality.all_executions_recorded",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.6.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:objective_recomputation.all_match",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.6.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:replay.development.exact",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_reconciliation.json:replay.confirmation.all_reproduced",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.6.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_reconciliation.json:audits_retained.all_present",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:audits_retained.all_clean",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_reconciliation.json:audits_retained.evidence_pointers.verdict",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_reconciliation.json:audits_retained.fast_profile_used",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:contributions.DESCRIPTIVE",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_group_ablation.json:per_symbol",
@@ -7058,72 +7064,82 @@
         },
         {
           "clause_id": "L09.7.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:contributions.PREDICTIVE",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:contributions.SELECTION",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:contributions.TIMING",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:contributions.POLICY",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.6",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:net_gain_after_risk_and_cost",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_claim_report.json:conclusion_level",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_claim_report.json:decision_rule",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_uncertainty.json:contrasts.C-A.ci_lower",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "L09.7.7",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:forbidden.fund_grade_alpha_proven",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_confirmation.py::test_no_report_claims_a_proven_fund_grade_alpha",
@@ -7150,86 +7166,86 @@
         },
         {
           "clause_id": "G11.2.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:conclusion_level",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_claim_report.json:conclusion_vocabulary",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "G11.4.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_support.json:transition_diagnostics.anchored_on",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_support.json:transition_diagnostics.activation_delay",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_support.json:transition_diagnostics.wrong_switch_loss.status",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "G11.4.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:scope.statement",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_uncertainty.json:contrasts.C-A.concentration",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "G11.4.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:contrasts.C-A.concentration",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_support.json:transition_diagnostics.unknown_and_fallback_usage",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_support.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "T62.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:scope",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "tests/test_lab09_confirmation.py::test_no_untested_cell_is_presented_as_evidence",
@@ -7240,7 +7256,7 @@
         },
         {
           "clause_id": "T63.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "tests/test_lab09_uncertainty.py::test_symbols_are_resampled_together_so_common_shocks_survive",
@@ -7249,8 +7265,8 @@
             },
             {
               "fragment": "lab09_uncertainty.json:resampling",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
@@ -7267,50 +7283,50 @@
         },
         {
           "clause_id": "OUT.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_confirmation_results.json:cells",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_confirmation_results.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "OUT.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_uncertainty.json:contrasts",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_uncertainty.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "OUT.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_stress.json:cost_stress.pooled",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_stress.json:information_stress.per_cell",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_stress.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "OUT.5",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:conclusion_level",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
@@ -7338,621 +7354,77 @@
         },
         {
           "clause_id": "EXIT.1",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:scope.statement",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_claim_report.json:conclusion_level",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "EXIT.2",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
               "fragment": "lab09_claim_report.json:blockers",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_claim_report.json:forbidden.statement",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "EXIT.3",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "lab09_claim_report.json:conclusion_level",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_claim_report.json"
+              "fragment": "lab09_claim_report.json:accounting_severity.severity",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "lab09_claim_report.json:accounting_severity.rule",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             },
             {
               "fragment": "lab09_reconciliation.json:financial_identity.cost_binding_is_a_finding",
-              "verdict": "BROKEN",
-              "detail": "no such artifact lab09_reconciliation.json"
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         },
         {
           "clause_id": "EXIT.4",
-          "verdict": "BROKEN",
+          "verdict": "RESOLVED",
           "fragments": [
             {
-              "fragment": "correction_ledger.json:corrections",
-              "verdict": "BROKEN",
-              "detail": "'corrections' not present; found ['built_at_utc', 'defects', 'defects_total', 'evidence_is_append_only', 'guide_section', 'method', 'numeric_history', 'rule'] (configs)"
+              "fragment": "correction_ledger.json:defects",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
+            },
+            {
+              "fragment": "correction_ledger.json:numeric_history",
+              "verdict": "RESOLVED",
+              "detail": "resolved (configs)"
             }
           ]
         }
       ]
     }
   },
-  "broken_total": 79,
-  "broken": [
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.1.4",
-      "fragment": "lab09_confirmation_results.json:stamp_ordering",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.1.6",
-      "fragment": "lab09_confirmation_results.json:stamp_ordering.unlock_precedes_run",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.1",
-      "fragment": "lab09_confirmation_results.json:cells_planned",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.1",
-      "fragment": "lab09_confirmation_results.json:cells",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.2",
-      "fragment": "lab09_confirmation_results.json:seeds",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.3",
-      "fragment": "lab09_confirmation_results.json:economics",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.3",
-      "fragment": "lab09_reconciliation.json:financial_identity.cost_binding",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.4",
-      "fragment": "lab09_confirmation_results.json:engine_untouched",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.4",
-      "fragment": "lab09_confirmation_results.json:no_human_adjustment.unchanged_during_run",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.5",
-      "fragment": "lab09_confirmation_results.json:cells[].notes.regime_schedule",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.5",
-      "fragment": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.6",
-      "fragment": "lab09_confirmation_results.json:no_human_adjustment",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.7",
-      "fragment": "lab09_confirmation_results.json:protocol_frozen_at_utc",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.2.7",
-      "fragment": "lab09_confirmation_results.json:stamp_ordering.freeze_precedes_unlock",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.1",
-      "fragment": "lab09_uncertainty.json:contrasts.B-A.not_a_portfolio",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.2",
-      "fragment": "lab09_uncertainty.json:resampling",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.3",
-      "fragment": "lab09_uncertainty.json:contrasts",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.4",
-      "fragment": "lab09_uncertainty.json:contrasts.B-A.episodes",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.5",
-      "fragment": "lab09_uncertainty.json:contrasts.B-A.concentration",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.6",
-      "fragment": "lab09_uncertainty.json:holm.family",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.6",
-      "fragment": "lab09_uncertainty.json:holm.adjusted",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.7",
-      "fragment": "lab09_uncertainty.json:exploratory.contrasts",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.7",
-      "fragment": "lab09_uncertainty.json:holm.excluded_from_family",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.3.8",
-      "fragment": "lab09_uncertainty.json:contrasts.B-A.block_length_sensitivity",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.1",
-      "fragment": "lab09_stress.json:cost_stress.multipliers",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.1",
-      "fragment": "lab09_stress.json:cost_stress.pooled",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.2",
-      "fragment": "lab09_confirmation_results.json:cells[].arms[].switch_delays",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.3",
-      "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.MISLABELLED_TRANSITIONS",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.4",
-      "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.STALE_FEED",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.5",
-      "fragment": "lab09_stress.json:information_stress.per_cell[].stresses.MISSING_ENRICHMENT",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.4.6",
-      "fragment": "lab09_stress.json:no_retuning_after_a_stress",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.1",
-      "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.a_new_episode_was_exercised",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.2",
-      "fragment": "lab09_support.json:situations.MIXED_AMBIGUOUS_STATES.per_symbol",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.3",
-      "fragment": "lab09_support.json:situations.STATE_LABEL_PERMUTATION_AFTER_REFIT",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.4",
-      "fragment": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.5",
-      "fragment": "lab09_support.json:situations.POLICY_ON_THE_CONFIRMATION_INTERVAL",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.6",
-      "fragment": "lab09_support.json:situations.CAMPAIGN_NOT_FLAT.blocked_reasons_across_every_arm",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.7",
-      "fragment": "lab09_support.json:time_edge_attribution",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.5.7",
-      "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.1",
-      "fragment": "lab09_reconciliation.json:financial_identity",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.2",
-      "fragment": "lab09_reconciliation.json:parameter_version_lifecycle.every_bar_attributed",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.3",
-      "fragment": "lab09_reconciliation.json:search_cardinality.all_executions_recorded",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.4",
-      "fragment": "lab09_reconciliation.json:objective_recomputation.all_match",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.5",
-      "fragment": "lab09_reconciliation.json:replay.development.exact",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.5",
-      "fragment": "lab09_reconciliation.json:replay.confirmation.all_reproduced",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.6",
-      "fragment": "lab09_reconciliation.json:audits_retained.all_present",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.6.6",
-      "fragment": "lab09_reconciliation.json:audits_retained.fast_profile_used",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.1",
-      "fragment": "lab09_claim_report.json:contributions.DESCRIPTIVE",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.2",
-      "fragment": "lab09_claim_report.json:contributions.PREDICTIVE",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.3",
-      "fragment": "lab09_claim_report.json:contributions.SELECTION",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.4",
-      "fragment": "lab09_claim_report.json:contributions.TIMING",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.5",
-      "fragment": "lab09_claim_report.json:contributions.POLICY",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.6",
-      "fragment": "lab09_claim_report.json:net_gain_after_risk_and_cost",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.6",
-      "fragment": "lab09_claim_report.json:conclusion_level",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "L09.7.7",
-      "fragment": "lab09_claim_report.json:forbidden.fund_grade_alpha_proven",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.2.4",
-      "fragment": "lab09_claim_report.json:conclusion_level",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.2.4",
-      "fragment": "lab09_claim_report.json:conclusion_vocabulary",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.1",
-      "fragment": "lab09_support.json:transition_diagnostics.anchored_on",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.1",
-      "fragment": "lab09_support.json:transition_diagnostics.activation_delay",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.1",
-      "fragment": "lab09_support.json:transition_diagnostics.wrong_switch_loss.status",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.2",
-      "fragment": "lab09_claim_report.json:scope.statement",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.2",
-      "fragment": "lab09_uncertainty.json:contrasts.C-A.concentration",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.3",
-      "fragment": "lab09_uncertainty.json:contrasts.C-A.concentration",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.3",
-      "fragment": "lab09_support.json:situations.NEW_REGIME_EPISODE.per_symbol",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "G11.4.3",
-      "fragment": "lab09_support.json:transition_diagnostics.unknown_and_fallback_usage",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_support.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "T62.1",
-      "fragment": "lab09_claim_report.json:scope",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "T63.1",
-      "fragment": "lab09_uncertainty.json:resampling",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "OUT.2",
-      "fragment": "lab09_confirmation_results.json:cells",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_confirmation_results.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "OUT.3",
-      "fragment": "lab09_uncertainty.json:contrasts",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_uncertainty.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "OUT.4",
-      "fragment": "lab09_stress.json:cost_stress.pooled",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "OUT.4",
-      "fragment": "lab09_stress.json:information_stress.per_cell",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_stress.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "OUT.5",
-      "fragment": "lab09_claim_report.json:conclusion_level",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.1",
-      "fragment": "lab09_claim_report.json:scope.statement",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.1",
-      "fragment": "lab09_claim_report.json:conclusion_level",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.2",
-      "fragment": "lab09_claim_report.json:blockers",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.2",
-      "fragment": "lab09_claim_report.json:forbidden.statement",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.3",
-      "fragment": "lab09_claim_report.json:conclusion_level",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_claim_report.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.3",
-      "fragment": "lab09_reconciliation.json:financial_identity.cost_binding_is_a_finding",
-      "verdict": "BROKEN",
-      "detail": "no such artifact lab09_reconciliation.json"
-    },
-    {
-      "phase": "lab09_task_audit.json",
-      "clause_id": "EXIT.4",
-      "fragment": "correction_ledger.json:corrections",
-      "verdict": "BROKEN",
-      "detail": "'corrections' not present; found ['built_at_utc', 'defects', 'defects_total', 'evidence_is_append_only', 'guide_section', 'method', 'numeric_history', 'rule'] (configs)"
-    }
-  ],
-  "verdict": "BROKEN_POINTERS_FOUND"
+  "broken_total": 0,
+  "broken": [],
+  "verdict": "ALL_POINTERS_RESOLVE"
 }

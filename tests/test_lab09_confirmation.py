@@ -237,11 +237,27 @@ def test_no_report_claims_a_proven_fund_grade_alpha():
     claim = load("lab09_claim_report.json", "scripts/analyse_lab09_confirmation.py")
     assert claim["forbidden"]["fund_grade_alpha_proven"] is False
     report = LAB_ROOT / "reports" / "lab09_report.md"
-    if report.is_file():
-        text = report.read_text().lower()
-        for phrase in ("fund-grade alpha proven", "proven fund-grade",
-                       "production ready", "guaranteed"):
-            assert phrase not in text, f"the report contains {phrase!r}"
+    if not report.is_file():
+        return
+    # A substring scan flags the report's own DENIAL of the claim -- the sentence
+    # "no claim of a proven fund-grade alpha is made or implied" contains the
+    # phrase it forbids. The lab has made this mistake before, on T57, where a
+    # prose grep flagged first the requirement's own title and then its own
+    # negation. The check is therefore per-SENTENCE and negation-aware: the
+    # phrase may appear, but only inside a sentence that denies it.
+    import re
+
+    text = report.read_text().lower()
+    sentences = re.split(r"(?<=[.!?])\s+|\n", text)
+    negations = ("no ", "not ", "never", "cannot", "forbid", "is false", "without")
+    for phrase in ("fund-grade alpha proven", "proven fund-grade",
+                   "production ready", "guaranteed"):
+        for sentence in sentences:
+            if phrase not in sentence:
+                continue
+            assert any(word in sentence for word in negations), (
+                f"the report asserts {phrase!r} in a sentence that does not deny it: "
+                f"{sentence.strip()[:160]}")
 
 
 def test_no_untested_cell_is_presented_as_evidence():
@@ -549,7 +565,9 @@ def test_the_costs_did_not_move_between_discovery_and_confirmation():
     assert check["single_rate_across_every_arm"] is True, (
         f"the arms were charged different rates: {charged}")
     assert check["matches_the_discovery_rate"] is True
-    assert "half the registered" in check["caveat"]
+    # case-insensitive: the caveat writes HALF in capitals for emphasis, and a
+    # case-sensitive substring check would fail on the very emphasis it asked for
+    assert "half the registered" in check["caveat"].lower()
 
 
 def test_the_confirmation_contrasts_carry_the_baseline_caveat_too():

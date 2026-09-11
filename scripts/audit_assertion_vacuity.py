@@ -28,6 +28,18 @@ sys.path.insert(0, str(LAB_ROOT / "src"))
 #: Keyed by the TEST and the assertion TEXT rather than by a line number, because a
 #: line number expires on any edit above it -- and a stale one can land on a
 #: different assert, which then reads as declared although nobody reviewed it.
+#: The gate that reads THIS audit's output cannot be audited by it. When the gate
+#: fails, pytest stops at its first assertion, so its later assertions go
+#: unreached -- which makes the next run report them as undeclared, which keeps
+#: the gate failing. A strange loop with no fixed point, and the same shape as
+#: `audit_identities.py` reporting 12/12 by grepping its own output. The
+#: exclusion is NAMED here rather than left implicit, exactly as that one is.
+SELF_REFERENTIAL_TESTS = {
+    "test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason":
+        "reads configs/assertion_vacuity_audit.json, so its own unreached lines are an artefact "
+        "of it having failed on the previous run's artifact, not evidence about the suite",
+}
+
 ACCEPTED: dict[str, tuple[str, str]] = {
     "test_lab03_pipeline.py::"
     "test_read_lock_distinguishes_expected_drift_from_a_real_invalidation::"
@@ -64,6 +76,34 @@ ACCEPTED: dict[str, tuple[str, str]] = {
         "the branch for an identity still OWED by a phase that has landed; every owed identity "
         "was discharged when its phase landed, so the population is empty",
         "tests/test_guide_contracts.py::test_the_taxonomy_lists_all_twelve_identities"),
+    "test_lab09_confirmation.py::"
+    "test_a_missing_measurement_is_never_reported_as_a_negative_result::"
+    'assert entry.get("reason"), f"{name} is NOT_MEASURED without saying wh': (
+        "the branch for a contribution that could not be measured; all five were measured on "
+        "this run, so no contribution is NOT_MEASURED",
+        "tests/test_contingency_paths.py::"
+        "test_the_claim_rule_can_reach_every_verdict_it_declares"),
+    "test_lab09_confirmation.py::"
+    "test_the_conclusion_follows_the_registered_decision_rule::"
+    'assert expected.startswith("NET_"), expected': (
+        "the branch for a SUPPORTED contribution and therefore an edge conclusion; nothing "
+        "cleared the minimum economic effect on this run",
+        "tests/test_contingency_paths.py::"
+        "test_the_claim_rule_can_reach_every_verdict_it_declares"),
+    "test_lab09_confirmation.py::"
+    "test_the_conclusion_follows_the_registered_decision_rule::"
+    'assert entry["verdict"] == "SUPPORTED", name': (
+        "the same branch at the per-contribution level: no interval sits entirely above the "
+        "minimum",
+        "tests/test_contingency_paths.py::"
+        "test_the_claim_rule_can_reach_every_verdict_it_declares"),
+    "test_lab09_confirmation.py::"
+    "test_the_conclusion_follows_the_registered_decision_rule::"
+    'assert entry["verdict"] == "INCONCLUSIVE", (': (
+        "the branch for an interval that STRADDLES the minimum; every measured contribution was "
+        "ruled out entirely BELOW it, which is a stronger negative than inconclusive",
+        "tests/test_contingency_paths.py::"
+        "test_the_claim_rule_can_reach_every_verdict_it_declares"),
     "test_lab08_factorial.py::"
     "test_risk_only_is_blocked_rather_than_silently_returning_the_baseline::"
     "assert transfer >= 0.5, (": (
@@ -155,12 +195,17 @@ def main() -> int:
             self.reasons: dict[str, str] = {}
 
         def pytest_runtest_logreport(self, report):
-            if report.skipped and report.when == "setup":
-                name = report.nodeid.split("::")[-1].split("[")[0]
-                reason = ""
-                if isinstance(report.longrepr, tuple) and len(report.longrepr) == 3:
-                    reason = str(report.longrepr[2])
-                self.reasons[name] = reason.replace("Skipped: ", "")
+            # ANY phase, not just setup. `pytest.skip()` called inside a test body
+            # -- which is how every artifact-dependent test here skips -- reports
+            # at `call`, so filtering on `setup` saw zero skips and filed all 107
+            # of their assertions as unreachable branches.
+            if not report.skipped:
+                return
+            name = report.nodeid.split("::")[-1].split("[")[0]
+            reason = ""
+            if isinstance(report.longrepr, tuple) and len(report.longrepr) == 3:
+                reason = str(report.longrepr[2])
+            self.reasons.setdefault(name, reason.replace("Skipped: ", "") or "skipped")
 
     skips = _Skips()
     exit_code = pytest.main([str(LAB_ROOT / "tests"), "-q", "--no-header",
@@ -173,6 +218,8 @@ def main() -> int:
         name = pathlib.Path(filename).name
         for line, (kind, owner, snippet) in sorted(table.items()):
             if (filename, line) not in hit:
+                if owner in SELF_REFERENTIAL_TESTS:
+                    continue
                 key = stable_key(name, owner, snippet)
                 reason, exercised = ACCEPTED.get(key, (None, None))
                 skipped = owner in skips.reasons
@@ -213,6 +260,7 @@ def main() -> int:
                        "separately: counting them together makes a phase mid-run look like a "
                        "suite full of checks nobody has looked at, and buries the real ones"),
         "stale_declarations": stale_declarations,
+        "self_referential_exclusions": SELF_REFERENTIAL_TESTS,
         "stale_declaration_rule": ("a declaration that matches no assert in the suite is stale: "
                                    "the test was renamed, the assertion reworded, or the guard "
                                    "deleted. It is reported rather than ignored"),

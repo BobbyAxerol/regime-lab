@@ -1,809 +1,153 @@
 {
   "schema": "crypto_regime_lab.assertion_vacuity_audit.v1",
-  "tests_passed": true,
-  "assertion_lines_tracked": 2008,
-  "assertion_lines_reached": 1908,
+  "tests_passed": false,
+  "assertion_lines_tracked": 2099,
+  "assertion_lines_reached": 2083,
   "never_reached": [
     {
       "location": "test_guide_contracts.py:196",
+      "key": "test_guide_contracts.py::test_the_identity_audit_does_not_pass_on_its_own_output::assert record[\"owner\"] not in landed, (",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_the_identity_audit_does_not_pass_on_its_own_output",
+      "snippet": "assert record[\"owner\"] not in landed, (",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for an identity still OWED by a phase that has landed; every owed identity was discharged when its phase landed, so the population is empty",
+      "rule_exercised_by": "tests/test_guide_contracts.py::test_the_taxonomy_lists_all_twelve_identities"
     },
     {
       "location": "test_lab03_pipeline.py:127",
+      "key": "test_lab03_pipeline.py::test_read_lock_distinguishes_expected_drift_from_a_real_invalidation::assert verification[\"status\"] in (\"UNCHANGED\", \"EXPECTED_MUTABLE_DRIFT",
       "kind": "assert",
+      "test": "test_read_lock_distinguishes_expected_drift_from_a_real_invalidation",
+      "snippet": "assert verification[\"status\"] in (\"UNCHANGED\", \"EXPECTED_MUTABLE_DRIFT",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
       "accepted": true,
       "why_unreachable_here": "the `else` for a snapshot with no closed-partition drift; upstream currently HAS drift",
       "rule_exercised_by": "tests/test_contingency_paths.py::test_the_no_drift_branch_reports_unchanged"
     },
     {
       "location": "test_lab03_pipeline.py:672",
+      "key": "test_lab03_pipeline.py::test_measured_metrics_drift_is_a_restamp_and_the_shallow_check_still_fails_closed::assert any(v[\"product_id\"] == product for v in revisions), (",
       "kind": "assert",
+      "test": "test_measured_metrics_drift_is_a_restamp_and_the_shallow_check_still_fails_closed",
+      "snippet": "assert any(v[\"product_id\"] == product for v in revisions), (",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
       "accepted": true,
       "why_unreachable_here": "the cohort-invalidation loop; every current drift is a vintage re-stamp, so no cohort is invalidated",
       "rule_exercised_by": "tests/test_contingency_paths.py::test_a_content_revision_actually_invalidates_its_cohort"
     },
     {
       "location": "test_lab04_legacy_labelling.py:164",
+      "key": "test_lab04_legacy_labelling.py::test_the_conclusion_level_comes_from_the_registered_vocabulary::assert not hyp[\"blockers_preventing_a_stronger_claim\"]",
       "kind": "assert",
+      "test": "test_the_conclusion_level_comes_from_the_registered_vocabulary",
+      "snippet": "assert not hyp[\"blockers_preventing_a_stronger_claim\"]",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
       "accepted": true,
       "why_unreachable_here": "the guard for a NET_PARAMETER_SELECTION_EDGE conclusion; LAB-04 concluded INCONCLUSIVE_SAMPLE",
       "rule_exercised_by": "tests/test_contingency_paths.py::test_a_stronger_conclusion_requires_no_blockers_and_a_real_effect"
     },
     {
       "location": "test_lab04_legacy_labelling.py:165",
+      "key": "test_lab04_legacy_labelling.py::test_the_conclusion_level_comes_from_the_registered_vocabulary::assert abs(hyp[\"mean_daily_net_return_difference\"]) >= \\",
       "kind": "assert",
+      "test": "test_the_conclusion_level_comes_from_the_registered_vocabulary",
+      "snippet": "assert abs(hyp[\"mean_daily_net_return_difference\"]) >= \\",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
       "accepted": true,
       "why_unreachable_here": "the same guard's second clause",
       "rule_exercised_by": "tests/test_contingency_paths.py::test_a_stronger_conclusion_requires_no_blockers_and_a_real_effect"
     },
     {
       "location": "test_lab04_legacy_labelling.py:359",
+      "key": "test_lab04_legacy_labelling.py::test_the_audit_refuses_a_matrix_built_with_the_wrong_design::assert any(t.startswith(\"L04.5\") for t in blocked), (",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_the_audit_refuses_a_matrix_built_with_the_wrong_design",
+      "snippet": "assert any(t.startswith(\"L04.5\") for t in blocked), (",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for a probe design that deviates from spec; the real design matches",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_spec_deviating_design_must_block_the_l045_rows"
     },
     {
       "location": "test_lab08_factorial.py:413",
+      "key": "test_lab08_factorial.py::test_risk_only_is_blocked_rather_than_silently_returning_the_baseline::assert transfer >= 0.5, (",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:40",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:41",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:65",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:66",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:67",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:69",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:71",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:72",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:83",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:84",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:85",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:86",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:87",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:88",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:94",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:95",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:96",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:129",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:130",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:132",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:139",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:140",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:141",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:147",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:149",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:150",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:151",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:157",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:158",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:165",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:166",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:179",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:181",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:189",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:190",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:196",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:197",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:203",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:204",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:211",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:212",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:217",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:220",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:221",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:232",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_risk_only_is_blocked_rather_than_silently_returning_the_baseline",
+      "snippet": "assert transfer >= 0.5, (",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for a RISK_ONLY control that CAN be computed; state transfer across refits is 1.64%, so every cell reports BLOCKED_BY_STATE_NAMESPACING instead",
+      "rule_exercised_by": "tests/test_lab08_factorial.py::test_risk_only_is_blocked_rather_than_silently_returning_the_baseline"
     },
     {
       "location": "test_lab09_confirmation.py:233",
+      "key": "test_lab09_confirmation.py::test_a_missing_measurement_is_never_reported_as_a_negative_result::assert entry.get(\"reason\"), f\"{name} is NOT_MEASURED without saying wh",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:238",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:244",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:251",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:253",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:254",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:255",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:256",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:262",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:263",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:265",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:286",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:325",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:326",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:327",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:328",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:331",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:334",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:336",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:337",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:338",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:342",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:353",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:354",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:371",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:372",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:397",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:402",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:407",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:409",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:410",
-      "kind": "loop_body",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:411",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_a_missing_measurement_is_never_reported_as_a_negative_result",
+      "snippet": "assert entry.get(\"reason\"), f\"{name} is NOT_MEASURED without saying wh",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for a contribution that could not be measured; all five were measured on this run, so no contribution is NOT_MEASURED",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_claim_rule_can_reach_every_verdict_it_declares"
     },
     {
       "location": "test_lab09_confirmation.py:413",
+      "key": "test_lab09_confirmation.py::test_the_conclusion_follows_the_registered_decision_rule::assert expected.startswith(\"NET_\"), expected",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_the_conclusion_follows_the_registered_decision_rule",
+      "snippet": "assert expected.startswith(\"NET_\"), expected",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for a SUPPORTED contribution and therefore an edge conclusion; nothing cleared the minimum economic effect on this run",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_claim_rule_can_reach_every_verdict_it_declares"
     },
     {
-      "location": "test_lab09_confirmation.py:415",
+      "location": "test_lab09_confirmation.py:427",
+      "key": "test_lab09_confirmation.py::test_the_conclusion_follows_the_registered_decision_rule::assert entry[\"verdict\"] == \"SUPPORTED\", name",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_the_conclusion_follows_the_registered_decision_rule",
+      "snippet": "assert entry[\"verdict\"] == \"SUPPORTED\", name",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the same branch at the per-contribution level: no interval sits entirely above the minimum",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_claim_rule_can_reach_every_verdict_it_declares"
     },
     {
-      "location": "test_lab09_confirmation.py:417",
+      "location": "test_lab09_confirmation.py:431",
+      "key": "test_lab09_confirmation.py::test_the_conclusion_follows_the_registered_decision_rule::assert entry[\"verdict\"] == \"INCONCLUSIVE\", (",
       "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:425",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:426",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:429",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:442",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:444",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:446",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:448",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:456",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:460",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:461",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:462",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:463",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
-    },
-    {
-      "location": "test_lab09_confirmation.py:464",
-      "kind": "assert",
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "test": "test_the_conclusion_follows_the_registered_decision_rule",
+      "snippet": "assert entry[\"verdict\"] == \"INCONCLUSIVE\", (",
+      "cause": "UNREACHED_BRANCH",
+      "skip_reason": null,
+      "accepted": true,
+      "why_unreachable_here": "the branch for an interval that STRADDLES the minimum; every measured contribution was ruled out entirely BELOW it, which is a stronger negative than inconclusive",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_claim_rule_can_reach_every_verdict_it_declares"
     }
   ],
-  "never_reached_count": 100,
-  "undeclared": [
-    "test_guide_contracts.py:196",
-    "test_lab04_legacy_labelling.py:359",
-    "test_lab08_factorial.py:413",
-    "test_lab09_confirmation.py:40",
-    "test_lab09_confirmation.py:41",
-    "test_lab09_confirmation.py:65",
-    "test_lab09_confirmation.py:66",
-    "test_lab09_confirmation.py:67",
-    "test_lab09_confirmation.py:69",
-    "test_lab09_confirmation.py:71",
-    "test_lab09_confirmation.py:72",
-    "test_lab09_confirmation.py:83",
-    "test_lab09_confirmation.py:84",
-    "test_lab09_confirmation.py:85",
-    "test_lab09_confirmation.py:86",
-    "test_lab09_confirmation.py:87",
-    "test_lab09_confirmation.py:88",
-    "test_lab09_confirmation.py:94",
-    "test_lab09_confirmation.py:95",
-    "test_lab09_confirmation.py:96",
-    "test_lab09_confirmation.py:129",
-    "test_lab09_confirmation.py:130",
-    "test_lab09_confirmation.py:132",
-    "test_lab09_confirmation.py:139",
-    "test_lab09_confirmation.py:140",
-    "test_lab09_confirmation.py:141",
-    "test_lab09_confirmation.py:147",
-    "test_lab09_confirmation.py:149",
-    "test_lab09_confirmation.py:150",
-    "test_lab09_confirmation.py:151",
-    "test_lab09_confirmation.py:157",
-    "test_lab09_confirmation.py:158",
-    "test_lab09_confirmation.py:165",
-    "test_lab09_confirmation.py:166",
-    "test_lab09_confirmation.py:179",
-    "test_lab09_confirmation.py:181",
-    "test_lab09_confirmation.py:189",
-    "test_lab09_confirmation.py:190",
-    "test_lab09_confirmation.py:196",
-    "test_lab09_confirmation.py:197",
-    "test_lab09_confirmation.py:203",
-    "test_lab09_confirmation.py:204",
-    "test_lab09_confirmation.py:211",
-    "test_lab09_confirmation.py:212",
-    "test_lab09_confirmation.py:217",
-    "test_lab09_confirmation.py:220",
-    "test_lab09_confirmation.py:221",
-    "test_lab09_confirmation.py:232",
-    "test_lab09_confirmation.py:233",
-    "test_lab09_confirmation.py:238",
-    "test_lab09_confirmation.py:244",
-    "test_lab09_confirmation.py:251",
-    "test_lab09_confirmation.py:253",
-    "test_lab09_confirmation.py:254",
-    "test_lab09_confirmation.py:255",
-    "test_lab09_confirmation.py:256",
-    "test_lab09_confirmation.py:262",
-    "test_lab09_confirmation.py:263",
-    "test_lab09_confirmation.py:265",
-    "test_lab09_confirmation.py:286",
-    "test_lab09_confirmation.py:325",
-    "test_lab09_confirmation.py:326",
-    "test_lab09_confirmation.py:327",
-    "test_lab09_confirmation.py:328",
-    "test_lab09_confirmation.py:331",
-    "test_lab09_confirmation.py:334",
-    "test_lab09_confirmation.py:336",
-    "test_lab09_confirmation.py:337",
-    "test_lab09_confirmation.py:338",
-    "test_lab09_confirmation.py:342",
-    "test_lab09_confirmation.py:353",
-    "test_lab09_confirmation.py:354",
-    "test_lab09_confirmation.py:371",
-    "test_lab09_confirmation.py:372",
-    "test_lab09_confirmation.py:397",
-    "test_lab09_confirmation.py:402",
-    "test_lab09_confirmation.py:407",
-    "test_lab09_confirmation.py:409",
-    "test_lab09_confirmation.py:410",
-    "test_lab09_confirmation.py:411",
-    "test_lab09_confirmation.py:413",
-    "test_lab09_confirmation.py:415",
-    "test_lab09_confirmation.py:417",
-    "test_lab09_confirmation.py:425",
-    "test_lab09_confirmation.py:426",
-    "test_lab09_confirmation.py:429",
-    "test_lab09_confirmation.py:442",
-    "test_lab09_confirmation.py:444",
-    "test_lab09_confirmation.py:446",
-    "test_lab09_confirmation.py:448",
-    "test_lab09_confirmation.py:456",
-    "test_lab09_confirmation.py:460",
-    "test_lab09_confirmation.py:461",
-    "test_lab09_confirmation.py:462",
-    "test_lab09_confirmation.py:463",
-    "test_lab09_confirmation.py:464"
-  ],
+  "never_reached_count": 11,
+  "undeclared": [],
+  "unreached_because_the_test_skipped": [],
+  "skipped_tests": 0,
+  "cause_rule": "an assert inside a SKIPPED test did not run because its input is missing, not because its branch is impossible. The two are reported separately: counting them together makes a phase mid-run look like a suite full of checks nobody has looked at, and buries the real ones",
+  "stale_declarations": [],
+  "self_referential_exclusions": {
+    "test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason": "reads configs/assertion_vacuity_audit.json, so its own unreached lines are an artefact of it having failed on the previous run's artifact, not evidence about the suite"
+  },
+  "stale_declaration_rule": "a declaration that matches no assert in the suite is stale: the test was renamed, the assertion reworded, or the guard deleted. It is reported rather than ignored",
   "rule": "an assertion that never runs cannot fail. A guard for a failure the current data does not produce is legitimate and stays, but it must be DECLARED with where its rule is exercised instead. An undeclared one is a check nobody has looked at",
-  "method": "sys.monitoring LINE events over tests/, recording every assert statement and every statement inside a loop that contains one"
+  "method": "sys.monitoring LINE events over tests/, recording every assert statement and every statement inside a loop that contains one",
+  "declaration_key": "file::test::asserted-text. A line number expires on any edit above it, and a stale one can land on a different assert that then reads as declared although nobody reviewed it"
 }
