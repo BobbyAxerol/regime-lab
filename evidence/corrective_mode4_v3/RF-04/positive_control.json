@@ -1,0 +1,37 @@
+{
+  "controller_cutoffs_bars": [
+    401,
+    901,
+    1401,
+    1901
+  ],
+  "regime_versions_after_last_cutoff": [
+    "regime-2",
+    "regime-2",
+    "regime-2"
+  ],
+  "calendar_versions_after_last_cutoff": [
+    "cal-2",
+    "cal-2",
+    "cal-2"
+  ],
+  "params_changed_by_treatment": true,
+  "regime": {
+    "status": "EVALUATED",
+    "entries": 1,
+    "engine_fills": 2,
+    "equity": 20565.02237400521
+  },
+  "calendar": {
+    "status": "EVALUATED",
+    "entries": 2,
+    "engine_fills": 4,
+    "equity": 21289.253205281257
+  },
+  "treatment_reached_execution": true,
+  "ground_truth_use": "switch bars only place the synthetic world; the policy reads emissions",
+  "schema": "regime_lab.rf04_positive_control.v1",
+  "lab_run_id": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T18:59:46.267634+00:00"
+}

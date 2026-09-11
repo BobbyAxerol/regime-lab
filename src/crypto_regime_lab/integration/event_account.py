@@ -95,6 +95,7 @@ class EventAccountStrategy:
         self.entries = 0
         self.unmapped: list[dict] = []
         self.rejections: list[dict] = []
+        self._seq = 0
         self.fills_out: list[dict] = []
         self.switches: list[dict] = []
         self._active_ready = initial.requested_at_bar <= 0
@@ -112,11 +113,13 @@ class EventAccountStrategy:
                trigger=None, reduce_only=False, tag=None, oco=None):
         import quantbt as q
 
+        self._seq += 1
         return q.OrderCommand(
             timestamp=timestamp, action=q.OrderAction.PLACE, symbol=SYMBOL,
             side=q.OrderSide.BUY if side > 0 else q.OrderSide.SELL,
             order_type=order_type, qty=float(qty), price=price, trigger_price=trigger,
-            reduce_only=bool(reduce_only), tag=tag, oco_group_id=oco)
+            reduce_only=bool(reduce_only), tag=tag, oco_group_id=oco,
+            order_id=f"lab-{self._seq}")
 
     def _current_price(self, context) -> float:
         close = context.close

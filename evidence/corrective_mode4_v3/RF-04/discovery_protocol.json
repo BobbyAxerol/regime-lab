@@ -1,0 +1,56 @@
+{
+  "schema": "regime_lab.rf04_discovery_protocol.v1",
+  "generated_at_utc": "2026-09-11T18:59:46.267592+00:00",
+  "status": "REGISTERED_BEFORE_DISCOVERY_RUNS",
+  "primary_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "cells_planned": 20,
+  "cohort": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "data": "server_core_v1, development 2021-01-01..2023-12-31"
+  },
+  "budgets": {
+    "pilot_trials_per_cutoff": 32,
+    "freeze_after_coverage_review": true,
+    "tier_caps_seconds": {
+      "T2": 600,
+      "T3": 900
+    }
+  },
+  "mde": {
+    "corrected_daily_account_bps": 0.0371,
+    "artifact": "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json"
+  },
+  "gates": {
+    "must_close_before_results": [
+      "G10 model repairs (A14)",
+      "G11 positive control (this artifact)"
+    ]
+  },
+  "decay_panels": [
+    "D1 IS->OOS",
+    "D2 fixed-parameter age",
+    "D3 adjacent operational folds"
+  ],
+  "controls_order": [
+    "M4_CAL_MATCHED after the pilot",
+    "delayed-state/placebo if budget allows"
+  ],
+  "lab_run_id": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T18:59:46.272143+00:00"
+}
