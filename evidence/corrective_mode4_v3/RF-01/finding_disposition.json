@@ -1,0 +1,371 @@
+{
+  "schema": "regime_lab.finding_disposition.v3",
+  "generated_at_utc": "2026-09-11T15:06:02.294044+00:00",
+  "phase": "RF-01",
+  "vocabulary": [
+    "OPEN_REPRODUCED",
+    "FIXED_PENDING_TEST",
+    "FIXED_AND_VERIFIED",
+    "ALREADY_FIXED_WITH_SOURCE_AND_TEST_EVIDENCE",
+    "QUARANTINED_UNSUPPORTED_PATH",
+    "SECONDARY_REPAIRED_NOT_MARKET_EVALUATED",
+    "BLOCKED_WITH_REASON"
+  ],
+  "dispositions": [
+    {
+      "id": "A01",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T01",
+        "T59"
+      ],
+      "evidence": "probe P01; configs/cost_binding_verification.json",
+      "note": null
+    },
+    {
+      "id": "A02",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "evidence": "probes P02/P12; SRC01-02",
+      "note": null
+    },
+    {
+      "id": "A03",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T11",
+        "T12"
+      ],
+      "evidence": "probes P06/P07; SRC14/SRC16",
+      "note": null
+    },
+    {
+      "id": "A04",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T09",
+        "T10",
+        "T13",
+        "T14",
+        "T17",
+        "T18"
+      ],
+      "evidence": "probe P11; SRC03/13/14/21/22",
+      "note": null
+    },
+    {
+      "id": "A05",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T15",
+        "T16"
+      ],
+      "evidence": "probe P05; SRC18-20",
+      "note": null
+    },
+    {
+      "id": "A06",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T06",
+        "T07",
+        "T08"
+      ],
+      "evidence": "OP-19; configs/protective_order_fidelity.json",
+      "note": null
+    },
+    {
+      "id": "A07",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T51",
+        "T52"
+      ],
+      "evidence": "probe P08; SRC15",
+      "note": null
+    },
+    {
+      "id": "A08",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T25",
+        "T26",
+        "T40"
+      ],
+      "evidence": "SRC17",
+      "note": null
+    },
+    {
+      "id": "A09",
+      "category": "P0",
+      "disposition": "QUARANTINED_UNSUPPORTED_PATH",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T37",
+        "T38"
+      ],
+      "evidence": "SRC05",
+      "note": "old E path disabled; repaired E only in RF-03"
+    },
+    {
+      "id": "A10",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T29",
+        "T30",
+        "T31"
+      ],
+      "evidence": "probe P03; SRC04/SRC25",
+      "note": null
+    },
+    {
+      "id": "A11",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T41",
+        "T42"
+      ],
+      "evidence": "probe P04; SRC06/07/10",
+      "note": null
+    },
+    {
+      "id": "A12",
+      "category": "P1",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T45",
+        "T46",
+        "T48",
+        "T49"
+      ],
+      "evidence": "SRC08-10",
+      "note": null
+    },
+    {
+      "id": "A13",
+      "category": "P1",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T47"
+      ],
+      "evidence": "SRC06/SRC11",
+      "note": null
+    },
+    {
+      "id": "A14",
+      "category": "P1",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T43",
+        "T44",
+        "T50"
+      ],
+      "evidence": "probe P10; SRC24/SRC26",
+      "note": null
+    },
+    {
+      "id": "A15",
+      "category": "P0",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "T59"
+      ],
+      "evidence": "probe P09; SRC23",
+      "note": "corrected derivation registered in corrective_study_spec.json; freeze before RF-04"
+    },
+    {
+      "id": "A16",
+      "category": "P0",
+      "disposition": "FIXED_PENDING_TEST",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "T60",
+        "T61",
+        "T62"
+      ],
+      "evidence": "SRC27; configs/lab09_claim_report.json",
+      "note": "invalidation manifest written this phase; gate test added in RF-01.4"
+    },
+    {
+      "id": "D01",
+      "category": "D",
+      "disposition": "REPRODUCIBILITY_PARTIAL",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "RF-05 reproduction_manifest"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "audit ZIP contains no raw pilot market pack; server snapshot is read-only"
+    },
+    {
+      "id": "D02",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "RF-01.4"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "tests hardcode a venv executable/paths"
+    },
+    {
+      "id": "D03",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T63"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "trial lifecycle ledger lacks duplicate/pruned/failed states"
+    },
+    {
+      "id": "D04",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-03",
+      "required_tests": [
+        "T64"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "response sampling 4000/400 and missing supported rows"
+    },
+    {
+      "id": "D05",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T24"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "tick/lot metadata is sample-derived, not venue historical authority"
+    },
+    {
+      "id": "D06",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "T24"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "no-funding label must travel with every economic artifact"
+    },
+    {
+      "id": "D07",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T19"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "A-HASH five cells unrun and docs drifted"
+    },
+    {
+      "id": "D08",
+      "category": "D",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-01",
+      "required_tests": [
+        "RF-01.4 mutation checks"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "test presence did not prove the runner used the helper"
+    },
+    {
+      "id": "N01",
+      "category": "N",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T54"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "PF definition must stay raw_quantbt vs trade PF"
+    },
+    {
+      "id": "N02",
+      "category": "N",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T06/T07"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "same-close native clock is not next-open"
+    },
+    {
+      "id": "N03",
+      "category": "N",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-05",
+      "required_tests": [
+        "T70"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "audit_bundle_manifest self-hash defect preserved as history"
+    },
+    {
+      "id": "N04",
+      "category": "N",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T53"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "observer aliases (turnover/mean_return/volatility) must be mapped"
+    },
+    {
+      "id": "N05",
+      "category": "N",
+      "disposition": "OPEN_REPRODUCED",
+      "planned_phase": "RF-02",
+      "required_tests": [
+        "T53"
+      ],
+      "evidence": "recovered audit bundle",
+      "note": "whole-window Sharpe used sqrt(len(steps))"
+    }
+  ],
+  "counts": {
+    "FIXED_PENDING_TEST": 1,
+    "OPEN_REPRODUCED": 26,
+    "QUARANTINED_UNSUPPORTED_PATH": 1,
+    "REPRODUCIBILITY_PARTIAL": 1
+  },
+  "rule": "NOT_BENEFICIAL is not a disposition for a fee/backdate/fabricated-fill defect. A quarantined path blocks every arm that depends on it.",
+  "lab_run_id": "RF-01",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T15:06:09.201846+00:00"
+}

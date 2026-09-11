@@ -1,0 +1,799 @@
+{
+  "schema": "regime_lab.historical_invalidation.v3",
+  "generated_at_utc": "2026-09-11T15:06:02.294044+00:00",
+  "invalidated_study": "crypto_regime_timeedge_v2",
+  "superseded_by_study": "corrective_mode4_v3",
+  "historical_conclusion_level": "FAILED_VALIDITY",
+  "historical_conclusion_preserved": true,
+  "historical_artifacts_edited": false,
+  "execution_validity": "FAIL",
+  "implementation_fidelity": "DEVIATED",
+  "statistical_status": "NOT_EVALUABLE",
+  "rule": "a P0 finding that touches a contrast makes that contrast's statistical claim NOT_EVALUABLE. RULED_OUT is only allowed for a valid experiment with the correct threshold and enough evidence. Raw curves, null metrics and negative results stay in place; no historical file is rewritten.",
+  "findings": [
+    {
+      "id": "A01",
+      "severity": "P0",
+      "title": "fee charged one half of the registered one-way rate",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-05",
+        "LAB-06",
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-HASH/BTCUSDT",
+        "A-HASH/ETHUSDT",
+        "A-HASH/SOLUSDT",
+        "A-HASH/BNBUSDT",
+        "A-HASH/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "SELECTION",
+        "TIMING",
+        "all account-return magnitudes"
+      ],
+      "evidence": [
+        "probe P01",
+        "SRC12",
+        "SRC13",
+        "configs/cost_binding_verification.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A01",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "every candidate was scored and every account charged under 0.0002 instead of 0.0004; the fee probe changed 1/12 A-SC/BTC arm selections, so this is a design defect, not accounting only."
+    },
+    {
+      "id": "A02",
+      "severity": "P0",
+      "title": "first future-selected version active from bar 0",
+      "affected_phases": [
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "TIMING",
+        "POLICY",
+        "activation-delay attribution"
+      ],
+      "evidence": [
+        "probe P02",
+        "probe P12",
+        "SRC01",
+        "SRC02"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A02",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "the schedule's first selection is installed at bar 0 without waiting for its requested/ready bar; confirmation first dynamic cutoffs were 8..64 hours after account start."
+    },
+    {
+      "id": "A03",
+      "severity": "P0",
+      "title": "non-converged / unmapped candidates still scored and confirmed",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-VWAP/BTCUSDT(C,D,E)",
+        "A-VWAP/ETHUSDT(A)",
+        "A-VWAP/SOLUSDT(C)"
+      ],
+      "invalidated_claims": [
+        "SELECTION",
+        "TIMING",
+        "POLICY"
+      ],
+      "evidence": [
+        "probe P06",
+        "probe P07",
+        "SRC14",
+        "SRC16"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A03",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "convergence compared exit bar sets only (price/qty/reason/sequence ignored) and _evaluate returned EVALUATED on unmapped intents; 7 development and 5 confirmation arm-cells were non-converged."
+    },
+    {
+      "id": "A04",
+      "severity": "P0",
+      "title": "adapter fed fabricated fills; corrective exits and amendments lost",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-05",
+        "LAB-06",
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-HASH/BTCUSDT",
+        "A-HASH/ETHUSDT",
+        "A-HASH/SOLUSDT",
+        "A-HASH/BNBUSDT",
+        "A-HASH/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "SELECTION",
+        "TIMING",
+        "POLICY",
+        "execution validity"
+      ],
+      "evidence": [
+        "probe P11",
+        "SRC03",
+        "SRC13",
+        "SRC14",
+        "SRC21",
+        "SRC22"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A04",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "on_fill was called with raw next-open predictions before the engine confirmed; HMA corrective EXIT_ALL follow-ups and VWAP AMEND_PROTECTION were dropped or recorded unmapped while still scored."
+    },
+    {
+      "id": "A05",
+      "severity": "P0",
+      "title": "HMA stop-mode choices collapse to one effective mode",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "DESCRIPTIVE stop-mode family",
+        "A-HMA SELECTION"
+      ],
+      "evidence": [
+        "probe P05",
+        "SRC18",
+        "SRC19",
+        "SRC20"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A05",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "schema choices are Half Distance Zone / Zone Distance / ATR but the adapter accepts only One Distance Zone / Half Distance Zone / Last High/Low / ATR Only and defaults unknown names to mode 1; all three searched choices map to the same mode."
+    },
+    {
+      "id": "A06",
+      "severity": "P0",
+      "title": "decision frame used as protection execution instead of 1m",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-05",
+        "LAB-06",
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "absolute protective-fill levels",
+        "TIMING (intrabar bias may differ by parameter set)"
+      ],
+      "evidence": [
+        "OP-19",
+        "SRC13",
+        "SRC14",
+        "configs/protective_order_fidelity.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A06",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "the protocol declares 1m execution; protective orders resolved on the 15m/1h decision bar. Sharing the approximation across arms does not guarantee the comparative effect is unchanged."
+    },
+    {
+      "id": "A07",
+      "severity": "P0",
+      "title": "block utility drops PnL at the first observation of a block",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-06",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "SELECTION",
+        "response utility",
+        "decay magnitudes"
+      ],
+      "evidence": [
+        "probe P08",
+        "SRC15"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A07",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "net_return=(segment[-1]-segment[0])/capital ignores the move from the observation before lo to lo; a partition can lose money while every block reports zero."
+    },
+    {
+      "id": "A08",
+      "severity": "P0",
+      "title": "arm A was not the public Mode 4 WFO baseline",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-05",
+        "LAB-06",
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "SELECTION baseline",
+        "TIMING"
+      ],
+      "evidence": [
+        "SRC17",
+        "configs/lab04_selector_counterexamples.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A08",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "the custom calendar loop filled mean_is_sharpe with a non-Sharpe utility and used a default selector instead of the public mode_4_is_only_robust / per_fold_causal path."
+    },
+    {
+      "id": "A09",
+      "severity": "P0",
+      "title": "arm E was a copy of arm D's schedule",
+      "affected_phases": [
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "POLICY"
+      ],
+      "evidence": [
+        "SRC05",
+        "configs/lab08_factorial_full.json",
+        "configs/lab09_confirmation_results.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A09",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "the runner assigned E the same selections as D; E and D share a daily path in 15/15 development and 15/15 confirmation cells. This is null by construction, not a measured conditional-policy null."
+    },
+    {
+      "id": "A10",
+      "severity": "P0",
+      "title": "scheduler treated a model namespace change as a market change",
+      "affected_phases": [
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "TIMING",
+        "POLICY"
+      ],
+      "evidence": [
+        "probe P03",
+        "SRC04",
+        "SRC25",
+        "configs/trigger_eligibility_audit.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A10",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "state identity included the namespace, so refits triggered transitions even when the semantic state did not change; decision_eligible/quality_status were not filtered."
+    },
+    {
+      "id": "A11",
+      "severity": "P0",
+      "title": "response similarity used squared fit residual as market context",
+      "affected_phases": [
+        "LAB-06",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "policy"
+      ],
+      "scope_affected": [
+        "A-SC/BTCUSDT"
+      ],
+      "invalidated_claims": [
+        "PREDICTIVE",
+        "POLICY"
+      ],
+      "evidence": [
+        "probe P04",
+        "SRC06",
+        "SRC07",
+        "SRC10"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A11",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "0.5*w*(z-mu_selected)^2 preserves neither sign nor state; opposite trends at opposite centroids have zero residual distance and are treated as the same context."
+    },
+    {
+      "id": "A12",
+      "severity": "P1",
+      "title": "response study lacked support and was not wired to deployment",
+      "affected_phases": [
+        "LAB-06",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "policy"
+      ],
+      "scope_affected": [
+        "A-SC/BTCUSDT"
+      ],
+      "invalidated_claims": [
+        "PREDICTIVE",
+        "POLICY"
+      ],
+      "evidence": [
+        "SRC08",
+        "SRC09",
+        "SRC10",
+        "configs/lab09_policy_decision_ledger.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A12",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "one cell only; weekly reset-flat episodes without warmup; empty campaign book; contiguous-block support counted weight fragments rather than time dependence; projected turnover=1 against a 0.1 allocation."
+    },
+    {
+      "id": "A13",
+      "severity": "P1",
+      "title": "candidate bank had no conditional-specialist admission",
+      "affected_phases": [
+        "LAB-06",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "policy"
+      ],
+      "scope_affected": [
+        "A-SC/BTCUSDT"
+      ],
+      "invalidated_claims": [
+        "POLICY",
+        "bank composition"
+      ],
+      "evidence": [
+        "SRC06",
+        "SRC11",
+        "configs/lab06_bank_registry.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A13",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "global robust-score ranking plus parameter-distance dedupe only; specialist_note() was a description, not admission logic, and parameter diversity is not behavioral diversity."
+    },
+    {
+      "id": "A14",
+      "severity": "P1",
+      "title": "model ladder/ablation did not prove decision value",
+      "affected_phases": [
+        "LAB-03",
+        "LAB-05",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "BTCUSDT regime model"
+      ],
+      "invalidated_claims": [
+        "DESCRIPTIVE",
+        "TIMING model input"
+      ],
+      "evidence": [
+        "probe P10",
+        "SRC24",
+        "SRC26"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A14",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "scaler fit over the whole calibration frame leaked into inner validation; ablation changed the scored target across feature sets; K/cadence were frozen despite an inner criterion that picked K=2; centroids from different scalers were compared in incompatible coordinates."
+    },
+    {
+      "id": "A15",
+      "severity": "P0",
+      "title": "minimum economic effect omitted the allocation factor",
+      "affected_phases": [
+        "LAB-04",
+        "LAB-05",
+        "LAB-06",
+        "LAB-07",
+        "LAB-08",
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-HASH/BTCUSDT",
+        "A-HASH/ETHUSDT",
+        "A-HASH/SOLUSDT",
+        "A-HASH/BNBUSDT",
+        "A-HASH/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "every economic comparison that used the 0.64 bps/day hurdle"
+      ],
+      "evidence": [
+        "probe P09",
+        "SRC23",
+        "configs/minimum_economic_effect.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A15",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "the registered derivation multiplied a notional-based cost by turn-over/day but compared it to an account-return endpoint; under the lab's own fixed notional the factor is 2000/20000=0.1."
+    },
+    {
+      "id": "A16",
+      "severity": "P0",
+      "title": "claim hierarchy was not fail-closed",
+      "affected_phases": [
+        "LAB-09"
+      ],
+      "affected_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "scope_affected": [
+        "A-HMA/BTCUSDT",
+        "A-HMA/ETHUSDT",
+        "A-HMA/SOLUSDT",
+        "A-HMA/BNBUSDT",
+        "A-HMA/DOGEUSDT",
+        "A-SC/BTCUSDT",
+        "A-SC/ETHUSDT",
+        "A-SC/SOLUSDT",
+        "A-SC/BNBUSDT",
+        "A-SC/DOGEUSDT",
+        "A-VWAP/BTCUSDT",
+        "A-VWAP/ETHUSDT",
+        "A-VWAP/SOLUSDT",
+        "A-VWAP/BNBUSDT",
+        "A-VWAP/DOGEUSDT",
+        "A-HASH/BTCUSDT",
+        "A-HASH/ETHUSDT",
+        "A-HASH/SOLUSDT",
+        "A-HASH/BNBUSDT",
+        "A-HASH/DOGEUSDT"
+      ],
+      "invalidated_claims": [
+        "SELECTION",
+        "TIMING",
+        "DESCRIPTIVE",
+        "PREDICTIVE",
+        "POLICY",
+        "development outcome"
+      ],
+      "evidence": [
+        "SRC27",
+        "configs/lab09_claim_report.json"
+      ],
+      "retest_required": true,
+      "invalidated_by": "A16",
+      "superseded_by": "corrective_mode4_v3",
+      "reason": "with FAILED_VALIDITY final, subclaims remained RULED_OUT and confirms_the_development_outcome=true; a policy that never acted cannot serve as a predictive-validation test."
+    }
+  ],
+  "contrast_claims": [
+    {
+      "id": "SELECTION",
+      "historical_verdict": "RULED_OUT",
+      "repaired_verdict": "NOT_EVALUABLE",
+      "caused_by": [
+        "A01",
+        "A03",
+        "A04",
+        "A07",
+        "A08",
+        "A15"
+      ]
+    },
+    {
+      "id": "TIMING",
+      "historical_verdict": "RULED_OUT",
+      "repaired_verdict": "NOT_EVALUABLE",
+      "caused_by": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A06",
+        "A08",
+        "A10",
+        "A14",
+        "A15"
+      ]
+    },
+    {
+      "id": "DESCRIPTIVE",
+      "historical_verdict": "NOT_SUPPORTED",
+      "repaired_verdict": "NOT_EVALUABLE",
+      "caused_by": [
+        "A05",
+        "A14"
+      ]
+    },
+    {
+      "id": "PREDICTIVE",
+      "historical_verdict": "NOT_SUPPORTED",
+      "repaired_verdict": "NOT_EVALUABLE",
+      "caused_by": [
+        "A11",
+        "A12",
+        "A14"
+      ]
+    },
+    {
+      "id": "POLICY",
+      "historical_verdict": "NULL_BY_CONSTRUCTION",
+      "repaired_verdict": "NOT_IMPLEMENTED_AS_SPECIFIED",
+      "caused_by": [
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13"
+      ]
+    }
+  ],
+  "historical_development_outcome": {
+    "value": "NO_PROMISING_DESIGN",
+    "repaired_status": "NOT_EVALUABLE",
+    "reason": "the development comparison inherits A01-A15 and cannot be cited as a measured outcome."
+  },
+  "e_arm": {
+    "historical_status": "QUARANTINED",
+    "repaired_claim_status": "NOT_IMPLEMENTED_AS_SPECIFIED",
+    "reason": "E was D's schedule copied; no conditional-response deployment existed to evaluate."
+  },
+  "appendix_evidence": {
+    "recovered_bundle": "evidence/corrective_mode4_v3/audit_recovered_v1",
+    "original_archive_sha256": "2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f",
+    "original_self_manifest_defect": "N03 preserved, see finding_disposition.json"
+  },
+  "lab_run_id": "RF-01",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T15:06:09.199985+00:00"
+}
