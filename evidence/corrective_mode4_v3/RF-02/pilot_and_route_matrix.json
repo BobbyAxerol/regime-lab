@@ -1,0 +1,178 @@
+{
+  "schema": "regime_lab.rf02_pilot_and_route_matrix.v3",
+  "phase": "RF-02",
+  "study_id": "corrective_mode4_v3",
+  "data": {
+    "source": "synthetic pilot frame (seed 17, 400 bars)",
+    "is_synthetic": true,
+    "note": "route proof only; the real-snapshot rerun replaces the frame"
+  },
+  "pilot_runs": {
+    "A-SC": {
+      "status": "EVALUATED",
+      "entries": 1,
+      "engine_fills": 2,
+      "fills_seen": 2,
+      "unmapped": [],
+      "equity_last": 19919.375211707058,
+      "versions": [
+        "A-SC-seed",
+        "WARMING"
+      ]
+    },
+    "A-HMA": {
+      "status": "EVALUATED",
+      "entries": 1,
+      "engine_fills": 2,
+      "fills_seen": 2,
+      "unmapped": [],
+      "equity_last": 19777.69299446068,
+      "versions": [
+        "A-HMA-seed",
+        "WARMING"
+      ]
+    }
+  },
+  "timings": {
+    "A-SC": {
+      "cold_seconds": 1.313,
+      "warm_seconds": 0.161
+    },
+    "A-HMA": {
+      "cold_seconds": 0.163,
+      "warm_seconds": 0.163
+    }
+  },
+  "route_matrix": {
+    "cells": [
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "route_status": "QUALIFIED_EVENT",
+        "reason": "protection orders projected and fills returned by the engine",
+        "pilot": true
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "route_status": "QUALIFIED_EVENT",
+        "reason": "protection orders projected and fills returned by the engine",
+        "pilot": true
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "route_status": "QUALIFIED_EVENT",
+        "reason": "protection orders projected and fills returned by the engine",
+        "pilot": true
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "route_status": "QUALIFIED_EVENT",
+        "reason": "protection orders projected and fills returned by the engine",
+        "pilot": true
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "route_status": "QUALIFIED_EVENT",
+        "reason": "protection orders projected and fills returned by the engine",
+        "pilot": true
+      },
+      {
+        "cell": "A-SC/BTCUSDT",
+        "route_status": "QUALIFIED_FAST",
+        "reason": "public Mode 4 signal route + event route both ran",
+        "pilot": true
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "route_status": "QUALIFIED_FAST",
+        "reason": "public Mode 4 signal route + event route both ran",
+        "pilot": true
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "route_status": "QUALIFIED_FAST",
+        "reason": "public Mode 4 signal route + event route both ran",
+        "pilot": true
+      },
+      {
+        "cell": "A-SC/BNBUSDT",
+        "route_status": "QUALIFIED_FAST",
+        "reason": "public Mode 4 signal route + event route both ran",
+        "pilot": true
+      },
+      {
+        "cell": "A-SC/DOGEUSDT",
+        "route_status": "QUALIFIED_FAST",
+        "reason": "public Mode 4 signal route + event route both ran",
+        "pilot": true
+      },
+      {
+        "cell": "A-VWAP/BTCUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "AMEND_PROTECTION is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-VWAP/ETHUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "AMEND_PROTECTION is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-VWAP/SOLUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "AMEND_PROTECTION is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-VWAP/BNBUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "AMEND_PROTECTION is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-VWAP/DOGEUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "AMEND_PROTECTION is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-HASH/BTCUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "partial TP ladder is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-HASH/ETHUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "partial TP ladder is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-HASH/SOLUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "partial TP ladder is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-HASH/BNBUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "partial TP ladder is not expressible on the event route",
+        "pilot": false
+      },
+      {
+        "cell": "A-HASH/DOGEUSDT",
+        "route_status": "BLOCKED_CAPABILITY",
+        "reason": "partial TP ladder is not expressible on the event route",
+        "pilot": false
+      }
+    ],
+    "counts": {
+      "QUALIFIED_EVENT": 5,
+      "QUALIFIED_FAST": 5,
+      "BLOCKED_CAPABILITY": 10
+    }
+  },
+  "rule": "route decisions come from capability/schema before any outcome; a cell that cannot preserve alpha semantics is BLOCKED_CAPABILITY, never silently rerouted",
+  "lab_run_id": "RF-02",
+  "written_at_utc": "2026-09-11T15:55:04.798801+00:00"
+}
