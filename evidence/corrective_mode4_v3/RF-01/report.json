@@ -1,0 +1,123 @@
+{
+  "schema": "regime_lab.corrective_phase_report.v3",
+  "phase_id": "RF-01",
+  "status": "COMPLETE",
+  "proof_status": "TECHNICAL_ONLY",
+  "study_id": "corrective_mode4_v3",
+  "generated_at_utc": "2026-09-11T15:14:58.466201+00:00",
+  "objective": "freeze scope, invalidate false claims, inventory the Mode 4 binding, add failing-before tests",
+  "source": {
+    "archive_sha256": "2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f",
+    "candidate_commit": "fd2d4f0dc5a6667cad763d80bc45e59cd0daf7e5",
+    "candidate_source_manifest": "evidence/corrective_mode4_v3/RF-01/source_before_manifest.json",
+    "quantbt_core_version": "1.1.1",
+    "native_artifact": "0.4.2",
+    "actual_import_origins": [
+      "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+      null
+    ]
+  },
+  "registered_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "findings_disposition": {
+    "FIXED_PENDING_TEST": 1,
+    "OPEN_REPRODUCED": 26,
+    "QUARANTINED_UNSUPPORTED_PATH": 1,
+    "REPRODUCIBILITY_PARTIAL": 1
+  },
+  "tests": {
+    "passed": 3,
+    "failed": 6,
+    "skipped": 0,
+    "artifact_refs": [
+      "evidence/corrective_mode4_v3/RF-01/regression_before_repair.json"
+    ],
+    "full_suite": "6 failed, 789 passed, 1 warning in 151.82s (0:02:31)"
+  },
+  "market_runs": {
+    "planned_cells": 20,
+    "executed_cells": 0,
+    "valid_pairs": 0,
+    "blocked_cells": [],
+    "note": "RF-01 runs no market experiment by design"
+  },
+  "metrics": {
+    "raw_quantbt_ref": null,
+    "canonical_ref": null,
+    "decay_panel_ref": null
+  },
+  "performance": {
+    "wall_seconds": null,
+    "cpu_seconds": null,
+    "peak_rss_bytes": null,
+    "actual_candidate_bar_visits": 0
+  },
+  "proof_capability": {
+    "technical_validity": "TECHNICAL_ONLY",
+    "positive_control": "NOT_TESTED",
+    "treatment_reached_execution": "NOT_TESTED"
+  },
+  "potential": {
+    "level": "UNASSESSED",
+    "evidence_refs": [
+      "quantbt_binding_report.json",
+      "probe_reproduction_v1"
+    ],
+    "falsifiable_next_step": "RF-02 route qualification with golden fee/timing fixtures"
+  },
+  "claim": {
+    "validity": "FAIL",
+    "statistical_status": "NOT_EVALUABLE",
+    "scope": "historical study invalidated; corrective study not yet evaluated"
+  },
+  "limitations": [
+    "no market experiment in this phase",
+    "nested retrospective history",
+    "A-HASH blocked",
+    "funding absent"
+  ],
+  "review": {
+    "author": "OpenCode",
+    "reviewer": null,
+    "disagreements": []
+  },
+  "handoff": {
+    "next_phase": "RF-02",
+    "blocking_findings": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05"
+    ]
+  },
+  "report_md": {
+    "path": "report.md",
+    "sha256": "b6ddd1a7b63286b7b8105ee905a93f1b266f220b9c8e156da25dbd7d9d841337"
+  },
+  "lab_run_id": "RF-01",
+  "written_at_utc": "2026-09-11T15:14:58.466479+00:00"
+}
