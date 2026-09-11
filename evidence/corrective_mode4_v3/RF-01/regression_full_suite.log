@@ -1,0 +1,26 @@
+FFFFFF.................................................................. [  9%]
+........................................................................ [ 18%]
+........................................................................ [ 27%]
+........................................................................ [ 36%]
+........................................................................ [ 45%]
+........................................................................ [ 54%]
+........................................................................ [ 63%]
+........................................................................ [ 72%]
+........................................................................ [ 81%]
+........................................................................ [ 90%]
+........................................................................ [ 99%]
+...                                                                      [100%]
+=============================== warnings summary ===============================
+lab_regime_model_quantbt/tests/test_lab01_safety.py::test_t03_duplicate_member_rejected
+  /usr/lib/python3.12/zipfile/__init__.py:1624: UserWarning: Duplicate name: 'vwap.py'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a04_a_corrective_followup_exit_must_reach_the_position
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit
+6 failed, 789 passed, 1 warning in 151.82s (0:02:31)

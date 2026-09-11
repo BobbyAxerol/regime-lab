@@ -1,0 +1,67 @@
+============================= test session starts ==============================
+collecting ... collected 9 items
+
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode FAILED [ 11%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar FAILED [ 22%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated FAILED [ 33%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a04_a_corrective_followup_exit_must_reach_the_position FAILED [ 44%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta FAILED [ 55%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit FAILED [ 66%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a09_the_old_e_arm_is_quarantined_not_wired_from_d PASSED [ 77%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a15_the_corrected_mde_derivation_is_registered_and_history_preserved PASSED [ 88%]
+tests/mode4_corrective/test_rf01_before_repairs.py::test_a16_a_blocked_pipeline_may_only_report_not_evaluable PASSED [100%]
+
+=================================== FAILURES ===================================
+_______ test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode _______
+tests/mode4_corrective/test_rf01_before_repairs.py:56: in test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode
+    assert None not in effective.values(), (
+E   AssertionError: a searched sl_input choice has no adapter mode and silently defaults: {'Half Distance Zone': 1, 'Zone Distance': None, 'ATR': None}
+E   assert None not in dict_values([1, None, None])
+E    +  where dict_values([1, None, None]) = <built-in method values of dict object at 0x7fdbf860fc80>()
+E    +    where <built-in method values of dict object at 0x7fdbf860fc80> = {'Half Distance Zone': 1, 'Zone Distance': None, 'ATR': None}.values
+__ test_a02_a_future_selected_version_is_not_active_before_its_requested_bar ___
+tests/mode4_corrective/test_rf01_before_repairs.py:73: in test_a02_a_future_selected_version_is_not_active_before_its_requested_bar
+    assert "FUTURE_SELECTED" not in run.version_by_bar[:100], (
+E   AssertionError: a parameter version selected at bar 100 is active before it was requested
+E   assert 'FUTURE_SELECTED' not in ['FUTURE_SELECTED', 'FUTURE_SELECTED', 'FUTURE_SELECTED', 'FUTURE_SELECTED', 'FUTURE_SELECTED', 'FUTURE_SELECTED', ...]
+_______ test_a03_a_non_converged_candidate_is_not_financially_evaluated ________
+tests/mode4_corrective/test_rf01_before_repairs.py:89: in test_a03_a_non_converged_candidate_is_not_financially_evaluated
+    assert result.status != cb.ProbeStatus.EVALUATED, (
+E   AssertionError: a run that did not converge and left unmapped intents was scored
+E   assert 'EVALUATED' != 'EVALUATED'
+E    +  where 'EVALUATED' = Evaluation(point_id='cfaeb9f9e69d8da7', params={'coeff': 4, 'AP': 20, 'alpha.condition_threshold': 55, 'novolumedata': False, 'src_col': 'close'}, origin='audit', status='EVALUATED', episodes={'e0': {'utility': 0.055, 'net_return': 0.00055, 'max_drawdown': 0.0, 'trades': 0, 'exposure': 0.0, 'gate_pass': True}}, window={'net_return': 0.00055, 'max_drawdown': 0.0, 'sharpe_per_window': None, 'fills': 0, 'entries': 0, 'exposure': 0.0, 'mean_holding_bars': None, 'bars': 12, 'converged': False, 'passes': 4, 'unmapped_intents': 3}, error=None).status
+E    +  and   'EVALUATED' = <class 'crypto_regime_lab.selector.probe_design.ProbeStatus'>.EVALUATED
+E    +    where <class 'crypto_regime_lab.selector.probe_design.ProbeStatus'> = <module 'crypto_regime_lab.experiments.calendar_baseline' from '/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/experiments/calendar_baseline.py'>.ProbeStatus
+_________ test_a04_a_corrective_followup_exit_must_reach_the_position __________
+tests/mode4_corrective/test_rf01_before_repairs.py:132: in test_a04_a_corrective_followup_exit_must_reach_the_position
+    assert stub.state.position == pytest.approx(0.0), (
+E   AssertionError: the corrective follow-up exit was generated but never applied to the position
+E   assert 20.0 == 0.0 ± 1.0e-12
+E     
+E     comparison failed
+E     Obtained: 20.0
+E     Expected: 0.0 ± 1.0e-12
+______ test_a07_episode_money_deltas_telescope_to_the_whole_account_delta ______
+tests/mode4_corrective/test_rf01_before_repairs.py:146: in test_a07_episode_money_deltas_telescope_to_the_whole_account_delta
+    assert total_money == pytest.approx(equity[-1] - equity[0]), (
+E   AssertionError: block returns do not telescope to the whole-account money delta; the move across the block boundary is dropped
+E   assert 0.0 == -1000.0 ± 0.001
+E     
+E     comparison failed
+E     Obtained: 0.0
+E     Expected: -1000.0 ± 0.001
+_ test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit __
+tests/mode4_corrective/test_rf01_before_repairs.py:164: in test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit
+    assert len(schedule.cutoffs) == 0, (
+E   AssertionError: a namespace-only change or a decision_eligible=false emission produced a refit
+E   assert 1 == 0
+E    +  where 1 = len(('2024-01-02T00:00:00+00:00',))
+E    +    where ('2024-01-02T00:00:00+00:00',) = RegimeSchedule(cutoffs=('2024-01-02T00:00:00+00:00',), train_days=180, test_days=180, inner_episodes=6, source='1 emitted state changes; the first inside each of 1 equal periods, with a 0-day minimum gap').cutoffs
+=========================== short test summary info ============================
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a04_a_corrective_followup_exit_must_reach_the_position
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta
+FAILED tests/mode4_corrective/test_rf01_before_repairs.py::test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit
+========================= 6 failed, 3 passed in 2.00s ==========================

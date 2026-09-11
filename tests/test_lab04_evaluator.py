@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -223,7 +224,7 @@ def _pyflakes(*targets: str) -> list[str]:
     import subprocess
 
     done = subprocess.run(
-        [str(LAB_ROOT / "environments/lab_venv/bin/python"), "-m", "pyflakes", *targets],
+        [sys.executable, "-m", "pyflakes", *targets],
         cwd=LAB_ROOT, capture_output=True, text=True, timeout=900)
     # the four supplied alphas are byte-preserved provenance: hash_momentum.py really
     # does use np without importing numpy (finding + SD-HASH-01), and fixing it would

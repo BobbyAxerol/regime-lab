@@ -234,7 +234,7 @@ def main() -> int:
                 "anchor guide 7.2 step 1 requires: " + matrix_note + ")")
 
     tests = subprocess.run(
-        [str(LAB_ROOT / "environments/lab_venv/bin/python"), "-m", "pytest",
+        [sys.executable, "-m", "pytest",
          "tests/test_lab04_selector.py", "tests/test_lab04_evaluator.py",
          "-q", "--no-header", "-p", "no:warnings"],
         cwd=LAB_ROOT, capture_output=True, text=True, timeout=3600)

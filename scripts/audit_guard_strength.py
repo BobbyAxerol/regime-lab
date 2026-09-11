@@ -15,10 +15,10 @@ Artifacts are restored from an in-memory copy of the original bytes even when a
 test run fails, so an interrupted run cannot leave a mutated artifact behind.
 Re-run this after adding any new reported invariant.
 """
-import json, pathlib, subprocess
+import json, pathlib, subprocess, sys
 
 LAB = pathlib.Path(__file__).resolve().parent.parent
-PY_BIN = LAB / "environments/lab_venv/bin/python"
+PY_BIN = pathlib.Path(sys.executable)
 
 CASES = [
     ("configs/lab07_continuous_trace.json",

@@ -139,7 +139,7 @@ def main() -> int:
     missing = sorted(n for n, p in artifacts.items() if not p.is_file())
 
     tests = subprocess.run(
-        [str(LAB_ROOT / "environments/lab_venv/bin/python"), "-m", "pytest",
+        [sys.executable, "-m", "pytest",
          "tests/test_lab05_regime.py", "-q", "--no-header", "-p", "no:warnings"],
         cwd=LAB_ROOT, capture_output=True, text=True, timeout=3600)
     test_line = next((ln for ln in reversed(tests.stdout.splitlines())
