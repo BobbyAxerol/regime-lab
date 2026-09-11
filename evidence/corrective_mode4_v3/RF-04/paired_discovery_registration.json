@@ -1,0 +1,53 @@
+{
+  "schema": "regime_lab.rf04_paired_pilot_registration.v1",
+  "status": "REGISTERED_BEFORE_THE_PAIRED_PILOT_RUNS",
+  "study_id": "corrective_mode4_v3",
+  "cells": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "route": "endpoint",
+      "route_status": "QUALIFIED_FAST"
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT"
+    }
+  ],
+  "development_window": {
+    "start": "2021-01-01",
+    "end": "2022-06-30",
+    "snapshot_id": "server_core_v1",
+    "product": "crypto_binance_futures_1m"
+  },
+  "arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "mode4_contract": {
+    "optimization_mode": "mode_4_is_only_robust",
+    "optimization_schedule": "per_fold_causal",
+    "candidate_selection_metric": "is_only_robust",
+    "scoring_backend": "endpoint",
+    "oos_used_for_selection": false
+  },
+  "matched": {
+    "account_capital": 20000.0,
+    "entry_notional": 2000.0,
+    "one_way_fee": 0.0004,
+    "slippage_bps": 1.0,
+    "train_memory_days": 180,
+    "optuna_trials_per_cutoff": 8,
+    "seed": 20260911,
+    "calendar_cadence": "first cutoff 2021-01-01, 180-day test spacing, max 3 cutoffs",
+    "regime_controller": {
+      "min_gap_days": 90.0,
+      "max_age_days": 180.0,
+      "budget": null
+    }
+  },
+  "budget_note": "the registered full-study pilot budget is 32-64 trials/cutoff; this bounded pilot registers the low end overridden to 8 trials/cutoff for both arms so the paired contrast is computed before any scaling",
+  "registered_at_utc": "2026-09-11T19:52:06.498533+00:00",
+  "lab_run_id": "RF-04",
+  "written_at_utc": "2026-09-11T19:52:06.498584+00:00"
+}
