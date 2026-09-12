@@ -1,0 +1,1085 @@
+{
+  "schema": "regime_lab.rf04_cell_coverage.v1",
+  "phase": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "status": "COVERAGE_CLOSED_10_EXECUTED_10_BLOCKED_0_NOT_RUN_0_NOT_RUN_BUDGET",
+  "status_vocabulary": [
+    "RUN_VALID",
+    "RUN_NOT_EVALUABLE",
+    "BLOCKED_CAPABILITY",
+    "NOT_RUN",
+    "NOT_RUN_BUDGET",
+    "INSUFFICIENT_DATA"
+  ],
+  "rule": "one row per planned primary cell (4 alphas x 5 symbols of the registered discovery cohort); the route decision is merged from RF-02/pilot_and_route_matrix.json and the run result from RF-04/paired_discovery_full.json. A non-executed cell carries null metrics with a reason, never a zero. A rejected or bounded arm is recorded as NOT_RUN_BUDGET/RUN_NOT_EVALUABLE with the exact reason",
+  "sources": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+      "sha256": "6b2ff015fa613cb72f6572fc20d394818dc2c4144c277eca51f5214d03e613e0"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json",
+      "sha256": "b67adbc7c602fa51c14af0fd7c38ab0ea67c8abd9ce8a2cdfe90c9328ee7e707"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json",
+      "sha256": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5"
+    }
+  ],
+  "registered_cohort": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "data": "server_core_v1, development 2021-01-01..2023-12-31"
+  },
+  "counts": {
+    "RUN_VALID": 10,
+    "RUN_NOT_EVALUABLE": 0,
+    "BLOCKED_CAPABILITY": 10,
+    "NOT_RUN": 0,
+    "NOT_RUN_BUDGET": 0,
+    "INSUFFICIENT_DATA": 0,
+    "planned_cells": 20,
+    "total_classified": 20
+  },
+  "cells": [
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/5",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/0",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/5"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19922.3596154709,
+            "total_return_pct": -0.38820192264549247,
+            "sharpe": -0.12072810456714066,
+            "num_trades": 6,
+            "max_drawdown_pct": 2.480420305315043,
+            "wall_seconds": 30.982
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20021.084492012164,
+            "total_return_pct": 0.10542246006082223,
+            "sharpe": 0.061323155946543306,
+            "num_trades": 10,
+            "max_drawdown_pct": 1.9233647305383985,
+            "wall_seconds": 54.543
+          },
+          "M4_CAL_MATCHED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19772.661444561334,
+            "total_return_pct": -1.1366927771933266,
+            "sharpe": -0.3310555261519622,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.250242905057369,
+            "wall_seconds": 57.519
+          },
+          "M4_REGIME_DELAYED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19897.571803903153,
+            "total_return_pct": -0.5121409804842325,
+            "sharpe": -0.42132851239124935,
+            "num_trades": 10,
+            "max_drawdown_pct": 1.0936732128292137,
+            "wall_seconds": 55.972
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": null,
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19922.3596154709,
+          "total_return_pct": -0.38820192264549247,
+          "sharpe": -0.12072810456714066,
+          "num_trades": 6,
+          "max_drawdown_pct": 2.480420305315043,
+          "wall_seconds": 30.982
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20021.084492012164,
+          "total_return_pct": 0.10542246006082223,
+          "sharpe": 0.061323155946543306,
+          "num_trades": 10,
+          "max_drawdown_pct": 1.9233647305383985,
+          "wall_seconds": 54.543
+        },
+        "M4_CAL_MATCHED": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19772.661444561334,
+          "total_return_pct": -1.1366927771933266,
+          "sharpe": -0.3310555261519622,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.250242905057369,
+          "wall_seconds": 57.519
+        },
+        "M4_REGIME_DELAYED": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19897.571803903153,
+          "total_return_pct": -0.5121409804842325,
+          "sharpe": -0.42132851239124935,
+          "num_trades": 10,
+          "max_drawdown_pct": 1.0936732128292137,
+          "wall_seconds": 55.972
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/6",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/1",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/6"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 20370.226481523354,
+            "total_return_pct": 1.8511324076167623,
+            "sharpe": 1.0687478383661126,
+            "num_trades": 6,
+            "max_drawdown_pct": 0.7979708911267737,
+            "wall_seconds": 30.758
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19801.254050613938,
+            "total_return_pct": -0.9937297469303163,
+            "sharpe": -0.26380760216534144,
+            "num_trades": 10,
+            "max_drawdown_pct": 3.453538949451535,
+            "wall_seconds": 54.675
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 20370.226481523354,
+          "total_return_pct": 1.8511324076167623,
+          "sharpe": 1.0687478383661126,
+          "num_trades": 6,
+          "max_drawdown_pct": 0.7979708911267737,
+          "wall_seconds": 30.758
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19801.254050613938,
+          "total_return_pct": -0.9937297469303163,
+          "sharpe": -0.26380760216534144,
+          "num_trades": 10,
+          "max_drawdown_pct": 3.453538949451535,
+          "wall_seconds": 54.675
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/7",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/2",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/7"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19633.647417264176,
+            "total_return_pct": -1.8317629136791247,
+            "sharpe": -1.4900440043134335,
+            "num_trades": 6,
+            "max_drawdown_pct": 2.0131897735405984,
+            "wall_seconds": 26.158
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20080.2602850015,
+            "total_return_pct": 0.4013014250074942,
+            "sharpe": 0.16984783666473813,
+            "num_trades": 12,
+            "max_drawdown_pct": 2.1486982885779256,
+            "wall_seconds": 51.054
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19633.647417264176,
+          "total_return_pct": -1.8317629136791247,
+          "sharpe": -1.4900440043134335,
+          "num_trades": 6,
+          "max_drawdown_pct": 2.0131897735405984,
+          "wall_seconds": 26.158
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20080.2602850015,
+          "total_return_pct": 0.4013014250074942,
+          "sharpe": 0.16984783666473813,
+          "num_trades": 12,
+          "max_drawdown_pct": 2.1486982885779256,
+          "wall_seconds": 51.054
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/8",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/3",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/8"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 20056.300393707977,
+            "total_return_pct": 0.28150196853988785,
+            "sharpe": 0.23356245566965425,
+            "num_trades": 6,
+            "max_drawdown_pct": 0.7136590163526902,
+            "wall_seconds": 30.365
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20333.74438223483,
+            "total_return_pct": 1.6687219111741536,
+            "sharpe": 0.6831618876167455,
+            "num_trades": 12,
+            "max_drawdown_pct": 1.9957163322375955,
+            "wall_seconds": 54.408
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 20056.300393707977,
+          "total_return_pct": 0.28150196853988785,
+          "sharpe": 0.23356245566965425,
+          "num_trades": 6,
+          "max_drawdown_pct": 0.7136590163526902,
+          "wall_seconds": 30.365
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20333.74438223483,
+          "total_return_pct": 1.6687219111741536,
+          "sharpe": 0.6831618876167455,
+          "num_trades": 12,
+          "max_drawdown_pct": 1.9957163322375955,
+          "wall_seconds": 54.408
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/9",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/4",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/9"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19333.53524301208,
+            "total_return_pct": -3.332323784939595,
+            "sharpe": -1.200865522238967,
+            "num_trades": 6,
+            "max_drawdown_pct": 3.4094282014291792,
+            "wall_seconds": 31.129
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20147.36598560322,
+            "total_return_pct": 0.7368299280161139,
+            "sharpe": 0.13852484200186896,
+            "num_trades": 10,
+            "max_drawdown_pct": 3.4210402981578056,
+            "wall_seconds": 54.489
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19333.53524301208,
+          "total_return_pct": -3.332323784939595,
+          "sharpe": -1.200865522238967,
+          "num_trades": 6,
+          "max_drawdown_pct": 3.4094282014291792,
+          "wall_seconds": 31.129
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20147.36598560322,
+          "total_return_pct": 0.7368299280161139,
+          "sharpe": 0.13852484200186896,
+          "num_trades": 10,
+          "max_drawdown_pct": 3.4210402981578056,
+          "wall_seconds": 54.489
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/BTCUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/0",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/5",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/0"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 20413.78198369375,
+            "total_return_pct": 2.068909918468753,
+            "sharpe": 0.4071196243295457,
+            "num_trades": 6,
+            "max_drawdown_pct": 3.598697064528108,
+            "wall_seconds": 159.992
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20513.420683473494,
+            "total_return_pct": 2.567103417367478,
+            "sharpe": 0.4211449277050762,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.7068971057319677,
+            "wall_seconds": 284.518
+          },
+          "M4_CAL_MATCHED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19999.969160657056,
+            "total_return_pct": -0.0001541967147204559,
+            "sharpe": -0.1505374026725576,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0008874681061955889,
+            "wall_seconds": 107.224
+          },
+          "M4_REGIME_DELAYED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19999.955674828594,
+            "total_return_pct": -0.0002216258570297214,
+            "sharpe": -0.2741301619308593,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0007145449271023159,
+            "wall_seconds": 111.968
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": [
+          {
+            "route": "endpoint",
+            "route_role": "REGISTERED_DEVIATION",
+            "implementation_fidelity": "DEVIATED",
+            "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; kept in the full artifact only as the registered route deviation",
+            "account_metrics": {
+              "M4_CAL": {
+                "folds": 3,
+                "trials": 24,
+                "equity_last": 19999.969160657056,
+                "total_return_pct": -0.0001541967147204559,
+                "sharpe": -0.1505374026725576,
+                "num_trades": 2,
+                "max_drawdown_pct": 0.0008874681061955889,
+                "wall_seconds": 47.665
+              },
+              "M4_REGIME": {
+                "folds": 6,
+                "trials": 48,
+                "equity_last": 19999.959669209533,
+                "total_return_pct": -0.00020165395233561866,
+                "sharpe": -0.22879295671634722,
+                "num_trades": 2,
+                "max_drawdown_pct": 0.0007657632919013941,
+                "wall_seconds": 107.116
+              }
+            },
+            "source": {
+              "kind": "reused_committed_artifact",
+              "artifact": "paired_discovery_pilot.json",
+              "sha256": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5",
+              "pointer": "#/cells/0",
+              "note": "same development window, economics, trial budget and seed policy as the fresh RF-04.6 runs; the pilot artifact is not rewritten"
+            }
+          }
+        ]
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 20413.78198369375,
+          "total_return_pct": 2.068909918468753,
+          "sharpe": 0.4071196243295457,
+          "num_trades": 6,
+          "max_drawdown_pct": 3.598697064528108,
+          "wall_seconds": 159.992
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20513.420683473494,
+          "total_return_pct": 2.567103417367478,
+          "sharpe": 0.4211449277050762,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.7068971057319677,
+          "wall_seconds": 284.518
+        },
+        "M4_CAL_MATCHED": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19999.969160657056,
+          "total_return_pct": -0.0001541967147204559,
+          "sharpe": -0.1505374026725576,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0008874681061955889,
+          "wall_seconds": 107.224
+        },
+        "M4_REGIME_DELAYED": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19999.955674828594,
+          "total_return_pct": -0.0002216258570297214,
+          "sharpe": -0.2741301619308593,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0007145449271023159,
+          "wall_seconds": 111.968
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/1",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/6",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/1"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19659.787545295607,
+            "total_return_pct": -1.7010622735219694,
+            "sharpe": -0.8456924421279314,
+            "num_trades": 6,
+            "max_drawdown_pct": 1.8265557519451487,
+            "wall_seconds": 158.8
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19422.33074626655,
+            "total_return_pct": -2.888346268667241,
+            "sharpe": -0.6498383536190165,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.865951398163488,
+            "wall_seconds": 277.845
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19659.787545295607,
+          "total_return_pct": -1.7010622735219694,
+          "sharpe": -0.8456924421279314,
+          "num_trades": 6,
+          "max_drawdown_pct": 1.8265557519451487,
+          "wall_seconds": 158.8
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19422.33074626655,
+          "total_return_pct": -2.888346268667241,
+          "sharpe": -0.6498383536190165,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.865951398163488,
+          "wall_seconds": 277.845
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/2",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/7",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/2"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 22798.49446921846,
+            "total_return_pct": 13.99247234609231,
+            "sharpe": 1.352440160413242,
+            "num_trades": 6,
+            "max_drawdown_pct": 4.816550455645691,
+            "wall_seconds": 143.223
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19385.498230885274,
+            "total_return_pct": -3.0725088455736294,
+            "sharpe": -1.0860379463184142,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.798264588949224,
+            "wall_seconds": 259.529
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 22798.49446921846,
+          "total_return_pct": 13.99247234609231,
+          "sharpe": 1.352440160413242,
+          "num_trades": 6,
+          "max_drawdown_pct": 4.816550455645691,
+          "wall_seconds": 143.223
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 19385.498230885274,
+          "total_return_pct": -3.0725088455736294,
+          "sharpe": -1.0860379463184142,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.798264588949224,
+          "wall_seconds": 259.529
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/3",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/8",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/3"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19938.067887845704,
+            "total_return_pct": -0.3096605607714853,
+            "sharpe": -0.14442282905164575,
+            "num_trades": 6,
+            "max_drawdown_pct": 1.6802661770152598,
+            "wall_seconds": 156.608
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20108.791005514282,
+            "total_return_pct": 0.5439550275714078,
+            "sharpe": 0.17136549907453683,
+            "num_trades": 12,
+            "max_drawdown_pct": 2.200342009181053,
+            "wall_seconds": 280.02
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19938.067887845704,
+          "total_return_pct": -0.3096605607714853,
+          "sharpe": -0.14442282905164575,
+          "num_trades": 6,
+          "max_drawdown_pct": 1.6802661770152598,
+          "wall_seconds": 156.608
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20108.791005514282,
+          "total_return_pct": 0.5439550275714078,
+          "sharpe": 0.17136549907453683,
+          "num_trades": 12,
+          "max_drawdown_pct": 2.200342009181053,
+          "wall_seconds": 280.02
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed on the event route with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays NOT_EVALUATED because RF-04.6 is a bounded discovery run with no paired inference computed",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/4",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/9",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json#/cells/4"
+      ],
+      "executed": true,
+      "run_result": {
+        "route": "event",
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19689.750375485142,
+            "total_return_pct": -1.5512481225742891,
+            "sharpe": -0.6342772994215331,
+            "num_trades": 6,
+            "max_drawdown_pct": 2.555300343348942,
+            "wall_seconds": 154.683
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20112.029308624562,
+            "total_return_pct": 0.5601465431228192,
+            "sharpe": 0.10055396329632933,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.6805508924769734,
+            "wall_seconds": 289.216
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NOT_EVALUATED",
+        "statistical_status_reason": "bounded discovery paired run; no paired bootstrap or decay panel is computed for the scaled cells",
+        "economic_status": "NOT_EVALUATED",
+        "route_deviations": []
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "folds": 3,
+          "trials": 24,
+          "equity_last": 19689.750375485142,
+          "total_return_pct": -1.5512481225742891,
+          "sharpe": -0.6342772994215331,
+          "num_trades": 6,
+          "max_drawdown_pct": 2.555300343348942,
+          "wall_seconds": 154.683
+        },
+        "M4_REGIME": {
+          "folds": 6,
+          "trials": 48,
+          "equity_last": 20112.029308624562,
+          "total_return_pct": 0.5601465431228192,
+          "sharpe": 0.10055396329632933,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.6805508924769734,
+          "wall_seconds": 289.216
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/10",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/10"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/11",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/11"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/12",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/12"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/13",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/13"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/14",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/14"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/15",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/15"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/16",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/16"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/17",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/17"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/18",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/18"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix blocks this cell before any outcome; no run result exists",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/19",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/19"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    }
+  ],
+  "lab_run_id": "RF-04",
+  "written_at_utc": "2026-09-12T02:16:08.238222+00:00"
+}

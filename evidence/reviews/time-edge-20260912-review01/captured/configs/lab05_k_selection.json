@@ -1,0 +1,98 @@
+{
+  "schema": "crypto_regime_lab.k_selection.v1",
+  "registered_starting_k": 3,
+  "k_policy": {
+    "3": "primary starting point",
+    "2": "registered parsimonious alternative",
+    "4": "opens ONLY on an explicit discovery decision with recorded decision value"
+  },
+  "candidates_considered": [
+    2,
+    3
+  ],
+  "expansion_k_requested": false,
+  "expansion_k_admitted": false,
+  "expansion_decision": null,
+  "scores": {
+    "2": {
+      "n_states": 2,
+      "mean_per_observation_objective": 0.615641060283393,
+      "worst_fold": 0.763785196287478,
+      "folds": [
+        {
+          "train_end": 100,
+          "valid_start": 100,
+          "valid_end": 786,
+          "per_observation_objective": 0.5682094644064031,
+          "selected_seed": 37,
+          "empty_states_in_fit": []
+        },
+        {
+          "train_end": 786,
+          "valid_start": 786,
+          "valid_end": 1472,
+          "per_observation_objective": 0.5149285201562981,
+          "selected_seed": 11,
+          "empty_states_in_fit": []
+        },
+        {
+          "train_end": 1472,
+          "valid_start": 1472,
+          "valid_end": 2158,
+          "per_observation_objective": 0.763785196287478,
+          "selected_seed": 51,
+          "empty_states_in_fit": []
+        }
+      ],
+      "scored_on": "held-out INNER chronological blocks of the development window",
+      "holdout_used": false,
+      "outcome_used": false
+    },
+    "3": {
+      "n_states": 3,
+      "mean_per_observation_objective": 0.6274105021394017,
+      "worst_fold": 0.7839272340426243,
+      "folds": [
+        {
+          "train_end": 100,
+          "valid_start": 100,
+          "valid_end": 786,
+          "per_observation_objective": 0.5937493359783184,
+          "selected_seed": 51,
+          "empty_states_in_fit": [
+            1
+          ]
+        },
+        {
+          "train_end": 786,
+          "valid_start": 786,
+          "valid_end": 1472,
+          "per_observation_objective": 0.5045549363972625,
+          "selected_seed": 23,
+          "empty_states_in_fit": []
+        },
+        {
+          "train_end": 1472,
+          "valid_start": 1472,
+          "valid_end": 2158,
+          "per_observation_objective": 0.7839272340426243,
+          "selected_seed": 11,
+          "empty_states_in_fit": []
+        }
+      ],
+      "scored_on": "held-out INNER chronological blocks of the development window",
+      "holdout_used": false,
+      "outcome_used": false
+    }
+  },
+  "best_by_inner_criterion": 2,
+  "selection_rule": "mean per-observation objective on held-out inner chronological blocks; ties break to the SMALLER K",
+  "chart_inspection_used": false,
+  "method_note": "a lower objective at higher K is close to automatic, so this comparison never by itself justifies opening K=4. That needs a recorded discovery decision naming the decision value the extra state buys (guide 8.1)",
+  "registered_k_used": 3,
+  "inner_criterion_agrees_with_registered": false,
+  "override_policy": "the registered starting K=3 is used and the disagreement is reported rather than acted on. This is a JUDGEMENT CALL and the guide can be read both ways: 8.1 calls K=3 the 'primary starting' K with K=2 a registered 'parsimonious alternative', while 8.3 says K is chosen in nested development -- which is exactly the criterion that preferred K=2 here. The lab keeps the registered starting point because switching after seeing a score, even a nested-development score, is still choosing the model on a result; but the margin is small and the decision belongs to the user, so it is recorded in reports/improvement_opinions.md rather than settled silently.",
+  "margin_between_top_two": 0.0117694418560087,
+  "relative_margin": 0.018758758127057452,
+  "direction_note": "the usual worry is that a larger K fits better almost by construction. Here the SMALLER K scored better, which is the opposite direction and is why the standard warning does not settle this case."
+}

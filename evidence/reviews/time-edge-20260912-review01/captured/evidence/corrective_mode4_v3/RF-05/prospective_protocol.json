@@ -1,0 +1,69 @@
+{
+  "schema": "regime_lab.rf05_prospective_protocol.v1",
+  "phase": "RF-05",
+  "study_id": "corrective_mode4_v3",
+  "status": "SPECIFIED_NOT_EXECUTED",
+  "purpose": "declare the confirmation protocol for an interval this study has never observed, so a later prospective run cannot be designed after seeing its result",
+  "execution_status": "NOT_EXECUTED",
+  "live_orders": false,
+  "network_fetch": false,
+  "primary_question": "does a causal regime-triggered refit schedule improve continuous-account net return versus the calendar per_fold_causal WFO on data the study has not seen?",
+  "arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "budget_control": "M4_CAL_MATCHED",
+  "family": [
+    {
+      "id": "TIMING",
+      "contrast": "M4_REGIME - M4_CAL",
+      "question": "does causal regime timing add account net return on the same continuous account?"
+    },
+    {
+      "id": "BUDGET_AWARE",
+      "contrast": "M4_REGIME - M4_CAL_MATCHED",
+      "question": "is any timing gain separable from refit cadence and compute?"
+    }
+  ],
+  "mde_bps_per_day": 0.03709428129829986,
+  "mde_rule": "the RF-04-frozen corrected MDE is carried forward unchanged; it is never recomputed after a prospective result is seen",
+  "data_requirement": {
+    "window": "strictly after 2026-08-31 (the last date consumed by the invalidated historical study)",
+    "untouched": "no feature, parameter, threshold or model may be selected on this window before the run",
+    "missing_data": "reported as missing, never fetched at run time or zero-filled"
+  },
+  "analysis_contract": {
+    "statistic": "paired mean daily account net-return difference on common dates",
+    "bootstrap": {
+      "type": "paired moving-block",
+      "block_days": 5,
+      "resamples": 2000,
+      "seed": 20260911,
+      "development_chosen": true
+    },
+    "multiplicity": {
+      "method": "holm",
+      "family": [
+        "TIMING",
+        "BUDGET_AWARE"
+      ]
+    },
+    "claim_gate": "A16: execution validity and implementation fidelity must be PASS/AS_SPECIFIED before any statistical or economic status other than NOT_EVALUABLE",
+    "positive_rule": "POSITIVE_WITHIN_SCOPE requires the paired CI lower bound above the frozen MDE and the Holm-adjusted p below 0.05"
+  },
+  "budget": {
+    "trials_per_cutoff": "registered 32-64 range, to be frozen before the run",
+    "tier_caps_seconds": {
+      "T3": 900,
+      "T4": "approved_total"
+    }
+  },
+  "stop_conditions": [
+    "any execution-validity or implementation-fidelity failure closes the contrast as NOT_EVALUABLE",
+    "the protocol is not modified after the prospective result is seen",
+    "no production merge or live deployment follows from a positive result without a separate decision"
+  ],
+  "registered_at_utc": "2026-09-12T02:29:28.758682+00:00",
+  "written_at_utc": "2026-09-12T02:29:28.758700+00:00",
+  "lab_run_id": "RF-05"
+}

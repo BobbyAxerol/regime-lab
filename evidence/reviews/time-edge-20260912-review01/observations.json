@@ -1,0 +1,1751 @@
+{
+  "fup02": {
+    "checkpoint": "2026-09-12T05:16:46.601353+00:00",
+    "status": "PARTIAL_BUDGET_STOPPED",
+    "coverage": {
+      "RUN_VALID": 2,
+      "RUN_NOT_EVALUABLE": 0,
+      "BUDGET_STOPPED": 1,
+      "NOT_RUN_BUDGET": 0,
+      "FAILED": 1,
+      "INSUFFICIENT_DATA": 0,
+      "BLOCKED_CAPABILITY": 0,
+      "NOT_RUN": 16,
+      "planned_cells": 20,
+      "total_classified": 20
+    },
+    "review": {
+      "shards_planned": 40,
+      "cutoffs_planned": 360,
+      "cutoffs_scored": 67,
+      "admissible_cutoffs": 67,
+      "admissible_over_scored": 1.0,
+      "trials_total": 2144,
+      "trials_finite": 1466,
+      "trials_nonfinite": 678,
+      "infeasible_trials": 0,
+      "bad_trial_fraction": 0.316231
+    },
+    "progress": [
+      {
+        "cell": "A-SC/BTCUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-SC/BNBUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-SC/DOGEUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "coverage_status": "RUN_VALID",
+        "shards": {
+          "M4_CAL": {
+            "status": "COMPLETE",
+            "scored": 7,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "COMPLETE",
+            "scored": 11,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "coverage_status": "RUN_VALID",
+        "shards": {
+          "M4_CAL": {
+            "status": "COMPLETE",
+            "scored": 7,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "COMPLETE",
+            "scored": 11,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "coverage_status": "FAILED",
+        "shards": {
+          "M4_CAL": {
+            "status": "FAILED",
+            "scored": 6,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "FAILED",
+            "scored": 9,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "coverage_status": "BUDGET_STOPPED",
+        "shards": {
+          "M4_CAL": {
+            "status": "COMPLETE",
+            "scored": 7,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 9,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-VWAP/BTCUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-VWAP/ETHUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-VWAP/SOLUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-VWAP/BNBUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-VWAP/DOGEUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HASH/BTCUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HASH/ETHUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HASH/SOLUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HASH/BNBUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      },
+      {
+        "cell": "A-HASH/DOGEUSDT",
+        "coverage_status": "NOT_RUN",
+        "shards": {
+          "M4_CAL": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 7
+          },
+          "M4_REGIME": {
+            "status": "PENDING",
+            "scored": 0,
+            "planned": 11
+          }
+        }
+      }
+    ],
+    "runtime_failures": [
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "M4_CAL",
+        "fold_id": 4,
+        "cutoff": "2022-12-22T00:00:00+00:00",
+        "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=3312, timestamp=2022-11-10 00:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "M4_REGIME",
+        "fold_id": 4,
+        "cutoff": "2022-02-26T00:00:00+00:00",
+        "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=18890, timestamp=2022-11-10 09:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "arm": "M4_REGIME",
+        "fold_id": 7,
+        "cutoff": "2022-12-30T04:00:00+00:00",
+        "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=3113, timestamp=2022-11-09 21:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+      }
+    ],
+    "ledger_rows": 2144,
+    "ledger_unique_keys": 2144,
+    "completed_invocations_recorded": [
+      {
+        "invocation": 1,
+        "started_at_utc": "2026-09-12T04:16:24.481999+00:00",
+        "budget_seconds": 60.0,
+        "shard_cap_seconds": 900.0,
+        "cutoff_cap_seconds": 900.0,
+        "trials_per_cutoff": 32,
+        "planned_shards": [
+          "A-HMA/BTCUSDT:M4_CAL"
+        ],
+        "ran_shards": [
+          {
+            "shard": "A-HMA/BTCUSDT:M4_CAL",
+            "result": "BUDGET_STOPPED",
+            "completed_folds": 1,
+            "wall_seconds": 56.228
+          }
+        ],
+        "stop_reason": "invocation budget exhausted",
+        "ended_at_utc": "2026-09-12T04:17:24.528147+00:00",
+        "wall_seconds": 60.046
+      },
+      {
+        "invocation": 2,
+        "started_at_utc": "2026-09-12T04:18:22.228146+00:00",
+        "budget_seconds": 1800.0,
+        "shard_cap_seconds": 900.0,
+        "cutoff_cap_seconds": 900.0,
+        "trials_per_cutoff": 32,
+        "planned_shards": [
+          "A-HMA/BTCUSDT:M4_CAL",
+          "A-HMA/BTCUSDT:M4_REGIME"
+        ],
+        "ran_shards": [
+          {
+            "shard": "A-HMA/BTCUSDT:M4_CAL",
+            "result": "COMPLETE",
+            "completed_folds": 7,
+            "wall_seconds": 373.959
+          },
+          {
+            "shard": "A-HMA/BTCUSDT:M4_REGIME",
+            "result": "COMPLETE",
+            "completed_folds": 11,
+            "wall_seconds": 549.096
+          }
+        ],
+        "stop_reason": "invocation completed its planned shard list",
+        "ended_at_utc": "2026-09-12T04:32:57.993357+00:00",
+        "wall_seconds": 875.765
+      }
+    ],
+    "reference_hash_checks": {
+      "cell_coverage_sha256": false,
+      "coverage_review_sha256": false
+    },
+    "forward_reference_hash_checks": {
+      "cell_coverage.json": true,
+      "coverage_review.json": true
+    }
+  },
+  "account_windows": [
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 1309,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2023-12-31T00:00:00+00:00",
+        19106.523505432844
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.3301757300551092,
+        "total_return_pct": -4.467382472835779,
+        "num_trades": 364,
+        "max_drawdown_pct": 10.348388587988062
+      },
+      "entries": 182,
+      "fill_count": 364,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 1309,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2023-12-31T00:00:00+00:00",
+        20688.769505556025
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.3160578901129991,
+        "total_return_pct": 3.4438475277801306,
+        "num_trades": 289,
+        "max_drawdown_pct": 3.573133972450504
+      },
+      "entries": 145,
+      "fill_count": 289,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 1309,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2023-12-31T00:00:00+00:00",
+        19943.11213830243
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.005707467553193123,
+        "total_return_pct": -0.2844393084878494,
+        "num_trades": 398,
+        "max_drawdown_pct": 10.328538810595502
+      },
+      "entries": 199,
+      "fill_count": 398,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 1309,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2023-12-31T00:00:00+00:00",
+        18350.689192494938
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.49357023061475647,
+        "total_return_pct": -8.24655403752531,
+        "num_trades": 482,
+        "max_drawdown_pct": 10.28202565387088
+      },
+      "entries": 241,
+      "fill_count": 482,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 1309,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2023-12-31T00:00:00+00:00",
+        19068.049583049866
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.3374597581125095,
+        "total_return_pct": -4.659752084750668,
+        "num_trades": 313,
+        "max_drawdown_pct": 11.192514618553682
+      },
+      "entries": 157,
+      "fill_count": 313,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/BTCUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19999.969160657056
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.1505374026725576,
+        "total_return_pct": -0.0001541967147204559,
+        "num_trades": 2,
+        "max_drawdown_pct": 0.0008874681061955889,
+        "profit_factor": 0.9748975328714052,
+        "win_rate": null,
+        "cagr": null,
+        "sortino": -0.12579755014151356
+      },
+      "entries": null,
+      "fill_count": 0,
+      "retained_versions": null,
+      "retained_fill_fields": []
+    },
+    {
+      "cell": "RF04:A-SC/BTCUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19999.959669209533
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.22879295671634722,
+        "total_return_pct": -0.00020165395233561866,
+        "num_trades": 2,
+        "max_drawdown_pct": 0.0007657632919013941,
+        "profit_factor": 0.9619887797576985,
+        "win_rate": null,
+        "cagr": null,
+        "sortino": -0.19100102778500364
+      },
+      "entries": null,
+      "fill_count": 0,
+      "retained_versions": null,
+      "retained_fill_fields": []
+    },
+    {
+      "cell": "RF04:A-SC/BTCUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20413.78198369375
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.4071196243295457,
+        "total_return_pct": 2.068909918468753,
+        "num_trades": 6,
+        "max_drawdown_pct": 3.598697064528108
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/BTCUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20513.420683473494
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.4211449277050762,
+        "total_return_pct": 2.567103417367478,
+        "num_trades": 12,
+        "max_drawdown_pct": 3.7068971057319677
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/ETHUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19659.787545295607
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.8456924421279314,
+        "total_return_pct": -1.7010622735219694,
+        "num_trades": 6,
+        "max_drawdown_pct": 1.8265557519451487
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/ETHUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19422.33074626655
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.6498383536190165,
+        "total_return_pct": -2.888346268667241,
+        "num_trades": 12,
+        "max_drawdown_pct": 3.865951398163488
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/SOLUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 655,
+      "first": [
+        "2020-09-14T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        22798.49446921846
+      ],
+      "pre_evaluation_days": 109,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 1.352440160413242,
+        "total_return_pct": 13.99247234609231,
+        "num_trades": 6,
+        "max_drawdown_pct": 4.816550455645691
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/SOLUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 655,
+      "first": [
+        "2020-09-14T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19385.498230885274
+      ],
+      "pre_evaluation_days": 109,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -1.0860379463184142,
+        "total_return_pct": -3.0725088455736294,
+        "num_trades": 12,
+        "max_drawdown_pct": 3.798264588949224
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/BNBUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19938.067887845704
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.14442282905164575,
+        "total_return_pct": -0.3096605607714853,
+        "num_trades": 6,
+        "max_drawdown_pct": 1.6802661770152598
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/BNBUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20108.791005514282
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.17136549907453683,
+        "total_return_pct": 0.5439550275714078,
+        "num_trades": 12,
+        "max_drawdown_pct": 2.200342009181053
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/DOGEUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 721,
+      "first": [
+        "2020-07-10T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19689.750375485142
+      ],
+      "pre_evaluation_days": 175,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.6342772994215331,
+        "total_return_pct": -1.5512481225742891,
+        "num_trades": 6,
+        "max_drawdown_pct": 2.555300343348942
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-SC/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 721,
+      "first": [
+        "2020-07-10T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20112.029308624562
+      ],
+      "pre_evaluation_days": 175,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.10055396329632933,
+        "total_return_pct": 0.5601465431228192,
+        "num_trades": 12,
+        "max_drawdown_pct": 3.6805508924769734
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/BTCUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19922.3596154709
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.12072810456714066,
+        "total_return_pct": -0.38820192264549247,
+        "num_trades": 6,
+        "max_drawdown_pct": 2.480420305315043
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/BTCUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20021.084492012164
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.061323155946543306,
+        "total_return_pct": 0.10542246006082223,
+        "num_trades": 10,
+        "max_drawdown_pct": 1.9233647305383985
+      },
+      "entries": 5,
+      "fill_count": 10,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/ETHUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20370.226481523354
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 1.0687478383661126,
+        "total_return_pct": 1.8511324076167623,
+        "num_trades": 6,
+        "max_drawdown_pct": 0.7979708911267737
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/ETHUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19801.254050613938
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -0.26380760216534144,
+        "total_return_pct": -0.9937297469303163,
+        "num_trades": 10,
+        "max_drawdown_pct": 3.453538949451535
+      },
+      "entries": 5,
+      "fill_count": 10,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/SOLUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 655,
+      "first": [
+        "2020-09-14T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19633.647417264176
+      ],
+      "pre_evaluation_days": 109,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -1.4900440043134335,
+        "total_return_pct": -1.8317629136791247,
+        "num_trades": 6,
+        "max_drawdown_pct": 2.0131897735405984
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/SOLUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 655,
+      "first": [
+        "2020-09-14T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20080.2602850015
+      ],
+      "pre_evaluation_days": 109,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.16984783666473813,
+        "total_return_pct": 0.4013014250074942,
+        "num_trades": 12,
+        "max_drawdown_pct": 2.1486982885779256
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/BNBUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20056.300393707977
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.23356245566965425,
+        "total_return_pct": 0.28150196853988785,
+        "num_trades": 6,
+        "max_drawdown_pct": 0.7136590163526902
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/BNBUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 760,
+      "first": [
+        "2020-06-01T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20333.74438223483
+      ],
+      "pre_evaluation_days": 214,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.6831618876167455,
+        "total_return_pct": 1.6687219111741536,
+        "num_trades": 12,
+        "max_drawdown_pct": 1.9957163322375955
+      },
+      "entries": 6,
+      "fill_count": 12,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/DOGEUSDT",
+      "arm": "M4_CAL",
+      "evaluation_start": "2021-01-01",
+      "rows": 721,
+      "first": [
+        "2020-07-10T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        19333.53524301208
+      ],
+      "pre_evaluation_days": 175,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": -1.200865522238967,
+        "total_return_pct": -3.332323784939595,
+        "num_trades": 6,
+        "max_drawdown_pct": 3.4094282014291792
+      },
+      "entries": 3,
+      "fill_count": 6,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    },
+    {
+      "cell": "RF04:A-HMA/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "evaluation_start": "2021-01-01",
+      "rows": 721,
+      "first": [
+        "2020-07-10T00:00:00+00:00",
+        20000.0
+      ],
+      "last": [
+        "2022-06-30T00:00:00+00:00",
+        20147.36598560322
+      ],
+      "pre_evaluation_days": 175,
+      "pre_evaluation_equity_values": [
+        20000.0
+      ],
+      "engine_report": {
+        "sharpe": 0.13852484200186896,
+        "total_return_pct": 0.7368299280161139,
+        "num_trades": 10,
+        "max_drawdown_pct": 3.4210402981578056
+      },
+      "entries": 5,
+      "fill_count": 10,
+      "retained_versions": [
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY",
+        "FLAT_UNTIL_READY"
+      ],
+      "retained_fill_fields": [
+        "bar_index",
+        "side",
+        "qty",
+        "price",
+        "fee",
+        "tag"
+      ]
+    }
+  ],
+  "regime": {
+    "active_tape": "configs/lab05_full_emission_tape.json",
+    "rows": 6571,
+    "symbol": "BTCUSDT",
+    "span": [
+      "2020-12-31 04:00:00",
+      "2023-12-31 04:00:00"
+    ],
+    "field_counts": {
+      "ready_at": 0,
+      "model_fit_cutoff": 0,
+      "state_common": 0,
+      "economic_context": 0,
+      "decision_eligible": 6571,
+      "quality_status": 6571
+    },
+    "quality_counts": {
+      "OK": 6470,
+      "UNKNOWN_STATE": 101
+    },
+    "active_registry_design": {
+      "n_states": 3,
+      "lambda_jump": 1.0,
+      "train_memory_days": 365
+    },
+    "active_registry_models": 40,
+    "rf04_selected_design": {
+      "model": "JM",
+      "n_states": 3,
+      "lambda_jump": 0.5,
+      "cadence": "4h",
+      "mean_per_observation_objective": 0.7283768759696301,
+      "candidate_index": 4,
+      "deployment_action": "RECORDED_DESIGN_SELECTION. The frozen historical constants stay untouched; a new registration version is required before an outer/confirmation role may deploy the selected design (RF03.2: outer/confirmation does not retune)"
+    },
+    "fixed_target_ablation": {
+      "target_name": "forward_paired_return_24h_proxy",
+      "target_kind": "paired_future_return_minus_trailing_return_proxy",
+      "denominators": {
+        "feature_sets": 3,
+        "folds_per_set": {
+          "['G1']": 3,
+          "['G1', 'G2']": 3,
+          "['G1', 'G2', 'G5']": 3
+        },
+        "scored_rows_per_set": {
+          "['G1']": 2046,
+          "['G1', 'G2']": 2046,
+          "['G1', 'G2', 'G5']": 2046
+        }
+      }
+    },
+    "ablation_rank_ic": [
+      {
+        "groups": [
+          "G1"
+        ],
+        "value": 0.4451045570252137
+      },
+      {
+        "groups": [
+          "G1",
+          "G2"
+        ],
+        "value": 0.36772761386373914
+      },
+      {
+        "groups": [
+          "G1",
+          "G2",
+          "G5"
+        ],
+        "value": 0.267942031501673
+      }
+    ]
+  },
+  "decay": {
+    "denominators": {
+      "D1_rows": 168,
+      "D1_valid_rows": 80,
+      "D2_rows": 36,
+      "D3_rows": 102,
+      "D3_valid_rows": 89,
+      "cells": 2,
+      "arms": 4,
+      "registered_anchors": 4,
+      "anchors_replayed": 4,
+      "null_value_reasons": [
+        "IS_ACCOUNT_RETURN_NOT_IN_TRIAL_LEDGER",
+        "IS_PROFIT_FACTOR_NOT_IN_TRIAL_LEDGER",
+        "OOS_NO_LOSS_DENOMINATOR",
+        "OOS_NO_TRADES",
+        "OOS_VALID_WITH_FLAGS",
+        "UNDEFINED_PROFIT_FACTOR",
+        "UNDEFINED_SHARPE",
+        "UNDEFINED_VALUE"
+      ]
+    },
+    "D2_self_comparison_rows": 12,
+    "D2_PF_rows": 12,
+    "D2_PF_null_rows": 12,
+    "D2_PF_rows_with_finite_underlying_PF": 3,
+    "D2_route_mismatch_rows": 18,
+    "D2_observed_days": {
+      "91": 18,
+      "90": 18
+    },
+    "D2_validity": {
+      "VALID": 16,
+      "UNDEFINED_PROFIT_FACTOR": 12,
+      "UNDEFINED_SHARPE": 8
+    },
+    "D1_cells": [
+      "A-HMA/BTCUSDT",
+      "A-SC/BTCUSDT"
+    ]
+  },
+  "report_pairs": {
+    "RF-01": {
+      "md": true,
+      "json": true
+    },
+    "RF-02": {
+      "md": true,
+      "json": true
+    },
+    "RF-03": {
+      "md": true,
+      "json": true
+    },
+    "RF-04": {
+      "md": true,
+      "json": true
+    },
+    "RF-05": {
+      "md": true,
+      "json": true
+    },
+    "FUP-01": {
+      "md": false,
+      "json": false
+    },
+    "FUP-02": {
+      "md": true,
+      "json": true
+    }
+  }
+}

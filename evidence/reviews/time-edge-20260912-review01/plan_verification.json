@@ -1,0 +1,38 @@
+{
+  "schema": "regime_lab.time_edge_plan_verification.v1",
+  "lab_run_id": "time-edge-20260912-review01",
+  "verified_at_utc": "2026-09-12T05:41:19.208788+00:00",
+  "plan_sha256": "0352ccaeca79b65b33c44a9c04a64552e229fe87cf400510d994fe6f1e9a3695",
+  "helper_sha256": {
+    "scripts/audit_time_edge_review.py": "219e0722ebfa3f959910c61b6bd1d3ce854580f4658d6b6df4ac75404e0bfd72",
+    "scripts/render_time_edge_plan.py": "2885ced286c59132265173c3cd5cc70fea39a1a0130d94425257d28f8867b3d7"
+  },
+  "status": "PASS_WITHIN_DOCUMENT_REVIEW_SCOPE",
+  "checks": {
+    "local_path_and_anchor_links": 453,
+    "guide_reference_uses": 277,
+    "captured_file_hashes_and_sizes": 306,
+    "audit_artifact_hashes": 5,
+    "acceptance_rows": {
+      "V2": 64,
+      "V3": 70
+    },
+    "render_idempotent": true,
+    "source_ast_parse": "PASS",
+    "pyflakes": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "section_11_vs_1_1_anchor_collision": "PASS"
+  },
+  "engine_runs": 0,
+  "optimizer_runs": 0,
+  "market_statistical_tests": 0,
+  "existing_tests_rerun": 0,
+  "limitations": [
+    "Document/source-probe audit only; this does not validate the economic pipeline.",
+    "Automatic heading anchor validation uses GitHub-style Unicode slugs; no browser rendering was run.",
+    "FUP-02 continued independently and is represented by the timestamped snapshot."
+  ]
+}

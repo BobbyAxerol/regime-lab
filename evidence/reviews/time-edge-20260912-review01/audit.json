@@ -1,0 +1,32 @@
+{
+  "schema": "regime_lab.time_edge_review.v1",
+  "lab_run_id": "time-edge-20260912-review01",
+  "study_id": "time_edge_readonly_review",
+  "capture_started_at_utc": "2026-09-12T05:16:53.745169+00:00",
+  "completed_at_utc": "2026-09-12T05:17:13.370929+00:00",
+  "source_python_files": 263,
+  "source_lines": 71498,
+  "source_ast_errors": [],
+  "test_functions_inventoried_not_run": 835,
+  "evidence_text_files": 1587,
+  "json_parse_errors": [],
+  "capture_change_checks": [
+    []
+  ],
+  "selected_capture_stable_during_read": true,
+  "source_changed_during_review": [],
+  "elapsed_seconds": 19.635983711108565,
+  "engine_runs": 0,
+  "optimizer_runs": 0,
+  "market_statistical_tests": 0,
+  "existing_tests_rerun": 0,
+  "scope_limit": "AST/text inventory covers the entire lab source/scripts/tests and saved text evidence; semantic review focuses active economic/model/statistical paths. This is not a certificate that every path is correct.",
+  "capture_limit": "FUP-02 continues independently; this is a byte snapshot, not a transactional database freeze.",
+  "artifact_hashes": {
+    "source_inventory.json": "558cb94bd6cfad44e2d14639668e15d235eb0a3331b6e2b81d5ba46d414066de",
+    "evidence_inventory.json": "46c76316b794408d14572aecb958187bdf8cb70fb9b06b9c1f684167e3dbf40c",
+    "source_probes.json": "8b4a4764c3d62c44a6661a7bc579cc9db73fe39d39b42aeb8dec33947d3b8983",
+    "observations.json": "3a113ddc1dce6ab07ca1f9a9cce9d5409aab2d9e973e57859dc575499ab217f6",
+    "capture_manifest.json": "384a365c9ed33c3cb2fc2d4f02145d3fb1f5d3eb690315b56e63d8cad11c7bf3"
+  }
+}

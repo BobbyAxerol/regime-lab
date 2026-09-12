@@ -1,0 +1,61 @@
+{
+  "classification": "AST_EXTRACTED_SOURCE_PROBES_NOT_ENGINE_OR_MARKET_TESTS",
+  "numpy": "2.2.6",
+  "pandas": "2.3.3",
+  "scheduler": {
+    "future_model_ready_triggered": [
+      "2021-01-03T00:00:00+00:00"
+    ],
+    "missing_eligibility_fields_triggered": [
+      "2021-01-03T00:00:00+00:00"
+    ],
+    "constant_state_365_observations_max_age_180_triggers": [],
+    "limitations": "isolated source function; an external validated tape could guard inputs, but the active tape omits ready_at"
+  },
+  "decay": {
+    "expected_half_open_days_per_90_day_window": 90,
+    "observed_H1_days": 91,
+    "observed_H2_days": 91,
+    "shared_boundary_day": "2021-04-01",
+    "daily_profit_factor_value": 2.0444444444444456,
+    "d2_lookup_profit_factor_value": null,
+    "all_loss_daily_returns_result": {
+      "start": "2021-01-01 00:00:00+00:00",
+      "end": "2021-01-03 00:00:00+00:00",
+      "observed_days": 3,
+      "mean_daily_return_bps": -101.01697244554379,
+      "sharpe": -1891.2958564304345,
+      "profit_factor_daily": null,
+      "max_drawdown_pct": 3.0,
+      "status": "VALID_WITH_FLAGS",
+      "reasons": [
+        "NO_TRADES"
+      ]
+    }
+  },
+  "forward_target_purge_index_check": {
+    "classification": "SOURCE_INDEX_ANALYSIS",
+    "train_end_exclusive": 100,
+    "forward_horizon_rows": 6,
+    "train_target_slice_in_source": "target[:train_end]",
+    "train_origin_rows_with_outcome_end_at_or_after_cutoff": [
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "validation_head_dropped_in_source": 6,
+    "finding": "dropping validation head does not make the six training outcomes available at the training cutoff"
+  },
+  "rf05_window": {
+    "declared_evaluation_start": "2021-01-01",
+    "actual_return_dates": [
+      "2020-12-31",
+      "2021-01-01",
+      "2021-01-02"
+    ],
+    "out_of_window_return_retained": true
+  }
+}
