@@ -43,7 +43,10 @@ def main():
     parser.add_argument("--profile", default=DEFAULT_PROFILE)
     parser.add_argument("--output", default=DEFAULT_OUTPUT)
     parser.add_argument("--total", type=float, default=NEW_TOTAL)
+    parser.add_argument("--reserve", type=float, default=SELECTION_CAP + 2 * TASK_CAP,
+                        help="future wall this revision must reserve in addition to prior charges")
     parser.add_argument("--why", default="selection cap measured too small for the registered 32 trials")
+    parser.add_argument("--extra", help="JSON file with additional measured_reason fields")
     args = parser.parse_args()
     root = ROOT
     profile_path = root / args.profile
@@ -53,8 +56,8 @@ def main():
         "live ledger charges went backwards; re-measure instead of restamping"
     projection = profile["extrapolation_to_32_trials"]["projected_seconds"]
     assert SELECTION_CAP > projection, "registered selection cap must exceed the measured projection"
-    required = prior_charged + SELECTION_CAP + 2 * TASK_CAP
-    assert args.total >= required, "new total must reserve selection, audit and deployment caps"
+    required = prior_charged + args.reserve
+    assert args.total >= required, "new total must cover prior charges plus the registered reserve"
     revision = {
         "schema": ALLOCATION_REVISION_SCHEMA,
         "study_id": "time_edge_validation_v4",
@@ -72,6 +75,7 @@ def main():
         "cpu_limit": 2,
         "memory_gib": 4,
         "profile_refs": [{"path": args.profile, "sha256": file_digest(profile_path)}],
+        "reserved_future_wall_seconds": args.reserve,
         "measured_reason": {
             "source": DEFAULT_PROFILE,
             "pilot_run": profile["lab_run_id"],
@@ -95,8 +99,8 @@ def main():
                                "trials, threads or a different account window.",
         "cpu_limit_change_justification": None,
         "what_it_changes": [
-            "selection task wall cap: %ss -> %ss" % (TASK_CAP, SELECTION_CAP),
             "shared allocation total wall: %ss -> %ss (appended to the live ledger)" % (prior_total, args.total),
+            args.why,
         ],
         "what_it_does_not_change": [
             "registered 32 trials per cutoff, search seed, scorer, train window, economics and engine contract",
@@ -111,6 +115,8 @@ def main():
         "note": "Registered before the next pilot job; pilot-07's measured profile is the justification. This is a budget "
                 "revision, not a trial-budget change.",
     }
+    if args.extra:
+        revision["measured_reason"]["additional"] = read(root / args.extra)
     output = root / args.output
     h = save(output, revision)
     print(json.dumps({"revision": str(output.relative_to(root)), "sha256": h,
