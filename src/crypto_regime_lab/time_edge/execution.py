@@ -61,8 +61,16 @@ class DecisionProxy:
 
 
 class ClockedStrategy(EventAccountStrategy):
-    def __init__(self, alpha_id, frame, selections, *, allocation=.1, account_start=None):
+    def __init__(self, alpha_id, frame, selections, *, allocation=.1, account_start=None,
+                 engine_offset=0):
         self.account_start=None if account_start is None else pd.Timestamp(account_start)
+        # The engine may run on a market prepared from ``account_start`` onward
+        # while this strategy keeps the registered warmup history. Callback bar
+        # indices are relative to that engine market, so the offset restores the
+        # absolute coordinates used by decisions, fills and version runs.
+        self.engine_offset=int(engine_offset)
+        if self.engine_offset < 0:
+            raise ContractError("engine window offset cannot be negative")
         self.decisions_frame, self.mapping = decision_frame(frame, DECISION_MINUTES[alpha_id])
         if self.decisions_frame.empty or not selections:
             raise ContractError("decision history and initial selection required")
@@ -141,7 +149,7 @@ class ClockedStrategy(EventAccountStrategy):
         return selection, adapter
 
     def on_bar_close(self, context):
-        bar = int(context.bar_index); self.callback_count += 1
+        bar = int(context.bar_index) + self.engine_offset; self.callback_count += 1
         if self.account_start is not None and self.frame.index[bar] < self.account_start:
             if getattr(context,"fills_this_bar",None):
                 raise ContractError("fill before the registered account window")
@@ -199,35 +207,69 @@ class ClockedStrategy(EventAccountStrategy):
         return commands
 
 
-def endpoint(*, fee=.0004, slippage=1., native_backend="rust"):
+def endpoint(*, fee=.0004, slippage=1., native_backend="rust", reactive_kernel_mode="single_pass"):
     import quantbt as q
+    # Audit retention is report_level/audit_sink, not the Python oracle replay.
+    # With single_pass the canonical execution trace and native accounting audit
+    # are attached from the primary Rust session (the engine's own
+    # "avoids replaying execution in Python" route). replay_certified would
+    # double-run every bar and materialize a discarded 11-rows/bar Python trace,
+    # which cannot fit the registered 4 GiB worker for 180-day windows.
     return q.QuantBTEndpoint.native_event_strategy(
         account=q.AccountConfig(initial_capital=20000., leverage=1.),
         symbols=["S"], fee_rate=fee, fee=2*fee, slippage_bps=slippage,
         use_funding=False, execution_contract=CONTRACT, native_backend=native_backend,
-        backend_policy="certified_only", report_level="audit", audit_sink="memory")
+        backend_policy="certified_only", report_level="audit", audit_sink="memory",
+        reactive_kernel_mode=reactive_kernel_mode)
 
 
 class PreparedAccount:
+    """One account per candidate, prepared per account window.
+
+    The account only exists from ``account_start`` onward while the alpha keeps
+    the registered causal warmup history. Handing the full history to the engine
+    made every audit replay trace O(history) even though no position could exist
+    before the window; each requested window therefore prepares its own immutable
+    market and runs absolute bar coordinates back onto the full frame.
+    """
+
     def __init__(self, frame, *, fee=.0004, slippage=1., native_backend="rust"):
         validate_market(frame)
         self.frame = frame
+        self.fee, self.slippage, self.native_backend = fee, slippage, native_backend
         started = time.perf_counter()
         self.endpoint = endpoint(fee=fee, slippage=slippage, native_backend=native_backend)
         self.runner = self.endpoint.prepare_native_event_strategy(data=frame)
         self.packing_seconds = time.perf_counter()-started
         self.runs = 0
+        self._windows = {}
+
+    def _window(self, first):
+        key = int(first)
+        if key not in self._windows:
+            window = self.frame.iloc[key:]
+            prepared = endpoint(fee=self.fee, slippage=self.slippage, native_backend=self.native_backend)
+            started = time.perf_counter()
+            runner = prepared.prepare_native_event_strategy(data=window)
+            # The window market is the engine's full world: one account run here
+            # can never materialize the pre-window history again.
+            self._windows[key] = (window, prepared, runner, time.perf_counter()-started)
+        return self._windows[key]
 
     def run(self, alpha_id, selections, *, account_start=None, cold=False):
-        strategy = ClockedStrategy(alpha_id, self.frame, selections,account_start=account_start)
+        first = 0 if account_start is None else int(self.frame.index.searchsorted(pd.Timestamp(account_start)))
+        strategy = ClockedStrategy(alpha_id, self.frame, selections, account_start=account_start,
+                                   engine_offset=first)
         started = time.perf_counter()
+        if first == 0:
+            window, engine_endpoint, runner, packing = self.frame, self.endpoint, self.runner, self.packing_seconds
+        else:
+            window, engine_endpoint, runner, packing = self._window(first)
         try:
-            first = 0 if account_start is None or cold else int(self.frame.index.searchsorted(pd.Timestamp(account_start)))
             if cold:
-                result = self.endpoint.simulate(data=self.frame,strategy=strategy)
+                result = engine_endpoint.simulate(data=window, strategy=strategy)
             else:
-                result = (self.runner.run(strategy, report_level="audit") if first == 0 else
-                          self.runner.run_window(strategy,start_bar=first,end_bar=len(self.frame),report_level="audit"))
+                result = runner.run(strategy, report_level="audit")
         except Exception as exc:
             # Caller's append-only trial evidence retains even a constructor/fill error.
             raise ContractError(f"{type(exc).__name__}: {exc}; unmapped={strategy.unmapped}; rejected={strategy.rejections}") from exc
@@ -241,6 +283,12 @@ class PreparedAccount:
             fill["absolute_bar_index"] = fill["bar_index"]
             fill["bar_index"] -= first
         raw_meta = dict(getattr(result,"metadata",{}) or {})
+        # The audit route is report_level=audit + audit_sink=memory on the
+        # primary Rust session. Fail closed if the engine ever stops attaching
+        # the canonical execution trace or the native accounting ledger.
+        if int(raw_meta.get("canonical_trace_row_count") or 0) <= 0 or not isinstance(
+                raw_meta.get("accounting_ledger_v1"), pd.DataFrame):
+            raise ContractError("audit retention missing: canonical trace/native accounting ledger not attached")
         tables = {k:v for k,v in raw_meta.items() if isinstance(v,(pd.DataFrame,pd.Series))}
         tables.update({"engine_diagnostics":result.diagnostics,"engine_margin":result.margin,
                        "engine_fees":result.fees,"engine_funding":result.funding})
@@ -252,7 +300,7 @@ class PreparedAccount:
                 "order_events":strategy.order_events_out, "version_runs":strategy.version_runs,
                 "funnel":strategy.funnel, "unmapped":strategy.unmapped, "rejections":strategy.rejections,
                 "engine_fill_count":observed, "engine_metadata":meta, "engine_tables":tables,"requested_contract":CONTRACT,
-                "wall_seconds":time.perf_counter()-started, "packing_seconds":self.packing_seconds,
+                "wall_seconds":time.perf_counter()-started, "packing_seconds":packing,
                 "callback_count":strategy.callback_count, "decision_count":strategy.decision_count,
                 "engine_absolute_start_bar":first,"terminal_position":float(positions[-1]), "terminal_equity":float(equity[-1])}
 
