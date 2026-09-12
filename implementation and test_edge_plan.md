@@ -2,14 +2,32 @@
 
 **Ngày lập:** 12/09/2026. **Phạm vi:** `/root/bobby/pool_alpha/lab_regime_model_quantbt`.
 **Vai trò:** đầu mối để đọc tình trạng thực, truy nguồn yêu cầu, giao việc, nghiệm thu và tìm báo cáo.
-**Trạng thái:** `TE-01_REGISTRATION_VALIDATED_FOR_TECHNICAL_REPAIR`; chưa đóng toàn phase vì
-`FINAL_FUP_HANDOFF_PENDING`. TE-02…TE-05 **chưa được thực hiện**.
-Pending này thuộc tiếp nhận FUP; **không chặn TE-02 trên bản sao lab độc lập**. Xem [rà soát chi phí FUP](#fup-cost-decision).
+**Trạng thái:** `TE_TECHNICAL_IMPLEMENTATION_IN_PROGRESS`. Người dùng đã dừng OpenCode và duyệt
+gộp FUP còn lại vào TE, hoàn tất coding/test/CLI rồi bàn giao chạy. TE-01 contracts đã kiểm;
+TE-02…TE-05 đang được triển khai kỹ thuật, chưa có market acceptance mới.
 
-Theo chỉ thị mới của người dùng: **để OpenCode hoàn tất FUP-02**, giao Codex sửa và kiểm chứng 20 findings.
-Đã đăng ký và kiểm chứng hợp đồng TE-01, lưu baseline lỗi trước sửa, manifests và báo cáo riêng;
-chưa sửa runner/model/registration của FUP-02 hoặc chạy thêm backtest.
+Theo chỉ thị mới nhất: **không tiếp tục FUP như một chuỗi riêng**. Snapshot sau khi người dùng báo dừng
+ở [FUP intake](evidence/reviews/fup02-stopped-20260912-01/review.json); không đổi nhãn thành run hoàn tất.
+Codex chịu trách nhiệm sửa kỹ thuật, kiểm chứng, runner và hướng dẫn CLI; các job engine/market dài
+được chạy từ bộ lệnh bàn giao với isolation/budget/acceptance có evidence.
 Việc một task được liệt kê ở đây không có nghĩa code đã được sửa, test đã pass hoặc một market run mới đã được cấp ngân sách.
+
+<a id="approved-coding-order"></a>
+## Thứ tự coding và gộp FUP — đã được người dùng duyệt
+
+Checklist viết trước code: [implementation R03](configs/time_edge_validation_v4/implementation_checklist_r03.json).
+`IMPLEMENTED` là code đã có; `RUNTIME_QUALIFIED` cần kết quả chạy engine thật; không gộp hai trạng thái.
+
+| Ưu tiên | Phase/task bắt đầu | Phần FUP được tiếp nhận | Đầu ra để nghiệm thu |
+|---|---|---|---|
+| 1 | [TE-02](#te-02): TE02.1/2/3/7 rồi 4/5/6/8 | FUP-02 scorer, triển khai lặp, lỗi domain, shard/resume/budget; capability còn thiếu từ FUP-01 | Engine adapter đúng clock/sizing, selection-only, ledger không mất lỗi, CLI pilot/profile/resume |
+| 2 | [TE-03](#te-03): TE03.1–8 | Các follow-up về regime model, label, causality, opportunity và controls | Model đã chọn nối vào emitted tape; dossier mỗi fold; full-path control CLI |
+| 3 | [TE-04](#te-04): TE04.1–9 | FUP discovery chưa chạy, matched controls, decay và statistics | CLI chạy có resume; metrics/decay/inference từ artifacts; calibration trước claim |
+| 4 | [TE-05](#te-05): TE05.1–6 | FUP freeze, coverage/reproducibility và báo cáo còn thiếu | Freeze/verify/report CLI; báo cáo MD+JSON từ artifacts đã commit; hướng dẫn OpenCode/người dùng |
+
+Sau mỗi phần coding: commit riêng, báo test thật và giới hạn; sau mỗi phase: báo cáo và khuyến nghị
+task tiếp theo. Giữ mọi failed/partial artifacts của FUP làm diagnostic; chỉ tái dùng cache đúng
+identity/cutoff/economics, không dùng nhãn RUN_VALID cũ để bỏ qua TE acceptance.
 
 ## 0. Đọc từ đây
 
