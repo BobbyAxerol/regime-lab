@@ -2,29 +2,41 @@
 
 Research lab (not a product) around a pinned, unmodified `quantbt-engine==1.1.1`. It asks whether
 regime information selects parameters and times their deployment better than calendar WFO. The
-authoritative plan is `QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md` (Vietnamese, ~1830
-lines). `CLAUDE.md` is the English digest of its binding rules — read both before changing
-anything. `CLAUDE.md`'s "Current state" section is stale (it ends at LAB-08); the artifacts below
-are the executable truth.
+authoritative plan is `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` (Vietnamese,
+~13.5k lines); the older `QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md` applies only where not
+superseded. `CLAUDE.md` is the English digest — read both before changing anything.
 
 ## Current state (verify, don't assume)
 
 - Historical study LAB-01 … LAB-09 is complete and its conclusion is **`FAILED_VALIDITY`**
   (`reports/lab09_report.md`). LAB-10 is folded into the corrective phases below — there is no
   separate LAB-10 run. `evidence/crypto_regime_timeedge_v2/` is append-only and never edited.
-- The authoritative plan now is `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md`
-  (Vietnamese, ~13.5k lines): a Mode 4 `per_fold_causal` corrective study in five phases
-  **RF-01 … RF-05** on branch `mode4-corrective`. It supersedes Final V2 wherever they conflict.
-  Registered spec: `evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json`. Historical
-  claim verdicts are superseded to `NOT_EVALUABLE` in `historical_invalidation.json` without
-  editing any historical artifact.
-- **RF-01 is complete (TECHNICAL_ONLY)**: identity, Mode 4 binding, invalidation, dispositions and
-  spec are committed; the 12 restored audit probes reproduce on this source. The before-repair
-  tests in `tests/mode4_corrective/` **fail by design** (`6 failed / 3 passed`; full suite
-  `6 failed, 789 passed`) and must go green in RF-02…RF-03 — never delete or weaken them.
+- The authoritative plan is the five-phase corrective study **RF-01 … RF-05** on branch
+  `mode4-corrective` (`study_id=corrective_mode4_v3`, stable dirs under
+  `evidence/corrective_mode4_v3/`). Registered spec:
+  `evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json`. Historical claim verdicts are
+  superseded to `NOT_EVALUABLE` in `historical_invalidation.json` without editing any historical
+  artifact.
+- **RF-01 … RF-05 are complete.** RF-01 = identity/binding/invalidation and the then-failing
+  before-repair probes; RF-02 = real-snapshot event account and public Mode 4 baseline; RF-03 =
+  causal regime controller; RF-04 = 10-cell event-route paired discovery
+  (`RF-04/paired_discovery_full.json`) plus design freeze, decay and controls; RF-05 = freeze,
+  recompute, claims, integrity and handoff (`RF-05/report.md`, `claim_report.json`, etc.).
+  Coverage is **10 of 20 planned cells executed**; A-VWAP/A-HASH stay `BLOCKED_CAPABILITY` with
+  null metrics + reasons, never zero-filled.
+- **RF-05 claim**: `TECHNICALLY_VALID_WITH_PARTIAL_COVERAGE`, economic `INCONCLUSIVE`. Paired
+  common-date daily `M4_REGIME - M4_CAL` aggregate (10 cells): mean −0.1123 bps/day, block
+  bootstrap (5 days, 2000 draws, seed 20260911) 95% CI [−0.4940, +0.1907]; `M4_REGIME −
+  M4_CAL_MATCHED` (1 evaluable cell, A-HMA/BTCUSDT; A-SC endpoint is `DEVIATED`): +0.1620
+  [−0.2142, +0.6154]. Holm over {TIMING, BUDGET_AWARE} (m=2) → both `INCONCLUSIVE` against the
+  frozen MDE 0.0371 bps/day; A-SC/SOLUSDT is `NEGATIVE_WITHIN_SCOPE` at cell level. No `POSITIVE`.
+  Contamination `NESTED_RETROSPECTIVE` (no untouched holdout);
+  `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED` and must not be run here.
+- The before-repair tests in `tests/mode4_corrective/` are green since RF-02/RF-03 — never delete or
+  weaken them. Full suite currently `862 passed`; RF-05 guards live in
+  `tests/mode4_corrective/test_rf05_claims.py`.
 - The lab marker keeps `study_id=crypto_regime_timeedge_v2` (LAB-01 bootstrap evidence; not
-  rewritten). The corrective study uses `study_id=corrective_mode4_v3` with a stable phase dir
-  `evidence/corrective_mode4_v3/RF-01/` (not a timestamped run dir).
+  rewritten).
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
 - Lab git: repo on `main`, remote `regime-lab`; corrective work is on **`mode4-corrective`**.
@@ -38,15 +50,17 @@ Run from the lab root. Use only the lab venv — never the shared `/root/bobby/p
 
 ```bash
 LAB=/root/bobby/pool_alpha/lab_regime_model_quantbt
-$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # 6 before-repair failures expected until RF-02/03
+$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # currently 862 passed
 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/test_x.py::test_y -q
-$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q   # the RF before-repair set
+$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q   # 76 passed (RF guards)
 $LAB/environments/lab_venv/bin/python -m pyflakes src scripts tests     # clean except src/.../alphas/raw-supplied/
 PYTHONPATH=src $LAB/environments/lab_venv/bin/python -m crypto_regime_lab.cli <stage> --lab-root $LAB
 $LAB/environments/lab_venv/bin/python scripts/<runner>.py               # scripts insert src/ themselves
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf01.py           # regenerate RF-01 artifacts (--force to supersede)
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf01_regressions.py --full
 $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf01_report.py  # renders evidence/corrective_mode4_v3/RF-01/report.md
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf05.py --force   # RF-05 freeze/recompute/claims/integrity/handoff (no engine call)
+$LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force  # report.md/json + integrity/repro refresh
 ```
 
 - `python -m crypto_regime_lab.cli` needs `PYTHONPATH=src`; pytest gets it from `tests/conftest.py`.

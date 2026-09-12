@@ -1,0 +1,1461 @@
+{
+  "schema": "regime_lab.rf05_recomputation.v1",
+  "phase": "RF-05",
+  "study_id": "corrective_mode4_v3",
+  "status": "RECOMPUTED_FROM_FROZEN_ARTIFACTS",
+  "rule": "every number is a deterministic function of committed RF-04 result paths; no engine was rerun for any statistic, CI, cost level or reconstruction; old curves were not rescaled and the corrected fee binding is taken from the RF-04 account records",
+  "frozen_inputs": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+      "sha256": "6b2ff015fa613cb72f6572fc20d394818dc2c4144c277eca51f5214d03e613e0",
+      "role": "event-route account equity, fills, selections and trials"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json",
+      "sha256": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f",
+      "role": "matched control and placebo accounts on the 2 pilot cells"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/cell_coverage.json",
+      "sha256": "fadeef2554a9e79f01aa1f441113c79d224c5427fa64be6825dce986a400cd57",
+      "role": "20-cell coverage and null reasons"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json",
+      "sha256": "3cf6e9fd0be244d21e6d80ef51478b3a0f48a92ca4db133d2bb645c3185d9e29",
+      "role": "frozen corrected MDE"
+    }
+  ],
+  "paired_recompute": {
+    "reference": "claim_report.json#/cells",
+    "cells": [
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-SC/BTCUSDT",
+        "cell": "A-SC/BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.552415, 0.616401] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.0679607553753819,
+          "ci95_low_bps": -0.5524147234279921,
+          "ci95_high_bps": 0.6164014813285917,
+          "p_two_sided": 0.778,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.7068971057319677,
+          "right_max_drawdown_pct": 3.598697064528108,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-SC/ETHUSDT",
+        "cell": "A-SC/ETHUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "ETHUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.962780, 0.701401] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": -0.15515177153744372,
+          "ci95_low_bps": -0.9627799960378934,
+          "ci95_high_bps": 0.7014007097735488,
+          "p_two_sided": 0.745,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.865951398163488,
+          "right_max_drawdown_pct": 1.8265557519451487,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-SC/SOLUSDT",
+        "cell": "A-SC/SOLUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "SOLUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "NEGATIVE_WITHIN_SCOPE",
+        "statistical_status_reason": "paired CI upper bound -0.058026 < MDE 0.037094; an effect as large as the registered minimum is excluded on this contrast",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": -2.517506043821058,
+          "ci95_low_bps": -5.786555215709833,
+          "ci95_high_bps": -0.05802565198117728,
+          "p_two_sided": 0.038,
+          "n_days": 654,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.798264588949224,
+          "right_max_drawdown_pct": 4.816550455645691,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-SC/BNBUSDT",
+        "cell": "A-SC/BNBUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BNBUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.258391, 0.510329] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.11444148427495264,
+          "ci95_low_bps": -0.25839098948468603,
+          "ci95_high_bps": 0.5103290036992553,
+          "p_two_sided": 0.506,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 2.200342009181053,
+          "right_max_drawdown_pct": 1.6802661770152598,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-SC/DOGEUSDT",
+        "cell": "A-SC/DOGEUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "DOGEUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.712610, 1.410148] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.30834756363138893,
+          "ci95_low_bps": -0.7126097614636182,
+          "ci95_high_bps": 1.4101475135944854,
+          "p_two_sided": 0.538,
+          "n_days": 720,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.6805508924769734,
+          "right_max_drawdown_pct": 2.555300343348942,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-HMA/BTCUSDT",
+        "cell": "A-HMA/BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.379385, 0.557921] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.06330121421041358,
+          "ci95_low_bps": -0.3793854574780768,
+          "ci95_high_bps": 0.5579212389223244,
+          "p_two_sided": 0.768,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 1.9233647305383985,
+          "right_max_drawdown_pct": 2.480420305315043,
+          "left_trades": 10,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 3
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-HMA/ETHUSDT",
+        "cell": "A-HMA/ETHUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-1.037550, 0.169469] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": -0.3699311898810749,
+          "ci95_low_bps": -1.037550323965503,
+          "ci95_high_bps": 0.16946852774291762,
+          "p_two_sided": 0.21,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.453538949451535,
+          "right_max_drawdown_pct": 0.7979708911267737,
+          "left_trades": 10,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-HMA/SOLUSDT",
+        "cell": "A-HMA/SOLUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.256784, 1.022144] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.3458292578029455,
+          "ci95_low_bps": -0.2567835351260845,
+          "ci95_high_bps": 1.022143553856763,
+          "p_two_sided": 0.245,
+          "n_days": 654,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 2.1486982885779256,
+          "right_max_drawdown_pct": 2.0131897735405984,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-HMA/BNBUSDT",
+        "cell": "A-HMA/BNBUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.324455, 0.565893] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.18242550328474674,
+          "ci95_low_bps": -0.3244549476472725,
+          "ci95_high_bps": 0.5658931135325337,
+          "p_two_sided": 0.627,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 1.9957163322375955,
+          "right_max_drawdown_pct": 0.7136590163526902,
+          "left_trades": 12,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 2
+        }
+      },
+      {
+        "family": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL on A-HMA/DOGEUSDT",
+        "cell": "A-HMA/DOGEUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "DOGEUSDT",
+        "route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.757316, 2.071727] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.5824305742845793,
+          "ci95_low_bps": -0.7573163896107447,
+          "ci95_high_bps": 2.071726881216571,
+          "p_two_sided": 0.384,
+          "n_days": 720,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false,
+        "risk": {
+          "left_max_drawdown_pct": 3.4210402981578056,
+          "right_max_drawdown_pct": 3.4094282014291792,
+          "left_trades": 10,
+          "right_trades": 6,
+          "parameter_changes_between_arms": 1
+        }
+      },
+      {
+        "family": "BUDGET_AWARE",
+        "contrast": "M4_REGIME - M4_CAL_MATCHED on A-SC/BTCUSDT",
+        "cell": "A-SC/BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "matched_control_route": "endpoint",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "DEVIATED",
+        "implementation_fidelity_reason": "the matched control exists only on the 'endpoint' route while the primary arm executes on the 'event' route; the routes differ, so the budget contrast is not on the same execution binding",
+        "statistical_status": "NOT_EVALUABLE",
+        "statistical_status_reason": "A16: execution validity or implementation fidelity is not PASS/AS_SPECIFIED",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.3462749451161589,
+          "ci95_low_bps": -0.7113236801023315,
+          "ci95_high_bps": 1.442291956200142,
+          "p_two_sided": 0.533,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false
+      },
+      {
+        "family": "BUDGET_AWARE",
+        "contrast": "M4_REGIME - M4_CAL_MATCHED on A-HMA/BTCUSDT",
+        "cell": "A-HMA/BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "matched_control_route": "event",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "implementation_fidelity_reason": null,
+        "statistical_status": "INCONCLUSIVE",
+        "statistical_status_reason": "paired CI [-0.214218, 0.615415] crosses the frozen MDE 0.037094 (and 0); the data cannot separate the treatment from the control",
+        "cell_level_exploratory": true,
+        "holm_adjusted_p": null,
+        "paired_daily_difference": {
+          "method": "paired_moving_block_bootstrap_on_saved_daily_returns",
+          "block_days": 5,
+          "block_length_development_chosen": true,
+          "block_length_rule": "fixed at 5 calendar days in the RF-04.3 control registration and kept unchanged in RF-05; no block length was chosen from a result",
+          "resamples": 2000,
+          "seed": 20260911,
+          "unit": "account bps/day",
+          "mean_daily_diff_bps": 0.1619994933452141,
+          "ci95_low_bps": -0.21421834340841062,
+          "ci95_high_bps": 0.6154146378009397,
+          "p_two_sided": 0.436,
+          "n_days": 759,
+          "zero_variance": false,
+          "status": "EVALUATED"
+        },
+        "frozen_mde_bps_per_day": 0.03709428129829986,
+        "mde_cleared": false
+      }
+    ],
+    "note": "the per-cell paired daily differences are recomputed here from the saved equity paths and repeated in the claim report; no engine call produces a CI"
+  },
+  "cost_stress": {
+    "levels": [
+      "1x",
+      "1.5x",
+      "2x"
+    ],
+    "cost_multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "registered_multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rule": "ledger-linear sensitivity on the frozen event cohort: the committed fill path (bar, side, qty, price, fee) is held fixed and the stressed daily equity is base_equity - (multiplier - 1) * cumulative one-way cost per fill, where one-way cost = fee + qty * price * slippage_rate; all arms use the same assumptions",
+    "slippage_rate": 0.0001,
+    "harness_control": {
+      "one_x_reproduces_base_equity": true,
+      "max_abs_equity_difference": 0.0,
+      "check": "the 1x level is compared against the committed equity path before writing"
+    },
+    "per_cell": [
+      {
+        "cell": "A-SC/BTCUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.0679607553753819,
+            "ci95_low_bps": -0.5524147234279921,
+            "ci95_high_bps": 0.6164014813285917,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.06601178400972245,
+            "ci95_low_bps": -0.5549721997256546,
+            "ci95_high_bps": 0.617353097324543,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.06406199348151961,
+            "ci95_low_bps": -0.5572414199209602,
+            "ci95_high_bps": 0.614666954156619,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-SC/ETHUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "ETHUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": -0.15515177153744372,
+            "ci95_low_bps": -0.9627799960378934,
+            "ci95_high_bps": 0.7014007097735488,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": -0.15716867585087996,
+            "ci95_low_bps": -0.9656201339705245,
+            "ci95_high_bps": 0.6999455608464961,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": -0.15918640401021183,
+            "ci95_low_bps": -0.9684142949181411,
+            "ci95_high_bps": 0.6987853489889507,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-SC/SOLUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "SOLUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": -2.517506043821058,
+            "ci95_low_bps": -5.786555215709833,
+            "ci95_high_bps": -0.05802565198117728,
+            "n_days": 654,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": -2.5196127009504643,
+            "ci95_low_bps": -5.788454528284769,
+            "ci95_high_bps": -0.05754702888243512,
+            "n_days": 654,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": -2.5217202978938813,
+            "ci95_low_bps": -5.793316244246879,
+            "ci95_high_bps": -0.05706822114630156,
+            "n_days": 654,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-SC/BNBUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "BNBUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.11444148427495264,
+            "ci95_low_bps": -0.25839098948468603,
+            "ci95_high_bps": 0.5103290036992553,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.11245992897844326,
+            "ci95_low_bps": -0.2607262127682893,
+            "ci95_high_bps": 0.5073801942737025,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.11047756561268629,
+            "ci95_low_bps": -0.2633940594340805,
+            "ci95_high_bps": 0.5035030114157685,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-SC/DOGEUSDT",
+        "alpha_id": "A-SC",
+        "symbol": "DOGEUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.30834756363138893,
+            "ci95_low_bps": -0.7126097614636182,
+            "ci95_high_bps": 1.4101475135944854,
+            "n_days": 720,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.3062461453694287,
+            "ci95_low_bps": -0.7150789732312962,
+            "ci95_high_bps": 1.4095595780596255,
+            "n_days": 720,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.3041438487073303,
+            "ci95_low_bps": -0.7180707384359917,
+            "ci95_high_bps": 1.4089711957696118,
+            "n_days": 720,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/BTCUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BTCUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.06330121421041358,
+            "ci95_low_bps": -0.3793854574780768,
+            "ci95_high_bps": 0.5579212389223244,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.06202165347699687,
+            "ci95_low_bps": -0.3802190650441165,
+            "ci95_high_bps": 0.5575722832778043,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.06074160972314638,
+            "ci95_low_bps": -0.38417787842424694,
+            "ci95_high_bps": 0.557222772029995,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/ETHUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "ETHUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": -0.3699311898810749,
+            "ci95_low_bps": -1.037550323965503,
+            "ci95_high_bps": 0.16946852774291762,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": -0.3713496758926695,
+            "ci95_low_bps": -1.0394954553661289,
+            "ci95_high_bps": 0.16805638077537638,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": -0.3727686886858191,
+            "ci95_low_bps": -1.0422525148349644,
+            "ci95_high_bps": 0.16662141453920598,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/SOLUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "SOLUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.3458292578029455,
+            "ci95_low_bps": -0.2567835351260845,
+            "ci95_high_bps": 1.022143553856763,
+            "n_days": 654,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.34355760073459335,
+            "ci95_low_bps": -0.25794153626870925,
+            "ci95_high_bps": 1.0225819320270537,
+            "n_days": 654,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.341284965212844,
+            "ci95_low_bps": -0.25909387503519427,
+            "ci95_high_bps": 1.0215606875530536,
+            "n_days": 654,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/BNBUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "BNBUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.18242550328474674,
+            "ci95_low_bps": -0.3244549476472725,
+            "ci95_high_bps": 0.5658931135325337,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.1805151553449327,
+            "ci95_low_bps": -0.3252190353675273,
+            "ci95_high_bps": 0.5618379534879723,
+            "n_days": 759,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.1786039693020154,
+            "ci95_low_bps": -0.32854441967303005,
+            "ci95_high_bps": 0.5598986207129699,
+            "n_days": 759,
+            "status": "EVALUATED"
+          }
+        }
+      },
+      {
+        "cell": "A-HMA/DOGEUSDT",
+        "alpha_id": "A-HMA",
+        "symbol": "DOGEUSDT",
+        "route": "event",
+        "levels": {
+          "1x": {
+            "cost_multiplier": 1.0,
+            "mean_daily_diff_bps": 0.5824305742845793,
+            "ci95_low_bps": -0.7573163896107447,
+            "ci95_high_bps": 2.071726881216571,
+            "n_days": 720,
+            "status": "EVALUATED"
+          },
+          "1.5x": {
+            "cost_multiplier": 1.5,
+            "mean_daily_diff_bps": 0.5809890608630393,
+            "ci95_low_bps": -0.7604685752237608,
+            "ci95_high_bps": 2.0689851183383388,
+            "n_days": 720,
+            "status": "EVALUATED"
+          },
+          "2x": {
+            "cost_multiplier": 2.0,
+            "mean_daily_diff_bps": 0.5795469843126964,
+            "ci95_low_bps": -0.7636220383997885,
+            "ci95_high_bps": 2.0662423491391633,
+            "n_days": 720,
+            "status": "EVALUATED"
+          }
+        }
+      }
+    ],
+    "per_level_aggregate": [
+      {
+        "level": "1x",
+        "cost_multiplier": 1.0,
+        "mean_daily_diff_bps": -0.11231942661390955,
+        "ci95_low_bps": -0.49397487311770505,
+        "ci95_high_bps": 0.19065782316112864,
+        "n_days": 759,
+        "p_two_sided": 0.537,
+        "status": "EVALUATED"
+      },
+      {
+        "level": "1.5x",
+        "cost_multiplier": 1.5,
+        "mean_daily_diff_bps": -0.1140883594167713,
+        "ci95_low_bps": -0.4965733047200048,
+        "ci95_high_bps": 0.18820150523242563,
+        "n_days": 759,
+        "p_two_sided": 0.532,
+        "status": "EVALUATED"
+      },
+      {
+        "level": "2x",
+        "cost_multiplier": 2.0,
+        "mean_daily_diff_bps": -0.11585802415318405,
+        "ci95_low_bps": -0.49917280709271844,
+        "ci95_high_bps": 0.18585338613435115,
+        "n_days": 759,
+        "p_two_sided": 0.524,
+        "status": "EVALUATED"
+      }
+    ],
+    "not_rerun": {
+      "engine_cost_rebinding": "NOT_RERUN: changing the engine fee/slippage inputs would require a new native-event run; RF-05 deliberately does not rerun the engine for a stress panel or a CI"
+    }
+  },
+  "metric_reconstruction": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": 2.068909918468753,
+      "engine_sharpe": 0.4071196243295457,
+      "engine_max_drawdown_pct": 3.598697064528108,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20413.78198369375,
+        "total_return_pct_recomputed": 2.068909918468753,
+        "mean_daily_return_bps": 0.27829387428436575,
+        "sharpe365_recomputed": 0.4071196243295457,
+        "max_drawdown_pct_daily_recomputed": 3.345491415097226,
+        "profit_factor_daily": 1.3570002397021228,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0206890991846878,
+          "equity_ratio": 1.0206890991846875,
+          "relative_residual": 2.1754381927111546e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/BTCUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 2.567103417367478,
+      "engine_sharpe": 0.4211449277050762,
+      "engine_max_drawdown_pct": 3.7068971057319677,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20513.420683473494,
+        "total_return_pct_recomputed": 2.567103417367478,
+        "mean_daily_return_bps": 0.3462546296597476,
+        "sharpe365_recomputed": 0.4211449277050762,
+        "max_drawdown_pct_daily_recomputed": 3.4525576127494566,
+        "profit_factor_daily": 1.2489115463021057,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0256710341736754,
+          "equity_ratio": 1.0256710341736748,
+          "relative_residual": 6.494614672547132e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -1.7010622735219694,
+      "engine_sharpe": -0.8456924421279314,
+      "engine_max_drawdown_pct": 1.8265557519451487,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 19659.787545295607,
+        "total_return_pct_recomputed": -1.7010622735219694,
+        "mean_daily_return_bps": -0.22475302389556875,
+        "sharpe365_recomputed": -0.8456924421279314,
+        "max_drawdown_pct_daily_recomputed": 1.7010622735219658,
+        "profit_factor_daily": 0.35052113669374685,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9829893772647803,
+          "equity_ratio": 0.9829893772647803,
+          "relative_residual": 0.0
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": -2.888346268667241,
+      "engine_sharpe": -0.6498383536190165,
+      "engine_max_drawdown_pct": 3.865951398163488,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 19422.33074626655,
+        "total_return_pct_recomputed": -2.888346268667241,
+        "mean_daily_return_bps": -0.3799047954330125,
+        "sharpe365_recomputed": -0.6498383536190165,
+        "max_drawdown_pct_daily_recomputed": 3.727061857998633,
+        "profit_factor_daily": 0.6478581055429871,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9711165373133277,
+          "equity_ratio": 0.9711165373133276,
+          "relative_residual": 1.1432438661756067e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": 13.99247234609231,
+      "engine_sharpe": 1.352440160413242,
+      "engine_max_drawdown_pct": 4.816550455645691,
+      "recomputed": {
+        "n_days": 654,
+        "equity_first": 20000.0,
+        "equity_last": 22798.49446921846,
+        "total_return_pct_recomputed": 13.99247234609231,
+        "mean_daily_return_bps": 2.0438310965422075,
+        "sharpe365_recomputed": 1.3524401604132419,
+        "max_drawdown_pct_daily_recomputed": 3.9505467672082233,
+        "profit_factor_daily": 2.354077297507853,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.139924723460924,
+          "equity_ratio": 1.139924723460923,
+          "relative_residual": 7.791553261548083e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": -3.0725088455736294,
+      "engine_sharpe": -1.0860379463184142,
+      "engine_max_drawdown_pct": 3.798264588949224,
+      "recomputed": {
+        "n_days": 654,
+        "equity_first": 20000.0,
+        "equity_last": 19385.498230885274,
+        "total_return_pct_recomputed": -3.0725088455736294,
+        "mean_daily_return_bps": -0.4736749472788505,
+        "sharpe365_recomputed": -1.0860379463184142,
+        "max_drawdown_pct_daily_recomputed": 3.7597604398136406,
+        "profit_factor_daily": 0.33450236778125364,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9692749115442635,
+          "equity_ratio": 0.9692749115442637,
+          "relative_residual": 2.2908320671507574e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -0.3096605607714853,
+      "engine_sharpe": -0.14442282905164575,
+      "engine_max_drawdown_pct": 1.6802661770152598,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 19938.067887845704,
+        "total_return_pct_recomputed": -0.3096605607714853,
+        "mean_daily_return_bps": -0.039498425171466824,
+        "sharpe365_recomputed": -0.14442282905164572,
+        "max_drawdown_pct_daily_recomputed": 1.3927603113417368,
+        "profit_factor_daily": 0.8799297439899076,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9969033943922849,
+          "equity_ratio": 0.9969033943922851,
+          "relative_residual": 2.227343252857417e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 0.5439550275714078,
+      "engine_sharpe": 0.17136549907453683,
+      "engine_max_drawdown_pct": 2.200342009181053,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20108.791005514282,
+        "total_return_pct_recomputed": 0.5439550275714078,
+        "mean_daily_return_bps": 0.07494305910348581,
+        "sharpe365_recomputed": 0.17136549907453683,
+        "max_drawdown_pct_daily_recomputed": 1.3641536724382786,
+        "profit_factor_daily": 1.1755886755638767,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.005439550275714,
+          "equity_ratio": 1.005439550275714,
+          "relative_residual": 0.0
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -1.5512481225742891,
+      "engine_sharpe": -0.6342772994215331,
+      "engine_max_drawdown_pct": 2.555300343348942,
+      "recomputed": {
+        "n_days": 720,
+        "equity_first": 20000.0,
+        "equity_last": 19689.750375485142,
+        "total_return_pct_recomputed": -1.5512481225742891,
+        "mean_daily_return_bps": -0.2150376316147679,
+        "sharpe365_recomputed": -0.6342772994215332,
+        "max_drawdown_pct_daily_recomputed": 2.2391640866520928,
+        "profit_factor_daily": 0.5479841366099082,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9844875187742573,
+          "equity_ratio": 0.9844875187742571,
+          "relative_residual": 2.255433417799846e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 0.5601465431228192,
+      "engine_sharpe": 0.10055396329632933,
+      "engine_max_drawdown_pct": 3.6805508924769734,
+      "recomputed": {
+        "n_days": 720,
+        "equity_first": 20000.0,
+        "equity_last": 20112.029308624562,
+        "total_return_pct_recomputed": 0.5601465431228192,
+        "mean_daily_return_bps": 0.09330993201662104,
+        "sharpe365_recomputed": 0.10055396329632933,
+        "max_drawdown_pct_daily_recomputed": 2.8149893924181235,
+        "profit_factor_daily": 1.0884422426451459,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0056014654312282,
+          "equity_ratio": 1.0056014654312282,
+          "relative_residual": 0.0
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -0.38820192264549247,
+      "engine_sharpe": -0.12072810456714066,
+      "engine_max_drawdown_pct": 2.480420305315043,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 19922.3596154709,
+        "total_return_pct_recomputed": -0.38820192264549247,
+        "mean_daily_return_bps": -0.04833159677249043,
+        "sharpe365_recomputed": -0.12072810456714064,
+        "max_drawdown_pct_daily_recomputed": 1.9872111788033826,
+        "profit_factor_daily": 0.9051331781399455,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9961179807735447,
+          "equity_ratio": 0.9961179807735451,
+          "relative_residual": 3.343649184295425e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 0.10542246006082223,
+      "engine_sharpe": 0.061323155946543306,
+      "engine_max_drawdown_pct": 1.9233647305383985,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20021.084492012164,
+        "total_return_pct_recomputed": 0.10542246006082223,
+        "mean_daily_return_bps": 0.014969617437923159,
+        "sharpe365_recomputed": 0.061323155946543306,
+        "max_drawdown_pct_daily_recomputed": 1.6749125665308575,
+        "profit_factor_daily": 1.0546591309431852,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0010542246006078,
+          "equity_ratio": 1.0010542246006082,
+          "relative_residual": 4.4362153311649166e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": 1.8511324076167623,
+      "engine_sharpe": 1.0687478383661126,
+      "engine_max_drawdown_pct": 0.7979708911267737,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20370.226481523354,
+        "total_return_pct_recomputed": 1.8511324076167623,
+        "mean_daily_return_bps": 0.2425998468849234,
+        "sharpe365_recomputed": 1.0687478383661126,
+        "max_drawdown_pct_daily_recomputed": 0.38522794936389726,
+        "profit_factor_daily": 4.399944954595371,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0185113240761678,
+          "equity_ratio": 1.0185113240761676,
+          "relative_residual": 2.180089702256723e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": -0.9937297469303163,
+      "engine_sharpe": -0.26380760216534144,
+      "engine_max_drawdown_pct": 3.453538949451535,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 19801.254050613938,
+        "total_return_pct_recomputed": -0.9937297469303163,
+        "mean_daily_return_bps": -0.1273313429961515,
+        "sharpe365_recomputed": -0.26380760216534144,
+        "max_drawdown_pct_daily_recomputed": 3.1090451776312458,
+        "profit_factor_daily": 0.7743663283898352,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9900627025306971,
+          "equity_ratio": 0.9900627025306968,
+          "relative_residual": 2.2427327517485876e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -1.8317629136791247,
+      "engine_sharpe": -1.4900440043134335,
+      "engine_max_drawdown_pct": 2.0131897735405984,
+      "recomputed": {
+        "n_days": 654,
+        "equity_first": 20000.0,
+        "equity_last": 19633.647417264176,
+        "total_return_pct_recomputed": -1.8317629136791247,
+        "mean_daily_return_bps": -0.28202403733613585,
+        "sharpe365_recomputed": -1.4900440043134335,
+        "max_drawdown_pct_daily_recomputed": 1.848329791607448,
+        "profit_factor_daily": 0.009068236825735274,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9816823708632088,
+          "equity_ratio": 0.9816823708632088,
+          "relative_residual": 0.0
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 0.4013014250074942,
+      "engine_sharpe": 0.16984783666473813,
+      "engine_max_drawdown_pct": 2.1486982885779256,
+      "recomputed": {
+        "n_days": 654,
+        "equity_first": 20000.0,
+        "equity_last": 20080.2602850015,
+        "total_return_pct_recomputed": 0.4013014250074942,
+        "mean_daily_return_bps": 0.06380522046680963,
+        "sharpe365_recomputed": 0.16984783666473813,
+        "max_drawdown_pct_daily_recomputed": 1.7518165731353836,
+        "profit_factor_daily": 1.1578936237879427,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0040130142500754,
+          "equity_ratio": 1.004013014250075,
+          "relative_residual": 4.4231419667579223e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": 0.28150196853988785,
+      "engine_sharpe": 0.23356245566965425,
+      "engine_max_drawdown_pct": 0.7136590163526902,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20056.300393707977,
+        "total_return_pct_recomputed": 0.28150196853988785,
+        "mean_daily_return_bps": 0.03750523800800487,
+        "sharpe365_recomputed": 0.23356245566965425,
+        "max_drawdown_pct_daily_recomputed": 0.6626183818561728,
+        "profit_factor_daily": 1.3734655632556934,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0028150196853987,
+          "equity_ratio": 1.0028150196853989,
+          "relative_residual": 2.2142129960786855e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 1.6687219111741536,
+      "engine_sharpe": 0.6831618876167455,
+      "engine_max_drawdown_pct": 1.9957163322375955,
+      "recomputed": {
+        "n_days": 759,
+        "equity_first": 20000.0,
+        "equity_last": 20333.74438223483,
+        "total_return_pct_recomputed": 1.6687219111741536,
+        "mean_daily_return_bps": 0.2199307412927516,
+        "sharpe365_recomputed": 0.6831618876167453,
+        "max_drawdown_pct_daily_recomputed": 1.4271475372842355,
+        "profit_factor_daily": 1.7239543054439237,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.016687219111742,
+          "equity_ratio": 1.0166872191117415,
+          "relative_residual": 4.368002287252653e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "arm": "M4_CAL",
+      "route": "event",
+      "engine_total_return_pct": -3.332323784939595,
+      "engine_sharpe": -1.200865522238967,
+      "engine_max_drawdown_pct": 3.4094282014291792,
+      "recomputed": {
+        "n_days": 720,
+        "equity_first": 20000.0,
+        "equity_last": 19333.53524301208,
+        "total_return_pct_recomputed": -3.332323784939595,
+        "mean_daily_return_bps": -0.4679174586788447,
+        "sharpe365_recomputed": -1.2008655222389673,
+        "max_drawdown_pct_daily_recomputed": 3.332323784939599,
+        "profit_factor_daily": 0.2784496397665108,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 0.9666767621506039,
+          "equity_ratio": 0.966676762150604,
+          "relative_residual": 1.1484945827757352e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "route": "event",
+      "engine_total_return_pct": 0.7368299280161139,
+      "engine_sharpe": 0.13852484200186896,
+      "engine_max_drawdown_pct": 3.4210402981578056,
+      "recomputed": {
+        "n_days": 720,
+        "equity_first": 20000.0,
+        "equity_last": 20147.36598560322,
+        "total_return_pct_recomputed": 0.7368299280161139,
+        "mean_daily_return_bps": 0.11451311560573459,
+        "sharpe365_recomputed": 0.13852484200186896,
+        "max_drawdown_pct_daily_recomputed": 3.221501996869102,
+        "profit_factor_daily": 1.1404846634190553,
+        "profit_factor_status": "DEFINED",
+        "compounding_identity": {
+          "product_of_daily_returns": 1.0073682992801614,
+          "equity_ratio": 1.0073682992801611,
+          "relative_residual": 2.2042048085461747e-16
+        }
+      },
+      "total_return_comparison": "EXACT_MATCH",
+      "sharpe_comparison": "DIFFERENT_SAMPLING: the engine Sharpe is its own stats sampling clock; the recomputed sharpe365 is canonical daily account",
+      "max_drawdown_comparison": "DAILY_RESAMPLE_VS_ENGINE_INTRABAR: the engine max drawdown is intrabar, the recomputed value uses daily closes"
+    }
+  ],
+  "not_rerunnable": [
+    {
+      "item": "engine fee/slippage path rebinding",
+      "status": "NOT_RERUNNABLE_WITHOUT_ENGINE",
+      "reason": "a changed cost input changes engine fills; the ledger-linear sensitivity is reported instead and is explicitly not an engine run"
+    },
+    {
+      "item": "m4_cal_matched on the 8 scaled cells",
+      "status": "NOT_RUN",
+      "reason": "only the 2 registered pilot cells ran the mandatory budget control in RF-04"
+    },
+    {
+      "item": "A-VWAP/A-HASH cells",
+      "status": "BLOCKED_CAPABILITY",
+      "reason": "amend/ladder semantics are not carried on the native-event route; no metrics are fabricated and the cells stay null with a reason"
+    },
+    {
+      "item": "prospective interval",
+      "status": "SPECIFIED_NOT_EXECUTED",
+      "reason": "no interval is an untouched holdout; the protocol is registered in RF-05 and must not be run in this study"
+    },
+    {
+      "item": "registered 32-64 trials/cutoff design",
+      "status": "NOT_RUN",
+      "reason": "RF-04 executed the bounded 8 trials/cutoff design; the wider budget stays frozen for a later prospective run"
+    },
+    {
+      "item": "2023-01-01..2023-12-31 development extension",
+      "status": "NOT_EXECUTED",
+      "reason": "the executed development window ended 2022-06-30"
+    },
+    {
+      "item": "funding modelling",
+      "status": "MISSING_DECLARED",
+      "reason": "the event account runs with use_funding=False under the registered contract"
+    },
+    {
+      "item": "NEIGH selector secondary contrasts",
+      "status": "NOT_IMPLEMENTED",
+      "reason": "M4_*_NEIGH arms were never run; SELECTOR and INTERACTION have no data"
+    }
+  ],
+  "supersedes": null,
+  "lab_run_id": "RF-05",
+  "written_at_utc": "2026-09-12T02:29:43.372402+00:00"
+}

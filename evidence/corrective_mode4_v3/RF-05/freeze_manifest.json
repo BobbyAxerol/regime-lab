@@ -1,0 +1,321 @@
+{
+  "schema": "regime_lab.rf05_freeze_manifest.v1",
+  "phase": "RF-05",
+  "study_id": "corrective_mode4_v3",
+  "status": "FROZEN",
+  "hash_algorithm": "sha256",
+  "all_components_present": true,
+  "components": {
+    "lab_source": [
+      {
+        "path": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py",
+        "role": "Mode 4 per_fold_causal machinery, cutoff provider and account payloads",
+        "present": true,
+        "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+        "size_bytes": 35097
+      },
+      {
+        "path": "src/crypto_regime_lab/experiments/regime_schedule.py",
+        "role": "causal online trigger controller",
+        "present": true,
+        "sha256": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+        "size_bytes": 10575
+      },
+      {
+        "path": "src/crypto_regime_lab/integration/event_account.py",
+        "role": "native-event continuous account (A02/A03/A04)",
+        "present": true,
+        "sha256": "61db4631f0b30aec66aae9d493a59613f17631abd8cff964bd9dead5636c9673",
+        "size_bytes": 12940
+      },
+      {
+        "path": "src/crypto_regime_lab/integration/activation.py",
+        "role": "parameter digests and version windows",
+        "present": true,
+        "sha256": "1cd9d9052f3dae7acee44c748497aa17bf410bb7f499fb5022c6769e7219bae7",
+        "size_bytes": 14440
+      },
+      {
+        "path": "src/crypto_regime_lab/quantbt_bridge/routes.py",
+        "role": "route-specific typed fee/slippage binding",
+        "present": true,
+        "sha256": "9737b7193bbcf01702fa84c8da2d3caf5327948c917e3a802f1d5e8132cfd5ea",
+        "size_bytes": 5131
+      },
+      {
+        "path": "src/crypto_regime_lab/evidence/claim_gate.py",
+        "role": "A16 fail-closed claim hierarchy",
+        "present": true,
+        "sha256": "23e01cd46604703b52be836505a83f05eb598478c54645a5d17c4eb8776ea00e",
+        "size_bytes": 1826
+      },
+      {
+        "path": "scripts/run_rf04_paired_pilot.py",
+        "role": "registered paired pilot runner",
+        "present": true,
+        "sha256": "7772808b0710614467153b4ed52f3c430280d4e240fb593f257c46bef92ca55d",
+        "size_bytes": 14135
+      },
+      {
+        "path": "scripts/run_rf04_scale.py",
+        "role": "scaled paired discovery runner",
+        "present": true,
+        "sha256": "9c1d10f48cc9ae17661a84506ff8ea7162540ee64547762432ca2e6f20a39bd5",
+        "size_bytes": 35966
+      },
+      {
+        "path": "scripts/run_rf04_decay_and_controls.py",
+        "role": "decay panels and controls runner",
+        "present": true,
+        "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+        "size_bytes": 62561
+      }
+    ],
+    "corrected_spec_and_revisions": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json",
+        "role": "registered corrective study spec (source of truth)",
+        "present": true,
+        "sha256": "ea5981080b38853428d86fd2b036e018963a65165a8dd7da7633c89cc150825d",
+        "size_bytes": 8122
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/pre-RF04-clearing/spec_revisions.json",
+        "role": "REV-01..REV-04 spec revisions recorded before RF-04",
+        "present": true,
+        "sha256": "c02a01b714688b05aae7c2a3c63fd3555e21d9cfb5809f26d24a88f9d8c93ce6",
+        "size_bytes": 1063
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-01/historical_invalidation.json",
+        "role": "historical claim invalidation (append-only)",
+        "present": true,
+        "sha256": "cd951568c6f2c6715345aa46e336f74aa80c7d564ea72c8a2505880358715534",
+        "size_bytes": 21608
+      }
+    ],
+    "model_manifest_registry": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/model_design_selection_manifest.json",
+        "role": "G10/A14 model ladder selection manifest",
+        "present": true,
+        "sha256": "47b8ef7f216bda2fc5993fd56ba8d303c9b5f965141a4899b2e6c28bafcb5a7a",
+        "size_bytes": 35634
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/causal_model_registry.json",
+        "role": "causal regime model registry and namespace mapping",
+        "present": true,
+        "sha256": "17ed170e8112f99440330f52bc7ba318548929c6f9a43ecde7c44bb2bd7f43c2",
+        "size_bytes": 37036
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/current_coordinate_contract.json",
+        "role": "common-coordinate contract for refits",
+        "present": true,
+        "sha256": "61c274b5b32e784ad698b7c5f5e1c94c18360a299371be2b26be79307c90ddab",
+        "size_bytes": 6990
+      }
+    ],
+    "scheduler_controller": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-03/controller_and_dispositions.json",
+        "role": "controller rules plus A09-A14 dispositions",
+        "present": true,
+        "sha256": "366f6804ba8e9f36ef6629b9b247cba6507d17714244c3f79038549de0723e3b",
+        "size_bytes": 2954
+      },
+      {
+        "path": "configs/lab05_full_emission_tape.json",
+        "role": "frozen BTCUSDT emission tape reused by RF-04",
+        "present": true,
+        "sha256": "bd344a1254dd29f475f2bcc6b3f5bb6cb5ffa378fd42b76f155ee7ff282fa290",
+        "size_bytes": 1494085
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/paired_discovery_registration.json",
+        "role": "paired discovery registration (pre-run)",
+        "present": true,
+        "sha256": "20c24ded268514391960ca3602dea6b23e5a748d4205896d42cce41a99d3d487",
+        "size_bytes": 1628
+      }
+    ],
+    "cost_binding_and_mde": [
+      {
+        "path": "configs/cost_binding_verification.json",
+        "role": "measured fee binding defect and corrected one-way semantics",
+        "present": true,
+        "sha256": "7725d8324613be4c572678a249720446a5f144492d05b2422b1aeb664f632708",
+        "size_bytes": 2398
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json",
+        "role": "frozen corrected MDE 0.0371 bps/day",
+        "present": true,
+        "sha256": "3cf6e9fd0be244d21e6d80ef51478b3a0f48a92ca4db133d2bb645c3185d9e29",
+        "size_bytes": 930
+      },
+      {
+        "path": "configs/minimum_economic_effect.json",
+        "role": "historical registered minimum effect (preserved)",
+        "present": true,
+        "sha256": "6b605bfa5acd5260d3cae4707d20d6c6d2f4bb4b6d230e2b38923eda4148c4de",
+        "size_bytes": 1251
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-01/quantbt_binding_report.json",
+        "role": "installed QuantBT/resolved-route binding report",
+        "present": true,
+        "sha256": "f7aa0994561ec2d7fbdd83b086e415f2d889e986964365cd8459b9ffcd3701df",
+        "size_bytes": 41608
+      }
+    ],
+    "budgets": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/discovery_protocol.json",
+        "role": "registered discovery budget and gates",
+        "present": true,
+        "sha256": "94b03a347737895d9f20cffc971081d85a53d042b157a28059ce3857899646b2",
+        "size_bytes": 1295
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/profiling_and_budget.json",
+        "role": "measured runtime and unmeasured-field reasons",
+        "present": true,
+        "sha256": "ddfa99e4633348aa9337b4d3a107382026b788054ef532a1e645e8a80af2e0b1",
+        "size_bytes": 8211
+      }
+    ],
+    "primary_metrics": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/design_freeze.json",
+        "role": "frozen primary design, arms, contrasts and MDE",
+        "present": true,
+        "sha256": "accdfe3dfa22923eecda8be2c9ea0671ac8d80018605afd0084f8a8b7b5b25ca",
+        "size_bytes": 2086
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/controls_registration.json",
+        "role": "pre-run matched/placebo/anchor registration",
+        "present": true,
+        "sha256": "69decb922482763defa7cc98b1eb7c04749006736bf3c32674e87d9c68c0bb6d",
+        "size_bytes": 3394
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "role": "10-cell paired event-route results",
+        "present": true,
+        "sha256": "6b2ff015fa613cb72f6572fc20d394818dc2c4144c277eca51f5214d03e613e0",
+        "size_bytes": 4088867
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/cell_coverage.json",
+        "role": "20-cell coverage with null reasons",
+        "present": true,
+        "sha256": "fadeef2554a9e79f01aa1f441113c79d224c5427fa64be6825dce986a400cd57",
+        "size_bytes": 45107
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/decay_panels.json",
+        "role": "D1/D2/D3 decay panels",
+        "present": true,
+        "sha256": "90c9d5c361d33402191b01fa59a17bdab75f97d667f70fe329e33d1ccfe15fdd",
+        "size_bytes": 1050896
+      },
+      {
+        "path": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json",
+        "role": "matched control, placebo and decision funnel",
+        "present": true,
+        "sha256": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f",
+        "size_bytes": 806062
+      }
+    ],
+    "prospective_protocol": [
+      {
+        "path": "evidence/corrective_mode4_v3/RF-05/prospective_protocol.json",
+        "role": "registered prospective protocol, SPECIFIED_NOT_EXECUTED",
+        "present": true,
+        "sha256": "13e6a1ab83cf26535048f82b3c758e0c468f654cf7facc4f0377812fe6a72d36",
+        "size_bytes": 2869
+      }
+    ],
+    "environment_and_data": [
+      {
+        "path": "configs/requirements.lock",
+        "role": "dependency lock",
+        "present": true,
+        "sha256": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+        "size_bytes": 3317
+      },
+      {
+        "path": "snapshots/server_core_v1/manifest.json",
+        "role": "byte-copied snapshot manifest",
+        "present": true,
+        "sha256": "88c19513043e05bbd7d8901916b87fe01d10822678b020e6cd8d2fdec00300ff",
+        "size_bytes": 481749
+      }
+    ]
+  },
+  "frozen_mde": {
+    "value_bps_per_day": 0.03709428129829986,
+    "value_account_daily": 3.7094281298299854e-06,
+    "artifact": "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json",
+    "artifact_sha256": "3cf6e9fd0be244d21e6d80ef51478b3a0f48a92ca4db133d2bb645c3185d9e29",
+    "status": "FROZEN_BEFORE_RF04_RESULTS"
+  },
+  "primary_metrics": {
+    "statistic": "paired mean daily account net-return difference on common dates",
+    "arms": [
+      "M4_CAL",
+      "M4_REGIME"
+    ],
+    "budget_control": "M4_CAL_MATCHED",
+    "family": [
+      "TIMING",
+      "BUDGET_AWARE"
+    ],
+    "design_freeze_ref": "evidence/corrective_mode4_v3/RF-04/design_freeze.json"
+  },
+  "contamination": {
+    "status": "NESTED_RETROSPECTIVE",
+    "untouched_holdout": false,
+    "holdout_statement": "every interval available to the study (2021-01-01..2023-12-31 development and the 2024-01-01..2026-08-31 outer window consumed by the invalidated historical confirmation) was used while finding and repairing defects; no interval is relabeled an untouched holdout",
+    "development_window_executed": [
+      "2021-01-01",
+      "2022-06-30"
+    ],
+    "registered_development_window": [
+      "2021-01-01",
+      "2023-12-31"
+    ],
+    "prospective_protocol": {
+      "status": "SPECIFIED_NOT_EXECUTED",
+      "artifact": "evidence/corrective_mode4_v3/RF-05/prospective_protocol.json",
+      "artifact_sha256": "13e6a1ab83cf26535048f82b3c758e0c468f654cf7facc4f0377812fe6a72d36",
+      "executed": false,
+      "live_orders": false
+    },
+    "rule": "corrected results are retrospective/prequential evidence within the tested scope; they are never called a holdout confirmation and no live run is performed"
+  },
+  "git": {
+    "branch": "mode4-corrective",
+    "head_commit": "c33c663ea3a9e152b609c1e5dcbf655b06246b96",
+    "working_tree_porcelain": [
+      "?? evidence/corrective_mode4_v3/RF-05/",
+      "?? evidence/selftest/run-20260912T021845Z-33036fd3/",
+      "?? evidence/selftest/run-20260912T021849Z-29f78434/",
+      "?? evidence/selftest/run-20260912T021849Z-321d682d/",
+      "?? scripts/run_rf05.py",
+      "?? scripts/write_rf05_report.py",
+      "?? tests/mode4_corrective/test_rf05_claims.py"
+    ],
+    "note": "recorded at artifact generation; the RF-05 outputs are untracked until the phase commit"
+  },
+  "not_frozen": [
+    "A-VWAP and A-HASH cells (route BLOCKED_CAPABILITY; not executed)",
+    "the prospective interval (specified, not observed and not executed)"
+  ],
+  "rule": "freeze the corrected design before RF-05 reporting; the aggregate is never called over 20 cells when only 10 event cells were executed",
+  "lab_run_id": "RF-05",
+  "written_at_utc": "2026-09-12T02:29:28.832306+00:00"
+}

@@ -1,0 +1,283 @@
+{
+  "schema": "regime_lab.rf05_reproducibility_manifest.v1",
+  "phase": "RF-05",
+  "study_id": "corrective_mode4_v3",
+  "status": "REPRODUCIBLE_ON_SERVER",
+  "portable_bundle_complete": false,
+  "reproducible_on_server": true,
+  "portable_bundle_note": "the lab venv and the byte-copied snapshot parquet stay on the server under configs/requirements.lock and snapshots/; this manifest does not embed them",
+  "canonical_runners": [
+    {
+      "operation": "rf05_freeze_recompute_claims_integrity",
+      "path": "scripts/run_rf05.py",
+      "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+      "purpose": "generate RF05.1-RF05.5 artifacts from committed RF-04 evidence (no market run)"
+    },
+    {
+      "operation": "rf05_report",
+      "path": "scripts/write_rf05_report.py",
+      "sha256": "56f3a002dde046f9133e99fd6d5f0675a513c8375c5d2eb0b9cb5bf5cff3ec1b",
+      "purpose": "render RF-05/report.md and report.json, then refresh integrity and reproducibility"
+    },
+    {
+      "operation": "rf05_acceptance_tests",
+      "path": "tests/mode4_corrective/test_rf05_claims.py",
+      "sha256": "ce5b9d45055fd25fe3971a767db03d578f5d08c41778ef314be0cde2b6441d60",
+      "purpose": "RF-05 artifact guards (CI denominators, MDE, claim gate, freeze hashes, 12 sections)"
+    },
+    {
+      "operation": "rf04_paired_discovery",
+      "path": "scripts/run_rf04_scale.py",
+      "sha256": "9c1d10f48cc9ae17661a84506ff8ea7162540ee64547762432ca2e6f20a39bd5",
+      "purpose": "re-run the frozen paired discovery if the frozen inputs must be reproduced"
+    },
+    {
+      "operation": "rf04_controls_and_decay",
+      "path": "scripts/run_rf04_decay_and_controls.py",
+      "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+      "purpose": "re-run matched control, placebo and D1/D2/D3 panels"
+    }
+  ],
+  "logical_operations": [
+    {
+      "requested_name": "validate-environment",
+      "mapping_status": "REUSE",
+      "command": "python -m crypto_regime_lab.cli preflight --lab-root $LAB",
+      "note": "REUSE: lab CLI preflight"
+    },
+    {
+      "requested_name": "validate-protocol",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_pre_rf04_clearing.py --force",
+      "note": "REUSE: writes the corrected MDE and the spec revisions; already committed"
+    },
+    {
+      "requested_name": "inventory",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf05.py --force",
+      "note": "REUSE: RF-05 freeze manifest and artifact integrity"
+    },
+    {
+      "requested_name": "run-regressions",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf01_regressions.py --full",
+      "note": "REUSE: RF-01 before-repair regression evidence"
+    },
+    {
+      "requested_name": "run-real-alpha-parity-pilot",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf02b_closeout.py --force",
+      "note": "REUSE: RF-02 real-snapshot pilot and native qualification"
+    },
+    {
+      "requested_name": "run-mode4-calendar",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf04_scale.py --force",
+      "note": "REUSE: the frozen paired discovery runs M4_CAL inside the same invocation"
+    },
+    {
+      "requested_name": "run-mode4-regime",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf04_scale.py --force",
+      "note": "REUSE: the frozen paired discovery runs M4_REGIME inside the same invocation"
+    },
+    {
+      "requested_name": "build-metrics-and-decay",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf04_decay_and_controls.py --force",
+      "note": "REUSE: D1/D2/D3 and canonical metrics"
+    },
+    {
+      "requested_name": "run-controls",
+      "mapping_status": "REUSE",
+      "command": "python scripts/run_rf04_decay_and_controls.py --force",
+      "note": "REUSE: M4_CAL_MATCHED, delayed-state placebo and the decision funnel"
+    },
+    {
+      "requested_name": "rebuild-phase-report",
+      "mapping_status": "REUSE",
+      "command": "python scripts/write_rf05_report.py --force",
+      "note": "RF-05 report pair"
+    },
+    {
+      "requested_name": "rebuild-final-report",
+      "mapping_status": "REUSE",
+      "command": "python scripts/write_rf05_report.py --force",
+      "note": "RF-05 is the final corrected phase report; no separate final report exists"
+    },
+    {
+      "requested_name": "verify-evidence",
+      "mapping_status": "REUSE",
+      "command": "python -m pytest tests/mode4_corrective -q",
+      "note": "REUSE: the mode4_corrective suite includes test_rf05_claims.py"
+    }
+  ],
+  "commands": {
+    "regenerate_rf05_artifacts": "PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf05.py --force",
+    "render_report": "PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force",
+    "acceptance_tests": "PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q | tee $LAB/evidence/corrective_mode4_v3/RF-05/test_suite_mode4_corrective.log",
+    "full_suite": "PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q",
+    "static_check": "PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pyflakes $LAB/src $LAB/scripts $LAB/tests | tee $LAB/evidence/corrective_mode4_v3/RF-05/pyflakes_mode4_corrective.log"
+  },
+  "dependency_lock": {
+    "path": "configs/requirements.lock",
+    "sha256": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+    "rule": "rebuild the lab venv with scripts/bootstrap_lab.py and this lock; never use the shared pool_alpha venv"
+  },
+  "environment": {
+    "python_version": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+    "numba": {
+      "numba_version": "0.65.1",
+      "llvmlite_version": "0.47.0",
+      "threading_layer": null,
+      "num_threads": 4,
+      "default_num_threads": 4,
+      "cache_dir": null,
+      "disable_jit": 0,
+      "fastmath_policy": "lab reference kernels must run fastmath=False; a fastmath variant is a separate recorded version, never a silent substitution (guide L02.2)"
+    },
+    "threads": {
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "NUMBA_NUM_THREADS": null,
+      "os_sched_affinity": 4
+    },
+    "python_executable": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+    "platform": "Linux-5.15.0-46-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "hostname": "Bobby",
+    "cpu_count": 4,
+    "packages": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "numba": "0.65.1",
+      "llvmlite": "0.47.0",
+      "scipy": "1.18.1",
+      "pyarrow": "25.0.1",
+      "ta": "0.11.0",
+      "optuna": "4.8.0",
+      "pytest": "9.1.1"
+    },
+    "quantbt_import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "env_flags": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "NUMBA_CACHE_DIR": null,
+      "MPLCONFIGDIR": null,
+      "TMPDIR": null
+    }
+  },
+  "git": {
+    "branch": "mode4-corrective",
+    "head_commit": "c33c663ea3a9e152b609c1e5dcbf655b06246b96",
+    "working_tree_porcelain": [
+      "?? evidence/corrective_mode4_v3/RF-05/",
+      "?? evidence/selftest/run-20260912T021845Z-33036fd3/",
+      "?? evidence/selftest/run-20260912T021849Z-29f78434/",
+      "?? evidence/selftest/run-20260912T021849Z-321d682d/",
+      "?? evidence/selftest/run-20260912T023101Z-39c6aa0c/",
+      "?? evidence/selftest/run-20260912T023106Z-d0ea9b88/",
+      "?? evidence/selftest/run-20260912T023106Z-efc80f5a/",
+      "?? scripts/run_rf05.py",
+      "?? scripts/write_rf05_report.py",
+      "?? tests/mode4_corrective/test_rf05_claims.py"
+    ],
+    "note": "recorded at artifact generation; the RF-05 outputs are untracked until the phase commit"
+  },
+  "artifact_hashes": {
+    "rf05": {
+      "evidence/corrective_mode4_v3/RF-05/artifact_integrity.json": "3782afa7fedbd75bff09c3cbcf41a9836022ab28d9081ddb0e746d12f7def65f",
+      "evidence/corrective_mode4_v3/RF-05/claim_report.json": "5565e8b0abc998d5879dc13cba9987d13688e5a38d7e3dc77bbaeebdfeae721c",
+      "evidence/corrective_mode4_v3/RF-05/freeze_manifest.json": "8d7fbe7649c97a6673c65689a33458ca22eb445bf65ff84505186514d4cadae8",
+      "evidence/corrective_mode4_v3/RF-05/handoff.md": "869a61016c506e378f0eb28fa48949ff50d933774b214e0e0adc684443b896e4",
+      "evidence/corrective_mode4_v3/RF-05/prospective_protocol.json": "13e6a1ab83cf26535048f82b3c758e0c468f654cf7facc4f0377812fe6a72d36",
+      "evidence/corrective_mode4_v3/RF-05/pyflakes_mode4_corrective.log": "ba5a7a923210660e4cf281ff757f4a82938b8ed9ba82df331eab2cd875185b50",
+      "evidence/corrective_mode4_v3/RF-05/recomputation.json": "cab5f8f8d03da68334cb9d27195dc605fff6c6ac3a169a70d388f2f5fd60c284",
+      "evidence/corrective_mode4_v3/RF-05/report.json": "a1101ba7439b420710ca265d8a6d20512171d9ea6d967fdb4093630657626baf",
+      "evidence/corrective_mode4_v3/RF-05/report.md": "0a01a791857a8bdae484ccedbfc0a95c92f95172913244d8331bf8e53c50b14b",
+      "evidence/corrective_mode4_v3/RF-05/reproducibility_manifest.json": "70c9d7d6f5cb6e5afe87760abb9b20428bcdb3b83d574eb3161a4964c1565309",
+      "evidence/corrective_mode4_v3/RF-05/test_suite_full.log": "9e3ac105fcf2323e6c8a827adfcdc0915ece2339b928d3f3d4b3f2b755831956",
+      "evidence/corrective_mode4_v3/RF-05/test_suite_mode4_corrective.log": "82d2b593c8ea9829bb58ceb7133b54e57ab2983537d7d287ac96284c26d05eb7"
+    },
+    "frozen_components": {
+      "src/crypto_regime_lab/experiments/dynamic_fold_provider.py": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+      "src/crypto_regime_lab/experiments/regime_schedule.py": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+      "src/crypto_regime_lab/integration/event_account.py": "61db4631f0b30aec66aae9d493a59613f17631abd8cff964bd9dead5636c9673",
+      "src/crypto_regime_lab/integration/activation.py": "1cd9d9052f3dae7acee44c748497aa17bf410bb7f499fb5022c6769e7219bae7",
+      "src/crypto_regime_lab/quantbt_bridge/routes.py": "9737b7193bbcf01702fa84c8da2d3caf5327948c917e3a802f1d5e8132cfd5ea",
+      "src/crypto_regime_lab/evidence/claim_gate.py": "23e01cd46604703b52be836505a83f05eb598478c54645a5d17c4eb8776ea00e",
+      "scripts/run_rf04_paired_pilot.py": "7772808b0710614467153b4ed52f3c430280d4e240fb593f257c46bef92ca55d",
+      "scripts/run_rf04_scale.py": "9c1d10f48cc9ae17661a84506ff8ea7162540ee64547762432ca2e6f20a39bd5",
+      "scripts/run_rf04_decay_and_controls.py": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+      "evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json": "ea5981080b38853428d86fd2b036e018963a65165a8dd7da7633c89cc150825d",
+      "evidence/corrective_mode4_v3/pre-RF04-clearing/spec_revisions.json": "c02a01b714688b05aae7c2a3c63fd3555e21d9cfb5809f26d24a88f9d8c93ce6",
+      "evidence/corrective_mode4_v3/RF-01/historical_invalidation.json": "cd951568c6f2c6715345aa46e336f74aa80c7d564ea72c8a2505880358715534",
+      "evidence/corrective_mode4_v3/RF-04/model_design_selection_manifest.json": "47b8ef7f216bda2fc5993fd56ba8d303c9b5f965141a4899b2e6c28bafcb5a7a",
+      "evidence/corrective_mode4_v3/RF-04/causal_model_registry.json": "17ed170e8112f99440330f52bc7ba318548929c6f9a43ecde7c44bb2bd7f43c2",
+      "evidence/corrective_mode4_v3/RF-04/current_coordinate_contract.json": "61c274b5b32e784ad698b7c5f5e1c94c18360a299371be2b26be79307c90ddab",
+      "evidence/corrective_mode4_v3/RF-03/controller_and_dispositions.json": "366f6804ba8e9f36ef6629b9b247cba6507d17714244c3f79038549de0723e3b",
+      "configs/lab05_full_emission_tape.json": "bd344a1254dd29f475f2bcc6b3f5bb6cb5ffa378fd42b76f155ee7ff282fa290",
+      "evidence/corrective_mode4_v3/RF-04/paired_discovery_registration.json": "20c24ded268514391960ca3602dea6b23e5a748d4205896d42cce41a99d3d487",
+      "configs/cost_binding_verification.json": "7725d8324613be4c572678a249720446a5f144492d05b2422b1aeb664f632708",
+      "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json": "3cf6e9fd0be244d21e6d80ef51478b3a0f48a92ca4db133d2bb645c3185d9e29",
+      "configs/minimum_economic_effect.json": "6b605bfa5acd5260d3cae4707d20d6c6d2f4bb4b6d230e2b38923eda4148c4de",
+      "evidence/corrective_mode4_v3/RF-01/quantbt_binding_report.json": "f7aa0994561ec2d7fbdd83b086e415f2d889e986964365cd8459b9ffcd3701df",
+      "evidence/corrective_mode4_v3/RF-04/discovery_protocol.json": "94b03a347737895d9f20cffc971081d85a53d042b157a28059ce3857899646b2",
+      "evidence/corrective_mode4_v3/RF-04/profiling_and_budget.json": "ddfa99e4633348aa9337b4d3a107382026b788054ef532a1e645e8a80af2e0b1",
+      "evidence/corrective_mode4_v3/RF-04/design_freeze.json": "accdfe3dfa22923eecda8be2c9ea0671ac8d80018605afd0084f8a8b7b5b25ca",
+      "evidence/corrective_mode4_v3/RF-04/controls_registration.json": "69decb922482763defa7cc98b1eb7c04749006736bf3c32674e87d9c68c0bb6d",
+      "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json": "6b2ff015fa613cb72f6572fc20d394818dc2c4144c277eca51f5214d03e613e0",
+      "evidence/corrective_mode4_v3/RF-04/cell_coverage.json": "fadeef2554a9e79f01aa1f441113c79d224c5427fa64be6825dce986a400cd57",
+      "evidence/corrective_mode4_v3/RF-04/decay_panels.json": "90c9d5c361d33402191b01fa59a17bdab75f97d667f70fe329e33d1ccfe15fdd",
+      "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f",
+      "evidence/corrective_mode4_v3/RF-05/prospective_protocol.json": "13e6a1ab83cf26535048f82b3c758e0c468f654cf7facc4f0377812fe6a72d36",
+      "configs/requirements.lock": "cce787952a2a02d1b297400f02d039f9c87bca94608cdc062d9bbf2fdef48e4a",
+      "snapshots/server_core_v1/manifest.json": "88c19513043e05bbd7d8901916b87fe01d10822678b020e6cd8d2fdec00300ff"
+    }
+  },
+  "rollback": {
+    "corrected_baseline": "branch mode4-corrective at the commit recorded in git.head_commit; RF-05 only adds evidence/corrective_mode4_v3/RF-05 and the two scripts plus the RF-05 test file",
+    "command": "git -C $LAB checkout <recorded commit>  # or: git -C $LAB checkout -- evidence/corrective_mode4_v3/RF-05 scripts/run_rf05.py scripts/write_rf05_report.py tests/mode4_corrective/test_rf05_claims.py",
+    "historical_evidence": "evidence/crypto_regime_timeedge_v2 is append-only and was never edited; old claims are superseded by RF-01/historical_invalidation.json without touching historical artifacts",
+    "protected_paths_untouched": true
+  },
+  "remaining_blockers": [
+    {
+      "blocker": "A-VWAP/A-HASH capability",
+      "status": "BLOCKED_CAPABILITY",
+      "reason": "amend/ladder semantics are not carried on the native-event route; the endpoint route returns tied objectives and no per-fill ledger"
+    },
+    {
+      "blocker": "registered 32-64 trials/cutoff",
+      "status": "NOT_RUN",
+      "reason": "RF-04 executed the bounded 8 trials/cutoff design; the frozen design carries it"
+    },
+    {
+      "blocker": "development window 2023-01-01..2023-12-31",
+      "status": "NOT_EXECUTED",
+      "reason": "the executed pair window ended 2022-06-30"
+    },
+    {
+      "blocker": "untouched holdout",
+      "status": "NONE_EXISTS",
+      "reason": "NESTED_RETROSPECTIVE; the prospective protocol is registered but NOT_EXECUTED"
+    },
+    {
+      "blocker": "funding",
+      "status": "MISSING_DECLARED",
+      "reason": "the event account runs with use_funding=False under the registered contract"
+    },
+    {
+      "blocker": "M4_CAL_MATCHED on the 8 scaled cells",
+      "status": "NOT_RUN",
+      "reason": "the budget control was registered/running only on the 2 pilot cells"
+    }
+  ],
+  "production_merge_or_publish": false,
+  "original_evidence_preserved": true,
+  "written_at_utc": "2026-09-12T02:33:34.171653+00:00",
+  "lab_run_id": "RF-05"
+}
