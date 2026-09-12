@@ -1,0 +1,70 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.environment_identity.v1",
+  "captured_at_utc": "2026-09-12T06:43:36.446336+00:00",
+  "interpreter": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+  "python_version": "3.12.13",
+  "python_implementation": "CPython",
+  "system": "Linux",
+  "release": "5.15.0-46-generic",
+  "machine": "x86_64",
+  "libc": [
+    "glibc",
+    "2.35"
+  ],
+  "capture_script_sha256": "d6baf6d65e6fbdd8ea28872b018b42b74d92fca11d88ecf7ca858babe6b30360",
+  "git_head": "49fa565cf2cf8464fd527352de28d81224fd825a",
+  "original_alpha_zip": {
+    "path": "vendor_readonly/alpha_zip_original.zip",
+    "sha256": "57406dbb9ffdcf4617e4895925126fa73600a585a6541f996c6b2d980f6701ae",
+    "members": [
+      {
+        "alpha": "A-VWAP",
+        "member": "alpha_to_tes_regime_model/vwap.py",
+        "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+        "match": true
+      },
+      {
+        "alpha": "A-HASH",
+        "member": "alpha_to_tes_regime_model/hash_momentum.py",
+        "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+        "match": true
+      },
+      {
+        "alpha": "A-HMA",
+        "member": "alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+        "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+        "match": true
+      },
+      {
+        "alpha": "A-SC",
+        "member": "alpha_to_tes_regime_model/signal_combine.py",
+        "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+        "match": true
+      }
+    ]
+  },
+  "lab_marker": {
+    "path": ".lab_marker.json",
+    "sha256": "7ebe5eaef43a065cdb90eb41c6c92db2a241e988940f6b92c26084aeb8a5499e",
+    "original_study_id_retained": "crypto_regime_timeedge_v2"
+  },
+  "legacy_environment": {
+    "resolved_path": "evidence/crypto_regime_timeedge_v2/run-20260909T184758Z-5c2c862a/environment_baseline.json",
+    "sha256": "e429eaf394eaf895702e713f273fec886293fcd3280eaa524a091200bd527fa0",
+    "stale_reference": "evidence/environment_baseline.json",
+    "stale_path_exists": false
+  },
+  "historical_source_archive": {
+    "record_path": "evidence/corrective_mode4_v3/audit_recovered_v1/regime_lab_audit/archive_inventory.json",
+    "record_sha256": "6c2e696f30c3efa8378a038f0c4f1c49e2ef9704896124e0bdd5c45bd6da224f",
+    "historical_archive_sha256": "2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f",
+    "current_zip_rehashed": false,
+    "reason": "historical code ZIP has a recovered record; current lab source identity uses committed file manifest, not an assumed match to that archive"
+  },
+  "engine_runs": 0,
+  "archive_extracted": false,
+  "limits": "Metadata supplement only; source gate still waits for final FUP handoff. No archive extraction/capability certification."
+}
