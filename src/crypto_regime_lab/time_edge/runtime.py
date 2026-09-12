@@ -12,7 +12,7 @@ from ..experiments.time_edge_contracts import load_registration, validate_regist
 from ..safety.paths import SandboxPolicy
 from ..safety.process import lab_worker_env, disk_usage_report
 from ..safety.sandbox import build_bwrap_argv, probe_isolation
-from .storage import Ledger, EvidenceError, digest, file_digest, read, save, utcnow
+from .storage import Ledger, EvidenceError, check_allocation_revision, digest, file_digest, read, save, utcnow
 
 KINDS = {"qualify", "select", "audit_selection", "deploy", "features", "fit_model", "emit", "targets", "world", "full_control", "decay", "statistical_calibration"}
 
@@ -62,6 +62,10 @@ def validate_job(root, job):
     if job["total_wall_seconds"] > 1800 and not job.get("profile_refs"):
         raise EvidenceError("larger shared allocation requires measured profile references")
     for reference in job.get("profile_refs",[]): verify_ref(root,reference)
+    if job.get("budget_revision") is not None:
+        check_allocation_revision(job["allocation_id"],
+            job["budget_revision"].get("prior_total_wall_seconds"),
+            job["total_wall_seconds"], job["budget_revision"])
     seen=set()
     for task in job["tasks"]:
         if task["kind"] not in KINDS or task["task_id"] in seen:
@@ -124,7 +128,8 @@ def run_jobs(root, job, *, retry_failed=False, max_tasks=None, resume=False):
     save(directory/"job.json",job)
     ledger=Ledger(directory,{"job_hash":digest(job)},job["total_wall_seconds"])
     allocation_dir=local(root,f'evidence/time_edge_validation_v4/allocations/{job["allocation_id"]}')
-    allocation=Ledger(allocation_dir,{"allocation_id":job["allocation_id"]},job["total_wall_seconds"])
+    allocation=Ledger(allocation_dir,{"allocation_id":job["allocation_id"]},job["total_wall_seconds"],
+                      revision=job.get("budget_revision"))
     done={}; count=0
     try:
         with allocation.lock(), ledger.lock():

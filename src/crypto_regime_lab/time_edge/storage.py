@@ -15,6 +15,52 @@ class EvidenceError(ValueError):
     pass
 
 
+ALLOCATION_REVISION_SCHEMA = "regime_lab.te_allocation_revision.v1"
+
+
+def check_allocation_revision(allocation_id, prior_budget, total_seconds, revision, *, charged=None):
+    """A budget increase is valid only as an appended, measured revision.
+
+    The shared allocation ledger is never reset: prior attempts stay charged and
+    the revision must restate the old budget, the measured prior charge and the
+    same allocation identity. ``charged`` is checked against the live ledger when
+    the revision is applied; callers that only validate a job omit it.
+    """
+    if not isinstance(revision, dict):
+        raise EvidenceError("allocation revision must be an object")
+    if revision.get("schema") != ALLOCATION_REVISION_SCHEMA:
+        raise EvidenceError("unsupported allocation revision schema")
+    if revision.get("allocation_id") != allocation_id:
+        raise EvidenceError("allocation revision belongs to a different allocation")
+    if not revision.get("revision_id"):
+        raise EvidenceError("allocation revision needs an id")
+    for key in ("prior_total_wall_seconds", "total_wall_seconds"):
+        value = revision.get(key)
+        if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value):
+            raise EvidenceError("allocation revision needs a finite "+key)
+    if abs(float(revision["prior_total_wall_seconds"]) - float(prior_budget)) > 1e-6:
+        raise EvidenceError("allocation revision prior budget does not match the live ledger")
+    if abs(float(revision["total_wall_seconds"]) - float(total_seconds)) > 1e-6:
+        raise EvidenceError("allocation revision total does not match the requested budget")
+    if float(total_seconds) <= float(prior_budget):
+        raise EvidenceError("allocation revision must increase the budget")
+    if charged is not None:
+        recorded = revision.get("prior_charged_wall_seconds")
+        if not isinstance(recorded, (int, float)) or isinstance(recorded, bool) or not math.isfinite(recorded):
+            raise EvidenceError("allocation revision needs the measured prior charged wall")
+        if abs(float(recorded) - float(charged)) > 1e-6:
+            raise EvidenceError("allocation revision prior charged wall does not match the live ledger")
+    if revision.get("per_arm_compute_is_unchanged") is not True:
+        raise EvidenceError("allocation revision must state per-arm compute is unchanged")
+    for key in ("how_arms_stay_equal", "measured_reason", "what_it_costs", "what_it_changes",
+                "what_it_does_not_change"):
+        if not revision.get(key):
+            raise EvidenceError("allocation revision missing "+key)
+    if not revision.get("profile_refs"):
+        raise EvidenceError("allocation revision needs measured profile references")
+    return revision
+
+
 def jsonable(value):
     """Boundary serializer for engine objects (dataclasses, numpy arrays).
 
@@ -116,7 +162,7 @@ class Ledger:
     charged attempt, never a cached successful result. SQLite provides durable
     transactions; the CLI holds a nonblocking process lock across a worker run.
     """
-    def __init__(self, root, identity, total_seconds):
+    def __init__(self, root, identity, total_seconds, revision=None):
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         if not math.isfinite(total_seconds) or total_seconds <= 0:
@@ -131,16 +177,29 @@ class Ledger:
             started TEXT NOT NULL, ended TEXT, status TEXT NOT NULL, reserved REAL NOT NULL,
             wall REAL, result_path TEXT, result_hash TEXT, reason TEXT);
           CREATE INDEX IF NOT EXISTS task_attempt ON attempt(task, status);
+          CREATE TABLE IF NOT EXISTS budget_revision(id TEXT PRIMARY KEY, applied_at TEXT NOT NULL,
+            old_budget REAL NOT NULL, new_budget REAL NOT NULL, prior_charged REAL NOT NULL,
+            artifact_hash TEXT NOT NULL);
         """)
+        self.identity = identity
+        self.total = float(total_seconds)
         with self.db:
             row = self.db.execute("SELECT * FROM study").fetchone()
             key = digest(identity)
             if row is None:
                 self.db.execute("INSERT INTO study VALUES (?,?)", (key,total_seconds))
-            elif row["identity"] != key or row["budget"] != total_seconds:
-                raise EvidenceError("resume identity/budget drift; create a registered new run")
-        self.identity = identity
-        self.total = float(total_seconds)
+            elif row["identity"] != key:
+                raise EvidenceError("resume identity drift; create a registered new run")
+            elif row["budget"] != total_seconds:
+                if revision is None:
+                    raise EvidenceError("resume identity/budget drift; create a registered new run")
+                check_allocation_revision(identity.get("allocation_id"), row["budget"], total_seconds,
+                                          revision, charged=self.spent())
+                self.db.execute("UPDATE study SET budget=?", (float(total_seconds),))
+                self.db.execute("INSERT INTO budget_revision(id,applied_at,old_budget,new_budget,prior_charged,artifact_hash)"
+                                " VALUES(?,?,?,?,?,?)",
+                                (revision["revision_id"], utcnow(), row["budget"], float(total_seconds),
+                                 float(revision["prior_charged_wall_seconds"]), digest(revision)))
 
     @contextmanager
     def lock(self):
@@ -210,6 +269,7 @@ class Ledger:
     def status(self):
         return {"identity":digest(self.identity),"allocated_wall_seconds":self.total,
                 "charged_wall_seconds":self.spent(),"remaining_wall_seconds":max(0,self.total-self.spent()),
+                "budget_revisions":[dict(r) for r in self.db.execute("SELECT * FROM budget_revision ORDER BY applied_at")],
                 "attempts":[dict(r) for r in self.db.execute("SELECT * FROM attempt ORDER BY started")]}
 
     def close(self):

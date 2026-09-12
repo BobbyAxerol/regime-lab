@@ -5,7 +5,79 @@ from types import SimpleNamespace
 import pytest
 
 from crypto_regime_lab.time_edge import runtime
-from crypto_regime_lab.time_edge.storage import read, save
+from crypto_regime_lab.time_edge.storage import (ALLOCATION_REVISION_SCHEMA, Ledger, digest,
+                                                 file_digest, read, save)
+
+
+def allocation_revision(allocation_id, prior_total, total, prior_charged):
+    return {"schema": ALLOCATION_REVISION_SCHEMA, "revision_id": "unit-revision-1",
+            "allocation_id": allocation_id, "prior_total_wall_seconds": prior_total,
+            "total_wall_seconds": total, "prior_charged_wall_seconds": prior_charged,
+            "task_wall_seconds": 1.0, "selection_task_wall_seconds": 2.0, "workers": 1,
+            "cpu_limit": 2, "memory_gib": 4,
+            "profile_refs": [{"path":"unit-profile.json","sha256":"0"*64}],
+            "per_arm_compute_is_unchanged": True,
+            "how_arms_stay_equal": "one sequential selection shared by every arm",
+            "measured_reason": {"trials_completed": 10}, "what_it_costs": "wall clock only",
+            "what_it_changes": ["task cap"], "what_it_does_not_change": ["per-arm compute"]}
+
+
+def test_allocation_revision_appends_and_keeps_prior_charges(lab_tmp):
+    directory=lab_tmp/"allocations/revised"
+    ledger=Ledger(directory,{"allocation_id":"revised"},2.0)
+    attempt=ledger.begin({"task":"first"},1.0)
+    ledger.finish(attempt,status="COMPLETE",wall=.5,result={"status":"OK"})
+    ledger.close()
+    opened=Ledger(directory,{"allocation_id":"revised"},5.0,
+                  revision=allocation_revision("revised",2.0,5.0,.5))
+    try:
+        status=opened.status()
+        assert status["allocated_wall_seconds"] == 5.0
+        assert status["charged_wall_seconds"] == .5, "prior charges survive the revision"
+        assert status["remaining_wall_seconds"] == 4.5
+        assert [r["id"] for r in status["budget_revisions"]] == ["unit-revision-1"]
+        assert status["budget_revisions"][0]["old_budget"] == 2.0
+    finally:
+        opened.close()
+
+
+def test_allocation_revision_cannot_slip_past_the_live_ledger(lab_tmp):
+    directory=lab_tmp/"allocations/restamped"
+    ledger=Ledger(directory,{"allocation_id":"restamped"},2.0)
+    attempt=ledger.begin({"task":"first"},1.0)
+    ledger.finish(attempt,status="COMPLETE",wall=.5,result={"status":"OK"})
+    ledger.close()
+    with pytest.raises(ValueError,match="must increase"):
+        Ledger(directory,{"allocation_id":"restamped"},1.5,
+               revision=allocation_revision("restamped",2.0,1.5,.5)).close()
+    with pytest.raises(ValueError,match="prior charged"):
+        Ledger(directory,{"allocation_id":"restamped"},5.0,
+               revision=allocation_revision("restamped",2.0,5.0,99.)).close()
+    with pytest.raises(ValueError,match="prior budget"):
+        Ledger(directory,{"allocation_id":"restamped"},5.0,
+               revision=allocation_revision("restamped",1.0,5.0,.5)).close()
+    with pytest.raises(ValueError,match="identity/budget drift|identity drift"):
+        Ledger(directory,{"allocation_id":"restamped"},5.0).close()
+    with pytest.raises(ValueError,match="per-arm"):
+        bad=allocation_revision("restamped",2.0,5.0,.5); bad["per_arm_compute_is_unchanged"]=False
+        Ledger(directory,{"allocation_id":"restamped"},5.0,revision=bad).close()
+
+
+def test_validate_job_checks_a_registered_allocation_revision(monkeypatch,lab_tmp):
+    profile=lab_tmp/"evidence/selection-profile.json"; save(profile,{"measured":True})
+    refs=[{"path":"evidence/selection-profile.json","sha256":file_digest(profile)}]
+    revision=allocation_revision("revised",2.0,5.0,.5); revision["profile_refs"]=refs
+    monkeypatch.setattr(runtime,"source_identity",lambda root:{})
+    monkeypatch.setattr(runtime,"load_registration",lambda path:{})
+    monkeypatch.setattr(runtime,"validate_registration",lambda registration:None)
+    job={"lab_run_id":"revision-run","allocation_id":"revised","total_wall_seconds":5.0,
+         "task_wall_seconds":1.0,"source_identity":digest({}),"inputs":{},
+         "tasks":[{"task_id":"child","kind":"qualify","wall_seconds":1.0}],
+         "profile_refs":refs,"budget_revision":revision}
+    runtime.validate_job(lab_tmp,job)
+    revision["per_arm_compute_is_unchanged"]=False
+    with pytest.raises(ValueError,match="per-arm"):
+        runtime.validate_job(lab_tmp,job)
 
 
 def harness(monkeypatch,lab_tmp,policy,lab_root, *, delay=0., outcome="OK"):

@@ -6,7 +6,7 @@ import pandas as pd
 from ..experiments.time_edge_contracts import ContractError
 from .runtime import local, source_identity, validate_job
 from .schedule import calendar, triggers, matched_cadence
-from .storage import digest, file_digest, read, save, utcnow
+from .storage import ALLOCATION_REVISION_SCHEMA, check_allocation_revision, digest, file_digest, read, save, utcnow
 from .eligibility import history_start, coverage
 
 
@@ -42,6 +42,19 @@ def make_plan(root, *, run_id, stage, spec=None, allocation=None):
     inputs={}; tasks=[]
     if allocation is None:
         allocation={"allocation_id":"TE02-PILOT-R03","total_wall_seconds":1800.,"task_wall_seconds":600.}
+    if allocation.get("schema") == ALLOCATION_REVISION_SCHEMA:
+        check_allocation_revision(allocation["allocation_id"], allocation.get("prior_total_wall_seconds"),
+                                  allocation["total_wall_seconds"], allocation)
+        plan_allocation={"allocation_id":allocation["allocation_id"],
+                         "total_wall_seconds":float(allocation["total_wall_seconds"]),
+                         "task_wall_seconds":float(allocation["task_wall_seconds"]),
+                         "profile_refs":allocation["profile_refs"],
+                         "budget_revision":allocation,
+                         "workers":int(allocation.get("workers",1)),
+                         "cpu_limit":int(allocation.get("cpu_limit",2)),
+                         "memory_gib":int(allocation.get("memory_gib",4))}
+    else:
+        plan_allocation=dict(allocation)
     if stage in ("discovery","models","targets","decay","controls","statistical-calibration") and spec is None:
         raise ContractError("this stage needs a registered --spec with measured inputs; see handoff/TE_CLI_RUNBOOK.md")
     if stage == "qualify":
@@ -53,10 +66,12 @@ def make_plan(root, *, run_id, stage, spec=None, allocation=None):
                     "start":"2020-01-01T00:00:00Z","end":"2024-01-01T00:00:00Z"}]
         else:
             # Training-only technical pilot; not a TE04 economic look.
+            selection_wall=float(allocation.get("selection_task_wall_seconds",plan_allocation["task_wall_seconds"]))
             tasks=[{"task_id":"engine-clock-fee-reconciliation","kind":"qualify","wall_seconds":60.},
                 {"task_id":"A-SC-BTC-train-selection","kind":"select","market":"BTCUSDT","alpha_id":"A-SC",
                  "cutoff":"2020-12-01T00:00:00Z","history_start":"2020-01-01T00:00:00Z","latency_seconds":60.,
-                 "latency_role":"PROFILING_FLOOR_NOT_DISCOVERY_CERTIFICATE","depends_on":["engine-clock-fee-reconciliation"]},
+                 "latency_role":"PROFILING_FLOOR_NOT_DISCOVERY_CERTIFICATE","wall_seconds":selection_wall,
+                 "depends_on":["engine-clock-fee-reconciliation"]},
                 {"task_id":"A-SC-BTC-selected-audit","kind":"audit_selection","market":"BTCUSDT","alpha_id":"A-SC",
                  "cell_id":"A-SC/BTCUSDT","history_start":"2020-01-01T00:00:00Z","depends_on":["A-SC-BTC-train-selection"]},
                 {"task_id":"A-SC-BTC-train-deployment","kind":"deploy","market":"BTCUSDT","alpha_id":"A-SC",
@@ -86,10 +101,12 @@ def make_plan(root, *, run_id, stage, spec=None, allocation=None):
             tasks.extend(discovery_tasks(root,spec,inputs))
     if not tasks: raise ContractError("no runnable tasks in registered plan")
     plan={"lab_run_id":run_id,"created_at":utcnow(),"stage":stage,"source_identity":digest(source_identity(root)),
-          "inputs":inputs,"tasks":tasks,**allocation,
+          "inputs":inputs,"tasks":tasks,**plan_allocation,
           "runtime_acceptance":None if spec is None else spec.get("runtime_acceptance"),
           "completion_rule":"all planned tasks; failed/blocked retained; no outcome-based stopping",
-          "economic_conclusion":"NOT_ASSESSED_BY_PLAN","workers":1,"cpu_limit":2,"memory_gib":4}
+          "economic_conclusion":"NOT_ASSESSED_BY_PLAN",
+          "workers":plan_allocation.get("workers",1),"cpu_limit":plan_allocation.get("cpu_limit",2),
+          "memory_gib":plan_allocation.get("memory_gib",4)}
     validate_job(root,plan)
     output=local(root,folder+"/job.json"); save(output,plan)
     return {"job":str(output.relative_to(root)),"sha256":file_digest(output),"tasks":len(tasks),
