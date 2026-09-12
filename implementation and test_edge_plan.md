@@ -4,6 +4,7 @@
 **Vai trò:** đầu mối để đọc tình trạng thực, truy nguồn yêu cầu, giao việc, nghiệm thu và tìm báo cáo.
 **Trạng thái:** `TE-01_REGISTRATION_VALIDATED_FOR_TECHNICAL_REPAIR`; chưa đóng toàn phase vì
 `FINAL_FUP_HANDOFF_PENDING`. TE-02…TE-05 **chưa được thực hiện**.
+Pending này thuộc tiếp nhận FUP; **không chặn TE-02 trên bản sao lab độc lập**. Xem [rà soát chi phí FUP](#fup-cost-decision).
 
 Theo chỉ thị mới của người dùng: **để OpenCode hoàn tất FUP-02**, giao Codex sửa và kiểm chứng 20 findings.
 Đã đăng ký và kiểm chứng hợp đồng TE-01, lưu baseline lỗi trước sửa, manifests và báo cáo riêng;
@@ -561,7 +562,8 @@ trong TE-01. D1/D2/D3 và CAL–REGIME chưa có số đo thị trường mới;
 TE-04 sở hữu paired time-edge/decay inference. Findings mới vẫn OPEN đến khi caller thật và
 affected outputs được sửa/kiểm; hợp đồng mới PASS không tự đóng chúng.
 
-Chuẩn bị TE-02 được dựa trên R01. Việc sửa code dùng chung với FUP phải chờ bàn giao nguồn;
+TE-02 có thể bắt đầu sửa và kiểm kỹ thuật trên bản sao vật lý riêng trong lab dựa trên R01.
+Việc sửa trực tiếp code dùng chung với FUP phải chờ bàn giao nguồn;
 market workers còn cần OS isolation, engine/model qualification, δ đã materialize và tổng budget.
 Xem [phase verdict][te01-verdict] và [reproduction/runtime-gate verification][te01-reproduction].
 
@@ -923,11 +925,13 @@ nghiên cứu trong phạm vi đã kiểm. Báo cáo đã commit giữ nguyên; 
   `acceptance_checks`, `reuse_scope`, `budget_ref`. Kết quả âm/chưa rõ có thể dẫn tới khuyến nghị dừng,
   thu hẹp claim hoặc sửa phép thử theo registration, không mặc định mở thêm grid để tìm số dương.
 
-**Khuyến nghị hiện tại sau TE-01:** hoàn tất [TE01.1](#te-01) khi có bàn giao cuối FUP-02 để pin
-source/evidence cuối và chốt reuse. Bước triển khai tiếp theo ưu tiên [TE02.1 rồi TE02.2](#te-02):
+**Khuyến nghị hiện tại sau TE-01, đã sửa sau rà soát chi phí:** đề nghị ngừng mở thêm FUP shard/resume
+ở checkpoint an toàn, giữ kết quả PARTIAL và bàn giao; đề nghị này chưa được thực hiện trên process.
+[TE01.1](#te-01) tiếp nhận source/evidence cuối khi có; **không cần chờ việc này mới triển khai TE-02 độc lập**.
+Bước triển khai tiếp theo ưu tiên [TE02.1 rồi TE02.2](#te-02):
 đúng route/clock/lifecycle từng alpha trước, rồi kiểm scorer và public Mode 4 trên cùng cutoff.
-Trong lúc chờ FUP có thể đọc source, chuẩn bị fixtures và adapters riêng trong lab; sửa source mà
-FUP đang dùng phải chờ bàn giao. Engine pilots cần OS isolation và budget đã đăng ký. Nghiệm thu
+Trong lúc chờ FUP có thể sửa và kiểm fixtures/adapters trên bản sao lab riêng; không sửa source mà
+FUP đang dùng. Engine pilots cần chứng minh module import từ đúng bản sao, OS isolation và budget đã đăng ký. Nghiệm thu
 bằng actual fills/fees/activation traces và selected-params/objective parity; sau đó mới mở rộng
 TE02.3–TE02.8, rồi [TE-03](#te-03) model/controls và [TE-04](#te-04) time-edge/decay inference.
 
@@ -1199,6 +1203,25 @@ Trạng thái COVERED cũ được giữ như khai báo lịch sử; nghiệm th
 Freeze test của RF-05 chỉ cho một FUP-01 supersession là guard lịch sử, không lý do tạo workaround
 vĩnh viễn. Lượt sửa tiếp theo dùng **study/version/manifest mới** và giữ frozen RF-05 evidence nguyên vẹn.
 Không sửa pin cũ để làm test pass; không copy scripts thành nhiều implementation trái nhau.
+
+<a id="fup-cost-decision"></a>
+#### Rà soát điều kiện chờ và chi phí FUP-02
+
+[Báo cáo cost/validity](evidence/reviews/fup02-cost-20260912-01/report.md) và
+[JSON đã capture](evidence/reviews/fup02-cost-20260912-01/review.json) phân biệt thời gian trôi qua,
+wall của invocation đã đóng và phần đang chạy; không tự suy CPU/RAM host từ sandbox hiện tại.
+FUP vẫn hữu ích cho debug/profile trong đúng scope, nhưng nhãn RUN_VALID cũ không nghiệm thu
+warmup/scorer, execution clock hoặc model/statistical controls của TE study mới.
+
+Điều kiện chờ được thu hẹp theo [operational revision R02](configs/time_edge_validation_v4/operational_dependency_revision_r02.json):
+final handoff cần cho tiếp nhận kết quả FUP cuối và sửa cùng source; không cần cho sửa kỹ thuật ở
+bản sao lab độc lập. R01 và báo cáo TE-01 cũ giữ nguyên lịch sử. Runtime gate hiện tại vẫn đóng;
+TE-02 phải kiểm đường nguồn độc lập bằng actual import/hash evidence trước engine pilot, không đặt
+`fup02_final_handoff=true` giả. Các gate về isolation, ngân sách và validity vẫn áp dụng.
+
+Khuyến nghị: ngừng mở thêm FUP shard/resume ở checkpoint an toàn, bàn giao PARTIAL có ledger;
+sửa TE02.1/2, tách selection/deployment TE02.3 và tổng budget/resume TE02.7 trước khi mở rộng.
+Đây là khuyến nghị sau review, chưa phải lệnh đã thực thi trên process của OpenCode.
 
 ### 12.3 Budget/stop rules
 
