@@ -1,0 +1,26 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "revision_id": "OPERATIONAL-DEPENDENCY-R02",
+  "lab_run_id": "fup02-cost-20260912-01",
+  "registered_at_utc": "2026-09-12T07:00:46.737346+00:00",
+  "status": "REGISTERED_OPERATIONAL_CLARIFICATION_BEFORE_TE02",
+  "reason": "Final FUP handoff was too broad as a dependency for independent technical repairs; G3 RF01.1 permits an isolated lab working copy. Current user requested review of waiting and resource cost.",
+  "evidence_ref": "evidence/reviews/fup02-cost-20260912-01/review.json",
+  "technical_work": "TE02 may begin on a physically independent lab-owned source copy with pinned dependencies and separate outputs/cache while FUP intake remains pending. Do not edit the running FUP source.",
+  "final_fup_handoff_required_for": [
+    "accepting final FUP result generation",
+    "mutating source imported by active FUP process in place"
+  ],
+  "engine_gate_revision_required": "Before any TE02 engine pilot, implement and verify distinct measured source-coordination evidence: final FUP handoff OR isolated-copy/module-origin/hash proof. Never forge fup02_final_handoff=true as a substitute. Existing runtime gate remains closed until this is implemented.",
+  "unchanged_requirements": [
+    "OS worker isolation",
+    "lab-only writes and installed QuantBT",
+    "protected source integrity",
+    "registered pilot budget and provenance",
+    "economic/model/control/threshold gates for market inference"
+  ],
+  "financial_protocol_changed": false,
+  "fup_process_stop_executed": false,
+  "next_action_recommendation": "Pause new FUP shards/resumes at a safe checkpoint, retain partial evidence, repair before further expansion. This recommendation has not been sent to OpenCode or enforced."
+}
