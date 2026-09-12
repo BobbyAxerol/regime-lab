@@ -3,7 +3,9 @@
 Each guard has a denominator and can go red:
 
 * every freeze-manifest component hash equals the committed file (no
-  self-referential entry and no hash recorded without a file);
+  self-referential entry and no hash recorded without a file). A component that
+  changed after the freeze passes only when a later registered study declares
+  the exact old/new hashes in its FUP-01 artifact; an undeclared drift fails;
 * every evaluated CI carries a positive common-date denominator and the frozen
   MDE 0.0371 bps/day, and the Holm family is exactly {TIMING, BUDGET_AWARE};
 * no contrast is ``POSITIVE_WITHIN_SCOPE`` without a CI lower bound above the
@@ -38,19 +40,56 @@ def _load(lab_root, parts: tuple, name: str) -> dict:
     return json.loads(lab_root.joinpath(*parts).joinpath(name).read_text(encoding="utf-8"))
 
 
+def _declared_supersessions(lab_root, manifest_name: str, prior_hashes: dict) -> dict:
+    """Frozen components a registered follow-up declares it has repaired.
+
+    The freeze and reproducibility manifests stay honest RF-05 records: a file
+    whose committed hash no longer matches may pass only when a later registered
+    study declares the exact old and new hashes. An undeclared drift still fails.
+    """
+    capability_path = lab_root.joinpath(
+        "evidence", "corrective_mode4_v3", "FUP-01", "native_event_capability.json")
+    if not capability_path.is_file():
+        return {}
+    capability = json.loads(capability_path.read_text(encoding="utf-8"))
+    declared = {}
+    for row in capability.get("frozen_component_supersessions", []):
+        if not row["frozen_by"].endswith(manifest_name):
+            continue
+        assert row["registered_study"] == "FUP-01", row
+        assert prior_hashes.get(row["path"]) == row["frozen_sha256"], (
+            f"{row['path']}: the declaration does not match the RF-05 prior hash")
+        assert row["rf05_results_recomputed"] is False, row
+        declared[row["path"]] = row
+    return declared
+
+
 def test_rf05_freeze_manifest_hashes_match_committed_files(lab_root):
     manifest = _load(lab_root, RF05, "freeze_manifest.json")
     assert manifest["hash_algorithm"] == "sha256"
     assert manifest["all_components_present"] is True
+    prior = {row["path"]: row["sha256"]
+             for rows in manifest["components"].values() for row in rows}
+    declared = _declared_supersessions(lab_root, "freeze_manifest.json", prior)
     checked = 0
+    superseded = 0
     for group, rows in manifest["components"].items():
         assert rows, f"freeze group {group} is empty"
         for row in rows:
             assert row["present"] is True, f"{row['path']} is not present"
             path = lab_root / row["path"]
             assert path.is_file(), f"{row['path']} is missing"
-            assert sha256_file(path) == row["sha256"], f"{row['path']} sha256 mismatch"
+            actual = sha256_file(path)
+            if actual != row["sha256"]:
+                assert row["path"] in declared, (
+                    f"{row['path']} changed after the RF-05 freeze without a registered "
+                    "follow-up supersession declaring the old and new hashes")
+                assert declared[row["path"]]["current_sha256"] == actual, (
+                    f"{row['path']}: the declared supersession hash does not match the file")
+                superseded += 1
             checked += 1
+    assert superseded == len(declared), "a declared supersession matched no frozen component"
+    assert superseded <= 1, "more frozen components drifted than the follow-up declares"
     assert checked >= 30, "the freeze component denominator collapsed"
     contamination = manifest["contamination"]
     assert contamination["status"] == "NESTED_RETROSPECTIVE"
@@ -236,9 +275,20 @@ def test_rf05_reproducibility_and_handoff_guardrails(lab_root):
     assert "scripts/run_rf05.py" in runner_paths
     assert "scripts/write_rf05_report.py" in runner_paths
     assert "tests/mode4_corrective/test_rf05_claims.py" in runner_paths
+    prior = {row["path"]: row["sha256"] for row in repro["canonical_runners"]}
+    declared = _declared_supersessions(lab_root, "reproducibility_manifest.json", prior)
+    superseded = 0
     for row in repro["canonical_runners"]:
         assert (lab_root / row["path"]).is_file()
-        assert sha256_file(lab_root / row["path"]) == row["sha256"]
+        actual = sha256_file(lab_root / row["path"])
+        if actual != row["sha256"]:
+            assert row["path"] in declared, (
+                f"{row['path']} changed after the RF-05 reproducibility manifest without a "
+                "registered follow-up supersession declaring the old and new hashes")
+            assert declared[row["path"]]["current_sha256"] == actual, (
+                f"{row['path']}: the declared supersession hash does not match the file")
+            superseded += 1
+    assert superseded == len(declared), "a declared supersession matched no canonical runner"
     assert repro["artifact_hashes"]["rf05"]
     handoff = lab_root.joinpath(*RF05).joinpath("handoff.md").read_text(encoding="utf-8")
     for token in ("Canonical commands", "Rollback", "Remaining blockers", "no production merge"):
