@@ -2,9 +2,9 @@
 
 **Ngày lập:** 12/09/2026. **Phạm vi:** `/root/bobby/pool_alpha/lab_regime_model_quantbt`.
 **Vai trò:** đầu mối để đọc tình trạng thực, truy nguồn yêu cầu, giao việc, nghiệm thu và tìm báo cáo.
-**Trạng thái:** `TE_TECHNICAL_IMPLEMENTATION_IN_PROGRESS`. Người dùng đã dừng OpenCode và duyệt
-gộp FUP còn lại vào TE, hoàn tất coding/test/CLI rồi bàn giao chạy. TE-01 contracts đã kiểm;
-TE-02…TE-05 đang được triển khai kỹ thuật, chưa có market acceptance mới.
+**Trạng thái:** `TE_TECHNICAL_DELIVERY_RUNTIME_BLOCKED`. Người dùng đã dừng OpenCode và duyệt
+gộp FUP còn lại vào TE. Bộ code, tests, CLI và runbook đã được triển khai; nghiệm thu kỹ thuật
+và phần binding còn thiếu được tách rõ trong báo cáo. **Chưa đóng toàn bộ TE-02…05, chưa có time-edge proof.**
 
 Theo chỉ thị mới nhất: **không tiếp tục FUP như một chuỗi riêng**. Snapshot sau khi người dùng báo dừng
 ở [FUP intake](evidence/reviews/fup02-stopped-20260912-01/review.json); không đổi nhãn thành run hoàn tất.
@@ -28,6 +28,27 @@ Checklist viết trước code: [implementation R03](configs/time_edge_validatio
 Sau mỗi phần coding: commit riêng, báo test thật và giới hạn; sau mỗi phase: báo cáo và khuyến nghị
 task tiếp theo. Giữ mọi failed/partial artifacts của FUP làm diagnostic; chỉ tái dùng cache đúng
 identity/cutoff/economics, không dùng nhãn RUN_VALID cũ để bỏ qua TE acceptance.
+
+<a id="technical-delivery"></a>
+### Bàn giao kỹ thuật 12/09 — đọc trước khi chạy tiếp
+
+- [Báo cáo nghiệm thu theo phase và đủ 20 findings](reports/time_edge_validation_v4/te-delivery-20260912-01.md)
+  được sinh từ [JSON đã commit](evidence/time_edge_validation_v4/delivery/te-delivery-20260912-01.json).
+- [Runbook và lệnh CLI](handoff/TE_CLI_RUNBOOK.md): bắt đầu bằng **TE-02 preflight → qualification → pilot train A-SC/BTC**.
+  Job đã tạo: [qualify](evidence/time_edge_validation_v4/plans/te-host-qualify-01/job.json),
+  [pilot](evidence/time_edge_validation_v4/plans/te-host-pilot-01/job.json). Không cần đợi FUP-02.
+- [Bộ kiểm tra kỹ thuật](evidence/time_edge_validation_v4/technical/te-technical-20260912-02/acceptance.json): **131 PASS / 33,19 giây**;
+  actual installed optimizer với synthetic account scorer, pure learned-model/math/causality, process fault injection;
+  **0 market engine runs**, không dùng test PASS như economic evidence.
+- Hai phát hiện mới: **8/20 cells thiếu initial history** (SOL/DOGE × 4 alpha); A-VWAP cần prefix tới **101 ngày**
+  ở biên parameter space. [Coverage](evidence/time_edge_validation_v4/delivery/coverage-20260912-01.json).
+  R01 vẫn immutable; planner/worker chặn thiếu history, không ngầm đổi dates/cells.
+- Các binding còn thiếu: real four-alpha lifecycle/sizing/pre-fill equity; measured parity/latency;
+  full-path power ở net effect biết trước và placebo/delay/risk acceptance. Chi tiết từng finding trong report,
+  [R04](configs/time_edge_validation_v4/implementation_binding_r04.json) và [inventory R05](configs/time_edge_validation_v4/delivery_scope_r05.json).
+  Những gate này phải được giải quyết/nghiệm thu trước TE-04 discovery; không viết PASS thủ công để vượt.
+- Các mục review FUP/RF bên dưới là **bằng chứng lịch sử trước repair**. CLI canonical mới ở
+  `scripts/run_time_edge.py`, package `src/crypto_regime_lab/time_edge/`; không coi fixes đó đã sửa ngược evidence FUP cũ.
 
 ## 0. Đọc từ đây
 

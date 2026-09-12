@@ -1,0 +1,13 @@
+{
+  "inputs": {
+    "features": "REPLACE_WITH_RAW_FEATURES_PARQUET",
+    "targets": "evidence/time_edge_validation_v4/host-targets-01.json"
+  },
+  "model_series": {
+    "features": "features",
+    "targets": "targets",
+    "start": "2021-02-01T00:00:00Z",
+    "end": "2022-01-01T00:00:00Z",
+    "latency_seconds": 60
+  }
+}

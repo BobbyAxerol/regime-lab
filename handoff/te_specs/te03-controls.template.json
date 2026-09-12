@@ -1,0 +1,23 @@
+{
+  "inputs": {},
+  "tasks": [
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60
+    }
+  ]
+}
