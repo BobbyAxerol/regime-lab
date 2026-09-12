@@ -38,12 +38,14 @@ def triggers(emissions, *, initial_ready, end, min_gap_days=28, max_age_days=180
         required = ("model_id","model_ready_at","model_fit_cutoff","state_namespace","state_id",
                     "decision_eligible","quality_status","feature_schema_hash","model_design_hash")
         if any(k not in record for k in required):
+            pending, repeats = None, 0
             rejected.append({"at":moment.isoformat(),"reason":"MISSING_ELIGIBILITY_OR_LINEAGE"});continue
         if (record["decision_eligible"] is not True or record["quality_status"] != "OK"
                 or utc(record["model_ready_at"]) > moment or utc(record["model_fit_cutoff"]) > utc(record["model_ready_at"])):
+            pending, repeats = None, 0
             rejected.append({"at":moment.isoformat(),"reason":"INELIGIBLE_OR_NOT_READY"});continue
         common = record.get("state_common")
-        key = ("common",common) if common is not None else (record["state_namespace"],record["state_id"])
+        key = (record.get("state_common_namespace","common"),common) if common is not None else (record["state_namespace"],record["state_id"])
         if key == pending:
             repeats += 1
         else:

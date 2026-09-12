@@ -1,0 +1,220 @@
+{
+  "lab_run_id": "TE-DELIVERY-SCOPE-R05",
+  "status": "TECHNICAL_DELIVERY_INVENTORY_NOT_SCIENTIFIC_CLOSURE",
+  "original_registration": "r01 remains immutable",
+  "additional_binding": {
+    "indicator_history": "SC=1d, HMA=18d, HASH=3d, VWAP=101d, all-candidate conservative bound; no parameter-dependent train start",
+    "initial_data_scope": "R01 2020-12-31 full20 initialization blocked for SOL/DOGE. No silent cohort/date change. New preregistration required before full discovery.",
+    "state_namespace": "Matched vintages share inherited common namespace; K changes create a new namespace; unmatched identities never act as a market transition.",
+    "cold_window_boundary": "Warmup history bars cannot issue orders in either cold or prepared execution.",
+    "synthetic_bank": "Earliest fixed bank cutoff=max(2019-07-15, 2019-01-01+180d+all-candidate history); outcome-blind."
+  },
+  "findings": [
+    {
+      "finding_id": "TEF-01",
+      "source": "src/crypto_regime_lab/time_edge/metrics.py",
+      "required_tests": [
+        "test_first_fee_and_window_mask"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Runtime mark/fee reconciliation"
+    },
+    {
+      "finding_id": "TEF-02",
+      "source": "src/crypto_regime_lab/time_edge/decay.py",
+      "required_tests": [
+        "test_exact_age_90_days_and_no_overlap"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "270-day fixed-theta engine accounts"
+    },
+    {
+      "finding_id": "TEF-03",
+      "source": "src/crypto_regime_lab/time_edge/metrics.py",
+      "required_tests": [
+        "test_pf_loss_only_and_initial_dd"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Actual closed-trade ledger; daily PF is separate"
+    },
+    {
+      "finding_id": "TEF-04",
+      "source": "src/crypto_regime_lab/time_edge/decay.py",
+      "required_tests": [
+        "test_decay_cal_minus_regime_sign_and_joint_calendar_influence"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Matched CAL/REG age cohorts and power"
+    },
+    {
+      "finding_id": "TEF-05",
+      "source": "src/crypto_regime_lab/time_edge/model.py",
+      "required_tests": [
+        "test_emission_suffix_ready_and_warmed_filter"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Market vintage→emission→selection lineage"
+    },
+    {
+      "finding_id": "TEF-06",
+      "source": "src/crypto_regime_lab/time_edge/schedule.py",
+      "required_tests": [
+        "test_missing_eligibility_and_namespace_not_transition"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Real missing/unknown support per vintage"
+    },
+    {
+      "finding_id": "TEF-07",
+      "source": "src/crypto_regime_lab/time_edge/schedule.py",
+      "required_tests": [
+        "test_initial_max_age_and_no_future_ready"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Registered initial history missing in 8/20 cells"
+    },
+    {
+      "finding_id": "TEF-08",
+      "source": "src/crypto_regime_lab/time_edge/model.py",
+      "required_tests": [
+        "test_target_tail_purge_and_equal_time_exclusion"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Actual matured 28-day candidate targets"
+    },
+    {
+      "finding_id": "TEF-09",
+      "source": "src/crypto_regime_lab/time_edge/pipeline_controls.py",
+      "required_tests": [
+        "test_funnel_empty_and_truth_shortcut_cannot_pass"
+      ],
+      "implementation_status": "PARTIAL_BINDING",
+      "remaining": "PARTIAL: full learned structural worlds implemented; known net effect=2delta calibration not established"
+    },
+    {
+      "finding_id": "TEF-10",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_explicit_actual_quantbt_constructor_binding"
+      ],
+      "implementation_status": "PARTIAL_BINDING",
+      "remaining": "PARTIAL: real next-open clock fixture; all-alpha partial/ladder/amend/reject qualification remains required"
+    },
+    {
+      "finding_id": "TEF-11",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_no_shadow_decisions_no_double_warmup"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Measured readiness latency; real pending/supersede/fill migration"
+    },
+    {
+      "finding_id": "TEF-12",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_window_fill_counts_are_not_whole_account"
+      ],
+      "implementation_status": "PARTIAL_BINDING",
+      "remaining": "PARTIAL: true pre-fill equity binding absent; proxy cannot materialize delta"
+    },
+    {
+      "finding_id": "TEF-13",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_selection_only_actual_mode4_and_persistent_resume"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Market optimizer/prepared-cold parity; speed must be measured"
+    },
+    {
+      "finding_id": "TEF-14",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_protection_domain_failure_retained"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Real failed candidates retained; domain rejected as whole trial"
+    },
+    {
+      "finding_id": "TEF-15",
+      "source": "src/crypto_regime_lab/time_edge/runtime.py",
+      "required_tests": [
+        "test_allocation_shared_across_run_ids_and_cached_success"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Host wall/CPU/RSS profile under isolation"
+    },
+    {
+      "finding_id": "TEF-16",
+      "source": "src/crypto_regime_lab/time_edge/reporting.py",
+      "required_tests": [
+        "test_real_report_rejects_uncommitted_input"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Only committed unchanged inputs may become reports"
+    },
+    {
+      "finding_id": "TEF-17",
+      "source": "src/crypto_regime_lab/time_edge/inference.py",
+      "required_tests": [
+        "test_block_bootstrap_matches_slow_independent_oracle"
+      ],
+      "implementation_status": "PARTIAL_BINDING",
+      "remaining": "PARTIAL: statistical-only and structural controls do not yet certify full-pipeline boundary power"
+    },
+    {
+      "finding_id": "TEF-18",
+      "source": "src/crypto_regime_lab/time_edge/model_evaluation.py",
+      "required_tests": [
+        "test_information_future_parameter_ranking_not_price_direction"
+      ],
+      "implementation_status": "PARTIAL_BINDING",
+      "remaining": "PARTIAL: model info/opportunity/funnel implemented; placebo/delay/risk matrix not qualified"
+    },
+    {
+      "finding_id": "TEF-19",
+      "source": "src/crypto_regime_lab/time_edge/execution.py",
+      "required_tests": [
+        "test_fill_index_uses_completed_decision_bar"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Full actual engine tables/lineage reconciliation"
+    },
+    {
+      "finding_id": "TEF-20",
+      "source": "src/crypto_regime_lab/time_edge/../cli.py",
+      "required_tests": [
+        "test_legacy_factorial_cli_cannot_claim_te_study"
+      ],
+      "implementation_status": "IMPLEMENTED_WITH_RUNTIME_GATE",
+      "remaining": "Historical E/NEIGH not repaired; forbidden as primary TE evidence"
+    }
+  ],
+  "phases": [
+    {
+      "phase": "TE-02",
+      "technical_scope": "Clocked account, selection-only, captured trials, total budget/resume, source pins, pilot parity CLI; true pre-fill/sizing/lifecycle acceptance pending.",
+      "next_action": "Host preflight → qualify → training pilot. Full discovery blocked.",
+      "guide": "G3 RF-02 §§5,7.4,8; G2 §§3,4,7,9.4–9.5"
+    },
+    {
+      "phase": "TE-03",
+      "technical_scope": "Causal JM/M0 vintages, mature targets, real emitted tape, dossiers, information and structural full-path CLI.",
+      "next_action": "Targets/features/models on eligible training history; boundary-power design still requires resolution.",
+      "guide": "G3 RF-03 §§7.2–7.5; G2 §§6.4,8,9.1–9.3"
+    },
+    {
+      "phase": "TE-04",
+      "technical_scope": "Canonical metrics, D1/D2/D3, weighted paired inference, Holm four-family, calendar blocks, calibration checkpoint.",
+      "next_action": "Resolve initial coverage + measured prerequisites before three-arm discovery/decay.",
+      "guide": "G3 RF-04 §§2,6,8; G2 §§10,11"
+    },
+    {
+      "phase": "TE-05",
+      "technical_scope": "Immutable collection/freeze/verify; committed-input reports, per-fold/model tables and claims blocked on missing evidence.",
+      "next_action": "Freeze current technical delivery; append runtime reports after host qualification.",
+      "guide": "G3 RF-05 §§10,12; G2 §12 LAB-09/10, §13.6"
+    }
+  ]
+}

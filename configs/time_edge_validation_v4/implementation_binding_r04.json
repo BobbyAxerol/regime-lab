@@ -1,0 +1,45 @@
+{
+  "lab_run_id": "TE-CODING-R04",
+  "study_id": "time_edge_validation_v4",
+  "status": "IMPLEMENTATION_BINDING_BEFORE_MARKET_RUNS",
+  "supersedes": "Only ambiguous implementation details; original R01 remains immutable",
+  "execution": {
+    "endpoint": "QuantBTEndpoint.native_event_strategy",
+    "contract": "event_lifecycle_v3_next_open",
+    "native_backend": "rust",
+    "backend_policy": "certified_only",
+    "prepared": "Public prepare_native_event_strategy/run_window; optimizer native_prepared_wfo remains off",
+    "warmup": "LAB indicators prepare on causal historical prefix; engine account begins at registered account start; no shadow decisions or double warmup",
+    "sizing": "10 percent of engine context equity at entry decision, units priced at completed decision close; next-open gap changes realized fill notional; report realized allocation separately",
+    "sizing_qualification": "Decision-time sizing is not claimed identical to fill-time percent equity. Actual engine size_order parity and realized gap exposure are required before economic qualification."
+  },
+  "daily_windows": {
+    "selection": "180 calendar days of eligible data through exact cutoff; canonical Sharpe uses complete UTC days wholly inside that interval, recording omitted partial-day boundaries",
+    "decay": "90 complete UTC days per H1/H2/H3 from ceil(selection_ready, UTC day); retain exact ready/activation clocks and alignment delay; require full 270 complete days",
+    "justification": "Daily UTC Sharpe and a non-midnight ready/cutoff cannot both treat partial boundary days as full daily observations. Explicit alignment prevents a hidden 91-day window."
+  },
+  "turnover": {
+    "registered": "absolute fill notional / true engine pre-fill equity",
+    "current_public_callback": "NativeFillEvent has no top-level pre_fill_equity field",
+    "diagnostic": "pre-bar equity ratio reported under turnover_pre_bar_diagnostic only",
+    "mode4": "turnover remains nonfinite internally/null with reason in artifacts; all turnover/trade penalties are disabled in pinned R01 config; no fabricated canonical turnover",
+    "economic_threshold": "Do not materialize delta from pre-bar proxy. Require a qualified true pre-fill trace binding or an explicitly preregistered scientific revision before discovery."
+  },
+  "model": {
+    "M0": "Train median/MAD standardized mean of g1_rv_6, g1_direction_6, g2_log_activity_30, then train tercile cuts; interpret as a composite descriptor, never universal bull/bear labels",
+    "state_mapping": "one-to-one minimum squared raw-coordinate distance in current train robust scales; best-vs-next permutation cost margin must exceed 0.05; otherwise ambiguous",
+    "unknown": "no state-triggered search; incumbent remains; missing lineage rejected",
+    "target": "real same-engine candidate net mean daily utility, fixed candidate identities known by origin; mature outcome time strictly before supervised fit cutoff"
+  },
+  "decay_matching": {
+    "maximum_ready_distance_days": 28,
+    "strata": "same cell, UTC quarter, declared common economic context",
+    "selection": "first eligible timestamp per quarter before age outcomes are read"
+  },
+  "controls": {
+    "statistical_only": "1000 repetitions per 0, delta, 2delta, 4delta condition; four hypotheses and 4999 bootstrap draws; AR(1) coefficient 0.4 and shared calendar innovation",
+    "structural_worlds": "NULL_STATIONARY versus RECURRING_OPPORTUNITY, semi-Markov 28-84 day episodes, conditional return AR coefficient +/-0.35",
+    "known_effect_limit": "A planted market opportunity is not a known learner timing gain of 2delta. Structural full-path controls cannot certify the registered economic-boundary power test without measured end-to-end calibration."
+  },
+  "report_rule": "No technical PASS, generated world, or configuration boolean substitutes for runtime/economic qualification."
+}

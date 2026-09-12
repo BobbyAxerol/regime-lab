@@ -205,3 +205,47 @@ def test_protection_domain_failure_retained():
     with pytest.raises(ContractError,match="nonpositive"):
         strategy._place(frame.index[0],-1,1.,q.OrderType.LIMIT,price=-5.,kind="protection",bar=0)
     assert strategy.unmapped[0]["value"] == -5
+
+
+def test_entry_sizing_uses_current_engine_equity():
+    from crypto_regime_lab.alphas.contracts import OrderIntent, IntentKind, ExecutionPhase
+    frame=bars(60); t="2020-01-01T00:00:00Z"
+    strategy=ClockedStrategy("A-SC",frame,[{"selection_id":"s","params":{"x":1},"cutoff":t,"ready_at":t}])
+    intent=OrderIntent(kind=IntentKind.ENTER_LONG,decision_index=0,earliest_phase=ExecutionPhase.NEXT_OPEN,reason="sizing contract fixture")
+    first=strategy._intent_commands(intent,context(frame,0,equity=20000.))[0]
+    second=strategy._intent_commands(intent,context(frame,0,equity=10000.))[0]
+    assert first.qty == 20. and second.qty == 10.
+
+
+def test_selection_only_actual_mode4_and_persistent_resume(monkeypatch,lab_tmp,lab_root):
+    """Real installed optimizer, synthetic scorer-account fixture; ZERO engine runs."""
+    from crypto_regime_lab.time_edge import execution
+    from crypto_regime_lab.time_edge.storage import read
+    import quantbt.walkforward as wfo
+    idx=pd.date_range("2020-01-01",periods=181*1440,freq="min",tz="UTC")
+    frame=pd.DataFrame({c:np.ones(len(idx)) for c in ("open","high","low","close","volume")},index=idx)
+    cutoff=idx[-1]+pd.Timedelta(minutes=1)
+    class SyntheticReportedAccount:
+        total_calls=0
+        def __init__(self,frame,**kwargs): self.runs=0; self.frame=frame
+        def run(self,alpha,selections,account_start):
+            self.runs+=1; SyntheticReportedAccount.total_calls+=1
+            index=self.frame.index[self.frame.index >= account_start]
+            shift=(sum(len(str(v)) for v in selections[0]["params"].values())%10)*.00001
+            returns=.0001+shift+.001*np.sin(np.arange(180))
+            eq=np.repeat(20000*np.cumprod(1+returns),1440)
+            return {"status":"EVALUATED","equity":eq,"index":index,"fills":[],"engine_metadata":{},"commands":[],"order_events":[],"wall_seconds":0.,"callback_count":0}
+    monkeypatch.setattr(execution,"PreparedAccount",SyntheticReportedAccount)
+    binding=read(lab_root/"configs/time_edge_validation_v4/mode4_binding_r01.json")
+    old_callback=wfo.logging_callback
+    result=execution.select_only(frame,alpha_id="A-SC",cutoff=cutoff,binding=binding,evidence_dir=lab_tmp,lab_run_id="unit-mode4")
+    assert result["status"] == "SELECTED" and result["deployment_runs"] == 0
+    assert result["selected"]["selection_metadata"]["oos_used_for_selection"] is False
+    assert len(list(lab_tmp.glob("optuna-*.json"))) == 32
+    assert len(list(lab_tmp.glob("trial-*.json"))) > 0
+    assert wfo.logging_callback is old_callback
+    count=SyntheticReportedAccount.total_calls
+    repeated=execution.select_only(frame,alpha_id="A-SC",cutoff=cutoff,binding=binding,evidence_dir=lab_tmp,lab_run_id="unit-mode4")
+    assert repeated["params"] == result["params"]
+    assert repeated["selected"]["objective"] == result["selected"]["objective"]
+    assert SyntheticReportedAccount.total_calls == count and repeated["persistent_candidate_cache_hits"] > 0

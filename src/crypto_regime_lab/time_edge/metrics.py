@@ -35,10 +35,11 @@ def describe(rows):
         raise ContractError("nonempty valid account returns required")
     curve = np.r_[1., np.cumprod(1 + values)]
     peak = np.maximum.accumulate(curve)
+    pf=observation_pf(values.tolist())
     return {"days": len(values), "mean_daily_return": float(values.mean()),
             "total_return": float(curve[-1]-1),
             "daily_sharpe": daily_sharpe(values.tolist()),
-            "daily_observation_pf": observation_pf(values.tolist()),
+            "daily_observation_pf": pf, "profit_factor_daily":pf["value"],"profit_factor_daily_status":pf["status"],
             "max_drawdown": float(np.max(1-curve/peak)),
             "trade_pf": {"value": None, "reason": "requires engine closed-trade ledger; daily PF is separate"}}
 
