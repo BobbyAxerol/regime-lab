@@ -124,7 +124,8 @@ def main(argv=None):
     elif args.command == "collect":
         from crypto_regime_lab.time_edge.collection import collect_runs
         result=collect_runs(ROOT,args.run_id,kind=args.kind,output=args.output,task_id=args.task_id)
-    print(json.dumps(result,ensure_ascii=False,allow_nan=False,indent=2))
+    from crypto_regime_lab.time_edge.storage import jsonable as _jsonable
+    print(json.dumps(_jsonable(result),ensure_ascii=False,allow_nan=False,indent=2))
     return 1 if result.get("status") in ("FAILED","FAILED_SOURCE_DRIFT") else 0
 
 

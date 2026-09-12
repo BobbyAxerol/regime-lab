@@ -1,6 +1,7 @@
 """Immutable artifacts and crash-conservative total budgets across CLI resumes."""
 from contextlib import contextmanager
 from datetime import datetime, timezone
+import dataclasses
 import fcntl
 import hashlib
 import json
@@ -14,8 +15,47 @@ class EvidenceError(ValueError):
     pass
 
 
+def jsonable(value):
+    """Boundary serializer for engine objects (dataclasses, numpy arrays).
+
+    The worker receives real QuantBT result objects (e.g. a frozen
+    ``CompactFillLedger`` dataclass of numpy arrays) and must store them as
+    evidence. Unknown objects still fail closed: this is a conversion for known
+    shapes, not a blanket ``str()`` fallback.
+    """
+    if value is None or isinstance(value, (str, bool, int, float)):
+        return value
+    if isinstance(value, dict):
+        return {str(k): jsonable(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [jsonable(v) for v in value]
+    if dataclasses.is_dataclass(value) and not isinstance(value, type):
+        return jsonable(dataclasses.asdict(value))
+    if hasattr(value, "as_record"):
+        return jsonable(value.as_record())
+    if hasattr(value, "to_dict"):
+        return jsonable(value.to_dict())
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, bytes):
+        return value.decode("utf-8", "replace")
+    if type(value).__module__ == "decimal":
+        return float(value)
+    if hasattr(value, "value") and hasattr(value, "name"):
+        return jsonable(value.value)
+    if hasattr(value, "tolist"):
+        return jsonable(value.tolist())
+    if hasattr(value, "item"):
+        return jsonable(value.item())
+    raise TypeError(f"{type(value).__name__} is not JSON serialisable; "
+                    "give it an explicit schema field")
+
+
 def canonical(value):
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    return json.dumps(jsonable(value), sort_keys=True, separators=(",", ":"),
+                      allow_nan=False).encode()
 
 
 def digest(value):
