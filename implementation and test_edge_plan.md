@@ -2,10 +2,10 @@
 
 **Ngày lập:** 12/09/2026. **Phạm vi:** `/root/bobby/pool_alpha/lab_regime_model_quantbt`.
 **Vai trò:** đầu mối để đọc tình trạng thực, truy nguồn yêu cầu, giao việc, nghiệm thu và tìm báo cáo.
-**Trạng thái:** `REVIEW_AND_PLAN_WRITTEN`; các phase TE-01…TE-05 bên dưới **chưa được thực hiện**.
+**Trạng thái:** `TE-01_IN_PROGRESS_PREPARATION`; TE-02…TE-05 **chưa được thực hiện**.
 
-Theo chỉ thị hiện tại của người dùng: **để OpenCode tiếp tục FUP-02**. Lượt này rà soát và lập kế hoạch;
-không dừng process, không sửa các runner/model đang chạy, không sửa registration, không chạy thêm backtest.
+Theo chỉ thị mới của người dùng: **để OpenCode hoàn tất FUP-02**, giao Codex sửa và kiểm chứng 20 findings.
+Đã bắt đầu chuẩn bị TE-01 riêng; chưa sửa runner/model/registration của FUP-02 hoặc chạy thêm backtest.
 Việc một task được liệt kê ở đây không có nghĩa code đã được sửa, test đã pass hoặc một market run mới đã được cấp ngân sách.
 
 ## 0. Đọc từ đây
@@ -489,7 +489,7 @@ Study ID đề xuất `time_edge_validation_v4` là **PLANNED**, chưa có regis
 
 | Phase | Mục tiêu | Guide gốc | Dependencies | Trạng thái hiện tại |
 |---|---|---|---|---|
-| [TE-01](#te-01) | Khóa scope, hypotheses, identities, metric definitions và audit backlog | G3 RF-01; G2 LAB-01/03 | Bản chụp review; tiếp nhận FUP-02 sau checkpoint phù hợp | NOT_STARTED |
+| [TE-01](#te-01) | Khóa scope, hypotheses, identities, metric definitions và audit backlog | G3 RF-01; G2 LAB-01/03 | Preparation đã có; tiếp nhận cuối FUP-02 còn pending | IN_PROGRESS_PREPARATION |
 | [TE-02](#te-02) | Correct economic engine, Mode 4, delivery, budget/resume | G3 RF-02 + RF-03.3; G2 LAB-02/04/07 | TE-01 contracts | NOT_STARTED |
 | [TE-03](#te-03) | Model regime được đánh giá và nối vào controller, full positive/null capability | G3 RF-03; G2 LAB-05/06 | TE-01; dùng engine đã qualify ở TE-02 cho full controls | NOT_STARTED |
 | [TE-04](#te-04) | Controlled discovery, time edge, decay và uncertainty | G3 RF-04; G2 LAB-08 | TE-02 + TE-03 technical gates | NOT_STARTED |
@@ -499,16 +499,16 @@ Thứ tự code repairs có thể đan xen giữa TE-02/03, nhưng market infere
 phase bằng chữ COMPLETE từ phase cũ; mỗi gate đánh giá đúng source/model/engine/data version đang dùng.
 
 **Chỉ mục báo cáo mới:** namespace đề xuất `evidence/time_edge_validation_v4/TE-0N/<run_id>/`.
-Mỗi run có `report.md`, `report.json`, `artifact_manifest.json`; chưa tạo các đường dẫn này vì chưa chạy.
-Sau khi có run, thay ô “chưa có” bằng link đúng run trong bảng dưới, không trỏ tới file có thể bị ghi đè.
+Mỗi run có `report.md`, `report.json`, `artifact_manifest.json`; preparation TE-01 đã có, các phase sau chưa chạy.
+Sau mỗi run, cập nhật link đúng run trong bảng dưới, không trỏ tới file có thể bị ghi đè.
 
 | Phase | Report MD / JSON hiện có | Nhiệm vụ kế tiếp | Chủ sở hữu thực hiện / reviewer |
 |---|---|---|---|
-| TE-01 | Chưa có — NOT_STARTED | TE01.1: tiếp nhận FUP-02 và pin identities | Chưa phân công |
-| TE-02 | Chưa có — NOT_STARTED | Sau TE-01: TE02.1/2 route + scorer qualification | Chưa phân công |
-| TE-03 | Chưa có — NOT_STARTED | Sau TE-01: TE03.1/2 model protocol + causality | Chưa phân công |
-| TE-04 | Chưa có — NOT_STARTED | Sau TE-02/03: TE04.1 paired pilot | Chưa phân công |
-| TE-05 | Chưa có — NOT_STARTED | Sau TE-04: TE05.1/2 freeze + data-role eligibility | Chưa phân công |
+| TE-01 | [Preparation MD](evidence/time_edge_validation_v4/TE-01/prep-20260912-01/report.md) / [JSON](evidence/time_edge_validation_v4/TE-01/prep-20260912-01/report.json) — IN_PROGRESS | TE01.3/4/5 contracts; TE01.1 chờ tiếp nhận cuối FUP-02 | Codex; chưa có reviewer độc lập |
+| TE-02 | Chưa có — NOT_STARTED | Sau TE-01: TE02.1/2 route + scorer qualification | Codex; chưa có reviewer độc lập |
+| TE-03 | Chưa có — NOT_STARTED | Sau TE-01: TE03.1/2 model protocol + causality | Codex; chưa có reviewer độc lập |
+| TE-04 | Chưa có — NOT_STARTED | Sau TE-02/03: TE04.1 paired pilot | Codex; chưa có reviewer độc lập |
+| TE-05 | Chưa có — NOT_STARTED | Sau TE-04: TE05.1/2 freeze + data-role eligibility | Codex; chưa có reviewer độc lập |
 
 <a id="te-01"></a>
 ### TE-01 — Registration, nguồn sự thật và phạm vi tái sử dụng
@@ -859,7 +859,7 @@ per-cell paired effects, funnel và cost profile. Không tô màu nhãn trên gi
 
 | task_id | status | implementation commit | before/after test evidence | measured result ref | guide/test IDs | reviewer finding | remaining |
 |---|---|---|---|---|---|---|---|
-| Chưa có implementation task TE nào được thực hiện | NOT_STARTED | — | — | — | Xem phase index | — | Không tính kế hoạch là kết quả |
+| TE01.1 / TE01.2 preparation | IN_PROGRESS | `8882df8` | Chưa chạy regression tests; đã kiểm schema/hash và lint runner | [Preparation report](evidence/time_edge_validation_v4/TE-01/prep-20260912-01/report.md) | G3 RF-01; TG-01 | Toàn bộ TEF vẫn OPEN | Final FUP intake, full A/D/N mapping, contracts và before-repair cases |
 
 Vocabulary tracking: NOT_STARTED / IN_PROGRESS / BLOCKED_WITH_REASON / IMPLEMENTED_PENDING_TEST /
 VERIFIED_WITHIN_SCOPE / PARTIAL / CLOSED. `CLOSED` cần đủ deliverables, không chỉ file presence.
@@ -1178,6 +1178,7 @@ bắt đầu, thêm exact commands và dry-run estimate của canonical runner v
 | Lần | Nội dung | Không được hiểu là |
 |---|---|---|
 | 2026-09-12, review01 | Inventory code/evidence; source probes; 20 findings; thống nhất 5 phase và model/time-edge/decay/report/test contracts | Đã repair runtime, đã chạy TE study, đã xác nhận kết luận thị trường |
+| 2026-09-12, TE-01 preparation | Người dùng giao Codex triển khai; checklist trước code, source identities, 20 OPEN findings và report MD/JSON riêng | Đã hoàn thành TE-01, đã sửa 20 findings hoặc đã can thiệp FUP-02 |
 
 Sau mỗi task hoàn tất: commit scoped work theo quy tắc lab, ghi task ID/commit/evidence/test result,
 update status/next task tại đây. Không push nếu chưa được yêu cầu; không merge/publish/deploy/live.
