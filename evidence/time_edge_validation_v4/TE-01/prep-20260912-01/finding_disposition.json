@@ -1,0 +1,208 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "prep-20260912-01",
+  "schema": "regime_lab.te01_findings.v1",
+  "findings": [
+    {
+      "finding_id": "TEF-01",
+      "title_severity_phase": "Cửa sổ thống kê chứa warmup trước kỳ đánh giá · P0 · TE-01/04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- **Evidence:** [observations account_windows](evidence/reviews/time-edge-20260912-review01/observations.json).\n  RF-04 A-HMA/BTC account có 214 equity dates trước 2021-01-01, đều flat; RF-05 dùng cả chuỗi qua\n  `paired_daily_diff` ở [run_rf05.py](scripts/run_rf05.py). FUP-02 tiếp tục lưu prefix từ 2020-06-01.\n- **Chứng minh:** `ARTIFACT_CONFIRMED + PROBE_CONFIRMED`. Giữ raw equity để warmup/reproduce là hợp lệ;\n  đưa các ngày ngoài evaluation window vào mean/Sharpe/bootstrap là lỗi estimand của kỳ đã đăng ký.\n- **Sửa/test:** dùng previous mark để tính first return, sau đó lọc return timestamps vào `[eval_start, eval_end)`;\n  test phí observation đầu, ngày đầu kỳ, warmup dài/ngắn không đổi statistic trong kỳ, symbol thiếu coverage.\n- **Rerun:** trước hết recompute statistics từ saved paths; chỉ rerun engine nếu execution/selection cũng sai.\n- **Guide:** [G3 §6.2][g3-6.2], [§6.6][g3-6.6], V3:T51/T52/T58; [G2 §10.3][g2-10.3].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-02",
+      "title_severity_phase": "Age windows D2 dùng chung ngày biên · P1 · TE-04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [daily_metrics/age_windows/d2_replay](scripts/run_rf04_decay_and_controls.py) chọn `<= hi` ở cả hai\n  cửa sổ; source probe hai khoảng 90 ngày trả 91 observations mỗi khoảng. Artifact có cả rows 90/91 ngày.\n- **Chứng minh:** `PROBE_CONFIRMED + ARTIFACT_CONFIRMED`; thống nhất half-open `[a,b)`, timezone và\n  nhãn daily mark. Window sau nhận boundary return đúng một lần, không mất phí/PnL ở đầu kỳ.\n- **Gate:** tập dates disjoint; money PnL partition telescope; compounded returns khớp whole path.\n- **Guide:** [G3 §6.2][g3-6.2], [§6.5][g3-6.5]; V3:T51/T52/T57.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-03",
+      "title_severity_phase": "Profit Factor lookup và trạng thái không đúng · P1 · TE-04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- D2 tra key `profit_factor`, trong khi `daily_metrics` trả `profit_factor_daily`: toàn bộ PF D2 đang null,\n  kể cả rows có underlying PF hữu hạn. Daily metrics cũng gắn `NO_TRADES` cho chuỗi ngày chỉ lỗ.\n- **Chứng minh:** `SOURCE/PROBE/ARTIFACT_CONFIRMED`. Có negative-return observations không chứng minh\n  số trades; với denominator losses > 0 và gains = 0, return-based PF = 0 theo definition.\n- **Sửa/test:** tên metric có sampling/unit/source; PF có lãi/lỗ, chỉ lãi, chỉ lỗ, flat, no fills,\n  open positions, fee-only ngày đầu. D2 PF log-gap chỉ khi cả PF > 0 và hữu hạn; còn lại null + reason đúng.\n- **Guide:** [G3 §6.4][g3-6.4], [§6.5][g3-6.5], V3:T54/T56; không suy trade PF từ daily returns.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-04",
+      "title_severity_phase": "Bảng decay chưa trả lời so sánh hai method trong scope hiện tại · P1 · TE-04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [decay_panels.json](evidence/corrective_mode4_v3/RF-04/decay_panels.json) chỉ có hai pilot cells;\n  D2 chỉ bốn fold-0 anchors; có H1−H1 self-comparisons và A-SC replay route khác pilot route.\n  D1 gắn selected digest với operational OOS interval, dù incumbent có thể còn active sau cutoff.\n- **Chứng minh:** scope/route `ARTIFACT_CONFIRMED`; mức gán sai PnL cho selected params cần runtime trace.\n  “Có 36 rows” không phải 36 independent tests; “D2 COMPLETE” không phải đã chứng minh giảm decay.\n- **Sửa/test:** giữ D1 fixed-selected evaluation và operational carried-account attribution riêng;\n  anchors có selection/activation lineage; so method trên shared calendar/age design đã đăng ký;\n  loại H1−H1 khỏi denominator kiểm định nhưng giữ làm reference.\n- **Guide:** [G3 §6.5][g3-6.5], [§6.6][g3-6.6], [RF-04][g3-rf04]; V3:T55–T58.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-05",
+      "title_severity_phase": "Model selection/repair chưa nối vào tape chính · P0 đối với claim model mới · TE-03",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- FUP-02 và scaled RF-04 đọc `configs/lab05_full_emission_tape.json`. Registry của tape đó dùng\n  K=3/lambda=1.0. RF-04 chọn riêng K=3/lambda=0.5 và ghi **RECORDED_DESIGN_SELECTION**.\n- Tape chính không mang `ready_at`, `model_fit_cutoff`, `state_common`, `economic_context`; các model\n  sample/coordinate repairs ở RF-04 không tự thay thế nó. [Model observations](evidence/reviews/time-edge-20260912-review01/observations.json).\n- **Sửa/test:** registry → frozen model design → emitted tape → controller dùng đúng hashes và schema;\n  không sửa lại tape historical. Tape mới có đủ lineage; assert actual deployed design, không chỉ file tồn tại.\n- BTC làm context chung cho các symbol có thể là hypothesis hợp lệ; phải đăng ký như vậy và giới hạn claim.\n  Không tự coi common BTC là lỗi bắt buộc sửa thành per-symbol, cũng không claim đã thử per-symbol model.\n- **Guide:** [G3 §7.2][g3-7.2], [RF-03][g3-rf03], V3:T29/T42/T43/T50; [G2 §8][g2-8].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-06",
+      "title_severity_phase": "Controller không kiểm model ready; input thiếu field được mặc định hợp lệ · P0 · TE-03",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [online_trigger_schedule](src/crypto_regime_lab/experiments/regime_schedule.py) kiểm `available_at`\n  và quality/eligibility nhưng không kiểm model-ready; missing `decision_eligible` mặc định True,\n  missing quality mặc định OK. Probe đưa model ready năm 2025 vẫn trigger tại 2021.\n- **Chứng minh:** `PROBE_CONFIRMED`; active tape thiếu ready nên caller chưa đủ thông tin để chứng minh\n  eligibility đầy đủ. Không đơn giản lấy wall time năm 2026 làm operational historical ready time.\n- **Sửa/test:** phân biệt `computed_at_wall_utc` với `ready_at_replay`; validation bắt missing/late/stale/\n  unknown/ambiguous; actual scheduler test future-ready không trigger, positive eligible case trigger.\n- **Guide:** [G3 §7.3][g3-7.3], [§7.4][g3-7.4]; V3:T04/T05/T29/T30/T32.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-07",
+      "title_severity_phase": "Không có initial/max-age lifecycle đầy đủ · P1 · TE-02/03",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- `last_trigger` bắt đầu None; max-age chỉ chạy sau khi đã có trigger đầu. Probe tape constant một năm\n  không có refresh dù max-age=180 ngày. Provider cũng từ chối empty cutoff list; dynamic arm khởi đầu\n  tại first trigger, calendar có initial cutoff riêng.\n- **Sửa/test:** common initial incumbent hoặc explicit common flat policy; đồng hồ tuổi tham số bắt đầu\n  từ incumbent availability. Zero-transition phải có keep/max-age theo protocol, không empty schedule error.\n  So sánh initial exposure/latency giữa hai arms để tránh gọi thời gian đứng ngoài thị trường là parameter edge.\n- **Guide:** [G3 §7.3][g3-7.3], [§2.3][g3-2.3], V3:T03/T31/T32/T40.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-08",
+      "title_severity_phase": "Purge forward outcomes sai phía trong model ablation · P0 đối với information claim · TE-03",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [fixed_target_ablation](src/crypto_regime_lab/regime/ablation.py) fit state target profile từ\n  `target[:train_end]`; chỉ bỏ đầu validation. Với target horizon 6, sáu training origins cuối có outcome\n  kết thúc tại/sau cutoff. Bỏ validation head không làm các training outcomes ấy trở thành thông tin đã có.\n- [forward_paired_target](scripts/run_rf04_g10_model_repairs.py) là future market return trừ trailing\n  market return, không phải QuantBT paired candidate utility. Tên “paired” chưa chứng minh parameter ranking.\n- **Sửa/test:** purge theo `outcome_available_at <= decision_time` và sequence contract; mutate chỉ\n  outcomes chưa kết thúc phải giữ nguyên fitted response/profile trước cutoff. Feature/model scaler và\n  supervised target-profile đều phải qua gate; giữ proxy như descriptive diagnostic.\n- **Guide:** [G3 §7.2][g3-7.2], [§7.5][g3-7.5]; V3:T43/T44/T45; [G2 §9.1][g2-9.1].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-09",
+      "title_severity_phase": "Positive control chưa kiểm full learned pipeline · P1 · TE-03/04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [run_rf04_step1.py](scripts/run_rf04_step1.py) tạo emissions từ world state và chọn params từ\n  `params_for_state[state_by_bar[b]]`. Không fit JM để infer labels, không chạy Mode 4 để tìm params.\n  Test chủ yếu assert params/fill counts khác nhau.\n- **Chứng minh:** `SOURCE_CONFIRMED`; đây là execution/controller plumbing control, có giá trị ở scope đó.\n  Nó chưa chứng minh khả năng học regime rồi tìm time edge, hoặc false-positive rate của phép thử cuối.\n- **Sửa/test:** giữ control cũ đúng nhãn; thêm full-path positive/null worlds qua feature/model/selector/\n  scheduler/account/statistics, không đưa ground-truth state/optimal params vào policy.\n- **Guide:** [G3 RF-03.4][g3-rf03], [§11.2][g3-11.2]; V3:T38/T39; [G2 §10.2][g2-10.2].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-10",
+      "title_severity_phase": "Route đúng engine chưa đồng nghĩa đúng clock/resolution · P0 nếu claim sai cohort · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- FUP-02 đưa frame 1h cho A-HMA, 15m cho các alpha còn lại vào event account; event account chạy trên\n  chính frame đó. Chưa phải bằng chứng protection 1m. `ENGINE_EFFECTIVE_PHASE` là next_bar với engine\n  xử lý tại close theo binding hiện có; `declared_phase=next_open` không tự thay execution clock.\n- FUP-01 ghi backend resolved Python. Phải giữ requested/resolved riêng; không claim Rust speedup từ tên route.\n- **Sửa/test:** trace full public route cho gap/stop/TP/HTF boundary; hoặc dựng 1m execution đúng guide,\n  hoặc đăng ký một coarse/next-close cohort riêng với consequence rõ. Cả scoring và deployment cùng contract.\n- **Guide:** [G3 §5][g3-5], [§4.1 A06][g3-4.1], [§4.3 N02][g3-4.3]; V3:T06/T07/T08/T68; [G2 §4][g2-4].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-11",
+      "title_severity_phase": "Ready/activation/warmup không có trace đủ để chứng minh policy · P0/P1 · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- Event deployment nhận VersionWindow từ cutoff, không propagate selection-ready/compute-latency\n  đã ghi trong corrective spec. Pending version đếm warm bars rồi sau activation lại chờ warmup;\n  chưa thấy indicator-only warming ở pending loop. Main payload chỉ giữ 8 labels đầu trong `versions`.\n- **Chứng minh:** `SOURCE_CONFIRMED`; mức sai behavior theo alpha cần actual integration witness.\n  Không giả định chỉ bỏ thời gian chờ là sửa đúng; có indicator precompute và stateful recurrence cần kiểm riêng.\n- **Sửa/test:** readiness dùng past history; common initial; pending/superseded/campaign migration;\n  lưu compressed full parameter-version intervals và first affected order; không double warm hoặc backdate.\n- **Guide:** [G3 §7.3–7.4][g3-7.3], [RF-02][g3-rf02]; V3:T04/T21/T22/T32/T49; [G2 §9.4–9.5][g2-9.4].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-12",
+      "title_severity_phase": "Candidate scorer metrics/support cần qualify lại · P0 nếu đổi selection · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [EventAccountScorer](src/crypto_regime_lab/experiments/dynamic_fold_provider.py) chạy account bắt đầu\n  từ train start rồi đọc các subperiods; không lấy pre-train warmup vào score run. Mỗi subperiod trả\n  `trade_count/turnover` từ fill count của whole cached account, không từ riêng khoảng score.\n- `_annualised_sharpe` có nhánh ít daily observations chuyển sang bar returns nhưng vẫn nhân sqrt(365).\n  First-return/fee và minimum-support phải được qualify cùng Mode 4 penalty/temporal objective.\n- **Chứng minh:** `SOURCE_CONFIRMED`; tác động selector/penalty cần public-path parity trước kết luận.\n- **Sửa/test:** scorer output có definition/canonical units và per-window counts; warm outside scoring;\n  selected audit parity với QuantBT cùng dates/economics; không sửa objective chỉ ở một arm.\n- **Guide:** [G3 §2.1][g3-2.1], [§4.3 N04/N05][g3-4.3], [RF-02.4][g3-rf02]; V3:T25–T28/T53/T55.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-13",
+      "title_severity_phase": "Chấm một cutoff còn chạy deployment tới cuối frame · P1 compute / P0 failure semantics · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- [run_one_fold](scripts/run_fup02.py) gọi provider. Provider sau selection còn gọi\n  `_event_account_payload` trên full frame. Sau khi đủ cutoffs, FUP runner lại deploy full arm.\n- Source path này tạo công việc lặp và cho phép lỗi **sau cutoff** làm cả kết quả fold thành ERROR.\n  Checkpoint SOL ghi cutoff 2022-02-26 nhưng callback failure ở 2022-11-10; đây là evidence cần tách\n  training-selection status khỏi post-selection deployment status, không mặc định đây là selection leakage đã chứng minh.\n- **Sửa/test:** training-only operation trả selected/trials trước; deployment riêng một account/arm;\n  future suffix mutation không đổi selection hoặc xóa completed training ledger. Đo counters trước/sau.\n- **Guide:** [G3 §2.4][g3-2.4], [§7.4][g3-7.4], [§8.2][g3-8.2]; V3:T27/T35/T63/T66/T67.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-14",
+      "title_severity_phase": "Runtime errors và trial retention chưa đủ · P0/P1 · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- SOL có callback `limit commands require price > 0`. Provider bắt exception và trả error-only;\n  FUP chỉ append trial rows cho SCORED cutoffs. Các thử nghiệm đã xảy ra trong errored cutoff có thể\n  không đi vào ledger cuối; `infeasible_trials=0` không chứng minh không có sampled points không khả thi.\n- **Sửa/test:** xác định alpha/params/bar/command/version gây lỗi; tách domain infeasibility, runtime bug,\n  prune, timeout và deployment failure. Giữ tất cả attempts/intermediate/partial trials, cấm −1e9 financial\n  COMPLETE; chỉ rerun affected work với registration/version mới khi cần.\n- **Guide:** [G3 §4.2 D03/D08][g3-4.2], [§8.1][g3-8.1]; V3:T12/T13/T18/T36/T63.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-15",
+      "title_severity_phase": "Budget và resume chưa phải total-compute gate · P1 · TE-02",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- Total wall budget có field 43.200 giây nhưng đường main deadline dựa vào invocation hiện tại;\n  chưa thấy gate trừ tổng spent trước khi mở invocation kế. Resume chủ yếu kiểm trials/seed/window/budget hash,\n  chưa đóng đầy đủ code/alpha/schema/model/tape/route identity.\n- **Sửa/test:** cộng failed/retried/completed/aborted costs, nêu phần không đo được; invocation budget không\n  được vượt remainder; crash-safe resume theo manifest identity, append-only revisions, không ghi đè completed shard.\n- Trial coverage hơn ngưỡng nonfinite phải theo registered review, trước final freeze; kiểm nguyên nhân trước\n  tăng compute. Số trials/cutoff bằng nhau không phải tổng ngân sách hai arms bằng nhau.\n- **Guide:** [G3 §8][g3-8], V3:T33–T36/T63/T66/T67; [G2 §10.5][g2-10.5].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-16",
+      "title_severity_phase": "Báo cáo và hash drift, missing phase report · P1 · TE-01/05",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- `write_checkpoint` ghi main payload trước khi gắn hashes của coverage/review mới; main chứa backlink\n  của lần trước. Probe đọc ổn định chứng minh mismatch, dù chiều coverage→main khớp.\n- RF-04 report còn pilot while scaled artifact mới hơn; FUP-02 report có thể chậm checkpoint và in\n  “committed artifacts” khi file chưa commit. FUP-01 snapshot chưa có `report.md/report.json` riêng.\n  AGENTS/CLAUDE ghi “complete” rộng hơn `PARTIAL_TECHNICAL_CLOSURE` của RF-05.\n- **Sửa/test:** immutable checkpoint generations + external root manifest không self/circular hash;\n  report pin một generation; verify numbers/counts/status/commit provenance; current index dẫn superseding\n  report, không sửa registration/historical artifacts để xóa lịch sử.\n- **Guide:** [G3 §10][g3-10], [§12.6][g3-12.6]; V3:T62/T64/T65/T69/T70.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-17",
+      "title_severity_phase": "Statistics/claim gates có chữ thống kê nhưng chưa được calibration đầy đủ · P1 · TE-04/05",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- RF-05 có block bootstrap và Holm, nên không đúng nếu nói “không có thống kê nào”. Tuy nhiên tests\n  chủ yếu kiểm fields/denominators dương và nhãn INCONCLUSIVE; chưa chứng minh test có đúng coverage/power.\n- `p_two_sided` là tỷ lệ bootstrap draws nằm hai phía 0; cần validate cách dùng như p-value dưới null,\n  và consistency với hypothesis về ngưỡng kinh tế δ, không chỉ sign/zero. Đây là `NEEDS_STATISTICAL_VALIDATION`,\n  chưa kết luận mọi bootstrap percentile CI tự động sai.\n- Identical equity series đang tự thành `NOT_EVALUABLE`/“treatment did not reach execution”. Đường tài khoản\n  trùng nhau có thể là outcome hợp lệ; phải xét pipeline/control/action ledger trước khi quy lỗi implementation.\n- **Gate:** calibration bằng null/known-effect worlds; confidence interval, multiplicity, dependence,\n  zero variance, constant nonzero difference, missing cells và MDE cùng units; không chọn block length theo p đẹp.\n- **Guide:** [G3 §6.6–6.7][g3-6.6], [§12.2][g3-12.2]; V3:T38/T39/T60/T61; [G2 §11.3][g2-11.3].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-18",
+      "title_severity_phase": "Attribution controls và study design còn partial · P1/SCOPE · TE-04",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- FUP-02 chưa có matched control/decay/paired uncertainty. RF-05 budget-aware chỉ một cell evaluable;\n  A-SC matched control ở endpoint khác primary event route. `placebo` hiện là delayed tape, không phải\n  một control giả trạng thái độc lập với thông tin thị trường.\n- **Sửa/test:** calendar comparator được chọn trên development, giới hạn max budget ex ante; ghi realized\n  compute riêng. Dwell-matched placebo, delayed-state và risk-only có rationale/budget; không loại control vì thắng.\n- Không dùng realized future regime count để dựng live-feasible calendar trên chính evaluation path rồi\n  gọi information edge. Nếu phân tích hồi cứu như vậy, giữ nhãn diagnostic.\n- **Guide:** [G3 §2.2–2.3][g3-2.2], [RF-04.4][g3-rf04]; [G2 §10.2][g2-10.2].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-19",
+      "title_severity_phase": "Mất execution lineage và metric aliases · P1 · TE-02/05",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- Main provider payload cắt version tape còn 8 phần tử, bỏ order IDs/version/sequence khỏi fills, và\n  `engine_report.num_trades` lấy engine fill count. FUP-02 report gọi chúng là trades.\n- Decay `exposure` hiện đếm bars có adapter active, không phải bars có vị thế; không dùng nó như financial exposure.\n- **Sửa/test:** lưu interval tape đầy đủ, order/fill/campaign lineage và engine positions; phân biệt entries,\n  partial fills, completed campaigns, decision availability và actual exposure. Chart activation phải truy được.\n- **Guide:** [G3 §4.3 N04][g3-4.3], [§6.1][g3-6.1], [§10.5][g3-10.5]; V3:T10/T21/T32/T49/T54/T64.",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    },
+    {
+      "finding_id": "TEF-20",
+      "title_severity_phase": "Scope limitations và đường cũ chưa được đóng ở entry point · P1/SCOPE · TE-01/05",
+      "status": "OPEN",
+      "owner": "Codex",
+      "review_basis": "- Funding vẫn missing; instrument/tick/lot provenance cần trace theo symbol. Không suy venue-exact từ\n  cùng một placeholder symbol trong engine. CLI `run` còn dẫn về LAB-08 historical runner.\n- Test quarantine hiện có kiểm marker và vài source modules, chưa tự chứng minh mọi public entry point\n  từ chối historical economic inference. Những module E/response đúng unit nhưng chưa market-evaluate phải giữ riêng.\n- **Sửa/test:** canonical runner/study routing, protected source integrity, explicit no-funding cohort,\n  per-symbol contract registry; quarantine test bằng invocation bị từ chối, không chỉ grep string.\n- **Guide:** [G3 §1.3][g3-1.3], [§4.2][g3-4.2], [§7.5][g3-7.5], [§12.4][g3-12.4]; [G2 §13][g2-13].",
+      "implementation_commit": null,
+      "verification_ref": null,
+      "null_reason": "Implementation and runtime validation have not started."
+    }
+  ]
+}

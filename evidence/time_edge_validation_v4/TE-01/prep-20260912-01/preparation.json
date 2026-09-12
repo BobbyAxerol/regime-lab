@@ -1,0 +1,129 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "prep-20260912-01",
+  "schema": "regime_lab.te01_preparation.v1",
+  "created_at_utc": "2026-09-12T05:53:45.101634+00:00",
+  "status": "IN_PROGRESS_PREPARATION_ONLY",
+  "tasks": [
+    {
+      "task_id": "TE01.1",
+      "task": "Pin git/source/package/module/snapshot/alpha/schema/model hashes; capture FUP generation và interrupted attempts",
+      "required_outputs": [
+        "source_data_manifest.json",
+        "fup02_intake.json"
+      ],
+      "exit_gate": "Không missing identity được quảng cáo reproducible",
+      "owner": "Codex",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "task_id": "TE01.2",
+      "task": "Map A01–A16, D01–D08, N01–N05 và TEF-01…20 tới actual paths/callers/tests",
+      "required_outputs": [
+        "finding_disposition.json"
+      ],
+      "exit_gate": "Mỗi finding có affected scope, bằng chứng, retest và owner",
+      "owner": "Codex",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "task_id": "TE01.3",
+      "task": "Khóa evaluation dates, UTC boundaries, initial/terminal policies, warmup vs scoring; thống nhất metrics",
+      "required_outputs": [
+        "metric_contract.json",
+        "evaluation_windows.json"
+      ],
+      "exit_gate": "Tests biên/first fee trước báo cáo mới",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.4",
+      "task": "Register hypotheses, estimator, weights/missing-cell policy, δ và multiplicity, support/power, stopping",
+      "required_outputs": [
+        "study_registration.json",
+        "statistical_analysis_plan.json"
+      ],
+      "exit_gate": "Không null bắt buộc; chưa nhìn results mới để chọn metric thắng",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.5",
+      "task": "Register model hypothesis: common BTC hoặc per-symbol, features, K/lambda/cadence ladder nhỏ, selection rule",
+      "required_outputs": [
+        "model_protocol.json"
+      ],
+      "exit_gate": "Không gọi model selection manifest riêng là deployed design",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.6",
+      "task": "Register route/resolution/compute contract, phase budgets và tier caps",
+      "required_outputs": [
+        "compute_budget.json",
+        "execution_contract.json"
+      ],
+      "exit_gate": "Wall/CPU/RSS/candidate work và residual budget có cách đo",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.7",
+      "task": "Classify evidence reuse; tiếp tục historical invalidation bằng record mới",
+      "required_outputs": [
+        "reuse_decision.json",
+        "invalidation.json"
+      ],
+      "exit_gate": "Không sửa curves/history, không tự relabel prospective",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "registration_frozen": false,
+  "phase_exit_passed": false,
+  "fup02_intake": {
+    "status": "PENDING_FINAL_FUP02_HANDOFF",
+    "observed_source": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json",
+    "observed_checkpoint_at_utc": "2026-09-12T05:53:10.011734+00:00",
+    "observed_status": "PARTIAL_BUDGET_STOPPED",
+    "stable_during_read": true,
+    "captured_sha256": "8f6acc5605b63d8f90aa75f56c534f0abd9526feb7a7821a74eb225855728949",
+    "captured_path": "fup02_checkpoint.json",
+    "coverage": {
+      "NOT_RUN_BUDGET": 14,
+      "RUN_VALID": 3,
+      "FAILED": 2,
+      "BUDGET_STOPPED": 1
+    },
+    "limit": "A checkpoint and terminal cell labels do not themselves prove the external agent has completed its run."
+  },
+  "rules_loaded": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "../.agents/AGENTS.md"
+  ],
+  "verification_scope": {
+    "manifest_files_hashed": 284,
+    "findings_indexed": 20,
+    "task_count": 7,
+    "engine_runs": 0,
+    "optimizer_runs": 0,
+    "tests_executed": 0,
+    "market_statistical_tests": 0,
+    "elapsed_seconds": 0.29639310762286186,
+    "process_peak_rss_kib": 31004
+  },
+  "economic_metrics": null,
+  "economic_metrics_reason": "No economic experiment was run in preparation.",
+  "remaining_before_te01_exit": [
+    "Final FUP-02 intake and executable source identity after OpenCode finishes.",
+    "Complete original A/D/N finding mapping and raw-data/installed-contract verification.",
+    "Freeze metric/evaluation, hypothesis/multiplicity/support/power and model protocols.",
+    "Freeze measured route/resource contracts and select the affected-output reuse policy.",
+    "Write and execute the before-repair regression cases before TE-02/03 repairs."
+  ],
+  "next_task": "TE01.3/4/5: specify contracts and analysis decisions; keep final FUP intake pending."
+}
