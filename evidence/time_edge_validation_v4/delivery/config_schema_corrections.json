@@ -1,0 +1,25 @@
+{
+  "schema": "regime_lab.te_config_schema_corrections.v1",
+  "generated_by": "runner (TE publishing gate)",
+  "corrections": [
+    {
+      "artifact": "configs/time_edge_validation_v4/implementation_binding_r04.json",
+      "old_sha256": "1f5203f11cee928805bec123469852f7d005cfb1caa52e07b5336411605ce3cb",
+      "new_sha256": "b3dad8d3c54ada6f6edeb51025f18b96f42adbe94c614a1b04c597c8924b5c92",
+      "change": "added the required top-level schema key; no value changed"
+    },
+    {
+      "artifact": "configs/time_edge_validation_v4/implementation_checklist_r03.json",
+      "old_sha256": "4b86686fd4dc161cbf2cc90662397239fe9ff90ffa58d6ab2c1f83b50d7155dc",
+      "new_sha256": "e945bf948e0400b762ffaa7e03ecf7a716fbdb33fe3f3965011d783d72942b63",
+      "change": "added the required top-level schema key; no value changed"
+    },
+    {
+      "artifact": "configs/time_edge_validation_v4/operational_dependency_revision_r02.json",
+      "old_sha256": "ee28e424480605e4407546059a8f983c307e942f7512c916a57768b2509b81c6",
+      "new_sha256": "72b4c4a61e53070fe5f41ed14b02b8d164838269b3e95d1fde3db8091568ab50",
+      "change": "added the required top-level schema key; no value changed"
+    }
+  ],
+  "rule": "metadata correction only; any freeze pinning an old hash is superseded by this record and needs a superseding freeze stamp before a claim relies on the old hash"
+}
