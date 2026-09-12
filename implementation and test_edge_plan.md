@@ -838,7 +838,7 @@ Report là output của writer đọc artifacts đã đóng, không chạy optim
 Mỗi phase có **Markdown + JSON** cùng source references. Những fields không áp dụng ghi status và reason,
 không điền 0. Báo cáo cũ không sửa tay để khớp kết luận mới.
 
-### 9.1 Mười hai phần của phase report
+### 9.1 Mười ba phần của phase report
 
 1. Objective/hypotheses và những gì phase không test.
 2. Guide/task/test IDs, source/data/alpha/model/economic identity; requested/resolved engine.
@@ -852,6 +852,8 @@ không điền 0. Báo cáo cũ không sửa tay để khớp kết luận mới
 10. Proof capability và bottleneck có evidence: opportunity/information/activation/cost/sample/validity.
 11. Verdict, remaining blockers, review disagreements; technical/statistical/economic/deployment tách riêng.
 12. Rerun/render commands, hashes, chart-source refs, handoff task và central index update.
+13. **Khuyến nghị bước tiếp theo theo kế hoạch chung:** ưu tiên task nào, vì sao từ evidence vừa có,
+    điều kiện bắt đầu, phạm vi reuse/rerun và tiêu chí nghiệm thu; theo §9.4 bên dưới.
 
 Mỗi report kèm glossary định nghĩa metric, đơn vị và denominator đang dùng. Tối thiểu:
 **IS/OOS** = khoảng dùng chọn tham số/khoảng đánh giá về sau; **WFO** = tối ưu và đánh giá cuốn chiếu;
@@ -881,6 +883,7 @@ Schema đích đề xuất, chưa là report đã đạt:
   "coverage": {"planned": null, "completed": null, "blocked": null, "reasons": []},
   "claim": {"validity": "NOT_TESTED", "statistical": "NOT_EVALUABLE", "economic": "NOT_EVALUATED"},
   "remaining_findings": [],
+  "next_actions": [],
   "runtime_ref": null,
   "reproduction_ref": null
 }
@@ -902,6 +905,31 @@ per-cell paired effects, funnel và cost profile. Không tô màu nhãn trên gi
 Vocabulary tracking: NOT_STARTED / IN_PROGRESS / BLOCKED_WITH_REASON / IMPLEMENTED_PENDING_TEST /
 VERIFIED_WITHIN_SCOPE / PARTIAL / CLOSED. `CLOSED` cần đủ deliverables, không chỉ file presence.
 Review này không tự gọi “independent statistical validation” vì là cùng một người rà source/evidence.
+
+### 9.4 Khuyến nghị sau mỗi phase — yêu cầu của người dùng
+
+Mỗi lần báo cáo kết thúc hoặc tạm chốt một phase, cả báo cáo MD/JSON và câu trả lời cho người dùng
+phải có khuyến nghị cụ thể. Áp dụng cả khi phase PARTIAL/BLOCKED, và sau phase cuối nếu nên dừng
+nghiên cứu trong phạm vi đã kiểm. Báo cáo đã commit giữ nguyên; cập nhật bằng record/báo cáo mới.
+
+- Chốt trạng thái phase, phần đạt/chưa đạt và kết luận được phép rút ra từ evidence.
+- Nêu 1–3 việc ưu tiên kế tiếp với phase/task ID và link đến mục tương ứng trong plan/guide.
+- Giải thích mỗi việc giải quyết blocker hoặc câu hỏi nào; phân biệt việc có thể làm ngay và việc
+  phải chờ dependency thật. Không tự coi dependency chưa có evidence là đã hoàn tất.
+- Nêu đầu ra và phép kiểm để nghiệm thu; chỉ rõ phần tái sử dụng và phần cần chạy lại. Runtime/budget
+  dự kiến phải dựa trên profile đã đo; chưa có profile ghi `NOT_PROFILED`, không hứa thời lượng.
+- Ghi khuyến nghị trong `next_actions` của report JSON: `priority`, `phase_id`, `task_id`, `plan_ref`,
+  `guide_refs`, `reason_evidence_refs`, `readiness`, `dependencies`, `expected_outputs`,
+  `acceptance_checks`, `reuse_scope`, `budget_ref`. Kết quả âm/chưa rõ có thể dẫn tới khuyến nghị dừng,
+  thu hẹp claim hoặc sửa phép thử theo registration, không mặc định mở thêm grid để tìm số dương.
+
+**Khuyến nghị hiện tại sau TE-01:** hoàn tất [TE01.1](#te-01) khi có bàn giao cuối FUP-02 để pin
+source/evidence cuối và chốt reuse. Bước triển khai tiếp theo ưu tiên [TE02.1 rồi TE02.2](#te-02):
+đúng route/clock/lifecycle từng alpha trước, rồi kiểm scorer và public Mode 4 trên cùng cutoff.
+Trong lúc chờ FUP có thể đọc source, chuẩn bị fixtures và adapters riêng trong lab; sửa source mà
+FUP đang dùng phải chờ bàn giao. Engine pilots cần OS isolation và budget đã đăng ký. Nghiệm thu
+bằng actual fills/fees/activation traces và selected-params/objective parity; sau đó mới mở rộng
+TE02.3–TE02.8, rồi [TE-03](#te-03) model/controls và [TE-04](#te-04) time-edge/decay inference.
 
 <a id="test-groups"></a>
 ## 10. Nhóm phép thử và tiêu chí có thể thất bại
