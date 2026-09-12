@@ -1,0 +1,78 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.report.v1",
+  "verdict": {
+    "study_id": "time_edge_validation_v4",
+    "phase_id": "TE-01",
+    "lab_run_id": "te01-r01-20260912-01",
+    "schema": "regime_lab.te01.phase_verdict.v1",
+    "created_at_utc": "2026-09-12T06:38:35.906896+00:00",
+    "registration_status": "REGISTRATION_VALIDATED_FOR_TECHNICAL_REPAIR",
+    "phase_status": "PARTIAL_TECHNICAL_CLOSURE_FINAL_FUP_HANDOFF_PENDING",
+    "full_phase_complete": false,
+    "technical_registration_validated": true,
+    "task_status": {
+      "TE01.1": "PINNED_CHECKPOINT_FINAL_FUP_HANDOFF_PENDING",
+      "TE01.2": "MAPPED_49_FINDINGS_RUNTIME_RETESTS_REMAIN_OPEN",
+      "TE01.3": "CONTRACT_VALIDATED",
+      "TE01.4": "REGISTERED_COST_FORMULA_NUMERIC_FREEZE_REQUIRED_BEFORE_TE04",
+      "TE01.5": "REGISTERED_NOT_FITTED_OR_DEPLOYED",
+      "TE01.6": "TE01_BUDGET_MEASURED_FUTURE_ENGINE_BUDGET_NOT_ALLOCATED",
+      "TE01.7": "REUSE_AND_INVALIDATION_OVERLAY_RECORDED"
+    },
+    "baseline_correct_behavior_failures": 8,
+    "baseline_unexpected_errors": [],
+    "source_changed_during_audit": [],
+    "new_findings_closed": 0,
+    "runtime_ready": false,
+    "runtime_gate": {
+      "fup02_final_handoff": false,
+      "source_identity_verified": false,
+      "os_isolation_verified": false,
+      "economic_engine_qualified": false,
+      "model_and_controls_qualified": false,
+      "economic_threshold_materialized": false,
+      "total_budget_allocated": false,
+      "no_affected_p0": false
+    },
+    "remaining": [
+      "Final FUP-02 handoff and pin executable source before changing its imports/configs.",
+      "Actual engine/clock/scorer and model/control qualification belongs to TE-02/03.",
+      "Materialize registered cost threshold from qualified training-only traces before TE-04.",
+      "No new market job until measured isolation and total resource allocation pass."
+    ],
+    "runtime": {
+      "wall_seconds": 16.299144932068884,
+      "cpu_seconds": 10.058452968,
+      "peak_rss_kib": 213796,
+      "engine_runs": 0,
+      "optimizer_runs": 0,
+      "market_statistical_tests": 0
+    },
+    "claim": {
+      "proof_status": "TECHNICAL_ONLY",
+      "economic_status": "NOT_EVALUABLE",
+      "deployment": "NOT_ASSESSED"
+    }
+  },
+  "inputs": {
+    "phase_verdict.json": "f63684d30bbb187377d525e22c9d0bc1314e50997acaa7d2ffdca47faab64657",
+    "registration_validation.json": "a98a76f4949e522a1cf49cdb60dc0f719fea0c35c8bdbc0c01e6a0ce896abbfb",
+    "contract_tests.json": "ab38982d26e23dda79547b85cc2f26e40a169314cc9a10615a76317dc0a8b16d",
+    "regression_baseline.json": "438c1fb17193a016bb081e98ac410b94c3c5e7935513381d47c82ffe9bdb507f",
+    "source_data_manifest.json": "d435c54b533085ae25a9921b9fe8cc46623c986d997c1a3e76a349fb702daa61",
+    "snapshot_verification.json": "e39709c89be00aa2dff42ab4432375a71b3dfe11b313337cbdf70332f509cc8d",
+    "quantbt_binding_report.json": "593df2a30b431ad5e4b7596ce97b890a51e0d130794a86494422abde8bbe3eab",
+    "fup02_intake.json": "6281bef5aad373aa6a6618635cfa8b2b67a78417064d8efb0c41a27e24b25ea7",
+    "finding_disposition.json": "90ceee9f3c768f15cd7dbae521efc252d5b345e39cbec7ced7061b29c8a33181",
+    "os_isolation.json": "1c4c3538b6f84b2d5421713d3760a9a5bc37e9d65aacd737f0fc1408aac834a5",
+    "reuse_decision.json": "3433aaa3d7ebcd288b4dec9261a1e9f1c6f3d5247332dc2648d9b236dd3b3b38",
+    "protected_source_verification.json": "2277ce8373413f12c1c47eae0da53f544a95b63c84c62970dc4f94a950617271",
+    "invalidation.json": "4717107fe840fd55a1607ac40adcb2644516fa2ca54b52a9def208100beaa99b",
+    "acceptance_coverage.json": "e20bfc86055eeed724266940d5230848432ac93f84bb703b5c8cf6a7dbcf202c"
+  },
+  "report_md_sha256": "d7d2f88a84fccf1ea4e5a9610e5694ec7d10ad6807e0d906805d55a097c82dcf",
+  "source_of_numbers": "committed audit artifacts only"
+}
