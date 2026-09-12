@@ -3,9 +3,11 @@
 Each guard has a denominator and can go red:
 
 * all 20 planned cells are present, unique, classified with the registered
-  vocabulary, and the RF-02 route matrix / RF-04 run results merge exactly;
+  vocabulary, and the RF-02 route matrix / RF-04 full paired artifact merge
+  exactly; the RF-04.1 pilot-era report is checked against the superseded pilot
+  scope so the coverage supersession stays explicit;
 * a non-executed cell carries null metrics with a reason, never a zero, and an
-  executed cell's numbers equal the committed artifact values;
+  executed cell's numbers equal the committed full-artifact values;
 * profiling has positive denominators, measured wall values equal the pilot
   artifact, the truly unmeasured fields are null + reason, and engine counters
   equal the committed evaluator traces;
@@ -13,7 +15,7 @@ Each guard has a denominator and can go red:
   digests recompute and cross-check the decay panel, and the schema hash
   recomputes from the declared schema object;
 * the report references all three artifacts and its coverage counts agree with
-  the coverage artifact.
+  the pilot scope the full-cohort artifact supersedes.
 """
 
 from __future__ import annotations
@@ -29,7 +31,7 @@ RF02 = ("evidence", "corrective_mode4_v3", "RF-02")
 GAP_CLOSE_ARTIFACTS = ("cell_coverage.json", "profiling_and_budget.json",
                        "mode4_transparency_ledger.json")
 STATUS_VOCABULARY = {"RUN_VALID", "RUN_NOT_EVALUABLE", "BLOCKED_CAPABILITY",
-                     "NOT_RUN", "INSUFFICIENT_DATA"}
+                     "NOT_RUN", "NOT_RUN_BUDGET", "INSUFFICIENT_DATA"}
 
 
 def _read(lab_root, parts, name: str) -> str:
@@ -48,7 +50,7 @@ def _canonical_sha256(payload) -> str:
 def test_rf04_cell_coverage_all_20_cells_unique_classified_and_merged(lab_root):
     coverage = _load(lab_root, RF04, "cell_coverage.json")
     route = _load(lab_root, RF02, "pilot_and_route_matrix.json")
-    pilot = _load(lab_root, RF04, "paired_discovery_pilot.json")
+    full = _load(lab_root, RF04, "paired_discovery_full.json")
     cells = coverage["cells"]
     assert len(cells) == 20, "the registered cohort is 4 alphas x 5 symbols"
     ids = [cell["cell"] for cell in cells]
@@ -65,31 +67,38 @@ def test_rf04_cell_coverage_all_20_cells_unique_classified_and_merged(lab_root):
                         if cell["coverage_status"] == "BLOCKED_CAPABILITY"}
     assert route_blocked == coverage_blocked, (
         f"route/coverage blocked mismatch: {route_blocked ^ coverage_blocked}")
-    executed = {cell["cell"] for cell in pilot["cells"]}
+    executed = {cell["cell"] for cell in full["cells"]}
     assert {cell["cell"] for cell in cells if cell["executed"]} == executed, (
-        "the executed set does not match the committed pilot")
+        "the executed set does not match the committed full paired artifact")
     counts = coverage["counts"]
     assert counts["planned_cells"] == 20 and counts["total_classified"] == 20
     for status in STATUS_VOCABULARY:
         assert counts[status] == sum(1 for cell in cells
                                      if cell["coverage_status"] == status)
     assert sum(counts[status] for status in STATUS_VOCABULARY) == 20
+    assert counts["RUN_VALID"] == 10 and counts["RUN_NOT_EVALUABLE"] == 0
+    assert counts["NOT_RUN"] == 0 and counts["NOT_RUN_BUDGET"] == 0
+    assert "paired_discovery_full.json" in {
+        source["artifact"].rsplit("/", 1)[-1] for source in coverage["sources"]}
     by_cell = {cell["cell"]: cell for cell in cells}
     sc = by_cell["A-SC/BTCUSDT"]
-    assert sc["coverage_status"] == "RUN_NOT_EVALUABLE"
-    assert sc["run_result"]["implementation_fidelity"] == "DEVIATED"
-    assert sc["run_result"]["economic_status"] == "NOT_EVALUABLE"
+    assert sc["coverage_status"] == "RUN_VALID"
+    assert sc["route"] == "event"
+    assert sc["run_result"]["implementation_fidelity"] == "AS_SPECIFIED"
+    assert [deviation["route"] for deviation in sc["run_result"]["route_deviations"]] == [
+        "endpoint"], "the registered endpoint deviation was not retained"
+    assert sc["run_result"]["route_deviations"][0]["implementation_fidelity"] == "DEVIATED"
     hma = by_cell["A-HMA/BTCUSDT"]
     assert hma["coverage_status"] == "RUN_VALID"
-    assert hma["run_result"]["economic_status"] == "INCONCLUSIVE"
-    assert hma["run_result"]["statistical_status"] == "INCONCLUSIVE"
+    assert hma["route"] == "event"
+    assert hma["run_result"]["route"] == "event"
 
 
-def test_rf04_cell_coverage_nulls_carry_reasons_and_metrics_match_pilot(lab_root):
+def test_rf04_cell_coverage_nulls_carry_reasons_and_metrics_match_full(lab_root):
     coverage = _load(lab_root, RF04, "cell_coverage.json")
-    pilot = _load(lab_root, RF04, "paired_discovery_pilot.json")
+    full = _load(lab_root, RF04, "paired_discovery_full.json")
     controls = _load(lab_root, RF04, "controls_and_funnel.json")
-    pilot_cells = {cell["cell"]: cell for cell in pilot["cells"]}
+    full_cells = {cell["cell"]: cell for cell in full["cells"]}
     matched = {row["cell"]: row["arm"] for row in controls["matched_control"]["cells"]}
     placebo = {row["cell"]: row["arm"] for row in controls["placebo"]["cells"]}
     for cell in coverage["cells"]:
@@ -104,10 +113,12 @@ def test_rf04_cell_coverage_nulls_carry_reasons_and_metrics_match_pilot(lab_root
             continue
         assert cell["account_metrics"] is not None
         assert cell["account_metrics_reason"] is None
-        artifact = pilot_cells[cell["cell"]]
+        artifact = full_cells[cell["cell"]]
+        primary = next(run for run in artifact["runs"]
+                       if run["route"] == artifact["primary_route"])
         for arm, values in cell["account_metrics"].items():
-            if arm in artifact["arms"]:
-                source = artifact["arms"][arm]
+            if arm in primary["arms"]:
+                source = primary["arms"][arm]
             elif arm == "M4_CAL_MATCHED":
                 source = matched[cell["cell"]]
             else:
@@ -218,20 +229,29 @@ def test_rf04_report_references_gap_close_artifacts(lab_root):
         assert name in text, f"report.md does not reference {name}"
     report = _load(lab_root, RF04, "report.json")
     coverage = _load(lab_root, RF04, "cell_coverage.json")
+    full = _load(lab_root, RF04, "paired_discovery_full.json")
     assert report["coverage_ref"] == "cell_coverage.json"
     assert report["profiling_ref"] == "profiling_and_budget.json"
     assert report["transparency_ref"] == "mode4_transparency_ledger.json"
     for name in GAP_CLOSE_ARTIFACTS:
         assert report["artifact_hashes"][name], f"report.json has no hash for {name}"
-    market = report["market_runs"]
-    assert market["planned_cells"] == 20
-    assert market["executed_cells"] == (coverage["counts"]["RUN_VALID"]
-                                        + coverage["counts"]["RUN_NOT_EVALUABLE"])
-    assert market["not_run_cells"] == coverage["counts"]["NOT_RUN"] == 8
-    assert len(market["blocked_cells"]) == coverage["counts"]["BLOCKED_CAPABILITY"] == 10
-    assert market["insufficient_data_cells"] == coverage["counts"]["INSUFFICIENT_DATA"]
+    # report.json is the RF-04.1 pilot-era report; the full artifact records its
+    # scope explicitly so the supersession is not silently renamed
+    pilot_scope = full["superseded_pilot_scope"]["counts"]
+    assert report["market_runs"]["planned_cells"] == 20
+    assert report["market_runs"]["executed_cells"] == (pilot_scope["RUN_VALID"]
+                                                       + pilot_scope["RUN_NOT_EVALUABLE"]) == 2
+    assert report["market_runs"]["not_run_cells"] == pilot_scope["NOT_RUN"] == 8
+    assert len(report["market_runs"]["blocked_cells"]) == pilot_scope[
+        "BLOCKED_CAPABILITY"] == 10
+    assert report["market_runs"]["insufficient_data_cells"] == pilot_scope[
+        "INSUFFICIENT_DATA"]
     assert report["coverage"]["per_cell"]["A-SC/BTCUSDT"] == "RUN_NOT_EVALUABLE"
     assert report["coverage"]["per_cell"]["A-HMA/BTCUSDT"] == "RUN_VALID"
+    assert "2 of 20 planned cells executed" in report["claim"]["scope"]
+    assert coverage["counts"]["RUN_VALID"] == 10, (
+        "the current coverage is the full-cohort supersession of the pilot scope")
+    assert coverage["counts"]["NOT_RUN"] == 0
     assert report["performance"]["profile_ref"] == "profiling_and_budget.json"
     assert report["performance"]["peak_rss_bytes"] is None
     assert report["performance"]["cpu_seconds"] is None
