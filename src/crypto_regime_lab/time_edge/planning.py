@@ -4,10 +4,13 @@ from pathlib import Path
 import pandas as pd
 
 from ..experiments.time_edge_contracts import ContractError
+from .coverage import check_coverage_revision, require_registered_coverage, verify_coverage_evidence
 from .runtime import local, source_identity, validate_job
 from .schedule import calendar, triggers, matched_cadence
 from .storage import ALLOCATION_REVISION_SCHEMA, check_allocation_revision, digest, file_digest, read, save, utcnow
 from .eligibility import history_start, coverage
+
+COVERAGE_REGISTRATION = "configs/time_edge_validation_v4/te03_coverage_registration.json"
 
 
 def ref(root, path):
@@ -33,13 +36,23 @@ def snapshot_indices(root, directory):
     return refs
 
 
-def make_plan(root, *, run_id, stage, spec=None, allocation=None):
+def make_plan(root, *, run_id, stage, spec=None, allocation=None, coverage=None):
     root=Path(root); folder=f"evidence/time_edge_validation_v4/plans/{run_id}"
     if not run_id.replace("-","").replace("_","").isalnum():
         raise ContractError("run ID may contain only letters, digits, hyphens and underscores")
     if stage in ("discovery","decay") and (allocation is None or not allocation.get("profile_refs")):
         raise ContractError("discovery/decay require explicit profile-backed shared allocation")
     inputs={}; tasks=[]
+    if spec is not None and any(name in spec for name in ("target_series","model_series")):
+        registered=read(root/COVERAGE_REGISTRATION)
+        if coverage is None:
+            require_registered_coverage(registered,spec)
+        else:
+            coverage_path=local(root,coverage)
+            revision=read(coverage_path)
+            check_coverage_revision(revision,spec=spec,registered=registered)
+            verify_coverage_evidence(root,revision)
+            inputs["coverage_revision"]=ref(root,coverage_path)
     if allocation is None:
         allocation={"allocation_id":"TE02-PILOT-R03","total_wall_seconds":1800.,"task_wall_seconds":600.}
     if allocation.get("schema") == ALLOCATION_REVISION_SCHEMA:

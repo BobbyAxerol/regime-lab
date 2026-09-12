@@ -29,7 +29,7 @@ def main(argv=None):
     plan=commands.add_parser("plan")
     plan.add_argument("--run-id",required=True)
     plan.add_argument("--stage",choices=("qualify","pilot","features","models","targets","discovery","decay","controls","statistical-calibration","custom"),required=True)
-    plan.add_argument("--spec"); plan.add_argument("--allocation")
+    plan.add_argument("--spec"); plan.add_argument("--allocation"); plan.add_argument("--coverage")
     for name in ("run","qualify","fit-model","controls","calibrate"):
         run=commands.add_parser(name); run.add_argument("--job",required=True)
         run.add_argument("--retry-failed",action="store_true"); run.add_argument("--max-tasks",type=int)
@@ -66,7 +66,8 @@ def main(argv=None):
         from crypto_regime_lab.time_edge.planning import make_plan
         result=make_plan(ROOT,run_id=args.run_id,stage=args.stage,
             spec=read(local(ROOT,args.spec)) if args.spec else None,
-            allocation=read(local(ROOT,args.allocation)) if args.allocation else None)
+            allocation=read(local(ROOT,args.allocation)) if args.allocation else None,
+            coverage=args.coverage)
     elif args.command in ("run","qualify","fit-model","controls","calibrate"):
         from crypto_regime_lab.time_edge.runtime import run_jobs
         job=read(local(ROOT,args.job))
