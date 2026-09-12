@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.metric_contract.te01.v1",
+  "source_of_financial_truth": "installed QuantBT equity/orders/fills/positions only; new functions are report arithmetic, never simulation",
+  "return": {
+    "name": "mean_daily_account_net_return",
+    "formula": "r[d]=E[d]/E[previous_mark]-1",
+    "unit": "account_return/day",
+    "bps_multiplier": 10000,
+    "sampling": "daily_UTC",
+    "zero_days": "retain within score interval",
+    "missing": "null_with_reason_never_zero",
+    "external_cashflows": false
+  },
+  "sharpe": {
+    "name": "canonical_daily_sharpe",
+    "formula": "sqrt(365)*mean(r-rf)/sample_std(r-rf,ddof=1)",
+    "risk_free_daily": 0.0,
+    "periods_per_year": 365,
+    "ddof": 1,
+    "minimum_arithmetic_observations": 2,
+    "zero_variance": "null/ZERO_VARIANCE",
+    "short_series": "null/INSUFFICIENT_OBSERVATIONS",
+    "bar_fallback": false
+  },
+  "profit_factor": {
+    "daily_name": "profit_factor_daily",
+    "raw_name": "profit_factor_quantbt",
+    "trade_name": "profit_factor_trade_net",
+    "daily_formula": "sum(positive daily returns)/abs(sum(negative daily returns))",
+    "only_loss_value": 0.0,
+    "no_loss": "null/NO_LOSS_DENOMINATOR",
+    "trade_pf_requires": "qualified QuantBT closed/censored campaign and fee allocation ledger",
+    "no_trades_from_returns_only": false,
+    "log_gap_requires": "both positive finite values and equal sampling/definition"
+  },
+  "drawdown": {
+    "local": "include starting equity peak in window",
+    "account": "retain historical high-water mark across folds",
+    "fold_sharpe_averaging": false
+  },
+  "decay": {
+    "D1": "raw same-selected-theta IS minus first fixed-theta OOS; operational mixed-incumbent returns separately attributed; IS selection bias disclosed",
+    "D2": "same theta continuous diagnostic account; age=selection_ready; also emit actual_activation age; do not reset each age window",
+    "D3": "next operational fold metric minus previous; descriptive, not pure parameter decay",
+    "age_window_days": 90,
+    "age_horizons": [
+      [
+        0,
+        90
+      ],
+      [
+        90,
+        180
+      ],
+      [
+        180,
+        270
+      ]
+    ],
+    "primary_age_contrast": "(mu_CAL_H1-mu_CAL_H3)-(mu_REGIME_H1-mu_REGIME_H3)",
+    "self_comparisons_in_inference": false,
+    "raw_and_penalized": "separate columns; candidate_decay_quantbt never renamed raw Sharpe",
+    "matching": "calendar/context design locked before replay; unmatched dynamic-fold ordinal never paired",
+    "uncertainty": "preserve common shocks and overlapping anchors; no iid row bootstrap"
+  },
+  "counts": {
+    "trades": "qualified completed campaigns; do not alias fill count",
+    "turnover": "sum(abs(fill_notional)/pre_fill_equity) with explicit weighting",
+    "exposure": "actual engine position notional/equity and time in position; not adapter-active bars"
+  },
+  "json": "strict JSON; nonfinite represented by null plus reason; no epsilon-manufactured PF"
+}

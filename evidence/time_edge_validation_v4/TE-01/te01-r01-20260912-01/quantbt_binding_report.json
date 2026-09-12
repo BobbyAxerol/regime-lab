@@ -1,0 +1,474 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.quantbt_binding_report.v1",
+  "sys_executable": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+  "quantbt_import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+  "init_sha256": "1b3e6280930667cfead1d983010b1997055b60fcd0decea402c44a2a21703566",
+  "packages": [
+    {
+      "name": "quantbt-engine",
+      "version": "1.1.1",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    },
+    {
+      "name": "quantbt-native",
+      "version": "0.4.2",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": [
+        {
+          "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/_quantbt_native/_quantbt_native.cpython-312-x86_64-linux-gnu.so",
+          "sha256": "b933d832247be816720d3a53460c03eeb5e892770b4a9c2f1389013e9629a3e8",
+          "bytes": 2995248
+        }
+      ]
+    },
+    {
+      "name": "numba",
+      "version": "0.65.1",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    },
+    {
+      "name": "pandas",
+      "version": "2.3.3",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    },
+    {
+      "name": "optuna",
+      "version": "4.8.0",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    },
+    {
+      "name": "pyarrow",
+      "version": "25.0.1",
+      "location": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages",
+      "native_files": []
+    }
+  ],
+  "wheel_hashes": [
+    {
+      "path": "wheelhouse/quantbt_engine-1.1.1-py3-none-any.whl",
+      "sha256": "9a1c7af724e543d8cba338206c0b2c64afe1fb3a621f21b2505454c4807b8587",
+      "bytes": 912472
+    },
+    {
+      "path": "wheelhouse/quantbt_native-0.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "e56d204778d94101b49a1259a276abf9684c689af4277f6b8d08e9d9275376d5",
+      "bytes": 1163795
+    },
+    {
+      "path": "wheelhouse/numba-0.65.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "sha256": "52bc6f3ceb8fcaff9b2ae26b4c6b1e9fee39db8d355534c0fe4f39a901246b84",
+      "bytes": 3802467
+    },
+    {
+      "path": "wheelhouse/optuna-4.8.0-py3-none-any.whl",
+      "sha256": "c57a7682679c36bfc9bca0da430698179e513874074b71bebedb0334964ab930",
+      "bytes": 419456
+    }
+  ],
+  "registered_config": {
+    "optimization_mode": "mode_4_is_only_robust",
+    "optimization_schedule": "per_fold_causal",
+    "candidate_selection_metric": "is_only_robust",
+    "optuna_trials": 32,
+    "random_seed": 20260912,
+    "scoring_backend": "endpoint",
+    "scoring_trading_days": 365,
+    "window_mode": "rolling",
+    "train_window": "180D",
+    "decay_lambda": 0.5,
+    "decay_gamma": 0.5,
+    "candidate_decay_lambda": null,
+    "candidate_decay_gamma": null,
+    "top_is_fraction": 0.1,
+    "top_is_k": null,
+    "flat_top_fraction": 0.1,
+    "flat_eps": 0.15,
+    "flat_min_samples": 3,
+    "flat_selector": "medoid",
+    "plateau_quantile": 0.25,
+    "plateau_median_weight": 0.25,
+    "plateau_std_penalty": 0.5,
+    "plateau_size_bonus": 0.01,
+    "is_subperiods": 6,
+    "q25_weight": 0.3,
+    "dispersion_penalty": 0.5,
+    "temporal_weight": 0.65,
+    "plateau_weight": 0.35,
+    "use_bootstrap_penalty": false,
+    "use_complexity_penalty": false,
+    "min_trades_per_year": null,
+    "trade_penalty_factor": null,
+    "optuna_early_stopping": null
+  },
+  "resolved_config": {
+    "optimization_mode": "mode_4_is_only_robust",
+    "optimization_schedule": "per_fold_causal",
+    "candidate_selection_metric": "is_only_robust",
+    "optuna_trials": 32,
+    "random_seed": 20260912,
+    "scoring_backend": "endpoint",
+    "scoring_trading_days": 365,
+    "window_mode": "rolling",
+    "train_window": "180D",
+    "decay_lambda": 0.5,
+    "decay_gamma": 0.5,
+    "candidate_decay_lambda": null,
+    "candidate_decay_gamma": null,
+    "top_is_fraction": 0.1,
+    "top_is_k": null,
+    "flat_top_fraction": 0.1,
+    "flat_eps": 0.15,
+    "flat_min_samples": 3,
+    "flat_selector": "medoid",
+    "plateau_quantile": 0.25,
+    "plateau_median_weight": 0.25,
+    "plateau_std_penalty": 0.5,
+    "plateau_size_bonus": 0.01,
+    "is_subperiods": 6,
+    "q25_weight": 0.3,
+    "dispersion_penalty": 0.5,
+    "temporal_weight": 0.65,
+    "plateau_weight": 0.35,
+    "use_bootstrap_penalty": false,
+    "use_complexity_penalty": false,
+    "min_trades_per_year": null,
+    "trade_penalty_factor": null,
+    "optuna_early_stopping": null
+  },
+  "config_matches_registration": true,
+  "public_signatures": {
+    "QuantBTEndpoint.walk_forward": "(strategy_class, split_mode: 'Union[str, int, pd.Timestamp]' = 'walk_forward_2022', split_frequency: 'str' = 'quarterly', target_mode: 'str' = 'signal_notional', window_mode: 'str' = 'expanding', train_window: 'Optional[str]' = None, optimization_mode: 'str' = 'none', optimization_schedule: 'str' = 'global', fold_boundary_position_policy: 'str' = 'carry', calendar_contract: 'str' = 'exact_v2', optimization_config: 'Optional[Dict]' = None, optuna_trials: 'int' = 0, optuna_early_stopping: 'Optional[int]' = None, random_seed: 'int' = 42, **kwargs) -> \"'QuantBTEndpoint'\"",
+    "WalkForwardEngine": "(strategy: 'Any', config: 'Optional[WalkForwardConfig]' = None, scorer: 'Optional[Callable[..., Dict[str, float]]]' = None, native_scorer: 'Optional[Callable[..., Dict[str, float]]]' = None)"
+  },
+  "research_retention_values": [
+    "full_trial_ledger",
+    "none",
+    "selected_only"
+  ],
+  "vfy01_to_11": [
+    {
+      "id": "VFY01",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+      "source_anchors": [
+        {
+          "line": 1168,
+          "text": "def pct_equity(cls, **kwargs) -> \"QuantBTEndpoint\":"
+        },
+        {
+          "line": 3195,
+          "text": "def _run_pct_equity_transition_native("
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY02",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+      "source_anchors": [
+        {
+          "line": 1932,
+          "text": "def walk_forward("
+        },
+        {
+          "line": 1958,
+          "text": "`mode_3_flat_minima`, `mode_4_is_only_robust`, and"
+        },
+        {
+          "line": 2128,
+          "text": "if str(optimization_mode).lower().strip() == \"mode_4_is_only_robust\""
+        },
+        {
+          "line": 2216,
+          "text": "`mode_3_flat_minima`, `mode_4_is_only_robust`, and"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY03",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256",
+      "source_anchors": [
+        {
+          "line": 1455,
+          "text": "def _run_per_fold_schedule("
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY04",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+      "source_anchors": [
+        {
+          "line": 2032,
+          "text": "native_prepared_wfo = str(optimization_config.get(\"native_prepared_wfo\", \"off\")).lower().strip()"
+        },
+        {
+          "line": 2033,
+          "text": "if native_prepared_wfo not in {\"off\", \"auto\", \"require\"}:"
+        },
+        {
+          "line": 2034,
+          "text": "raise ValueError(\"native_prepared_wfo must be 'off', 'auto', or 'require'\")"
+        },
+        {
+          "line": 3810,
+          "text": "and str(wf_config.metadata.get(\"native_prepared_wfo\", \"off\")).lower().strip() == \"require\""
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY05",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/backends/native_wfo_public.py",
+      "sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee",
+      "source_anchors": [
+        {
+          "line": 43,
+          "text": "_RUST_DIRECT_TIMING = \"close_target_v2_same_close\""
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY06",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+      "source_anchors": [
+        {
+          "line": 243,
+          "text": "one-way `fee_rate` at the endpoint boundary when explicit `fee_rate`"
+        },
+        {
+          "line": 359,
+          "text": "return self.fee / 2.0 if self.fee_rate is None else float(self.fee_rate)"
+        },
+        {
+          "line": 391,
+          "text": "\"fee_rate\": config.v2_fee_rate,"
+        },
+        {
+          "line": 507,
+          "text": "fee_rate=config.v2_fee_rate,"
+        },
+        {
+          "line": 569,
+          "text": "fee_rate=config.v2_fee_rate,"
+        },
+        {
+          "line": 632,
+          "text": "fee_rate=config.v2_fee_rate,"
+        },
+        {
+          "line": 700,
+          "text": "fee_rates = self.backend._per_symbol_array(config.v2_fee_rate, symbols, default=0.0)"
+        },
+        {
+          "line": 711,
+          "text": "fee_rates=fee_rates,"
+        },
+        {
+          "line": 756,
+          "text": "fee_rates = self.backend._per_symbol_array(config.v2_fee_rate, symbols, default=0.0)"
+        },
+        {
+          "line": 766,
+          "text": "fee_rates=fee_rates,"
+        },
+        {
+          "line": 867,
+          "text": "fee_rate=fee_rate,"
+        },
+        {
+          "line": 968,
+          "text": "\"fee_rate\": self.config.v2_fee_rate,"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY07",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/metrics/performance.py",
+      "sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095",
+      "source_anchors": [
+        {
+          "line": 224,
+          "text": "def profit_factor(result: BacktestResult) -> float:"
+        },
+        {
+          "line": 303,
+          "text": "stats_returns = _array_returns_for_stats(idx, equity_arr, returns_arr)"
+        },
+        {
+          "line": 304,
+          "text": "annual_periods = _array_annualization_periods(idx, stats_returns, trading_days)"
+        },
+        {
+          "line": 314,
+          "text": "sharpe_value = _array_sharpe(stats_returns, annual_periods)"
+        },
+        {
+          "line": 315,
+          "text": "sortino_value = _array_sortino(stats_returns, annual_periods)"
+        },
+        {
+          "line": 316,
+          "text": "omega_value = _array_omega(stats_returns)"
+        },
+        {
+          "line": 317,
+          "text": "pf_value = _array_profit_factor(stats_returns)"
+        },
+        {
+          "line": 319,
+          "text": "avg_win, avg_loss = _array_avg_win_loss(stats_returns)"
+        },
+        {
+          "line": 389,
+          "text": "def _array_annualization_periods(idx: pd.DatetimeIndex, stats_returns: np.ndarray, trading_days: int) -> float:"
+        },
+        {
+          "line": 390,
+          "text": "daily_equity_returns = len(stats_returns) > 0"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY08",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256",
+      "source_anchors": [
+        {
+          "line": 450,
+          "text": "candidate_decay_lambda: Optional[float] = None"
+        },
+        {
+          "line": 451,
+          "text": "candidate_decay_gamma: Optional[float] = None"
+        },
+        {
+          "line": 483,
+          "text": "trade_penalty_factor: Optional[float] = None"
+        },
+        {
+          "line": 715,
+          "text": "candidate_decay_lambda = None if self.candidate_decay_lambda is None else float(self.candidate_decay_lambda)"
+        },
+        {
+          "line": 716,
+          "text": "if candidate_decay_lambda is not None and candidate_decay_lambda < 0.0:"
+        },
+        {
+          "line": 717,
+          "text": "raise ValueError(\"candidate_decay_lambda must be >= 0 when provided\")"
+        },
+        {
+          "line": 718,
+          "text": "object.__setattr__(self, \"candidate_decay_lambda\", candidate_decay_lambda)"
+        },
+        {
+          "line": 719,
+          "text": "candidate_decay_gamma = None if self.candidate_decay_gamma is None else float(self.candidate_decay_gamma)"
+        },
+        {
+          "line": 720,
+          "text": "if candidate_decay_gamma is not None and candidate_decay_gamma < 0.0:"
+        },
+        {
+          "line": 721,
+          "text": "raise ValueError(\"candidate_decay_gamma must be >= 0 when provided\")"
+        },
+        {
+          "line": 722,
+          "text": "object.__setattr__(self, \"candidate_decay_gamma\", candidate_decay_gamma)"
+        },
+        {
+          "line": 790,
+          "text": "penalty_factor = None if self.trade_penalty_factor is None else float(self.trade_penalty_factor)"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY09",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py",
+      "sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256",
+      "source_anchors": [
+        {
+          "line": 2311,
+          "text": "def build_folds(self, idx: pd.DatetimeIndex) -> List[WalkForwardFold]:"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY10",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+      "source_anchors": [
+        {
+          "line": 1138,
+          "text": "def prepare_reactive_walk_forward("
+        },
+        {
+          "line": 1151,
+          "text": "series.  It is currently certified for a reset-flat account per fold;"
+        },
+        {
+          "line": 1967,
+          "text": "embargo provides an auditable flatten gap; `reset_flat` and"
+        },
+        {
+          "line": 3746,
+          "text": "if account_policy == \"reset_flat\":"
+        },
+        {
+          "line": 3748,
+          "text": "\"fold_account_policy='reset_flat' produces independent fold accounts and cannot be \""
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    },
+    {
+      "id": "VFY11",
+      "path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/backends/native_wfo_public.py",
+      "sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee",
+      "source_anchors": [
+        {
+          "line": 255,
+          "text": "\"turnover\": float(result.report_trade_count[row_index]),"
+        },
+        {
+          "line": 257,
+          "text": "\"mean_return\": float(result.total_return[row_index]),"
+        },
+        {
+          "line": 258,
+          "text": "\"volatility\": 0.0,"
+        }
+      ],
+      "status": "SOURCE_ANCHORED_RUNTIME_NOT_TESTED"
+    }
+  ],
+  "source_or_metadata_only": true,
+  "engine_runs": 0,
+  "limits": "Actual installed imports/config constructor and source anchors; not runtime parity, native execution or performance proof. A .so file hash does not mean that backend executed."
+}

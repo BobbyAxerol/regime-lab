@@ -1,0 +1,2331 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.finding_disposition.v1",
+  "findings": [
+    {
+      "id": "TEF-01",
+      "title": "Cửa sổ thống kê chứa warmup trước kỳ đánh giá · P0 · TE-01/04",
+      "source_refs": [
+        "scripts/run_rf05.py::paired_daily_diff"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::paired_recompute_rows"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR01",
+      "repair_phase": "TE-04",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::paired_daily_diff",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            259
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::paired_recompute_rows",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            489
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-02",
+      "title": "Age windows D2 dùng chung ngày biên · P1 · TE-04",
+      "source_refs": [
+        "scripts/run_rf04_decay_and_controls.py::daily_metrics"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_decay_and_controls.py::d2_replay"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR02",
+      "repair_phase": "TE-04",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::daily_metrics",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            123
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::d2_replay",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            455
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-03",
+      "title": "Profit Factor lookup và trạng thái không đúng · P1 · TE-04",
+      "source_refs": [
+        "scripts/run_rf04_decay_and_controls.py::daily_metrics"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_decay_and_controls.py::d2_replay"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR03/BR04",
+      "repair_phase": "TE-04",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::daily_metrics",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            123
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::d2_replay",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            455
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-04",
+      "title": "Bảng decay chưa trả lời so sánh hai method trong scope hiện tại · P1 · TE-04",
+      "source_refs": [
+        "scripts/run_rf04_decay_and_controls.py::d1_rows",
+        "scripts/run_rf04_decay_and_controls.py::d3_rows"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_decay_and_controls.py::main"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-08",
+      "repair_phase": "TE-04",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::d1_rows",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            279
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::d3_rows",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            387
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::main",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            740
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-05",
+      "title": "Model selection/repair chưa nối vào tape chính · P0 đối với claim model mới · TE-03",
+      "source_refs": [
+        "scripts/run_rf04_g10_model_repairs.py::main",
+        "src/crypto_regime_lab/regime/registry.py"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-05",
+      "repair_phase": "TE-03",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_g10_model_repairs.py::main",
+          "sha256": "fda62493e3ca67cf54e31f04f36520d1f7ea55083f7dde161b9f00948b691d94",
+          "lines": [
+            146
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/registry.py",
+          "sha256": "6b9729de048905de4a30259c1e39da1140d41ae2a0442fca2d9777d6677d8ae4",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-06",
+      "title": "Controller không kiểm model ready; input thiếu field được mặc định hợp lệ · P0 · TE-03",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR05/BR06",
+      "repair_phase": "TE-03",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule",
+          "sha256": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+          "lines": [
+            156
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            122
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-07",
+      "title": "Không có initial/max-age lifecycle đầy đủ · P1 · TE-02/03",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR07",
+      "repair_phase": "TE-03",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule",
+          "sha256": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+          "lines": [
+            156
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            122
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-08",
+      "title": "Purge forward outcomes sai phía trong model ablation · P0 đối với information claim · TE-03",
+      "source_refs": [
+        "src/crypto_regime_lab/regime/ablation.py::fixed_target_ablation"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_g10_model_repairs.py::main"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "BR08",
+      "repair_phase": "TE-03",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/ablation.py::fixed_target_ablation",
+          "sha256": "76ba00c46adb2707f223fe279a80b395228705a8656179c7dec4d4db11ce3dd2",
+          "lines": [
+            257
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_g10_model_repairs.py::main",
+          "sha256": "fda62493e3ca67cf54e31f04f36520d1f7ea55083f7dde161b9f00948b691d94",
+          "lines": [
+            146
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-09",
+      "title": "Positive control chưa kiểm full learned pipeline · P1 · TE-03/04",
+      "source_refs": [
+        "scripts/run_rf04_step1.py"
+      ],
+      "caller_refs": [
+        "tests/mode4_corrective/test_rf04_positive_control.py"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-09",
+      "repair_phase": "TE-03",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_step1.py",
+          "sha256": "4c4c5f868db4ba5e9d5340a5767728aa0c82a72737f98171d140c22f00f81e7d",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "tests/mode4_corrective/test_rf04_positive_control.py",
+          "sha256": "4a927308502e1648a6ca97f4d9acfee5b5fc051479a4e84b9d5086f49bc7b1a8",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-10",
+      "title": "Route đúng engine chưa đồng nghĩa đúng clock/resolution · P0 nếu claim sai cohort · TE-02",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-02",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-11",
+      "title": "Ready/activation/warmup không có trace đủ để chứng minh policy · P0/P1 · TE-02",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-04",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            101
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-12",
+      "title": "Candidate scorer metrics/support cần qualify lại · P0 nếu đổi selection · TE-02",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::EventAccountScorer",
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_annualised_sharpe"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-03",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::EventAccountScorer",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            282
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_annualised_sharpe",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            270
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-13",
+      "title": "Chấm một cutoff còn chạy deployment tới cuối frame · P1 compute / P0 failure semantics · TE-02",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::run_one_fold"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-10",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::run_one_fold",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            498
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-14",
+      "title": "Runtime errors và trial retention chưa đủ · P0/P1 · TE-02",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::run_one_fold"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-10",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::run_one_fold",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            498
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-15",
+      "title": "Budget và resume chưa phải total-compute gate · P1 · TE-02",
+      "source_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-10",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-16",
+      "title": "Báo cáo và hash drift, missing phase report · P1 · TE-01/05",
+      "source_refs": [
+        "scripts/run_fup02.py::write_checkpoint"
+      ],
+      "caller_refs": [
+        "scripts/write_fup02_report.py"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-11",
+      "repair_phase": "TE-01/05",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_fup02.py::write_checkpoint",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1360
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/write_fup02_report.py",
+          "sha256": "e1a1f51ed4d8d2b9589500b4a8e9853947182f760a8a3cd6bdf397340b0d71b7",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-17",
+      "title": "Statistics/claim gates có chữ thống kê nhưng chưa được calibration đầy đủ · P1 · TE-04/05",
+      "source_refs": [
+        "scripts/run_rf05.py::bootstrap",
+        "scripts/run_rf05.py::claim_status"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::build_claim_report"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-07",
+      "repair_phase": "TE-04/05",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::bootstrap",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            266
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::claim_status",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            306
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::build_claim_report",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            673
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-18",
+      "title": "Attribution controls và study design còn partial · P1/SCOPE · TE-04",
+      "source_refs": [
+        "scripts/run_rf04_decay_and_controls.py::paired_endpoint"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_decay_and_controls.py::main",
+        "scripts/run_rf05.py::build_claim_report"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-09",
+      "repair_phase": "TE-04",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::paired_endpoint",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            575
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::main",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            740
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::build_claim_report",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            673
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-19",
+      "title": "Mất execution lineage và metric aliases · P1 · TE-02/05",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-04",
+      "repair_phase": "TE-02",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "TEF-20",
+      "title": "Scope limitations và đường cũ chưa được đóng ở entry point · P1/SCOPE · TE-01/05",
+      "source_refs": [
+        "src/crypto_regime_lab/cli.py",
+        "src/crypto_regime_lab/experiments/factorial.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/cli.py"
+      ],
+      "existing_tests": [],
+      "new_validation_ref": "TG-12",
+      "repair_phase": "TE-01/05",
+      "related_findings": [],
+      "status": "OPEN",
+      "owner": "Codex",
+      "evidence_kind": "CURRENT_SOURCE_AND_PINNED_REVIEW; baseline probe only where mapped",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/cli.py",
+          "sha256": "1a1b8a9988a3a3726a3773f2afd3075604b98522b76b4d74df18bf4d37ca1077",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/factorial.py",
+          "sha256": "9b22545e5f0f6fce59b07cab2d54379ba550890a9e38a3a996f0e243a2846ddf",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/cli.py",
+          "sha256": "1a1b8a9988a3a3726a3773f2afd3075604b98522b76b4d74df18bf4d37ca1077",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A01",
+      "title": "Original guide finding A01",
+      "source_refs": [
+        "src/crypto_regime_lab/quantbt_bridge/routes.py::bound_fee_kwargs"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_contracts.py::test_a01_bound_fee_kwargs_translate_one_way_exactly_once"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-10",
+        "TEF-12"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/quantbt_bridge/routes.py::bound_fee_kwargs",
+          "sha256": "9737b7193bbcf01702fa84c8da2d3caf5327948c917e3a802f1d5e8132cfd5ea",
+          "lines": [
+            37
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_contracts.py::test_a01_bound_fee_kwargs_translate_one_way_exactly_once",
+          "sha256": "0dec2fe881545eff727d254329545bb4fbc373477c1851aea3e5ab2c64887d68",
+          "lines": [
+            61
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A02",
+      "title": "Original guide finding A02",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/activation.py",
+        "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-06",
+        "TEF-07",
+        "TEF-11"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/activation.py",
+          "sha256": "1cd9d9052f3dae7acee44c748497aa17bf410bb7f499fb5022c6769e7219bae7",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            101
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar",
+          "sha256": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
+          "lines": [
+            64
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A03",
+      "title": "Original guide finding A03",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/evaluator.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-13",
+        "TEF-14"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/evaluator.py",
+          "sha256": "a4e1eba1f9e4bd04b638f4518cec3975c3c9ac4fd08c502f3e1c4ba174aab98b",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated",
+          "sha256": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
+          "lines": [
+            80
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A04",
+      "title": "Original guide finding A04",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_event_account.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-10",
+        "TEF-11",
+        "TEF-19"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::EventAccountStrategy",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            101
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_event_account.py",
+          "sha256": "a72093d09e1caea75610b19ebbdf8aba3716ecad424463458328fe6140a4ac46",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A05",
+      "title": "Original guide finding A05",
+      "source_refs": [
+        "src/crypto_regime_lab/alphas/a_hma.py",
+        "src/crypto_regime_lab/selector/alpha_schemas.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::engine_param_ranges"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_contracts.py::test_a05_an_unknown_sl_input_is_rejected_not_defaulted"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-12",
+        "TEF-14"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/alphas/a_hma.py",
+          "sha256": "f6da200feae9b8ce0ae43d3d85bf563e2564c08fda4899440ad96c3fd185a6b5",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/selector/alpha_schemas.py",
+          "sha256": "4b4bbddc0b659872393a87ce3dbc0201b5ee4dbd6fe8e1c9ae5db2885100d29e",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::engine_param_ranges",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            145
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_contracts.py::test_a05_an_unknown_sl_input_is_rejected_not_defaulted",
+          "sha256": "0dec2fe881545eff727d254329545bb4fbc373477c1851aea3e5ab2c64887d68",
+          "lines": [
+            36
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A06",
+      "title": "Original guide finding A06",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/execution_clock.py",
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_contracts.py::test_a06_an_htf_decision_does_not_fill_on_its_own_close"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-10"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/execution_clock.py",
+          "sha256": "cd77bafe44429f96e66c7a385b1c5c30863509a4a9ec2177212a2df75e5ec9ed",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_contracts.py::test_a06_an_htf_decision_does_not_fill_on_its_own_close",
+          "sha256": "0dec2fe881545eff727d254329545bb4fbc373477c1851aea3e5ab2c64887d68",
+          "lines": [
+            92
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A07",
+      "title": "Original guide finding A07",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/evaluator.py",
+        "scripts/run_rf04_decay_and_controls.py::daily_metrics"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::paired_recompute_rows"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-04",
+      "related_findings": [
+        "TEF-01",
+        "TEF-02",
+        "TEF-03"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/evaluator.py",
+          "sha256": "a4e1eba1f9e4bd04b638f4518cec3975c3c9ac4fd08c502f3e1c4ba174aab98b",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::daily_metrics",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            123
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::paired_recompute_rows",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            489
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta",
+          "sha256": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
+          "lines": [
+            138
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A08",
+      "title": "Original guide finding A08",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::run_one_fold"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_mode4_baseline.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-09",
+        "TEF-12",
+        "TEF-13"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::run_one_fold",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            498
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_mode4_baseline.py",
+          "sha256": "f16b3d4c1423ff84b5422f58650325c655b5ed0373ed7a4039ffde45fad0eccf",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A09",
+      "title": "Original guide finding A09",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/factorial.py",
+        "scripts/run_response_policy.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/cli.py"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf01_before_repairs.py::test_a09_the_old_e_arm_is_quarantined_not_wired_from_d"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-05",
+      "related_findings": [
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/factorial.py",
+          "sha256": "9b22545e5f0f6fce59b07cab2d54379ba550890a9e38a3a996f0e243a2846ddf",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_response_policy.py",
+          "sha256": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/cli.py",
+          "sha256": "1a1b8a9988a3a3726a3773f2afd3075604b98522b76b4d74df18bf4d37ca1077",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf01_before_repairs.py::test_a09_the_old_e_arm_is_quarantined_not_wired_from_d",
+          "sha256": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
+          "lines": [
+            170
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A10",
+      "title": "Original guide finding A10",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf03_controller.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03",
+      "related_findings": [
+        "TEF-05",
+        "TEF-06",
+        "TEF-07"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/regime_schedule.py::online_trigger_schedule",
+          "sha256": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+          "lines": [
+            156
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::regime_cutoffs",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            122
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf03_controller.py",
+          "sha256": "212d5d60b7819e4b435769d78b1bb53d4d9d906ced659ee02f8bd340afeabb2a",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A11",
+      "title": "Original guide finding A11",
+      "source_refs": [
+        "src/crypto_regime_lab/regime/emissions.py",
+        "src/crypto_regime_lab/regime/registry.py"
+      ],
+      "caller_refs": [
+        "scripts/run_response_policy.py"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf03_controller.py::test_a11_opposite_economic_contexts_are_not_collapsed"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03",
+      "related_findings": [
+        "TEF-05",
+        "TEF-08"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/emissions.py",
+          "sha256": "9ed49531efe15cc570e249f7ea01ce4cbe5873f8810f44e53603a1e7afc9dcf7",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/registry.py",
+          "sha256": "6b9729de048905de4a30259c1e39da1140d41ae2a0442fca2d9777d6677d8ae4",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_response_policy.py",
+          "sha256": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf03_controller.py::test_a11_opposite_economic_contexts_are_not_collapsed",
+          "sha256": "212d5d60b7819e4b435769d78b1bb53d4d9d906ced659ee02f8bd340afeabb2a",
+          "lines": [
+            55
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A12",
+      "title": "Original guide finding A12",
+      "source_refs": [
+        "src/crypto_regime_lab/policy/response.py"
+      ],
+      "caller_refs": [
+        "scripts/run_response_policy.py"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_gap_close.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03",
+      "related_findings": [
+        "TEF-08",
+        "TEF-11",
+        "TEF-18"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/policy/response.py",
+          "sha256": "83b800c18b2c2f1503eb245baf188932b2267da78750c18e28d8bc66896e44de",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_response_policy.py",
+          "sha256": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_gap_close.py",
+          "sha256": "8926a38e0255b30d17cc790af9b4e1a0895d8f6c43a2146b28833d19b04c7b76",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A13",
+      "title": "Original guide finding A13",
+      "source_refs": [
+        "src/crypto_regime_lab/policy/bank.py"
+      ],
+      "caller_refs": [
+        "scripts/run_response_policy.py"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_gap_close.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03",
+      "related_findings": [
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/policy/bank.py",
+          "sha256": "c3ef5c2bee708bac0464e603f882ce4d5f844c119719cd25ba9e3e4f125a1a55",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_response_policy.py",
+          "sha256": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_gap_close.py",
+          "sha256": "8926a38e0255b30d17cc790af9b4e1a0895d8f6c43a2146b28833d19b04c7b76",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A14",
+      "title": "Original guide finding A14",
+      "source_refs": [
+        "src/crypto_regime_lab/regime/ablation.py::fixed_target_ablation",
+        "src/crypto_regime_lab/regime/model_selection.py"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_g10_model_repairs.py::main"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_model_repairs.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03",
+      "related_findings": [
+        "TEF-05",
+        "TEF-08"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/ablation.py::fixed_target_ablation",
+          "sha256": "76ba00c46adb2707f223fe279a80b395228705a8656179c7dec4d4db11ce3dd2",
+          "lines": [
+            257
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/regime/model_selection.py",
+          "sha256": "ab099eb8b4330fefb5b101084e4471454c4105505906c2121958409cdf64b5ad",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_g10_model_repairs.py::main",
+          "sha256": "fda62493e3ca67cf54e31f04f36520d1f7ea55083f7dde161b9f00948b691d94",
+          "lines": [
+            146
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_model_repairs.py",
+          "sha256": "9c79e89d4620c8e89b1b19d0b06920a948312f6d9f1b8ee9980a69f309a4debb",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A15",
+      "title": "Original guide finding A15",
+      "source_refs": [
+        "scripts/run_rf05.py::build_claim_report"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::main"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf01_before_repairs.py::test_a15_the_corrected_mde_derivation_is_registered_and_history_preserved"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01/04",
+      "related_findings": [
+        "TEF-17"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::build_claim_report",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            673
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::main",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            1524
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf01_before_repairs.py::test_a15_the_corrected_mde_derivation_is_registered_and_history_preserved",
+          "sha256": "5781d7e45bf844bd76e9c44c57ecd0183345c8dca61953718b0fd7356144ea52",
+          "lines": [
+            181
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "A16",
+      "title": "Original guide finding A16",
+      "source_refs": [
+        "scripts/run_rf05.py::claim_status",
+        "src/crypto_regime_lab/evidence/claim_gate.py"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::build_claim_report"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf05_claims.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01/05",
+      "related_findings": [
+        "TEF-17",
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::claim_status",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            306
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/evidence/claim_gate.py",
+          "sha256": "23e01cd46604703b52be836505a83f05eb598478c54645a5d17c4eb8776ea00e",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::build_claim_report",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            673
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf05_claims.py",
+          "sha256": "677eaa026acc3a914bebb22a791e4b64d01d2b64b8c3070faa0067957265ec66",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D01",
+      "title": "Original guide finding D01",
+      "source_refs": [
+        "src/crypto_regime_lab/data/snapshot.py"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_paired_pilot.py::load_frame"
+      ],
+      "existing_tests": [
+        "tests/test_lab03_pipeline.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01",
+      "related_findings": [
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/data/snapshot.py",
+          "sha256": "4b72499a6ef7c56ca867d60ebc6c5f28851e4990a8ff6c4cc364e888ce6e0253",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_paired_pilot.py::load_frame",
+          "sha256": "7772808b0710614467153b4ed52f3c430280d4e240fb593f257c46bef92ca55d",
+          "lines": [
+            56
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/test_lab03_pipeline.py",
+          "sha256": "7c95e56b9159b00d255787bbec21dd06b11c4c6e1c9e0202377b8055fb081390",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D02",
+      "title": "Original guide finding D02",
+      "source_refs": [
+        "tests/test_guide_contracts.py",
+        "tests/test_lab04_evaluator.py"
+      ],
+      "caller_refs": [
+        "scripts/run_rf01_regressions.py"
+      ],
+      "existing_tests": [
+        "tests/test_guide_contracts.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01",
+      "related_findings": [],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "tests/test_guide_contracts.py",
+          "sha256": "97bcecfc20a699c45ec4dded81c10ec6f623e7b790c617e8fb2458965d8f160b",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "tests/test_lab04_evaluator.py",
+          "sha256": "e08d8d90e1cfd0547fa1b7f8f0e17e8197aa62a87d4a2fac1625ddfcb62b4f81",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf01_regressions.py",
+          "sha256": "d8093b9b0e6e883d6c309eac9da3d3ac301b858540cc41c5959cc7a790db3064",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/test_guide_contracts.py",
+          "sha256": "97bcecfc20a699c45ec4dded81c10ec6f623e7b790c617e8fb2458965d8f160b",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D03",
+      "title": "Original guide finding D03",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_trial_records"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::run_one_fold"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_fup02_scale.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-14",
+        "TEF-15"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_trial_records",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            433
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::run_one_fold",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            498
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_fup02_scale.py",
+          "sha256": "d604303ccf4ee71040bd9476a90c78fdc12b52fb9a6869f58936f278f604d13b",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D04",
+      "title": "Original guide finding D04",
+      "source_refs": [
+        "src/crypto_regime_lab/policy/response.py"
+      ],
+      "caller_refs": [
+        "scripts/run_response_policy.py"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_gap_close.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-03/05",
+      "related_findings": [
+        "TEF-19",
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/policy/response.py",
+          "sha256": "83b800c18b2c2f1503eb245baf188932b2267da78750c18e28d8bc66896e44de",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_response_policy.py",
+          "sha256": "b4f24e71fa8eac168342c323f547d85305aa9eda07db2f2f4f80b6762b0d4a83",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_gap_close.py",
+          "sha256": "8926a38e0255b30d17cc790af9b4e1a0895d8f6c43a2146b28833d19b04c7b76",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D05",
+      "title": "Original guide finding D05",
+      "source_refs": [
+        "src/crypto_regime_lab/alphas/contracts.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "existing_tests": [
+        "tests/test_lab02_alphas.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/alphas/contracts.py",
+          "sha256": "e537ee695895896369c167e9d03045379c39ec6e11b1598bf200b93f3bfd0330",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/test_lab02_alphas.py",
+          "sha256": "08c0d288505e59118f976ae8d3a66db98569e653213a5f848532aef49dfe2701",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D06",
+      "title": "Original guide finding D06",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_contracts.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01",
+      "related_findings": [
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_contracts.py",
+          "sha256": "0dec2fe881545eff727d254329545bb4fbc373477c1851aea3e5ab2c64887d68",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D07",
+      "title": "Original guide finding D07",
+      "source_refs": [
+        "src/crypto_regime_lab/alphas/a_hash.py"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_fup01_native_event.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-14",
+        "TEF-16",
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/alphas/a_hash.py",
+          "sha256": "7bbd1aa478ed53d7339127cd4b93615ded3134e2ad4c2d6cfccfbecbd1b38bf2",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_fup01_native_event.py",
+          "sha256": "e1c3008d100522a37351d4af271dd76e08f1475e9699d6c4f842acf8ae64debe",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "D08",
+      "title": "Original guide finding D08",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+        "src/crypto_regime_lab/cli.py"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::main"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_mode4_baseline.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-05",
+        "TEF-06",
+        "TEF-09",
+        "TEF-11",
+        "TEF-12",
+        "TEF-13",
+        "TEF-14",
+        "TEF-19",
+        "TEF-20"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::run_cutoff_walk_forward",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            518
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/cli.py",
+          "sha256": "1a1b8a9988a3a3726a3773f2afd3075604b98522b76b4d74df18bf4d37ca1077",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::main",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1449
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_mode4_baseline.py",
+          "sha256": "f16b3d4c1423ff84b5422f58650325c655b5ed0373ed7a4039ffde45fad0eccf",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "N01",
+      "title": "Original guide finding N01",
+      "source_refs": [
+        "scripts/run_rf04_decay_and_controls.py::daily_metrics"
+      ],
+      "caller_refs": [
+        "scripts/run_rf04_decay_and_controls.py::d2_replay"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_decay_and_controls.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-04",
+      "related_findings": [
+        "TEF-03"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::daily_metrics",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            123
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf04_decay_and_controls.py::d2_replay",
+          "sha256": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
+          "lines": [
+            455
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+          "sha256": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "N02",
+      "title": "Original guide finding N02",
+      "source_refs": [
+        "src/crypto_regime_lab/integration/execution_clock.py"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/integration/event_account.py::run_event_account"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf02_contracts.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02",
+      "related_findings": [
+        "TEF-10"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/integration/execution_clock.py",
+          "sha256": "cd77bafe44429f96e66c7a385b1c5c30863509a4a9ec2177212a2df75e5ec9ed",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/integration/event_account.py::run_event_account",
+          "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+          "lines": [
+            628
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf02_contracts.py",
+          "sha256": "0dec2fe881545eff727d254329545bb4fbc373477c1851aea3e5ab2c64887d68",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "N03",
+      "title": "Original guide finding N03",
+      "source_refs": [
+        "scripts/run_rf05.py::build_integrity"
+      ],
+      "caller_refs": [
+        "scripts/run_fup02.py::write_checkpoint"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf05_claims.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-01/05",
+      "related_findings": [
+        "TEF-16"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "scripts/run_rf05.py::build_integrity",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            1127
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_fup02.py::write_checkpoint",
+          "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+          "lines": [
+            1360
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf05_claims.py",
+          "sha256": "677eaa026acc3a914bebb22a791e4b64d01d2b64b8c3070faa0067957265ec66",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "N04",
+      "title": "Original guide finding N04",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload"
+      ],
+      "caller_refs": [
+        "scripts/run_rf05.py::reconstruct_equity_metrics"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_decay_and_controls.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02/04",
+      "related_findings": [
+        "TEF-12",
+        "TEF-19"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_event_account_payload",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            760
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "scripts/run_rf05.py::reconstruct_equity_metrics",
+          "sha256": "761a71309abb0e1c28aa59b908469fe8f68b1b8146b8725305a4db889ea0a622",
+          "lines": [
+            365
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+          "sha256": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    },
+    {
+      "id": "N05",
+      "title": "Original guide finding N05",
+      "source_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_annualised_sharpe"
+      ],
+      "caller_refs": [
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::EventAccountScorer"
+      ],
+      "existing_tests": [
+        "tests/mode4_corrective/test_rf04_decay_and_controls.py"
+      ],
+      "new_validation_ref": "TG-01..TG-12 via central plan",
+      "repair_phase": "TE-02/04",
+      "related_findings": [
+        "TEF-12"
+      ],
+      "status": "PRESENT_REQUIRES_SCOPE_REQUALIFICATION",
+      "owner": "Codex",
+      "evidence_kind": "Existing repair/test pointer is not an executed proof in TE-01",
+      "verified_source_anchors": [
+        {
+          "kind": "source_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::_annualised_sharpe",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            270
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "caller_refs",
+          "reference": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py::EventAccountScorer",
+          "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+          "lines": [
+            282
+          ],
+          "scope": "mapped_not_runtime_requalified"
+        },
+        {
+          "kind": "existing_tests",
+          "reference": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+          "sha256": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292",
+          "lines": [],
+          "scope": "mapped_not_runtime_requalified"
+        }
+      ],
+      "economic_retest_required": true
+    }
+  ],
+  "counts": {
+    "OPEN": 20,
+    "PRESENT_REQUIRES_SCOPE_REQUALIFICATION": 29
+  },
+  "rule": "All 20 new findings remain OPEN; original repairs are scoped evidence references, not assumed financial validity."
+}

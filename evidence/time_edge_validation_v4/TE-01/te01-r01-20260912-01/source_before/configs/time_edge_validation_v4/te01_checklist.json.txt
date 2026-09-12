@@ -1,0 +1,116 @@
+{
+  "schema": "regime_lab.te01_checklist.v1",
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-preparation-registration",
+  "written_at_utc": "2026-09-12T05:51:27.923406+00:00",
+  "status": "CHECKLIST_REGISTERED_BEFORE_IMPLEMENTATION",
+  "authorization": {
+    "source": "current user message",
+    "scope": "Repair and validate the 20 findings through TE-01..TE-05; optimize runtime while preserving correctness.",
+    "constraint": "Let OpenCode finish FUP-02; no edits to its active code/config/tape or process intervention."
+  },
+  "scope_now": "TE-01 isolated preparation, source identities, finding ledger and prerequisites; no engine or optimizer run",
+  "guide_precedence": [
+    "current user instruction",
+    "REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md",
+    "verified contracts with explicit corrections",
+    "QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md where not superseded"
+  ],
+  "rule_files": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "../.agents/AGENTS.md"
+  ],
+  "tasks": [
+    {
+      "task_id": "TE01.1",
+      "task": "Pin git/source/package/module/snapshot/alpha/schema/model hashes; capture FUP generation và interrupted attempts",
+      "required_outputs": [
+        "source_data_manifest.json",
+        "fup02_intake.json"
+      ],
+      "exit_gate": "Không missing identity được quảng cáo reproducible",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.2",
+      "task": "Map A01–A16, D01–D08, N01–N05 và TEF-01…20 tới actual paths/callers/tests",
+      "required_outputs": [
+        "finding_disposition.json"
+      ],
+      "exit_gate": "Mỗi finding có affected scope, bằng chứng, retest và owner",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.3",
+      "task": "Khóa evaluation dates, UTC boundaries, initial/terminal policies, warmup vs scoring; thống nhất metrics",
+      "required_outputs": [
+        "metric_contract.json",
+        "evaluation_windows.json"
+      ],
+      "exit_gate": "Tests biên/first fee trước báo cáo mới",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.4",
+      "task": "Register hypotheses, estimator, weights/missing-cell policy, δ và multiplicity, support/power, stopping",
+      "required_outputs": [
+        "study_registration.json",
+        "statistical_analysis_plan.json"
+      ],
+      "exit_gate": "Không null bắt buộc; chưa nhìn results mới để chọn metric thắng",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.5",
+      "task": "Register model hypothesis: common BTC hoặc per-symbol, features, K/lambda/cadence ladder nhỏ, selection rule",
+      "required_outputs": [
+        "model_protocol.json"
+      ],
+      "exit_gate": "Không gọi model selection manifest riêng là deployed design",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.6",
+      "task": "Register route/resolution/compute contract, phase budgets và tier caps",
+      "required_outputs": [
+        "compute_budget.json",
+        "execution_contract.json"
+      ],
+      "exit_gate": "Wall/CPU/RSS/candidate work và residual budget có cách đo",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    },
+    {
+      "task_id": "TE01.7",
+      "task": "Classify evidence reuse; tiếp tục historical invalidation bằng record mới",
+      "required_outputs": [
+        "reuse_decision.json",
+        "invalidation.json"
+      ],
+      "exit_gate": "Không sửa curves/history, không tự relabel prospective",
+      "owner": "Codex",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "before_repair_cases": [
+    "first evaluation return retains initial fee and excludes warmup",
+    "half-open adjacent decay windows share no return observations",
+    "return-based PF handles only-loss separately from no-trade",
+    "future-model-ready emissions cannot trigger",
+    "missing eligibility cannot silently pass",
+    "constant regime retains the registered initial/max-age lifecycle",
+    "future outcomes unavailable at cutoff cannot enter training target profile",
+    "failed deployment preserves completed selection and trial ledger",
+    "resume accounts for all prior work and refuses source identity drift",
+    "full positive/null control exercises learned model and the real selector"
+  ],
+  "preparation_exit": "Source identities and all 20 OPEN findings are recorded; pending final FUP intake and unfrozen statistical/compute decisions are explicit. This is not TE-01 REGISTRATION_VALIDATED.",
+  "run_gate": "Do not start TE-02/TE-03 market work until the TE-01 contracts, regression cases and resource controls are validated."
+}

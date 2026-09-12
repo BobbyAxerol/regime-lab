@@ -1,0 +1,69 @@
+{
+  "schema": "crypto_regime_lab.sandbox_policy.v1",
+  "lab_root": "/root/bobby/pool_alpha/lab_regime_model_quantbt",
+  "protected_roots": [
+    "/root/bobby/pool_alpha/quantbt",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data",
+    "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model"
+  ],
+  "protected_root_roles": {
+    "/root/bobby/pool_alpha/quantbt": "QUANTBT_MAIN_ROOT (read-only reference; lab uses the PyPI wheel, not this tree)",
+    "/root/bobby/pool_alpha/alphas_storage/_get_data": "HISTORICAL_DATA_CODE_ROOT + HISTORICAL_STORAGE_ROOT",
+    "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model": "ALPHA_SOURCE_ROOT (the four allowed files)"
+  },
+  "forbidden_read_roots": [
+    "/root/bobby/pool_alpha/MLops",
+    "/root/bobby/pool_alpha/Arbops",
+    "/root/bobby/pool_alpha/Agent_alpha",
+    "/root/bobby/pool_alpha/BacktestPackage",
+    "/root/bobby/pool_alpha/alphas_scripts",
+    "/root/bobby/pool_alpha/backtest_portal_prototype",
+    "/root/bobby/pool_alpha/lean",
+    "/root/bobby/pool_alpha/alphas_storage/alpha_portfolio",
+    "/root/bobby/pool_alpha/alphas_storage/simulation_alpha",
+    "/root/bobby/pool_alpha/alphas_storage/TA",
+    "/root/bobby/pool_alpha/alphas_storage/ML",
+    "/root/bobby/pool_alpha/alphas_storage/MM_HFT",
+    "/root/bobby/pool_alpha/alphas_storage/arb",
+    "/root/bobby/pool_alpha/alphas_storage/option_based",
+    "/root/bobby/pool_alpha/alphas_storage/grid"
+  ],
+  "forbidden_read_rationale": "Guide 0.2: other alpha/strategy directories must not be mined for extra strategies, edited, or imported.",
+  "writable_roots": [
+    "/root/bobby/pool_alpha/lab_regime_model_quantbt"
+  ],
+  "resource_budget": {
+    "workers": 1,
+    "cpu_limit": 2,
+    "working_memory_gib": 4,
+    "disk_quota_gib": 20
+  },
+  "network_policy": {
+    "default": "off",
+    "allowed_stages": [
+      "environment_acquisition"
+    ],
+    "forbidden_stages": [
+      "run",
+      "certify",
+      "report",
+      "replay"
+    ],
+    "enforcement": "empty network namespace (--unshare-net) for every non-acquisition worker"
+  },
+  "os_level_isolation": {
+    "mechanism": "bubblewrap: --ro-bind / with LAB_ROOT re-bound writable, --unshare-net/pid/ipc/uts, --clearenv",
+    "availability": "MEASURED_AT_PREFLIGHT",
+    "static_claim_forbidden": true,
+    "note": "Availability is never taken from this file. safety/sandbox.probe_isolation() measures it each preflight and the result is written to evidence; a stale 'true' here would be exactly the false containment claim guide 0.2 forbids.",
+    "required_checks": [
+      "lab_root_writable",
+      "fake_protected_write_refused",
+      "network_blocked",
+      "no_credential_env",
+      "protected_roots_read_only"
+    ]
+  },
+  "alpha_source_dir": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+  "alpha_archive": "/root/bobby/pool_alpha/lab_regime_model_quantbt/alpha_to_tes_regime_model.zip"
+}

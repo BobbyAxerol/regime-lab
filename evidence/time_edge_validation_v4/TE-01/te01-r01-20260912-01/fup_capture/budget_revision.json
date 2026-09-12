@@ -1,0 +1,181 @@
+{
+  "schema": "regime_lab.fup02_compute_budget_revision.v1",
+  "phase": "FUP-02",
+  "study_id": "corrective_mode4_v3",
+  "status": "REGISTERED_BEFORE_THE_FUP02_RUNS",
+  "registered_at_utc": "2026-09-12T04:16:19.041762+00:00",
+  "registration_source": {
+    "artifact": "evidence/corrective_mode4_v3/followup-studies/followup_studies_registration.json",
+    "pointer": "#/studies/1",
+    "sha256": "e0da5da404e2364c441827f6432286501c2d3f4e20e20e78caa38a2499f33829",
+    "parent_discovery_protocol": {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/discovery_protocol.json",
+      "note": "RF-04's registered discovery protocol already names 32-64 trials/cutoff and the 2021-01-01..2023-12-31 development window; FUP-02 is the execution of that registration, not a new trial budget"
+    }
+  },
+  "run_gate": "run_fup02.py refuses to execute any shard unless this artifact exists and its status is REGISTERED_BEFORE_THE_FUP02_RUNS; --register-budget writes it once",
+  "scope": {
+    "cells": [
+      "A-SC/BTCUSDT",
+      "A-SC/ETHUSDT",
+      "A-SC/SOLUSDT",
+      "A-SC/BNBUSDT",
+      "A-SC/DOGEUSDT",
+      "A-HMA/BTCUSDT",
+      "A-HMA/ETHUSDT",
+      "A-HMA/SOLUSDT",
+      "A-HMA/BNBUSDT",
+      "A-HMA/DOGEUSDT",
+      "A-VWAP/BTCUSDT",
+      "A-VWAP/ETHUSDT",
+      "A-VWAP/SOLUSDT",
+      "A-VWAP/BNBUSDT",
+      "A-VWAP/DOGEUSDT",
+      "A-HASH/BTCUSDT",
+      "A-HASH/ETHUSDT",
+      "A-HASH/SOLUSDT",
+      "A-HASH/BNBUSDT",
+      "A-HASH/DOGEUSDT"
+    ],
+    "cells_planned": 20,
+    "arms": [
+      "M4_CAL",
+      "M4_REGIME"
+    ],
+    "shards_planned": 40,
+    "route": "event (all 20 cells; FUP-01 qualified A-VWAP/A-HASH, A-SC/A-HMA already qualified)",
+    "development_window": {
+      "start": "2021-01-01",
+      "end": "2023-12-31"
+    },
+    "calendar_cutoffs": 7,
+    "regime_cutoffs": 11,
+    "shard_granularity": "cell x arm, checkpointed per fold/cutoff"
+  },
+  "trial_budget": {
+    "registered_range": [
+      32,
+      64
+    ],
+    "executed_per_cutoff": 32,
+    "equal_across_arms": true,
+    "selection_reason": "the low end of the registered 32-64 range is executed so the fixed invocation budget closes the most complete paired cells; the per-arm compute is identical and no arm is granted more trials than the other",
+    "seed_policy": {
+      "seed": 20260911,
+      "derivation": "the installed engine derives the per-fold seed as (seed + fold_id * 1000003) mod 2**32; both arms and every cell use the same base seed and the same derivation",
+      "repeated_seeds_measure": "search variability, not independent observations"
+    }
+  },
+  "coverage_review_rule": {
+    "when": "before any final design freeze; not executed by FUP-02 itself",
+    "artifact": "coverage_review.json",
+    "admissible_definition": "a scored cutoff is admissible when the selector returned selected parameters and at least one trial objective is finite; pruned/infeasible-only cutoffs are not admissible",
+    "escalation": "if admissible_over_scored < 0.80 or (nonfinite + infeasible) / trials > 0.25, escalate the trial budget to 64 in a REVISED budget revision before the frozen rerun; if coverage stays insufficient, record the insufficiency and do not present the run as a fully supported design freeze",
+    "deep_selector_audit": "the public provider payload does not expose selector/cluster/fallback fields; the RF-04.2 transparency ledger deep audit remains the tool for that question"
+  },
+  "resource_caps": {
+    "workers": 1,
+    "worker_justification": "the registered sandbox resource budget is workers=1; keeping one worker keeps wall seconds comparable with RF-04.6 and keeps both arms sequential inside a cell (a shard is a cell x arm boundary, never a per-arm race)",
+    "cpu_limit": 2,
+    "cpu_change": "none requested; the registered sandbox cpu_limit=2 is unchanged",
+    "cpu_change_justification": null,
+    "working_memory_gib": 4,
+    "measured_peak_rss_gib": 1.02,
+    "per_shard_cap_seconds": 900,
+    "per_shard_cap_tier": "T3 (guide 8.1: discovery shards <= 900s)",
+    "per_cutoff_cap_seconds": 900,
+    "per_invocation_budget_seconds": 5400,
+    "total_wall_budget_seconds": 43200,
+    "total_wall_budget_note": "approved upper bound across all resumable invocations; every invocation writes its own elapsed seconds and stop reason, and unused budget is never silently transferred to one arm",
+    "network": "off (run stage)",
+    "thread_pinning": [
+      "NUMBA_NUM_THREADS=1",
+      "OMP_NUM_THREADS=1",
+      "OPENBLAS_NUM_THREADS=1",
+      "MKL_NUM_THREADS=1"
+    ]
+  },
+  "revision_rule": {
+    "append_only": true,
+    "may_change": [
+      "wall/invocation budgets and per-shard caps",
+      "the trial budget inside the registered 32-64 range when the coverage review requires it"
+    ],
+    "must_not_change": [
+      "per-arm compute: both arms always receive the same trial budget, seed, training memory, economics and route",
+      "a completed shard is never recomputed for a budget revision",
+      "a budget increase is never applied to one arm only"
+    ],
+    "cpu_change_rule": "any worker/CPU change needs a measured justification recorded here before the affected shards run and applies to both arms; no CPU change is requested by this revision"
+  },
+  "stop_vocabulary": [
+    "PENDING",
+    "COMPLETE",
+    "BUDGET_STOPPED",
+    "NOT_RUN_BUDGET",
+    "FAILED",
+    "INSUFFICIENT_DATA"
+  ],
+  "cutoff_stop_vocabulary": [
+    "NOT_RUN",
+    "SCORED",
+    "BUDGET_STOPPED",
+    "ERROR"
+  ],
+  "non_fabrication": "a non-run or stopped shard/fold stores null metrics plus the exact reason; nothing is zero-filled or estimated",
+  "pre_run_micro_benchmarks": [
+    {
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "interval": "1h",
+      "trials": 32,
+      "fold_id": 0,
+      "wall_seconds": 45.88,
+      "per_trial_seconds": 1.434,
+      "event_account_runs": 25,
+      "peak_rss_mib": 902.1
+    },
+    {
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "interval": "15min",
+      "trials": 32,
+      "fold_id": 0,
+      "wall_seconds": 135.66,
+      "per_trial_seconds": 4.239,
+      "event_account_runs": 19,
+      "peak_rss_mib": 997.7
+    },
+    {
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "interval": "15min",
+      "trials": 32,
+      "fold_id": 0,
+      "wall_seconds": 176.4,
+      "per_trial_seconds": 5.512,
+      "event_account_runs": 31,
+      "peak_rss_mib": 983.7
+    },
+    {
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "interval": "15min",
+      "trials": 32,
+      "fold_id": 0,
+      "wall_seconds": 180.2,
+      "per_trial_seconds": 5.631,
+      "event_account_runs": 33,
+      "peak_rss_mib": 1020.8
+    }
+  ],
+  "benchmark_conditions": "lab venv, one worker, thread-pinned, fold 0 of the registered calendar schedule, real snapshot partitions; measured immediately before registration, no selection on these numbers beyond choosing the cheapest-first execution order",
+  "contamination": {
+    "status": "NESTED_RETROSPECTIVE",
+    "untouched_holdout": false,
+    "reason": "2021-2023 was already exposed to design and repair work in RF-01..RF-05; FUP-02 adds trials and the 2023 development year but is not a holdout and makes no confirmation claim",
+    "post_2023_data": "never read by FUP-02"
+  },
+  "lab_run_id": "FUP-02",
+  "written_at_utc": "2026-09-12T04:16:19.042082+00:00"
+}

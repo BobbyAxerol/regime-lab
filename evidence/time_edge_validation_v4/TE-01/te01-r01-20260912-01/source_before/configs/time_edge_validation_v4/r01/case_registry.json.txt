@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.case_registry.te01.v1",
+  "scope": "before-repair assertions target correct behavior in CURRENT lab source; expected failures are not passes or financial evidence",
+  "before_repair_file": "tests/time_edge_validation_v4/before_repair_cases.py",
+  "cases": [
+    {
+      "case_id": "BR01",
+      "finding_id": "TEF-01",
+      "test": "test_rf05_excludes_pre_evaluation_return",
+      "expected_before_repair": "FAIL",
+      "property": "warmup return mask"
+    },
+    {
+      "case_id": "BR02",
+      "finding_id": "TEF-02",
+      "test": "test_adjacent_age_windows_are_half_open",
+      "expected_before_repair": "FAIL",
+      "property": "90/90 distinct calendar days"
+    },
+    {
+      "case_id": "BR03",
+      "finding_id": "TEF-03",
+      "test": "test_d2_uses_the_computed_pf_key",
+      "expected_before_repair": "FAIL",
+      "property": "D2 must retain a finite underlying PF"
+    },
+    {
+      "case_id": "BR04",
+      "finding_id": "TEF-03",
+      "test": "test_only_losses_are_zero_pf_not_no_trades",
+      "expected_before_repair": "FAIL",
+      "property": "PF=0 with loss denominator"
+    },
+    {
+      "case_id": "BR05",
+      "finding_id": "TEF-06",
+      "test": "test_future_model_ready_cannot_trigger",
+      "expected_before_repair": "FAIL",
+      "property": "model availability clock"
+    },
+    {
+      "case_id": "BR06",
+      "finding_id": "TEF-06",
+      "test": "test_missing_eligibility_cannot_trigger",
+      "expected_before_repair": "FAIL",
+      "property": "missing data fails closed"
+    },
+    {
+      "case_id": "BR07",
+      "finding_id": "TEF-07",
+      "test": "test_constant_state_has_registered_max_age",
+      "expected_before_repair": "FAIL",
+      "property": "initial age clock"
+    },
+    {
+      "case_id": "BR08",
+      "finding_id": "TEF-08",
+      "test": "test_unavailable_training_targets_do_not_change_profile",
+      "expected_before_repair": "FAIL",
+      "property": "purge forward target outcomes on training side"
+    }
+  ],
+  "contract_test_file": "tests/time_edge_validation_v4/test_registration_contracts.py",
+  "required_contract_cases": [
+    "first_fee_and_partition",
+    "warmup_invariance",
+    "only_loss_pf",
+    "log_pf_domain",
+    "daily_sharpe_ddof_units",
+    "paired_dates_and_missing",
+    "cost_allocation_units",
+    "holm_monotonicity",
+    "threshold_boundary_and_validity_gate",
+    "registration_mutations",
+    "runtime_gate_no_empty_pass",
+    "outcome_available_at",
+    "resume_identity_and_total_budget"
+  ],
+  "baseline_exit": "all eight cases execute; known AssertionError mismatches retained separately from unexpected errors; after repair the same cases must pass without changing their expected correct behavior",
+  "future_integration_required": [
+    "real engine same-cutoff public Mode 4 parity",
+    "positive/null learned-model full path",
+    "actual ready/activation/fill lineage",
+    "failed deployment preserves trial work",
+    "all 49 finding dispositions require runtime/claim-path proof as applicable"
+  ]
+}

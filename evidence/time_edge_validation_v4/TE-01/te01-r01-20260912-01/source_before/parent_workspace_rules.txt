@@ -1,0 +1,9 @@
+# Workspace & Git Safety Rules
+
+- **BẢO VỆ MÃ NGUỒN VÀ WORKING TREE**:
+  - Trước khi thực hiện bất kỳ lệnh Git nào, BẮT BUỘC phải kiểm tra `git status`.
+  - TUYỆT ĐỐI KHÔNG được chạy `git checkout <branch>`, `git reset --hard`, `git clean` khi đang có thay đổi chưa commit (`uncommitted changes`) trên làm việc đè/xóa mất code của USER.
+  - Phải tạo `git stash` hoặc `git commit` tạm thời bảo vệ Working Tree trước khi chuyển nhánh.
+
+- **CẤM XÂM PHẠM THƯ MỤC DỰ ÁN KHÁC**:
+  - Tuyệt đối không tự ý chạy lệnh Git checkout/reset/clean làm ảnh hưởng tới `alphas_storage` hoặc các repo độc lập khác ngoài thư mục làm việc hiện tại.
