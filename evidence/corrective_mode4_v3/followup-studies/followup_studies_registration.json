@@ -1,0 +1,73 @@
+{
+  "schema": "regime_lab.followup_study_registration.v1",
+  "registered_at_utc": "2026-09-12T02:37:50.958641+00:00",
+  "predecessor_study": "corrective_mode4_v3",
+  "parent_verdict": "TECHNICALLY_VALID_WITH_PARTIAL_COVERAGE / economic INCONCLUSIVE",
+  "status": "REGISTERED_NOT_EXECUTED",
+  "rule": "each entry is a NEW study: registered before any run, its own budgets, contamination status, report and claim gate; nothing here reruns the frozen RF-05 protocol.",
+  "studies": [
+    {
+      "id": "FUP-01",
+      "title": "native-event capability for A-VWAP and A-HASH",
+      "scope": [
+        "AMEND_PROTECTION / CANCEL_PROTECTION / REDUCE command projection",
+        "A-HASH ordered partial TP ladder with remaining quantity and cooldown",
+        "route qualification with T17/T19 acceptance and per-fill ledger"
+      ],
+      "non_goals": [
+        "changing A-VWAP/A-HASH thesis semantics",
+        "reusing the frozen RF-05 claims"
+      ],
+      "required_inputs": [
+        "quantbt_candidate native event order capabilities",
+        "lab handoff patch proposal if a candidate hook is needed"
+      ],
+      "exit": "route matrix entries become QUALIFIED_EVENT, or a documented BLOCKED_CAPABILITY with the exact missing command",
+      "budget": "T0/T1 unit + one bounded real pilot per alpha"
+    },
+    {
+      "id": "FUP-02",
+      "title": "expanded budget 32-64 trials/cutoff and full development window to 2023-12-31",
+      "scope": [
+        "rerun the paired M4_CAL/M4_REGIME discovery on the 10 event-route cells",
+        "registered trial budget 32-64/cutoff, coverage review before the final freeze",
+        "2023 development window added (2021-01-01..2023-12-31)"
+      ],
+      "non_goals": [
+        "using 2024+ for design choices",
+        "tuning against RF-04.6 outcomes"
+      ],
+      "required_inputs": [
+        "snapshots/server_core_v1 (closed partitions)",
+        "registered compute budget revision",
+        "coverage review"
+      ],
+      "exit": "corrected paired outcomes with per-contrast validity; no edge required; PARTIAL allowed",
+      "budget": "T3 shards <=900s, total approved before the run"
+    },
+    {
+      "id": "FUP-03",
+      "title": "prospective protocol execution",
+      "scope": [
+        "execute the protocol frozen before the RF-05 confirmation, once data with available_at after the freeze exists"
+      ],
+      "non_goals": [
+        "live trading (lab cannot execute)",
+        "reusing pre-freeze bars as prospective"
+      ],
+      "required_inputs": [
+        "post-freeze market data ingested after 2026-09-11 with an availability audit"
+      ],
+      "exit": "repeated protocol on untouched post-freeze data, or SPECIFIED_NOT_EXECUTED with the data gap named",
+      "budget": "approved per the prospective protocol"
+    }
+  ],
+  "current_blockers": {
+    "FUP-01": "needs native-event command projection code",
+    "FUP-02": "needs a compute-budget revision + hours of engine runs",
+    "FUP-03": "BLOCKED_NO_POST_FREEZE_DATA (snapshot ends 2026-09-09; freeze 2026-09-11)"
+  },
+  "lab_run_id": "followup-studies",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-12T02:37:50.958697+00:00"
+}
