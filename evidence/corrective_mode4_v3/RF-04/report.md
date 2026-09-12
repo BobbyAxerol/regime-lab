@@ -6,7 +6,7 @@ Generated from committed RF-04 artifacts by `scripts/write_rf04_report.py`. The 
 
 Test whether a causal regime-triggered refit schedule (`M4_REGIME`) changes the continuous account outcome against the calendar per-fold causal WFO (`M4_CAL`) on real snapshots, with refit cadence/compute separated by the mandatory budget control (`M4_CAL_MATCHED`), and close the metrics/decay panel (D1 IS->OOS, D2 fixed-parameter age, D3 adjacent operational folds) required before scaling.
 
-**Not tested:** economic superiority. The execution span is a 2-cell bounded pilot (A-SC/BTCUSDT and A-HMA/BTCUSDT) at 8 trials/cutoff on the pilot development window 2021-01-01..2022-06-30. The registered discovery protocol declares the wider cohort `server_core_v1, development 2021-01-01..2023-12-31`; the executed scope is narrower and is reported as such. A-VWAP/A-HASH are route-blocked and the remaining 16 cells were not executed; no 20-cell aggregate exists.
+**Not tested:** economic superiority. The execution span is a 2-cell bounded pilot (A-SC/BTCUSDT and A-HMA/BTCUSDT) at 8 trials/cutoff on the pilot development window 2021-01-01..2022-06-30. The registered discovery protocol declares the wider cohort `server_core_v1, development 2021-01-01..2023-12-31`; the executed scope is narrower and is reported as such. A-VWAP/A-HASH are route-blocked and 8 qualified cells were not executed; no 20-cell aggregate exists.
 
 ## 2. Identity, contracts and resolved runtime
 
@@ -37,7 +37,9 @@ Source hashes: `dynamic_fold_provider.py` `018274ca038f63c7f6764e06e55583fd84f05
 - raw pilot window 2021-01-01..2022-06-30; folds in the pilot: M4_CAL 3, M4_REGIME 6, M4_CAL_MATCHED 6, M4_REGIME_DELAYED 6
 - cutoffs: M4_CAL 2021-01-01T00:00:00+00:00, 2021-06-30T00:00:00+00:00, 2021-12-27T00:00:00+00:00; M4_REGIME 2021-01-03T20:00:00+00:00, 2021-04-10T08:00:00+00:00, 2021-07-21T12:00:00+00:00, 2021-10-28T12:00:00+00:00, 2022-02-26T00:00:00+00:00, 2022-06-06T12:00:00+00:00; M4_CAL_MATCHED 2021-01-01T00:00:00+00:00, 2021-04-11T00:00:00+00:00, 2021-07-20T00:00:00+00:00, 2021-10-28T00:00:00+00:00, 2022-02-05T00:00:00+00:00, 2022-05-16T00:00:00+00:00
 - trials: 72 pilot trial rows on each cell; matched and placebo 48 trial rows each on each cell
-- coverage: 2 of 20 planned cells executed; A-VWAP/A-HASH stay `BLOCKED_CAPABILITY` (amend/ladder semantics), the other 16 cells `NOT_RUN`; no silent denominator change
+- coverage (`cell_coverage.json`): 20 planned cells — 1 `RUN_VALID`, 1 `RUN_NOT_EVALUABLE`, 10 `BLOCKED_CAPABILITY` (A-VWAP/A-HASH amend/ladder semantics), 8 `NOT_RUN`, 0 `INSUFFICIENT_DATA`; no silent denominator change and no missing cell is zero-filled
+- A-HMA/BTCUSDT `RUN_VALID` (economic status `INCONCLUSIVE`); A-SC/BTCUSDT `RUN_NOT_EVALUABLE` (implementation_fidelity=`DEVIATED`); the 18 non-executed cells each carry a reason and an evidence ref in `cell_coverage.json`
+- transparency ledger (`mode4_transparency_ledger.json`): 2 cells x 2 primary arms x 18 cutoffs, digest cross-check `PASS` against the decay panel; the fallback fraction is None with a reason because no committed artifact records a per-cutoff fallback event
 - MDE corrected: 0.0371 bps/day; the 8-trial bounded pilot is below the registered 32-64 trials/cutoff
 
 ## 5. Technical vs market vs synthetic
@@ -77,8 +79,12 @@ Age reads are diagnostics after selection only; they never update a search thres
 - paired pilot wall: 240.3s total across both cells and arms
 - M4_CAL_MATCHED wall: 164.743s (placebo 171.856s, status `RUN`)
 - D2 anchor replay wall: 34.3s (4/4 anchors replayed, status `COMPLETE`)
+- profiling (`profiling_and_budget.json`): 144 pilot + 96 matched + 96 placebo trial rows, 2690121 artifact bytes; placebo per-cell wall sums to 167.94s against the 171.856s loop wall
+- CPU seconds: None (NOT_MEASURED: the RF-04 runners recorded wall clock only; no committed artifact or log stores process CPU seconds, so a value would be invented)
+- peak RSS: None (NOT_MEASURED: no RF-04 artifact or log records the peak resident set; report.json already carries peak_rss_bytes=null for the same reason)
+- candidate-bar visits: None (NOT_MEASURED: the pilot/evaluator traces record folds, trials, studies and event-account runs, not candidate-bar visits; the count cannot be reconstructed from committed values)
 - reported vs planned: 2 of 20 cells executed, 8 trials/cutoff instead of the registered 32-64; no canceled budget job and no degraded execution resolution were used to hit time
-- no cold/warm native split is claimed in this phase; the event account ran on the installed Python route with `native_import_error` recorded in RF-01
+- cold/warm: the RF-02 route proof records cold/warm seconds on its synthetic seed-17 frame (`profiling_and_budget.json#/cold_warm`); the RF-04 real-snapshot pilot did not record a cold/warm split; the event account ran on the installed Python route with `native_import_error` recorded in RF-01
 
 ## 8. Proof capability
 
@@ -118,6 +124,7 @@ Age reads are diagnostics after selection only; they never update a search thres
 LAB=/root/bobby/pool_alpha/lab_regime_model_quantbt
 PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_paired_pilot.py
 PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_decay_and_controls.py --force
+PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_gap_close.py --force
 PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q \
   | tee $LAB/evidence/corrective_mode4_v3/RF-04/test_suite_mode4_corrective.log
 PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pyflakes $LAB/src $LAB/scripts $LAB/tests/mode4_corrective \
@@ -140,7 +147,10 @@ Recorded output hashes:
 - `causal_model_registry.json` `17ed170e8112f99440330f52bc7ba318548929c6f9a43ecde7c44bb2bd7f43c2`
 - `emission_tape_sample.json` `a54d8eae5a0b7472aab5833fc05dc7c9af91f0d3daafccaebe375598c6aae17c`
 - `current_coordinate_contract.json` `61c274b5b32e784ad698b7c5f5e1c94c18360a299371be2b26be79307c90ddab`
-- `test_suite_mode4_corrective.log` `9ae5a6dfc422233fa81f0383e2ddd7b9d8e5966220433682c7b13134d767bb46`
+- `cell_coverage.json` `c236731049c544b1531d29d83a60d2c259be76d7cd508a3b8b58c95939a3cbdc`
+- `profiling_and_budget.json` `ddfa99e4633348aa9337b4d3a107382026b788054ef532a1e645e8a80af2e0b1`
+- `mode4_transparency_ledger.json` `6c1b4939cf6ff04c83e1ccdb0ec757fb9f87040ee7623eea5468c31181335656`
+- `test_suite_mode4_corrective.log` `c6ab813504c5cb68e8c7b169123f1a0f13e78a8b6fd1bcd3fe8e6092813f08ea`
 - `pyflakes_mode4_corrective.log` `ba5a7a923210660e4cf281ff757f4a82938b8ed9ba82df331eab2cd875185b50`
 
 Handoff: next phase `RF-05`; blocking finding = A-SC endpoint candidate evaluation (implementation_fidelity DEVIATED). The registered historical evidence under `evidence/crypto_regime_timeedge_v2/` was not touched.

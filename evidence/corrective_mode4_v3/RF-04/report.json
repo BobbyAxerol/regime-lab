@@ -3,7 +3,7 @@
   "phase_id": "RF-04",
   "status": "PARTIAL_TECHNICAL_CLOSURE",
   "study_id": "corrective_mode4_v3",
-  "generated_at_utc": "2026-09-11T20:16:25.113939+00:00",
+  "generated_at_utc": "2026-09-12T00:57:51.013611+00:00",
   "source": {
     "archive_sha256": "2765bd069a5caf16921c3df03dfafd8f090f4fdd2de5e1550a5ce390c87a980f",
     "lab_head_commit": "f4ba4e1b151222aa9811b25efcacebf960bf33c9",
@@ -32,7 +32,7 @@
     "RF-04.5": "FROZEN_FOR_RF05_WITH_BLOCKERS"
   },
   "tests": {
-    "passed": 57,
+    "passed": 63,
     "failed": 0,
     "skipped": 0,
     "artifact_refs": [
@@ -40,6 +40,10 @@
       "pyflakes_mode4_corrective.log"
     ],
     "test_file": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+    "test_files": [
+      "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+      "tests/mode4_corrective/test_rf04_gap_close.py"
+    ],
     "note": null
   },
   "market_runs": {
@@ -58,7 +62,15 @@
       "A-HASH/BNBUSDT",
       "A-HASH/DOGEUSDT"
     ],
-    "not_run_cells": 16,
+    "not_run_cells": 8,
+    "insufficient_data_cells": 0,
+    "coverage_status_counts": {
+      "RUN_VALID": 1,
+      "RUN_NOT_EVALUABLE": 1,
+      "BLOCKED_CAPABILITY": 10,
+      "NOT_RUN": 8,
+      "INSUFFICIENT_DATA": 0
+    },
     "arms": [
       "M4_CAL",
       "M4_REGIME",
@@ -66,6 +78,44 @@
       "M4_REGIME_DELAYED"
     ]
   },
+  "coverage": {
+    "ref": "cell_coverage.json",
+    "status": "COVERAGE_CLOSED_2_EXECUTED_10_BLOCKED_8_NOT_RUN",
+    "counts": {
+      "RUN_VALID": 1,
+      "RUN_NOT_EVALUABLE": 1,
+      "BLOCKED_CAPABILITY": 10,
+      "NOT_RUN": 8,
+      "INSUFFICIENT_DATA": 0,
+      "planned_cells": 20,
+      "total_classified": 20
+    },
+    "per_cell": {
+      "A-HMA/BTCUSDT": "RUN_VALID",
+      "A-HMA/ETHUSDT": "NOT_RUN",
+      "A-HMA/SOLUSDT": "NOT_RUN",
+      "A-HMA/BNBUSDT": "NOT_RUN",
+      "A-HMA/DOGEUSDT": "NOT_RUN",
+      "A-SC/BTCUSDT": "RUN_NOT_EVALUABLE",
+      "A-SC/ETHUSDT": "NOT_RUN",
+      "A-SC/SOLUSDT": "NOT_RUN",
+      "A-SC/BNBUSDT": "NOT_RUN",
+      "A-SC/DOGEUSDT": "NOT_RUN",
+      "A-VWAP/BTCUSDT": "BLOCKED_CAPABILITY",
+      "A-VWAP/ETHUSDT": "BLOCKED_CAPABILITY",
+      "A-VWAP/SOLUSDT": "BLOCKED_CAPABILITY",
+      "A-VWAP/BNBUSDT": "BLOCKED_CAPABILITY",
+      "A-VWAP/DOGEUSDT": "BLOCKED_CAPABILITY",
+      "A-HASH/BTCUSDT": "BLOCKED_CAPABILITY",
+      "A-HASH/ETHUSDT": "BLOCKED_CAPABILITY",
+      "A-HASH/SOLUSDT": "BLOCKED_CAPABILITY",
+      "A-HASH/BNBUSDT": "BLOCKED_CAPABILITY",
+      "A-HASH/DOGEUSDT": "BLOCKED_CAPABILITY"
+    }
+  },
+  "coverage_ref": "cell_coverage.json",
+  "profiling_ref": "profiling_and_budget.json",
+  "transparency_ref": "mode4_transparency_ledger.json",
   "metrics": {
     "raw_quantbt_ref": "paired_discovery_pilot.json",
     "canonical_ref": "decay_panels.json",
@@ -122,7 +172,14 @@
     "placebo_wall_seconds": 171.856,
     "d2_wall_seconds": 34.282123731449246,
     "peak_rss_bytes": null,
-    "actual_candidate_bar_visits": null
+    "cpu_seconds": null,
+    "actual_candidate_bar_visits": null,
+    "profile_ref": "profiling_and_budget.json",
+    "unmeasured_reasons": {
+      "cpu_seconds": "NOT_MEASURED: the RF-04 runners recorded wall clock only; no committed artifact or log stores process CPU seconds, so a value would be invented",
+      "peak_rss_bytes": "NOT_MEASURED: no RF-04 artifact or log records the peak resident set; report.json already carries peak_rss_bytes=null for the same reason",
+      "candidate_bar_visits": "NOT_MEASURED: the pilot/evaluator traces record folds, trials, studies and event-account runs, not candidate-bar visits; the count cannot be reconstructed from committed values"
+    }
   },
   "proof_capability": {
     "technical_validity": "PARTIAL",
@@ -333,7 +390,7 @@
   "design_freeze_ref": "design_freeze.json",
   "report_md": {
     "path": "report.md",
-    "sha256": "2005ab3a1bc7efc7695c401e36d3862f41def5b64f08a0439996b074df00cf08"
+    "sha256": "a1148e09b0d1912e586052662deb33e9d849bb29082becbc2a87ea9a3bbc8acc"
   },
   "artifact_hashes": {
     "paired_discovery_pilot.json": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5",
@@ -348,15 +405,20 @@
     "causal_model_registry.json": "17ed170e8112f99440330f52bc7ba318548929c6f9a43ecde7c44bb2bd7f43c2",
     "emission_tape_sample.json": "a54d8eae5a0b7472aab5833fc05dc7c9af91f0d3daafccaebe375598c6aae17c",
     "current_coordinate_contract.json": "61c274b5b32e784ad698b7c5f5e1c94c18360a299371be2b26be79307c90ddab",
-    "test_suite_mode4_corrective.log": "9ae5a6dfc422233fa81f0383e2ddd7b9d8e5966220433682c7b13134d767bb46",
+    "cell_coverage.json": "c236731049c544b1531d29d83a60d2c259be76d7cd508a3b8b58c95939a3cbdc",
+    "profiling_and_budget.json": "ddfa99e4633348aa9337b4d3a107382026b788054ef532a1e645e8a80af2e0b1",
+    "mode4_transparency_ledger.json": "6c1b4939cf6ff04c83e1ccdb0ec757fb9f87040ee7623eea5468c31181335656",
+    "test_suite_mode4_corrective.log": "c6ab813504c5cb68e8c7b169123f1a0f13e78a8b6fd1bcd3fe8e6092813f08ea",
     "pyflakes_mode4_corrective.log": "ba5a7a923210660e4cf281ff757f4a82938b8ed9ba82df331eab2cd875185b50",
     "source_hashes": {
       "src/crypto_regime_lab/experiments/dynamic_fold_provider.py": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
       "scripts/run_rf04_paired_pilot.py": "7772808b0710614467153b4ed52f3c430280d4e240fb593f257c46bef92ca55d",
       "scripts/run_rf04_decay_and_controls.py": "dd192c7e2fa8c99098372649db7f04aa1473b1383bec195b4df73451d3789a5f",
-      "tests/mode4_corrective/test_rf04_decay_and_controls.py": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292"
+      "scripts/run_rf04_gap_close.py": "7edaaed1e1b1e97d66f7ba7346254c69d5b971fc111f5109fe55e2ff03b5a8bd",
+      "tests/mode4_corrective/test_rf04_decay_and_controls.py": "e78473d9bb03f8cde049f765b3f468ed930921e831de302374508cf62ad28292",
+      "tests/mode4_corrective/test_rf04_gap_close.py": "4925a983490283f4871962660bb3143b7498b202c4cb9821c6498849512a5de4"
     }
   },
   "lab_run_id": "RF-04",
-  "written_at_utc": "2026-09-11T20:16:25.115170+00:00"
+  "written_at_utc": "2026-09-12T00:57:51.015112+00:00"
 }

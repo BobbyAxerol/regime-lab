@@ -1,0 +1,595 @@
+{
+  "schema": "regime_lab.rf04_cell_coverage.v1",
+  "phase": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "status": "COVERAGE_CLOSED_2_EXECUTED_10_BLOCKED_8_NOT_RUN",
+  "status_vocabulary": [
+    "RUN_VALID",
+    "RUN_NOT_EVALUABLE",
+    "BLOCKED_CAPABILITY",
+    "NOT_RUN",
+    "INSUFFICIENT_DATA"
+  ],
+  "rule": "one row per planned primary cell (4 alphas x 5 symbols of the registered discovery cohort); the route decision is merged from RF-02/pilot_and_route_matrix.json and the run result from the RF-04 paired pilot/control artifacts. A non-executed cell carries null metrics with a reason, never a zero",
+  "sources": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json",
+      "sha256": "b67adbc7c602fa51c14af0fd7c38ab0ea67c8abd9ce8a2cdfe90c9328ee7e707"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json",
+      "sha256": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json",
+      "sha256": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f"
+    }
+  ],
+  "registered_cohort": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "data": "server_core_v1, development 2021-01-01..2023-12-31"
+  },
+  "counts": {
+    "RUN_VALID": 1,
+    "RUN_NOT_EVALUABLE": 1,
+    "BLOCKED_CAPABILITY": 10,
+    "NOT_RUN": 8,
+    "INSUFFICIENT_DATA": 0,
+    "planned_cells": 20,
+    "total_classified": 20
+  },
+  "cells": [
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_reason": null,
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed with execution_validity=PASS and implementation_fidelity=AS_SPECIFIED; the economic status stays INCONCLUSIVE because the pilot covers 2 of 20 cells at 8 trials/cutoff",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json#/contrasts/1",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/0",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json#/cells/1",
+        "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json#/contrasts/1"
+      ],
+      "executed": true,
+      "run_result": {
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19922.3596154709,
+            "total_return_pct": -0.38820192264549247,
+            "sharpe": -0.12072810456714066,
+            "num_trades": 6,
+            "max_drawdown_pct": 2.480420305315043,
+            "wall_seconds": 30.982
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 20021.084492012164,
+            "total_return_pct": 0.10542246006082223,
+            "sharpe": 0.061323155946543306,
+            "num_trades": 10,
+            "max_drawdown_pct": 1.9233647305383985,
+            "wall_seconds": 54.543
+          },
+          "M4_CAL_MATCHED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19772.661444561334,
+            "total_return_pct": -1.1366927771933266,
+            "sharpe": -0.3310555261519622,
+            "num_trades": 12,
+            "max_drawdown_pct": 3.250242905057369,
+            "wall_seconds": 57.519
+          },
+          "M4_REGIME_DELAYED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19897.571803903153,
+            "total_return_pct": -0.5121409804842325,
+            "sharpe": -0.42132851239124935,
+            "num_trades": 10,
+            "max_drawdown_pct": 1.0936732128292137,
+            "wall_seconds": 55.972
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "AS_SPECIFIED",
+        "statistical_status": "INCONCLUSIVE",
+        "economic_status": "INCONCLUSIVE"
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 19922.3596154709,
+          "total_return_pct": -0.38820192264549247,
+          "sharpe": -0.12072810456714066,
+          "num_trades": 6,
+          "max_drawdown_pct": 2.480420305315043
+        },
+        "M4_REGIME": {
+          "equity_last": 20021.084492012164,
+          "total_return_pct": 0.10542246006082223,
+          "sharpe": 0.061323155946543306,
+          "num_trades": 10,
+          "max_drawdown_pct": 1.9233647305383985
+        },
+        "M4_CAL_MATCHED": {
+          "equity_last": 19772.661444561334,
+          "total_return_pct": -1.1366927771933266,
+          "sharpe": -0.3310555261519622,
+          "num_trades": 12,
+          "max_drawdown_pct": 3.250242905057369
+        },
+        "M4_REGIME_DELAYED": {
+          "equity_last": 19897.571803903153,
+          "total_return_pct": -0.5121409804842325,
+          "sharpe": -0.42132851239124935,
+          "num_trades": 10,
+          "max_drawdown_pct": 1.0936732128292137
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/1",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/1"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/2",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/2"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/3",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/3"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_EVENT",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/4",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/4"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-SC/BTCUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "route": "endpoint",
+      "route_reason": null,
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "RUN_NOT_EVALUABLE",
+      "reason": "executed in the bounded pilot but the endpoint scorer returned one objective for every sampled candidate and the account exposes no per-fill ledger; implementation_fidelity=DEVIATED and the timing contrast is NOT_EVALUABLE",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json#/contrasts/0",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/5",
+        "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json#/cells/0",
+        "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json#/contrasts/0"
+      ],
+      "executed": true,
+      "run_result": {
+        "arms": {
+          "M4_CAL": {
+            "folds": 3,
+            "trials": 24,
+            "equity_last": 19999.969160657056,
+            "total_return_pct": -0.0001541967147204559,
+            "sharpe": -0.1505374026725576,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0008874681061955889,
+            "wall_seconds": 47.665
+          },
+          "M4_REGIME": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19999.959669209533,
+            "total_return_pct": -0.00020165395233561866,
+            "sharpe": -0.22879295671634722,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0007657632919013941,
+            "wall_seconds": 107.116
+          },
+          "M4_CAL_MATCHED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19999.969160657056,
+            "total_return_pct": -0.0001541967147204559,
+            "sharpe": -0.1505374026725576,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0008874681061955889,
+            "wall_seconds": 107.224
+          },
+          "M4_REGIME_DELAYED": {
+            "folds": 6,
+            "trials": 48,
+            "equity_last": 19999.955674828594,
+            "total_return_pct": -0.0002216258570297214,
+            "sharpe": -0.2741301619308593,
+            "num_trades": 2,
+            "max_drawdown_pct": 0.0007145449271023159,
+            "wall_seconds": 111.968
+          }
+        },
+        "contrast_status": "VALID",
+        "execution_validity": "PASS",
+        "implementation_fidelity": "DEVIATED",
+        "statistical_status": "NOT_EVALUABLE",
+        "economic_status": "NOT_EVALUABLE"
+      },
+      "run_result_reason": null,
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 19999.969160657056,
+          "total_return_pct": -0.0001541967147204559,
+          "sharpe": -0.1505374026725576,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0008874681061955889
+        },
+        "M4_REGIME": {
+          "equity_last": 19999.959669209533,
+          "total_return_pct": -0.00020165395233561866,
+          "sharpe": -0.22879295671634722,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0007657632919013941
+        },
+        "M4_CAL_MATCHED": {
+          "equity_last": 19999.969160657056,
+          "total_return_pct": -0.0001541967147204559,
+          "sharpe": -0.1505374026725576,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0008874681061955889
+        },
+        "M4_REGIME_DELAYED": {
+          "equity_last": 19999.955674828594,
+          "total_return_pct": -0.0002216258570297214,
+          "sharpe": -0.2741301619308593,
+          "num_trades": 2,
+          "max_drawdown_pct": 0.0007145449271023159
+        }
+      },
+      "account_metrics_reason": null
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/6",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/6"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/7",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/7"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/8",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/8"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "QUALIFIED_FAST",
+      "coverage_status": "NOT_RUN",
+      "reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/9",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/9"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "inside the qualified route set but not executed: the bounded RF-04 pilot deliberately ran only A-SC/BTCUSDT and A-HMA/BTCUSDT; no account metrics exist for this cell and none are estimated",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/10",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/10"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/11",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/11"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/12",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/12"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/13",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/13"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/14",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/14"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "AMEND_PROTECTION is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/15",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/15"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/16",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/16"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/17",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/17"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/18",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/18"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "route": null,
+      "route_reason": "the RF-02 route matrix qualifies the route family (QUALIFIED_FAST/QUALIFIED_EVENT/BLOCKED_CAPABILITY) but records no per-cell execution route for an unexecuted cell",
+      "route_status": "BLOCKED_CAPABILITY",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route",
+      "evidence_ref": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/19",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json#/route_matrix/cells/19"
+      ],
+      "executed": false,
+      "run_result": null,
+      "run_result_reason": "partial TP ladder is not expressible on the event route",
+      "account_metrics": null,
+      "account_metrics_reason": "no arm ran on this cell; account metrics are null and are never replaced with a zero or an estimate"
+    }
+  ],
+  "written_at_utc": "2026-09-12T00:56:57.271680+00:00",
+  "lab_run_id": "RF-04"
+}

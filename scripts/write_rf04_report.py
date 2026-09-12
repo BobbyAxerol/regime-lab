@@ -69,6 +69,9 @@ def main() -> int:
     panel = load("decay_panels.json")
     freeze = load("design_freeze.json")
     manifest = load("model_design_selection_manifest.json")
+    coverage = load("cell_coverage.json")
+    profiling = load("profiling_and_budget.json")
+    ledger = load("mode4_transparency_ledger.json")
     mde = json.loads((LAB_ROOT / "evidence" / STUDY_ID / "pre-RF04-clearing"
                       / "mde_corrected.json").read_text(encoding="utf-8"))
     identity = json.loads((LAB_ROOT / "evidence" / STUDY_ID / "RF-01"
@@ -97,6 +100,11 @@ def main() -> int:
                      "model_design_selection_manifest.json", "causal_model_registry.json",
                      "emission_tape_sample.json", "current_coordinate_contract.json")
     }
+    assets.update({
+        name: sha256_file(RUN_DIR / name)
+        for name in ("cell_coverage.json", "profiling_and_budget.json",
+                     "mode4_transparency_ledger.json")
+    })
     log_hashes = {name: sha256_file(RUN_DIR / name) for name in
                   ("test_suite_mode4_corrective.log", "pyflakes_mode4_corrective.log")
                   if (RUN_DIR / name).exists()}
@@ -107,9 +115,14 @@ def main() -> int:
             sha256_file(LAB_ROOT / "scripts/run_rf04_paired_pilot.py"),
         "scripts/run_rf04_decay_and_controls.py":
             sha256_file(LAB_ROOT / "scripts/run_rf04_decay_and_controls.py"),
+        "scripts/run_rf04_gap_close.py":
+            sha256_file(LAB_ROOT / "scripts/run_rf04_gap_close.py"),
         "tests/mode4_corrective/test_rf04_decay_and_controls.py":
             sha256_file(LAB_ROOT / "tests/mode4_corrective/test_rf04_decay_and_controls.py")
             if (LAB_ROOT / "tests/mode4_corrective/test_rf04_decay_and_controls.py").exists() else None,
+        "tests/mode4_corrective/test_rf04_gap_close.py":
+            sha256_file(LAB_ROOT / "tests/mode4_corrective/test_rf04_gap_close.py")
+            if (LAB_ROOT / "tests/mode4_corrective/test_rf04_gap_close.py").exists() else None,
     }
 
     lines: list[str] = []
@@ -131,8 +144,9 @@ def main() -> int:
         "(A-SC/BTCUSDT and A-HMA/BTCUSDT) at 8 trials/cutoff on the pilot development window "
         f"{pilot['development_window']['start']}..{pilot['development_window']['end']}. The registered "
         f"discovery protocol declares the wider cohort `{protocol['cohort']['data']}`; the executed "
-        "scope is narrower and is reported as such. A-VWAP/A-HASH are route-blocked and the remaining "
-        "16 cells were not executed; no 20-cell aggregate exists.")
+        "scope is narrower and is reported as such. A-VWAP/A-HASH are route-blocked and "
+        f"{coverage['counts']['NOT_RUN']} qualified cells were not executed; no 20-cell aggregate "
+        "exists.")
     add("")
     add("## 2. Identity, contracts and resolved runtime")
     add("")
@@ -193,8 +207,26 @@ def main() -> int:
         f"M4_CAL_MATCHED {', '.join(controls['matched_control']['cutoffs'])}")
     add(f"- trials: {sum(row['trial_count'] for row in (sc['arms']['M4_CAL'], sc['arms']['M4_REGIME'],))} "
         f"pilot trial rows on each cell; matched and placebo 48 trial rows each on each cell")
-    add("- coverage: 2 of 20 planned cells executed; A-VWAP/A-HASH stay `BLOCKED_CAPABILITY` "
-        "(amend/ladder semantics), the other 16 cells `NOT_RUN`; no silent denominator change")
+    counts = coverage["counts"]
+    add(f"- coverage (`cell_coverage.json`): {counts['planned_cells']} planned cells — "
+        f"{counts['RUN_VALID']} `RUN_VALID`, {counts['RUN_NOT_EVALUABLE']} `RUN_NOT_EVALUABLE`, "
+        f"{counts['BLOCKED_CAPABILITY']} `BLOCKED_CAPABILITY` (A-VWAP/A-HASH amend/ladder "
+        f"semantics), {counts['NOT_RUN']} `NOT_RUN`, "
+        f"{counts['INSUFFICIENT_DATA']} `INSUFFICIENT_DATA`; no silent denominator change and no "
+        "missing cell is zero-filled")
+    hma_coverage = next(cell for cell in coverage["cells"] if cell["cell"] == "A-HMA/BTCUSDT")
+    sc_coverage = next(cell for cell in coverage["cells"] if cell["cell"] == "A-SC/BTCUSDT")
+    add(f"- A-HMA/BTCUSDT `{hma_coverage['coverage_status']}` (economic status "
+        f"`{hma_coverage['run_result']['economic_status']}`); A-SC/BTCUSDT "
+        f"`{sc_coverage['coverage_status']}` (implementation_fidelity="
+        f"`{sc_coverage['run_result']['implementation_fidelity']}`); the 18 non-executed cells "
+        "each carry a reason and an evidence ref in `cell_coverage.json`")
+    add(f"- transparency ledger (`mode4_transparency_ledger.json`): "
+        f"{ledger['coverage']['cells']} cells x {ledger['coverage']['arms']} primary arms x "
+        f"{ledger['coverage']['cutoffs']} cutoffs, digest cross-check "
+        f"`{ledger['digest_verification']['status']}` against the decay panel; the fallback "
+        f"fraction is {ledger['fallback_fraction']['value']} with a reason because no committed "
+        "artifact records a per-cutoff fallback event")
     add(f"- MDE corrected: {mde['corrected_daily_account_bps']:.4f} bps/day; the 8-trial bounded pilot "
         f"is below the registered 32-64 trials/cutoff")
     add("")
@@ -259,10 +291,24 @@ def main() -> int:
     add(f"- D2 anchor replay wall: {controls['decay_anchor']['wall_seconds']:.1f}s "
         f"({panel['denominators']['anchors_replayed']}/{panel['denominators']['registered_anchors']} "
         f"anchors replayed, status `{panel['D2']['status']}`)")
+    add(f"- profiling (`profiling_and_budget.json`): {profiling['denominators']['pilot_trial_rows']} "
+        f"pilot + {profiling['denominators']['matched_control_trial_rows']} matched + "
+        f"{profiling['denominators']['placebo_trial_rows']} placebo trial rows, "
+        f"{sum(profiling['bytes']['artifacts_bytes'].values())} artifact bytes; placebo per-cell "
+        f"wall sums to {profiling['wall_seconds']['totals']['placebo_sum_of_cell_arm_seconds']}s "
+        f"against the {profiling['wall_seconds']['totals']['placebo_loop_wall_seconds']}s loop wall")
+    add(f"- CPU seconds: {profiling['cpu_seconds']['value']} "
+        f"({profiling['cpu_seconds']['reason']})")
+    add(f"- peak RSS: {profiling['peak_rss_bytes']['value']} "
+        f"({profiling['peak_rss_bytes']['reason']})")
+    add(f"- candidate-bar visits: {profiling['candidate_bar_visits']['value']} "
+        f"({profiling['candidate_bar_visits']['reason']})")
     add("- reported vs planned: 2 of 20 cells executed, 8 trials/cutoff instead of the registered "
         "32-64; no canceled budget job and no degraded execution resolution were used to hit time")
-    add("- no cold/warm native split is claimed in this phase; the event account ran on the installed "
-        "Python route with `native_import_error` recorded in RF-01")
+    add("- cold/warm: the RF-02 route proof records cold/warm seconds on its synthetic seed-17 "
+        "frame (`profiling_and_budget.json#/cold_warm`); the RF-04 real-snapshot pilot did not "
+        "record a cold/warm split; the event account ran on the installed Python route with "
+        "`native_import_error` recorded in RF-01")
     add("")
     add("## 8. Proof capability")
     add("")
@@ -334,6 +380,7 @@ def main() -> int:
     add("LAB=/root/bobby/pool_alpha/lab_regime_model_quantbt")
     add("PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_paired_pilot.py")
     add("PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_decay_and_controls.py --force")
+    add("PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf04_gap_close.py --force")
     add("PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q \\")
     add("  | tee $LAB/evidence/corrective_mode4_v3/RF-04/test_suite_mode4_corrective.log")
     add("PYTHONDONTWRITEBYTECODE=1 $LAB/environments/lab_venv/bin/python -m pyflakes $LAB/src $LAB/scripts $LAB/tests/mode4_corrective \\")
@@ -400,17 +447,32 @@ def main() -> int:
             "skipped": (test_counts or {}).get("skipped"),
             "artifact_refs": ["test_suite_mode4_corrective.log", "pyflakes_mode4_corrective.log"],
             "test_file": "tests/mode4_corrective/test_rf04_decay_and_controls.py",
+            "test_files": ["tests/mode4_corrective/test_rf04_decay_and_controls.py",
+                           "tests/mode4_corrective/test_rf04_gap_close.py"],
             "note": (None if test_counts else "test log not present at report generation; counts null"),
         },
         "market_runs": {
-            "planned_cells": 20,
-            "executed_cells": len(pilot["cells"]),
+            "planned_cells": coverage["counts"]["planned_cells"],
+            "executed_cells": (coverage["counts"]["RUN_VALID"]
+                               + coverage["counts"]["RUN_NOT_EVALUABLE"]),
             "valid_pairs": sum(1 for cell in pilot["cells"] if cell["contrast"]["status"] == "VALID"),
-            "blocked_cells": (["A-VWAP/" + symbol for symbol in protocol["cohort"]["symbols"]]
-                              + ["A-HASH/" + symbol for symbol in protocol["cohort"]["symbols"]]),
-            "not_run_cells": 16,
+            "blocked_cells": [cell["cell"] for cell in coverage["cells"]
+                              if cell["coverage_status"] == "BLOCKED_CAPABILITY"],
+            "not_run_cells": coverage["counts"]["NOT_RUN"],
+            "insufficient_data_cells": coverage["counts"]["INSUFFICIENT_DATA"],
+            "coverage_status_counts": {status: coverage["counts"][status]
+                                       for status in coverage["status_vocabulary"]},
             "arms": ["M4_CAL", "M4_REGIME", "M4_CAL_MATCHED", "M4_REGIME_DELAYED"],
         },
+        "coverage": {
+            "ref": "cell_coverage.json",
+            "status": coverage["status"],
+            "counts": coverage["counts"],
+            "per_cell": {cell["cell"]: cell["coverage_status"] for cell in coverage["cells"]},
+        },
+        "coverage_ref": "cell_coverage.json",
+        "profiling_ref": "profiling_and_budget.json",
+        "transparency_ref": "mode4_transparency_ledger.json",
         "metrics": {
             "raw_quantbt_ref": "paired_discovery_pilot.json",
             "canonical_ref": "decay_panels.json",
@@ -426,8 +488,15 @@ def main() -> int:
             "matched_wall_seconds": controls["matched_control"]["wall_seconds"],
             "placebo_wall_seconds": controls["placebo"]["wall_seconds"],
             "d2_wall_seconds": controls["decay_anchor"]["wall_seconds"],
-            "peak_rss_bytes": None,
-            "actual_candidate_bar_visits": None,
+            "peak_rss_bytes": profiling["peak_rss_bytes"]["value"],
+            "cpu_seconds": profiling["cpu_seconds"]["value"],
+            "actual_candidate_bar_visits": profiling["candidate_bar_visits"]["value"],
+            "profile_ref": "profiling_and_budget.json",
+            "unmeasured_reasons": {
+                "cpu_seconds": profiling["cpu_seconds"]["reason"],
+                "peak_rss_bytes": profiling["peak_rss_bytes"]["reason"],
+                "candidate_bar_visits": profiling["candidate_bar_visits"]["reason"],
+            },
         },
         "proof_capability": {
             "technical_validity": "PARTIAL",

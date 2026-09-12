@@ -1,0 +1,256 @@
+{
+  "schema": "regime_lab.rf04_profiling_and_budget.v1",
+  "phase": "RF-04",
+  "study_id": "corrective_mode4_v3",
+  "status": "MEASURED_WITH_UNMEASURED_FIELDS_NULL",
+  "measurement_rule": "only values present in the committed RF-04/RF-02 artifacts (or file sizes of those artifacts) are recorded; a quantity that no committed artifact or log measured is null plus a reason",
+  "sources": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json",
+      "sha256": "aa70f5a090bce96f9fe070b2a70ef851806b0ca9ed2590c0aed175adeb7210c5"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json",
+      "sha256": "656a364c7a04a88f21b8c4d067af586d644ad231ff8ceb0fa02d952b2c8f068f"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/decay_panels.json",
+      "sha256": "90c9d5c361d33402191b01fa59a17bdab75f97d667f70fe329e33d1ccfe15fdd"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json",
+      "sha256": "b67adbc7c602fa51c14af0fd7c38ab0ea67c8abd9ce8a2cdfe90c9328ee7e707"
+    }
+  ],
+  "denominators": {
+    "planned_cells": 20,
+    "executed_cells": 2,
+    "pilot_trial_rows": 144,
+    "matched_control_trial_rows": 96,
+    "placebo_trial_rows": 96,
+    "total_control_trial_rows": 192,
+    "d2_anchor_replays": 4,
+    "d1_rows": 168,
+    "d2_rows": 36,
+    "d3_rows": 102
+  },
+  "wall_seconds": {
+    "pilot_by_cell_arm": {
+      "A-SC/BTCUSDT": {
+        "M4_CAL": 47.665,
+        "M4_REGIME": 107.116
+      },
+      "A-HMA/BTCUSDT": {
+        "M4_CAL": 30.982,
+        "M4_REGIME": 54.543
+      }
+    },
+    "matched_control_by_cell_arm": {
+      "A-SC/BTCUSDT": 107.224,
+      "A-HMA/BTCUSDT": 57.519
+    },
+    "placebo_by_cell_arm": {
+      "A-SC/BTCUSDT": 111.968,
+      "A-HMA/BTCUSDT": 55.972
+    },
+    "d2_anchor_replay_seconds": 34.282123731449246,
+    "rf02_route_proof_cold_warm_seconds": {
+      "A-SC": {
+        "cold_seconds": 1.313,
+        "warm_seconds": 0.161
+      },
+      "A-HMA": {
+        "cold_seconds": 0.163,
+        "warm_seconds": 0.163
+      }
+    },
+    "totals": {
+      "pilot_sum_of_cell_arm_seconds": 240.306,
+      "matched_control_loop_wall_seconds": 164.743,
+      "matched_control_sum_of_cell_arm_seconds": 164.743,
+      "placebo_loop_wall_seconds": 171.856,
+      "placebo_sum_of_cell_arm_seconds": 167.94,
+      "d2_anchor_replay_seconds": 34.282123731449246
+    }
+  },
+  "cold_warm": {
+    "measured": true,
+    "where": "RF-02/pilot_and_route_matrix.json#/timings",
+    "frame": {
+      "source": "synthetic pilot frame (seed 17, 400 bars)",
+      "is_synthetic": true,
+      "note": "route proof only; the real-snapshot rerun replaces the frame"
+    },
+    "values_seconds": {
+      "A-SC": {
+        "cold_seconds": 1.313,
+        "warm_seconds": 0.161
+      },
+      "A-HMA": {
+        "cold_seconds": 0.163,
+        "warm_seconds": 0.163
+      }
+    },
+    "note": "cold/warm route-proof timings were measured on the RF-02 synthetic seed-17 frame; the RF-04 real-snapshot pilot did not record a cold/warm split"
+  },
+  "cpu_seconds": {
+    "value": null,
+    "reason": "NOT_MEASURED: the RF-04 runners recorded wall clock only; no committed artifact or log stores process CPU seconds, so a value would be invented"
+  },
+  "peak_rss_bytes": {
+    "value": null,
+    "reason": "NOT_MEASURED: no RF-04 artifact or log records the peak resident set; report.json already carries peak_rss_bytes=null for the same reason"
+  },
+  "candidate_bar_visits": {
+    "value": null,
+    "reason": "NOT_MEASURED: the pilot/evaluator traces record folds, trials, studies and event-account runs, not candidate-bar visits; the count cannot be reconstructed from committed values"
+  },
+  "rows": {
+    "data_bars_by_cell": {
+      "A-SC/BTCUSDT": 72960,
+      "A-HMA/BTCUSDT": 18240
+    },
+    "account_bars_by_cell_arm": {
+      "A-SC/BTCUSDT": {
+        "M4_CAL": 72960,
+        "M4_REGIME": 72960
+      },
+      "A-HMA/BTCUSDT": {
+        "M4_CAL": null,
+        "M4_REGIME": null
+      }
+    },
+    "account_bars_null_reason": "the event-account payload records engine_fill_count and fill_count instead of a bar count, so its account_bars value is null rather than zero",
+    "trial_rows": {
+      "pilot_by_cell_arm": {
+        "A-SC/BTCUSDT": {
+          "M4_CAL": 24,
+          "M4_REGIME": 48
+        },
+        "A-HMA/BTCUSDT": {
+          "M4_CAL": 24,
+          "M4_REGIME": 48
+        }
+      },
+      "matched_control_by_cell": {
+        "A-SC/BTCUSDT": 48,
+        "A-HMA/BTCUSDT": 48
+      },
+      "placebo_by_cell": {
+        "A-SC/BTCUSDT": 48,
+        "A-HMA/BTCUSDT": 48
+      }
+    },
+    "panel_rows": {
+      "D1": 168,
+      "D2": 36,
+      "D3": 102
+    }
+  },
+  "bytes": {
+    "artifacts_bytes": {
+      "paired_discovery_pilot.json": 679918,
+      "paired_discovery_registration.json": 1628,
+      "discovery_protocol.json": 1295,
+      "positive_control.json": 838,
+      "controls_registration.json": 3394,
+      "controls_and_funnel.json": 806062,
+      "decay_panels.json": 1050896,
+      "design_freeze.json": 2086,
+      "model_design_selection_manifest.json": 35634,
+      "causal_model_registry.json": 37036,
+      "emission_tape_sample.json": 59079,
+      "current_coordinate_contract.json": 6990,
+      "RF-02/pilot_and_route_matrix.json": 5265
+    },
+    "total_artifacts_bytes": 2690121,
+    "note": "sizes of the committed input artifacts at generation time"
+  },
+  "trials": {
+    "pilot_by_cell_arm": {
+      "A-SC/BTCUSDT": {
+        "M4_CAL": 24,
+        "M4_REGIME": 48
+      },
+      "A-HMA/BTCUSDT": {
+        "M4_CAL": 24,
+        "M4_REGIME": 48
+      }
+    },
+    "matched_control_by_cell": {
+      "A-SC/BTCUSDT": 48,
+      "A-HMA/BTCUSDT": 48
+    },
+    "placebo_by_cell": {
+      "A-SC/BTCUSDT": 48,
+      "A-HMA/BTCUSDT": 48
+    },
+    "totals": {
+      "pilot": 144,
+      "matched_control": 96,
+      "placebo": 96,
+      "all_recorded": 336
+    }
+  },
+  "engine_calls": {
+    "definition": "counters copied from the committed evaluator traces: Optuna studies and trial rows for the endpoint route; event-account runs and scorer calls for the event route. D2 replays and positive-control accounts are counted once per committed replay record",
+    "optuna_counters": {
+      "cells_with_counter": [
+        "A-SC/BTCUSDT"
+      ],
+      "studies_by_cell_arm": {
+        "A-SC/BTCUSDT": {
+          "M4_CAL": 3,
+          "M4_REGIME": 6,
+          "M4_CAL_MATCHED": 6,
+          "M4_REGIME_DELAYED": 6
+        }
+      },
+      "trial_rows_by_cell_arm": {
+        "A-SC/BTCUSDT": {
+          "M4_CAL": 24,
+          "M4_REGIME": 48,
+          "M4_CAL_MATCHED": 48,
+          "M4_REGIME_DELAYED": 48
+        }
+      },
+      "not_recorded_on": {
+        "A-HMA/BTCUSDT": "the event route trace exposes event-account counters and no Optuna per-study counters, so an Optuna count for A-HMA/BTCUSDT is not applicable rather than zero"
+      }
+    },
+    "event_account_counters": {
+      "cells_with_counter": [
+        "A-HMA/BTCUSDT"
+      ],
+      "account_runs_by_cell_arm": {
+        "A-HMA/BTCUSDT": {
+          "M4_CAL": 15,
+          "M4_REGIME": 32,
+          "M4_CAL_MATCHED": 32,
+          "M4_REGIME_DELAYED": 32
+        }
+      },
+      "scorer_calls_by_cell_arm": {
+        "A-HMA/BTCUSDT": {
+          "M4_CAL": 27,
+          "M4_REGIME": 54,
+          "M4_CAL_MATCHED": 54,
+          "M4_REGIME_DELAYED": 54
+        }
+      },
+      "not_recorded_on": {
+        "A-SC/BTCUSDT": "the endpoint trace exposes Optuna counters and no event-account counters, so an event-account count for A-SC/BTCUSDT is not applicable rather than zero"
+      }
+    },
+    "d2_anchor_replays": 4,
+    "positive_control_accounts_evaluated": 2
+  },
+  "budget": {
+    "registered_full_study_trials_per_cutoff": 32,
+    "executed_bounded_trials_per_cutoff": 8,
+    "status": "BELOW_REGISTERED_MINIMUM",
+    "reason": "the bounded pilot registered the low end overridden to 8 trials/cutoff for both arms (paired_discovery_registration.json budget_note), below the registered full study value; the registered 32-64 range is never renamed"
+  },
+  "written_at_utc": "2026-09-12T00:56:57.282862+00:00",
+  "lab_run_id": "RF-04"
+}
