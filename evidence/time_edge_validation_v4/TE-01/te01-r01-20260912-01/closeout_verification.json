@@ -1,0 +1,42 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "status": "VERIFIED_SCOPED_CLOSEOUT",
+  "checked_new_index_references": [
+    "g3-rf01",
+    "te01-report",
+    "te01-json",
+    "te01-identity",
+    "te01-source",
+    "te01-fup",
+    "te01-binding",
+    "te01-findings",
+    "te01-baseline",
+    "te01-acceptance",
+    "te01-tests",
+    "te01-isolation",
+    "te01-reuse",
+    "te01-invalidation",
+    "te01-verdict",
+    "te01-reproduction",
+    "te01-report-check",
+    "g3-rf011",
+    "g3-rf012",
+    "g3-rf013",
+    "g3-rf014",
+    "g3-rf015"
+  ],
+  "plan_sha256": "aaf1ed7b87ecdba76ba1fedd877512135367bdbf8917c860d59697c731d06580",
+  "identity_report_sha256": "de60c988f0ca6702d72e3cf69b64e81bb650e8bf1bb48eba38a63ff494c35f99",
+  "protected_paths_checked": 1004,
+  "protected_changed": [],
+  "quantbt_git_status": "",
+  "fup_source_files_unchanged": [
+    "scripts/run_fup02.py",
+    "scripts/write_fup02_report.py",
+    "tests/mode4_corrective/test_fup02_scale.py"
+  ],
+  "engine_runs": 0,
+  "limits": "Metadata/index/source checks, no additional model fit, market test or financial qualification."
+}

@@ -2,10 +2,12 @@
 
 **Ngày lập:** 12/09/2026. **Phạm vi:** `/root/bobby/pool_alpha/lab_regime_model_quantbt`.
 **Vai trò:** đầu mối để đọc tình trạng thực, truy nguồn yêu cầu, giao việc, nghiệm thu và tìm báo cáo.
-**Trạng thái:** `TE-01_IN_PROGRESS_PREPARATION`; TE-02…TE-05 **chưa được thực hiện**.
+**Trạng thái:** `TE-01_REGISTRATION_VALIDATED_FOR_TECHNICAL_REPAIR`; chưa đóng toàn phase vì
+`FINAL_FUP_HANDOFF_PENDING`. TE-02…TE-05 **chưa được thực hiện**.
 
 Theo chỉ thị mới của người dùng: **để OpenCode hoàn tất FUP-02**, giao Codex sửa và kiểm chứng 20 findings.
-Đã bắt đầu chuẩn bị TE-01 riêng; chưa sửa runner/model/registration của FUP-02 hoặc chạy thêm backtest.
+Đã đăng ký và kiểm chứng hợp đồng TE-01, lưu baseline lỗi trước sửa, manifests và báo cáo riêng;
+chưa sửa runner/model/registration của FUP-02 hoặc chạy thêm backtest.
 Việc một task được liệt kê ở đây không có nghĩa code đã được sửa, test đã pass hoặc một market run mới đã được cấp ngân sách.
 
 ## 0. Đọc từ đây
@@ -489,7 +491,7 @@ Study ID đề xuất `time_edge_validation_v4` là **PLANNED**, chưa có regis
 
 | Phase | Mục tiêu | Guide gốc | Dependencies | Trạng thái hiện tại |
 |---|---|---|---|---|
-| [TE-01](#te-01) | Khóa scope, hypotheses, identities, metric definitions và audit backlog | G3 RF-01; G2 LAB-01/03 | Preparation đã có; tiếp nhận cuối FUP-02 còn pending | IN_PROGRESS_PREPARATION |
+| [TE-01](#te-01) | Khóa scope, hypotheses, identities, metric definitions và audit backlog | G3 RF-01; G2 LAB-01/03 | Registration đã kiểm; tiếp nhận cuối FUP-02 còn pending | TECHNICAL_REGISTRATION_VALIDATED; PHASE_PARTIAL |
 | [TE-02](#te-02) | Correct economic engine, Mode 4, delivery, budget/resume | G3 RF-02 + RF-03.3; G2 LAB-02/04/07 | TE-01 contracts | NOT_STARTED |
 | [TE-03](#te-03) | Model regime được đánh giá và nối vào controller, full positive/null capability | G3 RF-03; G2 LAB-05/06 | TE-01; dùng engine đã qualify ở TE-02 cho full controls | NOT_STARTED |
 | [TE-04](#te-04) | Controlled discovery, time edge, decay và uncertainty | G3 RF-04; G2 LAB-08 | TE-02 + TE-03 technical gates | NOT_STARTED |
@@ -499,12 +501,12 @@ Thứ tự code repairs có thể đan xen giữa TE-02/03, nhưng market infere
 phase bằng chữ COMPLETE từ phase cũ; mỗi gate đánh giá đúng source/model/engine/data version đang dùng.
 
 **Chỉ mục báo cáo mới:** namespace đề xuất `evidence/time_edge_validation_v4/TE-0N/<run_id>/`.
-Mỗi run có `report.md`, `report.json`, `artifact_manifest.json`; preparation TE-01 đã có, các phase sau chưa chạy.
+Mỗi run có `report.md`, `report.json`, `artifact_manifest.json`; audit TE-01 đã có, các phase sau chưa chạy.
 Sau mỗi run, cập nhật link đúng run trong bảng dưới, không trỏ tới file có thể bị ghi đè.
 
 | Phase | Report MD / JSON hiện có | Nhiệm vụ kế tiếp | Chủ sở hữu thực hiện / reviewer |
 |---|---|---|---|
-| TE-01 | [Preparation MD](evidence/time_edge_validation_v4/TE-01/prep-20260912-01/report.md) / [JSON](evidence/time_edge_validation_v4/TE-01/prep-20260912-01/report.json) — IN_PROGRESS | TE01.3/4/5 contracts; TE01.1 chờ tiếp nhận cuối FUP-02 | Codex; chưa có reviewer độc lập |
+| TE-01 | [Report MD][te01-report] / [JSON][te01-json]; [identity supplement][te01-identity] | TE01.1 chờ bàn giao cuối FUP-02; chuẩn bị qualification TE-02/03 theo gates | Codex; chưa có reviewer độc lập |
 | TE-02 | Chưa có — NOT_STARTED | Sau TE-01: TE02.1/2 route + scorer qualification | Codex; chưa có reviewer độc lập |
 | TE-03 | Chưa có — NOT_STARTED | Sau TE-01: TE03.1/2 model protocol + causality | Codex; chưa có reviewer độc lập |
 | TE-04 | Chưa có — NOT_STARTED | Sau TE-02/03: TE04.1 paired pilot | Codex; chưa có reviewer độc lập |
@@ -526,6 +528,42 @@ Sau mỗi run, cập nhật link đúng run trong bảng dưới, không trỏ t
 | TE01.5 | Register model hypothesis: common BTC hoặc per-symbol, features, K/lambda/cadence ladder nhỏ, selection rule | `model_protocol.json` | Không gọi model selection manifest riêng là deployed design |
 | TE01.6 | Register route/resolution/compute contract, phase budgets và tier caps | `compute_budget.json`, `execution_contract.json` | Wall/CPU/RSS/candidate work và residual budget có cách đo |
 | TE01.7 | Classify evidence reuse; tiếp tục historical invalidation bằng record mới | `reuse_decision.json`, `invalidation.json` | Không sửa curves/history, không tự relabel prospective |
+
+**Registration đang dùng:** [R01 manifest](configs/time_edge_validation_v4/r01/registration_manifest.json),
+[Mode 4 resolved knobs](configs/time_edge_validation_v4/mode4_binding_r01.json).
+R01 cho phép sửa kỹ thuật; không phải financial spec đã đủ điều kiện chạy thị trường.
+Ngưỡng δ đã đăng ký bằng công thức chi phí trên account turnover; số cụ thể và trace calibration
+phải được khóa trước TE-04. Không dùng null hoặc ngưỡng lịch sử để bỏ qua gate này.
+
+| Task | Guide chi tiết | Artifact / hợp đồng để thực hiện và nghiệm thu | Trạng thái TE-01 |
+|---|---|---|---|
+| TE01.1 | [G3 RF01.1][g3-rf011]; [G2 §0][g2-0], [§6][g2-6] | [Source/data manifest][te01-source], [FUP intake][te01-fup], [package binding][te01-binding], [identity supplement][te01-identity] | Đã pin checkpoint; chưa có bàn giao cuối FUP |
+| TE01.2 | [G3 RF01.2][g3-rf012], [RF01.4][g3-rf014]; [G2 §14][g2-14] | [Finding disposition][te01-findings], [baseline][te01-baseline], [T01–T64 coverage][te01-acceptance] | Map đủ; chưa coi findings là đã sửa |
+| TE01.3 | [G3 RF01.3][g3-rf013], [§6.6][g3-6.6]; [G2 §11][g2-11] | [Metric contract](configs/time_edge_validation_v4/r01/metric_contract.json), [evaluation windows](configs/time_edge_validation_v4/r01/evaluation_windows.json), [tests][te01-tests] | Kiểm hợp đồng arithmetic; chưa nối lại caller RF/FUP |
+| TE01.4 | [G3 RF01.5][g3-rf015], [§6.6–6.7][g3-6.6]; [G2 §10][g2-10], [§11][g2-11] | [Study registration](configs/time_edge_validation_v4/r01/study_registration.json), [statistical analysis plan](configs/time_edge_validation_v4/r01/statistical_analysis_plan.json) | Đăng ký hypotheses/CI/multiplicity/support; δ numeric và calibration chờ TE-02/03 |
+| TE01.5 | [G3 RF01.5][g3-rf015]; [G2 §8][g2-8] | [Model protocol](configs/time_edge_validation_v4/r01/model_protocol.json) | Đăng ký design/selection/label/fold dossier; chưa fit hoặc deploy |
+| TE01.6 | [G3 RF01.1][g3-rf011], [RF01.5][g3-rf015], [§8][g3-8]; [G2 §4][g2-4] | [Execution contract](configs/time_edge_validation_v4/r01/execution_contract.json), [compute budget](configs/time_edge_validation_v4/r01/compute_budget.json), [OS probe][te01-isolation] | Đã đo audit; OS namespace hiện không tạo được, market gate đóng |
+| TE01.7 | [G3 RF01.2][g3-rf012]; [G2 §13][g2-13] | [Reuse decision][te01-reuse], [invalidation overlay][te01-invalidation], [correction ledger](configs/correction_ledger.json) | Phân loại theo cell/arm và dependency; giữ nguyên lịch sử |
+
+<!-- BEGIN TE01_MEASURED -->
+**Số đo từ run `te01-r01-20260912-01` đã commit:**
+
+- Hợp đồng: **69 PASS**; baseline trước sửa: **8 FAIL đúng lỗi**, unexpected errors **0**.
+- Kiểm báo cáo: **5 PASS**; [evidence][te01-report-check].
+- Snapshot: **627 files / 1,448,678,208 bytes**, hash/size/row-count metadata khớp; chưa kiểm lại mọi candle row.
+- Audit: **16.299s wall**, **10.058s CPU**, peak RSS **213,796 KiB**; engine/optimizer/market tests **0/0/0**.
+- FUP snapshot lúc **2026-09-12T06:36:57.892446+00:00**, `PARTIAL_BUDGET_STOPPED`: `{"NOT_RUN_BUDGET": 13, "RUN_VALID": 3, "FAILED": 2, "BUDGET_STOPPED": 2}`; đây là checkpoint đã pin, không phải bàn giao cuối.
+<!-- END TE01_MEASURED -->
+
+**Giới hạn cần đọc đúng:** baseline dùng source probes và một centroid stub để cô lập lỗi purge;
+không phải full model/engine control. Model cũ là `INHERITED_FROZEN_INPUT`, không được đánh giá lại
+trong TE-01. D1/D2/D3 và CAL–REGIME chưa có số đo thị trường mới; TE-03 sở hữu model dossier và
+TE-04 sở hữu paired time-edge/decay inference. Findings mới vẫn OPEN đến khi caller thật và
+affected outputs được sửa/kiểm; hợp đồng mới PASS không tự đóng chúng.
+
+Chuẩn bị TE-02 được dựa trên R01. Việc sửa code dùng chung với FUP phải chờ bàn giao nguồn;
+market workers còn cần OS isolation, engine/model qualification, δ đã materialize và tổng budget.
+Xem [phase verdict][te01-verdict] và [reproduction/runtime-gate verification][te01-reproduction].
 
 **Báo cáo TE-01:** bảng planned/existing/reusable/quarantined/needs-rerun theo cell và arm; model readiness,
 metric audit trước sửa, toàn findings và đúng test scope. Không có performance claim.
@@ -1170,8 +1208,24 @@ Renderer đọc hai guide đã capture và hai acceptance registries được pi
 ở `plan_inputs/`, có [manifest](evidence/reviews/time-edge-20260912-review01/plan_input_manifest.json)
 xác nhận hashes khớp inventory lúc audit; các lần capture mới giữ chúng trực tiếp trong `captured/configs/`.
 
-Các task TE mới chưa có launcher; không đưa ví dụ command chưa implement thành “đã chạy”. Khi TE-01
-bắt đầu, thêm exact commands và dry-run estimate của canonical runner vào central index này.
+**Runner TE-01 đã thực thi:** chỉ đọc nguồn/snapshot metadata, kiểm contracts và baseline; không engine.
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  environments/lab_venv/bin/python -B scripts/run_te01.py audit --run-id FRESH_RUN_ID
+# Commit đúng audit artifacts trước khi render:
+PYTHONDONTWRITEBYTECODE=1 environments/lab_venv/bin/python -B \
+  scripts/run_te01.py report --run-id te01-r01-20260912-01
+PYTHONDONTWRITEBYTECODE=1 environments/lab_venv/bin/python -B \
+  scripts/run_te01.py runtime-gate --run-id te01-r01-20260912-01
+TE01_REPORT_RUN_ID=te01-r01-20260912-01 PYTHONDONTWRITEBYTECODE=1 \
+  environments/lab_venv/bin/python -B -m pytest -q -p no:cacheprovider \
+  tests/time_edge_validation_v4/report_verification_cases.py
+```
+
+Runtime gate hiện trả exit 2 theo đúng các blocker trong evidence. `audit` bắt buộc thư mục mới;
+không ghi đè run đã có. `before_repair_cases.py` được gọi riêng nên các FAIL chuẩn bị không lẫn
+với default pytest suite mà OpenCode có thể đang dùng. Các runner TE-02…TE-05 chưa được triển khai.
 
 ## 13. Change log và điều kiện cập nhật
 
@@ -1179,6 +1233,7 @@ bắt đầu, thêm exact commands và dry-run estimate của canonical runner v
 |---|---|---|
 | 2026-09-12, review01 | Inventory code/evidence; source probes; 20 findings; thống nhất 5 phase và model/time-edge/decay/report/test contracts | Đã repair runtime, đã chạy TE study, đã xác nhận kết luận thị trường |
 | 2026-09-12, TE-01 preparation | Người dùng giao Codex triển khai; checklist trước code, source identities, 20 OPEN findings và report MD/JSON riêng | Đã hoàn thành TE-01, đã sửa 20 findings hoặc đã can thiệp FUP-02 |
+| 2026-09-12, TE-01 R01 | Registration + baseline + source/data/package identities + reuse/invalidation; code `bc58622`, evidence `afb3e0c`, report `49fa565`; [báo cáo][te01-report] | Đã sửa toàn findings, đã có time edge, đã hoàn tất FUP hoặc đã mở market workers |
 
 Sau mỗi task hoàn tất: commit scoped work theo quy tắc lab, ghi task ID/commit/evidence/test result,
 update status/next task tại đây. Không push nếu chưa được yêu cầu; không merge/publish/deploy/live.
@@ -1328,3 +1383,25 @@ update status/next task tại đây. Không push nếu chưa được yêu cầu
 [g3-rf05]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf-05--frozen-đánh-giá-lại-phản-chứng-báo-cáohandoff-có-thể-kiểm-tra
 
 <!-- END GUIDE_LINKS -->
+
+[te01-report]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/report.md
+[te01-json]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/report.json
+[te01-identity]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/identity_report.md
+[te01-source]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/source_data_manifest.json
+[te01-fup]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/fup02_intake.json
+[te01-binding]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/quantbt_binding_report.json
+[te01-findings]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/finding_disposition.json
+[te01-baseline]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/regression_baseline.json
+[te01-acceptance]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/acceptance_coverage.json
+[te01-tests]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/contract_tests.json
+[te01-isolation]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/os_isolation.json
+[te01-reuse]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/reuse_decision.json
+[te01-invalidation]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/invalidation.json
+[te01-verdict]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/phase_verdict.json
+[te01-reproduction]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/reproduction_verification.json
+[te01-report-check]: evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/report_verification.json
+[g3-rf011]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf011--isolated-working-copy-và-identity
+[g3-rf012]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf012--invalidation-và-claim-sửa-ngay
+[g3-rf013]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf013--mode-4configmetric-contract-inventory
+[g3-rf014]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf014--regression-suite-nhỏ-và-positive-control-plan
+[g3-rf015]: REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md#rf015--register-primary-protocol-và-costtime-budgets
