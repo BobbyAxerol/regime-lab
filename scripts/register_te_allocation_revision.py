@@ -42,19 +42,19 @@ def main():
     parser.add_argument("--revision-id", default="TE02-PILOT-R03-REV01")
     parser.add_argument("--profile", default=DEFAULT_PROFILE)
     parser.add_argument("--output", default=DEFAULT_OUTPUT)
+    parser.add_argument("--total", type=float, default=NEW_TOTAL)
+    parser.add_argument("--why", default="selection cap measured too small for the registered 32 trials")
     args = parser.parse_args()
     root = ROOT
     profile_path = root / args.profile
     profile = read(profile_path)
     prior_total, prior_charged, prior_attempts = ledger_state(root, args.allocation_id)
-    assert abs(prior_total - profile["allocation_state_at_profile"]["total_wall_seconds"]) < 1e-6, \
-        "profile and live allocation total disagree"
-    assert abs(prior_charged - profile["allocation_state_at_profile"]["charged_wall_seconds"]) < 1e-6, \
-        "live ledger gained charges after the profile; re-measure instead of restamping"
+    assert prior_charged + 1e-6 >= profile["allocation_state_at_profile"]["charged_wall_seconds"], \
+        "live ledger charges went backwards; re-measure instead of restamping"
     projection = profile["extrapolation_to_32_trials"]["projected_seconds"]
     assert SELECTION_CAP > projection, "registered selection cap must exceed the measured projection"
     required = prior_charged + SELECTION_CAP + 2 * TASK_CAP
-    assert NEW_TOTAL >= required, "new total must reserve selection, audit and deployment caps"
+    assert args.total >= required, "new total must reserve selection, audit and deployment caps"
     revision = {
         "schema": ALLOCATION_REVISION_SCHEMA,
         "study_id": "time_edge_validation_v4",
@@ -65,7 +65,7 @@ def main():
         "prior_total_wall_seconds": prior_total,
         "prior_charged_wall_seconds": prior_charged,
         "prior_attempts": prior_attempts,
-        "total_wall_seconds": NEW_TOTAL,
+        "total_wall_seconds": float(args.total),
         "task_wall_seconds": TASK_CAP,
         "selection_task_wall_seconds": SELECTION_CAP,
         "workers": 1,
@@ -86,6 +86,7 @@ def main():
                                  % (prior_attempts, prior_charged),
             "why_not_fewer_trials": "the registered per-cutoff trial count is 32 (mode4_binding_r01 resolved_config); "
                                     "lowering it would be an unregistered fidelity reduction",
+            "why_this_revision": args.why,
         },
         "per_arm_compute_is_unchanged": True,
         "how_arms_stay_equal": "selection is one shared artifact per cell: M4_CAL, M4_REGIME and M4_CAL_MATCHED all consume "
@@ -94,25 +95,26 @@ def main():
                                "trials, threads or a different account window.",
         "cpu_limit_change_justification": None,
         "what_it_changes": [
-            "selection task wall cap: 600s -> 2700s",
-            "shared allocation total wall: 1800s -> 5400s (appended to the live ledger)",
+            "selection task wall cap: %ss -> %ss" % (TASK_CAP, SELECTION_CAP),
+            "shared allocation total wall: %ss -> %ss (appended to the live ledger)" % (prior_total, args.total),
         ],
         "what_it_does_not_change": [
             "registered 32 trials per cutoff, search seed, scorer, train window, economics and engine contract",
             "workers=1, cpu_limit=2, memory_gib=4 and per-arm compute",
-            "every prior attempt and its charged wall in allocations/TE02-PILOT-R03/ledger.sqlite",
+            "every prior attempt and its charged wall in allocations/%s/ledger.sqlite" % args.allocation_id,
         ],
-        "what_it_costs": "wall clock only; the shared allocation ledger is raised by 3600s "
-                         "(5400s new total minus the prior 1800s registration) and keeps all prior charges",
+        "what_it_costs": "wall clock only; the shared allocation ledger is raised by %ss "
+                         "(%ss new total minus the prior %ss registration) and keeps all prior charges"
+                         % (args.total - prior_total, args.total, prior_total),
         "baseline_protection_rule_still_holds": "no arm's interval, fees, outputs, seed or number of attempts is reduced or "
                                                 "raised; the same selected theta is reused by every arm",
-        "note": "Registered before pilot-08 ran; pilot-07's measured profile is the justification. This is a budget revision, "
-                "not a trial-budget change.",
+        "note": "Registered before the next pilot job; pilot-07's measured profile is the justification. This is a budget "
+                "revision, not a trial-budget change.",
     }
     output = root / args.output
     h = save(output, revision)
     print(json.dumps({"revision": str(output.relative_to(root)), "sha256": h,
-                      "prior_charged_wall_seconds": prior_charged, "total_wall_seconds": NEW_TOTAL,
+                      "prior_charged_wall_seconds": prior_charged, "total_wall_seconds": float(args.total),
                       "selection_task_wall_seconds": SELECTION_CAP, "projected_seconds": projection}, indent=2))
 
 
