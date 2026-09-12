@@ -344,5 +344,19 @@
   },
   "unverifiable": [],
   "evidence_is_append_only": true,
-  "status": "EVERY_CORRECTION_TRACEABLE"
+  "status": "EVERY_CORRECTION_TRACEABLE",
+  "study_overlays": [
+    {
+      "study_id": "time_edge_validation_v4",
+      "phase_id": "TE-01",
+      "lab_run_id": "TE01-R01",
+      "registered_at_utc": "2026-09-12T06:37:51.253942+00:00",
+      "status": "TECHNICAL_CONTRACTS_ADDED_EXISTING_CALLERS_UNCHANGED",
+      "registration_ref": "configs/time_edge_validation_v4/r01/registration_manifest.json",
+      "finding_map_ref": "configs/time_edge_validation_v4/finding_map_r01.json",
+      "evidence_namespace": "evidence/time_edge_validation_v4/TE-01/",
+      "reason": "TE-01 registers corrected window, metric, causal availability, study and reuse contracts. Existing RF/FUP callers are unchanged while FUP-02 remains under OpenCode ownership. All 20 new findings remain OPEN pending actual repair and retest. New immutable generations contain invalidation.json overlays; historical measured values and verdict files are preserved.",
+      "supersedes_numeric_result": false
+    }
+  ]
 }

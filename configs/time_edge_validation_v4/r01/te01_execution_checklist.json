@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.te01_execution_checklist.te01.v1",
+  "supersedes_scope": "extends prior preparation checklist; preserves its original bytes",
+  "scope": "complete TE01 registration/contracts/identity/reuse and before-repair baseline; no engine runs",
+  "tasks": [
+    "TE01.1",
+    "TE01.2",
+    "TE01.3",
+    "TE01.4",
+    "TE01.5",
+    "TE01.6",
+    "TE01.7"
+  ],
+  "required_findings": {
+    "A": 16,
+    "D": 8,
+    "N": 5,
+    "TEF": 20
+  },
+  "required_outputs": [
+    "source_data_manifest.json",
+    "fup02_intake.json",
+    "finding_disposition.json",
+    "quantbt_binding_report.json",
+    "snapshot_verification.json",
+    "regression_baseline.json",
+    "contract_tests.json",
+    "reuse_decision.json",
+    "invalidation.json",
+    "phase_verdict.json",
+    "report.md",
+    "report.json"
+  ],
+  "phase_verdict_rule": "registration may validate for repair while market readiness remains false; final FUP handoff and resource isolation must be explicit blockers, not assumed satisfied"
+}

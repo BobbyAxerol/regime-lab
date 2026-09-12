@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.model_protocol.te01.v1",
+  "primary_context": "COMMON_BTCUSDT_MARKET_CONTEXT",
+  "per_symbol_models": "disabled secondary revision; do not claim they were evaluated",
+  "features": [
+    "g1_rv_6",
+    "g1_direction_6",
+    "g1_efficiency_6",
+    "g2_taker_imbalance",
+    "g2_log_activity_30",
+    "g5_dispersion_6",
+    "g5_breadth_6",
+    "g5_residual_return_30"
+  ],
+  "group_weights": {
+    "g1_rv_6": 0.1111111111111111,
+    "g1_direction_6": 0.1111111111111111,
+    "g1_efficiency_6": 0.1111111111111111,
+    "g2_taker_imbalance": 0.16666666666666666,
+    "g2_log_activity_30": 0.16666666666666666,
+    "g5_dispersion_6": 0.1111111111111111,
+    "g5_breadth_6": 0.1111111111111111,
+    "g5_residual_return_30": 0.1111111111111111
+  },
+  "raw_panel_columns_required": true,
+  "full_sample_scaled_z_forbidden": true,
+  "observation_hours": 4,
+  "memory_days": 365,
+  "refit_days": 28,
+  "minimum_valid_train_fraction": 0.9,
+  "ladder": {
+    "control": "M0 train-only volatility/path/activity thresholds",
+    "jm_k": [
+      2,
+      3
+    ],
+    "jm_lambda": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "max_jm_designs": 6,
+    "fit_seeds": [
+      11,
+      23
+    ],
+    "alternative_cadences_hours": [
+      8,
+      24
+    ],
+    "alternative_cadences_enabled": false,
+    "sparse_hmm_gmm": "disabled until separately registered"
+  },
+  "inner_validation": {
+    "blocks": 3,
+    "minimum_train_days": 180,
+    "scaler": "fit only current inner train, all transforms frozen on validation",
+    "target_purge": "include supervised origin only if outcome_available_at <= selection cutoff (same-time sequence must be earlier); dropping validation head is insufficient",
+    "warm_filter": "initialize validation from causal terminal train state without hindsight traceback"
+  },
+  "selection_rule": "filter causal/convergence/dead-state/support failures; choose highest train-inner held-out future-candidate ranking utility; ties within predeclared numerical tolerance 1e-12 prefer K2 then lower normalized objective then deterministic design ID; no admissible informative design => M0 control plus no-promising-design status",
+  "information_target": {
+    "source": "same QuantBT engine/economics, causal candidate set; future pairwise candidate net-utility difference",
+    "primary_horizon_days": 28,
+    "secondary_horizons_days": [
+      7,
+      90
+    ],
+    "secondary_use": "diagnostic only and multiplicity ledger; not chosen after outcome",
+    "episode_spacing": "nonoverlapping origins for primary support, additional overlaps marked",
+    "same_target_cohort": true,
+    "price_forward_minus_trailing_return": "diagnostic proxy only, not parameter ranking proof"
+  },
+  "state_identity": {
+    "key": [
+      "model_id",
+      "state_namespace",
+      "state_id"
+    ],
+    "semantic_mapping": "raw economic coordinates, one-to-one where possible; ambiguous/unmatched explicit",
+    "naming": "train-only centroids/profiles; no universal bull/bear ID",
+    "memberships": "scores unless calibrated, not probabilities",
+    "market_accuracy": "not reported without independent ground truth"
+  },
+  "emission_required_fields": [
+    "model_id",
+    "model_fit_cutoff",
+    "model_ready_at",
+    "available_at",
+    "state_namespace",
+    "state_id",
+    "state_common",
+    "economic_context",
+    "quality_status",
+    "decision_eligible",
+    "source_mask",
+    "feature_schema_hash",
+    "model_design_hash"
+  ],
+  "eligibility": {
+    "quality_allowlist": [
+      "OK"
+    ],
+    "missing": "reject",
+    "unknown_stale_ambiguous": "keep existing safe incumbent, no information-triggered search",
+    "model_refit_alone": "not market transition"
+  },
+  "model_report_each_phase": {
+    "required": true,
+    "inherited": "INHERITED_FROZEN_INPUT with hash and original data role",
+    "unused": "NOT_EVALUATED_IN_THIS_PHASE with reason",
+    "per_fold": [
+      "model_at_selection",
+      "all_model_versions_during_fold",
+      "train_only_state_profiles",
+      "occupancy",
+      "dwell",
+      "transitions",
+      "unknown_fraction",
+      "mapping_status",
+      "information_effect_ci_support",
+      "actual_selected_active_params_and_orders"
+    ]
+  },
+  "known_current_model": "old K3 lambda1 tape and RF04 K3 lambda0.5 design selection are separate artifacts; both require deployment identity tests; neither presumed best"
+}
