@@ -1,0 +1,17 @@
+{
+  "purpose": "STATISTICAL_ONLY_SYNTHETIC_UNITS_NOT_MARKET_DELTA",
+  "inputs": {},
+  "registered_scope": "TE03.7 positive/null power for the registered four-hypothesis family; statistical only, no engine run; the engine full-path structural control is a separate controls stage",
+  "tasks": [
+    {
+      "task_id": "statistical-only-calibration",
+      "kind": "statistical_calibration",
+      "delta": 0.001,
+      "repetitions": 1000,
+      "days": 1095,
+      "draws": 4999,
+      "seed": 2026091210,
+      "wall_seconds": 1200
+    }
+  ]
+}
