@@ -1,0 +1,30 @@
+{
+  "schema": "regime_lab.te_controls_blocker.v1",
+  "lab_run_id": "te-host-controls-03",
+  "status": "NOT_RUN_BUDGET",
+  "reason": "task wall cap reached before the full structural-controls task completed",
+  "measured": {
+    "task_wall_seconds": 2700.2,
+    "charged_wall_seconds": 2700.2,
+    "cap_seconds": 2700.0,
+    "attempt_status": "TIMED_OUT",
+    "projection_one_selection_seconds": 1740.1,
+    "required_estimate_seconds": "4000-5400 for >=2 selections"
+  },
+  "funnel": {
+    "valid_observations": null,
+    "triggers": null,
+    "searches": null,
+    "different_params": null,
+    "activated": null,
+    "different_orders": null,
+    "reason": "run stopped at the cap; no fabricated fills or counts"
+  },
+  "claim_limits": {
+    "te04": "LOCKED",
+    "structural_controls": "NOT_RUN",
+    "power_positive_recovers": true,
+    "null_not_false_positive": true
+  },
+  "next": "register REV07 with a >=4000-5400s cap, run te-host-controls-04, then reassemble"
+}
