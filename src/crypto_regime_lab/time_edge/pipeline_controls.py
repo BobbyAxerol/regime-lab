@@ -115,6 +115,7 @@ def full_control(root, request):
     return {"status":"FULL_PATH_STRUCTURAL_CONTROL_COMPLETED","condition":task["condition"],"seed":seed,
         "cell_id":cell,"counts":counts,"model_ids":[v["model_id"] for v in vintages],
         "model_decisions":[v["decision"] for v in vintages],"eligible_emissions":sum(r["decision_eligible"] for r in tape),
+        "emissions_in_window":len(tape),
         "triggers":len(control["triggers"]),"distinct_regime_parameters":parameter_count,
         "activations":sum(r["event"] == "ACTIVATE" for r in accounts["M4_REGIME"]["funnel"]),
         "regime_commands":len(accounts["M4_REGIME"]["commands"]),"calendar_commands":len(accounts["M4_CAL"]["commands"]),
