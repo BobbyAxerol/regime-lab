@@ -747,3 +747,71 @@ plus a protocol revision (option 1) is proportionate.
 
 **Not run.** Nothing above is implemented. The lab reports the discrepancy, the per-alpha exposure and
 the reason contrasts are unaffected, and leaves the choice to the user.
+
+## OP-20 — Each worker is capped at 4 GiB on a 9.7 GiB shared host, so the cap that actually fires is the kernel's
+
+**Measured (2026-09-15).** `evidence/time_edge_validation_v4/operations/oom-incident-20260915-02.json`,
+written by `scripts/record_oom_incident.py` from the run receipts, the kernel ring buffer and `/proc`.
+
+Both BTC structural-control shards of `te-host-controls-btc-02` were SIGKILLed ~26 minutes into their
+first attempt. The receipts say `isolated child exited 137` — 128 + SIGKILL(9) — and nothing more.
+The kernel ring buffer says what the receipts cannot: `Out of memory: Killed process 1549135 (python)
+anon-rss:1569912kB` at 11:10:52 and `1549126` at 11:12:31, both `constraint=CONSTRAINT_NONE,
+global_oom`.
+
+Each kill is linked to its attempt by arithmetic, not by label: the kill timestamp minus that
+attempt's independently measured `wall_seconds` reproduces the second the runtime wrote its request
+file, with residuals of **−0.571s** and **−3.16s** while the runner-up candidate sits **98s** and
+**102s** away. The linkage refuses to claim a match when two kills fall inside the window, so it can
+go red.
+
+| | measured |
+|---|---|
+| peak worker RSS at kill | 1.50 GiB and 1.45 GiB |
+| registered per-worker limit | 4 GiB (`RLIMIT_AS`, `time_edge/workers.py::require_isolated`) |
+| workers registered for this run | 2 → an 8 GiB aggregate ceiling |
+| host | 9.72 GiB, **0 swap**, 4 CPUs |
+| other agent tool on the same host | `opencode`, itself OOM-killed at 10:49:28, 12:00:01, 12:07:46 and 12:10:24 holding 2.29–3.04 GiB |
+
+Neither worker came close to its own budget. The per-worker limit is enforced and measured; the
+**host-level aggregate is neither**, and with no swap the kernel's only move is to kill. No evidence
+was lost — every nested stage seals and publishes to the identity-keyed compute cache before the next
+begins, and the 11:47 retry replayed trials 1–27 of the 32-trial search from cache in under a second.
+The cost was ~26 minutes of wall per shard, twice.
+
+**Options.**
+
+1. *Record the kernel reason in the receipt.* When a child's return code is `-9`/`137`, read
+   `/proc/pressure/memory` and the ring buffer and write `killed_by=OOM` with the measured peak
+   alongside the existing reason. Why it might work: today a reader cannot tell an OOM from a
+   segfault from a manual kill, and all three are "exited 137" or near it — the same class of defect
+   as a `.get("quantity", 0.0)` that silently reads zero. Cost: a few lines in `runtime.py`. What
+   could go wrong: the ring buffer is not always readable, so the field must be `null` + reason
+   rather than a guess, and `runtime.py` is inside `source_identity` — it cannot be touched while a
+   run is in flight without invalidating the run.
+2. *Add a host-level admission check before dispatch.* At plan time, refuse to start `workers × 4 GiB`
+   unless `MemAvailable` plus swap covers it with a registered headroom, and record the reading in
+   the allocation. Why it might work: it turns an unregistered assumption into a measured
+   precondition, which is what every other budget in this lab already does. Cost: small, but it is a
+   new gate that can refuse a run the user wants to start. What could go wrong: `MemAvailable` at
+   dispatch does not bound what another tool allocates ten minutes later, so this narrows the window
+   rather than closing it.
+3. *Lower the per-worker `RLIMIT_AS` to fit the host.* Two workers at 3 GiB fit inside 9.72 GiB with
+   room for the editor and the collectors. Why it might work: the observed peak is 1.5 GiB, so 3 GiB
+   is still double the measurement. Cost: none in compute. What could go wrong: the 4 GiB figure is
+   the **registered** resource budget from LAB-01 (guide §0.3); changing it is a budget revision with
+   its own stamp, not an edit — and a worker that legitimately needs 3.5 GiB on a later stage would
+   then die inside its own limit, which is a worse failure than dying outside it.
+
+**What would settle it.** Option 1 alone, first: until the receipt says *why* a worker died, every
+argument about options 2 and 3 rests on a ring buffer that rotates. Then option 2, with the headroom
+registered rather than chosen. Option 3 only if a measured stage peak ever approaches 3 GiB.
+
+**Operationally, and separately from all three:** the proximate cause was two agent tools on one
+9.72 GiB host. The lab's own budget did not fail; it was never the binding constraint. That is not a
+code change and is not recorded as one.
+
+**Not run.** Nothing above is implemented. `runtime.py`, `workers.py` and
+`configs/time_edge_validation_v4/` are all inside the live run's `source_identity`
+(`e5807d05…`, verified identical to the working tree at 12:22) and must not change while
+`te-host-controls-btc-02` is in flight.
