@@ -2,6 +2,7 @@
   "purpose": "TE03.7 engine full-path structural controls: observable world -> raw features -> mature target -> learned JM/M0 vintage -> emitted triggers -> public Mode 4 -> real accounts. Truth files stay out of learner inputs.",
   "inputs": {},
   "registered_scope": "TE-03 table TE03.7 positive/null full path and treatment funnel; TE-04 discovery stays closed",
+  "worlds": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "DOGEUSDT"],
   "tasks": [
     {
       "task_id": "structural-NULL_STATIONARY",
@@ -11,7 +12,8 @@
       "days": 1461,
       "alpha_id": "A-SC",
       "latency_seconds": 60,
-      "wall_seconds": 8100
+      "worlds": ["BTCUSDT"],
+      "wall_seconds": 2700
     },
     {
       "task_id": "structural-RECURRING_OPPORTUNITY",
@@ -21,8 +23,98 @@
       "days": 1461,
       "alpha_id": "A-SC",
       "latency_seconds": 60,
-      "wall_seconds": 8100
+      "worlds": ["BTCUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["ETHUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["ETHUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["SOLUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["SOLUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["BNBUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["BNBUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["DOGEUSDT"],
+      "wall_seconds": 2700
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": ["DOGEUSDT"],
+      "wall_seconds": 2700
     }
   ],
-  "cap_note": "REV08: per-task wall raised 5400->8100 after controls-04 timeout; 3 selections at 1740s each"
+  "cap_note": "REV09: every registered world is its own full-control shard (1 world per task, own checkpoint/result); per-shard wall 2700s <= the measured 32-trial selection cap; the shard list interleaves the two conditions so a bounded invocation still covers both",
+  "shard_note": "each task asserts its own world; the pipeline never iterates worlds inside a task, so no single task needs a cap larger than one selection"
 }

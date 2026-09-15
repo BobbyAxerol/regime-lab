@@ -92,7 +92,7 @@ def make_plan(root, *, run_id, stage, spec=None, allocation=None, coverage=None)
                  "start":"2020-12-01T00:00:00Z","end":"2020-12-31T00:00:00Z","depends_on":["A-SC-BTC-train-selection","A-SC-BTC-selected-audit"]}]
     if spec:
         inputs.update({k:ref(root,v) if isinstance(v,str) else v for k,v in spec.get("inputs",{}).items()})
-        tasks.extend(spec.get("tasks",[]))
+        tasks.extend(explode_worlds(spec.get("tasks",[])))
         if "model_series" in spec:
             series=spec["model_series"]; previous=None; fits=[]
             for cutoff in calendar(series["start"],series["end"],28):
@@ -126,6 +126,33 @@ def make_plan(root, *, run_id, stage, spec=None, allocation=None, coverage=None)
             "allocation_id":plan["allocation_id"],"total_wall_seconds":plan["total_wall_seconds"],
             "worst_case_reserved_seconds":sum(t.get("wall_seconds",plan["task_wall_seconds"]) for t in tasks),
             "note":"allocation is shared across run IDs; task cap is not an ETA"}
+
+
+def explode_worlds(tasks):
+    """A task may name one `world` or a `worlds` list; the list becomes one task per world.
+
+    The exploded shards keep the task's kind, economics and registered wall cap;
+    only the evidence directory (a fresh task id) and the world selector differ,
+    so each shard checkpoints and reports on its own.
+    """
+    from .pipeline_controls import CANONICAL_WORLDS
+    expanded=[]
+    for task in tasks:
+        worlds=task.get("worlds")
+        if worlds is None:
+            expanded.append(task); continue
+        if "world" in task:
+            raise ContractError("a task may declare world or worlds, never both")
+        if not isinstance(worlds,list) or not worlds:
+            raise ContractError("worlds must be a non-empty list")
+        for world in worlds:
+            if world not in CANONICAL_WORLDS:
+                raise ContractError("unregistered structural world: "+str(world))
+            clone={k:v for k,v in task.items() if k != "worlds"}
+            clone["world"]=world
+            clone["task_id"]=str(task["task_id"])+"-"+world
+            expanded.append(clone)
+    return expanded
 
 
 def discovery_tasks(root, spec, inputs):

@@ -18,13 +18,20 @@ from .schedule import calendar, triggers
 from .storage import read, save, digest
 from ..experiments.time_edge_contracts import ContractError, paired_difference
 
+CANONICAL_WORLDS=("BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","DOGEUSDT")
+
 
 def full_control(root, request):
     from .workers import execute, read_market, candidate_targets, export_account
     root=Path(root); task=request["task"]; directory=local(root,request["task_evidence"])
     alpha=task["alpha_id"]; days=int(task.get("days",1461)); seed=int(task["seed"])
     if days < 730: raise ContractError("full control needs registered warmup plus at least 365 evaluation days")
-    cell=f"{alpha}/BTCUSDT"; start="2020-01-01T00:00:00Z"
+    world=task.get("world")
+    if world is not None and world not in CANONICAL_WORLDS:
+        raise ContractError("unregistered structural world: "+str(world))
+    symbols=(world,) if world else CANONICAL_WORLDS
+    market=world or "BTCUSDT"
+    cell=f"{alpha}/{market}"; start="2020-01-01T00:00:00Z"
     end=(pd.Timestamp("2019-01-01",tz="UTC")+pd.Timedelta(days=days)).isoformat()
     inputs={}; counts={"model_fits":0,"searches":0,"deployments":0,"target_accounts":0}
     def once(name, callback):
@@ -41,7 +48,8 @@ def full_control(root, request):
     def child(name, childtask):
         folder=directory/name; folder.mkdir(parents=True,exist_ok=True)
         return {**request,"task":childtask,"inputs":inputs,"dependencies":{},"task_evidence":str(folder.relative_to(root))}
-    for offset,symbol in enumerate(("BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","DOGEUSDT")):
+    for symbol in symbols:
+        offset=CANONICAL_WORLDS.index(symbol)
         result=once("world-"+symbol,lambda offset=offset,symbol=symbol:generate_world(root,child("raw-"+symbol,
             {"seed":seed+offset*100003,"condition":task["condition"],"days":days})))
         # Deliberately exclude result['truth'] from all learner inputs.
@@ -60,7 +68,7 @@ def full_control(root, request):
         def run():
             from .eligibility import history_start
             lo=pd.Timestamp(history_start(alpha,pd.Timestamp(cutoff)-pd.Timedelta(days=180)))
-            frame=read_market(root,inputs["BTCUSDT"],start=lo.isoformat(),end=cutoff)
+            frame=read_market(root,inputs[market],start=lo.isoformat(),end=cutoff)
             result=select_only(frame,alpha_id=alpha,cutoff=cutoff,binding=binding,evidence_dir=folder,lab_run_id=request["lab_run_id"])
             if result["status"] != "SELECTED": raise ContractError("control selector has no admissible parameter")
             result.update(selection_id=digest({"cutoff":cutoff,"params":result["params"]}),
@@ -84,7 +92,7 @@ def full_control(root, request):
         name="targets-"+digest(origin)[:16]
         result=once(name,lambda origin=origin,outcome=outcome,name=name:candidate_targets(root,child(name+"-artifacts",{
             "origin":origin,"end":outcome.isoformat(),"history_start":history_start(alpha,origin),
-            "candidate_bank":"bank","market":"BTCUSDT","alpha_id":alpha,"cell_id":cell})))
+            "candidate_bank":"bank","market":market,"alpha_id":alpha,"cell_id":cell})))
         targets.extend(result["targets"]); counts["target_accounts"]+=len(candidate_map)
     vintages=[]; previous=None
     for cutoff in calendar(start,end,28):
@@ -105,7 +113,7 @@ def full_control(root, request):
     for arm,cutoffs in schedules.items():
         selections=[initial]+[select(c) for c in cutoffs]
         def deploy(arm=arm,selections=selections):
-            frame=read_market(root,inputs["BTCUSDT"],start=history_start(alpha,start),end=end)
+            frame=read_market(root,inputs[market],start=history_start(alpha,start),end=end)
             run=PreparedAccount(frame).run(alpha,selections,account_start=start)
             return export_account(root,str((directory/arm).relative_to(root)),run,start=start,end=end,
                                   lab_run_id=request["lab_run_id"],selections=selections,cell_id=cell,arm=arm)
@@ -121,5 +129,6 @@ def full_control(root, request):
         "regime_commands":len(accounts["M4_REGIME"]["commands"]),"calendar_commands":len(accounts["M4_CAL"]["commands"]),
         "paired_mean_daily_effect":float(np.mean(pair["values"])),"paired_daily_returns":list(zip(pair["dates"],pair["values"])),
         "truth_entered_learner":False,"learner_input_keys":list(inputs),
+        "world":world,"worlds_executed":list(symbols),
         "boundary_power_qualification":"NOT_EVALUABLE_FROM_STRUCTURAL_WORLD_ALONE",
         "reason":"known opportunity is not known net learner effect=2delta; do not certify registered boundary power from these worlds"}

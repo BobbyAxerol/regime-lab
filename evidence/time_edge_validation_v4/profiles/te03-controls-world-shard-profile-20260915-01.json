@@ -1,0 +1,39 @@
+{
+  "schema": "regime_lab.te03_controls_shard_profile.v1",
+  "created_at": "2026-09-15T07:10:00+00:00",
+  "source": "evidence/time_edge_validation_v4/runs/te-host-controls-05",
+  "source_note": "measured from the controls-05 TIMED_OUT attempt 3ef0897a09724b6e9bd7de23fe1f572b (wall 8100.122s) and its sealed nested stage publications; controls-05 is not retried",
+  "sharding": {
+    "worlds_per_task_before": 5,
+    "worlds_per_task_after": 1,
+    "measured_stages_seconds": {
+      "five_worlds_plus_features": 34.4,
+      "bank_selection_32_trials": 1618.0
+    },
+    "measured_targets": {
+      "completed": 27,
+      "planned": 45,
+      "mean_wall_seconds": 234.0,
+      "median_wall_seconds": 233.5
+    }
+  },
+  "planned_counts_per_condition": {
+    "targets": 45,
+    "model_vintages": 53,
+    "calibration_plus_initial_selections": 7,
+    "regime_selections": "MEASURED_ONLY_IF_THE_TAPE_EXISTS"
+  },
+  "measured_residual_lower_bound_per_condition_seconds": {
+    "targets_remaining_18_x_234.0": 4212.0,
+    "model_fits_53_x_21.015": 1113.8,
+    "calibration_and_initial_selections_7_x_1618.0": 11326.0,
+    "lower_bound_total": 16651.8,
+    "excluded": [
+      "regime-triggered selections (one 32-trial search per trigger, 1618.0s each)",
+      "two account deployments",
+      "checkpoint replay overhead"
+    ]
+  },
+  "per_shard_cap_seconds": 2700.0,
+  "why_shard": "the 8100s monolith cap was reached after worlds+features+bank+27/45 targets; one task cannot hold the registered full path, so each registered world becomes its own shard with its own 2700s cap and its own checkpoint/result"
+}
