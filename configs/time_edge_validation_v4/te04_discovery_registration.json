@@ -1,0 +1,51 @@
+{
+  "schema": "regime_lab.te04_discovery_registration.v1",
+  "study_id": "time_edge_validation_v4",
+  "phase": "TE-04",
+  "status": "REGISTERED_NOT_EXECUTED",
+  "preregistered_at": "before any TE-04 engine run",
+  "primary_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "secondary_arms": [
+    "M4_CAL_MATCHED"
+  ],
+  "cells": "all qualified cells from the route matrix; unqualified cells keep null metrics with reasons",
+  "coverage": "TE03-COVERAGE-R01 (31 origins, 29 vintages)",
+  "contrasts": {
+    "primary": "M4_REGIME - M4_CAL",
+    "budget_aware": "M4_REGIME - M4_CAL_MATCHED",
+    "family": "registered before results; multiplicity adjusted over the primary family"
+  },
+  "controls_order": [
+    "M4_CAL_MATCHED (mandatory if refit counts differ materially)",
+    "delayed-state",
+    "placebo",
+    "risk-only"
+  ],
+  "decay": [
+    "D1 IS->OOS",
+    "D2 fixed-parameter age (anchors registered before run)",
+    "D3 adjacent operational folds"
+  ],
+  "funnel_steps": [
+    "valid_observations",
+    "triggers",
+    "searches",
+    "different_params",
+    "activated",
+    "different_orders"
+  ],
+  "mde": {
+    "rule": "frozen from measured account units before any TE-04 result is read",
+    "historical_reference_bps_per_day": 0.0371
+  },
+  "gate": "every contrast carries execution_validity / implementation_fidelity / statistical_status; no POSITIVE without CI clearing the registered MDE",
+  "rules": [
+    "no threshold loosening",
+    "no zero-fill",
+    "new run-id per attempt",
+    "setsid background with checkpoints"
+  ]
+}
