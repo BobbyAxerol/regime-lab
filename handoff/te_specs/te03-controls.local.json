@@ -11,7 +11,7 @@
       "days": 1461,
       "alpha_id": "A-SC",
       "latency_seconds": 60,
-      "wall_seconds": 5400
+      "wall_seconds": 8100
     },
     {
       "task_id": "structural-RECURRING_OPPORTUNITY",
@@ -21,8 +21,8 @@
       "days": 1461,
       "alpha_id": "A-SC",
       "latency_seconds": 60,
-      "wall_seconds": 5400
+      "wall_seconds": 8100
     }
   ],
-  "cap_note": "REV07: per-task wall raised 2700->5400 so >=2 selections (1740s each) fit; measured basis: two timeouts at 900s/2700s"
+  "cap_note": "REV08: per-task wall raised 5400->8100 after controls-04 timeout; 3 selections at 1740s each"
 }
