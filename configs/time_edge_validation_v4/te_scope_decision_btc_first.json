@@ -1,0 +1,13 @@
+{
+  "schema": "regime_lab.te_scope_decision.v1",
+  "study_id": "time_edge_validation_v4",
+  "decision": "BTCUSDT-first: optimize the pipeline (dedupe condition x world, parallelise independent tasks up to 4 workers) and run structural controls + TE-04/TE-05 on BTCUSDT only; expand to 5 symbols only after BTC demonstrates potential",
+  "rationale": "time edge is treated as a structural property; if it exists it should not vanish across symbols. A symbol-by-symbol disappearance would itself be the finding to investigate.",
+  "expansion_rule": "a 5-symbol round is a separate registered phase, run only after the BTC study reaches its claim gate",
+  "optimization": {
+    "dedupe": "targets/model fits shared between the two conditions per world",
+    "parallelism": "independent tasks may run with up to 4 workers/4 CPU; per-arm compute stays equal",
+    "rule": "no resolution reduction, no dropped audit, no fabricated fills"
+  },
+  "status": "REGISTERED_BEFORE_RERUN"
+}
