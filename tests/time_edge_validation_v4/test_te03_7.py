@@ -138,7 +138,7 @@ def test_shards_are_exploded_one_registered_world_per_task(lab_root):
     assert {task["world"] for task in expanded} == {"BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "DOGEUSDT"}
     for task in expanded:
         assert task["kind"] == "full_control"
-        assert task["wall_seconds"] <= 2700
+        assert task["wall_seconds"] <= 18000, "REV10 registered an 18000s/pass shard cap at the measured lower bound"
     job = load(lab_root, PLAN)
     assert job["stage"] == "controls"
     assert len(job["tasks"]) == 10
