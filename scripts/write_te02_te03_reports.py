@@ -87,7 +87,115 @@ def pilot_report():
     return "\n".join(lines)
 
 
+def te03_coverage_report():
+    """Render the extended-support TE-03 state once the coverage artifacts exist."""
+    revision = read(ROOT / "evidence/time_edge_validation_v4/coverage-revisions/TE03-COVERAGE-R01.json")
+    info = read(ROOT / "evidence/time_edge_validation_v4/te03-r2/information_value.json")
+    decision = read(ROOT / "evidence/time_edge_validation_v4/te03-r2/model_decision.json")
+    causality = read(ROOT / "evidence/time_edge_validation_v4/te03-r2/model_causality.json")
+    opportunity = read(ROOT / "evidence/time_edge_validation_v4/te03-r2/parameter_opportunity.json")
+    registry = read(ROOT / "evidence/time_edge_validation_v4/te03-r2/model_registry.json")
+    results = read(ROOT / "evidence/time_edge_validation_v4/host-model-results-02.json")["results"]
+    vintages = [row for row in results if "design_trials" in row]
+    targets = read(ROOT / "evidence/time_edge_validation_v4/host-targets-coverage-01.json")["targets"]
+    features = read(ROOT / "evidence/time_edge_validation_v4/host-features-01.json")["results"][0]
+    prior = revision["prior_coverage"]
+    revised = revision["revised_coverage"]
+    lines = [
+        "# TE-03 report — features, targets, model vintages and the coverage extension",
+        "",
+        "Stage scope: `features -> targets -> model vintages` plus the registered support extension "
+        "`TE03-COVERAGE-R01`. TE03.7 power/null calibration and the full-path controls are reported separately "
+        "in `te03-7-report.md`.",
+        "",
+        "## Coverage revision (registered before the extension)",
+        "",
+        f"- prior coverage: {prior['target_series']['origins']} targets "
+        f"({prior['target_series']['start'][:10]} .. {prior['target_series']['last_origin'][:10]}), "
+        f"{prior['model_series']['vintages']} vintages, {prior['support_measured']['evaluable_outer_targets']} "
+        f"evaluable outer targets, inference `{prior['support_measured']['status']}`.",
+        f"- revised coverage: {revised['target_series']['origins']} targets "
+        f"(+{revised['target_series']['delta_origins']} appended at "
+        f"{revised['target_series']['extension_start'][:10]}), {revised['model_series']['vintages']} vintages; "
+        f"support floor {revision['support_floor']['value']} from the registered statistical plan.",
+        "- revision artifact: `evidence/time_edge_validation_v4/coverage-revisions/TE03-COVERAGE-R01.json`; "
+        "grid 28d, horizon 28d, alpha A-SC, cell A-SC/BTCUSDT, bank and train window unchanged.",
+        "",
+        "## Stage facts (real snapshot data, one worker, no data_loader.py)",
+        "",
+        f"- features: `{features['status']}` over 5 copied symbols, {features['rows']} 4h rows, "
+        f"{features['missing_rows']} rows with any missing feature, raw parquet `{features['features']['sha256'][:16]}`; "
+        f"scaler `{features['scaler']}`.",
+        f"- targets: {len(targets)} non-overlapping 28-day targets, {len(targets[0]['candidate_ids'])} candidates each, "
+        f"origins {targets[0]['origin'][:10]} .. {targets[-1]['origin'][:10]}; the extension appends after the prior "
+        "last origin and reuses the same candidate bank (availability precedes every origin).",
+        f"- model: {len(vintages)} real fitted vintages (JM K2/K3 x lambda 0.5/1/2 plus M0 control, 2 fit seeds, "
+        "3 inner chronological validation blocks); a real fitted model, not a frozen stub.",
+        f"- emissions: {registry['emission_count']} states, {registry['eligible_emission_count']} decision-eligible, "
+        f"quality statuses {registry['quality_statuses']}.",
+        f"- causality checks: {json.dumps(causality['checks'], sort_keys=True)}; "
+        f"{sum(row['same_or_future_outcome_targets_excluded'] for row in causality['vintages'])} future/same-time "
+        "targets excluded by the registered purge.",
+        "",
+        "## Per-vintage evidence",
+        "",
+        "| cutoff | design used | decision | admissible | training targets | outer planned/evaluable | mean outer effect |",
+        "|---|---|---|---|---|---|---|",
+    ]
+    for vintage in vintages:
+        table = next(row for row in info["per_vintage"] if row["model_id"] == vintage["model_id"])
+        lines.append(f"| {vintage['cutoff'][:10]} | {vintage['design']['id']} | {vintage['decision']} | "
+                     f"{sum(1 for trial in vintage['design_trials'] if trial['admissible'])}/7 | "
+                     f"{table['training_targets']} | {table['planned_outer_targets']}/{table['evaluable_outer_targets']} | "
+                     f"{'' if table['mean_outer_information_effect'] is None else round(table['mean_outer_information_effect'],6)} |")
+    lines += [
+        "",
+        "## Information, opportunity and decision",
+        "",
+        f"- information value (future candidate-utility ranking, base comparator unconditional profile): "
+        f"{info['summary']['evaluable']}/{info['summary']['planned']} evaluable; mean {info['summary']['mean_effect']:.6f}, "
+        f"range [{info['summary']['effect_min']:.6f}, {info['summary']['effect_max']:.6f}], "
+        f"dispersion {info['summary']['effect_dispersion']:.6f}; inference `{info['inference']['status']}` "
+        f"({info['inference'].get('reason')}).",
+        f"- parameter opportunity: {opportunity['summary']['targets']} targets x {opportunity['summary']['candidate_count']} "
+        f"candidates; utility range mean {opportunity['summary']['utility_range_mean']:.8f}; per-origin unique behaviors "
+        f"{opportunity['summary']['unique_behaviors_min']}..{opportunity['summary']['unique_behaviors_max']}; "
+        f"rank reversal fraction {opportunity['rank_stability'][0]['rank_reversal_fraction']:.4f} over "
+        f"{opportunity['rank_stability'][0]['pairs_compared']} pairs (hindsight diagnostic only).",
+        f"- model decision: `{decision['decision']}`; selected inner-informative design {decision['selected_inner_informative']}"
+        f"/{decision['vintages']} vintages; M0 control {decision['m0_control_vintages']}; "
+        f"information inference `{decision['information_inference_status']}`.",
+        "",
+        "## TE03.7 status",
+        "",
+    ]
+    power_path = ROOT / "evidence/time_edge_validation_v4/te03/te03_7_power.json"
+    controls_path = ROOT / "evidence/time_edge_validation_v4/te03/te03_7_controls.json"
+    if power_path.is_file() and controls_path.is_file():
+        power = read(power_path); controls = read(controls_path)
+        lines += [
+            f"- statistical positive/null calibration: `{power['status']}`; positive control "
+            f"`{power['positive_control']['status']}` at +2 delta, null "
+            f"`{power['null_control']['status']}`; engine runs {power['engine_runs']}.",
+            f"- engine full-path structural controls: `{controls['status']}`; funnel `{controls['full_path_funnel']['status']}`; "
+            "no zero-filled funnel counts.",
+            "- delayed/risk controls remain TE-04 scope; TE-04 stays closed.",
+        ]
+    else:
+        lines.append("- not yet built in this sub-step; no zero-filled calibration is claimed.")
+    lines += [
+        "",
+        "## Tests",
+        "",
+        "- `environments/lab_venv/bin/python -m pytest tests/time_edge_validation_v4 -q`.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def te03_report():
+    if (ROOT / "evidence/time_edge_validation_v4/te03-r2/information_value.json").is_file():
+        return te03_coverage_report()
     results = read(ROOT / "evidence/time_edge_validation_v4/host-model-results-01.json")["results"]
     vintages = [v for v in results if "design_trials" in v]
     decision = read(ROOT / "evidence/time_edge_validation_v4/te03/model_decision.json")

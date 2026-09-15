@@ -37,10 +37,106 @@ def funnel_lines(funnel, heading):
     return lines
 
 
+def selection_lines(selections, heading):
+    lines = [heading, ""]
+    if not selections:
+        lines.append("- no completed full-path control: no 32-trial selection result exists; "
+                     "nothing is inferred and no fills are fabricated.")
+        return lines
+    for result in selections:
+        candidate = result.get("selected_candidate") or {}
+        components = result.get("components") or {}
+        lines += [
+            f"### {result['condition']} — candidate bank selection",
+            "",
+            f"- search artifact `{result['search_file']}`, cutoff `{result['cutoff']}`, status `{result['status']}`.",
+            f"- selected trial {result.get('trial_id')}: params `{json.dumps(result.get('params'))}`, "
+            f"objective {result.get('objective')}.",
+            f"- components: mean IS Sharpe {components.get('mean_is_sharpe')}, mean OOS Sharpe "
+            f"{components.get('mean_oos_sharpe')}, mean decay {components.get('mean_decay')}, "
+            f"std decay {components.get('std_decay')}, pruned {components.get('pruned')}.",
+            f"- trials completed {result.get('trials_completed')}/{result.get('trials_configured')}; "
+            f"scorer calls {result.get('scorer_calls')}; candidate cache hits "
+            f"{result.get('candidate_cache_hits')}.",
+            f"- selected candidate `{candidate.get('candidate_file')}`: status `{candidate.get('status')}`, "
+            f"fills {candidate.get('fill_count')}.",
+            "",
+        ]
+    return lines
+
+
+def gate_lines(gate, extra=None):
+    lines = ["| gate | status |", "|---|---|"]
+    for name, value in (gate or {}).items():
+        lines.append(f"| {name} | {'PASS' if value else 'FAIL'} |")
+    for name, value in (extra or {}).items():
+        lines.append(f"| {name} | {'PASS' if value else 'FAIL'} |")
+    return lines
+
+
+def partial_lines(partials):
+    if not partials:
+        return []
+    lines = ["", "### Partial shards (stages that did publish, nothing zero-filled)", ""]
+    lines += ["| shard | condition | world | worlds | features | searches (32-trial bank) | targets | vintages |",
+              "|---|---|---|---|---|---|---|---|"]
+    for funnel in partials:
+        m = funnel["partial_measurements"]
+        lines.append(f"| {funnel['shard_task_id']} | {funnel['condition']} | {funnel['world']} | "
+                     f"{m['worlds_generated']} | {m['features_built']} | {m['searches_completed']} | "
+                     f"{m['targets_completed']}/{m['targets_planned']} | "
+                     f"{m['model_vintages_completed']}/{m['model_vintages_planned']} |")
+    return lines
+
+
+def btc_controls_lines(args, controls):
+    lines = [
+        "",
+        "## BTC-first structural controls (TE03.7 P0)",
+        "",
+        f"- controls evidence: `{args.controls_btc}`; run `{controls['run_id']}`: `{controls['status']}`; "
+        f"allocation revision `{controls.get('allocation_revision')}`; stop reason `{controls['run_stop_reason']}`.",
+    ]
+    if (ROOT / args.funnel_btc).is_file():
+        lines.append(f"- standalone funnel and 32-trial selection artifact: `{args.funnel_btc}`.")
+    sharding = controls.get("sharding")
+    if sharding:
+        lines.append(f"- sharding: {sharding['unit']}; worlds {', '.join(sharding['worlds'])}; "
+                     f"{sharding['shards_completed']}/{sharding['shards_attempted']} attempted shards complete of "
+                     f"{sharding['shards_planned']} planned; per-shard cap {sharding['per_shard_cap_seconds']:.0f}s.")
+    lines += ["| task | world | condition | cap s | status | wall s | reason |",
+              "|---|---|---|---|---|---|---|"]
+    for task in controls["tasks"]:
+        lines.append(f"| {task['task_id']} | {task.get('world')} | {task['condition']} | "
+                     f"{task['wall_cap_seconds']:.0f} | {task['status']} | "
+                     f"{'' if task['wall_seconds'] is None else round(task['wall_seconds'],1)} | {task['reason']} |")
+    by_condition = controls.get("full_path_funnels_by_condition") or {}
+    if by_condition:
+        for condition in sorted(by_condition):
+            lines += funnel_lines(by_condition[condition], f"### {condition}")
+    else:
+        lines += funnel_lines(controls["full_path_funnel"], "### not measured")
+    lines += partial_lines(controls.get("partial_funnels") or [])
+    lines += selection_lines(controls.get("selection_results") or [], "### 32-trial bank selections")
+    lines += [
+        f"- `truth_entered_learner`: `{controls['truth_entered_learner']}`; fabricated fills: "
+        f"`{controls['fabricated_fills']}`.",
+        "",
+        "### P0 gate checks (canonical)",
+        "",
+    ]
+    lines += gate_lines(controls.get("p0_gate"),
+                        {"all_registered_shards_completed":
+                         controls["status"] == "FULL_PATH_STRUCTURAL_CONTROL_COMPLETED"})
+    return lines
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--power", default="evidence/time_edge_validation_v4/te03/te03_7_power.json")
     parser.add_argument("--controls", default="evidence/time_edge_validation_v4/te03/te03_7_controls_r2.json")
+    parser.add_argument("--controls-btc", default="evidence/time_edge_validation_v4/te03/te03_7_controls_btc.json")
+    parser.add_argument("--funnel-btc", default="evidence/time_edge_validation_v4/te03/te03_7_funnel_btc.json")
     parser.add_argument("--blocker", default="evidence/time_edge_validation_v4/te03/controls_06_blocker.json")
     parser.add_argument("--allocation-id", default="TE02-PILOT-R03")
     parser.add_argument("--tests-summary", default="tests/time_edge_validation_v4/test_te03_7.py (guards)")
@@ -48,6 +144,7 @@ def main():
     args = parser.parse_args()
     power = read(ROOT / args.power)
     controls = read(ROOT / args.controls)
+    controls_btc = read(ROOT / args.controls_btc) if (ROOT / args.controls_btc).is_file() else None
     blocker_path = ROOT / args.blocker
     blocker = read(blocker_path) if blocker_path.is_file() else None
     total, charged, revisions = allocation_state(args.allocation_id)
@@ -126,40 +223,10 @@ def main():
     else:
         lines += funnel_lines(controls["full_path_funnel"], "### not measured")
     partials = controls.get("partial_funnels") or []
-    if partials:
-        lines += ["", "### Partial shards (stages that did publish, nothing zero-filled)", ""]
-        lines += ["| shard | condition | world | worlds | features | searches (32-trial bank) | targets | vintages |",
-                  "|---|---|---|---|---|---|---|---|"]
-        for funnel in partials:
-            m = funnel["partial_measurements"]
-            lines.append(f"| {funnel['shard_task_id']} | {funnel['condition']} | {funnel['world']} | "
-                         f"{m['worlds_generated']} | {m['features_built']} | {m['searches_completed']} | "
-                         f"{m['targets_completed']}/{m['targets_planned']} | "
-                         f"{m['model_vintages_completed']}/{m['model_vintages_planned']} |")
+    lines += partial_lines(partials)
     lines += ["", "## 32-trial Mode 4 selection result", ""]
     selections = controls.get("selection_results") or []
-    if not selections:
-        lines.append("- no completed full-path control: no 32-trial selection result exists; "
-                     "nothing is inferred and no fills are fabricated.")
-    for result in selections:
-        candidate = result.get("selected_candidate") or {}
-        components = result.get("components") or {}
-        lines += [
-            f"### {result['condition']} — candidate bank selection",
-            "",
-            f"- search artifact `{result['search_file']}`, cutoff `{result['cutoff']}`, status `{result['status']}`.",
-            f"- selected trial {result.get('trial_id')}: params `{json.dumps(result.get('params'))}`, "
-            f"objective {result.get('objective')}.",
-            f"- components: mean IS Sharpe {components.get('mean_is_sharpe')}, mean OOS Sharpe "
-            f"{components.get('mean_oos_sharpe')}, mean decay {components.get('mean_decay')}, "
-            f"std decay {components.get('std_decay')}, pruned {components.get('pruned')}.",
-            f"- trials completed {result.get('trials_completed')}/{result.get('trials_configured')}; "
-            f"scorer calls {result.get('scorer_calls')}; candidate cache hits "
-            f"{result.get('candidate_cache_hits')}.",
-            f"- selected candidate `{candidate.get('candidate_file')}`: status `{candidate.get('status')}`, "
-            f"fills {candidate.get('fill_count')}.",
-            "",
-        ]
+    lines += selection_lines(selections, "### candidate bank selections")[2:]
     lines += [
         f"- `truth_entered_learner`: `{controls['truth_entered_learner']}`; fabricated fills: "
         f"`{controls['fabricated_fills']}`.",
@@ -168,11 +235,8 @@ def main():
         "",
         "## P0 gate checks",
         "",
-        "| gate | status |",
-        "|---|---|",
     ]
-    for name, value in (controls.get("p0_gate") or {}).items():
-        lines.append(f"| {name} | {'PASS' if value else 'FAIL'} |")
+    lines += gate_lines(controls.get("p0_gate"))
     if blocker is not None:
         lines += [
             "",
@@ -185,6 +249,8 @@ def main():
             f"`{blocker['measured']['bank_selection_32_trials']['complete']}`.",
             f"- next: {blocker['next']}",
         ]
+    if controls_btc is not None:
+        lines += btc_controls_lines(args, controls_btc)
     lines += [
         "",
         "## Delayed and risk controls",
