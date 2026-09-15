@@ -8,7 +8,9 @@
       "seed": 2026091200,
       "days": 1461,
       "alpha_id": "A-SC",
-      "latency_seconds": 60
+      "latency_seconds": 60,
+      "worlds": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "DOGEUSDT"],
+      "wall_seconds": 2700
     },
     {
       "task_id": "structural-RECURRING_OPPORTUNITY",
@@ -17,7 +19,10 @@
       "seed": 2026091201,
       "days": 1461,
       "alpha_id": "A-SC",
-      "latency_seconds": 60
+      "latency_seconds": 60,
+      "worlds": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "DOGEUSDT"],
+      "wall_seconds": 2700
     }
-  ]
+  ],
+  "cap_note": "worlds are exploded by the planner into one full-control shard per registered world; every shard gets its own task id, 2700s cap and checkpoint/result"
 }

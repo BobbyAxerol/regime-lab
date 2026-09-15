@@ -29,7 +29,10 @@ def full_control(root, request):
     world=task.get("world")
     if world is not None and world not in CANONICAL_WORLDS:
         raise ContractError("unregistered structural world: "+str(world))
-    symbols=(world,) if world else CANONICAL_WORLDS
+    # All registered context worlds are always generated (they define the
+    # point-in-time cross-section); the shard's own world is the market whose
+    # targets, selections and accounts the task computes.
+    symbols=CANONICAL_WORLDS
     market=world or "BTCUSDT"
     cell=f"{alpha}/{market}"; start="2020-01-01T00:00:00Z"
     end=(pd.Timestamp("2019-01-01",tz="UTC")+pd.Timedelta(days=days)).isoformat()
@@ -55,7 +58,7 @@ def full_control(root, request):
         # Deliberately exclude result['truth'] from all learner inputs.
         inputs[symbol]=result["observable_market"]
     feature_result=once("features",lambda:execute(root,child("feature-artifacts",{
-        "task_id":"features","kind":"features","markets":{s:s for s in inputs},
+        "task_id":"features","kind":"features","market":market,"markets":{s:s for s in inputs},
         "start":"2019-01-01T00:00:00Z","end":end})))
     features=pd.read_parquet(local(root,feature_result["features"]["path"]))
     binding=read(root/"configs/time_edge_validation_v4/mode4_binding_r01.json")

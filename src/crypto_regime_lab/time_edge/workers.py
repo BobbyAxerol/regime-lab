@@ -225,7 +225,7 @@ def execute(root, request):
             panels[symbol]=build_symbol_features(bars)
             del market
         market_context=build_market_context(panels)
-        common=attach_market(panels["BTCUSDT"],market_context)
+        common=attach_market(panels[task.get("market","BTCUSDT")],market_context)
         names=read(root/"configs/time_edge_validation_v4/r01/model_protocol.json")["features"]
         common=common.set_index("available_at")[names]
         path=directory/"raw_features.parquet"
