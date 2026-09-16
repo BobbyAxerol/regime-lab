@@ -1,0 +1,67 @@
+{
+ "allocation_id": "TE02-PILOT-R03",
+ "budget_revision_reason": "no budget increase: 300000.0 - 105607.06 = 194392.94s unspent, the 18000s shard cap fits; every prior charge stays in allocations/TE02-PILOT-R03/ledger.sqlite",
+ "budget_revision_required": false,
+ "cpu_limit": 2,
+ "cpu_policy": "1 worker x 2 CPUs; the runtime accepts up to 4 workers and stops at min(workers, cpu_limit, host CPUs); the single child gets a disjoint CPU slot and matching OMP/BLAS/NUMBA thread caps",
+ "how_arms_stay_equal": "M4_CAL, M4_REGIME and any matched arm consume the same selected parameters from the same 32-trial search, seed, train window and economics inside one shard task; the scheduler never splits or re-orders a task, so both arms receive identical compute",
+ "measured_reason": {
+  "attempt_wall_seconds": 7301.866036691994,
+  "excludes": [
+   "regime-triggered selections (one 32-trial search per trigger)",
+   "two account deployments",
+   "checkpoint replay overhead"
+  ],
+  "mean_target_wall_seconds": 220.8,
+  "measured_lower_bound_total_seconds": 23662.2,
+  "model_fit_mean_wall_seconds": 21.0,
+  "model_fits_seconds": 840.0,
+  "model_vintages": 40,
+  "note_on_prior_16652": "the REV10 note read the residual-at-stop as a full lower bound; this policy records the observed 7301.9s for 25/45 targets and the resulting 23662.2s lower bound",
+  "remaining_selection_seconds": 11326.0,
+  "remaining_selections": 7,
+  "remaining_targets_seconds": 4194.0,
+  "selection_wall_seconds": 1618.0,
+  "source_run": "te-host-controls-07 (stopped at 7301.866s, 25/45 targets, artefacts kept)",
+  "targets_completed": 25,
+  "targets_planned": 45,
+  "why_cap_18000": "the registered per-shard cap stays at the REV10 18000s; the measured lower bound is larger, so a shard checkpoints its nested stages and resumes with --retry-failed in a bounded later attempt instead of raising the cap further",
+  "host_oom_2026_09_15": "two btc-02 shards SIGKILLed ~26min in (exit 137); worker peaks 1.50/1.45 GiB vs 4 GiB RLIMIT_AS, host 9.72 GiB no swap, ~2 GiB resident opencode process; kills were host-global OOM, not worker-budget breach (see scripts/record_oom_incident.py evidence)",
+  "why_single_worker": "host currently ~3 GiB available; one worker peaks ~1.5-2 GiB, two concurrent workers plus resident processes exceed host RAM"
+ },
+ "memory_gib": 4,
+ "per_arm_compute_is_unchanged": true,
+ "prior_charged_wall_seconds": 105607.06264384305,
+ "prior_total_wall_seconds": 300000.0,
+ "profile_refs": [
+  {
+   "path": "evidence/time_edge_validation_v4/profiles/te03-controls-measured-20260912-01.json",
+   "sha256": "38c5260449755bc1f54718e00f41a5268cb62ae6f4173220446dd2f35073375d"
+  },
+  {
+   "path": "evidence/time_edge_validation_v4/runs/te-host-controls-07/attempts/a7bde4aebc1f410cad13092d2a3c0f76/receipt.json",
+   "sha256": "63a76f1aaf52ffe0a36181c1f5de329f058a0b27da82bc9686e478afe0a26de3"
+  },
+  {
+   "path": "evidence/time_edge_validation_v4/te03/te03_7_funnel_r3.json",
+   "sha256": "45fa7c5e5599cd5ea946ba4051a783f664ee7510b31a8f7bffd99d1f1e64bd33"
+  }
+ ],
+ "registered_at_utc": "2026-09-16T14:56:42.375735+00:00",
+ "schema": "regime_lab.te_allocation_worker_policy.v1",
+ "status": "REGISTERED_BEFORE_CONTROLS_08_SINGLE_WORKER",
+ "study_id": "time_edge_validation_v4",
+ "task_wall_seconds": 18000.0,
+ "total_wall_seconds": 300000.0,
+ "what_it_changes": [
+  "registers 1 worker x 2 CPUs for the controls-08 resume run (memory-safe path after measured host-global OOM kills of the 2-worker run)",
+  "keeps the registered 18000s per-shard cap"
+ ],
+ "what_it_does_not_change": [
+  "registered 32 trials per selection, search seed, scorer, train windows, economics and engine contract",
+  "every prior attempt and its charged wall in allocations/TE02-PILOT-R03/ledger.sqlite",
+  "the shared allocation total (300000s) and all six prior budget revisions"
+ ],
+ "worker_capability": 4,
+ "workers": 1
+}
