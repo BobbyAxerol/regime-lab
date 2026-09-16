@@ -19,8 +19,10 @@ Nhánh: `mode4-corrective`. TE-04 CHỈ mở sau khi P0 PASS.
 **Mục tiêu:** có funnel thật và 32-trial selection trong full-path structural controls.
 
 **Việc:**
-1. `te-host-controls-04` (đang chạy, REV07 cap 5.400s/task).
-2. Nếu còn vượt cap: REV08 nâng cap 8.100s/task (3 selection), chạy `te-host-controls-05`.
+1. `te-host-controls-07` đã `STOP_REQUESTED` (25/45 targets, wall 7301s, REV10; xem `runs/te-host-controls-07/STOP`).
+   Tiếp tục bằng shard per-world (REV09: namespace/state riêng, cap 18000s/shard), BTC-first theo scope
+   decision `1cc91e4`, checkpoint từng world, resume bằng run-id mới (không overwrite attempt cũ).
+2. Nếu còn vượt cap: REV11 nâng cap theo measured wall (ghi `measured_reason` từ receipt), chạy shard còn lại.
 3. Collect + assemble funnel: `valid_observations → triggers → searches → different_params → activated → different_orders`.
 4. Guard tests: denominator + zero-kèm-lý-do, không fabricated fills, positive/null không đổi.
 
@@ -85,9 +87,9 @@ Nhánh: `mode4-corrective`. TE-04 CHỈ mở sau khi P0 PASS.
 
 | Phase | Trạng thái | Người duyệt |
 |---|---|---|
-| P0 | đang chạy controls-04 | cần duyệt để bắt đầu P0 chính thức |
-| P1 | chờ P0 PASS | chờ duyệt riêng |
-| P2 | chờ P1 | chờ duyệt riêng |
-| P3 | chờ P2 | chờ duyệt riêng |
+| P0 | đang dở (controls-07 STOPPED; tiếp tục per-world shards) — **user đã duyệt toàn bộ 2026-09-16** | user |
+| P1 | chờ P0 PASS (không tự mở) | user (đã duyệt điều kiện) |
+| P2 | chờ P1 | user (đã duyệt điều kiện) |
+| P3 | chờ P2 | user (đã duyệt điều kiện) |
 
-Duyệt phase nào, tôi chạy trọn phase đó tới gate rồi dừng báo cáo để duyệt phase kế.
+Duyệt toàn bộ đã xong; tôi chạy lần lượt P0 → P1 → P2 → P3, dừng báo cáo ở mỗi gate.
