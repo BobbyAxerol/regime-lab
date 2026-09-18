@@ -34,19 +34,25 @@ not superseded. Read the active guide before changing anything.
   frozen MDE 0.0371 bps/day; A-SC/SOLUSDT is `NEGATIVE_WITHIN_SCOPE` at cell level. No `POSITIVE`.
   Contamination `NESTED_RETROSPECTIVE` (no untouched holdout);
   `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED` and must not be run here.
-- **RA-01 has run once (2026-09-18) and its verifier recorded `overall: FAIL`** —
-  `G01-ID` (git HEAD/branch/engine+native versions and endpoint hashes not captured) and
-  `G01-VERIFY` (report.md/handoff.md missing at verify time) failed; `G01-MIG/BUDGET/REPORT`
-  passed. Run dir `evidence/regime_time_edge_ra_v1/ra01-20260918T083335Z-0af14f6a/`; F-01…F-08 all
-  carry dispositions and the 6-row protocol migration is recorded. RA-02 must not start until
-  RA-01 passes and the owner approves. Artifacts are uncommitted, like the rest of the RA-01 work.
-- **Test suite is NOT currently all-green (2026-09-18, 1063 collected): 2 failed, 1061 passed**
-  (full run ≈ 4m15s). Both failures pre-date any new change and must be fixed or dispositioned,
-  not skipped: `tests/test_lab01_safety.py::test_t02_repo_has_no_aliasing_copies` (T02 scan returns
-  FAIL in this environment) and `tests/test_lab04_evaluator.py::test_no_dead_code_or_undefined_names_in_lab_source`
-  (unused import `ALLOWED_DISPOSITIONS` in `tests/ra_corrective/test_ra01_gates.py:14`).
-  The before-repair tests in `tests/mode4_corrective/` are green — never delete or weaken them.
-  RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
+- **RA-01 is COMPLETE and its verifier recorded `overall: PASS`** (2026-09-18,
+  run `ra01-20260918T093759Z-e72c0dd9`; independent verify exit 0; all five gates G01-ID/MIG/
+  VERIFY/BUDGET/REPORT pass). All G01 gates + 14 tests in `tests/ra_corrective/` are green.
+  Key facts locked: branch `mode4-corrective`, engine 1.1.1/native 0.4.2 (pip, no direct_url),
+  endpoint sha installed==protected; ledger `TE02-PILOT-R03` charged 165457.9s / 300000s with the
+  RUNNING row `bc9d8951…` classified `ORPHAN_NO_LIVE_PROCESS` (recovery belongs to the TE
+  supervisor, not RA-01); 7-row protocol migration (incl. T02 run-output-dedup scoping); 4-arm
+  registration with M4_CAL_MATCHED as canonical CAL_BUDGET and economic fields
+  `PENDING_CALIBRATION`. Approvals (scope, migration, arms, tuning, risk caps) are all `PENDING`
+  — **RA-02 must not start until the owner approves RA-01** (WAITING_OWNER_REVIEW). Two earlier
+  attempts (08:33Z FAIL — verifier did not read the nested identity schema; 09:36Z PASS) are kept
+  append-only. RA-01 code/artifacts are committed (commits `b2a58af`, `fa3be63`).
+- **Test suite is all-green (2026-09-18, 1069 collected): 1069 passed, 0 failed** (full run
+  ≈ 4m30s). The two former failures were fixed, not skipped: T02 aliasing check was re-scoped via
+  protocol migration row 7 (run-output dedup in `evidence/`/`snapshots/` is informational; a
+  hardlink in any source/config tree or a symlink into a protected root still FAILS) and the
+  unused `ALLOWED_DISPOSITIONS` import was removed from
+  `tests/ra_corrective/test_ra01_gates.py`. Before-repair tests in `tests/mode4_corrective/` are
+  green — never delete or weaken them. RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
 - The lab marker keeps `study_id=crypto_regime_timeedge_v2` (LAB-01 bootstrap evidence; not
   rewritten).
 - **Time-Edge study (TE, `study_id=time_edge_validation_v4`)** runs between RF-05 and RA:
