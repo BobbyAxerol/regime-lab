@@ -1,0 +1,121 @@
+{
+  "findings": [
+    {
+      "finding_id": "F-01",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/execution.py (imports dynamic_fold_provider L15, refs event_account)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/reports/time_edge_validation_v4/te02-pilot-09-report.md (32/32 trials complete, real 32-trial Mode 4 selection)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/integration/event_account.py"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/execution.py",
+        "src/crypto_regime_lab/experiments/dynamic_fold_provider.py"
+      ],
+      "planned_phase": "RA-04",
+      "claim_limit": "224 scorer calls per audit E01, not independently re-tallied; do not call a new runner fake Mode 4 on legacy grounds."
+    },
+    {
+      "finding_id": "F-02",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/compute_cache.py",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/pipeline_controls.py",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/runs/te-host-controls-08",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/runs/te-host-controls-09",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/runs/te-host-controls-10"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/compute_cache.py",
+        "src/crypto_regime_lab/time_edge/pipeline_controls.py",
+        "src/crypto_regime_lab/time_edge/storage.py"
+      ],
+      "planned_phase": "RA-02",
+      "claim_limit": "Metadata HIT is not enough if the engine still re-runs; fix identity, prove cross-run actual reuse."
+    },
+    {
+      "finding_id": "F-03",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "te-host-controls-10 ledger: attempt cd6debd9 FAILED wall=23496.65859210398s ('isolated child exited 1')",
+        "te-host-controls-10 attempts/*/stderr.log match memory-error strings",
+        "1 RUNNING attempt = live --retry-failed job observed in RA01.1 inventory"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/execution.py:210-306"
+      ],
+      "planned_phase": "RA-03",
+      "claim_limit": "OOM is not NO_EDGE; 84.4 MiB is not the whole working set; measured memory proof required."
+    },
+    {
+      "finding_id": "F-04",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/execution.py:309-388 (selection/scorer region)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/quantbt_candidate/quantbt/walkforward.py:4070-4125,4369-4410 (snapshot, provenance only)"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/execution.py"
+      ],
+      "planned_phase": "RA-04",
+      "claim_limit": "'7/8 fallback + one finite subperiod' per audit E07; do not call every fallback a bug or delete low-trade alphas."
+    },
+    {
+      "finding_id": "F-05",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/te03-r2 (information_value/model_causality/model_decision/model_registry files present)"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/model.py",
+        "src/crypto_regime_lab/data/panel.py"
+      ],
+      "planned_phase": "RA-05/RA-06",
+      "claim_limit": "'5/29 JM vintages, rank-IC delta -0.03263' per audit E03; do not infer PnL from IC or 729 independent samples."
+    },
+    {
+      "finding_id": "F-06",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/schedule.py:20-26 (triggers(), min_gap_days=28 default)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/host-emissions-03.json"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/schedule.py"
+      ],
+      "planned_phase": "RA-05",
+      "claim_limit": "'28 accepted triggers, median gap ~28.17d' is a scheduler replay, not 28 actual deployments."
+    },
+    {
+      "finding_id": "F-07",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/time_edge_validation_v4/r01/model_protocol.json (threshold language present)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/model.py"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/model.py"
+      ],
+      "planned_phase": "RA-05/RA-06",
+      "claim_limit": "Report the actual mixture and fallback share; do not describe a mostly-M0 path as JM."
+    },
+    {
+      "finding_id": "F-08",
+      "current_disposition": "PRESENT",
+      "evidence_refs": [
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/controls.py",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/te03/te03_7_power.json (mentions engine_runs)",
+        "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/host-calibration-01.json"
+      ],
+      "affected_paths": [
+        "src/crypto_regime_lab/time_edge/controls.py"
+      ],
+      "planned_phase": "RA-04/RA-07",
+      "claim_limit": "No market power certified from injected synthetic effects; small targeted controls + separate power analysis."
+    }
+  ],
+  "schema": "crypto_regime_lab.ra01_disposition.v1",
+  "lab_run_id": "ra01-20260918T093646Z-7b4e50a6",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T09:36:46.067540+00:00"
+}

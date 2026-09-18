@@ -1,0 +1,23 @@
+{
+  "test_file": "tests/ra_corrective/test_ra01_gates.py",
+  "test_node_ids": [
+    "test_admit_accepts_small_job_within_envelope",
+    "test_admit_refuses_over_envelope_as_blocked_budget",
+    "test_admit_refuses_over_task_cap",
+    "test_admit_refuses_excess_workers",
+    "test_admit_new_run_id_does_not_reset_charge",
+    "test_verifier_fails_on_empty_dir",
+    "test_verifier_fails_on_tampered_artifact",
+    "test_verifier_fails_on_zero_tests",
+    "test_verifier_fails_on_blocked_status_riding_pass",
+    "test_verifier_fails_on_protected_delta",
+    "test_verifier_passes_on_valid_bundle",
+    "test_verifier_reads_nested_baseline_identity",
+    "test_reconcile_matches_live_worker_by_start_window",
+    "test_reconcile_flags_orphan_running_row"
+  ],
+  "schema": "crypto_regime_lab.ra01_tests.v1",
+  "lab_run_id": "ra01-20260918T093646Z-7b4e50a6",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T09:36:46.080085+00:00"
+}
