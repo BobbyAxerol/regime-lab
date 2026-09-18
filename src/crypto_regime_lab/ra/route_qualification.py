@@ -91,6 +91,9 @@ def probe_route(alpha_id) -> dict:
         "route": "event (ClockedStrategy/EventAccountStrategy over the installed engine)",
         "fast_route_exists": False,
         "params_probed": params,
+        # What the schema actually declares, read live -- so a reader can see
+        "declared_schema_kinds": schema_declares(alpha_id),
+        "params_probed_is_one_point_of": len(schema_declares(alpha_id)),
         "market": market, "probed_at_utc": utcnow(),
     }
     try:
