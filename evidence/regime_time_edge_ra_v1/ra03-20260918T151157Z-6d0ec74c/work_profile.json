@@ -1,0 +1,31 @@
+{
+  "schema": "regime_lab.ra03_work_profile.v1",
+  "stages": [
+    {
+      "scope": "representative_train_candidate",
+      "alpha_id": "A-SC",
+      "load_seconds": 0.002463684999383986,
+      "prepare_construct_seconds": 0.0014174130046740174,
+      "window_pack_seconds": 0.021943915984593332,
+      "engine_seconds": 2.6924103570054285,
+      "serialize_seconds": 0.016488601977471262,
+      "cold_total_seconds": 2.7219911760184914,
+      "warm_repeat_seconds": 2.6336344049777836
+    },
+    {
+      "scope": "deployment_scope",
+      "alpha_id": "A-SC",
+      "load_seconds": 0.005738809006288648,
+      "prepare_construct_seconds": 0.0028292409842833877,
+      "window_pack_seconds": 0.039865383005235344,
+      "engine_seconds": 8.197592159966007,
+      "serialize_seconds": 0.05503849498927593,
+      "cold_total_seconds": 8.251131449011154,
+      "warm_repeat_seconds": 8.398477397975512
+    }
+  ],
+  "note": "load/prepare/window-pack/engine/serialize measured per real run; warm_repeat_seconds is a cache-hit repeat at the same account_start",
+  "lab_run_id": "ra03-20260918T151157Z-6d0ec74c",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:12:53.536507+00:00"
+}
