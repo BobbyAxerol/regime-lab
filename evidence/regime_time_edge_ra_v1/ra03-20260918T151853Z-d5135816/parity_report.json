@@ -1,0 +1,39 @@
+{
+  "schema": "regime_lab.ra03_parity_report.v1",
+  "cases_covered": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08"
+  ],
+  "required_test_node_ids": [
+    "test_m01_construct_prepares_nothing",
+    "test_m01_first_run_prepares_only_the_window_once",
+    "test_m02_none_and_explicit_bar_zero_share_one_window_and_agree_exactly",
+    "test_m02_absolute_fill_bar_matches_engine_offset",
+    "test_m03_two_candidates_at_the_same_window_do_not_share_strategy_state",
+    "test_m03_warm_and_cold_share_the_window_cache_without_corrupting_it",
+    "test_m04_tiers_agree_on_every_overlapping_field",
+    "test_m05_compact_is_a_declared_function_of_the_audit_trace",
+    "test_m06_repeated_runs_do_not_grow_retained_memory_unboundedly",
+    "test_m07_every_alpha_route_is_qualified_with_a_real_measured_run",
+    "test_m07_backend_policy_forbids_a_silent_native_fallback",
+    "test_m08_metric_rerun_touches_no_engine"
+  ],
+  "primary_semantics_changed_for_speed": false,
+  "fix_applied": "PreparedAccount.__init__ no longer eagerly packs the full frame; first==0 is now just another _window() key, lazily packed on first use and cached exactly like every other account_start. Verified: account_start=None and account_start=frame.index[0] now correctly share ONE window and produce byte-identical equity/fills (M02) -- previously they could each pack separately, doing the SAME work twice.",
+  "measured_waste_before_fix": {
+    "fixture": "10-day history + 2-day window, A-SC",
+    "eager_construct_wall_seconds": 0.0423,
+    "eager_construct_rss_mib": 7.8,
+    "was_ever_used": false,
+    "reason": "every real caller (TrainingScorer, candidate_targets, deploy/decay/full_control) passes a non-zero account_start because the frame includes pre-roll warmup"
+  },
+  "lab_run_id": "ra03-20260918T151853Z-d5135816",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:19:47.092886+00:00"
+}

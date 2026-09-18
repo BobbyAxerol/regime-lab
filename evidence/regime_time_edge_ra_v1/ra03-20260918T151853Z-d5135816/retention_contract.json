@@ -1,0 +1,69 @@
+{
+  "schema": "regime_lab.ra03_retention_contract.v1",
+  "tiers": [
+    "TRIAL_SCALAR",
+    "CANDIDATE_COMPACT",
+    "SELECTED_AUDIT"
+  ],
+  "fields": {
+    "TRIAL_SCALAR": [
+      "status",
+      "engine_fill_count",
+      "callback_count",
+      "decision_count",
+      "wall_seconds",
+      "packing_seconds",
+      "requested_contract",
+      "engine_absolute_start_bar",
+      "terminal_equity",
+      "terminal_position"
+    ],
+    "CANDIDATE_COMPACT": [
+      "status",
+      "daily_returns",
+      "metrics",
+      "daily_activity",
+      "complete_day_start",
+      "complete_day_end_exclusive",
+      "fill_count",
+      "order_event_count",
+      "rejection_count"
+    ],
+    "SELECTED_AUDIT": [
+      "status",
+      "equity",
+      "positions",
+      "index",
+      "fills",
+      "commands",
+      "order_events",
+      "version_runs",
+      "funnel",
+      "unmapped",
+      "rejections",
+      "engine_fill_count",
+      "requested_contract",
+      "wall_seconds",
+      "packing_seconds",
+      "callback_count",
+      "decision_count",
+      "engine_absolute_start_bar",
+      "terminal_position",
+      "terminal_equity"
+    ]
+  },
+  "measured_on": {
+    "alpha_id": "A-SC",
+    "fills": 4
+  },
+  "measured_sizes": {
+    "TRIAL_SCALAR_bytes": 345,
+    "SELECTED_AUDIT_bytes": 968408,
+    "ratio_audit_over_scalar": 2806.9797101449276
+  },
+  "rule": "TRIAL_SCALAR: full trial metadata/status/costs/counters, never a per-bar object. CANDIDATE_COMPACT: required return/equity observations plus report support, trace REFERENCES not the trace itself. SELECTED_AUDIT: orders/fills/rejects/amends/cancels, account invariants, version/activation lineage, reconstructable path. CANDIDATE_COMPACT is a declared function of SELECTED_AUDIT (ra/retention.py::candidate_compact_from_audit), never an independently recomputed number.",
+  "known_gap": "TrainingScorer._score (time_edge/execution.py) persists the FULL fills/commands/order_events for EVERY trial's candidate-*.json, not just trace references -- more than CANDIDATE_COMPACT specifies. Measured, not changed in this phase: changing the candidate-cache format is a wider-blast-radius change (other code reads those files) than RA-03's scope; recorded as an improvement opinion, not applied.",
+  "lab_run_id": "ra03-20260918T151853Z-d5135816",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:19:47.090197+00:00"
+}

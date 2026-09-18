@@ -1,0 +1,82 @@
+{
+  "schema": "regime_lab.ra_phase_gate.v1",
+  "phase_id": "RA-03",
+  "guide_version": "RA-GUIDE-1.0",
+  "registration_digest": null,
+  "source_dependency_digest": null,
+  "implementation_status": "COMPLETE",
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "required_gates": [
+    "G03-PARITY",
+    "G03-MEM",
+    "G03-ROUTE",
+    "G03-COST",
+    "G03-LEDGER",
+    "G03-MANIFEST"
+  ],
+  "gate_results": [
+    {
+      "gate_id": "G03-PARITY",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G03-MEM",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G03-ROUTE",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G03-COST",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G03-LEDGER",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G03-MANIFEST",
+      "status": "PASS",
+      "reasons": []
+    }
+  ],
+  "mandatory_tests": [
+    {
+      "command": "scripts/run_ra03.py --pytest-xml /tmp/claude-0/-root-bobby-pool-alpha-lab-regime-model-quantbt/167d39ac-87ec-42b5-bcdd-8ed5b7c149dc/scratchpad/ra_all_junit.xml",
+      "tests": 66,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "actual_run_refs": [
+    "route_matrix.json",
+    "memory_profile.json"
+  ],
+  "verified_reuse_refs": [],
+  "measured_resources": {
+    "phase_wall_s": 53.3,
+    "peak_rss_gib_max": 0.3748741149902344
+  },
+  "protected_state_before_ref": "baseline/protected_before",
+  "protected_state_after_ref": "protected status: clean",
+  "open_blockers": [],
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "notes": [
+    "verify ran over the frozen artifact set incl. this receipt"
+  ],
+  "lab_run_id": "ra03-20260918T151853Z-d5135816",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:19:47.126534+00:00"
+}
