@@ -124,6 +124,16 @@ class VwapMeanReversionEventAdapterV1(AlphaAdapter):
         if float(params["dev_mult"]) <= 0 or float(params["stop_atr"]) <= 0 \
                 or float(params["target_r"]) <= 0:
             raise ValueError("dev_mult, stop_atr and target_r must be positive")
+        # RA-04 Q03 (guide: an unknown categorical/bool must raise, never
+        # silently collapse): these two are declared kind="bool" in the
+        # registered schema (choices (False, True)); a plain bool(x) downstream
+        # would treat ANY nonzero/non-empty value as True, so a stray string
+        # like a mistyped param would silently mean True. Enforce membership
+        # here, at construction, before either flag is read.
+        for flag in ("exit_at_vwap", "time_stop_on"):
+            if params[flag] is not True and params[flag] is not False:
+                raise ValueError(f"{self.alpha_id}: {flag} must be a real bool (True/False), "
+                                 f"got {params[flag]!r} ({type(params[flag]).__name__})")
         self.htf_epsilon = htf_epsilon
         self.publication_delay = publication_delay
         self.features: VwapFeatures | None = None
