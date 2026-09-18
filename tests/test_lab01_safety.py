@@ -73,6 +73,49 @@ def test_t02_repo_has_no_aliasing_copies(policy):
     assert result["status"] == "PASS", result
 
 
+# --- T02: RA-01 protocol_migration row 7 (run-output dedup vs real aliasing)
+
+def test_t02_hardlink_outside_run_output_trees_fails(policy, lab_tmp):
+    root = lab_tmp / "t02src"
+    (root / "src").mkdir(parents=True)
+    real = root / "src" / "alpha.py"
+    real.write_text("x = 1\n")
+    os.link(real, root / "src" / "twin.py")
+    fake = SandboxPolicy(lab_root=root, protected_roots=policy.protected_roots)
+    result = checks_mod.check_t02_no_alias_copies(fake)
+    assert result["status"] == "FAIL", result["detail"]
+    assert any(o["code"] == "HARDLINK" for o in result["detail"]["offenders"])
+
+
+def test_t02_run_output_dedup_is_informational_not_fail(policy, lab_tmp):
+    root = lab_tmp / "t02ev"
+    (root / "evidence" / "run-a").mkdir(parents=True)
+    (root / "evidence" / "run-b").mkdir(parents=True)
+    data = root / "evidence" / "run-a" / "observable_market.parquet"
+    data.write_bytes(b"PARQUET_BYTES")
+    os.link(data, root / "evidence" / "run-b" / "observable_market.parquet")
+    fake = SandboxPolicy(lab_root=root, protected_roots=policy.protected_roots)
+    result = checks_mod.check_t02_no_alias_copies(fake)
+    assert result["status"] == "PASS", result["detail"]
+    assert result["observed"]["offender_count"] == 0
+    # both paths of the dedup pair carry nlink=2 and are recorded
+    assert result["observed"]["informational_count"] == 2
+
+
+def test_t02_symlink_into_protected_root_fails(policy, lab_tmp):
+    root = lab_tmp / "t02link"
+    (root / "src").mkdir(parents=True)
+    protected = lab_tmp / "t02protected"
+    protected.mkdir()
+    (protected / "endpoint.py").write_text("# protected\n")
+    os.symlink(protected / "endpoint.py", root / "src" / "endpoint.py")
+    fake = SandboxPolicy(lab_root=root, protected_roots=(protected,))
+    result = checks_mod.check_t02_no_alias_copies(fake)
+    assert result["status"] == "FAIL", result["detail"]
+    assert any(o["code"] == "SYMLINK" and o["into_protected"]
+               for o in result["detail"]["offenders"])
+
+
 # --- T03 -----------------------------------------------------------------
 
 @pytest.fixture
