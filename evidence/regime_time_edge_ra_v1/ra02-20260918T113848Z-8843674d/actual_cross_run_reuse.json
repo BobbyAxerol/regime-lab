@@ -1,0 +1,40 @@
+{
+  "schema": "regime_lab.ra02_cross_run_reuse.v1",
+  "first_computation": {
+    "producer": "ra02-20260918T113848Z-8843674d-a",
+    "status": "MISS",
+    "engine_runs": 1,
+    "engine_wall_seconds": 2.34706201904919,
+    "visited_bars": 1440,
+    "payload_sha256": "54b9a886b443263c28bde0a395c469940063899d5374923fb0ddf5d8f3a39e5d"
+  },
+  "cross_run_reuse": {
+    "producer": "ra02-20260918T113848Z-8843674d-b",
+    "status": "HIT",
+    "new_engine_runs": 0,
+    "payload_sha256": "54b9a886b443263c28bde0a395c469940063899d5374923fb0ddf5d8f3a39e5d",
+    "producer_of_reused_payload": "ra02-20260918T113848Z-8843674d-a"
+  },
+  "equivalence": {
+    "method": "canonical-byte-equal",
+    "passed": true
+  },
+  "provenance_excluded_from_key": [
+    "lab_run_id",
+    "output_path",
+    "wall_clock_created_at",
+    "producer_id"
+  ],
+  "causality_fields": [
+    "physical_compute_at",
+    "simulated_cutoff",
+    "simulated_ready_at"
+  ],
+  "causality_guard_accepted": true,
+  "engine_invocations": [
+    "ra02-20260918T113848Z-8843674d-a"
+  ],
+  "lab_run_id": "ra02-20260918T113848Z-8843674d",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T11:38:51.006951+00:00"
+}
