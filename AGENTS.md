@@ -81,11 +81,46 @@ not superseded. Read the active guide before changing anything.
   market claim. Known gap recorded, not changed: `TrainingScorer` persists FULL fills/commands/
   order_events per trial, more than the CANDIDATE_COMPACT retention tier specifies (wider blast
   radius than this phase's scope — other code reads those files).
-- **Test suite (2026-09-18, 1121 collected): 1118 passed, 3 failed** (full run ≈4m25s, verified
-  twice this session — once before and once after the RA03.1 execution.py fix, same 3 failures
-  both times, confirming no regression elsewhere execution.py is imported from). All three
-  pre-exist RA-02/RA-03 and are unrelated to either (confirmed: none touch
-  `src/crypto_regime_lab/ra/`, `src/crypto_regime_lab/time_edge/`, or `tests/ra_corrective/`); do
+- **RA-04 is COMPLETE, technical_gate PASS, 4/4 gates** (run `ra04-20260918T162015Z-85cc39de`,
+  2026-09-18; one earlier same-day attempt crashed writing `f04_reproduction.json` — raw `-inf`
+  Sharpe values violated `evidence/manifest.py`'s strict-JSON refusal of non-finite values, right
+  after `selector_semantics.json` had already been written — kept append-only, not discarded).
+  **F-04 reproduced on current source** (no raw evidence for it exists on this host): the
+  installed engine's own `split_datetime_index_into_subperiods_v1` (`is_subperiods=6`) splits by
+  bar count, so only shard 0 reliably starts at a UTC day boundary; `TrainingScorer._score`
+  scores complete days only, and a candidate that doesn't trade inside a shard returns
+  `sharpe=-inf`/`ZERO_VARIANCE`, correctly dropped by the installed selector's own
+  `np.isfinite` filter — but with few surviving shards, "temporal robustness" collapses to one
+  shared data point or the registered fallback constant. Measured on a 4-candidate/20-day fixture:
+  2/4 candidates ≤1 finite shard, 1/4 hit the pure fallback constant, cross-candidate score
+  collapse at 2 distinct shared values (exact float match) — and the SAME mechanism
+  (`selector: fallback_best_is_temporal`, `reason: insufficient_cluster_points`,
+  `temporal_count: 1.0`) surfaced **organically**, not by construction, through the real active
+  public-path integration call (RA04.6). Built `STOCK_MODE4_PLUS_ADMISSION_V1` (RA04.3) — a
+  post-selection guard over the unchanged stock selector (never substitutes its own winner):
+  ADMIT/KEEP_INCUMBENT/COMMON_FLAT_FALLBACK from two alpha-specific frozen thresholds
+  (`min_complete_train_days = max(2, history_days(alpha))`: SC=2, HMA=18, VWAP=101, HASH=3;
+  `min_finite_shards = 3 of 6`). Trial budget **reused** from
+  `configs/time_edge_validation_v4/mode4_binding_r01.json` (32 trials, `is_subperiods=6`,
+  `seed=20260912`), not re-frozen. Search dimensions: 2-3 per alpha with a real
+  `behavior_witness()` each — A-HMA's first-tried `min_length`/`mult` were measured **DEAD**
+  (byte-identical `terminal_equity` across their whole range on the phase fixture), reported
+  honestly and swapped for `max_length`/`take_profit`/`max_sl`. All 7 compact controls (RA04.5)
+  passed with real engine evidence. Found and fixed (lab-owned, not frozen by RF-05's
+  `freeze_manifest.json`): `alphas/a_vwap.py`'s `exit_at_vwap`/`time_stop_on` used naive
+  `bool(x)`, so ANY truthy value (a stray string, `1`) silently meant `True` — now raises unless
+  the value `is True`/`is False` exactly; verified behavior-preserving for real True/False,
+  301 passed / 0 regressions across every A-VWAP-touching test. Commits `e467e069` (the a_vwap.py
+  fix), `db228594` (RA-04 implementation), `0226eebd` (evidence, 2 runs kept).
+  `research_status: NOT_ASSESSED` — no economic/market claim; none of Q01-Q07/G04-* require
+  ranking IC>0, Sharpe>0, or regime beating a synthetic calendar.
+- **Test suite (2026-09-18, 1145 collected): 1142 passed, 3 failed** (full run ≈6m14s, verified
+  three times this session — before the RA03.1 execution.py fix, after it, and again after the
+  full RA-04 turn (a_vwap.py fix + all new `ra/`/`ra_corrective` files), same 3 failures every
+  time, confirming no regression anywhere execution.py or a_vwap.py is imported from). All three
+  pre-exist RA-02/RA-03/RA-04 and are unrelated to any of them (confirmed: none touch
+  `src/crypto_regime_lab/ra/`, `src/crypto_regime_lab/time_edge/`, `src/crypto_regime_lab/alphas/`,
+  or `tests/ra_corrective/`); do
   not fix them as a side effect of an unrelated phase without the owner's separate say-so (R-17):
   - `test_guide_publishing_discipline.py::test_all_nine_forbidden_claims_are_checked` +
     `test_each_check_names_the_evidence_the_claim_would_need` — forbidden-claims check #1
@@ -130,12 +165,13 @@ not superseded. Read the active guide before changing anything.
   is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (66 tests, green: 14 RA-01 + 23 RA-02
-  (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates)). RA-01/RA-02/RA-03 all complete;
-  **RA-04 needs its own owner approval before starting** (R-18 — the RA-02→RA-03 approval in
-  `owner_decisions.jsonl` does not extend to RA-04; check the ledger's LAST entry covers the
-  transition you're about to start, never assume an earlier one still applies). Sequence:
-  RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission →
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (90 tests, green: 14 RA-01 + 23 RA-02
+  (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates) + 24 RA-04 (9 Q-cases + 15 gates)).
+  RA-01/RA-02/RA-03/RA-04 all complete; **RA-05 needs its own owner approval before starting**
+  (R-18 — the RA-03→RA-04 approval in `owner_decisions.jsonl` does not extend to RA-05; check the
+  ledger's LAST entry covers the transition you're about to start, never assume an earlier one
+  still applies). Sequence:
+  RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission (done) →
   RA-05 4-arm discovery (STATIC, M4_CAL, M4_CAL_MATCHED=CAL_BUDGET canonical, M4_REGIME; primary
   H-BUDGET) → RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
   `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
@@ -172,6 +208,7 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra01.py           # RA-01
 $LAB/environments/lab_venv/bin/python $LAB/scripts/verify_ra01.py        # thin verifier over the RA-01 run dir
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra02.py --pytest-xml <junit of tests/ra_corrective>   # RA-02 semantic cache
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra03.py --pytest-xml <junit of tests/ra_corrective>   # RA-03 lazy prep/retention/route/profiler
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra04.py --pytest-xml <junit of tests/ra_corrective>   # RA-04 Mode 4 support/admission/controls
 $LAB/environments/lab_venv/bin/python $LAB/scripts/record_owner_decision.py --decides "RA-0N->RA-0M" --quote "<verbatim>" --reference "<where>"  # append to owner_decisions.jsonl
 $LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
 $LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
