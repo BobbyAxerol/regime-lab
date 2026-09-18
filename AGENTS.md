@@ -2,9 +2,11 @@
 
 Research lab (not a product) around a pinned, unmodified `quantbt-engine==1.1.1`. It asks whether
 regime information selects parameters and times their deployment better than calendar WFO. The
-authoritative plan is `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` (Vietnamese,
-~13.5k lines); the older `QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md` applies only where not
-superseded. `CLAUDE.md` is the English digest — read both before changing anything.
+five-phase corrective study RF-01…RF-05 is complete (`REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md`,
+Vietnamese, ~13.5k lines; `CLAUDE.md` is the English digest). **The current authority is the RA
+guide** `REGIME_LAB_MODE4_CORRECTIVE_AGENT_PHASE_GUIDE_VI.md` (RA-GUIDE-1.0, phases RA-01…RA-08,
+per-phase owner approval). `QUANTBT_CRYPTO_REGIME_TIME_EDGE_LAB_FINAL_V2_VI.md` applies only where
+not superseded. Read the active guide before changing anything.
 
 ## Current state (verify, don't assume)
 
@@ -32,11 +34,40 @@ superseded. `CLAUDE.md` is the English digest — read both before changing anyt
   frozen MDE 0.0371 bps/day; A-SC/SOLUSDT is `NEGATIVE_WITHIN_SCOPE` at cell level. No `POSITIVE`.
   Contamination `NESTED_RETROSPECTIVE` (no untouched holdout);
   `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED` and must not be run here.
-- The before-repair tests in `tests/mode4_corrective/` are green since RF-02/RF-03 — never delete or
-  weaken them. Full suite currently `862 passed`; RF-05 guards live in
-  `tests/mode4_corrective/test_rf05_claims.py`.
+- **RA-01 has run once (2026-09-18) and its verifier recorded `overall: FAIL`** —
+  `G01-ID` (git HEAD/branch/engine+native versions and endpoint hashes not captured) and
+  `G01-VERIFY` (report.md/handoff.md missing at verify time) failed; `G01-MIG/BUDGET/REPORT`
+  passed. Run dir `evidence/regime_time_edge_ra_v1/ra01-20260918T083335Z-0af14f6a/`; F-01…F-08 all
+  carry dispositions and the 6-row protocol migration is recorded. RA-02 must not start until
+  RA-01 passes and the owner approves. Artifacts are uncommitted, like the rest of the RA-01 work.
+- **Test suite is NOT currently all-green (2026-09-18, 1063 collected): 2 failed, 1061 passed**
+  (full run ≈ 4m15s). Both failures pre-date any new change and must be fixed or dispositioned,
+  not skipped: `tests/test_lab01_safety.py::test_t02_repo_has_no_aliasing_copies` (T02 scan returns
+  FAIL in this environment) and `tests/test_lab04_evaluator.py::test_no_dead_code_or_undefined_names_in_lab_source`
+  (unused import `ALLOWED_DISPOSITIONS` in `tests/ra_corrective/test_ra01_gates.py:14`).
+  The before-repair tests in `tests/mode4_corrective/` are green — never delete or weaken them.
+  RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
 - The lab marker keeps `study_id=crypto_regime_timeedge_v2` (LAB-01 bootstrap evidence; not
   rewritten).
+- **Time-Edge study (TE, `study_id=time_edge_validation_v4`)** runs between RF-05 and RA:
+  registration in `configs/time_edge_validation_v4/`, code in
+  `src/crypto_regime_lab/time_edge/` + `experiments/dynamic_fold_provider.py`, evidence under
+  `evidence/time_edge_validation_v4/`, handoffs `handoff/SESSION_TE_CURRENT.md`,
+  `TE_MASTER_PLAN_V1.md/.json`, `TE_PHASE_PLAN_V1.md`, `TE_CLI_RUNBOOK.md`. Ledger
+  `TE02-PILOT-R03` had budget 300000s with ~134542s remaining at RA-01 lock (2026-09-18), and one
+  RUNNING-or-orphan row with no live process — reconcile, never silently drop. Its binary/run
+  outputs are largely gitignored (manifests, ledgers and small JSON stay in git); large untracked
+  evidence trees are left alone, not committed wholesale and never deleted.
+- **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
+  RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (11 tests, green). Sequence:
+  RA-01 lock → RA-02 semantic cache → RA-03 memory/fast routes → RA-04 Mode 4 support/admission →
+  RA-05 4-arm discovery (STATIC, M4_CAL, M4_CAL_MATCHED=CAL_BUDGET canonical, M4_REGIME; primary
+  H-BUDGET) → RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
+  `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (PLAN ONLY, awaiting RA-01 approval;
+  one phase finished → report → owner review before the next, per R-18). Reuse `M4_CAL_MATCHED`
+  as the canonical CAL_BUDGET arm id — do not create a second economically identical arm.
+  Raw financial artifacts at TE paths are referenced by path/hash, not copied.
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
 - Lab git: repo on `main`, remote `regime-lab`; corrective work is on **`mode4-corrective`**.
@@ -61,7 +92,16 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf01_regressions.py --ful
 $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf01_report.py  # renders evidence/corrective_mode4_v3/RF-01/report.md
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf05.py --force   # RF-05 freeze/recompute/claims/integrity/handoff (no engine call)
 $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force  # report.md/json + integrity/repro refresh
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra01.py           # RA-01 baseline lock (writes evidence/regime_time_edge_ra_v1/<run_id>/)
+$LAB/environments/lab_venv/bin/python $LAB/scripts/verify_ra01.py        # thin verifier over the RA-01 run dir
+$LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
+$LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
 ```
+
+- The full suite takes ~4–5 minutes; run long jobs in the background and read the log.
+- The latest authority for runbooks is `handoff/TE_CLI_RUNBOOK.md` and
+  `handoff/RA_EXECUTION_PLAN_V1.md` (RA phases); the RF/LAB scripts above remain valid for
+  regeneration and audits (`scripts/audit_*.py`).
 
 - `python -m crypto_regime_lab.cli` needs `PYTHONPATH=src`; pytest gets it from `tests/conftest.py`.
 - Rebuild the venv with `scripts/bootstrap_lab.py` + `configs/requirements.lock`; `environments/`
@@ -87,6 +127,9 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force 
   cast corrupts fractional-volume symbols (measured in `reports/data_sources_used.md`).
 - Point every cache inside the lab; set `PYTHONDONTWRITEBYTECODE=1` in processes touching protected
   source.
+- Gitignore policy (commit 4ab071c): **all binary data files are ignored repo-wide** (`*.parquet`,
+  sqlite side-files, run-output market data over the GitHub size limit); manifests, ledgers,
+  receipts and small JSON stay in git. Never force-add large binaries; record the path/hash instead.
 
 ## Repo conventions an agent would otherwise get wrong
 
@@ -108,6 +151,12 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force 
   happened: `all([]) == True`, a key defaulting to `0.0`, a probe handed its own answer. New
   verdicts must carry a denominator and a way to go red. Use the `lab_tmp` fixture for scratch
   files that go through the read guard — pytest's `tmp_path` is outside `LAB_ROOT` and is refused.
+- **Separate the four validity axes** (RA guide §0.2): technical validity, scientific support,
+  economic evidence and owner approval are independent; a positive ranking-IC, switches > 0 or
+  positive PnL is never a condition for opening technical discovery. Gate redesign goes through
+  `protocol_migration` (old rule → new rule → reason → affected claims/tests); never edit the
+  acceptance of an old run to make it green. Keep historical runs, invalidations, costs and
+  previous negative/null results raw and untouched.
 - **quantbt cost binding**: `fee` is round-trip; pass the one-way rate as `fee_rate=` (or
   `fee=2*one_way`). The fee defect above cost the whole study its validity.
 - The deflated corners: `src/crypto_regime_lab/alphas/raw-supplied/` fails pyflakes by design;
@@ -120,7 +169,9 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force 
 (byte-copied parquet panels), `alphas` (4 adapters × version tiers, raw-supplied bytes are
 provenance-only), `selector` (robust neighborhood + candidate bank), `regime` (sparse jump-model
 state inference), `response` (parameter-response), `policy` (four-clock activation), `experiments`
-(factorial arms A–E), `integration` (continuous-account delivery), `quantbt_bridge` (the lab-owned
+(factorial arms A–E + `dynamic_fold_provider.py`), `time_edge` (Time-Edge v4 study: allocations,
+controls, discovery, funnel), `ra` (RA study: admission rules + thin phase verifier),
+`integration` (continuous-account delivery), `quantbt_bridge` (the lab-owned
 facade over the installed engine), `evidence` (atomic JSON writer). Arms: A = installed WFO +
 calendar, B = neighborhood selector + calendar, C = installed selector + regime-triggered refresh,
 D = both, E = bank + response policy. Primary matrix = 4 alphas × 5 symbols = 20 cells; A-HASH is
