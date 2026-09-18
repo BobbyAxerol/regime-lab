@@ -1,8 +1,11 @@
 {
   "schema": "crypto_regime_lab.assertion_vacuity_audit.v1",
-  "tests_passed": true,
-  "assertion_lines_tracked": 3280,
-  "assertion_lines_reached": 3247,
+  "tests_passed": false,
+  "assertion_lines_tracked": 3519,
+  "assertion_lines_reached": 3486,
+  "self_referential_tracked_lines": 6,
+  "self_referential_lines_reached": 5,
+  "self_referential_ratio_note": "lines owned by SELF_REFERENTIAL_TESTS are excluded from `never_reached` because measuring them is circular (this audit's own gate reading its own prior output); the same exclusion must apply to any reached-ratio computed over this document, or that ratio silently penalises the suite for the strange loop instead of measuring the suite",
   "never_reached": [
     {
       "location": "test_rf04_decay_and_controls.py:177",
@@ -12,9 +15,9 @@
       "snippet": "assert placebo[\"reason\"], \"a not-run placebo needs a reason\"",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "RF-04's placebo control actually ran (status RUN); the not-run branch is for a future pilot where compute runs out before the placebo cutoff (guide RA07.3)",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_not_run_placebo_must_carry_a_reason"
     },
     {
       "location": "test_rf04_scaling.py:176",
@@ -24,9 +27,9 @@
       "snippet": "assert \"budget\" in cell[\"reason\"].lower(), (",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "RF-04's 20 cells are only ever RUN_VALID or BLOCKED_CAPABILITY; no cell ran out of budget mid-attempt",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_non_run_coverage_cell_must_name_why"
     },
     {
       "location": "test_rf04_scaling.py:179",
@@ -36,9 +39,9 @@
       "snippet": "assert cell[\"reason\"].strip(), f\"{cell['cell']} has no non-run reason\"",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same as the budget branch above: no cell in this pilot is NOT_RUN or NOT_RUN_BUDGET",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_non_run_coverage_cell_must_name_why"
     },
     {
       "location": "test_rf05_claims.py:159",
@@ -48,9 +51,9 @@
       "snippet": "assert stats.get(\"ci95_low_bps\") is not None and stats[\"ci95_low_bps\"]",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "no RF-05 contrast is ever POSITIVE_WITHIN_SCOPE (guide A16: the bounded pilot may never record one); the guard is for a future run that tries to, without a CI above the MDE",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"
     },
     {
       "location": "test_rf05_claims.py:161",
@@ -60,9 +63,9 @@
       "snippet": "assert holm is not None and holm < 0.05, (",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same POSITIVE-only branch: no contrast reaches it without an above-MDE CI first",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"
     },
     {
       "location": "test_rf05_claims.py:167",
@@ -72,9 +75,9 @@
       "snippet": "assert entry[\"holm_significant\"] is True",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "the `positives` list this loop walks is always empty -- no RF-05 family entry is POSITIVE_WITHIN_SCOPE",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"
     },
     {
       "location": "test_rf05_claims.py:168",
@@ -84,9 +87,9 @@
       "snippet": "assert entry[\"mde_cleared\"] is True",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same empty `positives` loop as the line above",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"
     },
     {
       "location": "test_guide_contracts.py:196",
@@ -228,9 +231,9 @@
       "snippet": "assert by_condition",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "TE-03.7's controls funnel is still NOT_RUN_BUDGET (TE02-PILOT-R03 ledger has ~106442s left as of 2026-09-18); the MEASURED branch is real code waiting for that run, not dead code",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:101",
@@ -240,9 +243,9 @@
       "snippet": "assert funnel[\"status\"] == \"MEASURED\"",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason as the line above",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:102",
@@ -252,9 +255,9 @@
       "snippet": "assert {row[\"step\"] for row in funnel[\"steps\"]} == FUNNEL_STEPS",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:103",
@@ -264,9 +267,9 @@
       "snippet": "for step in funnel[\"steps\"]:",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason; this is the loop body over a MEASURED funnel's steps",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:104",
@@ -276,9 +279,9 @@
       "snippet": "assert step.get(\"rule\")",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:105",
@@ -288,9 +291,9 @@
       "snippet": "assert step[\"count\"] is not None, f\"{funnel['condition']}/{step['step'",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:106",
@@ -300,9 +303,9 @@
       "snippet": "assert isinstance(step[\"count\"], int) and step[\"count\"] >= 0",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:107",
@@ -312,9 +315,9 @@
       "snippet": "assert isinstance(step[\"denominator\"], int)",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:108",
@@ -324,9 +327,9 @@
       "snippet": "assert step[\"count\"] <= step[\"denominator\"]",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:109",
@@ -336,9 +339,9 @@
       "snippet": "if step[\"denominator\"] == 0:",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason; guards the zero-denominator escape hatch",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:110",
@@ -348,9 +351,9 @@
       "snippet": "assert step[\"denominator_reason\"]",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"
     },
     {
       "location": "test_te03_7.py:196",
@@ -360,9 +363,9 @@
       "snippet": "for step in funnel[\"steps\"]:",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "controls[\"status\"] is still NOT_RUN_BUDGET, so the report never had a MEASURED funnel row to render",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"
     },
     {
       "location": "test_te03_7.py:197",
@@ -372,9 +375,9 @@
       "snippet": "if step[\"count\"] is not None:",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"
     },
     {
       "location": "test_te03_7.py:198",
@@ -384,35 +387,13 @@
       "snippet": "assert f\"| {step['step']} | {step['count']} | {step['denominator']} |\"",
       "cause": "UNREACHED_BRANCH",
       "skip_reason": null,
-      "accepted": false,
-      "why_unreachable_here": null,
-      "rule_exercised_by": null
+      "accepted": true,
+      "why_unreachable_here": "same NOT_RUN_BUDGET reason",
+      "rule_exercised_by": "tests/test_contingency_paths.py::test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"
     }
   ],
   "never_reached_count": 32,
-  "undeclared": [
-    "test_rf04_decay_and_controls.py::test_rf04_paired_endpoints_fail_closed_on_identical_or_deviated::assert placebo[\"reason\"], \"a not-run placebo needs a reason\"",
-    "test_rf04_scaling.py::test_rf04_coverage_20_unique_statuses_with_reasons_and_no_fabricated_equity::assert \"budget\" in cell[\"reason\"].lower(), (",
-    "test_rf04_scaling.py::test_rf04_coverage_20_unique_statuses_with_reasons_and_no_fabricated_equity::assert cell[\"reason\"].strip(), f\"{cell['cell']} has no non-run reason\"",
-    "test_rf05_claims.py::test_rf05_no_positive_without_ci_clearing_mde::assert stats.get(\"ci95_low_bps\") is not None and stats[\"ci95_low_bps\"]",
-    "test_rf05_claims.py::test_rf05_no_positive_without_ci_clearing_mde::assert holm is not None and holm < 0.05, (",
-    "test_rf05_claims.py::test_rf05_no_positive_without_ci_clearing_mde::assert entry[\"holm_significant\"] is True",
-    "test_rf05_claims.py::test_rf05_no_positive_without_ci_clearing_mde::assert entry[\"mde_cleared\"] is True",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert by_condition",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert funnel[\"status\"] == \"MEASURED\"",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert {row[\"step\"] for row in funnel[\"steps\"]} == FUNNEL_STEPS",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::for step in funnel[\"steps\"]:",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert step.get(\"rule\")",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert step[\"count\"] is not None, f\"{funnel['condition']}/{step['step'",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert isinstance(step[\"count\"], int) and step[\"count\"] >= 0",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert isinstance(step[\"denominator\"], int)",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert step[\"count\"] <= step[\"denominator\"]",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::if step[\"denominator\"] == 0:",
-    "test_te03_7.py::test_measured_funnels_carry_denominators_and_reasons::assert step[\"denominator_reason\"]",
-    "test_te03_7.py::test_report_renders_the_revised_controls::for step in funnel[\"steps\"]:",
-    "test_te03_7.py::test_report_renders_the_revised_controls::if step[\"count\"] is not None:",
-    "test_te03_7.py::test_report_renders_the_revised_controls::assert f\"| {step['step']} | {step['count']} | {step['denominator']} |\""
-  ],
+  "undeclared": [],
   "unreached_because_the_test_skipped": [],
   "skipped_tests": 0,
   "cause_rule": "an assert inside a SKIPPED test did not run because its input is missing, not because its branch is impossible. The two are reported separately: counting them together makes a phase mid-run look like a suite full of checks nobody has looked at, and buries the real ones",
