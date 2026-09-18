@@ -1,0 +1,103 @@
+{
+  "schema": "regime_lab.time_edge_validation_v4.implementation_checklist_r03.v1",
+  "study_id": "time_edge_validation_v4",
+  "lab_run_id": "TE-CODING-R03",
+  "registered_at_utc": "2026-09-12T07:16:03.640847+00:00",
+  "authorization": "User stopped OpenCode and authorized all TE technical coding, tests, runnable CLI and handoff; remaining FUP work merged into TE phases.",
+  "fup_intake_ref": "evidence/reviews/fup02-stopped-20260912-01/review.json",
+  "phase_order": [
+    "TE-02",
+    "TE-03",
+    "TE-04",
+    "TE-05"
+  ],
+  "phase_tasks": {
+    "TE-02": [
+      "route_clock_sizing",
+      "scorer_windows_warmup",
+      "selection_only",
+      "failure_retention",
+      "ready_lineage",
+      "total_budget_resume"
+    ],
+    "TE-03": [
+      "causal_model_ladder",
+      "target_purge",
+      "deployment_identity",
+      "state_dossier",
+      "opportunity_information",
+      "full_pipeline_controls"
+    ],
+    "TE-04": [
+      "canonical_metrics",
+      "paired_inference",
+      "decay_d1_d2_d3",
+      "controlled_shards",
+      "statistical_calibration"
+    ],
+    "TE-05": [
+      "freeze_integrity",
+      "data_role_claims",
+      "generated_reports",
+      "acceptance_cli",
+      "handoff_commands"
+    ]
+  },
+  "finding_ids": [
+    "TEF-01",
+    "TEF-02",
+    "TEF-03",
+    "TEF-04",
+    "TEF-05",
+    "TEF-06",
+    "TEF-07",
+    "TEF-08",
+    "TEF-09",
+    "TEF-10",
+    "TEF-11",
+    "TEF-12",
+    "TEF-13",
+    "TEF-14",
+    "TEF-15",
+    "TEF-16",
+    "TEF-17",
+    "TEF-18",
+    "TEF-19",
+    "TEF-20"
+  ],
+  "cli_contract": [
+    "preflight",
+    "verify-technical",
+    "plan",
+    "qualify",
+    "fit-model",
+    "controls",
+    "calibrate",
+    "run",
+    "status",
+    "stop",
+    "analyse",
+    "freeze",
+    "verify",
+    "report"
+  ],
+  "implementation_rule": "Reuse actual installed QuantBT; no replacement fills/cash engine; preserve original sources and all prior evidence.",
+  "testing_rule": "Before/after source regressions, independent math oracles, fault injection and genuine installed constructor/callback contracts; runtime engine acceptance remains measured on isolated CLI workers.",
+  "budgets": {
+    "technical_task_wall_seconds": 60,
+    "technical_suite_wall_seconds": 300,
+    "engine_runs_in_current_sandbox": 0,
+    "workers": 1,
+    "cpu_limit": 2,
+    "memory_gib": 4,
+    "pilot_engine_total_seconds": 1800,
+    "market_total": "requires explicit profile-backed budget file before CLI expansion"
+  },
+  "completion_dimensions": [
+    "code_implemented",
+    "technical_tests_passed",
+    "runtime_qualified",
+    "economic_evaluated"
+  ],
+  "do_not_conflate": "Code/test completion is distinct from market execution and proof of edge. All phases must report actual status and next_actions."
+}

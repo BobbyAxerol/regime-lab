@@ -1,0 +1,416 @@
+{
+  "schema": "regime_lab.fup01_route_matrix.v1",
+  "phase": "FUP-01",
+  "study_id": "corrective_mode4_v3",
+  "rule": "route decisions come from capability and schema before any outcome; a cell that cannot preserve alpha semantics is BLOCKED_CAPABILITY with the exact missing command, never silently rerouted; a cell with no discovery run carries null metrics and a reason, never a zero",
+  "status_vocabulary": [
+    "QUALIFIED_FAST",
+    "QUALIFIED_EVENT",
+    "BLOCKED_CAPABILITY",
+    "INSUFFICIENT_DATA"
+  ],
+  "sources": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+      "sha256": "6b2ff015fa613cb72f6572fc20d394818dc2c4144c277eca51f5214d03e613e0"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-04/cell_coverage.json",
+      "sha256": "fadeef2554a9e79f01aa1f441113c79d224c5427fa64be6825dce986a400cd57"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json",
+      "sha256": "b67adbc7c602fa51c14af0fd7c38ab0ea67c8abd9ce8a2cdfe90c9328ee7e707"
+    }
+  ],
+  "counts": {
+    "QUALIFIED_FAST": 5,
+    "QUALIFIED_EVENT": 15,
+    "BLOCKED_CAPABILITY": 0,
+    "INSUFFICIENT_DATA": 0
+  },
+  "cells": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "registered_route": "endpoint",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/0",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "registered_route": "endpoint",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/1",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "registered_route": "endpoint",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/2",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "registered_route": "endpoint",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/3",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "registered_route": "endpoint",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "reason": "paired_discovery_registration.json registered A-SC/BTCUSDT on the endpoint route; the RF-04.1 endpoint run returned one objective for every sampled candidate and the account exposed no per-fill ledger, so RF-04.6 runs A-SC on the RF-02-qualified event route ('public Mode 4 signal route + event route both ran') and keeps the endpoint result as the registered route deviation",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/4",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/5",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/6",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/7",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/8",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "reason": "the RF-02 route matrix qualifies A-HMA on the native-event route: protection orders projected and fills returned by the engine",
+      "source": {
+        "kind": "committed_rf04_cell",
+        "artifact": "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+        "pointer": "#/cells/9",
+        "run_status": "RUN_VALID"
+      },
+      "metrics": null,
+      "metrics_reason": "route artifact only; the executed RF-04 account metrics live in paired_discovery_full.json and are not restated or zero-filled here",
+      "discovery_run": "RUN_VALID"
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: AMEND_PROTECTION reaches the engine on the tracked protection id at the next-bar effective phase, and CANCEL/REDUCE/reported fills were observed as engine order events",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-VWAP",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: AMEND_PROTECTION reaches the engine on the tracked protection id at the next-bar effective phase, and CANCEL/REDUCE/reported fills were observed as engine order events",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-VWAP",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: AMEND_PROTECTION reaches the engine on the tracked protection id at the next-bar effective phase, and CANCEL/REDUCE/reported fills were observed as engine order events",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-VWAP",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: AMEND_PROTECTION reaches the engine on the tracked protection id at the next-bar effective phase, and CANCEL/REDUCE/reported fills were observed as engine order events",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-VWAP",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: AMEND_PROTECTION reaches the engine on the tracked protection id at the next-bar effective phase, and CANCEL/REDUCE/reported fills were observed as engine order events",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-VWAP",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: the ordered ladder emits one reduce-only LIMIT per rung, partial fills reach the adapter as REDUCE, the remaining quantity reaches zero on the final rung and each partial pays the one-way fee",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-HASH",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: the ordered ladder emits one reduce-only LIMIT per rung, partial fills reach the adapter as REDUCE, the remaining quantity reaches zero on the final rung and each partial pays the one-way fee",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-HASH",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: the ordered ladder emits one reduce-only LIMIT per rung, partial fills reach the adapter as REDUCE, the remaining quantity reaches zero on the final rung and each partial pays the one-way fee",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-HASH",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: the ordered ladder emits one reduce-only LIMIT per rung, partial fills reach the adapter as REDUCE, the remaining quantity reaches zero on the final rung and each partial pays the one-way fee",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-HASH",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "registered_route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "reason": "QUALIFIED_EVENT: the ordered ladder emits one reduce-only LIMIT per rung, partial fills reach the adapter as REDUCE, the remaining quantity reaches zero on the final rung and each partial pays the one-way fee",
+      "source": {
+        "kind": "fup01_native_event_capability",
+        "artifact": "evidence/corrective_mode4_v3/FUP-01/native_event_capability.json",
+        "pointer": "#/alphas/A-HASH",
+        "run_status": "EVALUATED"
+      },
+      "metrics": null,
+      "metrics_reason": "no paired discovery run exists on this cell in any committed artifact; metrics are null and are never replaced with a zero or an estimate",
+      "discovery_run": "NOT_RUN"
+    }
+  ],
+  "lab_run_id": "FUP-01",
+  "written_at_utc": "2026-09-12T03:00:48.578161+00:00"
+}

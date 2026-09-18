@@ -1,0 +1,21 @@
+{
+  "schema": "regime_lab.model_response_scope_decision.v1",
+  "generated_at_utc": "2026-09-11T17:17:10.350296+00:00",
+  "decision": "the primary timing contrast M4_REGIME - M4_CAL depends on the regime-model tape, not on the response/bank layer",
+  "scoped_to_rf05": [
+    "A09/E_RESPONSE_V2",
+    "A12 response support",
+    "A13 bank specialists",
+    "G12 lifecycle log",
+    "G13 parity artifact",
+    "G14 runner wiring"
+  ],
+  "not_scoped_out": [
+    "G10 model ladder/inner-only scaler/common-coordinate mapping (A14)",
+    "G11 QuantBT positive control"
+  ],
+  "rule": "these model/positive-control gaps must be closed before any RF-04 result is interpreted as treatment strength",
+  "lab_run_id": "pre-RF04-clearing",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T17:17:10.354563+00:00"
+}

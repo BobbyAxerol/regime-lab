@@ -1,0 +1,12 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.os_isolation.v1",
+  "available": false,
+  "exit_code": 1,
+  "checks": {},
+  "stderr": "bwrap: Creating new namespace failed: Operation not permitted\n",
+  "engine_permitted_by_isolation_alone": false,
+  "limits": "No writes attempted against protected sources. Namespace availability alone does not qualify economic execution."
+}

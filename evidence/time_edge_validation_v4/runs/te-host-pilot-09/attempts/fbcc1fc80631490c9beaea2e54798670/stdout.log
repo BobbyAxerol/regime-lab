@@ -1,0 +1,36 @@
+{
+  "status": "SELECTED_AUDIT_PASS",
+  "checks": {
+    "two_evaluated_accounts": true,
+    "equity_parity": true,
+    "fill_parity": true,
+    "nonvacuous_fills": true,
+    "raw_selected_sharpe_parity": true
+  },
+  "denominator": 5,
+  "cold_marks": {
+    "path": "evidence/time_edge_validation_v4/runs/te-host-pilot-09/tasks/f0918f1701b790084b8b27d12df24640ed24d58178dafecfa93dc5cf6d2f0e42/cold-audit/engine_marks.parquet",
+    "sha256": "82c3ce4b213bace6cd48e6a3524ac0b8d3889b2bc2f26672474e913dd8f90a3e"
+  },
+  "prepared_marks": {
+    "path": "evidence/time_edge_validation_v4/runs/te-host-pilot-09/tasks/f0918f1701b790084b8b27d12df24640ed24d58178dafecfa93dc5cf6d2f0e42/prepared-audit/engine_marks.parquet",
+    "sha256": "82c3ce4b213bace6cd48e6a3524ac0b8d3889b2bc2f26672474e913dd8f90a3e"
+  },
+  "maximum_equity_error": 0.0,
+  "raw_sharpe": 3.0409222105250384,
+  "selected_raw_sharpe": 3.0409222105250384,
+  "fill_count": 65,
+  "cold_wall_seconds": 55.45908723399043,
+  "prepared_wall_seconds": 55.02071083243936,
+  "cold_callback_count": 259200,
+  "prepared_callback_count": 259200,
+  "lab_run_id": "te-host-pilot-09",
+  "source_identity": "c65a8ecfc6a8289550efbabe844bafab31ced5fb7239c5ed6b5ed6c2555ca1f5",
+  "task_id": "A-SC-BTC-selected-audit",
+  "measured_wall_seconds": 115.6394719388336,
+  "peak_rss_kib": 1265112,
+  "cpu_seconds": 122.0643,
+  "affinity_cpus": 2,
+  "alpha_id": "A-SC",
+  "cell_id": "A-SC/BTCUSDT"
+}

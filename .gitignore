@@ -31,3 +31,37 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ipynb_checkpoints/
+
+# Numba JIT caches inside the lab (regenerable, machine-specific)
+numba_cache/
+
+
+# ---------------------------------------------------------------------------
+# KHÔNG commit: market-slice parquet do runner ghi trong từng run
+# (evidence/**/runs/*/tasks/*/raw-*/observable_market.parquet, mỗi file >100MB).
+# Đây là bản sao byte của snapshot đã có read-lock; GitHub từ chối file >100MB.
+# Giữ file trên disk local, giữ manifest/receipt JSON (có sha256) trong git.
+# ---------------------------------------------------------------------------
+evidence/**/observable_market.parquet
+
+# ---------------------------------------------------------------------------
+# KHÔNG commit: mọi file dữ liệu nhị phân (parquet/arrow/feather/HDF5/pickle/
+# numpy/model binaries) ở bất cứ đâu trong repo. Lý do: GitHub từ chối file
+# >100MB và dữ liệu lớn làm phình repo; manifest JSON (có sha256) + receipt +
+# ledger sqlite vẫn ở trong git làm bằng chứng. File đã track trước đây không
+# bị ảnh hưởng. Trường hợp ngoại lệ thật sự cần: git add -f <file>.
+# ---------------------------------------------------------------------------
+*.parquet
+*.arrow
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.npy
+*.npz
+*.bin
+*.onnx
+*.pt
+*.pth
+*.ckpt

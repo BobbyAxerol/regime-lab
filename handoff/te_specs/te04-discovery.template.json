@@ -1,0 +1,39 @@
+{
+  "inputs": {
+    "runtime_acceptance": "REPLACE_WITH_MEASURED_RUNTIME_ACCEPTANCE",
+    "emissions": "REPLACE_WITH_EMISSIONS_RESULT_JSON",
+    "profile": "REPLACE_WITH_TRAINING_ROUTE_PROFILE_JSON",
+    "threshold": "REPLACE_WITH_FROZEN_TRUE_PREFILL_THRESHOLD_JSON",
+    "BTCUSDT": "evidence/time_edge_validation_v4/plans/te-host-pilot-01/market-BTCUSDT.json",
+    "ETHUSDT": "evidence/time_edge_validation_v4/plans/te-host-pilot-01/market-ETHUSDT.json",
+    "SOLUSDT": "evidence/time_edge_validation_v4/plans/te-host-pilot-01/market-SOLUSDT.json",
+    "BNBUSDT": "evidence/time_edge_validation_v4/plans/te-host-pilot-01/market-BNBUSDT.json",
+    "DOGEUSDT": "evidence/time_edge_validation_v4/plans/te-host-pilot-01/market-DOGEUSDT.json"
+  },
+  "runtime_acceptance": "runtime_acceptance",
+  "emissions": "emissions",
+  "profile": "profile",
+  "threshold": "threshold",
+  "cells": [
+    "A-SC/BTCUSDT",
+    "A-SC/ETHUSDT",
+    "A-SC/SOLUSDT",
+    "A-SC/BNBUSDT",
+    "A-SC/DOGEUSDT",
+    "A-HMA/BTCUSDT",
+    "A-HMA/ETHUSDT",
+    "A-HMA/SOLUSDT",
+    "A-HMA/BNBUSDT",
+    "A-HMA/DOGEUSDT",
+    "A-VWAP/BTCUSDT",
+    "A-VWAP/ETHUSDT",
+    "A-VWAP/SOLUSDT",
+    "A-VWAP/BNBUSDT",
+    "A-VWAP/DOGEUSDT",
+    "A-HASH/BTCUSDT",
+    "A-HASH/ETHUSDT",
+    "A-HASH/SOLUSDT",
+    "A-HASH/BNBUSDT",
+    "A-HASH/DOGEUSDT"
+  ]
+}

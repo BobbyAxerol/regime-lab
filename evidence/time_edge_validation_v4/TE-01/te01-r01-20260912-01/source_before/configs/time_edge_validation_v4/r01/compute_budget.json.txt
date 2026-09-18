@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.compute_budget.te01.v1",
+  "workers": 1,
+  "cpu_limit": 2,
+  "working_memory_gib": 4,
+  "new_evidence_disk_gib": 2,
+  "phase_te01": {
+    "total_wall_seconds": 900,
+    "individual_task_wall_seconds": 60,
+    "engine_runs": 0,
+    "optimizer_runs": 0,
+    "raw_data_read": "streamed hash and metadata only; no market simulation"
+  },
+  "tier_caps_seconds": {
+    "T0": 60,
+    "T1": 120,
+    "T2": 600,
+    "T3": 900
+  },
+  "future_phase_pilot_total_seconds": {
+    "TE-02": 1800,
+    "TE-03": 1800
+  },
+  "future_market_total": "UNALLOCATED_UNTIL_TE02_PROFILE_AND_FUP02_HANDOFF",
+  "allocation_status": "TE01_ONLY_ACTIVE",
+  "count_spend": [
+    "completed",
+    "failed",
+    "pruned",
+    "timed_out",
+    "interrupted",
+    "retries",
+    "model_fits",
+    "audit_flush",
+    "cold_compile"
+  ],
+  "measure": [
+    "wall",
+    "process_cpu",
+    "peak_rss",
+    "candidate_window_bars",
+    "actual_bar_visits",
+    "unique_evaluations",
+    "cache_hits",
+    "requested_and_resolved_backend",
+    "audit_bytes"
+  ],
+  "resume_key": [
+    "code_sha256",
+    "engine_wheel_sha256",
+    "alpha_schema_sha256",
+    "model_tape_sha256",
+    "data_sha256",
+    "clock",
+    "economics",
+    "seed",
+    "search_order",
+    "cutoff",
+    "budget_revision"
+  ],
+  "remaining": "total allocated minus all prior attempts; a new invocation never resets study spend",
+  "timeouts": "only own child process group; never send signals to OpenCode/FUP-02",
+  "fup02_concurrency": "no concurrent new engine/model market jobs until final FUP handoff; T0 reading/contracts tests only",
+  "reuse": "cache key must include cutoff/warmup/data/engine/alpha/metric schema; disk cache hits not counted as newly simulated bars",
+  "profiler_required_before_scale": true,
+  "no_automatic_hours_extension": true
+}

@@ -1,0 +1,794 @@
+{
+  "schema": "regime_lab.fup02_cell_coverage.v1",
+  "phase": "FUP-02",
+  "study_id": "corrective_mode4_v3",
+  "status": "FUP02_COVERAGE_PARTIAL_9_EXECUTED",
+  "status_vocabulary": [
+    "RUN_VALID",
+    "RUN_NOT_EVALUABLE",
+    "BUDGET_STOPPED",
+    "NOT_RUN_BUDGET",
+    "FAILED",
+    "INSUFFICIENT_DATA",
+    "BLOCKED_CAPABILITY",
+    "NOT_RUN"
+  ],
+  "rule": "one row per planned primary cell (4 alphas x 5 symbols); the route is merged from FUP-01/route_matrix.json and the run result from FUP-02/paired_discovery_fullwindow.json. A non-executed or non-complete cell carries null metrics with a reason, never a zero",
+  "sources": [
+    {
+      "artifact": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json",
+      "sha256": "f7c39b6b19115fc8409998c7f03be94a189920b69adf192ea51f97fdf0447715"
+    },
+    {
+      "artifact": "evidence/corrective_mode4_v3/FUP-01/route_matrix.json",
+      "sha256": "375190802342f8a27cc066a7b6b6c26ad35193a90810a3216d818068144c444b"
+    }
+  ],
+  "registered_cohort": {
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "data": "server_core_v1, development 2021-01-01..2023-12-31"
+  },
+  "route_matrix_ref": "evidence/corrective_mode4_v3/FUP-01/route_matrix.json",
+  "counts": {
+    "RUN_VALID": 6,
+    "RUN_NOT_EVALUABLE": 0,
+    "BUDGET_STOPPED": 1,
+    "NOT_RUN_BUDGET": 11,
+    "FAILED": 2,
+    "INSUFFICIENT_DATA": 0,
+    "BLOCKED_CAPABILITY": 0,
+    "NOT_RUN": 0,
+    "planned_cells": 20,
+    "total_classified": 20
+  },
+  "cells": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-SC/BTCUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-SC/BTCUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/0",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/0",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-SC/ETHUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-SC/ETHUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/1",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/1",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-SC/SOLUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-SC/SOLUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/2",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/2",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-SC/BNBUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-SC/BNBUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/3",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/3",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_FAST",
+      "route_role": "FIDELITY_ROUTE",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-SC/DOGEUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-SC/DOGEUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/4",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/4",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 19106.523505432844,
+          "total_return_pct": -4.467382472835779,
+          "sharpe": -0.3301757300551092,
+          "num_trades": 364,
+          "max_drawdown_pct": 10.348388587988062,
+          "fill_count": 364,
+          "wall_seconds": 373.959
+        },
+        "M4_REGIME": {
+          "equity_last": 20688.769505556025,
+          "total_return_pct": 3.4438475277801306,
+          "sharpe": 0.3160578901129991,
+          "num_trades": 289,
+          "max_drawdown_pct": 3.573133972450504,
+          "fill_count": 289,
+          "wall_seconds": 549.096
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/5",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/5",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 19943.11213830243,
+          "total_return_pct": -0.2844393084878494,
+          "sharpe": 0.005707467553193123,
+          "num_trades": 398,
+          "max_drawdown_pct": 10.328538810595502,
+          "fill_count": 398,
+          "wall_seconds": 369.844
+        },
+        "M4_REGIME": {
+          "equity_last": 18350.689192494938,
+          "total_return_pct": -8.24655403752531,
+          "sharpe": -0.49357023061475647,
+          "num_trades": 482,
+          "max_drawdown_pct": 10.28202565387088,
+          "fill_count": 482,
+          "wall_seconds": 551.398
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/6",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/6",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "coverage_status": "FAILED",
+      "reason": "M4_CAL: one or more folds failed; M4_REGIME: one or more folds failed",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "FAILED",
+        "M4_REGIME": "FAILED"
+      },
+      "completed_folds": {
+        "M4_CAL": 6,
+        "M4_REGIME": 9
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/7",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/7",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 19068.049583049866,
+          "total_return_pct": -4.659752084750668,
+          "sharpe": -0.3374597581125095,
+          "num_trades": 313,
+          "max_drawdown_pct": 11.192514618553682,
+          "fill_count": 313,
+          "wall_seconds": 354.421
+        },
+        "M4_REGIME": {
+          "equity_last": 23628.372139698076,
+          "total_return_pct": 18.141860698490376,
+          "sharpe": 1.2243077931671906,
+          "num_trades": 382,
+          "max_drawdown_pct": 3.4179828664949916,
+          "fill_count": 382,
+          "wall_seconds": 527.723
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/8",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/8",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "REGISTERED",
+      "coverage_status": "FAILED",
+      "reason": "M4_CAL: one or more folds failed; M4_REGIME: one or more folds failed",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "FAILED",
+        "M4_REGIME": "FAILED"
+      },
+      "completed_folds": {
+        "M4_CAL": 6,
+        "M4_REGIME": 9
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/9",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/9",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-VWAP/BTCUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-VWAP/BTCUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/10",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/10",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-VWAP/ETHUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-VWAP/ETHUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/11",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/11",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-VWAP/SOLUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-VWAP/SOLUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/12",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/12",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-VWAP/BNBUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-VWAP/BNBUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/13",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/13",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-VWAP/DOGEUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-VWAP/DOGEUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/14",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/14",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 17121.828819459763,
+          "total_return_pct": -14.390855902701183,
+          "sharpe": -0.9249884317201627,
+          "num_trades": 412,
+          "max_drawdown_pct": 19.871189138716264,
+          "fill_count": 412,
+          "wall_seconds": 1008.077
+        },
+        "M4_REGIME": {
+          "equity_last": 19202.839863957663,
+          "total_return_pct": -3.985800680211682,
+          "sharpe": -0.22481631045119066,
+          "num_trades": 412,
+          "max_drawdown_pct": 15.063364114962264,
+          "fill_count": 412,
+          "wall_seconds": 1578.319
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/15",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/15",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 25501.229130227584,
+          "total_return_pct": 27.506145651137913,
+          "sharpe": 1.4663927131308765,
+          "num_trades": 253,
+          "max_drawdown_pct": 6.078898519688774,
+          "fill_count": 253,
+          "wall_seconds": 1091.284
+        },
+        "M4_REGIME": {
+          "equity_last": 20965.498101284902,
+          "total_return_pct": 4.827490506424503,
+          "sharpe": 0.308459361913117,
+          "num_trades": 579,
+          "max_drawdown_pct": 6.758822338223258,
+          "fill_count": 579,
+          "wall_seconds": 1702.926
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/16",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/16",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "RUN_VALID",
+      "reason": "both arms completed the full cutoff list on the qualified event route and the paired contrast is VALID; economic status NOT_EVALUATED (no inference here)",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "COMPLETE",
+        "M4_REGIME": "COMPLETE"
+      },
+      "completed_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": {
+        "M4_CAL": {
+          "equity_last": 21696.728082128247,
+          "total_return_pct": 8.483640410641247,
+          "sharpe": 0.36606944290112514,
+          "num_trades": 1694,
+          "max_drawdown_pct": 10.15106032438476,
+          "fill_count": 1694,
+          "wall_seconds": 1061.93
+        },
+        "M4_REGIME": {
+          "equity_last": 26596.823174230805,
+          "total_return_pct": 32.98411587115402,
+          "sharpe": 1.4293691637494441,
+          "num_trades": 1293,
+          "max_drawdown_pct": 7.446481178902793,
+          "fill_count": 1293,
+          "wall_seconds": 1526.872
+        }
+      },
+      "account_metrics_reason": null,
+      "contrast_status": "VALID",
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/17",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/17",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "BUDGET_STOPPED",
+      "reason": "M4_CAL: BudgetExceeded: wall budget of 45.6s exceeded",
+      "executed": true,
+      "arm_status": {
+        "M4_CAL": "BUDGET_STOPPED",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 6,
+        "M4_REGIME": 6
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/18",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/18",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "route": "event",
+      "route_status": "QUALIFIED_EVENT",
+      "route_role": "QUALIFIED_BY_FUP01",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "neither arm was reached inside the registered invocation budget: the invocation budget of 3500s was exhausted before A-HASH/DOGEUSDT:M4_CAL started; the invocation budget of 3500s was exhausted before A-HASH/DOGEUSDT:M4_REGIME started",
+      "executed": false,
+      "arm_status": {
+        "M4_CAL": "NOT_RUN_BUDGET",
+        "M4_REGIME": "NOT_RUN_BUDGET"
+      },
+      "completed_folds": {
+        "M4_CAL": 0,
+        "M4_REGIME": 0
+      },
+      "planned_folds": {
+        "M4_CAL": 7,
+        "M4_REGIME": 11
+      },
+      "account_metrics": null,
+      "account_metrics_reason": "no arm completed; account metrics are null and are never replaced with a zero or an estimate",
+      "contrast_status": null,
+      "evidence_ref": "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/19",
+      "evidence_refs": [
+        "evidence/corrective_mode4_v3/FUP-02/paired_discovery_fullwindow.json#/cells/19",
+        "evidence/corrective_mode4_v3/FUP-01/route_matrix.json"
+      ]
+    }
+  ],
+  "lab_run_id": "FUP-02",
+  "written_at_utc": "2026-09-12T08:14:28.520656+00:00"
+}

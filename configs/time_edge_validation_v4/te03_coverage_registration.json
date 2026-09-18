@@ -1,0 +1,62 @@
+{
+  "schema": "regime_lab.te03_coverage_registration.v1",
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "coverage_id": "TE03-COVERAGE-REGISTERED-01",
+  "lab_run_id": "TE03-COVERAGE-REGISTERED-01",
+  "registered_at_utc": "2026-09-12T18:34:59+00:00",
+  "status": "REGISTERED_BEFORE_COVERAGE_EXTENSION",
+  "scope": "TE-03 candidate-utility targets and model vintages only; no engine economic look",
+  "target_series": {
+    "alpha_id": "A-SC",
+    "cell_id": "A-SC/BTCUSDT",
+    "start": "2020-12-02T00:00:00Z",
+    "end_exclusive": "2022-01-01T00:00:00Z",
+    "step_days": 28,
+    "horizon_days": 28,
+    "origins": 14,
+    "last_origin": "2021-12-01T00:00:00Z",
+    "artifact": {
+      "path": "evidence/time_edge_validation_v4/host-targets-01.json",
+      "sha256": "980f3bf0028877dbcba597f85e67e5d8b5d9d3807133026e45c30a3ba5d8ffec"
+    },
+    "candidate_bank": {
+      "path": "evidence/time_edge_validation_v4/host-candidate-bank-01.json",
+      "sha256": "962364b701e11ab8ee902870d4707b7d795c98b51e9df357d97c1a443a5560b4"
+    }
+  },
+  "model_series": {
+    "start": "2021-02-01T00:00:00Z",
+    "end_exclusive": "2022-01-01T00:00:00Z",
+    "step_days": 28,
+    "vintages": 12,
+    "last_cutoff": "2021-12-06T00:00:00Z",
+    "artifact": {
+      "path": "evidence/time_edge_validation_v4/host-model-results-01.json",
+      "sha256": "e97f33a7551c34288043e3a1eee8e28d001624f924374b6ce723ec035b8f41d5"
+    }
+  },
+  "support": {
+    "floor_field": "minimum_informative_candidate_episodes",
+    "floor_value": 20,
+    "floor_source": "configs/time_edge_validation_v4/r01/statistical_analysis_plan.json",
+    "prior_planned_outer_targets": 11,
+    "prior_evaluable_outer_targets": 8,
+    "prior_status": "INCONCLUSIVE_SUPPORT",
+    "prior_information_artifact": {
+      "path": "evidence/time_edge_validation_v4/te03/information_value.json",
+      "sha256": "482ca5bc0836a2451748988edd2af2dee928a142cc6fbde1c9405361a4242173"
+    },
+    "reason": "the registered support floor of 20 informative candidate episodes is not met by 8 evaluable outer targets; a coverage extension is required rather than moving any origin, cell or train window"
+  },
+  "extension_rule": "a spec whose target_series.end or model_series.end exceeds this registered end_exclusive must be planned with --coverage pointing at a regime_lab.te_coverage_revision.v1 artifact; the revision must restate this prior coverage, keep the 28-day grid and 28-day target horizon, extend the target series contiguously from last_origin + 28 days, recompute the model series from the registered model start, and leave alpha/cell/bank/economics unchanged",
+  "prohibited": [
+    "moving an existing origin, cell or train window",
+    "changing the 28-day grid or the 28-day target horizon",
+    "changing alpha, cell, candidate bank or economics",
+    "using later data for an earlier origin",
+    "zero-filling an unavailable or budget-stopped target"
+  ],
+  "engine_runs": 0,
+  "economic_conclusion": "NOT_EVALUABLE"
+}

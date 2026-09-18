@@ -1,0 +1,161 @@
+{
+  "scope": "uploaded-source synthetic/reference probes, NOT market replay",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "results": [
+    {
+      "id": "P01_fee_binding",
+      "ran": true,
+      "result": {
+        "registered_one_way": 0.0004,
+        "actual_rates": [
+          0.0002,
+          0.0002
+        ],
+        "fills": [
+          {
+            "bar_index": 1,
+            "sequence": 0,
+            "side": 1,
+            "qty": 20.0,
+            "price": 100.0,
+            "fee": 0.4,
+            "reason": "entry"
+          },
+          {
+            "bar_index": 9,
+            "sequence": 99,
+            "side": -1,
+            "qty": 20.0,
+            "price": 100.0,
+            "fee": 0.4,
+            "reason": "final_close"
+          }
+        ],
+        "final_equity": 19999.199999999997,
+        "confirmed_half_fee": true
+      }
+    },
+    {
+      "id": "P02_initial_future_params",
+      "ran": true,
+      "result": {
+        "requested_at_bar": 100,
+        "first_active_at": 0,
+        "pre_request_bars_using_future_params": 100,
+        "first_fills": [],
+        "confirmed_backdated": true
+      }
+    },
+    {
+      "id": "P03_namespace_and_invalid_emission",
+      "ran": true,
+      "result": {
+        "chosen": [
+          "2024-01-02T00:00:00+00:00"
+        ],
+        "semantic_state_changed": false,
+        "selected_decision_eligible": false,
+        "confirmed_namespace_trigger": true
+      }
+    },
+    {
+      "id": "P04_residual_context_collapse",
+      "ran": true,
+      "result": {
+        "true_contexts": [
+          [
+            -2.0
+          ],
+          [
+            2.0
+          ]
+        ],
+        "response_features": [
+          [
+            0.0
+          ],
+          [
+            0.0
+          ]
+        ],
+        "distance_used_by_response": 0.0,
+        "confirmed_distinct_states_collapsed": true
+      }
+    },
+    {
+      "id": "P05_hma_categorical_alias",
+      "ran": true,
+      "result": {
+        "declared_choices": [
+          "Half Distance Zone",
+          "Zone Distance",
+          "ATR"
+        ],
+        "adapter_mapping": {
+          "One Distance Zone": 0,
+          "Half Distance Zone": 1,
+          "Last High/Low": 2,
+          "ATR Only": 3
+        },
+        "effective_modes": {
+          "Half Distance Zone": 1,
+          "Zone Distance": 1,
+          "ATR": 1
+        },
+        "all_search_choices_same": true
+      }
+    },
+    {
+      "id": "P06_unconverged_candidate_accepted",
+      "ran": true,
+      "result": {
+        "run_converged": false,
+        "unmapped_intents": 3,
+        "evaluation_status": "EVALUATED",
+        "window": {
+          "net_return": 0.00055,
+          "max_drawdown": 0.0,
+          "sharpe_per_window": null,
+          "fills": 0,
+          "entries": 0,
+          "exposure": 0.0,
+          "mean_holding_bars": null,
+          "bars": 12,
+          "converged": false,
+          "passes": 4,
+          "unmapped_intents": 3
+        },
+        "accepted": true
+      }
+    },
+    {
+      "id": "P07_price_blind_convergence",
+      "ran": true,
+      "result": {
+        "applied_fill_price": 80.0,
+        "actual_engine_price": 120.0,
+        "matched_bar": 5,
+        "marked_converged": true,
+        "confirmed_price_blind_convergence": true
+      }
+    },
+    {
+      "id": "P08_episode_boundary_pnl",
+      "ran": true,
+      "result": {
+        "equity": [
+          20000.0,
+          20000.0,
+          19000.0,
+          19000.0
+        ],
+        "whole_loss": -1000.0,
+        "episode_reported_returns": {
+          "e0": 0.0,
+          "e1": 0.0
+        },
+        "lost_boundary_pnl": true
+      }
+    }
+  ]
+}

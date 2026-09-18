@@ -1,0 +1,594 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "lab_run_id": "fup02-stopped-20260912-01",
+  "phase_id": "FUP02_REVIEW",
+  "captured_at_utc": "2026-09-12T07:16:03.452951+00:00",
+  "checkpoint_at_utc": "2026-09-12T07:15:14.628918+00:00",
+  "first_run_at_utc": "2026-09-12T04:16:24.476038+00:00",
+  "checkpoint_status": "PARTIAL_BUDGET_STOPPED",
+  "elapsed_since_start_seconds": 10778.976913,
+  "closed_invocation_wall_seconds": 7936.3150000000005,
+  "stored_shard_wall_sum_seconds": 10426.389,
+  "do_not_sum_wall_measures": "invocation wall and shard rollups overlap; incomplete invocation is absent until finally; neither measures CPU",
+  "invocations": [
+    {
+      "invocation": 1,
+      "started_at_utc": "2026-09-12T04:16:24.481999+00:00",
+      "ended_at_utc": "2026-09-12T04:17:24.528147+00:00",
+      "wall_seconds": 60.046,
+      "budget_seconds": 60.0
+    },
+    {
+      "invocation": 2,
+      "started_at_utc": "2026-09-12T04:18:22.228146+00:00",
+      "ended_at_utc": "2026-09-12T04:32:57.993357+00:00",
+      "wall_seconds": 875.765,
+      "budget_seconds": 1800.0
+    },
+    {
+      "invocation": 3,
+      "started_at_utc": "2026-09-12T04:35:47.107897+00:00",
+      "ended_at_utc": "2026-09-12T05:34:07.213969+00:00",
+      "wall_seconds": 3500.106,
+      "budget_seconds": 3500.0
+    },
+    {
+      "invocation": 4,
+      "started_at_utc": "2026-09-12T05:34:10.056080+00:00",
+      "ended_at_utc": "2026-09-12T06:32:30.454284+00:00",
+      "wall_seconds": 3500.398,
+      "budget_seconds": 3500.0
+    }
+  ],
+  "open_attempts": [
+    {
+      "schema": "crypto_regime_lab.attempt.v1",
+      "attempt_id": "att-83051c5ed09f",
+      "lab_run_id": "FUP-02",
+      "study_id": "corrective_mode4_v3",
+      "operation": "FUP02.shard.A-HMA/BTCUSDT.M4_CAL",
+      "status": "STARTED",
+      "at_utc": "2026-09-12T04:17:46.596741+00:00",
+      "duration_s": null,
+      "detail": {}
+    },
+    {
+      "schema": "crypto_regime_lab.attempt.v1",
+      "attempt_id": "att-9679e95ca734",
+      "lab_run_id": "FUP-02",
+      "study_id": "corrective_mode4_v3",
+      "operation": "FUP02.shard.A-HASH/SOLUSDT.M4_CAL",
+      "status": "STARTED",
+      "at_utc": "2026-09-12T07:01:36.591174+00:00",
+      "duration_s": null,
+      "detail": {}
+    }
+  ],
+  "coverage": {
+    "NOT_RUN_BUDGET": 13,
+    "RUN_VALID": 5,
+    "FAILED": 2
+  },
+  "cells": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "status": "RUN_VALID",
+      "interval": "1h",
+      "arms": {
+        "M4_CAL": {
+          "status": "COMPLETE",
+          "scored": 7,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": 16.671
+        },
+        "M4_REGIME": {
+          "status": "COMPLETE",
+          "scored": 11,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": 23.406
+        }
+      }
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "status": "RUN_VALID",
+      "interval": "1h",
+      "arms": {
+        "M4_CAL": {
+          "status": "COMPLETE",
+          "scored": 7,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": 17.125
+        },
+        "M4_REGIME": {
+          "status": "COMPLETE",
+          "scored": 11,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": 22.741
+        }
+      }
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "status": "FAILED",
+      "interval": "1h",
+      "arms": {
+        "M4_CAL": {
+          "status": "FAILED",
+          "scored": 6,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "FAILED",
+          "scored": 9,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "status": "RUN_VALID",
+      "interval": "1h",
+      "arms": {
+        "M4_CAL": {
+          "status": "COMPLETE",
+          "scored": 7,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": 16.86
+        },
+        "M4_REGIME": {
+          "status": "COMPLETE",
+          "scored": 11,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": 22.696
+        }
+      }
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "status": "FAILED",
+      "interval": "1h",
+      "arms": {
+        "M4_CAL": {
+          "status": "FAILED",
+          "scored": 6,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "FAILED",
+          "scored": 9,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "status": "RUN_VALID",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "COMPLETE",
+          "scored": 7,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": 54.594
+        },
+        "M4_REGIME": {
+          "status": "COMPLETE",
+          "scored": 11,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": 62.859
+        }
+      }
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "status": "RUN_VALID",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "COMPLETE",
+          "scored": 7,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": 53.434
+        },
+        "M4_REGIME": {
+          "status": "COMPLETE",
+          "scored": 11,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": 66.538
+        }
+      }
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 6,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "status": "NOT_RUN_BUDGET",
+      "interval": "15min",
+      "arms": {
+        "M4_CAL": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 7,
+          "first_cutoff": "2021-01-01T00:00:00+00:00",
+          "account_wall_seconds": null
+        },
+        "M4_REGIME": {
+          "status": "NOT_RUN_BUDGET",
+          "scored": 0,
+          "planned": 11,
+          "first_cutoff": "2021-01-03T20:00:00+00:00",
+          "account_wall_seconds": null
+        }
+      }
+    }
+  ],
+  "cutoff_counts": {
+    "NOT_RUN": 228,
+    "SCORED": 126,
+    "ERROR": 6
+  },
+  "trial_ledger_rows": 4032,
+  "failed_cutoffs": [
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "arm": "M4_CAL",
+      "fold": 4,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=3312, timestamp=2022-11-10 00:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "arm": "M4_REGIME",
+      "fold": 4,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=18890, timestamp=2022-11-10 09:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "arm": "M4_REGIME",
+      "fold": 7,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=3113, timestamp=2022-11-09 21:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "arm": "M4_CAL",
+      "fold": 1,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=705, timestamp=2021-01-30 09:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "fold": 1,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=2641, timestamp=2021-01-30 09:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "arm": "M4_REGIME",
+      "fold": 3,
+      "reason": "NativeEventStrategyError: native-event strategy callback 'on_bar_close' failed at bar_index=439, timestamp=2021-05-19 19:00:00+00:00, strategy_id='EventAccountStrategy': ValueError: limit commands require price > 0"
+    }
+  ],
+  "registered_total_wall_seconds": 43200,
+  "claim_limits": [
+    "nested retrospective discovery on 2021-01-01..2023-12-31; no holdout and no live claim, contamination stays NESTED_RETROSPECTIVE",
+    "no paired bootstrap, decay panel or matched control is computed here; statistical status is NOT_EVALUATED for every contrast",
+    "the regime cutoff list comes from the committed BTCUSDT emission tape and is identical across symbols; per-symbol model tapes are not claimed",
+    "the registered trial budget is 32-64/cutoff; FUP-02 executes the low end (32), equal for both arms",
+    "a budget-stopped or non-run shard carries null metrics plus its exact reason"
+  ],
+  "regime_tape": {
+    "artifact": "configs/lab05_full_emission_tape.json",
+    "sha256": "bd344a1254dd29f475f2bcc6b3f5bb6cb5ffa378fd42b76f155ee7ff282fa290",
+    "symbol": "BTCUSDT",
+    "per_symbol": false,
+    "note": "the same committed BTCUSDT emission tape RF-03/RF-04 used; kept so the regime cutoff list is identical across cells and comparable with RF-04.6; per-symbol model tapes are not claimed here"
+  },
+  "source_identity": [
+    {
+      "path": "scripts/run_fup02.py",
+      "sha256": "92d2b6cbfbadd34b12f62de8900a56f428b40d1b6987f6c0b42267761102c859",
+      "same_as_te01_baseline": true
+    },
+    {
+      "path": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py",
+      "sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+      "same_as_te01_baseline": true
+    },
+    {
+      "path": "src/crypto_regime_lab/experiments/regime_schedule.py",
+      "sha256": "6ef43c991a1a0c80075e67c108c20b6199cf2346405f438c62e1ad9299823f22",
+      "same_as_te01_baseline": true
+    },
+    {
+      "path": "src/crypto_regime_lab/integration/event_account.py",
+      "sha256": "01114e9e55ec832c6c3d1bb9ab4baa2900794d8e1c6de23a5a58e0291e3b6af6",
+      "same_as_te01_baseline": true
+    }
+  ],
+  "source_checks": {
+    "fold_calls_whole_provider_lines": [
+      502
+    ],
+    "provider_deploys_account_lines": [
+      628
+    ],
+    "final_arm_deploys_again_lines": [
+      910
+    ],
+    "main_reads_registered_total_wall_cap_lines": [],
+    "scope": "AST/source call-path witnesses; not sampled runtime timings or proof of exact savings"
+  },
+  "process_visibility": "current tool sees only its own PID namespace; live OpenCode CPU/RSS/liveness unverified",
+  "recommendation": "PAUSE_NEW_FUP_SHARDS_AT_SAFE_CHECKPOINT_AND_REPAIR_TE02_IN_ISOLATED_LAB_COPY",
+  "dependency_correction": "final FUP intake is required for accepting final FUP artifacts, not for independent TE02 development on pinned lab-owned source",
+  "actions_taken": "read-only capture and review; no signals sent, no source/config/process changes to FUP",
+  "engine_runs": 0,
+  "audit_wall_seconds": 0.10678228083997965
+}

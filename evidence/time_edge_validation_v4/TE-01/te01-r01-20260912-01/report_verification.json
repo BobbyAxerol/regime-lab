@@ -1,0 +1,56 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "command": [
+    "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/time_edge_validation_v4/report_verification_cases.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml",
+    "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/TE-01/te01-r01-20260912-01/report_verification.xml",
+    "--basetemp",
+    "/root/bobby/pool_alpha/lab_regime_model_quantbt/.cache/te01/report-check"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4829439800232649,
+  "cases": [
+    {
+      "name": "test_report_measured_numbers_match_independent_artifact_fields",
+      "status": "PASS",
+      "seconds": 0.013
+    },
+    {
+      "name": "test_every_report_input_and_audit_manifest_hash_matches",
+      "status": "PASS",
+      "seconds": 0.075
+    },
+    {
+      "name": "test_all_findings_acceptance_ids_and_cell_arms_remain_visible",
+      "status": "PASS",
+      "seconds": 0.002
+    },
+    {
+      "name": "test_links_and_technical_definitions_are_present",
+      "status": "PASS",
+      "seconds": 0.003
+    },
+    {
+      "name": "test_no_market_or_full_phase_claim_is_created_by_registration",
+      "status": "PASS",
+      "seconds": 0.001
+    }
+  ],
+  "hashes": {
+    "report.md": "d7d2f88a84fccf1ea4e5a9610e5694ec7d10ad6807e0d906805d55a097c82dcf",
+    "report.json": "59a079f77c5a7af74434527d31f6ec0ab9b701d72ad73d6781dd0903898ed1cd",
+    "report_verification.log": "bba54d0d911e4f4b3ff7099be56f23a579126dd0cbb36d88eb246b10ef320d5b",
+    "report_verification.xml": "d4b20d4376d1d041f02bab123bb65dc703f35ae30a649c54d3f38988d63216f3"
+  },
+  "engine_runs": 0
+}

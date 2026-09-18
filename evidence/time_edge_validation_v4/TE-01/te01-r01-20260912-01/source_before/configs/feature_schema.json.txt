@@ -1,0 +1,661 @@
+{
+  "schema": "crypto_regime_lab.feature_schema.v1",
+  "snapshot_id": "server_core_v1",
+  "regime_observation_interval": "4h",
+  "groups": {
+    "G1": "direction and path shape",
+    "G2": "activity / active-flow proxies",
+    "G3": "leverage and crowding",
+    "G4": "liquidity and absorption",
+    "G5": "market coordination"
+  },
+  "specs": {
+    "g1_rv_6": {
+      "name": "g1_rv_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "realized volatility over 6 regime bars",
+      "caveat": ""
+    },
+    "g1_direction_6": {
+      "name": "g1_direction_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "sum(r)/sqrt(sum r^2): a direction descriptor",
+      "caveat": "not a t-statistic"
+    },
+    "g1_efficiency_6": {
+      "name": "g1_efficiency_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "|sum r| / sum|r|: separates directional from choppy volatility",
+      "caveat": ""
+    },
+    "g1_downside_ratio_6": {
+      "name": "g1_downside_ratio_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "share of realized variance from negative returns",
+      "caveat": "a variation ratio, not a crash probability"
+    },
+    "g2_taker_imbalance": {
+      "name": "g2_taker_imbalance",
+      "group": "G2",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "taker_buy_base_volume",
+        "volume"
+      ],
+      "description": "2*takerbuy/volume - 1 on the regime bar",
+      "caveat": "both sides of every trade exist; not net capital inflow"
+    },
+    "g2_log_activity_30": {
+      "name": "g2_log_activity_30",
+      "group": "G2",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "quote_volume"
+      ],
+      "description": "log(quote volume / trailing median)",
+      "caveat": ""
+    },
+    "g2_trade_count_30": {
+      "name": "g2_trade_count_30",
+      "group": "G2",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "number_of_trades"
+      ],
+      "description": "log(trade count / trailing median)",
+      "caveat": ""
+    },
+    "g3_dlog_oi": {
+      "name": "g3_dlog_oi",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "sum_open_interest"
+      ],
+      "description": "change in log open interest",
+      "caveat": "a rise is not evidence of new longs"
+    },
+    "g3_basis": {
+      "name": "g3_basis",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "close",
+        "spot_close"
+      ],
+      "description": "F/S - 1 on synchronised closes",
+      "caveat": "requires a spot series for the same symbol"
+    },
+    "g3_return_oi_interaction": {
+      "name": "g3_return_oi_interaction",
+      "group": "G3",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "close",
+        "sum_open_interest"
+      ],
+      "description": "one preregistered return x OI-change interaction",
+      "caveat": ""
+    },
+    "g4_spread_bps": {
+      "name": "g4_spread_bps",
+      "group": "G4",
+      "scope": "local",
+      "window": null,
+      "requires": [
+        "spread_bps"
+      ],
+      "description": "relative spread in basis points",
+      "caveat": "a missing snapshot is missing, never a zero spread"
+    },
+    "g4_log_amihud_30": {
+      "name": "g4_log_amihud_30",
+      "group": "G4",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "close",
+        "quote_volume"
+      ],
+      "description": "log of the rolling |r| / quote volume impact proxy",
+      "caveat": "a proxy, not a measured impact"
+    },
+    "g1_jump_concentration_6": {
+      "name": "g1_jump_concentration_6",
+      "group": "G1",
+      "scope": "local",
+      "window": 6,
+      "requires": [
+        "close"
+      ],
+      "description": "largest squared return as a share of window variance",
+      "caveat": ""
+    },
+    "g5_dispersion_6": {
+      "name": "g5_dispersion_6",
+      "group": "G5",
+      "scope": "market",
+      "window": 6,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "cross-sectional dispersion of the eligible universe",
+      "caveat": ""
+    },
+    "g5_breadth_6": {
+      "name": "g5_breadth_6",
+      "group": "G5",
+      "scope": "market",
+      "window": 6,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "share of the eligible universe with a positive trailing return",
+      "caveat": ""
+    },
+    "g5_factor_concentration_30": {
+      "name": "g5_factor_concentration_30",
+      "group": "G5",
+      "scope": "market",
+      "window": 30,
+      "requires": [
+        "market_returns"
+      ],
+      "description": "first-eigenvalue share of a trailing covariance",
+      "caveat": ""
+    },
+    "g5_residual_return_30": {
+      "name": "g5_residual_return_30",
+      "group": "G5",
+      "scope": "local",
+      "window": 30,
+      "requires": [
+        "close",
+        "market_returns"
+      ],
+      "description": "return residual to a beta fitted on a PAST window only",
+      "caveat": ""
+    }
+  },
+  "feature_tiers": {
+    "primary_core": [
+      "g1_rv_6",
+      "g1_direction_6",
+      "g1_efficiency_6",
+      "g2_taker_imbalance",
+      "g2_log_activity_30",
+      "g5_dispersion_6",
+      "g5_breadth_6",
+      "g5_residual_return_30"
+    ],
+    "derivatives_extension": [
+      "g3_dlog_oi",
+      "g3_return_oi_interaction",
+      "g3_basis"
+    ],
+    "liquidity_extension": [
+      "g4_spread_bps",
+      "g4_log_amihud_30"
+    ],
+    "registered_alternative": [
+      "g1_downside_ratio_6",
+      "g1_jump_concentration_6",
+      "g2_trade_count_30",
+      "g5_factor_concentration_30"
+    ]
+  },
+  "primary_core_features": [
+    "g1_rv_6",
+    "g1_direction_6",
+    "g1_efficiency_6",
+    "g2_taker_imbalance",
+    "g2_log_activity_30",
+    "g5_dispersion_6",
+    "g5_breadth_6",
+    "g5_residual_return_30"
+  ],
+  "primary_core_count": 8,
+  "scaler_active_features": [
+    "g1_direction_6",
+    "g1_downside_ratio_6",
+    "g1_efficiency_6",
+    "g1_jump_concentration_6",
+    "g1_rv_6",
+    "g2_log_activity_30",
+    "g2_taker_imbalance",
+    "g2_trade_count_30",
+    "g3_basis",
+    "g3_dlog_oi",
+    "g3_return_oi_interaction",
+    "g4_log_amihud_30",
+    "g5_breadth_6",
+    "g5_dispersion_6",
+    "g5_factor_concentration_30",
+    "g5_residual_return_30"
+  ],
+  "coverage_by_feature": {
+    "g1_rv_6": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 0.9995,
+        "BNBUSDT": 0.9996,
+        "DOGEUSDT": 0.9996
+      },
+      "covers_all_five": true
+    },
+    "g1_direction_6": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 0.9995,
+        "BNBUSDT": 0.9996,
+        "DOGEUSDT": 0.9996
+      },
+      "covers_all_five": true
+    },
+    "g1_efficiency_6": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 0.9995,
+        "BNBUSDT": 0.9996,
+        "DOGEUSDT": 0.9996
+      },
+      "covers_all_five": true
+    },
+    "g1_downside_ratio_6": {
+      "tier": "registered_alternative",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 0.9995,
+        "BNBUSDT": 0.9996,
+        "DOGEUSDT": 0.9996
+      },
+      "covers_all_five": true
+    },
+    "g2_taker_imbalance": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 1.0,
+        "ETHUSDT": 1.0,
+        "SOLUSDT": 1.0,
+        "BNBUSDT": 1.0,
+        "DOGEUSDT": 1.0
+      },
+      "covers_all_five": true
+    },
+    "g2_log_activity_30": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.998,
+        "ETHUSDT": 0.998,
+        "SOLUSDT": 0.9978,
+        "BNBUSDT": 0.998,
+        "DOGEUSDT": 0.9978
+      },
+      "covers_all_five": true
+    },
+    "g2_trade_count_30": {
+      "tier": "registered_alternative",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.998,
+        "ETHUSDT": 0.998,
+        "SOLUSDT": 0.9978,
+        "BNBUSDT": 0.998,
+        "DOGEUSDT": 0.9978
+      },
+      "covers_all_five": true
+    },
+    "g3_dlog_oi": {
+      "tier": "derivatives_extension",
+      "symbols_with_any_data": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.8984,
+        "ETHUSDT": 0.7118,
+        "SOLUSDT": 0.0,
+        "BNBUSDT": 0.0,
+        "DOGEUSDT": 0.0
+      },
+      "covers_all_five": false
+    },
+    "g3_basis": {
+      "tier": "derivatives_extension",
+      "symbols_with_any_data": [
+        "BTCUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 1.0,
+        "ETHUSDT": 0.0,
+        "SOLUSDT": 0.0,
+        "BNBUSDT": 0.0,
+        "DOGEUSDT": 0.0
+      },
+      "covers_all_five": false
+    },
+    "g3_return_oi_interaction": {
+      "tier": "derivatives_extension",
+      "symbols_with_any_data": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.8984,
+        "ETHUSDT": 0.7118,
+        "SOLUSDT": 0.0,
+        "BNBUSDT": 0.0,
+        "DOGEUSDT": 0.0
+      },
+      "covers_all_five": false
+    },
+    "g4_spread_bps": {
+      "tier": "liquidity_extension",
+      "symbols_with_any_data": [
+        "BTCUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.0087,
+        "ETHUSDT": 0.0,
+        "SOLUSDT": 0.0,
+        "BNBUSDT": 0.0,
+        "DOGEUSDT": 0.0
+      },
+      "covers_all_five": false
+    },
+    "g4_log_amihud_30": {
+      "tier": "liquidity_extension",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9979,
+        "ETHUSDT": 0.9979,
+        "SOLUSDT": 0.9977,
+        "BNBUSDT": 0.9979,
+        "DOGEUSDT": 0.9978
+      },
+      "covers_all_five": true
+    },
+    "g1_jump_concentration_6": {
+      "tier": "registered_alternative",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 0.9995,
+        "BNBUSDT": 0.9996,
+        "DOGEUSDT": 0.9996
+      },
+      "covers_all_five": true
+    },
+    "g5_dispersion_6": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 1.0,
+        "BNBUSDT": 1.0,
+        "DOGEUSDT": 1.0
+      },
+      "covers_all_five": true
+    },
+    "g5_breadth_6": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9996,
+        "ETHUSDT": 0.9996,
+        "SOLUSDT": 1.0,
+        "BNBUSDT": 1.0,
+        "DOGEUSDT": 1.0
+      },
+      "covers_all_five": true
+    },
+    "g5_factor_concentration_30": {
+      "tier": "registered_alternative",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.8923,
+        "ETHUSDT": 0.8923,
+        "SOLUSDT": 0.9977,
+        "BNBUSDT": 0.9074,
+        "DOGEUSDT": 0.9684
+      },
+      "covers_all_five": true
+    },
+    "g5_residual_return_30": {
+      "tier": "primary_core",
+      "symbols_with_any_data": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "non_null_fraction_by_symbol": {
+        "BTCUSDT": 0.9979,
+        "ETHUSDT": 0.9979,
+        "SOLUSDT": 0.9977,
+        "BNBUSDT": 0.9979,
+        "DOGEUSDT": 0.9978
+      },
+      "covers_all_five": true
+    }
+  },
+  "complexity_budget": "guide 6.4 starts at roughly 8-12 active features",
+  "budget_respected": true,
+  "tier_rule": "only the primary_core tier covers all five symbols and may enter the regime model. G3 needs the metrics product (BTCUSDT and ETHUSDT only) and G4 needs the book product (BTCUSDT, weeks only), so they are cohort EXTENSIONS evaluated on their own interval rather than silently-NaN core columns (guide 6.2).",
+  "dropped_features": {
+    "g4_spread_bps": "no finite observation in the training slice"
+  },
+  "group_weights": {
+    "g1_rv_6": 0.1111111111111111,
+    "g1_direction_6": 0.1111111111111111,
+    "g1_efficiency_6": 0.1111111111111111,
+    "g2_taker_imbalance": 0.16666666666666666,
+    "g2_log_activity_30": 0.16666666666666666,
+    "g5_dispersion_6": 0.1111111111111111,
+    "g5_breadth_6": 0.1111111111111111,
+    "g5_residual_return_30": 0.1111111111111111
+  },
+  "group_weight_rule": "w_j = omega_g / d_g, so adding features to one block cannot inflate it",
+  "scaler": {
+    "schema": "crypto_regime_lab.robust_scaler.v1",
+    "formula": "clip((x - median_train) / (1.4826*MAD_train + eps), -c, c)",
+    "clip": 5.0,
+    "fitted_on_rows": 40869,
+    "training_range": [
+      "2020-01-01 00:00:00",
+      "2023-12-31 00:00:00"
+    ],
+    "median": {
+      "g1_rv_6": 0.031364479806007976,
+      "g1_direction_6": 0.03215343661386522,
+      "g1_efficiency_6": 0.3867904701482441,
+      "g1_downside_ratio_6": 0.49740821534549085,
+      "g2_taker_imbalance": -0.017061695167933988,
+      "g2_log_activity_30": -0.007445457083273651,
+      "g2_trade_count_30": -0.006530490871787892,
+      "g3_dlog_oi": 0.0004418255116940273,
+      "g3_basis": -0.00028947327853312554,
+      "g3_return_oi_interaction": 8.18729724679476e-07,
+      "g4_log_amihud_30": -23.227171960699536,
+      "g1_jump_concentration_6": 0.5450512015042677,
+      "g5_dispersion_6": 0.007718270986763484,
+      "g5_breadth_6": 0.6,
+      "g5_factor_concentration_30": 0.8032114343531188,
+      "g5_residual_return_30": -0.0002012011647859295
+    },
+    "scale": {
+      "g1_rv_6": 0.021588873903529537,
+      "g1_direction_6": 1.1133502978367835,
+      "g1_efficiency_6": 0.32083888125050847,
+      "g1_downside_ratio_6": 0.4426534140932686,
+      "g2_taker_imbalance": 0.04726177480875774,
+      "g2_log_activity_30": 0.5352390824910591,
+      "g2_trade_count_30": 0.43471672844500336,
+      "g3_dlog_oi": 0.014318674658388469,
+      "g3_basis": 0.0003911762616168412,
+      "g3_return_oi_interaction": 6.0077986285330656e-05,
+      "g4_log_amihud_30": 2.1406868343296006,
+      "g1_jump_concentration_6": 0.1845858980915222,
+      "g5_dispersion_6": 0.004441918048415329,
+      "g5_breadth_6": 0.59304,
+      "g5_factor_concentration_30": 0.1016626055406127,
+      "g5_residual_return_30": 0.005235842528682495
+    },
+    "epsilon": {
+      "g1_rv_6": 1e-09,
+      "g1_direction_6": 1e-09,
+      "g1_efficiency_6": 1e-09,
+      "g1_downside_ratio_6": 1e-09,
+      "g2_taker_imbalance": 1e-09,
+      "g2_log_activity_30": 1e-09,
+      "g2_trade_count_30": 1e-09,
+      "g3_dlog_oi": 1e-09,
+      "g3_basis": 1e-09,
+      "g3_return_oi_interaction": 1e-09,
+      "g4_log_amihud_30": 2.3227171960699536e-08,
+      "g1_jump_concentration_6": 1e-09,
+      "g5_dispersion_6": 1e-09,
+      "g5_breadth_6": 1e-09,
+      "g5_factor_concentration_30": 1e-09,
+      "g5_residual_return_30": 1e-09
+    },
+    "dropped": {
+      "g4_spread_bps": "no finite observation in the training slice"
+    },
+    "active_features": [
+      "g1_direction_6",
+      "g1_downside_ratio_6",
+      "g1_efficiency_6",
+      "g1_jump_concentration_6",
+      "g1_rv_6",
+      "g2_log_activity_30",
+      "g2_taker_imbalance",
+      "g2_trade_count_30",
+      "g3_basis",
+      "g3_dlog_oi",
+      "g3_return_oi_interaction",
+      "g4_log_amihud_30",
+      "g5_breadth_6",
+      "g5_dispersion_6",
+      "g5_factor_concentration_30",
+      "g5_residual_return_30"
+    ],
+    "policy": "fitted on the training slice only; never on the full history"
+  },
+  "intermediate_aggregates_retained": true,
+  "retention_note": "raw feature values are stored alongside the z-scores so any feature can be recomputed and audited"
+}

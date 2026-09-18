@@ -1,0 +1,4037 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.protected_source_verification.v1",
+  "before": [
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.githooks/pre-commit",
+      "sha256": "9a49ad18a0b4ea30341fc77a96663b44a4bb73b9dd5bdfacf1267d267aeb0f3e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/CODEOWNERS",
+      "sha256": "e36ec1d7755747a97f1a6192e81f8e72befd6f42221159a81426b7343ca9f478"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/ISSUE_TEMPLATE/bug_report.md",
+      "sha256": "5de6932d9571d334fbaf2e8898d6482fb7e16355d716e103ce45543ee8ba2b04"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "c7c9cf48b4e4c26e811a6a6b706ccf4f994ae6338cf8615743701e72719598f1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/ISSUE_TEMPLATE/feature_request.md",
+      "sha256": "305aab20be39379bbac8e47b24a9dd81b1ec4693fb80bbe9244154a578a1072b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "212c10d0804cd84102a3fc7e3d8117ee584ed7680aa8d4f3d9e4e720606e7ecd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/ci.yml",
+      "sha256": "8fe335f535d52590fece4761b2651226a3944000e6209a503944eb28b900938c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/native-nightly.yml",
+      "sha256": "2ce294786cda9bc8fe9a8cf9690d670253941dfe17f769348eab2382369fea2d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/native-platform-matrix.yml",
+      "sha256": "ca3cdd20f26acfea20040ff9c6f73e0afaaf9077c4efb3a595ff1fde1a261832"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/native-release.yml",
+      "sha256": "5404095dec09db1935c9d6eca74b1ef3db039ea2c613761244181c740269139c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/native-security.yml",
+      "sha256": "b1a8ed69353311c43f46eacdbe7bfe51895e87a1ff8389704649b11d05394239"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/native.yml",
+      "sha256": "39d72b18389485515338ec82a425d8e0385821c89f0cd2fde36f4f3ec9dae24b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/public-native-consumer.yml",
+      "sha256": "6df56aafc8af9eaea82feebaee2b9cada34b6a11dfde9bf39c9bc0591ef6ab8b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/publish-native.yml",
+      "sha256": "264f1aede32cce4da45b30c39ed6364ebceff94db378bff644870fb2a0069c77"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/publish-testpypi.yml",
+      "sha256": "cea24880703812b730cafd2d682a161fa816ff34b5cd27a60afbab975879dc55"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.github/workflows/publish.yml",
+      "sha256": "ac41ee9cb173e461b9e741d4dbb044d55bc1a712a6dfe3d533583e15e0fc7387"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.gitignore",
+      "sha256": "b24c35e642d61bb58f45f4c81b7afbabd74f65d51adb873a160a068680d69d38"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/.gitlab-ci.yml",
+      "sha256": "3b0014fc0b24e13760ef824b584fd3918383f8ead8679c5876e906817e20a2cc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/AGENTS.md",
+      "sha256": "2ab24c9a03b40cf9b92ab5d5e8471b9481fe4bd90edf95273762a4e1ce4f613e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/CHANGELOG.md",
+      "sha256": "c6aadd348a4fbfe28d496f9816f85ca3e82b45d762dc8a663ede69f6dbcb334e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/CODE_OF_CONDUCT.md",
+      "sha256": "932229f3621e00ba3bb000afb0ad087f232e16634c7182cb73f19578605515b1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/CONTRIBUTING.md",
+      "sha256": "7459b1ff45458b4667eae12dc3383695e140802388d0a583cd42eb17fef64126"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/LICENSE",
+      "sha256": "de4547bb06fe67e03ed7f367f0b35be5803d842814c672b3f42fd108b80c8dc1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/MANIFEST.in",
+      "sha256": "d9a1e5c1c242497d1ebfda90d209d1dd4faefde4c83aab7f15e9e3b746949c8a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/Makefile",
+      "sha256": "baea1b8aa598dc6591e09019cc95f905a1621b99c214e2740da831c087e055eb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/README.md",
+      "sha256": "610a083aca2eda79ed8f3e86cbd620bf96d7b2e8420cacb9b6337e0ab80331b5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/SECURITY.md",
+      "sha256": "a1bab173183a0eb8d78742ca9218a6eb7cd876c31733bbca82d895bdf7a12a06"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/SUPPORT.md",
+      "sha256": "00b98b10b925da00ebe88f9dc855520f2ec875d5b1567e21cac95fcb40f228a1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/README.md",
+      "sha256": "87b67c6011fe2b8456f32f7ffc32bde3bf8e50e3fc374674c781be01a88c87a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/__init__.py",
+      "sha256": "f9304fa943a085bc83deac55dc324c2e9927a55279208a4d5175952f2f9b5a90"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/baselines/v1_1_corpus_manifest.json",
+      "sha256": "85ac42b40311c91773de24dcf7815572b0d25ffe06306889276ec324a0899d58"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/baselines/v1_1_endpoint_inventory.json",
+      "sha256": "9ae1e20c7bc881b30fc6f1b4002fc3316aefc07200afe7b8e4e7560b53bd1b09"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/baselines/v1_1_installed_wheel_baseline.json",
+      "sha256": "a18d85617cf735d031e5260054cdeb5fe828f7cc2cecb463322a206681ecf8e4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/benchmark_phase48c_event_driven.py",
+      "sha256": "ede6982002b4e2423f6349a6d20cf009a6143d78bde37f70f16036941ca48e2b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/compare_phase9_parity.py",
+      "sha256": "423d8dfa193311de66b22da5fb6fbc47b1d688406e1bc46ed4f176f6db25d493"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/gamma_scalping_backtestsample.py",
+      "sha256": "00b820c2093a15fd72e28ec78cd6d5532afe09c618c337fd5c1312748075c2bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/history/release_performance_evolution_v1.json",
+      "sha256": "a855f897abd01d3bdfd55db6d369daf578d2ebfecca95f4d46e0d926ebb36b15"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_followup_native_metrics.py",
+      "sha256": "42b7345d9b8197a687dc2a09988f5358097f44e865b7ad1a5ef2aa12f9343b3d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_followup_statistical_work.py",
+      "sha256": "ca2ecccd698eddeedf9fef8a3f5e9a2bd24d3013030fa06424e64e0bacc7ed50"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_generic_callback_audit.py",
+      "sha256": "1efd5191a03f4a04250a420b96fedc28e44f8e849c6c75e019ffc20ac06f415c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_grid_2000.py",
+      "sha256": "bfafcd2b15ecbb5bc3156784900c211e845facfdbc7408ae6e13d5a537426c8e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_next02_fresh_wfo.py",
+      "sha256": "33f5745fb7fb3289ac24d2c8fe021f433b5d7794a89d2f90de851d09aaf6caf2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_next02_reactive_wfo.py",
+      "sha256": "b32266131b1a0d0145bf8f8b598dd55ef7930cdff78d6a98367eaea983e598a0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf01_observer.py",
+      "sha256": "4be9df732ddbb0eecf3c62c8592b2bd6f1458335f49682f10e6e657d4aa33e3e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf03_reactive_boundary.py",
+      "sha256": "162d8bd0ca84182776483b6656ebb763fdf2883a4e9b5bf1d4acbc10ad742aca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf04_native_matching.py",
+      "sha256": "2cf5aff9b81be63faa12c3e3f65d89e1a7b9c58715e707311d4f45ff736ccd0f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf05_wfo_evaluation_reuse.py",
+      "sha256": "3c0d2357b11734ef27fd3b28e7666e3f5bdea0a1681dd713fccae37a66f72c2d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf06_research_audit.py",
+      "sha256": "6e0f000117c9e86448dd67b3dcb5f8cd865ef61c3c23de5198dc5842d2405be4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf07_combined_qualification.py",
+      "sha256": "b2a370c5fb4bdffdb898405cd0ccb69ebce68b0d64236986b98314f28874a14c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf08_public_wfo.py",
+      "sha256": "f9b2b5b197461d811074039686f613b38d5d021e7a6b74f088dfc0c4a79c2e4f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_perf09_reactive_boundary.py",
+      "sha256": "0d7af56375bb22a71b5a1a644406ccf786696d47c0d3f690631776a1ebae1c92"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase45d_zero_object.py",
+      "sha256": "c4b5592288a8d33c104a19250f6579d4da21ab5718a03395a4bf31fc15a7aa39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase45e_rust_batched.py",
+      "sha256": "139286e9a1a23467a5f2c97f207b511f0b7e73d656154b7a54b4d64d4981512d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase45f_release_gate.py",
+      "sha256": "999fda6b0e66614b4ecfdf4c4f8ba471b652d78751f95613781db3edd82d1136"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase46a_certification.py",
+      "sha256": "63ef89df41faba35c532815e4b460dd0b7dbc84d97781260eccad1c83a3b5831"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase46b_score_rss.py",
+      "sha256": "00104894ad6e26a7d4b3ede7570b75df367f6cdfd514883ecd1fb0bb304f2f3f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase46c_import_rss.py",
+      "sha256": "36f07cec6934cef150003d2f90f8f7386a064347af88f8f285ec48fdd301d43d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase46d_ownership_r2.py",
+      "sha256": "8dd2eff25caf2977e97b045b8e4adca929b4c467f6b88d0ff02bb1b5caed4dce"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase46e_release_gate.py",
+      "sha256": "9b59537bdf5579c2cb6bd644d0dd8983a8dd8064012c92c57a3e921780358cf5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase51a_contracts.py",
+      "sha256": "8d5c41ac08d53a425856ed43984a8b91af23b934de8bcb06512f07dc77782ad3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase53a_e0_profiles.py",
+      "sha256": "ffeb740cfc8e519334fb584509936befdf6a0dfc57c39ca771224da5e3bb1d93"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase53b_native_drivers.py",
+      "sha256": "e917810026f0023eccf172b1c1bc213e4a871412fdc5cf7e3a19571c9f72c72e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase54a5_exit_gate.py",
+      "sha256": "8818d4d01d6baa7dfffeb76128cd40c1831dd5910a24a61a6e937f63bd83bd10"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase54b2_public_routes.py",
+      "sha256": "e54137bc0227cfb53b8f3695577f5e0ae72d0b1d57d1b62404e0b4b07906b537"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase54b3_portfolio_package.py",
+      "sha256": "3ca47e89ae28841cc11008d1203f9970f21d38b25f1b8cc59aefc62d83d4891a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase60_result_rss.py",
+      "sha256": "9da8580eab6f91fec7db0c1d34878c6ec1ef24388e6ab158e17aab311402c3e3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase61_static_rust_primary.py",
+      "sha256": "484a730eec3bc382d821918209120758e88086fcc75c86879f697b0c1d53da14"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase62_reactive_coruntime.py",
+      "sha256": "2b63c12795aab823bb76e69bfcd0c0142d5411593f403721430c41a620634f2e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase63_sparse_block_batch.py",
+      "sha256": "5e2c5f5924c1aab2290d59e24afc5b63c44327719418187872926a26db6bd811"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase65_native_wfo.py",
+      "sha256": "eb2ce0c592aa65e7cafd2b0b3eaab274b472db635d8a413e6b653d440efddba0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase66_rust_target_vectorized.py",
+      "sha256": "9dcdf5734b6df691fbfdde18fd6c9b9422ef07dfaf9446a316956882de573597"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase67_shared_portfolio.py",
+      "sha256": "c3966e37dc77f5bdc8306919c9b8b41504e4495605b5d4ba66cb42462f8de025"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase68_bounded_package.py",
+      "sha256": "1f03a84ca2638dd8111a4a680dca2990302d376b65907c65903493f1b06696c0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase69_rust_intrabar.py",
+      "sha256": "5f81d382729e4ec23d98373d4d4c773d77b57f1454d409de8039cf9772d7e24c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase71_runtime_soak.py",
+      "sha256": "8e02199c359d11613b6516d2d92b64743f5a7d45b1d296cfa0d0ddd827e8bf32"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase73_prepared_evaluation.py",
+      "sha256": "078de1a5f45e9354ed99436d2796409125d7657f09c4dddd821972b7cb315c98"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase74_public_wfo.py",
+      "sha256": "91135a26ddd6e0b77dadb8c49a0a08ef29441621943cb1ff74981d9b2388d3a9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase75_reactive_scalar_retention.py",
+      "sha256": "c2f618fdfe27c23d03ba9dcb8bdd26d32003d86dd876b6016d11b06fa9231589"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase76_reactive_wfo.py",
+      "sha256": "4372d25bab1abf22017812ee84c3fa533d0ae1ca076288553593ab8442bdb434"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase77_1_public_matrix.py",
+      "sha256": "4a102216489695f8bc7a343737785a3f109cb3ec90b5e63206799143568fcb1e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase77_2_pct_equity_wfo.py",
+      "sha256": "e26c61e6c52a8d4d71b11a8402fd146f8abd5f6e86104b1805cbf9e828583eac"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase77_3_reactive_closure.py",
+      "sha256": "7e2885864db2f7c8561b46c5a48a1bb3d2b59d05010a490068c941b04b190d45"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_phase77_native_performance_closure.py",
+      "sha256": "e4a632a05f32a42413504aba3c60812beaec649cb7271e57631fc66c273dc50f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_pre48e.py",
+      "sha256": "4f52e7410683b4678df61e96b5885231085daf832b1a8eb3dd69e38cf262f50a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/benchmark_reactive_session.py",
+      "sha256": "4b615005a4f105d59c839ef4fa4e4fd06f45c02e97c2f944d8607b6b2a3aac0d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/e0_e3_e6_v1.json",
+      "sha256": "8261e75af68efa975b3b0a46743f8c9a1dc134e4eed777b1c4878d71a32bb280"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase54a5_exit_gate_v1.json",
+      "sha256": "d94113a28446f2c6befc5f358ff1712362aa30e88e0fcc42217a7fa2ce27af45"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase54b2_public_routes_v1.json",
+      "sha256": "c65a3a5c110605bb98fa9f2af214ea646a76104e2c559ac0fb05daf0c1501cc3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase54b3_portfolio_package_v1.json",
+      "sha256": "f90b0d928c1961bcd194a499824e2f9c8319b700bed8e20fd7216738d77a8bb7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase62_reactive_coruntime_v1.json",
+      "sha256": "a54a8b2ccb35084473f14129fb0ec42e9a9bb07f937db7aa3f8b1095f2ca0bf1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase63_sparse_block_batch_v1.json",
+      "sha256": "26e2d088cfca1b15e20212a87defe15faeaecc736cf5c7ef46d48fa87b7907e8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase66_rust_target_vectorized_v1.json",
+      "sha256": "5f5df1683d1869d184ded0e04fd2b8a5d231f2bd84e8c8d4082243f15c170bf3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase67_shared_portfolio_v1.json",
+      "sha256": "1aa194ed1ed915d0822644f4d7b45feb2dc879fb80c57572193703c2d1821bb9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase68_bounded_package_v1.json",
+      "sha256": "898dd7de1c6d86dc4458a16bfaf967a6538824db18009cf6c83949cbd1116c9f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase69_rust_intrabar_v1.json",
+      "sha256": "22a1e5a6cc42039d76c0c9a76a5a775b939d27fd58eb3b9b4131de4edc3e97f1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase71_runtime_productization_v1.json",
+      "sha256": "19f9eb5678c1f7bda4ccfcdf7bed88ee7cad0c3e4d8b1e62e1d92a4894e9e504"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase72_measurement_contract_v1.json",
+      "sha256": "cdfb26a0a21a165157f270662e6ea4f15a5a5e3e3a830c134b37cfe53979f09d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase77_1_public_matrix_v1.json",
+      "sha256": "88d20943c3eff535266664050b74eb5514e9e262eef57b1f3ef07bcc17937801"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase77_2_pct_equity_wfo_v1.json",
+      "sha256": "244a6719864c80e4be7646466797227a3f56fc17268222f1201625fe08f52c4f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/manifests/phase77_3_reactive_closure_v1.json",
+      "sha256": "ce015c689308a55e4946f3dbaf6e530ad807bf7107af27f2157aabfa484694c6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase45d_zero_object.json",
+      "sha256": "1033bd33604ba292fa0d3e483771891dd91fa2fb3f70c2061bc6c94f05fb7c2d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase45e_rust_batched.json",
+      "sha256": "5374d026bb477dfd774fa0aba70d31c592f1c975ad7ca73117d29819fabbefe4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase45f_release_gate.json",
+      "sha256": "314e78259b2d994d8ce3d3601e5a2cef0678bc9795593cf9a3148747dbd799a2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46a_correctness.json",
+      "sha256": "2d513d826de7ec81f72d24bf1df89795efb03e0c5efe14d7934fb0d2dd48038f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46b_score_rss.json",
+      "sha256": "c306693c1c1b584fbcd5366ebc6427e6d1c9e2fda3108bee9b95415b5377c17d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46c_import_rss.json",
+      "sha256": "2dfaf9b5dc96c1a2b473b00f05a58fc7452ebb54b5f1e78f19d9a05a83a1af64"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46d1_ownership_r2.json",
+      "sha256": "7d151cb6f8a3c3b5fcd07069e312f552864ff86fd77ab34a6c33e0b02a4b552e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46d1_score_rss.json",
+      "sha256": "2e8ecdc22e3fe2c7d2d7125e0b01748ded551bf787af582ee0d4b22ab356e86a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46d_ownership_r2.json",
+      "sha256": "0fece42535004ffff51160e5c83543d12da97df869815e5e7fa05bbeb4b146d9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46e_release_gate.json",
+      "sha256": "a1d66d4253caa1c0e1025c86869e8db8632da350479249e48a57f9c861e66a58"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/phase46f_release_gate.json",
+      "sha256": "68554c9100baa3ea3acdc91c6f799223d59027efb423856ecb3a9eefbe592b61"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/profile_grid_optimizer_trial.py",
+      "sha256": "761bdc3e9fafd27deefa228e144623e2c0874ca127144c0d09f403dda6a5f4b3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/reactive_session_baseline.json",
+      "sha256": "b9157e414654d4f309a511c3856ab6344502bc8ae5eeea030ca1cd89e72c6705"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/reactive_session_baseline.md",
+      "sha256": "3c4aace9a9e423f462a622f86eb3ed04c3df67e35975dd8766c66d606f1b379d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/registries/perf_04_specialization_registry_v1.json",
+      "sha256": "a2738ab6b620c1dad1c514d0b6a46499edc7d3ff731e09e51183ba28733ca57c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/followup_native_metrics_experiment.json",
+      "sha256": "38eb67eaeadaa8c1a1cc8f51785116c3d241f0b9188c51d81c0b82b84e1b1d9d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/followup_statistical_work.json",
+      "sha256": "c2f6e748098fc2428e3dae848153e8a5f9742297c351d0b8c8c252b9fba7fc1a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/generic_callback_audit_closure.json",
+      "sha256": "c77bc558aaac6469d0676fb61f17f9151995218857b40ff991122a3189fd25b8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/next02_mode4_causal_30.json",
+      "sha256": "f5952f344a2139460c3933d28b1cabf6695d79e588ade56c3ae049885794495d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/next02_mode4_causal_30.md",
+      "sha256": "64e2b39c0420dd148da6b777340d8e8adcb731de3c3f99829da852421aa0e0cf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/next02_reactive_mode4_causal_30.json",
+      "sha256": "c09152becb85a407541d71684bdc8ba10cd36dcf4518d7cfc99c43e02b2782e9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/next02_reactive_mode4_causal_30.md",
+      "sha256": "aeff3c1d1097fd4930c34d85255d628792a2c6724c6ff42d4c04dfc7b6654871"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/p0_baseline/manifest.json",
+      "sha256": "7bc7e6923da6b4fccea0b775f263b3f20da9d081b17715c9a2676ade3356427a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_01_observer_baseline_v1.json",
+      "sha256": "87d07e8fede96666eeaad2dbfd9fa1fc89936c16315ec93dbc24af423294030f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_02_session_reuse.json",
+      "sha256": "877a550acc4115f4d355e868450fc875f12d255dd27fec6068db16279be8e81b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_02_session_reuse.md",
+      "sha256": "270df7863b6beb99fd6465258f3238cb0a2be53261611f0ae6c5791f698c6eac"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_03_reactive_boundary.json",
+      "sha256": "6e34577d343849c712fdafcee43ebdce4df3a6b89cef182dccfb4cb145750a91"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_03_reactive_boundary.md",
+      "sha256": "944feeb9bdbf801091df070bf497ddce4495d913ed686d879e85431c39776a49"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_04_native_matching.json",
+      "sha256": "5a4000756e5f754edbfd323c1355e0f26c348874a2fd00e2d36cd9a788b6245a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_04_native_matching.md",
+      "sha256": "18528d443f1768d5a51ce91452568f8333a9778c637079751e3e088c0ac57ba4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_05_wfo_evaluation_reuse.json",
+      "sha256": "3d08bd5fb1d024173b20d96867f6fccd0733cd2cf471bb7738916f2729579114"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_05_wfo_evaluation_reuse.md",
+      "sha256": "4948a8192feef10bb5bc84e0ba15dedad45db8924567fd90c892f8500dfd28e2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_06_research_audit.json",
+      "sha256": "9c1fe9b378fe0ba8ff753e2cbd113ea44976376deba8050eea67d7eb6f6e2bcc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_06_research_audit.md",
+      "sha256": "543d6def122f9a5dbff68760d1a64ba59d2f19510f5d523c1a7e4840e39534ad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_candidate_wheel.json",
+      "sha256": "eaaa476f10680b4a2d354815318a54eeeb4aeeb6999c48a5178ffd99b9e83c56"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_combined_qualification.json",
+      "sha256": "2664c37e42aa0298fd7875f0e4d91b87888d76d7af4b865b285e167ee54ae054"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_combined_qualification.md",
+      "sha256": "0e0c20d8847b2b8196739ef2b52142aa78f3fe1cd78690a8a16287ca7a6be227"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_cross_domain_regression.json",
+      "sha256": "f08ee6b7b2765030ffd1a32ad0c4d1d47d62188cf6aa913e6c4fd4be1dfa8755"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_performance_closure.json",
+      "sha256": "9c1ab51999d2c521ffd1ca3e45c1d880d21316c0f1295c9c1309b09bfb910d7e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_07_pgo_decision.json",
+      "sha256": "1e85fd2a08eb1e679c1d57921f686d8e584903b82661ec8ee8300d03706693c9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo.json",
+      "sha256": "009fc71f6f4a0de4be6361fa04f359fe185cab346779918b8283ab7894094efb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo.md",
+      "sha256": "137c34af0ca800c8795f944a426a6cf3d5aaeda8c5f5324f2ff58632f678bb4b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo_broad.json",
+      "sha256": "5625d654568a787369d3411693082fb21ccadf01a6a25073e4c1bd7d733d9b52"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo_broad.md",
+      "sha256": "1bf45152fdd56c21b81af2d250bed87b23d887c44274844fbeda897e94a829c6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo_standard.json",
+      "sha256": "71656053c826fa1db9d24eda62176e897e97be07dc529bb04684a7eaeb1e394d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_08_public_wfo_standard.md",
+      "sha256": "3be1e35f1ece9a9e7520d41eff84a1372eaf4d10a79463f538d22d77a04d5148"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_09_reactive_boundary.json",
+      "sha256": "5fabae288905898698e111e062c43d272328966835feed42742c47220fea8364"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/perf_09_reactive_boundary.md",
+      "sha256": "9a7c79425706f47f71d836bc5276501f172c0501ffa50617e623e0b36936e13a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/python_audit_long_only.json",
+      "sha256": "1a3dfd79aefe71831f68ecee8758eb6336ffac26e5cbcaeccd4b4ba8241baf56"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/python_audit_long_short.json",
+      "sha256": "3af022f93ad381eae317b0f6100927800f20cbf2944071fd21f5d4297eca3973"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/python_scalar_long_only.json",
+      "sha256": "9e4a03a632b1baad08427404fc34fb2a6e34386fcecbd792507eced610a354d0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/python_scalar_long_short.json",
+      "sha256": "189978dcf4dd915db9f76615f589c5cb25cd08f3aa5b3203bdcefc59151f4900"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/rust_audit_long_only.json",
+      "sha256": "16b5a5e8de3abd71fcea4624e4ea708074df8e92590df34fda2a13d4c13f8038"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/rust_audit_long_short.json",
+      "sha256": "2f3fcd31f90346d6d6f79eed89144e5e6cd79848a0c600e9164f250364abd70b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/rust_scalar_long_only.json",
+      "sha256": "3e7da9c2ce64c2f044934ddf22b4e6973d55ff7d9aab49b0a8740acc33b661d2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47c/rust_scalar_long_short.json",
+      "sha256": "eb59c6b87c769fb55ced4205d3f21debafd1c11ff76f8394358cacddec187fe2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47d/profile_scalar.json",
+      "sha256": "1a76e55e14eab65c1e17a77efa57fdfef563e4050b96ee3cb8058687163f783d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47d/python_scalar_long_only.json",
+      "sha256": "b4e35dfa0e37e07d37a9cde21e4de60f47f46e5f479054a54624375e29196ada"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47d/python_scalar_long_short.json",
+      "sha256": "5b01b1bd181813727d2d063e2b387937446aeac2a7ac2e6f1ba0298f302173fc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47d/rust_scalar_long_only.json",
+      "sha256": "67a0e846b2fa27fa26f0a5e3921e87f38d2803c2cb562de2a44e4886d1e94015"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase47d/rust_scalar_long_short.json",
+      "sha256": "041c68ea232f79ebf5c9a4c8bd652a139d98d09de513451764b1ac2fdce2ec7f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase48e/after.json",
+      "sha256": "2e655d984ad1574b8f0749dda2df6ccef5c025097af92aa8d2955133906c300a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase48e/after.md",
+      "sha256": "eaea5a2bda38e52b0332df586b56f4b0f52218509f7f814deafea00495de282e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase48e1/after.json",
+      "sha256": "5aacc2c6b5678fd46b5f8272cbc43a903cce1ace146c9d4493ea0e753b5ad535"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase48e1/after.md",
+      "sha256": "cbcb5e846957403a0aed35ad77af042a948808dce91a2047da409183c0607892"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase51a/contracts.json",
+      "sha256": "bd9b4257f11a8c77372b8aef29633a361e5f313a73ee65db269bb37a50ee12b3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase53a/benchmark_taxonomy.json",
+      "sha256": "dcf89ce6e087e2054675ccef704c0d7934909bc35c1eb2d89243b5e3473a8cf3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase53a/e0_profiles.json",
+      "sha256": "4efac30681c99d3ad289df59926bb551de0f28a53a29f34a77312820efd175da"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase53b/native_drivers.json",
+      "sha256": "599ee8b75a7fe74f80a3d955da9c5cf408533e8b77360f4ee6a4b9d60cca41bd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase54a5/exit_gate.json",
+      "sha256": "508d13de3547b5556323f0f25f1d3c87ffc7e69c601af7a8e9ede4c130e93ddc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase54a5/exit_gate.md",
+      "sha256": "437e0f9b40b557359883c75932b149c5cd8ddd3f271685d8420ba390ea8d1969"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase54b2/public_routes.json",
+      "sha256": "ab1ef7603ed4f0068d5d040ba163c72ed5b501cbd8a2157d2699c8977fbb516c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase54b2/public_routes.md",
+      "sha256": "7343dd2cde503472ecd7f2aacb539276766c5d489e1efb09d92263924ad89ad6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase54b3/portfolio_package.json",
+      "sha256": "095318fe0d590360b88e386203f9f116f8aa35dad5869174284c1cc4c61c45b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase62_reactive_coruntime.json",
+      "sha256": "c6e6ca4a79f4355542665027725fc6e64043a7f25f642c16f8138715bdd7b075"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase62_reactive_coruntime.md",
+      "sha256": "196ab62decf6a529be7387fe4ca56a854de021f333d894c4c8a8031d674c31ea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase63_sparse_block_batch.json",
+      "sha256": "af0b6167deb425e204c1c9b471e5ed2785478469fc92399e99922e8fe2265265"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase63_sparse_block_batch.md",
+      "sha256": "3835556dcc2fbe1220d57993f52bc6a99d22aab3d78bda92c5510743154fdb30"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase65_native_wfo.json",
+      "sha256": "634f110890dd66e58ceec45496fe9bce430373d7fac72964bad32d6811292a7b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase65_native_wfo.md",
+      "sha256": "521eaf5e1bac7ae0b4e0b3f81b44f45f77bcdda21b9767aa516cc5bf66a010f8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase66_rust_target_vectorized.json",
+      "sha256": "016460e9f116d9b7c0a0e9790d09baa3cad4afa700d623715159e618fc3644ad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase66_rust_target_vectorized.md",
+      "sha256": "f69d2ac63bd1566dc15add3ece07bd2393adbae34093d04790a9b0230d3bf81c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase67_shared_portfolio.json",
+      "sha256": "907d4e5c2bdab59013b82422b3524cb8f6d21dae7001cd4dab62d81f1c3076be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase67_shared_portfolio.md",
+      "sha256": "d86a2a281d5d720896d622091e3e9cfef31ec87d993563e4aedef1e2496c58a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase68_bounded_package.json",
+      "sha256": "7b6060a9b45fab8417c27ae3a4759f7f758ea9c9fd176c8406def5af1a1dd8d7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase68_bounded_package.md",
+      "sha256": "90fd1ed369254bfe61f703475b32090e622874066d904137fb6dc60575ad03bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase69_rust_intrabar.json",
+      "sha256": "a7d906cc64d30cc13d501cbe0fa23c8794ead0122a34695c10f7464edf6127d6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase69_rust_intrabar.md",
+      "sha256": "aa4b0127e8da67c8d26dc5a9cb827174b156d6db13dee3244c35778f910187fa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase71_runtime_soak.json",
+      "sha256": "b898a7b551449aa2a59277990668d3a374296692a991a91e005dd5de5af8a19c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase71_runtime_soak.md",
+      "sha256": "c982ecc2c1e354859445efb6a63a2ab37d10bf095410813233292d9f4ee3f6ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase73_prepared_evaluation.json",
+      "sha256": "40eca48ad6452c213a9031cf5d0e654db399c5ca3d95bb74501e3e1d3424d61c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase73_prepared_evaluation.md",
+      "sha256": "5e4e1ac61a4a05e008bee01c462d728250c2c32d25e0abe33b7e7fd3dd9df91a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase74_public_wfo.json",
+      "sha256": "cd27e471e43340f221d4cbfd060a383f58dfeda9ebe39ad209c339e5c463de48"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase74_public_wfo.md",
+      "sha256": "57aeb0e5a810008b8fd32e7b745857f7f6c998a089aae5464c8363fc0fac8cbd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase75_reactive_scalar_retention.json",
+      "sha256": "9ede06a5c81d977d19e83e6ff77fb7e94b10838544d91aedc7687034a5863ee9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase75_reactive_scalar_retention.md",
+      "sha256": "b410cce349cf77deaf941cd1268361705d1123348c90928b9d355d830563eff8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase76_reactive_wfo.json",
+      "sha256": "cee2bd41092dc00a9e991a7c5ceb07a312ce31af96e42a8b8636b0048f858280"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase76_reactive_wfo.md",
+      "sha256": "343c8bec9765d2885aeee2e2afb0c1e5c4293a606e22405cfb0c2435283be064"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_1_public_matrix.json",
+      "sha256": "25eaf827477ac873f537b23f128def1c7bd10edef8687655109f4f1300c9b672"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_1_public_matrix.md",
+      "sha256": "108f8749675c348b8dfa52552625751b54a61e1487cf04abbabbf34eb359c2e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_1_public_standard.json",
+      "sha256": "0e73c013f573ef6931688803847ab45441e04d8a3144842930f48dab5d17ed8b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_1_public_standard.md",
+      "sha256": "ea0fa49c3fca30640524b1075c939dc48a1991661f41c3b9bc3bd833597cd214"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_pct_equity_wfo.json",
+      "sha256": "8ccfab5915084f02cdf9af452bfcb41b838a43c381eed57707840f65198e0c5f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_pct_equity_wfo.md",
+      "sha256": "f5c1d0f3b890a7a7772d60809ceabcf98e95b94a65336c6fc484be23f9b19f12"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_pct_equity_wfo_standard.json",
+      "sha256": "f105f92d828c36c1e7f33fdbf84c2c955c415470ec2c67fbb4144fd2b1735337"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_pct_equity_wfo_standard.md",
+      "sha256": "61d906852ac91c6eeb8932f3d833180cd36d6e17835da5aae0ac4dcb0cb0844d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_public_matrix_control_smoke.json",
+      "sha256": "96f043e1216c6b5542184d803427542c04f94d68e79920d41531f13a63173cb9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_public_matrix_control_smoke.md",
+      "sha256": "e7a53e2cabfbd64ba8835d1b405736596ca50af2fac110dd123080054a7e6821"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_public_matrix_control_standard.json",
+      "sha256": "e650bed3a9c3eccbcb4c6f070b9ab82705d2818558e9c5c35889bf8168f145d7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_2_public_matrix_control_standard.md",
+      "sha256": "9ee09031f7f795061bba64b4e2bc2a51d1b26632a0ced0acb1e21e33b2d9a4c0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_3_reactive_closure.json",
+      "sha256": "9f0aca601e95443b7e92e70f360113effd75f1de93a10f556c4c8745520d01a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_3_reactive_closure.md",
+      "sha256": "efc2abeaa74d71c92bbb0e759eed2c37798e3ab90c2dede71608ae7ead800ac8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_native_performance_closure.json",
+      "sha256": "581b03a1d602f0b93ccb53a72a79289eefb2963267fbf6cf4df21e51039d47b9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase77_native_performance_closure.md",
+      "sha256": "51bbfb760dbefb08e05821b030c2b10201a4df59eeca1004680306886ee599ee"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase78_public_promotion.json",
+      "sha256": "5f5e0a1cc7e779c55f18016014a1c4d707c948a41c936751c2450787e30f7efc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/phase78_public_promotion.md",
+      "sha256": "35d994a5ea6b1540d4d8b9ec97e2c61c8906df48c17ad10536b287cec9b62c36"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/pre48e/after.json",
+      "sha256": "5fea7eab2d029e290363dc632c8fa85fa204b337e052d056352880a984e58144"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/pre48e/baseline.json",
+      "sha256": "fc70ebd3bcc49923fa7b2e0e3a411aebb0fa27516737d09c23b0e0675071cca5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/pre48e/baseline.md",
+      "sha256": "fb1962ea9df9392a6755b313b7632d033b60b4ed19fe221a21c3166345eac073"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/pre48e/report.md",
+      "sha256": "7f6cc275078a650734b4c7f29414ed8759b8b741b245aec554fbd2cb8b30da4b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/quantbt-next01-final-everybar-100.json",
+      "sha256": "61e78baf48b49995c4c8204b6458ca6a6f2099fbb6204df9226772718a95c865"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/quantbt-next01-final-everybar-100.pairs.json",
+      "sha256": "59391d2f021bd50931b6fb3938ecb28f16ee99ab13a6051785989d69097f2a1f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/quantbt-next01-final-lifecycle-3.json",
+      "sha256": "05dbc9411a98eb9608d90ba85b68f0c060b0bd52c8bc10aa0bd3a2400704bc07"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/quantbt-next01-final-sparse-100.json",
+      "sha256": "31913a065aa32bc50adc5642b4a919b070b0fd583eed1fd1f84a2a12fa5f4d5e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/results/quantbt-next01-final-sparse-100.pairs.json",
+      "sha256": "3229ef0cd5d6e014d91991292222386480ac4d2e831df1524c4ee2b5915bd562"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/native_event/traceability/perf_01_traceability_v1.json",
+      "sha256": "1709c43cc5389c8d81cb8fc8c0ac6e84e481dcf606b2e05c4f9abfcefc5e9f2a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/options_phase10_baseline.json",
+      "sha256": "00c75435ba7a5da9cc970d10be944036dd4bfbca0a569f742efef91a6b28eb90"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/options_phase10_baseline.md",
+      "sha256": "298fe73858dff751118fbe00f9f9ac3427d37c52a4117d6d11ee1be3842e27be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/out/phase30e_reactive_runner.json",
+      "sha256": "8361f7086ed0fa2d371fec03b8e4324977b55fee9227a7532c09b7598c6030ca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/out/phase30e_reactive_runner.md",
+      "sha256": "c53210f316fcbed5212f39b149bac186a15fc668a0ae44aa8510cd42be8688ee"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/pct_equity_nautilus_smoke.json",
+      "sha256": "6306f30392adc078332239d821843b383646c1644b90619de7b6dcfd703cd102"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/pct_equity_nautilus_smoke.md",
+      "sha256": "f903a21b601657ec43f2b024666dfcd874337b597c6e32b2506ef9fc461f8c7b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase12_arbitrage_cert.json",
+      "sha256": "bdb6bc7b193614b3c53a7c38e947f56421c1bb795c235b46d3f47494a47572ff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase12_arbitrage_cert.md",
+      "sha256": "266fd89cbd8516f5bb24d674278b581c3e9a2febd2d541890c44b5498470a1fb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase12_benchmark_nautilus_cert.json",
+      "sha256": "bb2af96b81d16bec616abd10318a1ac013708fe2259237ff48e91c742d06a724"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase12_benchmark_nautilus_cert.md",
+      "sha256": "aec124fffa41180e60fdd591575646bf5f21009c4e362c03f206d2f8e6f23ec3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase13_portfolio_report.json",
+      "sha256": "1de5279b1898dab8e24a306ab925ec7b9b9192d043ca4e7f454ec22af5e948b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase13_portfolio_report.md",
+      "sha256": "43611b51ffd580b115d6655d1da1fb0278917d2449f82f70909e178e9834f731"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase13_wfo_cache.json",
+      "sha256": "437dcb8843c1bdd41fc7c3723d0a448079239feaec21aee7345f80b73fbcf05a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase13_wfo_cache.md",
+      "sha256": "fe27e22c89ad34cef73e5930ee379a15a15916637d5422a1f6327d1c8cec8e2a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase14_service_loop.json",
+      "sha256": "40bfebf7f1837b68d3d3f86d1683cde5eb82f96bc289a57e6731a5af33166071"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase14_service_loop.md",
+      "sha256": "6368960863f07b3e216978a5196196d29c6f4e51268e5588fd9022ec03cbc8e6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase15a_nautilus_certification.json",
+      "sha256": "1c3cc1a56c7ae840627689dd05c87eaa92058169af93b54f90bd5053260c5d8a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase15a_nautilus_certification.md",
+      "sha256": "bc477ac0e301379b85975296e6985b808a13300c210ba43284bbee643bb10bf9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase15b_synthetic_depth.json",
+      "sha256": "122539db8f3ca69f75ec827dab287ebd4095c783d04d45d54094117f27af910f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase15b_synthetic_depth.md",
+      "sha256": "bb1c24f373ae77931865ead1a73a550d1f9af03949cc7b21d11ff3de02de706b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase16_performance_debt.json",
+      "sha256": "380a66eefbcc1969ecda0d30f45848cf2ee9af68df4bcfbacb9d8999bccc0f8e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase16_performance_debt.md",
+      "sha256": "49b83aa8dc21566869223a79f143e60b689ea325b60f36f3cfc9b15d7eb845a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase31_intrabar_benchmark.json",
+      "sha256": "c659e85bfb1f0a0000911c8f77d8818d55b0cd9bd76a816bef5607d80b05be70"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase31_intrabar_benchmark.md",
+      "sha256": "c2df9c176c9a9b7bef2ffd0ca9c963cf37b98a3a395d65453142001d44a6b83e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34a_native_event_memory.json",
+      "sha256": "be02ba3b1cdba44c922009c84a1fec16a9426b5f6c7f3cbac6e04fb3c8b4cd35"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34a_native_event_memory.md",
+      "sha256": "3a46092e2bbd6940952ba8b853a87a9aaf286e49d64c853505a3f0a837b3ab9c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34b_native_event_prepared_score.json",
+      "sha256": "4a6a2b93730ba64db690a2d14a1333de885b47e32afb0c141337197585197e18"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34b_native_event_prepared_score.md",
+      "sha256": "e54de1b4afefbdd1437fcdba3e5c2443820b3621f71e5357a7c31827ab7b59dd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34c_native_event_single_pass.json",
+      "sha256": "d563e2ae529ea47672ef9579923d708ac4aaf102912a68fff9e5f0784e983392"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase34c_native_event_single_pass.md",
+      "sha256": "3918c585417f56227497804a3ab9ab6307403d03c255adbeb6ec41bf9f57f9ff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase48c_event_driven_facade.json",
+      "sha256": "f7bc1640aba8d033c328856e18e9eaaff25aa5528cf3bc9155ff834621abf28e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase48c_event_driven_facade.md",
+      "sha256": "3cc9a8cdfd1cdbb22250af0f84a5ecd28085814f39c752f71bac277e215c0dea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase49b_wfo_performance.json",
+      "sha256": "439bfde09275c8d7a5d3ca8bf354eda0e29d630adf44605ba52dc7212d54eeaf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase49b_wfo_performance.md",
+      "sha256": "e3e72c61563584f2e20ca9a6f8a874ca1b2a76e8c27f3533fd5f6c521f1aee67"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase7_profile_report.md",
+      "sha256": "296c85b7f568dd41f2cd1dc7755ca9278c0e51741c88ff40dc02ec5103d56c70"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase7_report.md",
+      "sha256": "bf72665ce6c1b4a9a05c9ae06c70196f22f83c84ed205e2c430a0c0b6c1e2db5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase7_thresholds.json",
+      "sha256": "bad6e0ddf761f3ff449b208bad13dbc99af3164565ee77781a057f751172aadc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase9_optimization_report.md",
+      "sha256": "ea5a480172ff52b7816ba44f82b4453aab49b41c58e76fe40c4339a42233ff72"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/phase9_parity_report.md",
+      "sha256": "f0f7f21625f988204c4a52d5ebf5217007295bf9aa15c7d96b8b056560f108e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/portfolio_real_parity_report.json",
+      "sha256": "9fff817cb1bdcfe2b5736067eaca36f091e4d246897f1eefb9f8790fc37d21d1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/portfolio_real_parity_report.md",
+      "sha256": "d84fa43f24f1ba3c9303e7a8c523b196fa69802429dc19bb31c72988507effeb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/profile_phase7.py",
+      "sha256": "78d859da684b2fa9001fbb49097c612a2e14d791700d1bcbe1031696525d72a9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/results/optimization_overhead.json",
+      "sha256": "f72a893df9e0c72d32e3a79eed4042a83f6999c822065272c65f265c4a99f92f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/results/optimization_overhead.md",
+      "sha256": "d23ebd97c56e22638dc5fa3ef60aced940fdf1c7c7de61029777216749e611f9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_arbitrage_phase_e.py",
+      "sha256": "e4af74dd5eefbbd370f7bbc9ef529f1855d499aac19c2fdcd868ff8010e43919"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_optimization_overhead.py",
+      "sha256": "f8dbb2a4160f20e0bb5f444566b0c2e30da62b16ee922e2dabadf9adba8567a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_options_engine.py",
+      "sha256": "f23a0dc2c2dc4c375a2d29e1818a31229b04d9328d76143ce989a6b7b962f5bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_pct_equity_nautilus_smoke.py",
+      "sha256": "70afc73b1868be9dbebae41fb7796168eb52671890a569173172f288a41a4de2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase12_arbitrage_cert.py",
+      "sha256": "9b053d85c0ff1b35158c309b10ce90e45578970b8a3a5366de144945e86a120d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase12_benchmark_nautilus_cert.py",
+      "sha256": "382f31d74467d017c576ed79142128b53661bb552252bce57bfdc343b72fe1ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase13_portfolio_report.py",
+      "sha256": "725090aa656fb79cf7c0dbbb56833950ea0d2306ac5a5d908e1d907bb97a4fd2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase13_wfo_cache.py",
+      "sha256": "77c81d6f3488126b8e4ce2fb2e50c1ed9a8ddb3852c929789107d94b7ddff6a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase14_service_loop.py",
+      "sha256": "67757fd3186a921bfa2223b6019de332e7292fe8f41c718567a596b4429f65ba"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase15a_nautilus_certification.py",
+      "sha256": "025da7872ce5a9ff49e09f78c5867a128766d8be4bc84b0acf8e84ec3a606058"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase15b_synthetic_depth.py",
+      "sha256": "1585916f04893f75d3c77feac37e087aae39d626f375ecdf1b1b499856ecfe0b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase16_performance_debt.py",
+      "sha256": "57605a5a82b3f7ee119cba47896d5724cfd5a7943420768d281b28b337c88f3a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase30e_reactive_runner.py",
+      "sha256": "98fdf05be0d1588fd970fab3b55af2266e4d84e5665f1039337596667b868367"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase31_intrabar.py",
+      "sha256": "621b936ca6a4d4d6706b399a15ab891bc1cda27407d315aa21c0fff307682fb9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase34a_native_event_memory.py",
+      "sha256": "1a868fcf0693b5a2411fcf76e167477e17dd2da2000d681a059e9e6f5f178ccb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase34b_native_event_prepared_score.py",
+      "sha256": "e5f15c76542427d2d16494f67c5a7e7fab3c11feb82994d6b51087b085dfbd01"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase34c_native_event_single_pass.py",
+      "sha256": "f5128db0fed86e333cb8872cef41abf2353da339e8597ddae1d15d9418bc8331"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase45b_native_event_score_rss.py",
+      "sha256": "b4a659bef6f17fae90455bd7de6893a5916b5bf180e6fafbffb8168a862ab6f0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase49b_wfo_performance.py",
+      "sha256": "4d87a3530003a98439dffb1c8fc27773bc8534c386bf7602c2f9694c1dc2f341"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_phase7.py",
+      "sha256": "f4d0f659e51bb5e1369cfc4e1b571cd50d12332be4805b5a5329f09cba7989c4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/benchmarks/run_portfolio_real_parity.py",
+      "sha256": "7771927da61f8ff2c7f205757015f29b2cd9694d101a7a6f1fe0508015a6c98b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/generated_product_manifest.json",
+      "sha256": "a2d2f05596f803ca7dd8673d5654e14be836794122da37134bd8439b6128717e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/generated_public_api_inventory.json",
+      "sha256": "aba03c5872bff12d17ea25487aa81bc3426eaf49c979b09df3561b26b32b8023"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/intrabar_contract_v1.json",
+      "sha256": "9e3d07bd3ca01afccaa7819d0ed6e7b5625c0c43fa66b6d5147749457dcdf5ad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/module_ownership.json",
+      "sha256": "be84923081683dace7370d91eaacb6b9ef6aac5c9171ec74891b36997d559c44"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/native_event_a5_review.json",
+      "sha256": "d3c802ceaf8bcd5731d6e33584b8ddddef8d1696ccb31c71843d917d875ac3e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/native_event_contract_registry.json",
+      "sha256": "19b1b87d78e24441ec05de605dc452ad9bff1612ac24e65c7ef9c94403a230aa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/native_event_deletion_manifest.json",
+      "sha256": "6265ec2e7f7c9810d11982e8ea0fc294e6aa34f391a1459ab4ec2032e38bcc0a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/native_event_product_registry.json",
+      "sha256": "b9cb1f5efb261bac951071433b260d0fd0eba2f89f7baa610fc6ae163b6cc2c4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/next03_product_qualification.json",
+      "sha256": "402689738d536bcc40f006c932679c46e62f32144702bd182010765fddb12fce"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/next03_root_mirror_retirement_baseline.json",
+      "sha256": "91234901a75d60b96c5845d92e63b8da209126c97ddf3e033b2a91962be7a130"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/next03_source_layout_inventory.json",
+      "sha256": "9ff539df45d0ef240eb1de3c034000d6cc13bcb90167209fd53b45c3550ea317"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/next03_wheel_consumer_proof.json",
+      "sha256": "6f87bc2dbbf210bf0da210a0317bc7d3d88fa330a64906ee5071c1c38708ca9b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/v1_1_correctness_contract.json",
+      "sha256": "f048ffa937641ca97094de38fd8435f786e709b96e7e3be39069eb3aecbad86e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/v1_1_linear_accounting_fill_replay_v2_contract.json",
+      "sha256": "ffec836ddceb37099820be43a666e93b77b26b7f23c0d8177d6e724e963a96b7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/v1_1_market_instrument_v2_contract.json",
+      "sha256": "8a851ddb347996a08d1c7ef6ee881aec3382cfefdef603f765f9d31003b3bf1b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/contracts/v1_1_measurement_contract.json",
+      "sha256": "4bf0942122f48169b74dcbc868941ed5ff7dc5e74aefa7ed159aa2e0f1d05bdf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/README.md",
+      "sha256": "2d6eadb0dbd271fbeafdfe8f48222be0b3bd1b78848cb38ed1a71870b3c06679"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0001-versioned-event-clock.md",
+      "sha256": "c2f1adad83c25ec1b4ecaa963df525b9f1275da7b00b36de5446737cac2a897c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0002-backend-spi.md",
+      "sha256": "3814691e1bc62cd8cd05c2f154d375728c72d11ddfee6a8ddf524ea2207dd166"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0003-rust-workspace.md",
+      "sha256": "aff36df854903635342b5f5aa4b4459109c4b5e057df0cadac78c756588d8cd9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0004-generational-order-arena.md",
+      "sha256": "3daedfc65fa5c466b4694ed1d36722fd25e24ada637bb2d8a8c5a56e067886c6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0005-strategy-ir.md",
+      "sha256": "61e2ea942b63a7f7a4a14024b0d59c2023acdd84490357d1cd962ffb902d6a45"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0006-batch-determinism.md",
+      "sha256": "650a4136b8f6018df5ec07fbbcb3c2cb88d63e774741b7db8d3927fd92e03615"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0007-portfolio-target-contract.md",
+      "sha256": "d7f95d7628221c87cb3f1c36768ced107bef792b9d423ad27249cec1cf6eebb7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0008-package-atomicity.md",
+      "sha256": "5b56a7bc782e2de5c1fa4a1e039a5c26660646e5ed68f76022349b6567968e13"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/0009-native-wheel-compatibility.md",
+      "sha256": "821cc59be26747ab85ccc35921cda2f845b333621b77da3f84475442a060f2f4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/ADR-RP-001-rust-primary-authority.md",
+      "sha256": "76d0214500d8722bfc684fe07ca0b7bb7db635bb814d05e1bc135d18552548c0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/ADR-RP-002-strategy-engine-boundary.md",
+      "sha256": "e5fce9be1b058591a91e48e749402447e5d0ae6e17a99c7124f26ad1d21d6cde"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/ADR-RP-003-correctness-before-performance.md",
+      "sha256": "3ccac168eb3ee7f21bc05be0d48effc8dfa5fcf2603f68b8e03a3e765f3ce36c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/ADR-RP-004-runtime-classes.md",
+      "sha256": "aa920f315e3999ca0edb209630db86d9cf8429e008bb0237693aaeb3bd87e6b4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/ADR-RP-005-wfo-optimizer-schedules.md",
+      "sha256": "cc3b88a423c7e4c04a243929f83ea9bd31a4b6233a43da596e92447165a19452"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/adr/README.md",
+      "sha256": "033d34ca1b272c9035232b9fe78c22720ff43e0b2fd4fa2642c66cb6c7fd8985"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/alpha_certification.md",
+      "sha256": "3b237498b01fba01d79850f53e707efd97a4d3fbd59e11426b408904919d4efb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/architecture/execution-plan.md",
+      "sha256": "817bf67564cb557fd730f359514628982acb4779ab474ec7b00bfe8baaa45433"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/architecture/native-rust.md",
+      "sha256": "92199f3b30e6eb15e7c06565e4836a5ab94efe9e73da434d3d3314d3512c2120"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/architecture/public_api_inventory.md",
+      "sha256": "633ecf15e8817dc9b237f89e29f244fa45a81ef6ee0a4c03137309ba9b42c7ff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/architecture/rust_primary_v1_1_baseline.md",
+      "sha256": "bd2911bd64012581172d057d5e93c5a0083e013efa6237957fce847206b4f257"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/architecture/source_layout.md",
+      "sha256": "57116897836a60a82699ccfca1c7e369323d254d72ba33e8247c601d91baacdd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/assets/quantbt-performance-evolution.png",
+      "sha256": "d65bef5aa41ddcdd453ad802b6cd90edf3d81b470fc3c7ead74008bb7d21dd88"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/assets/quantbt-performance-evolution.svg",
+      "sha256": "e8de55cf004b1910919b144bbd2bf314d3067e21f9581bd77ca4db5602761984"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/backend_selection.md",
+      "sha256": "b3138af73184dbfdd1734ffe2b5adc1cc5c3ef5e66d3753f669798442b7b41ca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/accounting.md",
+      "sha256": "ec6d0cadc42ad612b60e007ba912ecfb2e39b7bfbe6770cd9ffbdcfcabb4a9fc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/baseline_manifest.json",
+      "sha256": "21ef66362749fb2925b12382ddfb6491d2fee9fa0a38ce3a9354cae826a2cbf8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/contract_registry.md",
+      "sha256": "24c248e00a701bbe874f41eb4e26548b7fb5b1916fe3e672607f63c99621abfc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/event-clock.md",
+      "sha256": "13a3c8d7fe027893f58e274d4a2014fc9857eef2de3d48482ee74389671ae53d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/generated_product_compatibility.md",
+      "sha256": "b84b67acf8f2285f1bf0ccb1a599cf79a8b6affea208769b3ca0ff5751745782"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/order-lifecycle.md",
+      "sha256": "aba3b68261192defe8e0279364b990f7642433484a63343e40a7f5651a6a4eb3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/p0_accounting_trace.md",
+      "sha256": "f663d00cbaa0ba4118c1560b6fafc239eaab22633e57da37dbe7dbed5648ecfe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/p1_planning_backend_spi.md",
+      "sha256": "10319249793b7b989a102cf73370979df7f9b08985464972f65b9e72080b8fab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/p1_strategy_rust_ownership.md",
+      "sha256": "11567506dbc459ceeb978e74a2a4ca863d06cf1a280b6b2b31fa1f9901a7a8a8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/package-execution.md",
+      "sha256": "d7ea9f99fafb9b7cfe38fbba903f1402bda848b95f69fd512b1194d2576b5bdb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/pct_equity_transition_v1.md",
+      "sha256": "ba5a052012fbc1ab9e2e29d0c7085cc431b5a29ff22938f91eeec6f8621bf21c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/perf_01_computation_and_observer.md",
+      "sha256": "eac1069987a9e11d59837f04f4d625fd9112314f4a7100bef0ad9db44f33d483"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/perf_02_session_reuse.md",
+      "sha256": "15fc8470f0ba92fe5c02e8a15870abe2389df25f336065674c43f4d3edaadc08"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/phase51a_certification.json",
+      "sha256": "2b4ba3bf4be612efb802558e1bf1ba8018f13ad0b6773ed860ea389cf1fd782f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/phase51b_certification.json",
+      "sha256": "af2a0f6d2bea474db7afaaad24b22dc6fd1ecb56d88e3e8b5292d1d16cfb22ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/phase52a_certification.json",
+      "sha256": "38327ceaab4e7c9f557656bcd4b7f30c322283c18c883dbe80b7ddfe2d562051"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/phase52b_certification.json",
+      "sha256": "94cdc41fffe76ff8740a5a3f07f9e2b707cad0de7d17d41850756ab7610b17cc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/phase53b_certification.json",
+      "sha256": "c016b55f65a250dd41f7b530f5b8446b5a7fe9250c561c01bf8cec5ebcb22711"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/portfolio-targets.md",
+      "sha256": "367507ed9179352f5319210025588d04651928eb5da69a8c074c6b8f7c9d4b02"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_canonical_trace_v2.md",
+      "sha256": "286d466219fa00cd245170dada8cf3a83730882933e27652a53df5d4955e421c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_execution_clock.md",
+      "sha256": "8689ba9018e493bcaa33ac27465583e9d6533d36d144b75b1b369d289de63799"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_execution_metrics_result.md",
+      "sha256": "7d93ce23d88584da5b50130b708f59f212db9eabadb536b53c48cc798388d040"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_instrument_registry_v2.md",
+      "sha256": "2a0caf1cb4a18ec8e0f61627dd1301f0ebe27a44f4438dca2bced0cdf759ede9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_linear_accounting.md",
+      "sha256": "a30858830514c121fa2140956652c06643e0932bd9985e0dc991fffe933a303e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_linear_accounting_fill_replay_v2.md",
+      "sha256": "f120f1ef9454b38b3b1c35426d4c8023aa0d738acbc9098b40be73ef48bf1401"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_market_calendar_v2.md",
+      "sha256": "b1590b660aae28f05aa175f094e2433e728d2586b36124f322b0b21a47378b65"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/contracts/v1_1_target_execution_clock.md",
+      "sha256": "1fc7e3da1a5de12124a6c513f31373e9f2c34281e89f9e9a3e06553f32659677"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/endpoint.md",
+      "sha256": "59f5c67d35f31277df541fb572836843c2548aaf364c28a9c6c28f5869b31950"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/execution_contracts.md",
+      "sha256": "022693764430075ca8c9997d8fe59b1ee059235532ac98594ffd2a7cf4d1f3ca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/fast_intrabar.md",
+      "sha256": "686249c5c6c9185443b9750fe46bd45635b8e49b74b4843ea45a0683202d0f2c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/generated/v1_1_corpus_manifest.md",
+      "sha256": "88581ee1b9d3f607513c032ed1bb98269e426a17f79fe905f48ed3f89eaba612"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/generated/v1_1_endpoint_inventory.md",
+      "sha256": "bd0679e3d689d36a6afec3222152b4bc9b19b0a8943514dd1552c30bb34d5188"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/generated/v1_1_measurement_contract.md",
+      "sha256": "629a496bdcd0f45478e354084e535ef8c584561b017f983c4507640e9f919fb8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/grid_native_event_phase47c.md",
+      "sha256": "d80f648ba0e5184b48e95e2e3ae51623c55f67edef2b20f635a98bbc3a1055df"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/import_graph_and_rss_floor.md",
+      "sha256": "8f777e0757cd3a87077cf5127bdb105dfdc1460d734f8f3473ae8aaa9ac8f149"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/margin_leverage.md",
+      "sha256": "885163a3dbe689f4594d849199867b93b4939b23441fa16060278d3625708bfc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/migration/context-writer-ir.md",
+      "sha256": "b76aa001eb1a4ec5ff2e619b0688b51b33073850761c8a7cf1b1cd6bafee71b9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/migration/native_release_handoff.md",
+      "sha256": "2499fefaaf589414c20f159cac1fcb89165815e3b7e72f0a2f0a39ef2273a6cc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native/capabilities.md",
+      "sha256": "e938aee16a6208e8ac4cdb8cb9b95a056eea9d1b9618f04102a9a59acf0f5f17"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native/install.md",
+      "sha256": "0a07171cdc8c74f1d7ee9c674aa5ba4fc5d9feb69249c3625ac3d3e7d4c8ad35"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native/public_rust_promotion.md",
+      "sha256": "08ab30d6a487c9c1a88883dc6f9155165e240f0c9ed986f15015ea68435cd62d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native/troubleshooting.md",
+      "sha256": "ebb060561d82b2238c21316353d5c1f0aa9b24431fefc536c35e74e43b656369"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_dual_backend_phase46e.md",
+      "sha256": "29990f2ab87fa90bbb81a4f652c7a47aa786b71684c7340a05ed808f8594caa7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_parity.md",
+      "sha256": "92b039e9a31f8552b24b5e470f14e981d14caa4821f17ed68e78debb4a30f5be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_rust_batched.md",
+      "sha256": "4b499af29786a7cfd402f2d19f71113290648b9ac4f3c01fd4022bed64aa0f02"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_rust_full_contract.md",
+      "sha256": "05a3a074d0dae7e21808043b9a467fcb64ad579d1f5f960df9ea28cd9f30fa89"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_rust_ownership_r2.md",
+      "sha256": "b755b4b912f5e21e3beb758d6ff2febc9f652bdb814d2eaa757f4318ffe3d86d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_event_score_rss.md",
+      "sha256": "f9e4a41235dbd736a65b5c992b854766f417c5928e124d57c5d1c248c96355b4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_prepared_evaluation.md",
+      "sha256": "fbe59cd993ddaf49079b962191859a123c775eadbce4b24b572b4b186a4bd2cf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_prepared_wfo_public.md",
+      "sha256": "95b0b7609120d5e60f9379f94138391464185b4c52427d4707c35101e3fe6b13"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_productization_a5.md",
+      "sha256": "90b209e3518e8e4979c79256882c4b02f295a13f5ffd7dcc6f1df06c7145359f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_runtime_governance.md",
+      "sha256": "cff73ca89d35fc74b88b69eb8982ee1e5b9f9e96b2e11199be183cb9c69a6d3c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_strategy_ir.md",
+      "sha256": "f4cd871e0a1f89e55fa0fa33a80dffdfb736bbcc602a13cadd191b2863431ce8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/native_wfo_runtime.md",
+      "sha256": "50383a2248af735a2fba71ee813f27a376ef0abb6e9e337c4fcb2d60ebb6596a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/nautilus_backend.md",
+      "sha256": "66ac262e85d378bb498f27d4e024a380c76bc071364433e85b3b7a35af2c36cf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/optimization.md",
+      "sha256": "3fa9fcb8cd567d7fe832575de32513df945bbbbcb9ad487b075e50efe0a6ea8d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/options_p0_containment.md",
+      "sha256": "bcc7ac7910d04023163cb6ed6df653b91d6b4af114dbe17f1dcd685ca64b2e4a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/options_v1_2_rust_handoff.md",
+      "sha256": "50c5c11a96c2f9bdb566252c1abadcb04c75963316ab8a0ce91753a03a502451"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/order_fill_policies.md",
+      "sha256": "374b8aaccc0659f591e2b3e924b287c0a090f62753efbf9f29868e76276fe317"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/pair_basket_guide.md",
+      "sha256": "5e4c6cab0ef12c70d3c83cc397a21eb414b7218802dca146df6f03545edbab3b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/benchmarking.md",
+      "sha256": "2fe0b1ea6f78ca76836ce71c2faf0459d1550932d94077ffc2b17cdddc2e21ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/followup_statistical_work.md",
+      "sha256": "e9e9c728c5c220c08e08ded821686e2a239d6b4b98dcb5645e12670d19febde5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/generic_callback_audit_regression.md",
+      "sha256": "81beb249f59ad4e46cb53025ed8c1316ba6ffa4a966a308ce2361e8588fb6940"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/measurement_contract_v1.md",
+      "sha256": "b309a4bdd5a3aaa24059d593927332c50209f44cbbcefcc4a7a5c8698617daa3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/next01_reactive_public_runtime.md",
+      "sha256": "f95b538aecd90ad2d0e02425889de6246f29928b585483622f30b76586383d40"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/next02_fresh_wfo_reactive_wfo.md",
+      "sha256": "ac732bbdc284eeb3ffee623311de48a427e1ab2fddc71edddd6a6ae750365659"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_01_traceability.md",
+      "sha256": "6971ea1e795e13f657e9d23904d2c653bf3cba7966c40a503e508c06deabce0f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_03_reactive_boundary.md",
+      "sha256": "0dff943b835b842e71b93b1e9a3797e1877c0cd8c413e38f0ea2b9327f7fdb33"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_04_native_matching.md",
+      "sha256": "f0d3052e08f9fdad9c5f3457b2c5f9d14e5941416fd7cecff4601092afc1f017"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_05_wfo_evaluation_reuse.md",
+      "sha256": "4c06e774c86496e86cd6f445cfe9cd4b4ddbe5189aac1ae34279cd8bd6fd9ff7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_06_research_audit.md",
+      "sha256": "543e4896d563f915296a25019bd966da4120d770d52882417c86cb79cdd252bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_07_closure.md",
+      "sha256": "59004e1efeea7ae9fee7cf25392383b311f91388b12f398626e42324b77b46bd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_08_wfo_preparation.md",
+      "sha256": "f99a8e0542b485c477f42af2077eeb8019fd34d82e1df919bc61ccd8a522901c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/perf_09_reactive_boundary.md",
+      "sha256": "69c47ec62dd77fee2372417e90fe371beb076d69db692a4a99cfe084e90150ea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/public_wfo_baseline_v1.md",
+      "sha256": "43eb1ca4820e20b7191192edfe8880a9216e4d0a8e3eff28adfde49e2983d6fd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/release_evolution.md",
+      "sha256": "6c5057f3a4b468d85c347cf3554750944edecea3072ac4f97ec73acb4e26ab9e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/performance/workload-classes.md",
+      "sha256": "f77316cb504d3651c9b292b4a836857b4a54a5fafa7dbcd19354fb0920c90b39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/portfolio_engine_v3.md",
+      "sha256": "66b7f39e9cb6d4fddfd48eadb9c5e54f9fb5f8d168eb3e5546c62f98213a70bb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/reactive_wfo.md",
+      "sha256": "1f954e2d70cb88ea6d8a537ff0551345ab3de5eea2aad8c3c752db6e5dc39a19"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/release_packaging.md",
+      "sha256": "1cab66dc02759c58bd6ed890dc9cba52fab8eb1843eb382b0b01aed6ce496148"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/testpypi_release_checklist.md",
+      "sha256": "26041221e7503de26e0ab94d7f4dfb7a2acebd2ab8bac4d25ba31f4908e1f7fd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/vectorized_vs_event_driven.md",
+      "sha256": "9b4243e5ac07b5adf011fd67fd24594dbb31baecf0f71856917b76b5502d4dae"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/walkforward_causal.md",
+      "sha256": "13ae0cb1b546fbe6a60c691c46757133bb74158705ac452cb7b80926834e1056"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/docs/walkforward_methodology_vi.md",
+      "sha256": "37761c48809ccfbdb030c5f8dd1f085476e9f0d8a6d0878b5eb3d010c6e36926"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/README.md",
+      "sha256": "46f5a9b47f07ab78d1d93e748a25c8c5a21928644e2bb17ccb26d475b9c64296"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/_bootstrap.py",
+      "sha256": "dd10b7ededd2dfc9125efdfe173b50dbb44ba494316be54ae5e155b7ed417577"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/arbitrage_basis.py",
+      "sha256": "d21253a7b8927e9046de1e645282880e6af647092a8f0c963159dbcd7cace704"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/dca_grid_ladder.py",
+      "sha256": "7f2a0b1af1cc4ad20f84ecf527d1152bc94264f88a0123257f6b1b5f526a5c0b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/multi_symbol_portfolio.py",
+      "sha256": "6b8353ee1c9c4f62479561e84945bdd0b24ba0ffb374800a4f85214d8a6a508e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/nautilus_explicit_orders.py",
+      "sha256": "83e87150a0c653be6f4c8489c7bf045536fc7f1fcc02f0faf7ff68c5a8c86451"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/nautilus_validation.py",
+      "sha256": "159f44182de97c0e7020666597842ad835bc12ba260c8b9c5202facd1bae66c5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/optimization_workflow.py",
+      "sha256": "9e16c65f049472da391041a38c73ffe5cfc3c8008eb7e935b280fe4ebee39ceb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/_bootstrap.py",
+      "sha256": "99b2f169e265ab3f416a0586b5a76bcbaf6afa896b4b9322f124cdbdf52ce79d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/_mock.py",
+      "sha256": "32600538ccf1eb8bbe548ac70d69584b9724d4a19b8961de4c71b11f9b41e019"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/calendar_spread.py",
+      "sha256": "e596c983a74f2126afb53e5021f342280e8bdfde13b8c40f43b8502ed1e00463"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/covered_call.py",
+      "sha256": "0a7e15abf337a2d48c90faf0104fadec4c4b7948e555b4916ac64fdaccdbdcbf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/deribit_inverse_gamma_scalping.py",
+      "sha256": "542b28553f0399c1fdda98438314db637c345a11b0131702b6c7c9dde7296a10"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/options/linear_spread.py",
+      "sha256": "f858d09e364c572294b0b82b194b8bff33aa04cd639728f097cd84522b1c9590"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/pair_basket_event.py",
+      "sha256": "91fdeadc44004da0327fba80b6fdcd220cb8cdf6b56968130c85de59a2e37f15"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/phase6_public_api.py",
+      "sha256": "6e4e93080cda4edd9888647b054275156c729cbb4b5149e91ca1512d47578b97"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/single_order_event.py",
+      "sha256": "32350ed2afa4b503642bfb17da0161359a94ed36256ce6be73fc27e4e6115233"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/examples/walk_forward_train_test.py",
+      "sha256": "562d2d0f6a9c96aa382c007ee629ae0c562f6638d1a003d698ae685671bff92a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/methodology/walk_forward.md",
+      "sha256": "31603686df330b00dd2b2aa85c937259042289cea1d46751e7c0ac843dee7065"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/pyproject.toml",
+      "sha256": "e3d9f1927d9f48be6a95f30f0091247f38c7b0993d80f474c81e0cea059ee755"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/quantbt_phase34_merge_gate.py",
+      "sha256": "e70c1beba8d7c710fe09db24908687bc84a119ef34f0ef73acbd28d9b7c19bff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/__init__.py",
+      "sha256": "4f26d37be4af908f9ac3383c446fcddc047f484391c82868d14a1ddf483b787d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/__init__.py",
+      "sha256": "9f280c926f2d00202c084910ad57d7f8be22bad50d9825aa675f17d5733833b9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/calendar_oracle.py",
+      "sha256": "06b53e0c6e814367568e9faff5c2c17f58e35d4b73dbd93d09d9958d0a8b04c1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/fill_replay_oracle.py",
+      "sha256": "aa1edbb8fb945eb3d4e4be2e506ffa150b8a8b6d39ea0d2548aa5298fc747067"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/fill_replay_v2_oracle.py",
+      "sha256": "162dad532227d70e6ebaa9e2b810eda3a467ac01e46d9c48ed4801baa586f79e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/instrument_oracle.py",
+      "sha256": "b1ff2bf25ae978cb1e31591be3ef7ec307cdf5f8572cbfdb23f3956125e05c30"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/linear_accounting_oracle.py",
+      "sha256": "34de3d0fd6dff6c4dcfa13c9c702f66013f0867200013d7ba82b5711dc69d40a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/reference/python/timing_oracle.py",
+      "sha256": "e5c7dcab4191a87d19a5049c896c82b8d486ac839ce8d44cda0c2720f3e46c9a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust-toolchain.toml",
+      "sha256": "7458b2d74495e6fb1c1edeea4d5a793705476431dadb60627187111f91441e13"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/Cargo.lock",
+      "sha256": "88bbee3ac74052bea57de2c560472b00cbb63fa7f17eacc0de2d2022058fd5fd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/Cargo.toml",
+      "sha256": "f229e80fca44c127bbf2bf5c0a27d1916a991fe58afe9d56f6a18036e0c44e06"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-batch/Cargo.toml",
+      "sha256": "6e031612c042727cee5f2fcad04bbed750d2c017db56a8e784db1a8fa0ef7ba9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-batch/src/lib.rs",
+      "sha256": "bffbda3ebb6ea8b4b99f2f805b342f3af34cedd959fb80dc8aa43e44a87a07d1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-batch/src/target_wfo.rs",
+      "sha256": "0c33c4785699f97447b08bd51ed17a25c86f35038ce08c9b563c2542fc254314"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/Cargo.toml",
+      "sha256": "d0a3a9fc4ca0ea7ad07c26b61394e5e2790a143cdddebbd5b225ef76d315cb15"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/commands.rs",
+      "sha256": "14cb744a83f5a37d35ea18511e179cb87fbeb8e598180efac6a737beb23077aa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/enums.rs",
+      "sha256": "5655b55dd5a17237b60f42a12cebb234ae8dcf432bd4a3f12bc1ea6ada577c34"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/errors.rs",
+      "sha256": "aa4175838f297d37ec8b6c741377fafa75dab3527dc4b22634d6390e473637ac"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/generated_contracts.rs",
+      "sha256": "59f60a5d9dbb373fd6aed8deaa8e95aad4c07deecb3a9f9118dafabc1c6ecc16"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/generated_product_contracts.rs",
+      "sha256": "f5309bc061aaa61c69a51b83f14d73e4e73c7a47d9f1ecdccde627a3f0d4e3e2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/ids.rs",
+      "sha256": "ca73f338f2195c6afde991b6905d3ec83b36a6a9bb21773734b01b00f84d9dbe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/instrument_v2.rs",
+      "sha256": "92097083aad4087d8c2189a4a3d9d834704842a7ab634e07dc9b43ed2a32e162"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/lib.rs",
+      "sha256": "8eaa42fd12d7f115350406f29f6cdce7e812195d119291729b8403d196c2e6c2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/market_v2.rs",
+      "sha256": "d46b8e8d7e1fb7513cf03fa3316f1b7fc34bf3ae042c4351cb3a5bb400ddd939"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/numeric.rs",
+      "sha256": "329b4fc5b225f86e00168eeea3e58df1a1fa7bbb6b5493043a99ef71d0f0f9cb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-domain/src/trace_v2.rs",
+      "sha256": "f0645cd08a7143f73c5db8a8435c579f4d2da9ca59b78c12b95592099282d156"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/Cargo.toml",
+      "sha256": "1b0385ade0921aa4b0c04a4cb5b9b92faf082676c4c2fc12263a58f820e620b6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/account/linear_v1.rs",
+      "sha256": "e38f2d416dbc3d6f32d985da81084302a9cf032742c5f65a4781b2cc9fb8f843"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/account/mod.rs",
+      "sha256": "643a34aebf1ac9cedb85fd2294907dbce8f29cf9ede917d205bd73ea808983a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/account/positions.rs",
+      "sha256": "4d7f64a06a8cf1c60609c39c0380145741f95632ed786c7b545c3ebf62801e7c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/execution_model.rs",
+      "sha256": "97a148508d8303a055a4153de4ce2fe40142900cb65a136a0461136ceb705a7d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/fill_replay.rs",
+      "sha256": "f45f8cc04d717a3b2d5b8d418ef3625f4d4b6514b85bbbbbb5fd5b94eefdd1b5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/legacy/mod.rs",
+      "sha256": "8c017f3b8c88c41a72b353ba53b9f550620eb961cffbc75a860ce14a4ed36492"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/legacy/types.rs",
+      "sha256": "a665caa229a2b283c76c14ff904428a2645d8849e0548c9d66ef30f009f2608f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/lib.rs",
+      "sha256": "3ddef7950f90a8d4db1d2e324881f9b146873c53c28ff502464d92a161cbb55a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/market.rs",
+      "sha256": "7fee7bc612ec102a06476f5db45a1e35e03e0d2ec4aba4d044f5d1a5d1387a60"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/metrics_v2.rs",
+      "sha256": "3c43b3c600ba125f8a89e8c1879adf6dd41ddf94e5b7b8c5a2862b5966ba49a4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/orders/aliases.rs",
+      "sha256": "7f3c29135e85796ed2ba9b4d82a9b3045df792f5321a8b4635898c04f6e5da4d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/orders/arena.rs",
+      "sha256": "fc94f0c2bb1641feda0d8c9e573a0d48f86a088a397bd50bfe92c7ca45799dbc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/orders/indexes.rs",
+      "sha256": "2bb66f893d06c18b6fd0ae05ae05aeaf4f4124c3857749afe2787723d8c6fbec"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/orders/mod.rs",
+      "sha256": "b83ce325c86f7606024f51a904402229d229a7835fbc70ef8704ee1e30cac955"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/output/mod.rs",
+      "sha256": "87e464d666fdecbd780de1a7a84901711db4d6722c606539a3636eabd5ad95fb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/output/sinks.rs",
+      "sha256": "78a9613210cadcb8ecc18157dc53a86cd3f54adcf147dd08e8985f738d9fceec"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/output/static_tape.rs",
+      "sha256": "a205b56fef10dc6f0f79e5b7097944ffd93de5300c0765e44912efe8323446cd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-engine/src/session.rs",
+      "sha256": "c09fe1d83d48eec52320d2818a94c22850da64cc5c6affc86e1f62e4b731eb1a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/Cargo.toml",
+      "sha256": "a8cc12ceb5af796f72d9cd3201c13ad918b05e10ae9d1c22e5cd026d8b548a9b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/examples/perf02_session_reuse.rs",
+      "sha256": "4f3148c579ecb5c0a028b5e7b8c3dda8e49df630331d47cb7eb99447d394abd6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/src/intrabar.rs",
+      "sha256": "20627717aeff7d8b4b8c420e218c0b248cf708bcefc0769ef129463ae36bc8cd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/src/lib.rs",
+      "sha256": "713301a0d17e51df5832f6db866462a19c01ec07f704fb5f053394977c490803"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/src/package.rs",
+      "sha256": "c3d2ad27cd6fa0d25ace0bda4c9162ba087e66d4c94ca4b15bbd1ef4f8455b7f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-execution/src/target.rs",
+      "sha256": "be4e206e85bb0c3fb6eb77569769041c28862785029f123610f1ae49971496c9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-package/Cargo.toml",
+      "sha256": "f80947317c644bcbff8313896fb46258cce7f42a96b58649f5a8259d52946141"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-package/src/lib.rs",
+      "sha256": "a2f916c140aaf26e3df6b0ca5b43dba3474e811d791058be8e681912bdc83040"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-package/src/v2.rs",
+      "sha256": "1b5c798f45b43ae66740df6221c7cd8000ec715987b767ea3404ed657773d505"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-portfolio/Cargo.toml",
+      "sha256": "eacc5d92e12020ffc44d85d2fbe9fb9f09218976da5f7e215b5ec6e4e602f6e7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-portfolio/src/lib.rs",
+      "sha256": "9274b222e203985a93aa26609c2cfefe3224e632d4024d422fd123d9d850def7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-strategy-ir/Cargo.toml",
+      "sha256": "8671c6e00c4b9933ccbeb83ea6a72c2067141c3b0fc0e0b21dd9b9835aa89066"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/crates/quantbt-strategy-ir/src/lib.rs",
+      "sha256": "bd378d767144f157fb3d4c6cf4d64a87d05fdbf60759185f7a214dbd2ff9f42d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/Cargo.toml",
+      "sha256": "b95072714227cd603cff022f8ed7f55b53fccb950e88ed4b04a5937ccc9966e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/README.md",
+      "sha256": "b9647a719c26d94eb4948cb891356c7faddad365b7a7c6556bcd87fbca3dc44e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/pyproject.toml",
+      "sha256": "d29c3a20f0e08fc619565be3bf9b926cc1edea2e91e12bb0bee762469f0521ca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/src/lib.rs",
+      "sha256": "47dbc25ea3937016dd8acee03e74ce36cd17d16a04f9e35b09f66a1ad878519a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/src/prepared_evaluation.rs",
+      "sha256": "5f5fa37141f3c742e742997613f44a3abbad11b9193131805d50aee82f229193"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/src/reactive_hot_loop.rs",
+      "sha256": "48da705982d40b982314058571b62f0e54cbd33397caa20329a49a9c608ac3e6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/src/reactive_numeric.rs",
+      "sha256": "8e1012c50955a67bc7d6348512af335fe85733edda2545ba8a79184660874b79"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/rust/native_event/src/reactive_score.rs",
+      "sha256": "ea8712efbc5b22befc360cc4681e769911e321349005afb1beb4d5672a560bd6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/__init__.py",
+      "sha256": "1b3e6280930667cfead1d983010b1997055b60fcd0decea402c44a2a21703566"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/__init__.py",
+      "sha256": "0e8c4c0712efe5397e07ea7717fae96018d68707bed510258d2ab5ce3ecc2343"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/__init__.py",
+      "sha256": "b7a8a7c60a67e76abb68c1d6d7c9d03eafd700d4c1ce235eaeef4f435f4e1701"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/_dependency.py",
+      "sha256": "0e3cd279f40d261a60b40395c9e1ea86545819ea588e2747278f1702c583d3be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/backend.py",
+      "sha256": "e0a8a635364e1d817f47defd513bd2fb21050f039e9e9c5deffcd90f197e5808"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/instruments.py",
+      "sha256": "b25a29ea46d2ce0f5e2713326ab9bf2b36363db5fe6eb37c738f2242ead97e72"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/options.py",
+      "sha256": "d182d2c601b1911273088cd0c63ec52e93ca20df3644e9ea04cf7540e57cdd9e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/adapters/nautilus/reports.py",
+      "sha256": "351274d73f8ecf4f2486d8c0b815a198aed608a1d69af20e064a90ddcadb21ea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/api/__init__.py",
+      "sha256": "b636a8ee258eb54be88fb2bea78bd8556ced333d8bdc6ef1fd46d2192afec269"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/api/event_driven.py",
+      "sha256": "59fbd0e77ff70aaac429eac01550af519a430a5133ffa51883420fbb6943b6d2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/__init__.py",
+      "sha256": "3b935f6a1abbb359ae6343ec9398e9e3ac7080c05b8f8e249b6fe765ffecc87a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/_native_event_rust.py",
+      "sha256": "4514fde9fc9920ae0978297084de7b3a19b2dd5ee63def8fda86cbd58f9d1391"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_event.py",
+      "sha256": "4e8d00d81d427580b57eb58cbe1bf32688733068c19bf899c32c847810d274b6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_intrabar_rust.py",
+      "sha256": "700a2813c4b7803c11c68ddc6ad7369405bfde4eccabf8aedfd8a87dafc5767a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_option.py",
+      "sha256": "ba284c53a4ccca9cb2c043f53ecdacd67ac69deea5233f5a44b71c3103d2ed23"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_package_arbitrage.py",
+      "sha256": "a017ed7c1bdb9bed2d38fd9475b478dfaa2b5656108c9a745c26bc766eb879a8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_portfolio.py",
+      "sha256": "2bf87fd144945f4b9a28c7832761a820d3d093e48b18d5a71883037c4b9b1a6b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_portfolio_package.py",
+      "sha256": "212a43c9627773e175f14a5428c94667302f49cae097365cac109266cf91391a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_prepared_evaluation.py",
+      "sha256": "3471748537cc95465bb580852db8a50afc46c7c5da8e3921469671e9cbca210d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_strategy_ir.py",
+      "sha256": "e4d0dc9b74e6a7faa94e7671fba917ba31684c7f7400bc58812b724c84a7fdc0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_vectorized.py",
+      "sha256": "8fb22adab3dee3aa1e9f4702c387d18148f5d50f6ead64cd2ee16135bdb1074b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_wfo.py",
+      "sha256": "33b0354234aec59527fcb7a1f7ac122abeced2da492df0bc12774af2e074b691"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_wfo_public.py",
+      "sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_wfo_support.py",
+      "sha256": "23d3841095bdc11fdab53cbae8b2309e1b2150905ed81e0ef82c9e61372830e8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/native_wfo_target.py",
+      "sha256": "43af9ed0668eee19ebd6d6a9377beed6246bda0d932514be8b48d369e12d6c8d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo.py",
+      "sha256": "a1a1b55abab40dab2b3b6c7fdb37234181e9b23e4d8947576c936289825b2d4a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo_batch.py",
+      "sha256": "0c820db4e78097e2b50b1e5fe5c46837c6fc9c408eafa70dd473e6009aa5ded8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo_batch_selection.py",
+      "sha256": "811d48fefa4008fc70b5e7cbe2ea9a271b7a4a50265c10fb6f6ed34cd987512b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo_preparation.py",
+      "sha256": "e8735b6e70633d7f43cbacf9441541d80326178d7a43567d49928736a7957180"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo_support.py",
+      "sha256": "4b30b79aa8949864d1f7ce9f030f909f692a2fbe58b2c4b08aa806b663e91839"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backends/reactive_wfo_workers.py",
+      "sha256": "cb3b572de8165df2b561c92f9ac9dffff494ae051be439f224886150e8b9e02f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/backtester.py",
+      "sha256": "786c2df170b544f07cba0baa8a80dd4f3540d24a1e7916d8759041e82dee3b4a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/README.md",
+      "sha256": "86b7b3cdff9397b0042dd2d1ea5a4a81620c75fa9218aa2b34217776efd34c7b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/__init__.py",
+      "sha256": "f9304fa943a085bc83deac55dc324c2e9927a55279208a4d5175952f2f9b5a90"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/compare_phase9_parity.py",
+      "sha256": "423d8dfa193311de66b22da5fb6fbc47b1d688406e1bc46ed4f176f6db25d493"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/gamma_scalping_backtestsample.py",
+      "sha256": "00b820c2093a15fd72e28ec78cd6d5532afe09c618c337fd5c1312748075c2bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/phase7_thresholds.json",
+      "sha256": "bad6e0ddf761f3ff449b208bad13dbc99af3164565ee77781a057f751172aadc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/profile_phase7.py",
+      "sha256": "78d859da684b2fa9001fbb49097c612a2e14d791700d1bcbe1031696525d72a9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_arbitrage_phase_e.py",
+      "sha256": "e4af74dd5eefbbd370f7bbc9ef529f1855d499aac19c2fdcd868ff8010e43919"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_optimization_overhead.py",
+      "sha256": "f8dbb2a4160f20e0bb5f444566b0c2e30da62b16ee922e2dabadf9adba8567a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_options_engine.py",
+      "sha256": "f23a0dc2c2dc4c375a2d29e1818a31229b04d9328d76143ce989a6b7b962f5bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_pct_equity_nautilus_smoke.py",
+      "sha256": "70afc73b1868be9dbebae41fb7796168eb52671890a569173172f288a41a4de2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase12_arbitrage_cert.py",
+      "sha256": "9b053d85c0ff1b35158c309b10ce90e45578970b8a3a5366de144945e86a120d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase12_benchmark_nautilus_cert.py",
+      "sha256": "382f31d74467d017c576ed79142128b53661bb552252bce57bfdc343b72fe1ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase13_portfolio_report.py",
+      "sha256": "725090aa656fb79cf7c0dbbb56833950ea0d2306ac5a5d908e1d907bb97a4fd2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase13_wfo_cache.py",
+      "sha256": "77c81d6f3488126b8e4ce2fb2e50c1ed9a8ddb3852c929789107d94b7ddff6a7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase14_service_loop.py",
+      "sha256": "67757fd3186a921bfa2223b6019de332e7292fe8f41c718567a596b4429f65ba"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase15a_nautilus_certification.py",
+      "sha256": "025da7872ce5a9ff49e09f78c5867a128766d8be4bc84b0acf8e84ec3a606058"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase15b_synthetic_depth.py",
+      "sha256": "1585916f04893f75d3c77feac37e087aae39d626f375ecdf1b1b499856ecfe0b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase16_performance_debt.py",
+      "sha256": "57605a5a82b3f7ee119cba47896d5724cfd5a7943420768d281b28b337c88f3a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase30e_reactive_runner.py",
+      "sha256": "98fdf05be0d1588fd970fab3b55af2266e4d84e5665f1039337596667b868367"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase31_intrabar.py",
+      "sha256": "621b936ca6a4d4d6706b399a15ab891bc1cda27407d315aa21c0fff307682fb9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase34a_native_event_memory.py",
+      "sha256": "1a868fcf0693b5a2411fcf76e167477e17dd2da2000d681a059e9e6f5f178ccb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase34b_native_event_prepared_score.py",
+      "sha256": "e5f15c76542427d2d16494f67c5a7e7fab3c11feb82994d6b51087b085dfbd01"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase34c_native_event_single_pass.py",
+      "sha256": "f5128db0fed86e333cb8872cef41abf2353da339e8597ddae1d15d9418bc8331"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase49b_wfo_performance.py",
+      "sha256": "4d87a3530003a98439dffb1c8fc27773bc8534c386bf7602c2f9694c1dc2f341"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_phase7.py",
+      "sha256": "f4d0f659e51bb5e1369cfc4e1b571cd50d12332be4805b5a5329f09cba7989c4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/run_portfolio_real_parity.py",
+      "sha256": "7771927da61f8ff2c7f205757015f29b2cd9694d101a7a6f1fe0508015a6c98b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/benchmarks/v1_1_measurement.py",
+      "sha256": "04c95b903f9afdaa8bd80282a55dcb5ebe480d5456b664fac441dd90de0032a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/__init__.py",
+      "sha256": "13934f04c11849698712fc7fb500e3e4fb0f8a6b693da75c5d8e3ab7be552f41"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/_trace_columns.py",
+      "sha256": "710803cedaf72cd49b5464c7571dd8281ae1b3bd5fb2e45f101ab89e020df0f8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/accounting_contracts.py",
+      "sha256": "58dc454cff177fcdc67efbd59f072e9d6a48c6ec63a1db11715c431078577b8a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/arbitrage.py",
+      "sha256": "3a639611672643006f6ab2be89655e15dfd889ce70913219b0305e147aa54e56"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/basket.py",
+      "sha256": "ea046573d9245d771ec429f92916a87a8afbbc5d0d8811516eb90847a89df0f4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/certification.py",
+      "sha256": "9b1e9ff44f70850165fb48cc035887d688a5ef55989ac9899f12c23a8781ec35"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/constraints.py",
+      "sha256": "e4dec81fedddb817e60cc1ad02e4b5dea9fe400981a66f53e83355bad3299d09"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/engine.py",
+      "sha256": "d9a8003c86290a854f740eec4040822b1c99a124528c582cae4bbc8d58a240f5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/event.py",
+      "sha256": "f6af2e2c1b94d955513520030f8d62be622a1e25ca5fc68169d3dd2726c775af"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/event_contracts.py",
+      "sha256": "850f9b632348265ff22b488aed67ab31d86c581740daad9b9f85696c479f06e5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/execution_contract.py",
+      "sha256": "7ae9868f6922538444860143b86795c9f6e867661950c0182c340b24b8b63fed"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/execution_depth.py",
+      "sha256": "74cb874cb58795c441c77568e6e5c12750a1b06fcebb7529cd0c85d2c8450a5f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/execution_trace.py",
+      "sha256": "47803939a4e03c0a289a4fd955033682f7e5b61c47387d2b0bfe5d19786b4c36"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/fill_replay_v2.py",
+      "sha256": "37f9ee84bdf45f334390bd7182cc5aaff2715d3a0ba1347ff58d23fc2d90bd1b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/generated_native_event_contracts.py",
+      "sha256": "6b2923216bb43f24e4a015e95375c008e60640ad31778c1aff5c4a83c5fd851b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/generated_product_contracts.py",
+      "sha256": "aef8df43f24ec81b7cc1199c12e29d7292ff03595fc43059ec54e6e811d3741c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/instrument_contracts.py",
+      "sha256": "b74c78b63c3d794aadab96203d5dc2ed280ccce6c75cf2f453540f2d8d71074a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/instrument_registry_v2.py",
+      "sha256": "09df11a1334a6e818106c2de477511199092bf010de4e264cc4226f715f55c37"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/intrabar_kernel.py",
+      "sha256": "3a191fd95ee7a3c3607ef1fa9f6449a88a28b55e27731ae478444362522151fd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/intrabar_reference.py",
+      "sha256": "5c6dd10cbbc5803448ea4b0aef43a2ad6c76bc0ac7a75a62839d41988b49b5f5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/intrabar_session.py",
+      "sha256": "9e8e7e0b9f5a7ddb4dd9a90a71282655f2c7636782bb4a20be868074665e3b9f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/market_calendar_v2.py",
+      "sha256": "cbc92b27a07a643f65b95d764f728cd71dd7fc16c186c2744589bef28ba98af2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/market_tape.py",
+      "sha256": "9d1fef7124b76f07fbd13aa7e4a9ae575a2d5fc5ba5f2d4c64088799592cd1ee"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/native_event_capabilities.py",
+      "sha256": "d9a25ba8ebb86976bd1915da68267fd9acf8b5a40516a91cb74c6246bb6e7963"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/native_event_parity.py",
+      "sha256": "887798f28b7df6bd680b681a7662da9aa24602d74430e7c6832daf199cfe0153"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/native_event_promotion.py",
+      "sha256": "c5d2bb150db6161641feb90241a365509c4ef4b1d214536ce4a84ece873b2d54"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/native_result_v2.py",
+      "sha256": "9d6260ead695621e86a683a0f8a4d32b9225d40e0e76c84d29cb42b8e51e096b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/order_compiler.py",
+      "sha256": "f34b389180480c859b33c13a44f57414da59219b0ec054d3b6540b333baaabb1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/orders.py",
+      "sha256": "bf8095486a085641ad9e6db085ec7c1bf6336f5fe4c5badf339d274c39a712bd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/package_execution_contracts.py",
+      "sha256": "49d736a403e3d065554993d4a1c47d82d2774b8a1206e1d602807728e4abf7bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/package_execution_v2.py",
+      "sha256": "81cd0b56d8265410be1df383bcb2f8eb9689bd5ea3167bf5731e89744727a3b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/performance_contracts.py",
+      "sha256": "e364c8e4a0e7e36d751bb34f9a430f368da4317d9d46f124c0f67eb137b19f4d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/portfolio.py",
+      "sha256": "6b4a9ed8a08206e74dbfc6cb9b6fb6d0c2de629d061b5e36572cba9eee24c8f4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/portfolio_execution_contracts.py",
+      "sha256": "3109fc239c27c09f457014a660cf95a3704799c70f1d5e3e9262db9c1f5d28d4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/prepared_execution_v2.py",
+      "sha256": "e8ae915a8b2fddd9a8906fe70678f99801f94e767922eda3ddd7c8046c58a36e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/preprocessor.py",
+      "sha256": "676ca488602c43d1fd03b1ef46867323efb740ebb35e0940b0279935ac0c141d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/product_contracts.py",
+      "sha256": "444639f80f7d31d05ce78608947637f085c681e9fdf2dd7ba223d4deb152292e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/reactive.py",
+      "sha256": "813e8a2f6fcdcaa066c6c9d0220a45459fa55429fe46c42e5fc7070516828055"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/research_audit.py",
+      "sha256": "b7347591cdc7b71b0def67a3417847c56dc33dabf311f6640a8a50633f13c70e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/research_audit_artifact.py",
+      "sha256": "7a5ad9052251b08a85461b273d3fc1bb67f4b29223edc3dd6221c47903058e84"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/results.py",
+      "sha256": "559e17ded4d561b8e98968e0d276fbda4256c322ac2af78cfff06ef5383cbbe3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/runtime_governance.py",
+      "sha256": "c45533abe509cb630c5d9609199d1baeaea402f8d0fdce1167c48b7485826b7d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/schema.py",
+      "sha256": "f3100f136858271f4e20ac900c0d455d10a34546ca54017a5af6742330780304"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/scopes.py",
+      "sha256": "d9f458fdd525ebfdfdb5f51d2d8ca92f5e37b5b2e3d61c98f9f254ae224d4a7b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/structured_orders.py",
+      "sha256": "734b44de5614e5f12a4549aa00d60ba3995b244df84607c6960ab64c63b9f378"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/target_intents.py",
+      "sha256": "8b5466cb6798b686e54ac64efc5a12ac615d2b207c4cdfb8b3142eced1bf1a95"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/types.py",
+      "sha256": "c52a409aeeb21799b393b47b1c658c2f42b371dca1cbc969cc8985c9f7a34eaa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/vectorized.py",
+      "sha256": "80e47a3f2072fd531a789fdfaf1756e2468b60ef73fec3998f1d9187f5f05158"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/wfo_contracts.py",
+      "sha256": "890d73813da6c5e5f464ccb6379e3fda7d6d4957ad645e54428c91956d83f9cf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/wfo_evaluation.py",
+      "sha256": "9148c257954c1c29ee4484984cec15c058d5dbc5c93eb0b5bcd9e3187b5566e6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/core/wfo_preparation.py",
+      "sha256": "c675b1323e2396eafad9ebc26f74151758e5cd24d7a39417f480e5d2596cd551"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/endpoint.py",
+      "sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engine_spi/__init__.py",
+      "sha256": "4258e082784435d7e2bd1674a6c1b32d981f8a702123829abca42b35d73b6226"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engine_spi/errors.py",
+      "sha256": "5eba238f764a57cd17fe6fb0980a0fa052d6ff40f661adb731145212301f9193"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engine_spi/native_event.py",
+      "sha256": "ccde997bc9a18bd5683e30bf5d6e07b04e5b5ddc735b34181b8dd5743432d474"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engine_spi/protocol.py",
+      "sha256": "167b3b1d7e06088d2878c58fc6754560ca56ba58eac521554524a23f1f3bfb42"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engine_spi/registry.py",
+      "sha256": "4d4fbda9c6ed9da48bb56eaabb8a482c91fdf8a18821513008d58a0d46115b18"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/engines.py",
+      "sha256": "56d06df1404ff179a03d008e1d44d5ebf3eeda2dbde31f9ed35ebe07059b9821"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/errors.py",
+      "sha256": "0281de619c4144457f2b81892a1ac7752a32dea0066810a1d129f36e36cc206a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/metrics/__init__.py",
+      "sha256": "0fbb26b47f0417770c2e8ae03280806937a98d9ef34f1eec767a3ea3ded25fa7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/metrics/options_analytics.py",
+      "sha256": "ff74b11243b583b83724b38bf3a0cd57330887166cf81d855d115d31e443c90a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/metrics/performance.py",
+      "sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/__init__.py",
+      "sha256": "f7a7524fd1b8856b63262ceae2fb7fb6bf05b1a1aa7c0adf0dd1448ede23efd2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/bootstrap.py",
+      "sha256": "c2607d3c064eaa00ae07d1883f0eb6b029c2787d08bdd221972ed15471a14b4d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/callbacks.py",
+      "sha256": "6bb8ab0c890f2a2ebdacfae8dd84dcde6db17387acec56ad0aea65636f399d07"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/candidate_selection.py",
+      "sha256": "b33831c811941893f8ac3ca20363f7569637e6edb1d019a8c682bdf951f944ea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/config.py",
+      "sha256": "6b66dc66ef7851720d152d3f06d0d8f792d707b318e450f3d00042c35066a4eb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/constraints.py",
+      "sha256": "20102f6c672040b8a58f290a4c9ecb3116622b24b54ec9c2787085f3700762df"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluator.py",
+      "sha256": "3c53a0dc6ff8dd63cde22b62e369ed3c5637459614327108f019b08deac3d13a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/__init__.py",
+      "sha256": "e74b86ae2ff3990510d5812659064b5ecdf1e701ca2916c431fd6619d7ee75e5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/arbitrage.py",
+      "sha256": "551a13bd6c474e62e911ae54fb7fb65f54b991fa461c72c0f3fdb2e0f246c8fc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/generic.py",
+      "sha256": "bcf66f607681229db112b2865b4821700a53acf8865aa775826484a5d9fd652b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/grid_dca.py",
+      "sha256": "63467ab935751a0e32a369b77630fb95c5f716d4aff66e1e60590aeb8392af39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/intrabar.py",
+      "sha256": "d479e294ea726fcf6ff00d24fea246674245e28ddee081e8e53905067fa16e9d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/native_event.py",
+      "sha256": "fc15924a85f706d4095400fe18a47dd57f984034ee61992ac9fea8a46537d3f9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/options.py",
+      "sha256": "24543d7dfbb282fa86e042c22a1b46399cfb2f42696226ad1742592f8a436460"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/portfolio.py",
+      "sha256": "b046c2c76c1ece2b700e0f841c761aec647c21470e6daff707eccd4724260f4e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/evaluators/signal.py",
+      "sha256": "76af955826ffb8d518922f95c18aece472447d750db7028175528c69a869924f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/multiseed.py",
+      "sha256": "c176ee75b2f78ede05e91617c6fce96fed6be22ce85b0c33823d7a8d3547f7ef"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/objectives.py",
+      "sha256": "b7a661633d5bc77f7e2eef66e1b5f7df1f1439d83c3888de013c39c6859221a8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/optimizer.py",
+      "sha256": "1c801a4a867b352cc53d8740878eea4b73a8a063248293e0b35987a39a8d94b7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/result.py",
+      "sha256": "4a0aa633d6349344bcd0e0101584c48eb51dd7afe5e7293128df64ea8dd1e13f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/samplers.py",
+      "sha256": "21469f4d7c3541342935ad735c86045f3333bba086685719b093c5fc5d6d5c3d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/optimization/space.py",
+      "sha256": "b8897853d0a2ee8e8db9a02a96a4d35c1f66ec680338ce29a287ff317643d979"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/__init__.py",
+      "sha256": "38a4fd52822e8a6da18deb16f018c3ea1c24597f303256dc3453cac4769aca19"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/authority.py",
+      "sha256": "6aa7dd07410f3a6f7e369ca4b844dc2555b562f097c47d9ca46d06be4d3a3622"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/cache.py",
+      "sha256": "2aa7d17c1ab6c7f4e808c56dcc061a2329d679c27a489fa3bf15000b24a4cf42"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/capabilities.py",
+      "sha256": "e7998b5baee8bd7af959ddb9560f6b97962623fd2bcd3a8fb1a246a996cebb89"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/conventions.py",
+      "sha256": "99253429d2c86a52793c774475ff3b843ff68c050defdec294cc59ce4ee1a238"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/data.py",
+      "sha256": "a4a424c7318b2280c712893a79e5162c073e7c9e0a86035b31c5a05237e952ca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/execution.py",
+      "sha256": "1d7263b60dfdb3728e3d8d905200f2e264bd76491c5681de089296df455066db"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/fees.py",
+      "sha256": "e0216ce64999731648983e4ab5f0da069157819eec6e0b5f854bb910be7462bc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/greeks.py",
+      "sha256": "12533ad2c2dc46f017180600d6c6d83958cabe902c6dbfa4010e21643d450ea4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/hedging.py",
+      "sha256": "5cf6c1c7698570e320b2a0efdec2175d8e93ce1e206b36043fdd27c2f14db4b0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/iv.py",
+      "sha256": "f1ac18d1e417afd056b2a8d863a21b74474cf8687299d3c1a0be799d1592b050"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/ledger.py",
+      "sha256": "2edb76cd61638c4d06e0bca6d391f05c68abcdcd4a31335c5d95c764192c73ae"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/lifecycle.py",
+      "sha256": "5c457a63109422c36a6ac70ec323097521d75ab07e250fca01819509304c8f86"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/margin.py",
+      "sha256": "9b5f2d92bd30f8e87c28192d8cd19e33c352bbfbe9042a9dddf1665c5b118784"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/packages.py",
+      "sha256": "8753c7651b4984a47ecc803fd1bb9b2f9605c15edaa81dde8698b90ac3849c32"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/pricing.py",
+      "sha256": "092c9b85629e9802d9c597524dd0615320d76e8575e7af774ee218e94cb59ea8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/reporting.py",
+      "sha256": "e293644e55add28559ee0a256cdecc09ad1d1e0f3efd250282d1f87a908da4c1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/schema.py",
+      "sha256": "dafb8be1ebdb304385a22cb7203f83b1fd7ad6060a72d1477a68df664861cf3c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/selectors.py",
+      "sha256": "46b32ded8b605e33d1c1865eb19d6b01a8c0787a5b4c84d018846a5414208dfc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/strategy.py",
+      "sha256": "58c3b92ffb0018b0595e16c6fd6619c3b6e5008003e765845f88336d6a8917eb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/surface.py",
+      "sha256": "e362dbc2a6e553b513829edc6494c0239cf0eed2904a63080449b9fa808b5907"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/tape.py",
+      "sha256": "88230d39bf1099e262aefdfb187b0f49d5f532d378d7b7d2019661a08494fc66"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/templates/__init__.py",
+      "sha256": "7697d9c1ac2b2986c5b847aff5dee28826bcd368d7e057d3eb873d51fe4ca4d4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/options/templates/packages.py",
+      "sha256": "7d7a5b9caad5496b2bfe8944214f6417cce2127889f1cf41c8b62b42957e3c80"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/__init__.py",
+      "sha256": "3eab06fbf629a7acd79e2e562db6bfa9d606696f31af63ac87d699f061781cf9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/capabilities.py",
+      "sha256": "be935d11443c20482e0cc4c71f49e922616e9e9a05898c9129ed8d5d08428dfa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/fingerprints.py",
+      "sha256": "1ebdb9984c999cce0ec0a963b4de7a5c4071c0c15fad09360ef4e0a972c8e764"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/models.py",
+      "sha256": "3482c08ac569e748de289740c67f5b02e7c1cb7b73ed37ac9ed34132c8cbae1a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/output.py",
+      "sha256": "c6f4a96de6ae113a00178c3d71d7f01ee8123530e8151cbe35c580db13760b9a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/planning/resolve.py",
+      "sha256": "c979b6d29eb4cd0789d0fd7ec36e1f971ccd3b1eb03160d2a6f661e28d123c39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/portfolio.py",
+      "sha256": "a15abfcaa5930a8dde733309d705bff8b2f1707ab1bf962cc0a667b976a8cd84"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/__init__.py",
+      "sha256": "5cf27aac012869d4da67ee4013eade0fc591b45bf8cc37d6cf58fdc3f39dc1d0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/cache.py",
+      "sha256": "db1726ebf1a7758434f2f3a4df75f68f34dc98c975bdb8e3e2875bef196e2042"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/models.py",
+      "sha256": "e73eefd9678dff8d225cd9445ae480fd79aad3c0f92da24475eafc214d69cab8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/native_event.py",
+      "sha256": "e86e3f21f30ed31917119f6792a00013fdbffbaaf75ec83e179f65f725a43328"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/native_execution.py",
+      "sha256": "dcd56ea9ff1430ed976d6c12242b4b8d36b994b7ca4b3626d9c08f66f4a93383"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/native_intrabar_requests.py",
+      "sha256": "71f33a1dc9a1c40e10a29399a8c90be3843db97165ca06a13e18e038463a6b77"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/native_package_requests.py",
+      "sha256": "73ce4781fa601bb159a322cd5f2301205ffb2a2e4622a30bfd5366647c08ede3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/preparation/native_target_requests.py",
+      "sha256": "2a65a206fa1ef31b398e650cde0cda4e3e3df2861608752c213b9fcd8ce222b3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/__init__.py",
+      "sha256": "67f3aa4a9ab0e6f45ea924e59c5aa57abbc5a7740eb442a01c293d01567c8ae0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/arbitrage_audit.py",
+      "sha256": "0c8d7cdfeeaf7b63513c1dd2d8f68458010f4dbb66eae37a1f38d16546ae2c16"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/nautilus_bundle.py",
+      "sha256": "0626ae658a2ba82ddf382e98e679f2bfe80e8df0146ecef42e1413d185c5d4f4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/nautilus_certification.py",
+      "sha256": "138079faf8e3ba29c3c94f5959306c751dee42d3f0c92d113abbc715ce6ce954"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/nautilus_diagnostics.py",
+      "sha256": "8dc6b08cfb4f4684b26a29ae0985c4962c2f0ae21b140d36d5b605b7d4ae7d97"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/parity.py",
+      "sha256": "85960df1286ab89e9c22de896b81717c0033eee6d0e95bd3ad31c72d80d37f24"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/portfolio_audit.py",
+      "sha256": "cba2108155418532ef56f3b5ab493822b87da467140dc880013a148c83c9a200"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/reporting/portfolio_nautilus.py",
+      "sha256": "e4d5b01a7dd6677dd80285c5f7268327b0a2f616eb9219707bf825de5f65fef4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/results/__init__.py",
+      "sha256": "2654b66643495e5f74d5b4f47db553507e7c5331156fee9522067d8b17506774"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/results/raw.py",
+      "sha256": "9d8820c57164f8f4d74d0de03204fa9f398aa5b4778dbc3d7109707baa67668d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/sizing/__init__.py",
+      "sha256": "022272717879a37661d665dce5a8d30f473941eca6002ba9c3fc377a19b303e7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/sizing/fast.py",
+      "sha256": "9bdf758d6f19742fd461bfdfecdcb1adb48a87ebd1238f4fcde0c00a786ead82"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/sizing/modes.py",
+      "sha256": "41a7e60e5b57f68149912025484aae9b98875da83fea485f138748f6993db0b7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/__init__.py",
+      "sha256": "c3faac928954e8724da7b7015224147ecc6c0d11430225ccee2edda0645aed9b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/commands.py",
+      "sha256": "93c4c38b8cb179c6173ac2d843239466fc6a3ac5f0f7f37aaae3a579c988abe4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/context.py",
+      "sha256": "567ec16ab7bfe69f47bf305a4eda440c4a15f8be98884734cbf4a38b831bab93"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/driver.py",
+      "sha256": "a1115c2325fa440b27cdca5c4641bc3191b86e29b7e3227df138deacb3fa3cb2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/native_ir.py",
+      "sha256": "8ad2ba51b691666140eb1478ae987a76fc0077015b6198ace366904d3f444626"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/reactive_protocols.py",
+      "sha256": "d493814d961afdb2afa2962e5f800ba12ceab90c34ae294a6cdb6ff5f748d3f8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/reactive_wfo.py",
+      "sha256": "cef9395fc29f026ae131cbd65ae03d3b99afefe9bff06e515308a93cdc91e1a8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/requirements.py",
+      "sha256": "de46852146cff1cd498656707fff01c2bab79d354e55820c259ab59d07a70d59"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/strategies/wfo_prepared.py",
+      "sha256": "e7a420c4ee61c29bfc60910886a4cbd4fa4fcfc0f163227b3397547995c83fa8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/verification/__init__.py",
+      "sha256": "c4c40d8fb984ceb16a7e3a67635a55a872e32e3c35aa266ea516802f1fe0a5b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/verification/canonical_trace_v2.py",
+      "sha256": "cc3a2377738861928f536a97a0cf3d315e0763c6fd73bbe2f9232ef303fcc391"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/viz/__init__.py",
+      "sha256": "d3469dc0e606bdc5fecd644ff9165be05236763a764d57d9fb6ff93a25b09a47"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/viz/plots.py",
+      "sha256": "68ce68eea6e2bfb51cd4c2ee035f04b08c03fb00036491dfd456f5c845911f81"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/viz/themes.py",
+      "sha256": "da1b6522bae3c8271eeb7001168ad86adb4b82215378bfba872ec41efed7885e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/src/quantbt/walkforward.py",
+      "sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/conftest.py",
+      "sha256": "552f4e461d2135978f209fbd516feb343bce18044dead3bbec675e5bb8fb717c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/corpus/generated/product_contract_cases.json",
+      "sha256": "7b8e5ab1a3c97ae30d451273fd7939457b958fcd67bbce514d67f950903eb712"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/corpus/native_event/phase54a5_full_session.json",
+      "sha256": "d7da6a09c0732fd2a32385de6f0fe58aae91caa52c4777c3f04eedfbb595e98c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/corpus/p0_baseline/commands_single_symbol.json",
+      "sha256": "781beb0e6c209d6934de673e1ccb08dcd42cbfddcdc1cc8caf4af30dbbac59bd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/corpus/p0_baseline/market_single_symbol.json",
+      "sha256": "3d4ae1b56acecd023170d292aa740d1381cbb62f5b9b95e78451e7755867f906"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/corpus/regressions/phase51b/reversal_and_atomic_rollback.json",
+      "sha256": "ee464cf302a2ab153252823c0780222706999a3fd6d6bf8ff19e3b83ea77e04a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/fixtures/accounting_pre_optimization.py",
+      "sha256": "82961bb5499402db98faab91b9a7148d67d4fd7771c96b380014f7b2144566d3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/fixtures/canonical_trace_pre_optimization.py",
+      "sha256": "b2a2e9585b993cc6d18346d1ecd2f8fff051612ae67e2ee1cab220daf239295b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/__init__.py",
+      "sha256": "e1065cb9af286fee08ef3a153fefa89ede00526393ab2789d5dbcd933cbee260"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/conftest.py",
+      "sha256": "ff29b9457cca8effeed5bb0b5dd608141a0cce72bda1009f976821198eeec53a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase47b_full_contract.py",
+      "sha256": "c09c8bc77d14d1ad71099f4f4db6db25b1c857d958e23263ea49763b9d27236c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51a_contract_registry.py",
+      "sha256": "2d31be27762cf5cf6d8bce5983da28f9e696408726ee4e967edc7bb338d47930"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51a_v3_next_open.py",
+      "sha256": "81c74e3d13b43a98a447cab786e04eb70a211555564c2ca1b97816975bd1f9f1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51b_accounting_numeric.py",
+      "sha256": "c1a9c554bd808114675c7683b70be02a5606bcf10ab35cfa2d155ef5f5e88fec"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51b_capability_wheel.py",
+      "sha256": "de9ad209f2de44f8dbf271a02c6ad024c8c53ad23a1b69af5c30c23c1bcb8331"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51b_portfolio_package.py",
+      "sha256": "b4bbc1c2baaa5637293d2eeea503ced9b6d2ac47ca57e6d4c390972ef92d313d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase51b_trace_replay.py",
+      "sha256": "cbcdc6e05a0f963c036454833f70621fcad6e499e8e26edd5f06bec36f0c87aa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase52a_endpoint_pipeline.py",
+      "sha256": "286e042f60aec6bffadc6d3d629028ec11e4eefca5fef5a3c33e4dc832fcdb53"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase52a_engine_spi.py",
+      "sha256": "f058d682eed7f975085ce843b0021418bcdc8d359513c254ba755b27beb2997b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase52a_import_boundaries.py",
+      "sha256": "fcdcbf1e1d3d38f93ca7c8591c9d113bff6c76a3abcfb0c2a2b65904e82ac483"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase52a_planning.py",
+      "sha256": "95b09979cc4c99e355e618b18203b7ba7646c090d8f3117830ea342f50c8c453"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase52a_preparation.py",
+      "sha256": "60a3f64ad49fd36a790bdde52d3909e49129c4da8e48d4ab7d07db69d27fbd26"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase53a_pure_rust_core.py",
+      "sha256": "6ec4d645ec413bafe4c08c580cbebcf672377aaae240941c9ee3e0d33060112f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase53b_native_drivers.py",
+      "sha256": "8beab2961f9f39a9910737d5ed19d00886b67ff5d6e29debf0e2895c49fc4bb0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase54a_productization.py",
+      "sha256": "ddc63b54511db38fb2a4a5537fbbed58e6e326068fb96647bdfeb9d4572537e7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase54b1_native_promotion.py",
+      "sha256": "f7db60cf13133b8e2bfe1121ffda1a31401624fc87a3435765becfd6c199bef4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase54b2_rust_first_routes.py",
+      "sha256": "9def45d08707d0d6609858754ce7f4e68903e5ca168e8b3910da061837e7cd21"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase54b3_portfolio_package_promotion.py",
+      "sha256": "2f2837ad4440ab3e051ee9d2ea9b4c44f5a2f7884f6741ccf68e085419aacdef"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/contract/test_phase54b4_release_handoff.py",
+      "sha256": "a1994a074746e7432d889d1895f1c3e60761f26460fb8af62e271045b9853a7d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase46e_dual_backend_contract.py",
+      "sha256": "72cb429d7960f857dbfd7a5e4c2addd17a7a819739edf21aee1639047c986b82"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase48e1_closure.py",
+      "sha256": "737219c7f35a1fb12ae3ae82c8ade5b3be5803b135585a577766130bba6a547d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase48e_reuse.py",
+      "sha256": "abf17704278ec73fcdfb8a518353c2cea8931650ed0aa3f2b7d9789fa7bc60af"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase52b_ownership_cache_audit.py",
+      "sha256": "cf43eba1eb2c97f3093a959e833c046a21da9ddf602aff739d27d64875cb42b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase52b_strategy_boundary.py",
+      "sha256": "a795ca24b89788bca5095827ce73496e25e7d665e2d14a4b28e9b507c78d6059"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase54a5_differential_corpus.py",
+      "sha256": "a833258b6cb463804af8ab89d152325e3fb37910237c9745091549f4f60fe454"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase54a5_one_rust_execution_core.py",
+      "sha256": "69a15ef5013a8975282fdbad893ab88c916f142d40996712f632b98a6fd66a10"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase54a5_prepared_cache_boundary.py",
+      "sha256": "5d5188dd60439ad23dcf03e4f5dcfda2da0b0ea2d9d184cd2d79b52c28727de9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_phase54a5_typed_execution_request.py",
+      "sha256": "197712321579d833fd4f82f145d39ba5b895abba12ef1887580a41c8e188f1b6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_reactive_accounting_parity.py",
+      "sha256": "7417b4f3ece8fa31a6cd7c1df733ee5a26c5e133511813775b97152937ac879a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_reactive_backend_matrix.py",
+      "sha256": "50daa87e192fe2e3be8f416416ed5469da8866bebfeeb381a8dfacc8725a3565"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_reactive_callback_contract.py",
+      "sha256": "82f8fb17ff605e78c56ed622f508fe2dcfb76f7d4f624f0cd17fd4cc07f4cf70"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_reactive_lifecycle_parity.py",
+      "sha256": "8e6d0e81fcacb63f0fcde1ff8bc32119dba84b633b1ffc8663f64249875a6114"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_reactive_memory_lifetime.py",
+      "sha256": "b252cdbb98a7ee36e6c1b8f77805d7259574e9a393d3fad8d4569a843bbee4ff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_rust_batched_full_tape.py",
+      "sha256": "0f6cf095fab97d9ef6fcb13cc759db00f9047828883cf0af1668e19cd65bc1df"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_rust_batched_sparse.py",
+      "sha256": "47f28d0404d04068c9ae23eeef28d433ef700fdce2ba497d042f9a38fcfbd26d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_rust_phase46d_ownership.py",
+      "sha256": "9ec80b33314f4b18caa3aa392645afab3baf11d391e2d685ae512f399698d318"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_rust_r0_fallback.py",
+      "sha256": "9a1c913c60680e409c8d5cacb3c4c5e7ef4720ac01ad564da4a8ae5b96719743"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/native_event/test_rust_r1_single_symbol.py",
+      "sha256": "3a58068d191624b6bd8b6a4f88cd2d6f0a0be4386e7fa7c4033cbf5f4591d7c3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/conftest.py",
+      "sha256": "88441489f7cf402db3a8127f86f270639bd8e1f3959630dd37153077c8bd7528"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_endpoint_contract.py",
+      "sha256": "e95a1cd5d9aa8ab2119256a9514a0a31017f1870cbefe4c08b79154395e7061a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_fuzz_invalid_data.py",
+      "sha256": "3937e25e4f6c10d76d25316c2d27a004b63185d136a58abf1c50e5c40f339d13"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_nautilus_options.py",
+      "sha256": "e5bad378dad606fd82c63d2887ae4038df9018e82c01dbe653282a7c1629ffbe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase1_data.py",
+      "sha256": "17c2aaba8fa17ca44e93a772f86a467bbfcd73605f2bb3dfdd6ba1495d2711e8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase1_schema_conventions.py",
+      "sha256": "5995b145ee65b2e5bf5ded16920ae692d0e00997b1ce325beebcac53e44ac983"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase2_greeks.py",
+      "sha256": "7b5717ecaaca351f305863b0d8536c61d9b4199940becde57450f4e4ed4a5d4b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase2_inverse_conventions.py",
+      "sha256": "d810414f94e15e3dcd28680fe4cb53269976ab69b44ef5d6e33b291a99a82c54"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase2_iv.py",
+      "sha256": "b69fd10f83d8d158a4d05a01fe37e67e0eb4fd6ff90e1e17c1283702cb4bf00a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase2_pricing.py",
+      "sha256": "8a782d175c01c5ddfa11318c6880a8d0c560f3a22f83be3a5240d6c36ef2bd93"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase2_surface.py",
+      "sha256": "e95c1b81001c6168b4dff1e292c4805685ee1deac1382ce8c649aa6928fc3700"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase3_no_lookahead.py",
+      "sha256": "23e1ec23df64363055267d7464cc0884fcc522e1626c65d1b37c9fa907bed38b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase3_selectors.py",
+      "sha256": "f1fa7315121ca0959fbd1bcfada30e1717036885f0f53dae0bff9c88f97f6353"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase3_tape.py",
+      "sha256": "7b7caa598c72bf34cd1e7922fd9d2bfa19459a72aa2a94fd073af1db7b5a4adf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase4_execution.py",
+      "sha256": "6bd1cfc0d139c355f336f37b19627c48b67d503ac7d766a383bbe31fc2c3b3d0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase4_packages.py",
+      "sha256": "e1b53728a4c9545e5015302a0668aec12516b872a8836fc144784c6c52c617bc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase5_fees.py",
+      "sha256": "7f0e382b7adb2eeffe27fb5b0623205058b8578bdb9ef48634eab1b6d28e34f9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase5_ledger.py",
+      "sha256": "54a7dfd7bc9a82cbe06f34ed3c8ffd12183324c62f7e4ab7d2898d20ed713264"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase5_lifecycle.py",
+      "sha256": "8cf4cbb5dae7d35dd3a511f95c0dc6dcf4448b0ba0d4ec4adee7fd223199566f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase6_hedging.py",
+      "sha256": "e5c71025c0b3b4b6e162b1a5c327d23fae94838918deb078e028f3e971a6ab22"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase6_margin.py",
+      "sha256": "9e1e38fe9e2bee70c4a1f4e2a41726314b2e5a0a469748ef6a35e7a836a31e66"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_phase70_correctness_containment.py",
+      "sha256": "df9fe0333f56ccfdb4531a25411725bb43927a76bd0f9c68735fe83bd2f52e6f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_result_contract.py",
+      "sha256": "4c1b9e6d74bc46301fd67ff255ea7eaa68eec0614f561866b3c5a6fb89d61865"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_strategy_adapter_contract.py",
+      "sha256": "032c699c01da6c55617409c966efb173ed290ecfb153be9c3141b685d7ce239e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/options/test_strategy_payoffs.py",
+      "sha256": "3d2c0fd28341d1295c1a8c71cae313c72acd83df191db9c15bcf9db04f5df1b1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_endpoint.py",
+      "sha256": "26145004d558333e317e06a50a8ad7a3579ecdabfadabcec7cf1112bad96ecfc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_followup_statistical_work.py",
+      "sha256": "d4dfb5ad682745533aaedb5b15253872900bea93603e4f0a2af966075c790fce"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_gate_paired_timings.py",
+      "sha256": "f43fc359fcc339013580a74def692d66724990834784b142d333f4e2956787bb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_generic_callback_audit_regression.py",
+      "sha256": "35e4fc00830ef8c83e2a665a3b4a1401e73afa5c3abbf0f438e68a245744755c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_metrics_intraday_scope.py",
+      "sha256": "1f91f945fe89d640dbec3e794229a90ff4f90c10f986fa7bad84eda1523815c8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_native_release_evidence_hygiene.py",
+      "sha256": "e1001f40a354aac7e82308c74d62cb6587bba3d6a906d7fe9ee99012457432ad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next01_reactive_public_runtime.py",
+      "sha256": "aad8fa3bd7c2994488fff0d6729074aaad9c719c66e8db7a72aadd8a4eaea5ab"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next02_reactive_wfo_benchmark.py",
+      "sha256": "e1dd111564a5a69d4ae8b5bebb7bba1e2789ec3e8dd926c4cd256096639318e7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next03_canonical_source_layout.py",
+      "sha256": "7b1cbc478e3a118aaedd6c6b6ba7143b4a551614908f6611f535f5271db5e05d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next03_capability_surface.py",
+      "sha256": "966584155fde6fbfeddf7e050c3dfa6b0208d779e0516eef5b4d1611d16970fd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next03_clean_consumer_proof.py",
+      "sha256": "30753a63ed47aa12205a871fe64b657531991a8b54be59b2cfa9323c400edc61"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next03_product_qualification.py",
+      "sha256": "8578e2f6aa5ac9134a90fc57707cf4acc6f4118f8e87da0199c16963692a39be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_next03_source_inventory.py",
+      "sha256": "b46719566bc08cd0cd5199d85241515a7de61ec38d4d3b12b9372638559207eb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_optimization_core.py",
+      "sha256": "81c7648ebd9525b9a0d74cd97395c0eea8df1e06c0d31e58774af461f5a7fcbc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_optimization_evaluators.py",
+      "sha256": "ddbec5fe424a7d245924ad35bab0f3872988a337c7a305d767a2668b33012364"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_optimization_integration.py",
+      "sha256": "0d07c54a02c5b203a7c59ee2d5b0e4afcb1c9ba4c0fb888b336cb6508b6c53a9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_optimization_phase33b.py",
+      "sha256": "8b51c6197395ff878134517d172ee2149cac9bc53e4490d81b272a70adce2867"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_optimization_samplers.py",
+      "sha256": "fe0d6f2622829b5d72f09677fa3c1c4d013bd37aa25a22bfbbbd7fce0176377a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_pct_equity_nautilus_smoke.py",
+      "sha256": "87a5cc2e8a91d1721dcd332a72d3ec0b73c80d2ed3e3a7737fa4e1c805c090c2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_01_traceability_and_computation.py",
+      "sha256": "d8d62562b52bb423e19b9c4b8698a3a5318bcdf55451e314c60d015c321b461b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_02_session_reuse.py",
+      "sha256": "d9a312a9936f221e120d4d5dcfbe5829af2c4d2ce38a6d2109a5f81de2389e3b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_03_reactive_boundary.py",
+      "sha256": "58b06d539a4d74b0376203b51f4ac3dbe8666fe2dd2e6e69717b67b767b5de4d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_04_native_matching.py",
+      "sha256": "dcbe88e17a28190f557c28bf6efe63bc1a2580d8485709fadf32d5d13cfe5584"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_05_wfo_evaluation_reuse.py",
+      "sha256": "3338edf376c5be98f8c1d336246c8513477af467559280a94b62a081dc140fdc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_06_research_audit.py",
+      "sha256": "5f5867cbd78f8cb56e89ecb41c843426dd03320ba20e9a7e4ec84019fb487cf0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_07_performance_closure.py",
+      "sha256": "f48c10f78a52a25a093f918b5fbfe48c53eefe82268911a1925594b1c01a4963"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_08_wfo_preparation.py",
+      "sha256": "f7cc60b628a69f0129e011ff3b73dca2ba51da627b094d207cfcd84d6da799c8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_perf_09_reactive_boundary.py",
+      "sha256": "6e5cce58fa9fbd7c9b83d3d42243093bd9b7a050508fb44916ab7ae27a4f9fe9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase0_baseline.py",
+      "sha256": "2051e0b3e92b1b12461dc1e03cb0616b0f1d54ee23dc6c072a5a472094f2bb3d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_native_portfolio_backend.py",
+      "sha256": "691f504522c1542190e446ce2ab78ec7ec6ec837a0518922b0a8d41a7c73cbd6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_native_portfolio_full_surface.py",
+      "sha256": "ebdb0e8e08a0e9bbca291564df9cc1baee2a892401d3fc79a24ef06488629ffb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_portfolio_engine_spec.py",
+      "sha256": "24af56bbc8cb94882d8ee3e9e0b139c8615dde1136aafe703b6f797ae8240054"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_portfolio_institutional_scenarios.py",
+      "sha256": "57f103bb9c745dc2c35ab9a6b0893a9f74f6121a81db706783ca26e64354262f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_portfolio_nautilus_validation.py",
+      "sha256": "a460951bc9c6516755004476035c8ecfba512305c97ff19d29dcffaf5f5c8c8b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase11_portfolio_real_parity_script.py",
+      "sha256": "dbc149a83c8a0af96c0d68acc5734d981d6ce96d49a56c8cfc957a3018bdac39"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase12_arbitrage_certification.py",
+      "sha256": "00a137ef212778015848c943c03fab2936d9e559a8da45eb5f8cc29fcd3cfc78"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase12_benchmark_nautilus_cert.py",
+      "sha256": "45aa1b9bd1a9984dd3559bc2632f206a11f88c656976dd78d5da76a1f258eadb"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase13_arbitrage_certification_cleanup.py",
+      "sha256": "c258d6cbefc8dc7c0ab3ebcf634dd91a5d8e528eeafdcd5cb2a30f30acd8ffa8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase13_portfolio_report_parity.py",
+      "sha256": "b50216a8e756abfe731bc67ffd404c30e586851a66670f4ad7995b8f12aa61ff"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase14_service_loop_benchmark.py",
+      "sha256": "606b29a9efafb367970be2e8bc0059448041b6dc0c439215a83aac98a80c0a28"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase14c_prepared_report_levels.py",
+      "sha256": "ac62451516900a2609c7c3bc5ce094c3459248afb87c6a1be2b0395eb3a6f916"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase15a_nautilus_certification.py",
+      "sha256": "6199d78fffd6ed9b7a43685d14046d91d8d586164f45ee096e209d5210983c4b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase15b_synthetic_depth.py",
+      "sha256": "1a0decaf54c4996f30f37c6609c03d7a8b93390c190e824485a8902cf985face"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase16_prepared_service_context.py",
+      "sha256": "3e56565a48dfca6c22a255181fc500cdb3f22a767ba42376483ccafe0de2d2b8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase1_schema.py",
+      "sha256": "b9cc046b0fa502afac7c8c4113e3fa71af3fb6f3d72c3166d715a1833af6e747"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase2_native_vectorized.py",
+      "sha256": "04b076193fb265ee268b9dd34bcb6c71baf7ad2fbdb93de0e6927f3c90e2a7d7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase30a_native_event_lifecycle_contract.py",
+      "sha256": "e48ab4e805b4c904d916bcc518eb98bf6543404294309a9acc46d1e14e70026b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase30b_native_event_lifecycle_kernel.py",
+      "sha256": "d7fd17ac63bae3e1cd4cac25960d05451eaaf830727e2c00051ef8aff87ae4a1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase30c_native_event_endpoint_lifecycle.py",
+      "sha256": "ce84d919197d1573f212993c6378e88bc72cd4eb03c0ab133ae6152c6b3c16d8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase30d_native_event_reactive_runner.py",
+      "sha256": "e7b683a7949bdc1ef157d6dbabea434bf31a76978950d1b045430328a74f1509"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase30e_native_event_incremental_runner.py",
+      "sha256": "72088e49a4a7fc5bf900b96b72cdae5699e61bb0d0995c3b2418789a11759691"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31_merge_blockers.py",
+      "sha256": "9458153a78fe3c790c4d1f5eac82be4baa0334560e0bb8624ede6d5aa79b8b01"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31a_execution_correctness_contract.py",
+      "sha256": "4efb55292be982306c394d4c5a309bac633f6024e08d5519d076d1adec42c4bc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31b_market_tape_intrabar_oracle.py",
+      "sha256": "33e4fd547be70f54723e0af446cbc7c6d0d7b8b404c2213bf6e6179fbaaacc98"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31c_intrabar_kernel.py",
+      "sha256": "39b4377c28bd5d760d512c75b8bccc3b160457a5d7d7c354282e80b999db856c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31d_certification.py",
+      "sha256": "1c2c9493c95c04bc62edabd96ed2ba598dca96dff2ce0271f7e647f1f8046a05"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase31h_intrabar_session_reference.py",
+      "sha256": "62417d9b327794704336cd002bf2b1247798a25a1012a12be777eecaaf2782b6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase34a_native_event_artifacts.py",
+      "sha256": "251d9bf30e12180d5ae464ec425d58c18daf7be6dd6d8cc7e5be6f4fa4a68e53"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase34b_native_event_prepared_score.py",
+      "sha256": "573b93b6239152615bc84063ce530cd89514df8b0631e5608b937f8194891045"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase34c_native_event_single_pass.py",
+      "sha256": "be39f45355ec834e739f6a106917ed34f9c2442ce9ddac86ee0cf3ab658f80d0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase3_native_event.py",
+      "sha256": "ac0dd3158763c06ec105302badbe81e8dfcc247a07ee046fdfb95fd5275d3bad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase42_packaging_layout.py",
+      "sha256": "75647923f4c9895594d0c613b0a3730ff2e8f280a58514424cac9d64d7293c52"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase42c_ci_release.py",
+      "sha256": "218ef31b4152a1ee172545cb99cdd758ce7695891e0a278500a438634f654982"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase45a_source_tree_sync.py",
+      "sha256": "a3edcfb6c120eedb571a7171c58b85764fb0fc813e5db08bdeac464861467d5b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase45d_native_event_zero_object.py",
+      "sha256": "792591ef17167aec69a302165639ac664edd1cbddf6ae5b4ae256e7ee7f21d75"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase46a_correctness_certification.py",
+      "sha256": "7251e33f93297b217e72be3aa54d09b58b43feb91ed8c87efa257e1f6194d8a3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase46b_score_rss.py",
+      "sha256": "2720518aa573be407259b7ee89808eee4b2825bf138886df11310d97f083e037"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase46c_import_graph.py",
+      "sha256": "0252c3d38c01320afd96bc7b6d68b2f905e1ca63ce3c330a9296c792a64362b0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase46f_packaging_release.py",
+      "sha256": "6ad73fa40eaeeda439cc8d90f9a8ff25ffca454bf5edb960fdc776088d38e9c8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase47a_grid_adapter.py",
+      "sha256": "7a18db8b8a33c97be3236b35b84069af93f87d1dd81b9059b131f0cf5356c1ad"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase47c_grid_parity.py",
+      "sha256": "178083e5f61e19d8a3921eb9edd53e981b95d1a0ac1b5d4043b300f1f8b6a339"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase47d_grid_optimizer.py",
+      "sha256": "df80bcb8f1a9c73ce3acb35c09608bf6bd69b4698831f95411483dc519296c5f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase48a_release_surfaces.py",
+      "sha256": "d7f8f167133840791a11e93c5dd4c04c8b8185e80e94ba4e236002845d62827f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase48b_release_hygiene.py",
+      "sha256": "e5d2c6c2c75a8113b502ca25d4bc174cd4f3bb5604a9d0a9e8df72fd5191b374"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase48c_event_driven_facade.py",
+      "sha256": "ebd68c93b59621ad09ba96f6b72309658168e8545664cffc670280912b7a82aa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase48f_release_gate.py",
+      "sha256": "a37e46701d1ab3468c2e477d7f395ce114615cac38e3c4baaad241d71c9ab8a5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase49a_walkforward_schedules.py",
+      "sha256": "cf3cc1be880327805ad2e455d92c856d9f35e6026b10da0b5bda508826f02c84"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase49b_wfo_performance.py",
+      "sha256": "e2b1162089f08d5af3ee13f338d0d26227356dd35160a31514f5a65cad54fe1a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase4_basket.py",
+      "sha256": "257d620b29300363bdb8ebfcfc5218dfd2033c563c1107d71933db4b8999bdec"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase50_nested_mode1_causal.py",
+      "sha256": "6a60dc09d1e915be3a9666d556f0c16b28c8cf4d989d0072f7ea46415d4198e8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase54b2_benchmark_policy.py",
+      "sha256": "1774d46f70765654f63f8891e8c311365f383dae618cd94e0416cfd613fa8aea"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase55a_native_distribution.py",
+      "sha256": "3f8c71ae883e86933eaba56e49426950e255f559bc4474622f1e9e8671ec5742"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase55b_public_release.py",
+      "sha256": "3344580c8bff7f43b660eba349391e8ecc2355bfae6ce8b78197cc6fc05039bd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase56_v1_1_baseline.py",
+      "sha256": "197711d4d786c00454addbc5eb598c703ce07e9732d87056e8df2dcede428748"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase57_v1_1_specs_oracle_trace.py",
+      "sha256": "147210a2f78a20846344345ad23d154d4f88215742f1c777f7f479848d413b20"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase58_market_calendar_instrument_v2.py",
+      "sha256": "5366e101f1bf67a8eee239d77fdfb00a1f730afd490f2c4db444665788892c42"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase59_linear_accounting_fill_replay.py",
+      "sha256": "8e45a8b61b66c79318ab09123c23914e05160450021f6ed7a10b78be5d451c4c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_1_nautilus_report_bundle.py",
+      "sha256": "a41e88d89926a7adfbba52da32bbc5846c56c4d09f97be91895519b4d2d01417"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_3_arbitrage_audit.py",
+      "sha256": "8faed506b00036c44e92406386d186428a45efc152bc4307550038d8fa2ddbe6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_3_institutional_simulations.py",
+      "sha256": "0121c26d9b3ea29cf10b245041d11e7aa880b38a3a0eba588e906b4c7a867bca"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_3_portfolio_audit.py",
+      "sha256": "b12f1d25ff8b44ffdd856f4fddf71835445336060a3de06d2a8a7d5c9b50fc72"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_4_debt_domain_validation.py",
+      "sha256": "bb2fcfcfa1bff959609203fd2074971c8989c68199cfaf33e784011bbbecbdba"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_4_endpoint_depth.py",
+      "sha256": "fcd12b6107889c390ee85ec4e684688b3a643bff2dd564b54ca1141018e0254c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_4_nautilus_depth.py",
+      "sha256": "f75448b3942034dadb54996a8290c21304e7b5a655d8bf2d1ff996f4f5360a54"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase5_nautilus_adapter.py",
+      "sha256": "8b4c91f6e14e78e9150fdbec3de660706d286cfe47bdb3fe015558accb1b3029"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase60_execution_metrics_native_result.py",
+      "sha256": "094a14819c6374764c76b234cb212622ddb82f3253e2ce684d9992543cb17ea8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase61_static_event_rust_primary.py",
+      "sha256": "98142922f388579a017c015b15cd7a996c70f17e7cff2e09694f9d16544d2592"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase62_reactive_numeric_coruntime.py",
+      "sha256": "253a857d51510f67a335c98c13ad876d049ac46f2138cfa8943285306769695a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase63_sparse_block_reactive.py",
+      "sha256": "7b9c42d7fbbc29a1b3d1fc24d2d9bb3b78d0fae7e5daf2b16c33d5bd48dc7a56"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase64_wfo_correctness.py",
+      "sha256": "2938d318c1d3aed68c198c8b52d911fdd82f4158cc17619178056ed3d9a667be"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase65_native_wfo_runtime.py",
+      "sha256": "2c93c4f28bfcf26227c1c3755c1b4a54c6f091aa9d874b7664b1bc069b934360"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase66_rust_target_vectorized.py",
+      "sha256": "4d11f02cf5d37119f362b782551e19c1044e377f00bd0a96f51815a91babdfa2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase67_rust_shared_portfolio.py",
+      "sha256": "ab5271def399008c30dabac4a3a17bbed7e86e667c1bb2e6ecf74e61f7d3ad2a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase68_rust_package_authority.py",
+      "sha256": "3bca4c2837c687451022bf742b366ecbedb512a62f54d9d33f59c18c1ba54af6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase69_rust_intrabar_authority.py",
+      "sha256": "ba83aa50b140b9bc542b4afe23536299d3c868724ac607c0b74dfef2408e1295"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase6_public_api.py",
+      "sha256": "53d0761c37cc0742a5b510f7c3595c84415eae0f623643398944bf61a70e5aa5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase71_runtime_productization.py",
+      "sha256": "55080edba0fdc57bf16a7bcc5cac2198c073baae1ed54dcb7b2da6fc2ee3b775"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase72_measurement_contract.py",
+      "sha256": "fa2ebd9bb8389bd226e85247a119302f1eae63a6bf69882f762e096a520352e3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase73_prepared_evaluation.py",
+      "sha256": "9ba0bcf45efe796244b87d753abc30b347807bedf6fb93c966a664050947f70a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase74_public_wfo_native.py",
+      "sha256": "4bc394ea2582252415733c59ea8d2d995eb545a14fc9568a4660d2da57fe5bba"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase75_reactive_scalar_retention.py",
+      "sha256": "31aa9e05ea693a2120f9c49a6583b3ca8f8eaaba56b50862d362bdee97f9b8e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase76_reactive_wfo.py",
+      "sha256": "741c367eac173a76426a7936acf58acf487573cf0b2e6173fbe2492ecb5a18a6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase77_1_measurement_contract.py",
+      "sha256": "b487986b1ee3a86141e5cfa1ccd123db8599649f443d079d95510044c3a7f4d7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase77_2_pct_equity_native.py",
+      "sha256": "a30e921bf2fbbfd74813796ee1f4e346db9c4628cdc65bee56ee4702c5f70c19"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase77_3_kernel_resource_parity.py",
+      "sha256": "da9bece19ce6a17c4dfcb75df41adc9cdb701b59b865160e4462d294c1abb02f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase77_3_reactive_parity.py",
+      "sha256": "c228e8e9b2a40baa8187a8b090d2ce22167fcf178eda926b3c103b6fc89b574f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase77_native_performance_parity.py",
+      "sha256": "be2306e8f68e63198506f5d07138ac6a71ebf69ff032a24d725268b548616e88"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase78_public_release_closure.py",
+      "sha256": "b5ee52773e2b0d8dca026f8528d594a78d5561226955b19c94c8ad5c93f4a201"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase7_benchmark_suite.py",
+      "sha256": "c8e5219bb7c1a55b45671480f60ae956f543606e4299c8afe9bd1eca0c3a30b8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_a.py",
+      "sha256": "7e77dc0513f8626d486642a1bc5059a4835e16aee26171c3c8e1ccfd3121d6cd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_b.py",
+      "sha256": "f03edf17931364dd1c4f74a8a2b8e459b89e9f46b1e5cc5d6c2d0ff8ac578cfe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_c.py",
+      "sha256": "43b5eecf5243be305cdc1fad42dbc98897b36350241a10a58cab89f029c86294"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_d.py",
+      "sha256": "ca71077caeab843679f6c98fc40d84be24891ed1f38bb29bca646562383306ef"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_e.py",
+      "sha256": "8e78f1f4fe12d8dfce0cf820a101eceb1731efc50f57783674800f7944e54413"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_f.py",
+      "sha256": "44bd7d532b54e25e67787519e647ccdf10328f13a8979fad761014f66cf53fd1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_g.py",
+      "sha256": "4c66ee183de237871c61b742a4507fdb5d52e9eaa7974a2a6c502ffdf1726729"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase8_arbitrage_phase_h.py",
+      "sha256": "126cf8542139eaa2966d93d6fd51cb1fe2a76609de0265633171062f62f7dec3"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_phase9_performance_parity.py",
+      "sha256": "945e25cb19811ac1fdcb67103425126aec916215357a053fe41745274d5c9ea7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_pre48e_native_event_fast_paths.py",
+      "sha256": "141a98fc45c3ec70384af63eead75eb380962a151ef8adacd4a01bdfd8c3a193"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_real.py",
+      "sha256": "dfcf3e5a88d6af28610226d214c32fa4262c5c682b81e9fb82deec305c5fc3aa"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_real_endpoints.py",
+      "sha256": "c1b33a2389447930a18bc45b8b53765ce6361d5c8c6f9f0386a4fd29fcf62017"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_release_channel_policy.py",
+      "sha256": "345d5d860855b24fadc3d71ea61a08ca4eed951011dd2d46150e73c63b6beebe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_release_evidence_hygiene.py",
+      "sha256": "5dbbc67689aefd52796603353606f7dcc68407f73179779684efd80b758b0285"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_shared_quantity_constraints.py",
+      "sha256": "2c1ae43cc928ad6a1d634c67836f5978b18e5a6d476ab4a155d89f0c7986c1f4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tests/test_walkforward_phase1.py",
+      "sha256": "2f767f4a40b7d0a7608853e6ef6aa435e5fa298986af61718fce04ae40c2a378"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/audit_alpha_execution_contracts.py",
+      "sha256": "467d818873875fff321a6ba2f16d1e734592eb510023b518fadc5467a6dab285"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/audit_phase50_wfo_causal.py",
+      "sha256": "743bfb30e1bf88bb1e94b6ff25ca16edce26cb4ace2241a51e0421d0f7605282"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/build_perf07_candidate_wheel.py",
+      "sha256": "602ceacf2b6d44776cc346a10e056bf9bfbbbc0d4ed7324c5024fa04abfeeba5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/capture_v1_1_installed_wheel_baseline.py",
+      "sha256": "904569fe22e48161ec50790cc126e422a6b419b19a794e790a76b1cc46aa7f85"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/certify_native_release.py",
+      "sha256": "c9226ece2a90a1cab83ee91237762311d55533c68e43277401108f88f2a3f508"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/certify_phase51b_wheel.py",
+      "sha256": "e8319c8375f70c2314f3bc04072df470dfdf2aff1a9098eaee4f4c3965e38aa5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/certify_phase52a_wheel.py",
+      "sha256": "2007d342c41ab8abc2d0157617f9a55d0806eebbe89b878f984795608203dfde"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/certify_phase52b.py",
+      "sha256": "72f966466b8256b7d71cb4d8c5eaf6dbb2471d59d11ed50f901cc1e545a864d2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/certify_phase78_public_promotion.py",
+      "sha256": "b8f63eaabad5daab5c087cdfaed8b1f926c4b7188bced32b84bfd13c754add8c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_benchmark_governance.py",
+      "sha256": "b5f4af205823f73bcfebc5427a7baad3a3fbf7cfd7741dc6669a67ed198e2be2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_canonical_source_layout.py",
+      "sha256": "064239a0e3ce5a696df4c9bc2fdd5e7fd58f2e5c145919ef5d9bec1b344a58f0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_docs_links.py",
+      "sha256": "54e8b3eadb55c2f4853e75419ea01a0b2015a958d05aeacd263a92d94450217f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_module_architecture.py",
+      "sha256": "021136f532a820cee3cdbafcda09ecc9537d731868ad48fa6324460ac1caa7e0"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_native_a5_review.py",
+      "sha256": "d422154c1453927c954e98316f0d5d363f1e85cb6e3f240ff3e85c2d7406c741"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_native_release_handoff.py",
+      "sha256": "60c68cc520fac82ac6dd4336c8912c9df29b10aae9f32563c19fee6e5af1a1cd"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_native_wheels.py",
+      "sha256": "d4901bb32f49847dafc713448296810b527bca947de12c0d5d86ba82e6e21d91"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_next03_product_qualification.py",
+      "sha256": "e03e387d934858c55b95812568eabde067acfc1dec848981468e3c8f6a6d7ae2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_release_artifacts.py",
+      "sha256": "2a27f87419f08dbf07412a634472f858887e1e6f1e2858f9bbc8381a27d4aa2a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_release_channel.py",
+      "sha256": "25ba2b280394889e5c10e734711eb860889393487082d4793b1c77638348660e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_release_version.py",
+      "sha256": "df9304dbfbab8388db49ea4a0805aaf16744ed8680511770c4fc8da793ce2bf6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_v1_1_phase57_foundation.py",
+      "sha256": "63165de3593dd723c52b0095c6a7b34e7ecde468f93e9d1c7de485679c81cd82"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_v1_1_phase58_market_instrument.py",
+      "sha256": "539573b54cd29bf81e3813d0efd6cb9e7d3e9231b09762f62980cc231ec428b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/check_v1_1_phase59_linear_accounting.py",
+      "sha256": "4fcee746ac0ee70e08a54b403a6dffed6d5792259f7b697a84427d8640afb021"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/create_release_manifest.py",
+      "sha256": "0661337b1c3b1743a29372f395e05fe7bdbc71c029c24f9db940b5247693162b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/create_sbom.py",
+      "sha256": "4bd25e7e2bd68fd596831fffefe78de57f66f28ae79e497fbe311126b2c45e5b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/create_supply_chain_report.py",
+      "sha256": "02bfe06d1876e882a8bc8007fe1290aec95448e45609b9125a67536e414ec47b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/gate_paired_timings.py",
+      "sha256": "a5d26ad307635788787b6f1915ad18a9c020474389a6d5d560f16aa81b2a6a6a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_native_event_contracts.py",
+      "sha256": "9f5e5b8690ac1e0324696218327b6ffa3d413b1216eaa80ff0240cdec813c2e6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_perf01_traceability.py",
+      "sha256": "cb559a2d5962aa3273c08b0ae4b4f15dcfb831ee3f92fa7ea3e15d9394c0e8f9"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_perf07_closure.py",
+      "sha256": "43483c2707aae884c680831ab8d1caec2163b11228ac8ea0eb2e093d7b638a90"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_performance_evolution.py",
+      "sha256": "b28fec71450617f811753d558ec72146ef1fe5c5fb9ab27b4a23ba1e253ff130"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_product_contracts.py",
+      "sha256": "cc54bd96d3a21a6e8f57897a0de99a380021efc683f9ad4465a118fb3e8bae83"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_public_api_inventory.py",
+      "sha256": "60a24942d2b8441822f4a0cd606561a3f2b49067453653d1a3b5f0fbf1673e70"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/generate_v1_1_baseline.py",
+      "sha256": "707f08be8805fe4bcc4488860c490ed8c2c8ece0af8a64d10d08b125de24e6bf"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/materialize_generic_callback_pairs.py",
+      "sha256": "1b8a9915f6528238021fbc6608196a456386d0262740424920823e8185c5e3b5"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/measurement_contract.py",
+      "sha256": "306ebfbd4a6ea683c7ddf67eeabf1c79adb9f5da104ba167f4cd16d3f96c82de"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/next03_source_inventory.py",
+      "sha256": "476ffa5858923d171bd1aa7f659bafe73b246793b7f4af8555714136624d2b20"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/performance_closure.py",
+      "sha256": "872d016101a20fded068a256ae500dd3ffb456d8c806a66974197eb65a7f198a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/run_perf07_cross_domain_regression.py",
+      "sha256": "f9eff51225a35201dcb2bcd6f3650734854c8470cb47b27e696e8e1871c376df"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/run_perf07_pgo_experiment.py",
+      "sha256": "5391d47e54f8a5cacc34ceb9be99603d21d4e4ae654aa4fcc31b79f1fe9a01e6"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/run_test_shards.py",
+      "sha256": "cc849e0b0bd0cf011de3c24e8aceae82a469b8acf9262721239fba0278f0ed06"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/scan_public_secrets.py",
+      "sha256": "d345167634d29dafb42f213294058c467357fa3a60553ade28b83030366c949c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/verify_public_native_consumer.py",
+      "sha256": "5488fbd4aa58ea22707a376156bc91d6ea842d9ca431c2738d30ca491f9d6839"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/tools/verify_wheels.py",
+      "sha256": "71e62240504f001dd52f5d46f601d3e09335bf0d1cca593132baa92813b89d0c"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/QUANTBT_DEV_REACTIVE_WFO_PERFORMANCE_CLOSURE_3_PHASES_VI.md",
+      "sha256": "37f197196f9e2de28db9c42828da773151abb36cac9002f65eb5515e81686a73"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/QUANTBT_RUST_PRIMARY_V1_1_UPGRADE_GUIDE_VI.md",
+      "sha256": "83ab362441c90ad47cd10e0be4a983274aabe8c84e7db3dae039b86929fbab83"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/QUANTBT_V1_1_PRE_PHASE78_PERFORMANCE_CLOSURE_7_PHASES_VI.md",
+      "sha256": "16eca1816cd7f148f7c508722544d7232f301c057ba6c0a63ead43fcd3a275e7"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/arbitrage_engine_design.md",
+      "sha256": "e8d9a06cd6392331024c31046f56510130d314c8640f2016554c7dc845b024cc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/arbitrage_validation_plan.md",
+      "sha256": "9c1b67f26bea0b0f0aa10a5d78651c28024c1a311bdd37041988d4b714cf90f2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/implement.md",
+      "sha256": "ea031b28e59e2bada4b87ba7647fdb65fa39ee6fddece2b877e4201cd048f1ba"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/optimized_native_event_kernel_v2.md",
+      "sha256": "ad0bad6d89d6686bc6c8a8b53b08b65873ff671ae59ae7c2e1ec3eb0dde2e65f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase0_baseline_snapshot.json",
+      "sha256": "ba87c9b7263311b75b25b069f62ab502adee02634b8a7505dae2b9c08fec03f8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase0_baseline_snapshot.md",
+      "sha256": "4f32c016cd99a2f0091c04fe9fee9fd7441be3f4d2882e3c447ea2d513f239b4"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase10_performance_hardening_status.md",
+      "sha256": "3147586f1db3bb807484d25683fb5c72bf7746a34a5078c51561c6769d445635"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase1_domain_schema_status.md",
+      "sha256": "d245ce30525218fced350f53248b10a7e83ca40d34d3e58892c7c894a3af1b0b"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase2_pricing_iv_greeks_status.md",
+      "sha256": "9e3615efdbea56d6a5dc8da2061e1226e25f87f2e3139292382bef27bf3b1ded"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase3_tape_selectors_status.md",
+      "sha256": "a2d7df80a04f9b19126bf552a60d242964026df824785f8ee94454f446293058"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase4_packages_execution_status.md",
+      "sha256": "b13f3198f227ce14f029629b586f25e75a32014e572f55c2fa9bb43bfd0f3798"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase5_ledger_fees_lifecycle_status.md",
+      "sha256": "e8eb87af3cb4e324d17c18bdd3bfa09b0d8ee517dc26f3a9d870f9e27b70f54d"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase6_hedging_margin_status.md",
+      "sha256": "b87c8a1068b532208ce2b224d1b0f51f16153c5f43bb77aee001f258a313782a"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase7_backend_endpoint_result_status.md",
+      "sha256": "b210b2e056d41e8a36a5cc59667c7da6c83049da520aa9547ddc5190a77e1b7f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase8_strategy_templates_status.md",
+      "sha256": "c2b91f10ba9fcbf24f82d00cfa62ce0723dec8f5e6b877d4d2050da68e6bdb11"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/phase9_nautilus_validation_status.md",
+      "sha256": "d0c60707df0b35dfd153f18f8eaef01818705297c84fe4b1011d8df1c7d99555"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/quantbt_options_engine_execution_plan.md",
+      "sha256": "0835a7ad9487002c2a9b2c4eb1dbfd203b55a2bf7998d8e797cec5a4e328ab17"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/option_backtest_plan/quantbt_options_engine_verified_design.md",
+      "sha256": "960ceb34acd0714fa4fdc96eb9e9e57f9aa35027001e345571580c7d3b9c6295"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_domain_agnostic_optimization_upgrade.md",
+      "sha256": "486b36ecf046c5fa088d37cf13ab894c9e2375de866a88224e1fbc5c26bcb320"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_engine_packaging_pypi_pyo3_final_plan_v2_expanded.md",
+      "sha256": "c2becf7125964ad2e868ee665c81359393c3db3a80275885de47882ae44eab40"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_engine_packaging_pypi_pyo3_final_plan_v3_branch_audit.md",
+      "sha256": "7c0bb69bdac14e5fc7629570f296f9771b9572e388d3b552d7925eb6b52d0e51"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_final_grid_python_rust_full_contract_guide.md",
+      "sha256": "88a3b37d262acba70202dc9fde4f4c30f18f17c8eac445a7c00b1bdd8052b8b1"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_final_release_native_event_endpoint_packaging_audit.md",
+      "sha256": "280c3faabf08c0132254160b032531eba2d62a25e1966cf7715940a5298b84dc"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_final_upgrade_dual_backend_pypi_plan.md",
+      "sha256": "49e6576f199300cfc4ce4935d86267e5721e76007ac06fe0d776fad97699e3af"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_optimization_search_quality_upgrade.md",
+      "sha256": "2eea3f05d2cc0fac52946fd27f7a624234d8b8050df2e04ef5c690bb6580f8b2"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_p0_p3_native_rust_upgrade_blueprint.md",
+      "sha256": "356db4c5a66030c9d1548e663b883a1f818b516a4396345305d73be45d412c92"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_phase17_execution_correctness_fast_intrabar_upgrade.md",
+      "sha256": "151d4ba87017b21d251099ffbc18b1a563b185110b460a59803ae99193b5eff8"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/quantbt_portfolio_correctness_performance_plan_v2.md",
+      "sha256": "dea19c9d8af5261442ac4211d6d05deea2d917027d445f7452ecb3b4b8752e1e"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/upgrade/walkforwardengine_phase_plan.md",
+      "sha256": "d74d9b760c87a9d129d36912b7b844bb49df761856337b299c4ed0f9adf99cfe"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/quantbt/uv.lock",
+      "sha256": "c63b1f42126501a33176d980bb1deb94a5f0c2b346cf7ef2bbb302118a75189f"
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/vwap.py",
+      "sha256": "ef9e7e8a998a68584e742fb698cfd06ee27ec8355f76566b480810b552376d84",
+      "alpha": "A-VWAP",
+      "matches_registered_original": true
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/hash_momentum.py",
+      "sha256": "ab35d90680ea723440d8ad4d831029505e54bf2c2567350313b1cacbfea6c773",
+      "alpha": "A-HASH",
+      "matches_registered_original": true
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/adaptive_hma_cpp.py",
+      "sha256": "86c88f38e86b7e5b6e92108ef30704e5bdd3d69f6a9f9c07069fdff03ad958d2",
+      "alpha": "A-HMA",
+      "matches_registered_original": true
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model/signal_combine.py",
+      "sha256": "d540deef7d4275d58033a283421edb09296a7df9032361e050512a02823fc504",
+      "alpha": "A-SC",
+      "matches_registered_original": true
+    },
+    {
+      "path": "/root/bobby/pool_alpha/alphas_storage/_get_data/data_loader.py",
+      "sha256": "99612d99ada25732e457740c129fadf808725474d7647097253d919bb984bd4e",
+      "role": "static_reference_not_imported"
+    }
+  ],
+  "changed_paths": [],
+  "quantbt_git_status": "",
+  "original_alphas_match": true,
+  "production_writes_attempted": false
+}

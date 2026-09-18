@@ -171,6 +171,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if args.study_id == "time_edge_validation_v4":
+        parser.error("time_edge_validation_v4 uses scripts/run_time_edge.py; historical A-E/factorial runners are quarantined for this study")
     if args.stage == "preflight":
         return cmd_preflight(args)
     if args.stage == "verify-source-integrity":

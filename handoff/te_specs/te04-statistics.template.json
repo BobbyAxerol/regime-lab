@@ -1,0 +1,15 @@
+{
+  "purpose": "STATISTICAL_ONLY_SYNTHETIC_UNITS_NOT_MARKET_DELTA",
+  "inputs": {},
+  "tasks": [
+    {
+      "task_id": "statistical-only-calibration",
+      "kind": "statistical_calibration",
+      "delta": 0.001,
+      "repetitions": 1000,
+      "days": 1095,
+      "draws": 4999,
+      "seed": 2026091210
+    }
+  ]
+}

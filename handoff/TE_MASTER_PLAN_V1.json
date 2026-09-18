@@ -1,0 +1,47 @@
+{
+  "schema": "regime_lab.te_master_plan.v1",
+  "version": 1,
+  "goal": "one scoped conclusion for calendar vs regime timing across TE-03.7/TE-04/TE-05",
+  "envelope": {
+    "total_wall_seconds": 250000,
+    "per_task_cap_seconds": 5400,
+    "workers": 1,
+    "cpu_limit": 2,
+    "memory_gib": 4,
+    "rule": "revisions inside the envelope are appended automatically; exceeding it stops and reports"
+  },
+  "phases": [
+    {
+      "id": "P0",
+      "name": "close TE-03.7 structural controls",
+      "gate": "funnel+selection present, controls PASS or blocker",
+      "budget_seconds": 30000
+    },
+    {
+      "id": "P1",
+      "name": "TE-04 paired discovery, matched controls, decay",
+      "gate": "all contrasts have validity/status",
+      "budget_seconds": 140000
+    },
+    {
+      "id": "P2",
+      "name": "statistical calibration",
+      "gate": "calibration_passed or blocker",
+      "budget_seconds": 20000
+    },
+    {
+      "id": "P3",
+      "name": "TE-05 freeze, recompute, claims, handoff",
+      "gate": "TECHNICALLY_VALID for supported scope",
+      "budget_seconds": 60000
+    }
+  ],
+  "rules": [
+    "no threshold loosening",
+    "no zero-fill",
+    "new run-id per attempt",
+    "setsid background with checkpoints",
+    "commit each scoped piece",
+    "TE-04 not started until P0 gate passes"
+  ]
+}

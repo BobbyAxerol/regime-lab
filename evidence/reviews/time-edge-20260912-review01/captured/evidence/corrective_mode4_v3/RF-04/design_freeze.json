@@ -1,0 +1,62 @@
+{
+  "schema": "regime_lab.rf04_design_freeze.v1",
+  "phase": "RF-04",
+  "status": "FROZEN_FOR_RF05_WITH_BLOCKERS",
+  "study_id": "corrective_mode4_v3",
+  "primary_design": {
+    "mode4_contract": {
+      "optimization_mode": "mode_4_is_only_robust",
+      "optimization_schedule": "per_fold_causal",
+      "candidate_selection_metric": "is_only_robust",
+      "scoring_backend": "endpoint",
+      "oos_used_for_selection": false
+    },
+    "arms": [
+      "M4_CAL",
+      "M4_REGIME"
+    ],
+    "budget_control": "M4_CAL_MATCHED",
+    "primary_contrasts": [
+      {
+        "id": "TIMING",
+        "contrast": "M4_REGIME - M4_CAL"
+      },
+      {
+        "id": "BUDGET_AWARE",
+        "contrast": "M4_REGIME - M4_CAL_MATCHED"
+      }
+    ],
+    "cells": [
+      "A-SC/BTCUSDT",
+      "A-HMA/BTCUSDT"
+    ],
+    "development_window": [
+      "2021-01-01",
+      "2022-06-30"
+    ],
+    "economics": {
+      "account_capital": 20000.0,
+      "entry_notional": 2000.0,
+      "one_way_fee": 0.0004,
+      "slippage_bps": 1.0,
+      "trials_per_cutoff": 8,
+      "seed": 20260911,
+      "train_memory_days": 180
+    },
+    "mde_corrected_daily_account_bps": 0.0371
+  },
+  "no_promising_design": true,
+  "no_promising_design_reason": "the bounded 2-cell pilot establishes no positive primary contrast: A-SC/BTCUSDT has implementation_fidelity=DEVIATED (treatment not transmitted to execution) and A-HMA/BTCUSDT is INCONCLUSIVE with the paired CI containing both 0 and the corrected MDE",
+  "blockers": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "blocker": "endpoint scorer returns one objective for every sampled candidate and the account has no per-fill ledger; parameter ranking is not identified, so the timing contrast is NOT_EVALUABLE"
+    }
+  ],
+  "not_frozen": [
+    "A-VWAP and A-HASH cells (route BLOCKED_CAPABILITY; not executed)"
+  ],
+  "rule": "freeze the registered primary design for RF-05; no new positive cell is promoted and the aggregate is never called over 20 cells when only 2 executed",
+  "written_at_utc": "2026-09-11T20:12:16.814288+00:00",
+  "lab_run_id": "RF-04"
+}

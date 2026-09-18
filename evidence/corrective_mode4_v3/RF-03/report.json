@@ -1,0 +1,36 @@
+{
+  "schema": "regime_lab.corrective_phase_report.v3",
+  "phase_id": "RF-03",
+  "status": "TECHNICAL_PASS",
+  "study_id": "corrective_mode4_v3",
+  "generated_at_utc": "2026-09-11T16:21:16.504160+00:00",
+  "objective": "causal schedule, context repair, dispositions",
+  "findings": {
+    "A09": "QUARANTINED_UNSUPPORTED_PATH",
+    "A10": "FIXED_AND_VERIFIED",
+    "A11": "FIXED_AND_VERIFIED",
+    "A12": "SECONDARY_REPAIRED_NOT_MARKET_EVALUATED",
+    "A13": "SECONDARY_REPAIRED_NOT_MARKET_EVALUATED",
+    "A14": "REPAIRED_UNIT_ONLY"
+  },
+  "tests": {
+    "mode4_corrective": "all pass (A10 included)"
+  },
+  "market_runs": {
+    "executed_cells": 0
+  },
+  "claim": {
+    "validity": "TECHNICAL_PASS",
+    "statistical_status": "NOT_EVALUABLE"
+  },
+  "handoff": {
+    "next_phase": "RF-04",
+    "blocking_findings": []
+  },
+  "report_md": {
+    "path": "report.md",
+    "sha256": "19f69e9f6a24e03b6e5edc38b5aa6e7fe1c9c7667d1156172983d572d1e3c4a5"
+  },
+  "lab_run_id": "RF-03",
+  "written_at_utc": "2026-09-11T16:21:16.504265+00:00"
+}

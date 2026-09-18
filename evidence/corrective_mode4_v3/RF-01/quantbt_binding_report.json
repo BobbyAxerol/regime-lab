@@ -1,0 +1,1160 @@
+{
+  "candidate_root": "quantbt_candidate",
+  "candidate_endpoint_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+  "candidate_walkforward_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256",
+  "installed_quantbt": {
+    "import_origin": "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/__init__.py",
+    "module_version_attr": "1.1.1",
+    "distributions": {
+      "quantbt-engine": "1.1.1",
+      "quantbt-native": "0.4.2"
+    },
+    "public_symbol_count": 582,
+    "init_sha256": "1b3e6280930667cfead1d983010b1997055b60fcd0decea402c44a2a21703566",
+    "native_import_origin": null,
+    "native_import_error": "ModuleNotFoundError: No module named 'quantbt_native'"
+  },
+  "checks": [
+    {
+      "id": "VFY01",
+      "claim": "pct_equity() builds a legacy factory; the native transition route is opt-in",
+      "consequence": "factory name alone does not prove Rust/native routing",
+      "files": [
+        "endpoint.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "endpoint.py",
+          "line": 1168,
+          "pattern": "def pct_equity",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 1184,
+          "pattern": "def signal_notional",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3109,
+          "pattern": "_run_pct_equity_transition_native",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3195,
+          "pattern": "_run_pct_equity_transition_native",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3819,
+          "pattern": "_run_pct_equity_transition_native",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY02",
+      "claim": "walk_forward supports Mode 4 + per_fold_causal + endpoint scoring",
+      "consequence": "the corrective study must call this pipeline or reuse its instances/hooks",
+      "files": [
+        "endpoint.py",
+        "walkforward.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "endpoint.py",
+          "line": 1958,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2128,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2216,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 1963,
+          "pattern": "per_fold_causal",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 1958,
+          "pattern": "is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2127,
+          "pattern": "is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2128,
+          "pattern": "is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2216,
+          "pattern": "is_only_robust",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 211,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 508,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 513,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 532,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 536,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 681,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 703,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 704,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1152,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1277,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1784,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1883,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1974,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2012,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4070,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4332,
+          "pattern": "mode_4_is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 221,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 374,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 381,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 517,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 519,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 532,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 534,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 538,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1256,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1474,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4977,
+          "pattern": "per_fold_causal",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 211,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 508,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 513,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 532,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 536,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 681,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 682,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 690,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 699,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 703,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 703,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 704,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 704,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1152,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1277,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1281,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1784,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1883,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1974,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2012,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4062,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4070,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4078,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4091,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4113,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4169,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4200,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4216,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4301,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4332,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4332,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4333,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4445,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4450,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 4455,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 5258,
+          "pattern": "is_only_robust",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY03",
+      "claim": "per_fold_causal calls optimize_params with evaluate_oos_candidates=False",
+      "consequence": "Mode 4 causal selection must freeze before outer OOS; post-selection scoring is reporting only",
+      "files": [
+        "walkforward.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "walkforward.py",
+          "line": 1455,
+          "pattern": "def _run_per_fold_schedule",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 1515,
+          "pattern": "evaluate_oos_candidates=schedule == \\\"per_fold_decay\\\"",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY04",
+      "claim": "native prepared WFO defaults off; 'require' has an explicit availability gate",
+      "consequence": "Rust routing must be qualified, never asserted from metadata",
+      "files": [
+        "endpoint.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "endpoint.py",
+          "line": 2032,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2032,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2033,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2034,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2035,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2035,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2037,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2038,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2058,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2060,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2065,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2067,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3810,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3828,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3940,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3940,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3948,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3949,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3950,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4885,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4889,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4922,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4923,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4934,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4936,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4950,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 4951,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 5023,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 5024,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 5024,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 5033,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 5034,
+          "pattern": "native_prepared_wfo",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 2060,
+          "pattern": "native_prepared_wfo='require' is not available",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY05",
+      "claim": "the prepared public scorer uses a same-close timing contract",
+      "consequence": "it is not next-open execution; a shifted series does not change close into open",
+      "files": [
+        "preparation/native_target_requests.py",
+        "preparation/native_execution.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "preparation/native_target_requests.py",
+          "line": 32,
+          "pattern": "close_target_v2_same_close",
+          "file_sha256": "2a65a206fa1ef31b398e650cde0cda4e3e3df2861608752c213b9fcd8ce222b3"
+        },
+        {
+          "file": "preparation/native_target_requests.py",
+          "line": 155,
+          "pattern": "close_target_v2_same_close",
+          "file_sha256": "2a65a206fa1ef31b398e650cde0cda4e3e3df2861608752c213b9fcd8ce222b3"
+        },
+        {
+          "file": "preparation/native_execution.py",
+          "line": 530,
+          "pattern": "close_target_v2_same_close",
+          "file_sha256": "dcd56ea9ff1430ed976d6c12242b4b8d36b994b7ca4b3626d9c08f66f4a93383"
+        },
+        {
+          "file": "preparation/native_execution.py",
+          "line": 564,
+          "pattern": "close_target_v2_same_close",
+          "file_sha256": "dcd56ea9ff1430ed976d6c12242b4b8d36b994b7ca4b3626d9c08f66f4a93383"
+        },
+        {
+          "file": "preparation/native_execution.py",
+          "line": 605,
+          "pattern": "close_target_v2_same_close",
+          "file_sha256": "dcd56ea9ff1430ed976d6c12242b4b8d36b994b7ca4b3626d9c08f66f4a93383"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY06",
+      "claim": "legacy fee is a round-trip rate halved at the boundary; rust pct_equity requires fee_rate == fee/2",
+      "consequence": "bind the one-way rate per route and verify with golden fills (A01/COR-13)",
+      "files": [
+        "endpoint.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "endpoint.py",
+          "line": 359,
+          "pattern": "return self\\.fee / 2\\.0 if self\\.fee_rate is None",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 3237,
+          "pattern": "rust pct_equity_transition requires fee_rate to equal legacy fee / 2",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY07",
+      "claim": "the package profit factor is computed on stats_returns, not a trade ledger",
+      "consequence": "keep the raw metric and label it; trade PF is a separate definition",
+      "files": [
+        "metrics/performance.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "metrics/performance.py",
+          "line": 224,
+          "pattern": "def profit_factor",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 317,
+          "pattern": "_array_profit_factor\\(stats_returns\\)",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 303,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 304,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 314,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 315,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 316,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 317,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 319,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 389,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        },
+        {
+          "file": "metrics/performance.py",
+          "line": 390,
+          "pattern": "stats_returns",
+          "file_sha256": "152015d96b01021584422839b5f3fe70760efb9ec826dd3aebded557f2487095"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY08",
+      "claim": "outer Mode 4 candidate_decay is an IS-OOS selection metric with optional penalties",
+      "consequence": "keep raw and penalized fields separate; decay has three distinct definitions (D1/D2/D3)",
+      "files": [
+        "walkforward.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "walkforward.py",
+          "line": 450,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 715,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 715,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 715,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 716,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 716,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 717,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 718,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 718,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2131,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2131,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 5390,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 5390,
+          "pattern": "candidate_decay_lambda",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 451,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 719,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 719,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 719,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 720,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 720,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 721,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 722,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 722,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2132,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 2132,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 5391,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        },
+        {
+          "file": "walkforward.py",
+          "line": 5391,
+          "pattern": "candidate_decay_gamma",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY09",
+      "claim": "build_folds supports calendar frequencies and has no universal regime keyword",
+      "consequence": "a dynamic schedule needs a thin lab-only fold provider around the engine, not an invented API",
+      "files": [
+        "walkforward.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "walkforward.py",
+          "line": 2311,
+          "pattern": "def build_folds",
+          "file_sha256": "b3da15189cb87d5e6f0080123aeb7f245b4991d61354112049030335c8f3b256"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY10",
+      "claim": "prepare_reactive_walk_forward is certified for a reset-flat account per fold",
+      "consequence": "its output cannot be reported as one carried live account",
+      "files": [
+        "endpoint.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "endpoint.py",
+          "line": 1138,
+          "pattern": "def prepare_reactive_walk_forward",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        },
+        {
+          "file": "endpoint.py",
+          "line": 1151,
+          "pattern": "reset-flat account per fold",
+          "file_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    },
+    {
+      "id": "VFY11",
+      "claim": "prepared scorer aliases: turnover=report trade count, mean_return=total return, volatility=0 placeholder",
+      "consequence": "observer fields are not measured economic metrics; map units explicitly",
+      "files": [
+        "backends/native_wfo_public.py"
+      ],
+      "present": true,
+      "matches": [
+        {
+          "file": "backends/native_wfo_public.py",
+          "line": 255,
+          "pattern": "\"turnover\": float\\(result\\.report_trade_count",
+          "file_sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee"
+        },
+        {
+          "file": "backends/native_wfo_public.py",
+          "line": 257,
+          "pattern": "\"mean_return\": float\\(result\\.total_return",
+          "file_sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee"
+        },
+        {
+          "file": "backends/native_wfo_public.py",
+          "line": 258,
+          "pattern": "\"volatility\": 0\\.0",
+          "file_sha256": "e4725ad1f841b42454b2aff967f3e82949b3a9545ad23d7aa85bc4ebf5f232ee"
+        }
+      ],
+      "status": "VERIFIED_PRESENT_ON_CANDIDATE"
+    }
+  ],
+  "checks_total": 11,
+  "checks_present": 11,
+  "research_retention_resolution": {
+    "enum_source": {
+      "file": "core/research_audit.py",
+      "file_sha256": "b7347591cdc7b71b0def67a3417847c56dc33dabf311f6640a8a50633f13c70e",
+      "research_retention_levels": [
+        "full_trial_ledger",
+        "selected_only",
+        "none"
+      ],
+      "financial_retention_levels": [
+        "score",
+        "compact",
+        "audit"
+      ],
+      "financial_retention_scopes": [
+        "selected_final_execution",
+        "segmented_reset_flat_execution"
+      ]
+    },
+    "endpoint_default": {
+      "file": "endpoint.py",
+      "line": 1997,
+      "value": "none",
+      "warning": "a copied enum name that is not passed through falls back to none"
+    },
+    "registered_choice": {
+      "research_retention": "full_trial_ledger",
+      "financial_retention": "score",
+      "financial_retention_scope": "selected_final_execution",
+      "reason": "RF-04.2 needs the full trial ledger; financial depth may be raised by a spec revision if RF-02 shows it is required"
+    },
+    "status": "RESOLVED_FROM_INSTALLED_SOURCE",
+    "present_in_source": true
+  },
+  "rule": "every VFY claim is re-verified against the candidate copy in this lab. The merged plan is a guide, not the measurement.",
+  "schema": "regime_lab.quantbt_binding_report.v3",
+  "lab_run_id": "RF-01",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T15:16:23.925275+00:00"
+}

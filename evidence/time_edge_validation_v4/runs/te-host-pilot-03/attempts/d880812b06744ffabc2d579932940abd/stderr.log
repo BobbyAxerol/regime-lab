@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/scripts/run_time_edge.py", line 132, in <module>
+    try: raise SystemExit(main())
+                          ^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/scripts/run_time_edge.py", line 87, in main
+    save(local(ROOT,args.output),result)
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 70, in save
+    data = canonical(value) + b"\n"
+           ^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 47, in canonical
+    return json.dumps(jsonable(value), sort_keys=True, separators=(",", ":"),
+                      ^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 29, in jsonable
+    return {str(k): jsonable(v) for k, v in value.items()}
+                    ^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 29, in jsonable
+    return {str(k): jsonable(v) for k, v in value.items()}
+                    ^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 31, in jsonable
+    return [jsonable(v) for v in value]
+            ^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 33, in jsonable
+    return jsonable(dataclasses.asdict(value))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 29, in jsonable
+    return {str(k): jsonable(v) for k, v in value.items()}
+                    ^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/storage.py", line 42, in jsonable
+    raise TypeError(f"{type(value).__name__} is not JSON serialisable; "
+TypeError: Timestamp is not JSON serialisable; give it an explicit schema field

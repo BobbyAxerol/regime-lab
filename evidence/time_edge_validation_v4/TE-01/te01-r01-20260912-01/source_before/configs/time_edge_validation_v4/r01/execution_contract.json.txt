@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.execution_contract.te01.v1",
+  "engine": "quantbt-engine==1.1.1",
+  "native_distribution": "quantbt-native==0.4.2",
+  "install": "LAB_ROOT/environments/lab_venv",
+  "engine_source_mutations_allowed": false,
+  "primary_execution_resolution": "1m",
+  "strategy_decision_resolution": {
+    "A-SC": "15m",
+    "A-HMA": "1h",
+    "A-VWAP": "15m",
+    "A-HASH": "15m"
+  },
+  "execution_clock": "completed 1m/HTF information -> decision -> next eligible execution boundary; registered target next-open only if actual route qualification proves it",
+  "coarse_next_close": "separate explicitly named cohort only, never silent fallback into primary",
+  "routes": {
+    "A-SC": "public signal/target or event with same-contract qualification",
+    "A-HMA": "qualified stop/gap/exit route or actual event callbacks",
+    "A-VWAP": "event for amendment/cancel/corrective paths",
+    "A-HASH": "event ordered actual partial TP ladder"
+  },
+  "fees": {
+    "one_way_taker_rate": 0.0004,
+    "one_way_slippage_rate": 0.0001,
+    "legacy_fee_argument": "2*one_way_fee_rate",
+    "typed_fee_rate_argument": "one_way_fee_rate",
+    "stress_multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "funding": "missing_declared_not_venue_exact"
+  },
+  "account": {
+    "initial_equity": 20000.0,
+    "size_kind": "percent_current_equity_at_entry",
+    "allocation_fraction": 0.1,
+    "leverage_cap": 1.0,
+    "fold_boundary": "continuous_carry_campaign_then_switch_at_flat",
+    "sizing_repair": "must qualify actual adapter/engine percent-equity binding; no claim from constructor metadata alone"
+  },
+  "mode4_train": {
+    "memory_days": 180,
+    "trials_per_cutoff": 32,
+    "coverage_revision_max_trials": 64,
+    "revision_rule": "only after coverage/behavior diagnostic and prior to paired outcomes; same frozen trials rule both arms",
+    "raw_selected_audit": "same theta plus exact train window and warmup; never approximate by surrogate profit curve",
+    "retention": "all attempted trials including failed/pruned/duplicates; unique evaluations separately identified"
+  },
+  "calendar_days": 180,
+  "regime_trigger": {
+    "minimum_gap_days": 28,
+    "maximum_parameter_age_days": 180,
+    "confirmation_observations": 2,
+    "initial_age_clock": "shared initial incumbent ready time, not first observed transition",
+    "budget": "defer explicitly; no forced N events"
+  },
+  "calendar_matched": {
+    "cadence_menu_days": [
+      28,
+      56,
+      90,
+      180
+    ],
+    "selection": "closest predicted total work to regime using training-only trigger cadence and TE-02 measured route costs; tie slower cadence",
+    "both_arms_same_budget_ceiling": true,
+    "realized_work_match_relative_tolerance": 0.05,
+    "outside_tolerance": "bounded-budget comparison only; no identical-realized-compute claim",
+    "future_regime_refit_count_allowed": false
+  },
+  "latency": {
+    "replay_floor_seconds": 60,
+    "rule": "max(floor,ceil(measured conservative p95 search+packing time from prior technical pilots)); measured per route before TE-04",
+    "clocks": [
+      "observation_available",
+      "model_ready",
+      "search_selected",
+      "search_ready",
+      "indicator_ready",
+      "actual_activation",
+      "first_affected_order"
+    ],
+    "pending": "no entries by warming shadow adapter; only indicator state may warm",
+    "incumbent": "retains real position/campaign until registered safe migration"
+  },
+  "financial_trace": [
+    "orders",
+    "actual_fills",
+    "rejects",
+    "amends",
+    "cancels",
+    "positions",
+    "cash",
+    "equity",
+    "fees",
+    "parameter_versions",
+    "model_versions",
+    "selection_ready_activation_times"
+  ],
+  "native_require_policy": "unsupported => BLOCKED_CAPABILITY, never fallback described as native",
+  "route_gate": "runtime same-economics trace/parity required in TE-02; TE-01 only binds signatures and contracts"
+}

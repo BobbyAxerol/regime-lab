@@ -1,0 +1,41 @@
+{
+  "schema": "regime_lab.te03_7_funnel.v1",
+  "run_id": "te-host-controls-07",
+  "task_dirs": 1,
+  "worlds": 10,
+  "sealed_worlds": 5,
+  "funnel": {
+    "valid_observations": {
+      "value": 385,
+      "denominator": 385,
+      "reason": null
+    },
+    "triggers": {
+      "value": 0,
+      "denominator": 0,
+      "reason": "not materialized in the shard artifacts read by this assembler"
+    },
+    "searches": {
+      "value": 1,
+      "denominator": 1,
+      "reason": null
+    },
+    "different_params": {
+      "value": 0,
+      "denominator": 1,
+      "reason": null
+    },
+    "activated": {
+      "value": 0,
+      "denominator": 0,
+      "reason": "not materialized in the shard artifacts read by this assembler"
+    },
+    "different_orders": {
+      "value": 0,
+      "denominator": 0,
+      "reason": "not materialized in the shard artifacts read by this assembler"
+    }
+  },
+  "notes": [],
+  "rule": "denominator carried for every step; a step not materialized is null with a reason, never zero"
+}

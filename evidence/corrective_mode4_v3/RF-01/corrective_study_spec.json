@@ -1,0 +1,227 @@
+{
+  "schema": "regime_lab.corrective_study_spec.v3",
+  "registered_at_utc": "2026-09-11T15:16:15.112943+00:00",
+  "registered_by": "OpenCode under user approval (2026-09-11)",
+  "study_id": "corrective_mode4_v3",
+  "supersedes_study": "crypto_regime_timeedge_v2",
+  "status": "RF01_REGISTERED__RF02_QUALIFICATION_PENDING",
+  "source_of_truth": {
+    "plan": {
+      "path": "REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md",
+      "sha256": "bf983c2b63dd748d778a3d9c38360bfb6f081cb9b445d7a8044fbae63b2c7434"
+    },
+    "historical_study_registration": "configs/study_registration.json",
+    "historical_conclusion": "FAILED_VALIDITY (preserved; never rewritten)",
+    "precedence": [
+      "this spec",
+      "verified economic/availability contracts",
+      "A01-A16 findings",
+      "recovered audit evidence",
+      "Final V2 where not superseded"
+    ]
+  },
+  "primary_question": "On the same four real alphas, the same economic contract and the same Mode 4 train-only selector with the same training-memory rule, does a causal regime-triggered refit schedule improve out-of-sample continuous-account net return and reduce decay versus the calendar per_fold_causal WFO?",
+  "mode4_contract": {
+    "optimization_mode": "mode_4_is_only_robust",
+    "optimization_schedule": "per_fold_causal",
+    "candidate_selection_metric": "is_only_robust",
+    "scoring_backend": "endpoint",
+    "calendar_contract": "exact_v2",
+    "target_runtime_requested": "rust",
+    "native_prepared_wfo": "off_until_qualified",
+    "oos_used_for_selection": false,
+    "research_retention": "full_trial_ledger",
+    "research_retention_rule": "resolved from core/research_audit.py RESEARCH_RETENTION_LEVELS_V1; the endpoint default 'none' is not accepted and a copied enum name that is not passed through is not a setting",
+    "forbidden": [
+      "another optimization mode",
+      "a non-Sharpe utility in a Sharpe field",
+      "private default-selector imitation",
+      "future OOS decay as a primary ranker"
+    ]
+  },
+  "arms": {
+    "primary": [
+      "M4_CAL",
+      "M4_REGIME"
+    ],
+    "budget_control": "M4_CAL_MATCHED",
+    "secondary_selector": [
+      "M4_CAL_NEIGH",
+      "M4_REGIME_NEIGH"
+    ],
+    "secondary_policy": "E_RESPONSE_V2",
+    "E_RESPONSE_V2_status": "DISABLED_UNTIL_REPAIRED_RF03",
+    "naming_rule": "new names only; historical A/B/C/D/E are never reused"
+  },
+  "primary_contrast_family": [
+    {
+      "id": "TIMING",
+      "contrast": "M4_REGIME - M4_CAL",
+      "question": "does causal regime timing add account net return on the same continuous account?"
+    },
+    {
+      "id": "BUDGET_AWARE",
+      "contrast": "M4_REGIME - M4_CAL_MATCHED",
+      "question": "is any timing gain separable from refit cadence and compute?"
+    }
+  ],
+  "secondary_contrasts": [
+    {
+      "id": "SELECTOR",
+      "contrast": "M4_CAL_NEIGH - M4_CAL",
+      "family": "secondary"
+    },
+    {
+      "id": "INTERACTION",
+      "contrast": "(M4_REGIME_NEIGH - M4_CAL_NEIGH) - (M4_REGIME - M4_CAL)",
+      "family": "secondary"
+    },
+    {
+      "id": "POLICY_E",
+      "contrast": "E_RESPONSE_V2 - M4_CAL",
+      "family": "exploratory",
+      "status": "DISABLED_UNTIL_REPAIRED_RF03"
+    }
+  ],
+  "cohort": {
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "matrix_cells": 20,
+    "primary_cells": "cells that pass RF-02 route qualification; A-HASH may stay blocked and keeps null metrics",
+    "data_product": "crypto_binance_futures_1m",
+    "snapshot_id": "server_core_v1",
+    "snapshot_manifest_sha256": "88c19513043e05bbd7d8901916b87fe01d10822678b020e6cd8d2fdec00300ff",
+    "funding": "MISSING_DECLARED"
+  },
+  "windows": {
+    "development": "2021-01-01..2023-12-31",
+    "outer": "2024-01-01..2026-08-31 (consumed by the invalidated LAB-09 confirmation)",
+    "contamination_status": "NESTED_RETROSPECTIVE",
+    "prospective_protocol": {
+      "status": "SPECIFIED_NOT_EXECUTED",
+      "artifact": "TBD_RF05"
+    },
+    "rule": "no interval is an untouched holdout; corrected results are retrospective/prequential evidence"
+  },
+  "cost_contract": {
+    "one_way_taker_fee": 0.0004,
+    "slippage_per_side": 0.0001,
+    "binding_rule": "route-specific typed binding: explicit one-way fee_rate, or fee=2*one_way on legacy round-trip endpoints",
+    "binding_status": "TO_BE_QUALIFIED_RF02",
+    "stress_multipliers": [
+      1.0,
+      1.5,
+      2.0
+    ],
+    "sizing_contract": "percent-equity semantics per actual resolved factory; frozen by golden fixtures in RF-02"
+  },
+  "mde": {
+    "historical_registered": {
+      "value": 6.4e-05,
+      "unit": "account daily net return",
+      "status": "PRESERVED_AS_HISTORY",
+      "artifact": "configs/minimum_economic_effect.json"
+    },
+    "corrected_derivation": {
+      "formula": "one_way_cost_uncertainty_round_trip * actual_round_trips_per_day * actual_notional_over_equity",
+      "a15_note": "the old derivation omitted allocation; under its own fixed notional the value would be 6.4e-06/day (0.064 bps)",
+      "status": "PENDING_RF02_ACTUAL_ENGINE_UNITS",
+      "freeze_before": "RF-04 design freeze and RF-05 confirmation"
+    },
+    "business_hurdle": {
+      "status": "TO_BE_SET_BY_RESEARCH_OWNER",
+      "value": null,
+      "rule": "may be chosen independently of the cost derivation but must be registered before results"
+    }
+  },
+  "seeds": {
+    "probe_design": 20260911,
+    "model_multi_start": [
+      11,
+      23,
+      37,
+      51
+    ],
+    "placebo": 20260912,
+    "repeated_seeds_measure": "search variability, not independent observations"
+  },
+  "budgets": {
+    "search_trials_per_cutoff": {
+      "pilot_min": 32,
+      "pilot_max": 64,
+      "freeze_after_dry_run_coverage": true,
+      "note": "64 is not a guarantee; the final value is frozen before RF-04 discovery"
+    },
+    "tier_caps_seconds": {
+      "T0": 60,
+      "T1": 120,
+      "T2": 600,
+      "T3": 900,
+      "T4": "approved_total"
+    },
+    "os_resource_budget_start": {
+      "workers": 1,
+      "cpu_limit": 2,
+      "working_memory_gib": 4
+    },
+    "compute_matching": "total candidate-window-bars, route cost, probes, failed attempts, fits, wall/CPU; equal policy budget per arm",
+    "profiler_fields": [
+      "load/prepare/indicator/intent-pack",
+      "QuantBT simulation/metrics/native",
+      "mode4 selection/model-fit/regime/scheduling",
+      "audit encode/flush/report",
+      "unique evaluations/cache hits/visited bars",
+      "cold compile/warm run/RSS",
+      "requested/resolved backend/native origin"
+    ]
+  },
+  "latency_policy": {
+    "refit_latency": "measured conservative operational budget; zero seconds is refused",
+    "activation_rule": "effective_at >= max(selection_cutoff, fit_ready_at, indicator_ready_at, execution boundary)",
+    "no_backdating": true
+  },
+  "claim_gates": {
+    "execution_validity": [
+      "PASS",
+      "FAIL",
+      "PARTIAL"
+    ],
+    "implementation_fidelity": [
+      "AS_SPECIFIED",
+      "DEVIATED",
+      "NOT_IMPLEMENTED"
+    ],
+    "statistical_status": [
+      "NOT_EVALUABLE",
+      "INCONCLUSIVE",
+      "NEGATIVE_WITHIN_SCOPE",
+      "POSITIVE_WITHIN_SCOPE"
+    ],
+    "rule": "a P0 touching a contrast sets its statistical status to NOT_EVALUABLE; RULED_OUT requires validity, the correct threshold and enough evidence"
+  },
+  "evidence_layout": {
+    "root": "evidence/corrective_mode4_v3",
+    "phase_dir": "evidence/corrective_mode4_v3/RF-01",
+    "historical_evidence": "evidence/crypto_regime_timeedge_v2 (append-only, never edited)",
+    "report_pair": "report.md + report.json per phase",
+    "rerun_rule": "a superseding run gets a new artifact name or a supersedes chain; committed results are not overwritten in place"
+  },
+  "acceptance_registry": {
+    "path": "configs/rf_acceptance_registry.json",
+    "ids": "T01..T70",
+    "note": "separate from the historical T01..T64 registry; the old registry is untouched"
+  },
+  "lab_run_id": "RF-01",
+  "written_at_utc": "2026-09-11T15:16:23.935688+00:00"
+}

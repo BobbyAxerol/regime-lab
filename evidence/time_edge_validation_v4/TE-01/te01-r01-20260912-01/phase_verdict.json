@@ -1,0 +1,54 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.phase_verdict.v1",
+  "created_at_utc": "2026-09-12T06:38:35.906896+00:00",
+  "registration_status": "REGISTRATION_VALIDATED_FOR_TECHNICAL_REPAIR",
+  "phase_status": "PARTIAL_TECHNICAL_CLOSURE_FINAL_FUP_HANDOFF_PENDING",
+  "full_phase_complete": false,
+  "technical_registration_validated": true,
+  "task_status": {
+    "TE01.1": "PINNED_CHECKPOINT_FINAL_FUP_HANDOFF_PENDING",
+    "TE01.2": "MAPPED_49_FINDINGS_RUNTIME_RETESTS_REMAIN_OPEN",
+    "TE01.3": "CONTRACT_VALIDATED",
+    "TE01.4": "REGISTERED_COST_FORMULA_NUMERIC_FREEZE_REQUIRED_BEFORE_TE04",
+    "TE01.5": "REGISTERED_NOT_FITTED_OR_DEPLOYED",
+    "TE01.6": "TE01_BUDGET_MEASURED_FUTURE_ENGINE_BUDGET_NOT_ALLOCATED",
+    "TE01.7": "REUSE_AND_INVALIDATION_OVERLAY_RECORDED"
+  },
+  "baseline_correct_behavior_failures": 8,
+  "baseline_unexpected_errors": [],
+  "source_changed_during_audit": [],
+  "new_findings_closed": 0,
+  "runtime_ready": false,
+  "runtime_gate": {
+    "fup02_final_handoff": false,
+    "source_identity_verified": false,
+    "os_isolation_verified": false,
+    "economic_engine_qualified": false,
+    "model_and_controls_qualified": false,
+    "economic_threshold_materialized": false,
+    "total_budget_allocated": false,
+    "no_affected_p0": false
+  },
+  "remaining": [
+    "Final FUP-02 handoff and pin executable source before changing its imports/configs.",
+    "Actual engine/clock/scorer and model/control qualification belongs to TE-02/03.",
+    "Materialize registered cost threshold from qualified training-only traces before TE-04.",
+    "No new market job until measured isolation and total resource allocation pass."
+  ],
+  "runtime": {
+    "wall_seconds": 16.299144932068884,
+    "cpu_seconds": 10.058452968,
+    "peak_rss_kib": 213796,
+    "engine_runs": 0,
+    "optimizer_runs": 0,
+    "market_statistical_tests": 0
+  },
+  "claim": {
+    "proof_status": "TECHNICAL_ONLY",
+    "economic_status": "NOT_EVALUABLE",
+    "deployment": "NOT_ASSESSED"
+  }
+}

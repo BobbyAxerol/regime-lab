@@ -1,0 +1,202 @@
+{
+  "schema": "regime_lab.rf01_regression_baseline.v3",
+  "generated_at_utc": "2026-09-11T15:11:21.188953+00:00",
+  "phase": "RF-01",
+  "purpose": "failing-before evidence: each FAILED test asserts the behaviour the repaired pipeline must have, never that the bug is present",
+  "before_tests": {
+    "path": "tests/mode4_corrective",
+    "returncode": 1,
+    "counts": {
+      "FAILED": 6,
+      "PASSED": 3
+    },
+    "outcomes": [
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a05_a_hma_search_choices_do_not_collapse_into_one_stop_mode",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a02_a_future_selected_version_is_not_active_before_its_requested_bar",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a03_a_non_converged_candidate_is_not_financially_evaluated",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a04_a_corrective_followup_exit_must_reach_the_position",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a07_episode_money_deltas_telescope_to_the_whole_account_delta",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a10_a_namespace_change_or_ineligible_emission_does_not_trigger_a_refit",
+        "outcome": "FAILED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a09_the_old_e_arm_is_quarantined_not_wired_from_d",
+        "outcome": "PASSED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a15_the_corrected_mde_derivation_is_registered_and_history_preserved",
+        "outcome": "PASSED"
+      },
+      {
+        "nodeid": "test_rf01_before_repairs.py::test_a16_a_blocked_pipeline_may_only_report_not_evaluable",
+        "outcome": "PASSED"
+      }
+    ],
+    "log": "evidence/corrective_mode4_v3/RF-01/regression_before_repair.log",
+    "log_sha256": "2a0e30d9fe7db9e9222bc1dfada844f1f79020950d514c452573a8fda750610e"
+  },
+  "full_suite": {
+    "returncode": 1,
+    "summary": "6 failed, 789 passed, 1 warning in 151.82s (0:02:31)",
+    "failed_nodeids": [],
+    "log": "RF-01/regression_full_suite.log",
+    "log_sha256": "8c9de7509170ebf97fcb66fdfaf1ed6d4c83d2cc062774af1e06e852dd41ee4c"
+  },
+  "probe_map": [
+    {
+      "probe": "P01",
+      "finding": "A01",
+      "tests": [
+        "T01",
+        "T59"
+      ],
+      "observed": "actual fee rate 0.0002 against the registered one-way 0.0004"
+    },
+    {
+      "probe": "P02",
+      "finding": "A02",
+      "tests": [
+        "T03",
+        "T04"
+      ],
+      "observed": "a version requested at bar 100 is active from bar 0"
+    },
+    {
+      "probe": "P03",
+      "finding": "A10",
+      "tests": [
+        "T29",
+        "T30"
+      ],
+      "observed": "namespace change plus decision_eligible=false still triggers a refit"
+    },
+    {
+      "probe": "P04",
+      "finding": "A11",
+      "tests": [
+        "T41",
+        "T42"
+      ],
+      "observed": "opposite centroids collapse to zero context distance"
+    },
+    {
+      "probe": "P05",
+      "finding": "A05",
+      "tests": [
+        "T15",
+        "T16"
+      ],
+      "observed": "all three searched HMA stop choices map to effective mode 1"
+    },
+    {
+      "probe": "P06",
+      "finding": "A03",
+      "tests": [
+        "T11",
+        "T12"
+      ],
+      "observed": "converged=False with unmapped intents still returns EVALUATED"
+    },
+    {
+      "probe": "P07",
+      "finding": "A03",
+      "tests": [
+        "T11"
+      ],
+      "observed": "different exit price/qty at the same bar still marks converged"
+    },
+    {
+      "probe": "P08",
+      "finding": "A07",
+      "tests": [
+        "T51",
+        "T52"
+      ],
+      "observed": "a 1000 loss at a block boundary is reported as zero by both blocks"
+    },
+    {
+      "probe": "P09",
+      "finding": "A15",
+      "tests": [
+        "T59"
+      ],
+      "observed": "the registered 0.64 bps/day omitted the 0.1 allocation factor"
+    },
+    {
+      "probe": "P10",
+      "finding": "A14",
+      "tests": [
+        "T44"
+      ],
+      "observed": "adding a noise dimension to the target halves variance resolved"
+    },
+    {
+      "probe": "P11",
+      "finding": "A04",
+      "tests": [
+        "T18"
+      ],
+      "observed": "a generated corrective EXIT follow-up is never applied"
+    },
+    {
+      "probe": "P12",
+      "finding": "A02",
+      "tests": [
+        "T04"
+      ],
+      "observed": "the schedule uses the cutoff and ignores fit_ready_at"
+    }
+  ],
+  "probes_reproduced": {
+    "results_dir": "evidence/corrective_mode4_v3/probe_reproduction_v1",
+    "python": "3.12.13 (lab venv)",
+    "note": "the restored audit probes reproduce P01-P12 on the audited source; not a market replay"
+  },
+  "hardcoded_path_fixes": [
+    {
+      "path": "tests/test_lab04_evaluator.py",
+      "from": "LAB_ROOT/environments/lab_venv/bin/python",
+      "to": "sys.executable"
+    },
+    {
+      "path": "scripts/audit_lab04.py",
+      "from": "LAB_ROOT/environments/lab_venv/bin/python",
+      "to": "sys.executable"
+    },
+    {
+      "path": "scripts/audit_lab05.py",
+      "from": "LAB_ROOT/environments/lab_venv/bin/python",
+      "to": "sys.executable"
+    },
+    {
+      "path": "scripts/audit_lab06.py",
+      "from": "LAB_ROOT/environments/lab_venv/bin/python",
+      "to": "sys.executable"
+    },
+    {
+      "path": "scripts/audit_guard_strength.py",
+      "from": "LAB_ROOT/environments/lab_venv/bin/python",
+      "to": "pathlib.Path(sys.executable)"
+    }
+  ],
+  "rule": "a skipped test is not a pass; an environment skip is recorded with the reason it did not run",
+  "lab_run_id": "RF-01",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-11T15:13:57.492500+00:00"
+}

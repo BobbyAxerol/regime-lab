@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.reuse_policy.te01.v1",
+  "source_review": "evidence/reviews/time-edge-20260912-review01/audit.json",
+  "historical_evidence": "append_only",
+  "categories": [
+    {
+      "change": "report labels/hash/index",
+      "reuse": "identity-valid saved raw artifact",
+      "required": "render/reconcile only"
+    },
+    {
+      "change": "evaluation mask/PF/SR/bootstrap arithmetic",
+      "reuse": "complete equity/marks/real fill paths with valid economics",
+      "required": "recompute report statistics; engine only if required path missing"
+    },
+    {
+      "change": "model/tape/trigger",
+      "reuse": "raw data and cutoff-keyed invariant candidate evaluations only",
+      "required": "new immutable tape plus affected selection/deployment/inference"
+    },
+    {
+      "change": "fee/scorer/warmup/alpha behavior",
+      "reuse": "raw market and independently keyed pure indicators",
+      "required": "affected search plus deployment and every downstream claim"
+    },
+    {
+      "change": "execution resolution/latency/sizing",
+      "reuse": "raw source data and protocol ideas",
+      "required": "new contract qualification then affected full chain"
+    },
+    {
+      "change": "budget/search order",
+      "reuse": "old revision as discovery history",
+      "required": "new revision, complete failed attempt ledger and same policy budgets"
+    }
+  ],
+  "cell_policy": "all 20 rows; failed/pending/capability-blocked never treated as cash returns",
+  "fup02_finalization": "pin stable checkpoint bytes now; require explicit terminal handoff/generation and recheck source identity before any new runtime job",
+  "forbidden": [
+    "rescale old curves instead of fee-sensitive rerun",
+    "reuse old full-sample scalers as causal inner fits",
+    "treat selected params as complete arm account",
+    "retroactively relabel 2024+ untouched"
+  ]
+}

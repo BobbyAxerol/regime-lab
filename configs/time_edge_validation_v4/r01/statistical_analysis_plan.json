@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.statistical_analysis_plan.te01.v1",
+  "hypotheses": [
+    {
+      "id": "H-TIMING",
+      "contrast": "M4_REGIME - M4_CAL",
+      "estimator": "paired mean daily account net return",
+      "threshold_ref": "economic_threshold",
+      "family": "confirmatory_four",
+      "direction": "greater"
+    },
+    {
+      "id": "H-BUDGET",
+      "contrast": "M4_REGIME - M4_CAL_MATCHED",
+      "estimator": "paired mean daily account net return",
+      "threshold_ref": "economic_threshold",
+      "family": "confirmatory_four",
+      "direction": "greater"
+    },
+    {
+      "id": "H-DECAY",
+      "contrast": "registered CAL degradation minus REGIME degradation H1->H3",
+      "estimator": "mean of pre-registered matched calendar/context age-cohort return gaps",
+      "threshold_ref": "economic_threshold",
+      "family": "confirmatory_four",
+      "direction": "greater"
+    },
+    {
+      "id": "H-MODEL-INFO",
+      "contrast": "regime conditional minus unconditional future candidate utility ranking",
+      "estimator": "time-block held-out incremental rank correlation on fixed candidate/target/cohort",
+      "threshold": 0.0,
+      "threshold_unit": "rank_correlation_difference",
+      "family": "confirmatory_four",
+      "direction": "greater"
+    }
+  ],
+  "family": {
+    "name": "confirmatory_four",
+    "size": 4,
+    "alpha": 0.05,
+    "adjustment": "Holm step-down over all four one-sided p-values, including blocked hypotheses represented as 1.0 for multiplicity only",
+    "blocked_metric": "remains null; p=1 bookkeeping cannot create an evaluable result",
+    "confidence_intervals": "Bonferroni simultaneous two-sided basic intervals with alpha/(2*4) tails; report ordinary 95% intervals separately"
+  },
+  "aggregation": {
+    "primary": "complete planned 20-cell equal-capital fixed cohort only",
+    "partial": "fixed named common-valid subset determined by capability/coverage, equal weights 1/n; intersect daily dates across its cells, do not change weights row by row",
+    "full_aggregate_if_missing": "NOT_EVALUABLE; partial-scoped descriptive/statistical result kept separately",
+    "cross_cell_dependence": "same resampled calendar blocks across all cells and arms",
+    "seed_replications": "search variability only, not extra independent market samples",
+    "cell_tests": "descriptive intervals unless separate family for all 20 cell tests is registered before outcomes"
+  },
+  "bootstrap": {
+    "method": "circular moving calendar blocks of centered paired differences",
+    "draws": 4999,
+    "seed": 2026091201,
+    "primary_block_days": 28,
+    "sensitivity_block_days": [
+      7,
+      14,
+      56
+    ],
+    "sensitivity_rule": "report all, never select the most significant; positive claim additionally must retain direction and hurdle across estimable registered lengths",
+    "basic_interval": "theta_hat - quantiles(mean(centered_block_resamples))",
+    "one_sided_p": "(1+count(null_centered_bootstrap_mean >= theta_hat-delta))/(B+1)",
+    "point_null": "delta, not automatically zero",
+    "nonfinite_resamples": "count/report; no silent denominator reduction",
+    "mean_only_primary": "SR/PF re-evaluate whole statistic with valid denominator in each draw; secondary scope"
+  },
+  "support": {
+    "minimum_common_days": 365,
+    "minimum_nonoverlapping_blocks": 12,
+    "minimum_regime_recurrence_episodes": 10,
+    "minimum_distinct_effective_selections_per_arm": 3,
+    "minimum_informative_candidate_episodes": 20,
+    "insufficient": "INCONCLUSIVE_SUPPORT or NOT_EVALUABLE; thresholds are floors, not proof of power"
+  },
+  "economic_threshold": {
+    "kind": "PREREGISTERED_COST_FUNCTION",
+    "unit": "account_return/day",
+    "formula": "maximum across prespecified cells of mean calibration-day sum(abs(fill_notional)/pre_fill_equity * delta_one_way_cost)",
+    "delta_one_way_cost": 0.0005,
+    "calibration_policy": "TE-02 qualified M4_CAL on training-only data before initial cutoff, with all flat days retained; not M4_REGIME OOS outcomes",
+    "materialization": "numeric value and input trace hashes must be frozen in a separate record before the first TE-04 pair; absent/zero/invalid calibration blocks economic claims",
+    "historical_values": "0.64 and 0.0371 bps/day preserved as history, not silently inherited",
+    "business_hurdle": "no independent business hurdle asserted on behalf of the user",
+    "decay_threshold": "same frozen account-return/day threshold, with D2 support and attribution restrictions"
+  },
+  "power_calibration": {
+    "statistical_only_repetitions": 1000,
+    "full_pipeline_initial_worlds_per_condition": 20,
+    "full_pipeline_max_worlds_per_condition": 100,
+    "seed_base": 2026091210,
+    "null_effects": [
+      0.0
+    ],
+    "positive_effects_in_delta_units": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "null_at_economic_boundary": "also simulate true effect=delta for false-positive calibration",
+    "minimum_power_at_2delta": 0.8,
+    "fwer_nominal": 0.05,
+    "wilson_ci_level": 0.95,
+    "null_upper_tolerance": 0.08,
+    "full_pipeline_precision": "do not certify 5% FWER from 20 worlds; sequentially extend by prespecified batches of 20 under budget; if bounds remain undecided record CALIBRATION_INCONCLUSIVE",
+    "engine_avoidance": "bootstrap draws and statistical calibration reuse generated return paths; no engine call per bootstrap draw",
+    "truth": "ground-truth regimes and optimal params excluded from features/selector/policy; used only by world generator and evaluation"
+  },
+  "decay_design": {
+    "anchors": "first eligible actual selection per UTC quarter per cell/arm, selected by timestamp only; all chosen before reading age outcomes",
+    "maximum_anchors_per_cell_arm": 12,
+    "common_age_support": "full 270-day follow-up before eval end; no padding last anchors",
+    "comparison": "common-quarter strata and calendar/context matched anchor cohort; if no overlap/common support, descriptive association only",
+    "confounding": "age changes with calendar time; adjusted association is not proof of universal causal parameter decay",
+    "inference_unit": "calendar shocks and overlapping anchors jointly resampled, never individual decay rows iid"
+  },
+  "claims": {
+    "validity_first": true,
+    "treatment_fidelity_required": true,
+    "registered_support_required": true,
+    "calibration_required": true,
+    "simultaneous_ci_required": true,
+    "positive": "L > delta AND adjusted_p<=alpha AND risk/control gates pass",
+    "no_meaningful_improvement": "U < delta within tested scope",
+    "underperformance": "U < 0 reported separately",
+    "otherwise": "INCONCLUSIVE",
+    "equality_paths": "diagnose action lineage, never infer an implementation failure from equality alone",
+    "deployment": "always NOT_ASSESSED_BY_THIS_LAB"
+  },
+  "risk": {
+    "max_drawdown_deterioration_absolute": 0.02,
+    "turnover_and_exposure": "report paired distribution and tail losses; require equal registered leverage/sizing cap",
+    "funding": "missing; no perpetual-venue-exact claim"
+  },
+  "stopping": "no outcome-based early stop or unregistered p-value looks; stop for technical invalidity, safety, support or budget; negative results retained",
+  "contamination": "all current market data retrospective; TE-01 runs no market inference"
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "regime_lab.delivery_scope_schema_correction.v1",
+  "artifact": "configs/time_edge_validation_v4/delivery_scope_r05.json",
+  "correction": "added the required top-level schema key; no value or number changed",
+  "old_sha256": "52d8b1de564e1c4b2d5ed4b3093953d1f70d8fd8d16d8037a2ea98e7faa81a2b",
+  "new_sha256": "72c00b7205fb98ee6acc37f26bb22db30c7f9489bedc9eec382b08fd676dc5ea",
+  "freeze_ref": "evidence/time_edge_validation_v4/delivery/freeze-20260912-01.json",
+  "freeze_pins_old_sha256": "52d8b1de564e1c4b2d5ed4b3093953d1f70d8fd8d16d8037a2ea98e7faa81a2b",
+  "rule": "a pinned artifact is superseded by a recorded correction, never silently rewritten; a superseding freeze stamp is required before any claim depending on the old hash"
+}

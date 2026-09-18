@@ -1,0 +1,50 @@
+[
+  {
+    "id": "P09_cost_threshold_units",
+    "result": {
+      "original_threshold_account_bps_day": 0.64,
+      "entry_notional_over_capital": 0.1,
+      "threshold_from_stated_cost_formula_after_size_scaling_bps_day": 0.064,
+      "factor": 10.0,
+      "original_C_A_ci_account_bps_day": [
+        -0.406823220261542,
+        0.11446871628756412
+      ],
+      "original_B_A_ci_account_bps_day": [
+        -0.2755849174986665,
+        0.22962209376875597
+      ],
+      "note": "Only dimensional diagnostic; does not validate the faulty market experiment or authorize threshold retuning."
+    }
+  },
+  {
+    "id": "P10_ablation_target_changes",
+    "result": {
+      "identical_states": true,
+      "fixed_economic_target_exactly_predictable_from_states": true,
+      "G1_variance_resolved": 1.0,
+      "G1_G2_variance_resolved": 0.5,
+      "interpretation": "R-squared target changes when weights/features change; cannot infer marginal parameter-response value from this delta alone."
+    }
+  },
+  {
+    "id": "P11_followup_exit_ignored",
+    "result": {
+      "entry_filled": true,
+      "correction_exit_generated": 1,
+      "applied_exits": {},
+      "protection_levels": {},
+      "position_at_end": 20.0,
+      "confirmed_corrective_followup_not_consumed": true
+    }
+  },
+  {
+    "id": "P12_ready_time_not_used",
+    "result": {
+      "cutoff_bar": 5,
+      "ready_bar": 10,
+      "schedule_requested_at": 5,
+      "initial_deployment_has_no_ready_check": true
+    }
+  }
+]

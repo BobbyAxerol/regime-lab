@@ -1,0 +1,2833 @@
+{
+  "lab_run_id": "te-host-pilot-09",
+  "alpha_id": "A-SC",
+  "cutoff": "2020-12-01T00:00:00+00:00",
+  "selected": {
+    "trial_id": 26,
+    "params": {
+      "coeff": 3,
+      "AP": 48,
+      "alpha.condition_threshold": 60,
+      "novolumedata": false,
+      "src_col": "close"
+    },
+    "objective": 3.0409222105250384,
+    "mean_is_sharpe": 3.0409222105250384,
+    "mean_oos_sharpe": 0.0,
+    "mean_decay": 0.0,
+    "std_decay": 0.0,
+    "fold_metrics": [
+      {
+        "fold_id": 0,
+        "train_start": null,
+        "train_end": null,
+        "test_start": null,
+        "test_end": null,
+        "is_sharpe": 3.0409222105250384,
+        "is_sharpe_raw": 3.0409222105250384,
+        "is_turnover": null,
+        "is_trade_count": 32.0,
+        "is_required_trades": 0.0,
+        "is_trade_penalty": 0.0,
+        "oos_evaluated": false,
+        "is_subperiod_sharpes": [
+          -2.395497356207133,
+          4.17590721642477,
+          2.640385186181134,
+          -1.9155753012396246,
+          6.035561106649696,
+          5.1918631292607476
+        ],
+        "is_subperiod_sharpes_raw": [
+          -2.395497356207133,
+          4.17590721642477,
+          2.640385186181134,
+          -1.9155753012396246,
+          6.035561106649696,
+          5.1918631292607476
+        ],
+        "is_subperiod_trade_counts": [
+          5.0,
+          5.0,
+          4.0,
+          7.0,
+          5.0,
+          6.0
+        ],
+        "is_subperiod_count": 6,
+        "is_subperiod_median": 3.408146201302952,
+        "is_subperiod_q25": -0.7765851793844349,
+        "is_subperiod_mad": 2.2055659166522696,
+        "is_temporal_score": 2.0723876891614865
+      }
+    ],
+    "pruned": false,
+    "selection_metadata": {
+      "stage": "is_only_candidate_selection",
+      "objective_mode": "mode_4_is_only_robust",
+      "oos_seen_by_optuna": false,
+      "temporal_score": 2.0723876891614865,
+      "temporal_median": 3.408146201302952,
+      "temporal_q25": -0.7765851793844349,
+      "temporal_mad": 2.2055659166522696,
+      "temporal_count": 6.0,
+      "is_subperiod_count": 6.0,
+      "selector": "fallback_best_is_temporal",
+      "selected_by": "is_only_robust",
+      "oos_used_for_selection": false,
+      "reason": "no_dense_train_plateau",
+      "top_trials": 4,
+      "eps": 0.15,
+      "min_samples": 3,
+      "cluster_method": "numpy_dbscan_fallback",
+      "candidate_selection_complete": true
+    }
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "params": {
+        "coeff": 6,
+        "AP": 58,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.1516121375634825,
+      "mean_is_sharpe": 2.1516121375634825,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.1516121375634825,
+          "is_sharpe_raw": 2.1516121375634825,
+          "is_turnover": null,
+          "is_trade_count": 13.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.302635333979141,
+            3.77646703506765,
+            -1.652738032812805,
+            -3.9358944404996747,
+            7.333870481858308,
+            5.282741283819376
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.302635333979141,
+            3.77646703506765,
+            -1.652738032812805,
+            -3.9358944404996747,
+            7.333870481858308,
+            5.282741283819376
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            2.0,
+            3.0,
+            4.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.0618645011274226,
+          "is_subperiod_q25": -3.3651053385779575,
+          "is_subperiod_mad": 4.609317862159525,
+          "is_temporal_score": -2.252326031525727
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -2.252326031525727,
+        "temporal_median": 1.0618645011274226,
+        "temporal_q25": -3.3651053385779575,
+        "temporal_mad": 4.609317862159525,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 1,
+      "params": {
+        "coeff": 1,
+        "AP": 33,
+        "alpha.condition_threshold": 65,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.3568484163659191,
+      "mean_is_sharpe": 1.3568484163659191,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.3568484163659191,
+          "is_sharpe_raw": 1.3568484163659191,
+          "is_turnover": null,
+          "is_trade_count": 106.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -1.5881014950871297,
+            4.030261282319214,
+            2.2112432352376286,
+            -7.327890434967535,
+            2.515385133727114,
+            3.5288218157577895
+          ],
+          "is_subperiod_sharpes_raw": [
+            -1.5881014950871297,
+            4.030261282319214,
+            2.2112432352376286,
+            -7.327890434967535,
+            2.515385133727114,
+            3.5288218157577895
+          ],
+          "is_subperiod_trade_counts": [
+            15.0,
+            18.0,
+            14.0,
+            22.0,
+            19.0,
+            18.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.3633141844823715,
+          "is_subperiod_q25": -0.6382653125059401,
+          "is_subperiod_mad": 1.41622736455613,
+          "is_temporal_score": 1.4637209084525242
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 1.4637209084525242,
+        "temporal_median": 2.3633141844823715,
+        "temporal_q25": -0.6382653125059401,
+        "temporal_mad": 1.41622736455613,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 2,
+      "params": {
+        "coeff": 8,
+        "AP": 45,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.2936011381901014,
+      "mean_is_sharpe": 2.2936011381901014,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.2936011381901014,
+          "is_sharpe_raw": 2.2936011381901014,
+          "is_turnover": null,
+          "is_trade_count": 6.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.5808265537669124,
+            3.514157204111288,
+            2.0675243477596355,
+            -5.103347219538849,
+            8.815930370791666,
+            3.1551556414603574
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.5808265537669124,
+            3.514157204111288,
+            2.0675243477596355,
+            -5.103347219538849,
+            8.815930370791666,
+            3.1551556414603574
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            0.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.611339994609996,
+          "is_subperiod_q25": -2.1687388283852753,
+          "is_subperiod_mad": 3.5474918789391,
+          "is_temporal_score": 0.18697240662486347
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.18697240662486347,
+        "temporal_median": 2.611339994609996,
+        "temporal_q25": -2.1687388283852753,
+        "temporal_mad": 3.5474918789391,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 3,
+      "params": {
+        "coeff": 1,
+        "AP": 23,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.2023958147904348,
+      "mean_is_sharpe": 1.2023958147904348,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.2023958147904348,
+          "is_sharpe_raw": 1.2023958147904348,
+          "is_turnover": null,
+          "is_trade_count": 72.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.4211192353514748,
+            4.098467470128263,
+            1.442056266477208,
+            -5.1768213463881105,
+            3.1419415933509773,
+            2.2283482307463482
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.4211192353514748,
+            4.098467470128263,
+            1.442056266477208,
+            -5.1768213463881105,
+            3.1419415933509773,
+            2.2283482307463482
+          ],
+          "is_subperiod_trade_counts": [
+            12.0,
+            12.0,
+            8.0,
+            14.0,
+            11.0,
+            15.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.835202248611778,
+          "is_subperiod_q25": -2.205325359894304,
+          "is_subperiod_mad": 1.785002283127842,
+          "is_temporal_score": 0.2811034990795658
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.2811034990795658,
+        "temporal_median": 1.835202248611778,
+        "temporal_q25": -2.205325359894304,
+        "temporal_mad": 1.785002283127842,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 4,
+      "params": {
+        "coeff": 1,
+        "AP": 17,
+        "alpha.condition_threshold": 50,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 0.6772751658486432,
+      "mean_is_sharpe": 0.6772751658486432,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 0.6772751658486432,
+          "is_sharpe_raw": 0.6772751658486432,
+          "is_turnover": null,
+          "is_trade_count": 170.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.296942716200957,
+            3.165092384678913,
+            -0.0027319896849143776,
+            -3.3836755280079958,
+            2.088682090827592,
+            2.631663406178438
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.296942716200957,
+            3.165092384678913,
+            -0.0027319896849143776,
+            -3.3836755280079958,
+            2.088682090827592,
+            2.631663406178438
+          ],
+          "is_subperiod_trade_counts": [
+            28.0,
+            23.0,
+            28.0,
+            31.0,
+            28.0,
+            32.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.0429750505713389,
+          "is_subperiod_q25": -2.5384396434272256,
+          "is_subperiod_mad": 1.8554028448573368,
+          "is_temporal_score": -0.6462582648854972
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.6462582648854972,
+        "temporal_median": 1.0429750505713389,
+        "temporal_q25": -2.5384396434272256,
+        "temporal_mad": 1.8554028448573368,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 5,
+      "params": {
+        "coeff": 4,
+        "AP": 60,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0613098165743606,
+      "mean_is_sharpe": 3.0613098165743606,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0613098165743606,
+          "is_sharpe_raw": 3.0613098165743606,
+          "is_turnover": null,
+          "is_trade_count": 11.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -6.902099551158183,
+            4.214153210396134,
+            1.1520280197443094,
+            0.032238786593745246,
+            5.306869553638723,
+            6.660624605279155
+          ],
+          "is_subperiod_sharpes_raw": [
+            -6.902099551158183,
+            4.214153210396134,
+            1.1520280197443094,
+            0.032238786593745246,
+            5.306869553638723,
+            6.660624605279155
+          ],
+          "is_subperiod_trade_counts": [
+            4.0,
+            2.0,
+            1.0,
+            2.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.6830906150702214,
+          "is_subperiod_q25": 0.31218609488138627,
+          "is_subperiod_mad": 2.637315383522489,
+          "is_temporal_score": 1.4580887517733927
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 1.4580887517733927,
+        "temporal_median": 2.6830906150702214,
+        "temporal_q25": 0.31218609488138627,
+        "temporal_mad": 2.637315383522489,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 6,
+      "params": {
+        "coeff": 4,
+        "AP": 31,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0763999666488386,
+      "mean_is_sharpe": 3.0763999666488386,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0763999666488386,
+          "is_sharpe_raw": 3.0763999666488386,
+          "is_turnover": null,
+          "is_trade_count": 8.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.290029685069718,
+            4.287218052062,
+            2.3504180378693516,
+            -3.449336225077898,
+            7.902452437059819,
+            6.07826660694536
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.290029685069718,
+            4.287218052062,
+            2.3504180378693516,
+            -3.449336225077898,
+            7.902452437059819,
+            6.07826660694536
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.318818044965676,
+          "is_subperiod_q25": -1.9993976593410854,
+          "is_subperiod_mad": 3.6715414770369135,
+          "is_temporal_score": 0.8832280086448936
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.8832280086448936,
+        "temporal_median": 3.318818044965676,
+        "temporal_q25": -1.9993976593410854,
+        "temporal_mad": 3.6715414770369135,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 7,
+      "params": {
+        "coeff": 2,
+        "AP": 25,
+        "alpha.condition_threshold": 65,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.6691595467953966,
+      "mean_is_sharpe": 1.6691595467953966,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.6691595467953966,
+          "is_sharpe_raw": 1.6691595467953966,
+          "is_turnover": null,
+          "is_trade_count": 63.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.483087391766928,
+            2.140480736266127,
+            -1.193885203008808,
+            -2.5346084892015224,
+            4.554468043653102,
+            4.604610449774624
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.483087391766928,
+            2.140480736266127,
+            -1.193885203008808,
+            -2.5346084892015224,
+            4.554468043653102,
+            4.604610449774624
+          ],
+          "is_subperiod_trade_counts": [
+            11.0,
+            11.0,
+            9.0,
+            12.0,
+            9.0,
+            11.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 0.4732977666286594,
+          "is_subperiod_q25": -2.1994276676533437,
+          "is_subperiod_mad": 3.4821457071128847,
+          "is_temporal_score": -1.927603387223786
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -1.927603387223786,
+        "temporal_median": 0.4732977666286594,
+        "temporal_q25": -2.1994276676533437,
+        "temporal_mad": 3.4821457071128847,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 8,
+      "params": {
+        "coeff": 1,
+        "AP": 27,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.579810438201705,
+      "mean_is_sharpe": 1.579810438201705,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.579810438201705,
+          "is_sharpe_raw": 1.579810438201705,
+          "is_turnover": null,
+          "is_trade_count": 60.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -6.100379588225135,
+            4.124015908891612,
+            3.9705410280667115,
+            -3.6416211521052575,
+            3.827531111259193,
+            2.016662944459675
+          ],
+          "is_subperiod_sharpes_raw": [
+            -6.100379588225135,
+            4.124015908891612,
+            3.9705410280667115,
+            -3.6416211521052575,
+            3.827531111259193,
+            2.016662944459675
+          ],
+          "is_subperiod_trade_counts": [
+            10.0,
+            12.0,
+            6.0,
+            12.0,
+            8.0,
+            12.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.922097027859434,
+          "is_subperiod_q25": -2.2270501279640245,
+          "is_subperiod_mad": 1.1251814406197278,
+          "is_temporal_score": 1.6913912691603628
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 1.6913912691603628,
+        "temporal_median": 2.922097027859434,
+        "temporal_q25": -2.2270501279640245,
+        "temporal_mad": 1.1251814406197278,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 9,
+      "params": {
+        "coeff": 7,
+        "AP": 18,
+        "alpha.condition_threshold": 65,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.4860645307595406,
+      "mean_is_sharpe": 2.4860645307595406,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.4860645307595406,
+          "is_sharpe_raw": 2.4860645307595406,
+          "is_turnover": null,
+          "is_trade_count": 9.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.731915302609356,
+            3.863120746137547,
+            0.5979909727610614,
+            -3.989787159903652,
+            7.524403273087312,
+            4.305181677285244
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.731915302609356,
+            3.863120746137547,
+            0.5979909727610614,
+            -3.989787159903652,
+            7.524403273087312,
+            4.305181677285244
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.2305558594493045,
+          "is_subperiod_q25": -2.6494387337667518,
+          "is_subperiod_mad": 3.6842366157369737,
+          "is_temporal_score": -0.4063940685492078
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.4063940685492078,
+        "temporal_median": 2.2305558594493045,
+        "temporal_q25": -2.6494387337667518,
+        "temporal_mad": 3.6842366157369737,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 10,
+      "params": {
+        "coeff": 4,
+        "AP": 5,
+        "alpha.condition_threshold": 50,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.351077981607814,
+      "mean_is_sharpe": 2.351077981607814,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.351077981607814,
+          "is_sharpe_raw": 2.351077981607814,
+          "is_turnover": null,
+          "is_trade_count": 25.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.494340175615275,
+            5.000083195847982,
+            -0.5086927091938046,
+            -2.952106506916198,
+            4.969635974730463,
+            4.620762302503226
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.494340175615275,
+            5.000083195847982,
+            -0.5086927091938046,
+            -2.952106506916198,
+            4.969635974730463,
+            4.620762302503226
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            3.0,
+            4.0,
+            5.0,
+            4.0,
+            4.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.0560347966547106,
+          "is_subperiod_q25": -2.3412530574855994,
+          "is_subperiod_mad": 2.928824788634512,
+          "is_temporal_score": -0.11075351490822527
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.11075351490822527,
+        "temporal_median": 2.0560347966547106,
+        "temporal_q25": -2.3412530574855994,
+        "temporal_mad": 2.928824788634512,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 11,
+      "params": {
+        "coeff": 4,
+        "AP": 42,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.917123031931281,
+      "mean_is_sharpe": 2.917123031931281,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.917123031931281,
+          "is_sharpe_raw": 2.917123031931281,
+          "is_turnover": null,
+          "is_trade_count": 4.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.202382321058707,
+            4.410844852102336,
+            2.6215005462776633,
+            -1.5204995460923365,
+            0.07892667133142435,
+            6.0707774109951895
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.202382321058707,
+            4.410844852102336,
+            2.6215005462776633,
+            -1.5204995460923365,
+            0.07892667133142435,
+            6.0707774109951895
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.3502136088045438,
+          "is_subperiod_q25": -1.1206429917363963,
+          "is_subperiod_mad": 2.9656721990973365,
+          "is_temporal_score": -0.46881538826504343
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.46881538826504343,
+        "temporal_median": 1.3502136088045438,
+        "temporal_q25": -1.1206429917363963,
+        "temporal_mad": 2.9656721990973365,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 12,
+      "params": {
+        "coeff": 5,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.998518746237268,
+      "mean_is_sharpe": 2.998518746237268,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.998518746237268,
+          "is_sharpe_raw": 2.998518746237268,
+          "is_turnover": null,
+          "is_trade_count": 2.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.932054328407239,
+            3.6940316541721496,
+            2.2631859754076715,
+            null,
+            2.380523421195003,
+            6.070777410999788
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.932054328407239,
+            3.6940316541721496,
+            2.2631859754076715,
+            null,
+            2.380523421195003,
+            6.070777410999788
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.380523421195003,
+          "is_subperiod_q25": 2.2631859754076715,
+          "is_subperiod_mad": 1.3135082329771466,
+          "is_temporal_score": 2.402725097328731
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.402725097328731,
+        "temporal_median": 2.380523421195003,
+        "temporal_q25": 2.2631859754076715,
+        "temporal_mad": 1.3135082329771466,
+        "temporal_count": 5.0,
+        "is_subperiod_count": 5.0
+      }
+    },
+    {
+      "trial_id": 13,
+      "params": {
+        "coeff": 3,
+        "AP": 37,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.321728002272106,
+      "mean_is_sharpe": 2.321728002272106,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.321728002272106,
+          "is_sharpe_raw": 2.321728002272106,
+          "is_turnover": null,
+          "is_trade_count": 24.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.0544691778434023,
+            3.71924571221141,
+            0.0621178494417173,
+            -2.628744313540651,
+            3.912321479661043,
+            4.735679225215271
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.0544691778434023,
+            3.71924571221141,
+            0.0621178494417173,
+            -2.628744313540651,
+            3.912321479661043,
+            4.735679225215271
+          ],
+          "is_subperiod_trade_counts": [
+            4.0,
+            4.0,
+            3.0,
+            5.0,
+            4.0,
+            4.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.8906817808265637,
+          "is_subperiod_q25": -1.5253224210221226,
+          "is_subperiod_mad": 2.433318571611593,
+          "is_temporal_score": 0.21642576871413044
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.21642576871413044,
+        "temporal_median": 1.8906817808265637,
+        "temporal_q25": -1.5253224210221226,
+        "temporal_mad": 2.433318571611593,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 14,
+      "params": {
+        "coeff": 5,
+        "AP": 51,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.8407493690647845,
+      "mean_is_sharpe": 1.8407493690647845,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.8407493690647845,
+          "is_sharpe_raw": 1.8407493690647845,
+          "is_turnover": null,
+          "is_trade_count": 17.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.393632219635279,
+            4.217915620362841,
+            -1.4982742308041979,
+            -3.738641872629931,
+            4.631338400473403,
+            4.919798006968186
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.393632219635279,
+            4.217915620362841,
+            -1.4982742308041979,
+            -3.738641872629931,
+            4.631338400473403,
+            4.919798006968186
+          ],
+          "is_subperiod_trade_counts": [
+            3.0,
+            2.0,
+            3.0,
+            4.0,
+            3.0,
+            2.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.3598206947793214,
+          "is_subperiod_q25": -2.9197927224275086,
+          "is_subperiod_mad": 3.4157475089414735,
+          "is_temporal_score": -1.2239908764196679
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -1.2239908764196679,
+        "temporal_median": 1.3598206947793214,
+        "temporal_q25": -2.9197927224275086,
+        "temporal_mad": 3.4157475089414735,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 15,
+      "params": {
+        "coeff": 3,
+        "AP": 60,
+        "alpha.condition_threshold": 55,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.919992836988907,
+      "mean_is_sharpe": 2.919992836988907,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.919992836988907,
+          "is_sharpe_raw": 2.919992836988907,
+          "is_turnover": null,
+          "is_trade_count": 34.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -1.9861984517320919,
+            4.176673885160867,
+            1.3559048604142598,
+            -1.900587192165432,
+            6.553087764654941,
+            4.679759360690218
+          ],
+          "is_subperiod_sharpes_raw": [
+            -1.9861984517320919,
+            4.176673885160867,
+            1.3559048604142598,
+            -1.900587192165432,
+            6.553087764654941,
+            4.679759360690218
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            5.0,
+            5.0,
+            7.0,
+            5.0,
+            7.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.7662893727875635,
+          "is_subperiod_q25": -1.086464179020509,
+          "is_subperiod_mad": 2.850134189885016,
+          "is_temporal_score": 1.015283024138903
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 1.015283024138903,
+        "temporal_median": 2.7662893727875635,
+        "temporal_q25": -1.086464179020509,
+        "temporal_mad": 2.850134189885016,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 16,
+      "params": {
+        "coeff": 3,
+        "AP": 42,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.074204839884658,
+      "mean_is_sharpe": 2.074204839884658,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.074204839884658,
+          "is_sharpe_raw": 2.074204839884658,
+          "is_turnover": null,
+          "is_trade_count": 13.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -5.3654380763504586,
+            4.146879727473053,
+            -0.14189476624286387,
+            -2.854759990492906,
+            4.4270025698320765,
+            3.7138470671689565
+          ],
+          "is_subperiod_sharpes_raw": [
+            -5.3654380763504586,
+            4.146879727473053,
+            -0.14189476624286387,
+            -2.854759990492906,
+            4.4270025698320765,
+            3.7138470671689565
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            3.0,
+            2.0,
+            2.0,
+            3.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.7859761504630463,
+          "is_subperiod_q25": -2.1765436844303956,
+          "is_subperiod_mad": 2.5009649981895183,
+          "is_temporal_score": -0.11746945396083142
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.11746945396083142,
+        "temporal_median": 1.7859761504630463,
+        "temporal_q25": -2.1765436844303956,
+        "temporal_mad": 2.5009649981895183,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 17,
+      "params": {
+        "coeff": 6,
+        "AP": 8,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.016127464853366,
+      "mean_is_sharpe": 2.016127464853366,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.016127464853366,
+          "is_sharpe_raw": 2.016127464853366,
+          "is_turnover": null,
+          "is_trade_count": 14.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -5.304048326822563,
+            3.8483545105024057,
+            -1.0150504855626221,
+            -2.4815658759750803,
+            5.137240990530186,
+            5.0925334447268655
+          ],
+          "is_subperiod_sharpes_raw": [
+            -5.304048326822563,
+            3.8483545105024057,
+            -1.0150504855626221,
+            -2.4815658759750803,
+            5.137240990530186,
+            5.0925334447268655
+          ],
+          "is_subperiod_trade_counts": [
+            4.0,
+            2.0,
+            2.0,
+            2.0,
+            3.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.4166520124698918,
+          "is_subperiod_q25": -2.1149370283719655,
+          "is_subperiod_mad": 3.698235205158634,
+          "is_temporal_score": -1.066946698621015
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -1.066946698621015,
+        "temporal_median": 1.4166520124698918,
+        "temporal_q25": -2.1149370283719655,
+        "temporal_mad": 3.698235205158634,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 18,
+      "params": {
+        "coeff": 4,
+        "AP": 36,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.8577934292297504,
+      "mean_is_sharpe": 2.8577934292297504,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.8577934292297504,
+          "is_sharpe_raw": 2.8577934292297504,
+          "is_turnover": null,
+          "is_trade_count": 7.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -5.21421251211927,
+            4.320776724011277,
+            1.2822613924257318,
+            -1.7631969190681476,
+            5.67619741790102,
+            6.070777410997754
+          ],
+          "is_subperiod_sharpes_raw": [
+            -5.21421251211927,
+            4.320776724011277,
+            1.2822613924257318,
+            -1.7631969190681476,
+            5.67619741790102,
+            6.070777410997754
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            1.0,
+            2.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.8015190582185046,
+          "is_subperiod_q25": -1.0018323411946777,
+          "is_subperiod_mad": 3.071968356230882,
+          "is_temporal_score": 0.9649851777446603
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.9649851777446603,
+        "temporal_median": 2.8015190582185046,
+        "temporal_q25": -1.0018323411946777,
+        "temporal_mad": 3.071968356230882,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 19,
+      "params": {
+        "coeff": 6,
+        "AP": 49,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.3582729285978945,
+      "mean_is_sharpe": 2.3582729285978945,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.3582729285978945,
+          "is_sharpe_raw": 2.3582729285978945,
+          "is_turnover": null,
+          "is_trade_count": 9.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.0501358343805043,
+            3.8244086192302746,
+            -0.5523153047470617,
+            -0.8313426013991507,
+            7.23446122067809,
+            3.669835240969606
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.0501358343805043,
+            3.8244086192302746,
+            -0.5523153047470617,
+            -0.8313426013991507,
+            7.23446122067809,
+            3.669835240969606
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.5587599681112723,
+          "is_subperiod_q25": -0.7615857772361285,
+          "is_subperiod_mad": 2.3278756103147127,
+          "is_temporal_score": 0.16634642978307745
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.16634642978307745,
+        "temporal_median": 1.5587599681112723,
+        "temporal_q25": -0.7615857772361285,
+        "temporal_mad": 2.3278756103147127,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 20,
+      "params": {
+        "coeff": 5,
+        "AP": 29,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.515234021352934,
+      "mean_is_sharpe": 2.515234021352934,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.515234021352934,
+          "is_sharpe_raw": 2.515234021352934,
+          "is_turnover": null,
+          "is_trade_count": 16.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -5.064729626373724,
+            4.397844215634969,
+            -1.283377903264479,
+            -3.6159867205780816,
+            6.014963129426039,
+            6.3725254402807945
+          ],
+          "is_subperiod_sharpes_raw": [
+            -5.064729626373724,
+            4.397844215634969,
+            -1.283377903264479,
+            -3.6159867205780816,
+            6.014963129426039,
+            6.3725254402807945
+          ],
+          "is_subperiod_trade_counts": [
+            4.0,
+            2.0,
+            3.0,
+            4.0,
+            2.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.5572331561852448,
+          "is_subperiod_q25": -3.032834516249681,
+          "is_subperiod_mad": 4.636511128668172,
+          "is_temporal_score": -1.6708727630237452
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -1.6708727630237452,
+        "temporal_median": 1.5572331561852448,
+        "temporal_q25": -3.032834516249681,
+        "temporal_mad": 4.636511128668172,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 21,
+      "params": {
+        "coeff": 5,
+        "AP": 54,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.4035129328234213,
+      "mean_is_sharpe": 2.4035129328234213,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.4035129328234213,
+          "is_sharpe_raw": 2.4035129328234213,
+          "is_turnover": null,
+          "is_trade_count": 2.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.932054328407239,
+            -0.5045314101251448,
+            2.2598427939735286,
+            null,
+            2.3805234211916164,
+            6.070777410998438
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.932054328407239,
+            -0.5045314101251448,
+            2.2598427939735286,
+            null,
+            2.3805234211916164,
+            6.070777410998438
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.2598427939735286,
+          "is_subperiod_q25": -0.5045314101251448,
+          "is_subperiod_mad": 2.764374204098673,
+          "is_temporal_score": 0.7262962688866486
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.7262962688866486,
+        "temporal_median": 2.2598427939735286,
+        "temporal_q25": -0.5045314101251448,
+        "temporal_mad": 2.764374204098673,
+        "temporal_count": 5.0,
+        "is_subperiod_count": 5.0
+      }
+    },
+    {
+      "trial_id": 22,
+      "params": {
+        "coeff": 4,
+        "AP": 54,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.488616086223311,
+      "mean_is_sharpe": 2.488616086223311,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.488616086223311,
+          "is_sharpe_raw": 2.488616086223311,
+          "is_turnover": null,
+          "is_trade_count": 2.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.520418220672653,
+            -0.504531410120108,
+            2.887795824499355,
+            null,
+            2.380523421189961,
+            6.070777410997536
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.520418220672653,
+            -0.504531410120108,
+            2.887795824499355,
+            null,
+            2.380523421189961,
+            6.070777410997536
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.380523421189961,
+          "is_subperiod_q25": -0.504531410120108,
+          "is_subperiod_mad": 2.885054831310069,
+          "is_temporal_score": 0.7866365824988941
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.7866365824988941,
+        "temporal_median": 2.380523421189961,
+        "temporal_q25": -0.504531410120108,
+        "temporal_mad": 2.885054831310069,
+        "temporal_count": 5.0,
+        "is_subperiod_count": 5.0
+      }
+    },
+    {
+      "trial_id": 23,
+      "params": {
+        "coeff": 3,
+        "AP": 47,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.19959522805599,
+      "mean_is_sharpe": 3.19959522805599,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.19959522805599,
+          "is_sharpe_raw": 3.19959522805599,
+          "is_turnover": null,
+          "is_trade_count": 10.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.448933930874943,
+            4.116954079960789,
+            -0.04911178932435098,
+            -1.2585925171656909,
+            4.150927167181673,
+            6.799840522427459
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.448933930874943,
+            4.116954079960789,
+            -0.04911178932435098,
+            -1.2585925171656909,
+            4.150927167181673,
+            6.799840522427459
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            3.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.033921145318219,
+          "is_subperiod_q25": -0.9562223352053558,
+          "is_subperiod_mad": 2.704759842173682,
+          "is_temporal_score": 0.3946745236697713
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.3946745236697713,
+        "temporal_median": 2.033921145318219,
+        "temporal_q25": -0.9562223352053558,
+        "temporal_mad": 2.704759842173682,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 24,
+      "params": {
+        "coeff": 2,
+        "AP": 45,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.0693610133707931,
+      "mean_is_sharpe": 1.0693610133707931,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.0693610133707931,
+          "is_sharpe_raw": 1.0693610133707931,
+          "is_turnover": null,
+          "is_trade_count": 19.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.9418809426913,
+            0.4462273328006784,
+            -0.7126603336788045,
+            -3.0002333267888934,
+            2.9342873667834444,
+            4.395062530042802
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.9418809426913,
+            0.4462273328006784,
+            -0.7126603336788045,
+            -3.0002333267888934,
+            2.9342873667834444,
+            4.395062530042802
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            7.0,
+            2.0,
+            3.0,
+            3.0,
+            2.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": -0.13321650043906308,
+          "is_subperiod_q25": -2.428340078511371,
+          "is_subperiod_mad": 2.967260346786169,
+          "is_temporal_score": -2.345348697385559
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -2.345348697385559,
+        "temporal_median": -0.13321650043906308,
+        "temporal_q25": -2.428340078511371,
+        "temporal_mad": 2.967260346786169,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 25,
+      "params": {
+        "coeff": 2,
+        "AP": 36,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.712881834930297,
+      "mean_is_sharpe": 1.712881834930297,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.712881834930297,
+          "is_sharpe_raw": 1.712881834930297,
+          "is_turnover": null,
+          "is_trade_count": 40.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.094849435751338,
+            1.922448833736534,
+            -2.285143263673853,
+            0.390468010811291,
+            4.364806496077945,
+            3.6649506568589967
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.094849435751338,
+            1.922448833736534,
+            -2.285143263673853,
+            0.390468010811291,
+            4.364806496077945,
+            3.6649506568589967
+          ],
+          "is_subperiod_trade_counts": [
+            6.0,
+            10.0,
+            6.0,
+            5.0,
+            6.0,
+            7.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.1564584222739125,
+          "is_subperiod_q25": -1.4735200741106809,
+          "is_subperiod_mad": 2.858420154194558,
+          "is_temporal_score": -0.7148076770565708
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.7148076770565708,
+        "temporal_median": 1.1564584222739125,
+        "temporal_q25": -1.4735200741106809,
+        "temporal_mad": 2.858420154194558,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 26,
+      "params": {
+        "coeff": 3,
+        "AP": 48,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0409222105250384,
+      "mean_is_sharpe": 3.0409222105250384,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0409222105250384,
+          "is_sharpe_raw": 3.0409222105250384,
+          "is_turnover": null,
+          "is_trade_count": 32.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            5.0,
+            4.0,
+            7.0,
+            5.0,
+            6.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.408146201302952,
+          "is_subperiod_q25": -0.7765851793844349,
+          "is_subperiod_mad": 2.2055659166522696,
+          "is_temporal_score": 2.0723876891614865
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.0723876891614865,
+        "temporal_median": 3.408146201302952,
+        "temporal_q25": -0.7765851793844349,
+        "temporal_mad": 2.2055659166522696,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 27,
+      "params": {
+        "coeff": 3,
+        "AP": 40,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.9841068375150819,
+      "mean_is_sharpe": 1.9841068375150819,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.9841068375150819,
+          "is_sharpe_raw": 1.9841068375150819,
+          "is_turnover": null,
+          "is_trade_count": 14.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -5.319671688646262,
+            4.091129518749223,
+            -1.1356124616488048,
+            -2.8905698218387004,
+            4.423153869547752,
+            3.704091588971079
+          ],
+          "is_subperiod_sharpes_raw": [
+            -5.319671688646262,
+            4.091129518749223,
+            -1.1356124616488048,
+            -2.8905698218387004,
+            4.423153869547752,
+            3.704091588971079
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            3.0,
+            3.0,
+            2.0,
+            3.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 1.2842395636611372,
+          "is_subperiod_q25": -2.4518304817912266,
+          "is_subperiod_mad": 2.97290213048735,
+          "is_temporal_score": -0.9377606461199058
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.9377606461199058,
+        "temporal_median": 1.2842395636611372,
+        "temporal_q25": -2.4518304817912266,
+        "temporal_mad": 2.97290213048735,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 28,
+      "params": {
+        "coeff": 4,
+        "AP": 57,
+        "alpha.condition_threshold": 45,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.339927140966742,
+      "mean_is_sharpe": 2.339927140966742,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.339927140966742,
+          "is_sharpe_raw": 2.339927140966742,
+          "is_turnover": null,
+          "is_trade_count": 25.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.916092592068105,
+            4.179622849178612,
+            1.7451460382058122,
+            -0.8789312712346956,
+            4.434507973544287,
+            3.9438459026049286
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.916092592068105,
+            4.179622849178612,
+            1.7451460382058122,
+            -0.8789312712346956,
+            4.434507973544287,
+            3.9438459026049286
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            3.0,
+            3.0,
+            5.0,
+            4.0,
+            5.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.8444959704053705,
+          "is_subperiod_q25": -0.2229119438745687,
+          "is_subperiod_mad": 1.462569440956079,
+          "is_temporal_score": 2.0463376667649604
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.0463376667649604,
+        "temporal_median": 2.8444959704053705,
+        "temporal_q25": -0.2229119438745687,
+        "temporal_mad": 1.462569440956079,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 29,
+      "params": {
+        "coeff": 6,
+        "AP": 57,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.557710962372717,
+      "mean_is_sharpe": 2.557710962372717,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.557710962372717,
+          "is_sharpe_raw": 2.557710962372717,
+          "is_turnover": null,
+          "is_trade_count": 11.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.2431848008651953,
+            3.8040168865717896,
+            0.8156264295783779,
+            -4.026161239663561,
+            7.333870481852762,
+            5.245395294415336
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.2431848008651953,
+            3.8040168865717896,
+            0.8156264295783779,
+            -4.026161239663561,
+            7.333870481852762,
+            5.245395294415336
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            1.0,
+            2.0,
+            4.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.3098216580750837,
+          "is_subperiod_q25": -2.2284819932543023,
+          "is_subperiod_mad": 3.9798112300589654,
+          "is_temporal_score": -0.34862855493068956
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -0.34862855493068956,
+        "temporal_median": 2.3098216580750837,
+        "temporal_q25": -2.2284819932543023,
+        "temporal_mad": 3.9798112300589654,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 30,
+      "params": {
+        "coeff": 2,
+        "AP": 31,
+        "alpha.condition_threshold": 65,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 1.5343420988308072,
+      "mean_is_sharpe": 1.5343420988308072,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 1.5343420988308072,
+          "is_sharpe_raw": 1.5343420988308072,
+          "is_turnover": null,
+          "is_trade_count": 65.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.071047780136323,
+            1.7913472705617886,
+            -0.8858320932322946,
+            -2.3328630318120247,
+            5.316220520019034,
+            3.354122614115648
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.071047780136323,
+            1.7913472705617886,
+            -0.8858320932322946,
+            -2.3328630318120247,
+            5.316220520019034,
+            3.354122614115648
+          ],
+          "is_subperiod_trade_counts": [
+            10.0,
+            13.0,
+            9.0,
+            12.0,
+            9.0,
+            12.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 0.45275758866474697,
+          "is_subperiod_q25": -1.7747438584103161,
+          "is_subperiod_mad": 2.6547129946389205,
+          "is_temporal_score": -1.4070220661778081
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": -1.4070220661778081,
+        "temporal_median": 0.45275758866474697,
+        "temporal_q25": -1.7747438584103161,
+        "temporal_mad": 2.6547129946389205,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 31,
+      "params": {
+        "coeff": 3,
+        "AP": 47,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 2.887378407140243,
+      "mean_is_sharpe": 2.887378407140243,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 2.887378407140243,
+          "is_sharpe_raw": 2.887378407140243,
+          "is_turnover": null,
+          "is_trade_count": 33.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.381493884933316,
+            4.162342928581953,
+            2.8922319917732064,
+            -2.768381062771441,
+            5.559010909040344,
+            5.11341985046126
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.381493884933316,
+            4.162342928581953,
+            2.8922319917732064,
+            -2.768381062771441,
+            5.559010909040344,
+            5.11341985046126
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            5.0,
+            4.0,
+            8.0,
+            5.0,
+            6.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.52728746017758,
+          "is_subperiod_q25": -1.0630624157566853,
+          "is_subperiod_mad": 1.8089279195732222,
+          "is_temporal_score": 2.3039047756639635
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.3039047756639635,
+        "temporal_median": 3.52728746017758,
+        "temporal_q25": -1.0630624157566853,
+        "temporal_mad": 1.8089279195732222,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "trial_id": 26,
+      "params": {
+        "coeff": 3,
+        "AP": 48,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0409222105250384,
+      "mean_is_sharpe": 3.0409222105250384,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0409222105250384,
+          "is_sharpe_raw": 3.0409222105250384,
+          "is_turnover": null,
+          "is_trade_count": 32.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            5.0,
+            4.0,
+            7.0,
+            5.0,
+            6.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.408146201302952,
+          "is_subperiod_q25": -0.7765851793844349,
+          "is_subperiod_mad": 2.2055659166522696,
+          "is_temporal_score": 2.0723876891614865
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.0723876891614865,
+        "temporal_median": 3.408146201302952,
+        "temporal_q25": -0.7765851793844349,
+        "temporal_mad": 2.2055659166522696,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0,
+        "selector": "fallback_best_is_temporal",
+        "selected_by": "is_only_robust",
+        "oos_used_for_selection": false,
+        "reason": "no_dense_train_plateau",
+        "top_trials": 4,
+        "eps": 0.15,
+        "min_samples": 3,
+        "cluster_method": "numpy_dbscan_fallback",
+        "candidate_selection_complete": true
+      }
+    },
+    {
+      "trial_id": 23,
+      "params": {
+        "coeff": 3,
+        "AP": 47,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.19959522805599,
+      "mean_is_sharpe": 3.19959522805599,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.19959522805599,
+          "is_sharpe_raw": 3.19959522805599,
+          "is_turnover": null,
+          "is_trade_count": 10.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -3.448933930874943,
+            4.116954079960789,
+            -0.04911178932435098,
+            -1.2585925171656909,
+            4.150927167181673,
+            6.799840522427459
+          ],
+          "is_subperiod_sharpes_raw": [
+            -3.448933930874943,
+            4.116954079960789,
+            -0.04911178932435098,
+            -1.2585925171656909,
+            4.150927167181673,
+            6.799840522427459
+          ],
+          "is_subperiod_trade_counts": [
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            3.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.033921145318219,
+          "is_subperiod_q25": -0.9562223352053558,
+          "is_subperiod_mad": 2.704759842173682,
+          "is_temporal_score": 0.3946745236697713
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.3946745236697713,
+        "temporal_median": 2.033921145318219,
+        "temporal_q25": -0.9562223352053558,
+        "temporal_mad": 2.704759842173682,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 6,
+      "params": {
+        "coeff": 4,
+        "AP": 31,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0763999666488386,
+      "mean_is_sharpe": 3.0763999666488386,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0763999666488386,
+          "is_sharpe_raw": 3.0763999666488386,
+          "is_turnover": null,
+          "is_trade_count": 8.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -4.290029685069718,
+            4.287218052062,
+            2.3504180378693516,
+            -3.449336225077898,
+            7.902452437059819,
+            6.07826660694536
+          ],
+          "is_subperiod_sharpes_raw": [
+            -4.290029685069718,
+            4.287218052062,
+            2.3504180378693516,
+            -3.449336225077898,
+            7.902452437059819,
+            6.07826660694536
+          ],
+          "is_subperiod_trade_counts": [
+            2.0,
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            0.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.318818044965676,
+          "is_subperiod_q25": -1.9993976593410854,
+          "is_subperiod_mad": 3.6715414770369135,
+          "is_temporal_score": 0.8832280086448936
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 0.8832280086448936,
+        "temporal_median": 3.318818044965676,
+        "temporal_q25": -1.9993976593410854,
+        "temporal_mad": 3.6715414770369135,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 5,
+      "params": {
+        "coeff": 4,
+        "AP": 60,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0613098165743606,
+      "mean_is_sharpe": 3.0613098165743606,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0613098165743606,
+          "is_sharpe_raw": 3.0613098165743606,
+          "is_turnover": null,
+          "is_trade_count": 11.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -6.902099551158183,
+            4.214153210396134,
+            1.1520280197443094,
+            0.032238786593745246,
+            5.306869553638723,
+            6.660624605279155
+          ],
+          "is_subperiod_sharpes_raw": [
+            -6.902099551158183,
+            4.214153210396134,
+            1.1520280197443094,
+            0.032238786593745246,
+            5.306869553638723,
+            6.660624605279155
+          ],
+          "is_subperiod_trade_counts": [
+            4.0,
+            2.0,
+            1.0,
+            2.0,
+            1.0,
+            1.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 2.6830906150702214,
+          "is_subperiod_q25": 0.31218609488138627,
+          "is_subperiod_mad": 2.637315383522489,
+          "is_temporal_score": 1.4580887517733927
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 1.4580887517733927,
+        "temporal_median": 2.6830906150702214,
+        "temporal_q25": 0.31218609488138627,
+        "temporal_mad": 2.637315383522489,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    },
+    {
+      "trial_id": 26,
+      "params": {
+        "coeff": 3,
+        "AP": 48,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "objective": 3.0409222105250384,
+      "mean_is_sharpe": 3.0409222105250384,
+      "mean_oos_sharpe": 0.0,
+      "mean_decay": 0.0,
+      "std_decay": 0.0,
+      "fold_metrics": [
+        {
+          "fold_id": 0,
+          "train_start": null,
+          "train_end": null,
+          "test_start": null,
+          "test_end": null,
+          "is_sharpe": 3.0409222105250384,
+          "is_sharpe_raw": 3.0409222105250384,
+          "is_turnover": null,
+          "is_trade_count": 32.0,
+          "is_required_trades": 0.0,
+          "is_trade_penalty": 0.0,
+          "oos_evaluated": false,
+          "is_subperiod_sharpes": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_sharpes_raw": [
+            -2.395497356207133,
+            4.17590721642477,
+            2.640385186181134,
+            -1.9155753012396246,
+            6.035561106649696,
+            5.1918631292607476
+          ],
+          "is_subperiod_trade_counts": [
+            5.0,
+            5.0,
+            4.0,
+            7.0,
+            5.0,
+            6.0
+          ],
+          "is_subperiod_count": 6,
+          "is_subperiod_median": 3.408146201302952,
+          "is_subperiod_q25": -0.7765851793844349,
+          "is_subperiod_mad": 2.2055659166522696,
+          "is_temporal_score": 2.0723876891614865
+        }
+      ],
+      "pruned": false,
+      "selection_metadata": {
+        "stage": "is_search",
+        "objective_mode": "mode_4_is_only_robust",
+        "oos_seen_by_optuna": false,
+        "temporal_score": 2.0723876891614865,
+        "temporal_median": 3.408146201302952,
+        "temporal_q25": -0.7765851793844349,
+        "temporal_mad": 2.2055659166522696,
+        "temporal_count": 6.0,
+        "is_subperiod_count": 6.0
+      }
+    }
+  ],
+  "selector": "installed Mode 4 optimize_params(evaluate_oos_candidates=False)",
+  "account_runs": 32,
+  "scorer_calls": 224,
+  "persistent_candidate_cache_hits": 0,
+  "deployment_runs": 0,
+  "wall_seconds": 1736.3334423024207,
+  "nonfinite_values": {
+    "candidates[0].fold_metrics[0].is_turnover": "NAN",
+    "candidates[1].fold_metrics[0].is_turnover": "NAN",
+    "candidates[2].fold_metrics[0].is_turnover": "NAN",
+    "candidates[3].fold_metrics[0].is_turnover": "NAN",
+    "candidates[4].fold_metrics[0].is_turnover": "NAN",
+    "selected.fold_metrics[0].is_turnover": "NAN",
+    "trials[0].fold_metrics[0].is_turnover": "NAN",
+    "trials[10].fold_metrics[0].is_turnover": "NAN",
+    "trials[11].fold_metrics[0].is_turnover": "NAN",
+    "trials[12].fold_metrics[0].is_subperiod_sharpes[3]": "NEG_INF",
+    "trials[12].fold_metrics[0].is_subperiod_sharpes_raw[3]": "NEG_INF",
+    "trials[12].fold_metrics[0].is_turnover": "NAN",
+    "trials[13].fold_metrics[0].is_turnover": "NAN",
+    "trials[14].fold_metrics[0].is_turnover": "NAN",
+    "trials[15].fold_metrics[0].is_turnover": "NAN",
+    "trials[16].fold_metrics[0].is_turnover": "NAN",
+    "trials[17].fold_metrics[0].is_turnover": "NAN",
+    "trials[18].fold_metrics[0].is_turnover": "NAN",
+    "trials[19].fold_metrics[0].is_turnover": "NAN",
+    "trials[1].fold_metrics[0].is_turnover": "NAN",
+    "trials[20].fold_metrics[0].is_turnover": "NAN",
+    "trials[21].fold_metrics[0].is_subperiod_sharpes[3]": "NEG_INF",
+    "trials[21].fold_metrics[0].is_subperiod_sharpes_raw[3]": "NEG_INF",
+    "trials[21].fold_metrics[0].is_turnover": "NAN",
+    "trials[22].fold_metrics[0].is_subperiod_sharpes[3]": "NEG_INF",
+    "trials[22].fold_metrics[0].is_subperiod_sharpes_raw[3]": "NEG_INF",
+    "trials[22].fold_metrics[0].is_turnover": "NAN",
+    "trials[23].fold_metrics[0].is_turnover": "NAN",
+    "trials[24].fold_metrics[0].is_turnover": "NAN",
+    "trials[25].fold_metrics[0].is_turnover": "NAN",
+    "trials[26].fold_metrics[0].is_turnover": "NAN",
+    "trials[27].fold_metrics[0].is_turnover": "NAN",
+    "trials[28].fold_metrics[0].is_turnover": "NAN",
+    "trials[29].fold_metrics[0].is_turnover": "NAN",
+    "trials[2].fold_metrics[0].is_turnover": "NAN",
+    "trials[30].fold_metrics[0].is_turnover": "NAN",
+    "trials[31].fold_metrics[0].is_turnover": "NAN",
+    "trials[3].fold_metrics[0].is_turnover": "NAN",
+    "trials[4].fold_metrics[0].is_turnover": "NAN",
+    "trials[5].fold_metrics[0].is_turnover": "NAN",
+    "trials[6].fold_metrics[0].is_turnover": "NAN",
+    "trials[7].fold_metrics[0].is_turnover": "NAN",
+    "trials[8].fold_metrics[0].is_turnover": "NAN",
+    "trials[9].fold_metrics[0].is_turnover": "NAN"
+  },
+  "status": "SELECTED",
+  "params": {
+    "coeff": 3,
+    "AP": 48,
+    "alpha.condition_threshold": 60,
+    "novolumedata": false,
+    "src_col": "close"
+  },
+  "selection_id": "34ed92492863dcd6917f4f69f6627e77d4789d371ad9dea44c9b4d960216ccee",
+  "ready_at": "2020-12-01T00:01:00+00:00",
+  "model_id": null,
+  "measured_search_io_packing_seconds": 1737.6361012188718,
+  "source_identity": "c65a8ecfc6a8289550efbabe844bafab31ced5fb7239c5ed6b5ed6c2555ca1f5",
+  "task_id": "A-SC-BTC-train-selection",
+  "measured_wall_seconds": 1737.6361142452806,
+  "peak_rss_kib": 1392208,
+  "cpu_seconds": 1729.4394459999999,
+  "affinity_cpus": 2
+}

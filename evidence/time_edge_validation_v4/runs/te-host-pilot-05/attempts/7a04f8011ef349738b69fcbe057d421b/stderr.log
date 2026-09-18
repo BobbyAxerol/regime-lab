@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/scripts/run_time_edge.py", line 132, in <module>
+    try: raise SystemExit(main())
+                          ^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/scripts/run_time_edge.py", line 127, in main
+    print(json.dumps(result,ensure_ascii=False,allow_nan=False,indent=2))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type CompactFillLedger is not JSON serializable

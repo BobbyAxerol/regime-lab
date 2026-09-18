@@ -1,0 +1,463 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.acceptance_coverage.v1",
+  "cases": [
+    {
+      "id": "T01",
+      "question": "LAB_ROOT nằm trong protected repo",
+      "expected": "Preflight reject",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T02",
+      "question": "Symlink/hardlink editable trỏ source",
+      "expected": "Reject hoặc physical copy an toàn",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T03",
+      "question": "ZIP path traversal/symlink/duplicate",
+      "expected": "Reject trước extract",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T04",
+      "question": "Archive hash hoặc allowlist4file đổi",
+      "expected": "Stop, không tự dùng alpha mới",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "protected_source_verification.json: original alpha bytes; archive extraction not exercised"
+    },
+    {
+      "id": "T05",
+      "question": "Import ghi cache ra protected path trong sandbox fixture",
+      "expected": "Bị deny, worker có error rõ",
+      "status": "BLOCKED_ISOLATION_UNAVAILABLE",
+      "evidence_or_reason": "os_isolation.json: lab-owned write-denial/network/environment probe; no market worker"
+    },
+    {
+      "id": "T06",
+      "question": "Network/live credentials trong replay worker",
+      "expected": "Không accessible",
+      "status": "BLOCKED_ISOLATION_UNAVAILABLE",
+      "evidence_or_reason": "os_isolation.json: lab-owned write-denial/network/environment probe; no market worker"
+    },
+    {
+      "id": "T07",
+      "question": "Memory/process/cancel vượt budget",
+      "expected": "Chỉ own worker dừng, committed artifacts giữ",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T08",
+      "question": "Source hash trước/sau",
+      "expected": "Unchanged hoặc explicit external drift invalidate",
+      "status": "PASS_MEASURED_IDENTITY",
+      "evidence_or_reason": "protected_source_verification.json: actual before/after hashes, denominator retained"
+    },
+    {
+      "id": "T09",
+      "question": "HASH standalone thiếu numpy",
+      "expected": "Legacy-minimal fix documented; canonical imports pass",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T10",
+      "question": "HASH short arrays và ATR convention",
+      "expected": "Guarded; legacy/corrected conventions không mix",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T11",
+      "question": "HASH multiple TP crossed same bar",
+      "expected": "Engine path xử lý đúng quantity/priority",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T12",
+      "question": "HASH TP2 remaining fraction và lot rounding",
+      "expected": "Không over-close; dust explicit",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T13",
+      "question": "HMA open khác previous close",
+      "expected": "Actual fill/levels theo chosen contract",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T14",
+      "question": "HMA invalid min/max, unused knobs",
+      "expected": "Reject invalid; inactive params không inflate search",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T15",
+      "question": "HMA RSI flat, warmup/padding",
+      "expected": "Reference contract pass, no false warmup trades",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T16",
+      "question": "VWAP dynamic threshold chưa available",
+      "expected": "Không retroactive intrabar fill",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T17",
+      "question": "VWAP UTC day, HTF close và missing bucket",
+      "expected": "Proper availability và readiness",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T18",
+      "question": "VWAP simultaneous time/SL/TP",
+      "expected": "Same event priority mọi arms",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T19",
+      "question": "SC thiếu volume/RSI fallback",
+      "expected": "Resolve branch đúng hoặc explicit reject",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T20",
+      "question": "SC long-flat/amplitude/crossover",
+      "expected": "No silent shorts/no double shift; semantic version",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T21",
+      "question": "Fractional crypto volume",
+      "expected": "Không truncate thành int",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T22",
+      "question": "ms/ns và open/close labels",
+      "expected": "Canonical timestamps đúng; units assertion",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json: UTC/day-label rejection; raw ms/ns conversion not exercised"
+    },
+    {
+      "id": "T23",
+      "question": "Same-length symbols lệch timestamps",
+      "expected": "No relabel; exact map/reject",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T24",
+      "question": "Symbol trước listing",
+      "expected": "Không fabricate historical bars/returns",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T25",
+      "question": "Changed future raw data/preprocessing",
+      "expected": "Past feature/state/decision unchanged",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T26",
+      "question": "Snapshot sample_time cuối giờ",
+      "expected": "Không available tại đầu giờ",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T27",
+      "question": "Market universe và source revision",
+      "expected": "Membership/vintage as-of, no future selection",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T28",
+      "question": "Enrichment thiếu/stale",
+      "expected": "Mask/fallback; không zero giả",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T29",
+      "question": "Sharp peak vs broad profitable neighborhood",
+      "expected": "Bad probes retained, stability đúng",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T30",
+      "question": "Flat but negative region",
+      "expected": "Fails economic quality",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T31",
+      "question": "Fixed/inactive params/far sampled point",
+      "expected": "Geometry không đổi tùy sampled artifacts",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T32",
+      "question": "Dependent parameter TP/length manifold",
+      "expected": "Generate feasible unique probes",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T33",
+      "question": "Centroid chưa evaluate",
+      "expected": "Không deploy trước evaluate",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T34",
+      "question": "Medoid metric/tie-break",
+      "expected": "Matches reference distance objective",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T35",
+      "question": "Incumbent guard khác robust objective",
+      "expected": "Visible policy; comparable guard primary",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T36",
+      "question": "Fullset tuned presets vào early bank",
+      "expected": "Forbidden in primary",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T37",
+      "question": "Forward JM DP vs exhaustive tiny paths",
+      "expected": "Endpoint cost/state parity",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T38",
+      "question": "Batch versus streaming regime emissions",
+      "expected": "Same prefix vintages",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T39",
+      "question": "Model/scaler fit với future suffix",
+      "expected": "Mutation test phát hiện/reject",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "regression_baseline.json: target-profile mutation red; no whole model fit qualification"
+    },
+    {
+      "id": "T40",
+      "question": "Sparse weights collapse0/empty states",
+      "expected": "Degeneracy handled, không fake confidence",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T41",
+      "question": "Model refit permutes state IDs",
+      "expected": "Namespaced mapping, không false market transition",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T42",
+      "question": "Membership score bị gọi probability",
+      "expected": "Schema phân biệt/calibration evidence",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T43",
+      "question": "Known regime change và model drift",
+      "expected": "Inference không automatic retrain",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T44",
+      "question": "Novelty so với missing data",
+      "expected": "Separate states/fallback reasons",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T45",
+      "question": "Response outcome chưa kết thúc",
+      "expected": "Không được dùng tại decisionT",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json + regression_baseline.json: outcome availability oracle and red training profile"
+    },
+    {
+      "id": "T46",
+      "question": "Candidate discovered sau inner cutoff",
+      "expected": "Không xuất hiện trong inner pseudo-live bank",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T47",
+      "question": "Incumbent/challenger paired episodes",
+      "expected": "Same economics/initial-state/horizon",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T48",
+      "question": "One episode dominates similarity",
+      "expected": "Support/uncertainty cảnh báo, shrink/fallback",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T49",
+      "question": "Refit latency/job out-of-order",
+      "expected": "No early/backdated activation",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "regression_baseline.json: model-ready scheduler red; no actual engine delivery"
+    },
+    {
+      "id": "T50",
+      "question": "Params switch khi campaign còn mở",
+      "expected": "Old protective version giữ hoặc explicit migration",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T51",
+      "question": "New parameter indicators chưa warm",
+      "expected": "Wait/fallback; không reset false signals",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T52",
+      "question": "Model fit/bank refresh/switch counters",
+      "expected": "Distinct clocks, no recursive-trigger storm",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "regression_baseline.json: initial max-age red; full clock counters not qualified"
+    },
+    {
+      "id": "T53",
+      "question": "A/B/C/D fixed economics và budgets",
+      "expected": "No hidden fee/risk/evaluation advantage",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json: registered fees/units/budget; no actual all-arm execution"
+    },
+    {
+      "id": "T54",
+      "question": "Current WFO uses OOS for selection",
+      "expected": "Claim selection-adjusted hoặc causal comparator riêng",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "quantbt_binding_report.json: Mode 4 config/source only; runtime ledger deferred"
+    },
+    {
+      "id": "T55",
+      "question": "Dynamic folds khác length",
+      "expected": "Same daily account comparison, không average fold Sharpe",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json: daily common-date arithmetic; actual dynamic accounts deferred"
+    },
+    {
+      "id": "T56",
+      "question": "Carried account qua segments",
+      "expected": "No reset/virtual splice of expert PnL",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T57",
+      "question": "Sequential optimizer vs adaptive batch",
+      "expected": "Contract đúng, no false identical-sequence claim",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T58",
+      "question": "Risk-only/matched-cadence controls",
+      "expected": "Present dù chúng thắng method",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T59",
+      "question": "Negative/failed/pruned trials",
+      "expected": "Every record retained, null/status đúng",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json: failed-attempt budget; optimizer ledger delivery deferred"
+    },
+    {
+      "id": "T60",
+      "question": "Objective recompute từ components",
+      "expected": "Khớp reported value theo numeric contract",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T61",
+      "question": "JSON NaN/Inf, audit queue/error",
+      "expected": "Valid JSON; no success trước required flush",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "contract_tests.json: nonfinite registration rejected; audit queue not exercised"
+    },
+    {
+      "id": "T62",
+      "question": "Heatmap chưa tested, hindsight labels",
+      "expected": "Mask/diagnostic flag; không evidence giả",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T63",
+      "question": "Full5symbol paired bootstrap",
+      "expected": "Common shocks/dependence retained",
+      "status": "NOT_EXERCISED_IN_TE01",
+      "evidence_or_reason": "Requires the relevant TE-02/03/04/05 runtime or acceptance fixture; no inherited pass assumed"
+    },
+    {
+      "id": "T64",
+      "question": "Offline reproduce report/run và sources",
+      "expected": "Correct artifact identities; protected originals unchanged",
+      "status": "PARTIAL_CONTRACT_OR_RED_BASELINE",
+      "evidence_or_reason": "source_data_manifest.json: source identities; report verification follows commit; no engine replay"
+    }
+  ],
+  "counts": {
+    "NOT_EXERCISED_IN_TE01": 49,
+    "PARTIAL_CONTRACT_OR_RED_BASELINE": 12,
+    "BLOCKED_ISOLATION_UNAVAILABLE": 2,
+    "PASS_MEASURED_IDENTITY": 1
+  },
+  "limits": "Acceptance IDs are not pytest counts. Partial/source witnesses never count as full runtime acceptance."
+}

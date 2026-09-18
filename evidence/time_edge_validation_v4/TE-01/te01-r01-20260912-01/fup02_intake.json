@@ -1,0 +1,62 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.fup02_intake.v1",
+  "status": "SNAPSHOT_CAPTURED_FINAL_HANDOFF_PENDING",
+  "checkpoint_at_utc": "2026-09-12T06:36:57.892446+00:00",
+  "checkpoint_status": "PARTIAL_BUDGET_STOPPED",
+  "all_cells_terminal_label": false,
+  "final_handoff_verified": false,
+  "stable_during_read": true,
+  "files": [
+    {
+      "path": "paired_discovery_fullwindow.json",
+      "sha256": "cfb7fdc114ec75471a238f8af9b27f0e0ddaf903e6875bb0680f49a5bb827fe7",
+      "bytes": 2585011
+    },
+    {
+      "path": "attempts.jsonl",
+      "sha256": "cc367fc06a85a733728db44fa681c549b28f90a0d3de985546624a2d703d8a87",
+      "bytes": 16769
+    },
+    {
+      "path": "trial_ledger.jsonl",
+      "sha256": "b976a809b0a0b1670ddf66bcc6bf1157bea6e9e4d5b9666c0f569d2bd4235a0a",
+      "bytes": 5504946
+    },
+    {
+      "path": "cell_coverage.json",
+      "sha256": "36a63fdf732119ee2ca863babf29a6f3678ace34f8a5b5169288a24a20e2fb1d",
+      "bytes": 28084
+    },
+    {
+      "path": "coverage_review.json",
+      "sha256": "4330e7375ac3f399083cf078c48269b0b220d3425ee02ed64722cb1bb666bad7",
+      "bytes": 25319
+    },
+    {
+      "path": "budget_revision.json",
+      "sha256": "736a4f143dab47f9753d560a8e56511d365bff1a8a32967fd14a168f7f9ecb7f",
+      "bytes": 7345
+    },
+    {
+      "path": "report.md",
+      "sha256": "dffc23fe70fcce9245cd2bc758e4d4cf55705c0b1377f1fade771821b3d77b80",
+      "bytes": 9649
+    },
+    {
+      "path": "report.json",
+      "sha256": "32f0201b0b567fe105c79682673965427b55db686f0b4e01d367f5a099e1f866",
+      "bytes": 26895
+    }
+  ],
+  "coverage": {
+    "NOT_RUN_BUDGET": 13,
+    "RUN_VALID": 3,
+    "FAILED": 2,
+    "BUDGET_STOPPED": 2
+  },
+  "interrupted_attempts": [],
+  "limitation": "No external process is controlled. Stable bytes and terminal labels do not constitute a final OpenCode source/report handoff."
+}

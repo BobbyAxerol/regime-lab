@@ -1,0 +1,440 @@
+{
+  "schema": "regime_lab.rf_acceptance_registry.v3",
+  "registered_at_utc": "2026-09-11T15:16:43.312397+00:00",
+  "study_id": "corrective_mode4_v3",
+  "source_plan": {
+    "path": "REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md",
+    "sha256": "bf983c2b63dd748d778a3d9c38360bfb6f081cb9b445d7a8044fbae63b2c7434"
+  },
+  "rule": "these are requirements the corrective study must satisfy, not tests that already pass. Test presence does not prove the runner used the tested path (finding D08).",
+  "historical_registry": {
+    "path": "configs/acceptance_test_coverage.json",
+    "ids": "T01..T64",
+    "status": "UNTOUCHED"
+  },
+  "counts": {
+    "requirements": 70
+  },
+  "requirements": [
+    {
+      "id": "T01",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "M\u1ed9t buy v\u00e0 m\u1ed9t sell c\u00f3 notional bi\u1ebft tr\u01b0\u1edbc",
+      "expected": "Actual fees kh\u1edbp one-way rate \u1edf t\u1eebng route; kh\u00f4ng charge half/double"
+    },
+    {
+      "id": "T02",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Gi\u00e1 thay \u0111\u1ed5i khi \u0111ang gi\u1eef position v\u1edbi allocation b\u1eb1ng 10%",
+      "expected": "Ph\u00e2n bi\u1ec7t transition-only equity sizing v\u1edbi continuous rebalancing; label \u0111\u00fang contract"
+    },
+    {
+      "id": "T03",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Initial candidate ch\u1ec9 s\u1eb5n s\u00e0ng sau account start",
+      "expected": "Kh\u00f4ng active \u1edf bar 0; incumbent h\u1ee3p l\u1ec7 ho\u1eb7c kh\u00f4ng m\u1edf v\u1ecb th\u1ebf tr\u01b0\u1edbc ready"
+    },
+    {
+      "id": "T04",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Selection cutoff tr\u01b0\u1edbc fit-ready v\u00e0 indicator-ready",
+      "expected": "Effective time kh\u00f4ng s\u1edbm h\u01a1n c\u1ea3 ba v\u00e0 execution boundary"
+    },
+    {
+      "id": "T05",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "S\u1eeda to\u00e0n future suffix sau T",
+      "expected": "Features, regime emissions, selected params v\u00e0 commands c\u00f3 hi\u1ec7u l\u1ef1c tr\u01b0\u1edbc T kh\u00f4ng \u0111\u1ed5i"
+    },
+    {
+      "id": "T06",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Close-generated intent ch\u1ea1y tr\u00ean next-open route",
+      "expected": "Fill kh\u00f4ng t\u1ea1i close \u0111\u00e3 d\u00f9ng quy\u1ebft \u0111\u1ecbnh; kh\u00f4ng double shift; no future high/low"
+    },
+    {
+      "id": "T07",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Prepared same-close route \u0111\u01b0\u1ee3c \u0111\u1ec1 ngh\u1ecb cho next-open alpha",
+      "expected": "Binding gate reject ho\u1eb7c ch\u1ecdn engine \u0111\u00fang; kh\u00f4ng thay `close=open` \u0111\u1ec3 l\u00e1ch"
+    },
+    {
+      "id": "T08",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "HTF 15m/1h signal v\u00e0 execution 1m",
+      "expected": "Ch\u1ec9 closed HTF observation \u0111\u01b0\u1ee3c d\u00f9ng; map timestamp \u0111\u00fang; protection v\u1eabn 1m"
+    },
+    {
+      "id": "T09",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Actual fill c\u00f3 slippage/reject/partial quantity",
+      "expected": "Adapter nh\u1eadn \u0111\u00fang actual fields, kh\u00f4ng c\u1eadp nh\u1eadt t\u1eeb raw next-open d\u1ef1 \u0111o\u00e1n"
+    },
+    {
+      "id": "T10",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Nhi\u1ec1u fills c\u00f9ng m\u1ed9t bar, kh\u00e1c IDs/sequence/price",
+      "expected": "Kh\u00f4ng collapse b\u1eb1ng dictionary keyed ch\u1ec9 theo bar"
+    },
+    {
+      "id": "T11",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "C\u00f9ng exit bar nh\u01b0ng kh\u00e1c price/qty/reason",
+      "expected": "Trace comparator fail; kh\u00f4ng d\u00f9ng `set(bar_ids)` l\u00e0m convergence"
+    },
+    {
+      "id": "T12",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Unmapped intent ho\u1eb7c execution invalid",
+      "expected": "Kh\u00f4ng tr\u1ea3 financial score; fail/block v\u1edbi full reason"
+    },
+    {
+      "id": "T13",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Callback ph\u00e1t staged commands r\u1ed3i raise",
+      "expected": "Kh\u00f4ng submit partial staging; kh\u00f4ng t\u1ef1 retry dirty strategy state"
+    },
+    {
+      "id": "T14",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "M\u1ed9t order business-rejected trong batch h\u1ee3p l\u1ec7",
+      "expected": "Kh\u00f4ng t\u1ef1 bi\u1ebfn c\u1ea3 batch th\u00e0nh atomic package; gi\u1eef acceptance contract"
+    },
+    {
+      "id": "T15",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "HMA stop-mode categories",
+      "expected": "M\u1ed7i allowed category map \u0111\u00fang enum; unknown reject; fixture c\u00f3 behavioral difference"
+    },
+    {
+      "id": "T16",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Th\u00eam m\u1ed9t ignored/fixed parameter",
+      "expected": "Kh\u00f4ng thay effective execution ho\u1eb7c l\u00e0m t\u0103ng coverage/diversity gi\u1ea3"
+    },
+    {
+      "id": "T17",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "VWAP dynamic protection amendment",
+      "expected": "Actual amend/replace t\u1edbi QuantBT, effective \u0111\u00fang phase; kh\u00f4ng ch\u1ec9 ghi unmapped"
+    },
+    {
+      "id": "T18",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "HMA entry gap l\u00e0m bracket invalid",
+      "expected": "Corrective EXIT \u0111\u01b0\u1ee3c th\u1ef1c hi\u1ec7n/reject minh b\u1ea1ch; kh\u00f4ng booked instant favorable profit"
+    },
+    {
+      "id": "T19",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "HASH ladder partial TP",
+      "expected": "Quantity c\u00f2n l\u1ea1i, target order v\u00e0 fee \u0111\u00fang; kh\u00f4ng ch\u1ec9 l\u1ea5y target cu\u1ed1i"
+    },
+    {
+      "id": "T20",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "SignalCombine source long-flat",
+      "expected": "Kh\u00f4ng t\u1ef1 m\u1edf short ho\u1eb7c multiply leverage v\u00ec \u0111\u1ecdc sai signal amplitude"
+    },
+    {
+      "id": "T21",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Protective orders c\u00f2n m\u1edf khi params \u0111\u1ed5i",
+      "expected": "Old parameter version c\u00f2n s\u1ed1ng \u0111\u1ebfn terminal ho\u1eb7c migration c\u00f3 policy r\u00f5"
+    },
+    {
+      "id": "T22",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "B\u1eaft \u0111\u1ea7u episode sau m\u1ed9t warmup prefix",
+      "expected": "Indicators \u0111\u00e3 warm; episode account rule r\u00f5; kh\u00f4ng \u0111o cold-start nh\u01b0 stable behavior"
+    },
+    {
+      "id": "T23",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Symbol b\u1ecb thi\u1ebfu bars/kh\u00e1c calendar ho\u1eb7c tr\u01b0\u1edbc listing",
+      "expected": "Kh\u00f4ng relabel b\u1eb1ng same length, kh\u00f4ng fabricate zero returns tr\u01b0\u1edbc t\u1ed3n t\u1ea1i"
+    },
+    {
+      "id": "T24",
+      "group": "11.1 contract, execution v\u00e0 alpha",
+      "situation": "Spot/perp, tick/lot/funding coverage kh\u00e1c nhau",
+      "expected": "Contract v\u00e0 scope \u0111\u01b0\u1ee3c ghi \u0111\u00fang; kh\u00f4ng claim venue-exact ngo\u00e0i capability"
+    },
+    {
+      "id": "T25",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Baseline public Mode 4",
+      "expected": "Actual `mode_4_is_only_robust`, `per_fold_causal`, `is_only_robust` v\u00e0 endpoint scorer \u0111\u01b0\u1ee3c g\u1ecdi"
+    },
+    {
+      "id": "T26",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "T\u1ea1o utility r\u1ed3i g\u00e1n tr\u01b0\u1eddng `mean_is_sharpe`",
+      "expected": "Unit/schema test reject; kh\u00f4ng coi \u0111\u00e2y l\u00e0 stock Mode 4 baseline"
+    },
+    {
+      "id": "T27",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Thay outer OOS data/outcomes",
+      "expected": "Kh\u00f4ng \u1ea3nh h\u01b0\u1edfng selection tr\u01b0\u1edbc outer start; OOS kh\u00f4ng v\u00e0o TPE/selector"
+    },
+    {
+      "id": "T28",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Dynamic fold provider nh\u1eadn l\u1ecbch c\u1ed1 \u0111\u1ecbnh nh\u01b0 baseline",
+      "expected": "C\u00f9ng cutoff, trials, seed, selector v\u00e0 economics cho equivalent output"
+    },
+    {
+      "id": "T29",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "C\u00f9ng model state, \u0111\u1ed5i namespace ho\u1eb7c permute IDs",
+      "expected": "Kh\u00f4ng t\u1ef1 sinh market-change trigger; mapping d\u00f9ng common coordinates"
+    },
+    {
+      "id": "T30",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Emission `decision_eligible=false`, missing/stale/unknown",
+      "expected": "Kh\u00f4ng d\u00f9ng nh\u01b0 valid market state; novelty trigger n\u1ebfu c\u00f3 l\u00e0 policy explicit ri\u00eang"
+    },
+    {
+      "id": "T31",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Kh\u00f4ng c\u00f3 regime changes trong c\u1ea3 interval",
+      "expected": "Gi\u1eef incumbent/max-age policy \u0111\u00e3 freeze; kh\u00f4ng raise v\u00ec thi\u1ebfu \u0111\u00fang s\u00e1u refits"
+    },
+    {
+      "id": "T32",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Inference \u2192 trigger \u2192 search \u2192 ready \u2192 activation",
+      "expected": "M\u1ecdi state transition v\u00e0 delay truy \u0111\u01b0\u1ee3c; jobs kh\u00f4ng backdate ho\u1eb7c supersede sai"
+    },
+    {
+      "id": "T33",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "So hai cutoffs c\u00f3 s\u1ed1 trials/cache hits kh\u00e1c nhau",
+      "expected": "Gi\u1eef \u0111\u00fang audit/budget semantics; kh\u00f4ng t\u00e1i d\u00f9ng candidate t\u01b0\u01a1ng lai \u0111\u1ec3 \u00e9p matched set"
+    },
+    {
+      "id": "T34",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Sequential TPE versus batch mode",
+      "expected": "Kh\u00f4ng g\u1ecdi candidate-sequence parity n\u1ebfu l\u1ecbch ask/tell \u0111\u1ed5i; report distinct contract"
+    },
+    {
+      "id": "T35",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Candidate reuse cache",
+      "expected": "Key bao ph\u1ee7 economic state/cutoff/alpha/intent; m\u1ecdi trial v\u1eabn c\u00f3 record ri\u00eang"
+    },
+    {
+      "id": "T36",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Score cache \u1edf m\u1ed9t pruned/failed evaluation",
+      "expected": "Kh\u00f4ng tr\u1ea3 nh\u01b0 complete; intermediate reports/pruner semantics kh\u00f4ng m\u1ea5t"
+    },
+    {
+      "id": "T37",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "E path ch\u01b0a n\u1ed1i response",
+      "expected": "`NOT_IMPLEMENTED_AS_SPECIFIED` v\u00e0 disabled; kh\u00f4ng copy D r\u1ed3i g\u1ecdi zero effect"
+    },
+    {
+      "id": "T38",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Synthetic recurring-state world c\u00f3 advantage \u0111\u00e3 bi\u1ebft",
+      "expected": "Full pipeline c\u00f3 th\u1ec3 \u0111\u1ec1 xu\u1ea5t v\u00e0 th\u1ef1c hi\u1ec7n change \u0111\u00fang khi \u0111\u1ee7 evidence/cost; d\u00f9ng QuantBT \u0111\u1ec3 simulate"
+    },
+    {
+      "id": "T39",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "Synthetic null world ho\u1eb7c delayed/placebo state",
+      "expected": "False-switch/gain \u0111\u01b0\u1ee3c \u0111o; kh\u00f4ng b\u1eaft model ph\u1ea3i t\u00ecm edge"
+    },
+    {
+      "id": "T40",
+      "group": "11.2 Mode 4 v\u00e0 causal schedule",
+      "situation": "To\u00e0n pipeline regime off",
+      "expected": "C\u00f9ng fixed params/intent/economics cho baseline parity tr\u00ean actual engine"
+    },
+    {
+      "id": "T41",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Bull v\u00e0 bear \u0111\u1ec1u s\u00e1t centroid ri\u00eang",
+      "expected": "Economic contexts v\u1eabn kh\u00e1c; zero residual kh\u00f4ng b\u1ecb coi l\u00e0 c\u00f9ng \u0111i\u1ec1u ki\u1ec7n"
+    },
+    {
+      "id": "T42",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Refit scaler/model gi\u1eefa versions",
+      "expected": "Context comparison v\u00e0 state mapping c\u00f3 h\u1ec7 t\u1ecda \u0111\u1ed9 chung; kh\u00f4ng compare raw standardized values t\u1eeb hai scalers t\u00f9y \u00fd"
+    },
+    {
+      "id": "T43",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Inner fold preprocessing",
+      "expected": "Scaler/selection \u0111\u01b0\u1ee3c fit tr\u00ean inner train; future inner-validation mutation kh\u00f4ng \u0111\u1ed5i train fit"
+    },
+    {
+      "id": "T44",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Th\u00eam data group nh\u01b0ng target/coverage ph\u1ea3i c\u1ed1 \u0111\u1ecbnh",
+      "expected": "Ablation \u0111o c\u00f9ng target/c\u00f9ng cohort; reconstruction c\u1ee7a hai target spaces kh\u00f4ng b\u1ecb g\u1ecdi l\u00e0 incremental decision value"
+    },
+    {
+      "id": "T45",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Episode outcome k\u1ebft th\u00fac sau decision cutoff",
+      "expected": "Kh\u00f4ng \u0111\u01b0\u1ee3c d\u00f9ng trong response estimate hi\u1ec7n t\u1ea1i"
+    },
+    {
+      "id": "T46",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "M\u1ed9t \u0111o\u1ea1n li\u00ean ti\u1ebfp ch\u1ee9a nhi\u1ec1u weighted episodes",
+      "expected": "Kh\u00f4ng coi s\u1ed1 m\u1ea3nh r\u1eddi do top-weights t\u1ea1o ra l\u00e0 s\u1ed1 observations \u0111\u1ed9c l\u1eadp; report ESS/coverage/recurrence ri\u00eang"
+    },
+    {
+      "id": "T47",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Candidate bank ch\u1ee9a global anchor v\u00e0 specialists",
+      "expected": "Quality/local-risk gates th\u1eadt; behavioral diversity; no future discoveries"
+    },
+    {
+      "id": "T48",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Projected switching cost theo current account",
+      "expected": "C\u00f9ng \u0111\u01a1n v\u1ecb return/allocation/horizon; kh\u00f4ng m\u1eb7c \u0111\u1ecbnh turnover=1 cho 10% entry"
+    },
+    {
+      "id": "T49",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Parameter recommendation kh\u00f4ng active do open campaign",
+      "expected": "Ghi recommendation/approval/activation separately; kh\u00f4ng t\u00ednh opportunity nh\u01b0 \u0111\u00e3 execute"
+    },
+    {
+      "id": "T50",
+      "group": "11.3 model, response v\u00e0 uncertainty",
+      "situation": "Model K/cadence \u0111\u01b0\u1ee3c ch\u1ecdn t\u1eeb development",
+      "expected": "Choice/rejected alternatives c\u00f3 ledger; kh\u00f4ng \u0111\u1ed5i confirmation sau khi xem k\u1ebft qu\u1ea3"
+    },
+    {
+      "id": "T51",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Loss \u0111\u00fang t\u1ea1i \u0111\u1ea7u block",
+      "expected": "PnL \u0111\u01b0\u1ee3c t\u00ednh; c\u1ed9ng money deltas c\u1ee7a partition b\u1eb1ng total account delta"
+    },
+    {
+      "id": "T52",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "First fill/fee \u1edf observation \u0111\u1ea7u",
+      "expected": "D\u00f9ng initial equity tr\u01b0\u1edbc observation; kh\u00f4ng m\u1ea5t initial cost"
+    },
+    {
+      "id": "T53",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Returns tr\u00ean hai windows kh\u00e1c \u0111\u1ed9 d\u00e0i",
+      "expected": "Sharpe d\u00f9ng same annualization/time sampling, kh\u00f4ng `sqrt(number_of_rows)` \u0111\u1ec3 x\u1ebfp h\u1ea1ng"
+    },
+    {
+      "id": "T54",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Profit Factor observations kh\u00e1c trade PF",
+      "expected": "T\u00ean/denominator \u0111\u01b0\u1ee3c gi\u1eef r\u00f5; undefined/no-loss/no-trade c\u00f3 status, JSON kh\u00f4ng Inf/NaN"
+    },
+    {
+      "id": "T55",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "OOS metric tr\u1eeb trade-frequency penalty",
+      "expected": "Raw Sharpe v\u00e0 penalized selector metric \u0111\u01b0\u1ee3c l\u01b0u ri\u00eang, decay \u0111\u00fang nh\u00e3n"
+    },
+    {
+      "id": "T56",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Negative/near-zero IS Sharpe ho\u1eb7c return",
+      "expected": "Kh\u00f4ng ratio decay t\u00f9y ti\u1ec7n; additive gap v\u00e0 status d\u00f9ng theo spec"
+    },
+    {
+      "id": "T57",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "\u0110\u1ed5i params gi\u1eefa hai folds",
+      "expected": "Kh\u00f4ng g\u1ecdi ch\u00eanh l\u1ec7ch adjacent-fold l\u00e0 pure parameter decay"
+    },
+    {
+      "id": "T58",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Dynamic folds c\u00f3 length kh\u00e1c nhau",
+      "expected": "Primary comparison tr\u00ean common daily account path; kh\u00f4ng trung b\u00ecnh fold Sharpes"
+    },
+    {
+      "id": "T59",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Equity-fraction thay fixed notional",
+      "expected": "MDE/turnover units \u0111\u01b0\u1ee3c \u0111\u0103ng k\u00fd l\u1ea1i b\u1eb1ng actual account economics, kh\u00f4ng t\u00e1i d\u00f9ng factor c\u0169"
+    },
+    {
+      "id": "T60",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "P0 invalidity k\u00e8m CI tr\u00f4ng r\u00f5 \u00e2m/d\u01b0\u01a1ng",
+      "expected": "Claim `NOT_EVALUABLE`; kh\u00f4ng gi\u1eef subclaim `RULED_OUT`/`SUPPORTED`"
+    },
+    {
+      "id": "T61",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Confidence interval ch\u1ee9a meaningful positive v\u00e0 zero",
+      "expected": "`INCONCLUSIVE`; kh\u00f4ng \u0111\u1ed5i th\u00e0nh \u201ckh\u00f4ng c\u00f3 edge\u201d"
+    },
+    {
+      "id": "T62",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "M\u1ed9t s\u1ed1 cells ch\u01b0a s\u1eb5n s\u00e0ng ho\u1eb7c failed",
+      "expected": "\u0110\u1ee7 20 cell statuses; kh\u00f4ng th\u00eam zero PnL ho\u1eb7c b\u1ecf denominator im l\u1eb7ng"
+    },
+    {
+      "id": "T63",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Audit duplicate/pruned/failed trials",
+      "expected": "Trial ledger \u0111\u1ee7, statuses nguy\u00ean ngh\u0129a; unique evaluation count t\u00e1ch trial count"
+    },
+    {
+      "id": "T64",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Sample estimates ghi 4.000 nh\u01b0ng gi\u1eef 400",
+      "expected": "Cardinality test fail; sample policy v\u00e0 actual counts ph\u1ea3i kh\u1edbp"
+    },
+    {
+      "id": "T65",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Required audit writer flush l\u1ed7i",
+      "expected": "Execution c\u00f3 th\u1ec3 complete nh\u01b0ng overall run ch\u01b0a success; fail/partial c\u00f3 evidence"
+    },
+    {
+      "id": "T66",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Cache enabled/disabled v\u00e0 retained views",
+      "expected": "Same economics; kh\u00f4ng reuse mutable buffers c\u00f2n b\u1ecb result/view gi\u1eef; cache key/memory safe"
+    },
+    {
+      "id": "T67",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "T0/T1 pilot v\u01b0\u1ee3t budget",
+      "expected": "Ghi timeout k\u1ef9 thu\u1eadt/profiling, kh\u00f4ng bad strategy score, kh\u00f4ng t\u1ef1 gi\u1ea3m execution fidelity"
+    },
+    {
+      "id": "T68",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Native backend kh\u00f4ng c\u00f3 capability nh\u01b0ng request require",
+      "expected": "Fail-fast ho\u1eb7c documented route change \u0111\u00fang contract, kh\u00f4ng metadata Rust gi\u1ea3"
+    },
+    {
+      "id": "T69",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Rebuild report t\u1eeb artifacts",
+      "expected": "Metrics, claims, charts data v\u00e0 trial joins kh\u1edbp; kh\u00f4ng ph\u1ea3i ch\u1ea1y l\u1ea1i engine \u0111\u1ec3 format report"
+    },
+    {
+      "id": "T70",
+      "group": "11.4 metrics, b\u00e1o c\u00e1o v\u00e0 performance",
+      "situation": "Kh\u00f4i ph\u1ee5c evidence t\u1eeb Markdown n\u00e0y",
+      "expected": "20 original ZIP members \u0111\u00fang bytes/hash; original self-manifest warning c\u00f2n \u0111\u01b0\u1ee3c gi\u1eef"
+    }
+  ]
+}

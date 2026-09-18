@@ -1,0 +1,137 @@
+{
+  "schema": "regime_lab.pre_rf04_gap_audit.v1",
+  "generated_at_utc": "2026-09-11T17:06:37.855372+00:00",
+  "study_id": "corrective_mode4_v3",
+  "phase": "pre-RF04",
+  "regression_check": {
+    "full_suite_before": "3 failed / 810 passed",
+    "causes": [
+      "2 historical tests asserted the superseded raising contract",
+      "1 unreachable public helper"
+    ],
+    "fix": "updated the two tests to the repaired contract; removed the unused helper",
+    "after": "30 passed across affected tests + mode4_corrective (27)"
+  },
+  "gaps": [
+    {
+      "id": "G1",
+      "phase": "RF-01",
+      "severity": "medium",
+      "requirement": "RF01.4 positive-control plan",
+      "status": "PARTIAL",
+      "action": "write the plan artifact in RF-04.0"
+    },
+    {
+      "id": "G2",
+      "phase": "RF-01/A15",
+      "severity": "high",
+      "requirement": "corrected MDE units frozen before RF-04",
+      "status": "OPEN",
+      "action": "compute actual turnover/account units in the first RF-04 pilot and freeze"
+    },
+    {
+      "id": "G3",
+      "phase": "RF-01",
+      "severity": "medium",
+      "requirement": "spec revisions for schema/sizing changes",
+      "status": "OPEN",
+      "action": "append spec revisions for A05 choices (3->4) and A08 sizing (signal_notional, alloc 0.1)"
+    },
+    {
+      "id": "G4",
+      "phase": "RF-02.2",
+      "severity": "high",
+      "requirement": "remove _exit_oracle from the active evaluator",
+      "status": "PARTIAL",
+      "action": "explicitly quarantine/raise outside historical tests"
+    },
+    {
+      "id": "G5",
+      "phase": "RF-02.2",
+      "severity": "high",
+      "requirement": "every command executed/rejected/unsupported",
+      "status": "OPEN",
+      "action": "consume context.order_events_this_bar rejections; invalidate on rejection"
+    },
+    {
+      "id": "G6",
+      "phase": "RF-02.3",
+      "severity": "medium",
+      "requirement": "timing pinned for the scored/final account",
+      "status": "OPEN",
+      "action": "apply A06 to the public WFO final execution or register the close-target cohort"
+    },
+    {
+      "id": "G7",
+      "phase": "RF-02.6",
+      "severity": "medium",
+      "requirement": "A-SC + one order-sensitive alpha on real snapshot",
+      "status": "PARTIAL",
+      "action": "rerun the pilot with A-HMA on the real BTCUSDT slice"
+    },
+    {
+      "id": "G8",
+      "phase": "RF-02",
+      "severity": "low",
+      "requirement": "scalar/audit parity, thin adapter diff, failed-intent ledger, full benchmark profile",
+      "status": "MISSING",
+      "action": "produce in RF-04 if still required"
+    },
+    {
+      "id": "G9",
+      "phase": "RF-02.1",
+      "severity": "low",
+      "requirement": "route registry statuses consistent with the pilot",
+      "status": "OPEN",
+      "action": "update registry statuses from PENDING_QUALIFICATION"
+    },
+    {
+      "id": "G10",
+      "phase": "RF-03.1/2",
+      "severity": "high",
+      "requirement": "model ladder, inner-only scaler, common-coordinate mapping, fixed-target ablation",
+      "status": "DISPOSITIONED_NOT_IMPLEMENTED",
+      "action": "implement or formally scope out before any model-based claim"
+    },
+    {
+      "id": "G11",
+      "phase": "RF-03.4",
+      "severity": "high",
+      "requirement": "QuantBT-simulated positive control where treatment changes params/trades",
+      "status": "MISSING",
+      "action": "run one synthetic positive-control engine session"
+    },
+    {
+      "id": "G12",
+      "phase": "RF-03.3",
+      "severity": "medium",
+      "requirement": "trigger->search->ready->activation log",
+      "status": "PARTIAL",
+      "action": "wire lifecycle log"
+    },
+    {
+      "id": "G13",
+      "phase": "RF-03",
+      "severity": "medium",
+      "requirement": "prefix/streaming parity after the emission change",
+      "status": "OPEN",
+      "action": "record a parity artifact"
+    },
+    {
+      "id": "G14",
+      "phase": "RF-03.5",
+      "severity": "medium",
+      "requirement": "A12/A13 response runner wiring",
+      "status": "PARTIAL",
+      "action": "wire or mark NOT_IMPLEMENTED"
+    }
+  ],
+  "counts": {
+    "high": 5,
+    "medium": 7,
+    "low": 2
+  },
+  "verdict": "RF-01 TECHNICAL_ONLY OK; RF-02 PARTIAL_TECHNICAL_CLOSURE OK; RF-03 TECHNICAL_PASS but 5 high-severity gaps must clear before RF-04 results are interpreted",
+  "lab_run_id": "pre-RF04-audit",
+  "written_at_utc": "2026-09-11T17:06:37.855458+00:00"
+}

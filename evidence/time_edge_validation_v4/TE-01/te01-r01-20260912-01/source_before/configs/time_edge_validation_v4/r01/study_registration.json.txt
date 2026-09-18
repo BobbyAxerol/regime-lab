@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.study_registration.te01.v1",
+  "question": "Does a causal regime refresh schedule improve net account returns and parameter-age degradation relative to calendar WFO using the identical installed QuantBT Mode 4 selector and execution contract?",
+  "phases": [
+    "TE-01",
+    "TE-02",
+    "TE-03",
+    "TE-04",
+    "TE-05"
+  ],
+  "owner": "Codex under current user authorization",
+  "current_phase": "TE-01",
+  "primary_arms": [
+    "M4_CAL",
+    "M4_REGIME"
+  ],
+  "budget_control": "M4_CAL_MATCHED",
+  "disabled_arms": [
+    "M4_CAL_NEIGH",
+    "M4_REGIME_NEIGH",
+    "E_RESPONSE_V2",
+    "historical_A_B_C_D_E"
+  ],
+  "cohort": {
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ],
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "planned_cells": 20,
+    "data_product": "crypto_binance_futures_1m",
+    "snapshot": "server_core_v1",
+    "economic_label": "FUTURES_PRICE_RESEARCH_WITHOUT_FUNDING_NOT_VENUE_EXACT"
+  },
+  "mode4": {
+    "optimization_mode": "mode_4_is_only_robust",
+    "optimization_schedule": "per_fold_causal",
+    "candidate_selection_metric": "is_only_robust",
+    "scoring_backend": "endpoint",
+    "research_retention": "full_trial_ledger",
+    "financial_retention": "audit",
+    "oos_used_for_selection": false,
+    "optimizer_order": "sequential_ask_tell",
+    "native_prepared_wfo": "off_until_same_contract_qualified",
+    "requested_target": "rust",
+    "resolved_backend_required": true
+  },
+  "protocol_refs": [
+    "metric_contract.json",
+    "evaluation_windows.json",
+    "statistical_analysis_plan.json",
+    "model_protocol.json",
+    "execution_contract.json",
+    "compute_budget.json",
+    "reuse_policy.json",
+    "case_registry.json"
+  ],
+  "data_role": "NESTED_RETROSPECTIVE",
+  "market_run_authorized_by_this_phase": false,
+  "readiness_rule": "REGISTRATION_VALIDATED permits technical repair only. A separate runtime gate requires source/FUP handoff, isolation, actual engine parity, model/controls and materialized thresholds before discovery.",
+  "precedence": [
+    "current user instructions",
+    "Corrective V3 main guide",
+    "verified contracts with a recorded ADR",
+    "Final V2 where not superseded"
+  ],
+  "forbidden": [
+    "change protected source or shared venv",
+    "change active FUP-02 source/config/tape",
+    "invent QuantBT endpoints",
+    "derive fills/cash using a replacement engine",
+    "label consumed historical dates untouched",
+    "drop failed cells or optimize controls on evaluation outcomes"
+  ]
+}

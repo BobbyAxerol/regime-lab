@@ -1,0 +1,150 @@
+{
+  "schema": "regime_lab.rf05_artifact_integrity.v1",
+  "phase": "RF-05",
+  "study_id": "corrective_mode4_v3",
+  "status": "PASS",
+  "rule": "integrity is computed from the committed artifacts; a check that cannot see its denominator is failed, not skipped",
+  "json_files_checked": [
+    "evidence/corrective_mode4_v3/RF-01/corrective_study_spec.json",
+    "evidence/corrective_mode4_v3/RF-01/finding_disposition.json",
+    "evidence/corrective_mode4_v3/RF-01/historical_invalidation.json",
+    "evidence/corrective_mode4_v3/RF-01/quantbt_binding_report.json",
+    "evidence/corrective_mode4_v3/RF-01/regression_before_repair.json",
+    "evidence/corrective_mode4_v3/RF-01/report.json",
+    "evidence/corrective_mode4_v3/RF-01/source_before_manifest.json",
+    "evidence/corrective_mode4_v3/RF-01/working_copy_identity.json",
+    "evidence/corrective_mode4_v3/RF-02/alpha_route_registry.json",
+    "evidence/corrective_mode4_v3/RF-02/mode4_public_baseline.json",
+    "evidence/corrective_mode4_v3/RF-02/native_qualification.json",
+    "evidence/corrective_mode4_v3/RF-02/pilot_and_route_matrix.json",
+    "evidence/corrective_mode4_v3/RF-02/real_snapshot_pilot.json",
+    "evidence/corrective_mode4_v3/RF-02/report.json",
+    "evidence/corrective_mode4_v3/RF-03/controller_and_dispositions.json",
+    "evidence/corrective_mode4_v3/RF-03/report.json",
+    "evidence/corrective_mode4_v3/RF-04/causal_model_registry.json",
+    "evidence/corrective_mode4_v3/RF-04/cell_coverage.json",
+    "evidence/corrective_mode4_v3/RF-04/controls_and_funnel.json",
+    "evidence/corrective_mode4_v3/RF-04/controls_registration.json",
+    "evidence/corrective_mode4_v3/RF-04/current_coordinate_contract.json",
+    "evidence/corrective_mode4_v3/RF-04/decay_panels.json",
+    "evidence/corrective_mode4_v3/RF-04/design_freeze.json",
+    "evidence/corrective_mode4_v3/RF-04/discovery_protocol.json",
+    "evidence/corrective_mode4_v3/RF-04/emission_tape_sample.json",
+    "evidence/corrective_mode4_v3/RF-04/mode4_transparency_ledger.json",
+    "evidence/corrective_mode4_v3/RF-04/model_design_selection_manifest.json",
+    "evidence/corrective_mode4_v3/RF-04/paired_discovery_full.json",
+    "evidence/corrective_mode4_v3/RF-04/paired_discovery_pilot.json",
+    "evidence/corrective_mode4_v3/RF-04/paired_discovery_registration.json",
+    "evidence/corrective_mode4_v3/RF-04/positive_control.json",
+    "evidence/corrective_mode4_v3/RF-04/profiling_and_budget.json",
+    "evidence/corrective_mode4_v3/RF-04/report.json",
+    "evidence/corrective_mode4_v3/RF-05/artifact_integrity.json",
+    "evidence/corrective_mode4_v3/RF-05/claim_report.json",
+    "evidence/corrective_mode4_v3/RF-05/freeze_manifest.json",
+    "evidence/corrective_mode4_v3/RF-05/prospective_protocol.json",
+    "evidence/corrective_mode4_v3/RF-05/recomputation.json",
+    "evidence/corrective_mode4_v3/RF-05/report.json",
+    "evidence/corrective_mode4_v3/RF-05/reproducibility_manifest.json",
+    "evidence/corrective_mode4_v3/pre-RF04-clearing/gap_clearance.json",
+    "evidence/corrective_mode4_v3/pre-RF04-clearing/mde_corrected.json",
+    "evidence/corrective_mode4_v3/pre-RF04-clearing/model_response_scope_decision.json",
+    "evidence/corrective_mode4_v3/pre-RF04-clearing/spec_revisions.json"
+  ],
+  "json_file_count": 44,
+  "checks": [
+    {
+      "id": "STRICT_JSON",
+      "description": "every phase JSON parses under a strict decoder and carries an envelope",
+      "denominator": 44,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "COVERAGE_NULLS",
+      "description": "every non-executed cell carries null metrics with a reason",
+      "denominator": 20,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "SELECTION_JOINS",
+      "description": "selection -> cutoff -> model -> account joins resolve on all 10 cells",
+      "denominator": 20,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "FREEZE_HASHES",
+      "description": "every frozen component hash equals the committed file",
+      "denominator": 33,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "CLAIM_GATE",
+      "description": "every contrast status is A16-legal and POSITIVE requires CI > MDE and Holm < 0.05",
+      "denominator": 21,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "BOOTSTRAP_DENOMINATORS",
+      "description": "all evaluated CIs carry a positive common-date denominator",
+      "denominator": 14,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "REPORT_COVERAGE",
+      "description": "report pair carries the 12 required section/data groups",
+      "denominator": 12,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "id": "PHASE_REPORTS",
+      "description": "RF-01..RF-05 each carry a report pair (RF-05 after report generation)",
+      "denominator": 5,
+      "failures": [],
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "phase_report_pairs": [
+    {
+      "phase": "RF-01",
+      "report_md": true,
+      "report_json": true
+    },
+    {
+      "phase": "RF-02",
+      "report_md": true,
+      "report_json": true
+    },
+    {
+      "phase": "RF-03",
+      "report_md": true,
+      "report_json": true
+    },
+    {
+      "phase": "RF-04",
+      "report_md": true,
+      "report_json": true
+    },
+    {
+      "phase": "RF-05",
+      "report_md": true,
+      "report_json": true
+    }
+  ],
+  "report_present": true,
+  "written_at_utc": "2026-09-12T02:33:33.437599+00:00",
+  "lab_run_id": "RF-05"
+}

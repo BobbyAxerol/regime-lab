@@ -1,0 +1,590 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.reuse_decision.v1",
+  "policy_ref": "configs/time_edge_validation_v4/r01/reuse_policy.json",
+  "cells": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "fup02_status": "RUN_VALID",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "fup02_status": "RUN_VALID",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "fup02_status": "FAILED",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "fup02_status": "RUN_VALID",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "fup02_status": "FAILED",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "fup02_status": "BUDGET_STOPPED",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "fup02_status": "BUDGET_STOPPED",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "fup02_status": "NOT_RUN_BUDGET",
+      "arms": {
+        "M4_CAL": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_REGIME": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        },
+        "M4_CAL_MATCHED": {
+          "planned": true,
+          "new_study_result": "NOT_RUN",
+          "reuse_status": "DIAGNOSTIC_ONLY_OR_NOT_RUN_SEE_ORIGINAL_CELL"
+        }
+      },
+      "source_data": "REUSABLE_IF_HASH_VERIFIED",
+      "saved_accounts": "DIAGNOSTIC_ONLY_PENDING_EXECUTION_REQUALIFICATION",
+      "selection_cache": "CONDITIONAL_ON_EXACT_CUTOFF_SCORER_WARMUP_ECONOMICS_IDENTITY",
+      "model_tape": "QUARANTINED_FOR_NEW_DESIGN_CLAIMS",
+      "new_primary_result": "NEEDS_AFFECTED_CHAIN_RERUN_AFTER_TE02_TE03",
+      "report_only_recompute": "ALLOWED_AS_DIAGNOSTIC_NOT_REPAIRED_TIME_EDGE_PROOF",
+      "metrics": null,
+      "reason": "TE-01 does not evaluate market outcomes; original status retained."
+    }
+  ],
+  "rule": "Recompute only the affected dependency chain; no automatic full backtest or blind old cache reuse."
+}

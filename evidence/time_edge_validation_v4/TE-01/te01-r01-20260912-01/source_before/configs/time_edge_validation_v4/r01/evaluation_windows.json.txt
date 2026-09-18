@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "study_id": "time_edge_validation_v4",
+  "registration_id": "TE01-R01",
+  "lab_run_id": "TE01-R01",
+  "registered_at_utc": "2026-09-12T06:07:59.412754+00:00",
+  "status": "REGISTERED_FOR_TECHNICAL_REPAIR",
+  "schema": "regime_lab.evaluation_windows.te01.v1",
+  "timezone": "UTC",
+  "interval_convention": "[start,end)",
+  "daily_observation_label": "UTC day start; value is the end-of-that-day equity mark",
+  "development": {
+    "start": "2021-01-01T00:00:00Z",
+    "end_exclusive": "2024-01-01T00:00:00Z",
+    "role": "NESTED_RETROSPECTIVE_DEVELOPMENT"
+  },
+  "historical_outer": {
+    "start": "2024-01-01T00:00:00Z",
+    "end_exclusive": "2026-09-01T00:00:00Z",
+    "role": "CONSUMED_RETROSPECTIVE_ONLY",
+    "enabled": false
+  },
+  "prospective": {
+    "enabled": false,
+    "status": "SPECIFIED_NOT_EXECUTED",
+    "eligibility_rule": "both source available_at and data observation interval must follow a future immutable freeze; no acquisition or execution in TE-01"
+  },
+  "warmup": {
+    "score": false,
+    "alpha_rule": "past-only algorithm-specific pre-roll, validated by convergence in TE-02; no trades during indicator warmup",
+    "model_memory_days": 365,
+    "strategy_train_days": 180,
+    "read_start_bound": "2020-01-01T00:00:00Z",
+    "partial_history": "explicit insufficient support; never silently shorten training or fill missing prices"
+  },
+  "initial": {
+    "account_equity": 20000.0,
+    "incumbent_selection_cutoff": "2020-12-31T00:00:00Z",
+    "same_selected_parameters_all_primary_arms": true,
+    "selection_data_interval": "[cutoff-180d,cutoff)",
+    "ready_by": "2021-01-01T00:00:00Z",
+    "not_ready_policy": "common flat until initial same eligible selection is ready; disclose interval and forbid backfill"
+  },
+  "first_return": "use preceding raw account mark, or the declared pre-fee initial equity only when the observation is the account first mark; calculate returns before clipping evaluation window",
+  "terminal": {
+    "primary": "mark_to_market_keep_positions",
+    "closed_trade_policy": "open campaigns censored, unrealized retained in equity",
+    "forced_liquidation": "registered secondary engine scenario with fees, never artificial zero-PnL exit"
+  },
+  "missing_dates": "reject unexplained gaps; common-date partial subset disclosed; do not create zero-return market days",
+  "initial_support_gate": "each cell requires the same valid training history and initial readiness across arms; unsupported cells retain null metrics and reasons"
+}

@@ -1,0 +1,26 @@
+{
+  "study_id": "time_edge_validation_v4",
+  "phase_id": "TE-01",
+  "lab_run_id": "te01-r01-20260912-01",
+  "schema": "regime_lab.te01.invalidation.v1",
+  "status": "NEW_STUDY_INTERPRETATION_OVERLAY_ONLY",
+  "historical_files_modified": false,
+  "preserved_historical_conclusion": "LAB-09 FAILED_VALIDITY; RF-05 INCONCLUSIVE retained as recorded",
+  "affected_scope": "RF/FUP market timing/decay claims relying on the audited window, old tape, scorer or delivery path",
+  "economic_status_for_v4_reuse": "NOT_EVALUABLE",
+  "invalidated_by": [
+    "TEF-01",
+    "TEF-05",
+    "TEF-06",
+    "TEF-08",
+    "TEF-10",
+    "TEF-11",
+    "TEF-12",
+    "TEF-13",
+    "TEF-14"
+  ],
+  "superseded_by": "time_edge_validation_v4 after its own phase gates; not yet an economic result",
+  "secondary": "E/NEIGH and historical A..E prohibited in this registration; historical CLI runtime quarantine remains a later repair",
+  "does_not_invalidate": "raw market bytes, measured capability witnesses, or unit tests in their actual limited scope",
+  "retest_required": "mapped findings + before/after actual execution evidence + affected outputs; negative outcomes retained"
+}

@@ -93,3 +93,73 @@
 +        except (TypeError, ValueError):
 +            return 0.0
 +    return 0.0
+
+# ---------------------------------------------------------------------------
+#
+# PROPOSAL ONLY -- NOT APPLIED; FUP-02 uses a local workaround.
+#
+# Target : src/crypto_regime_lab/experiments/dynamic_fold_provider.py
+#          (LAB-OWNED file, frozen by RF-05 freeze_manifest.json; the freeze
+#          guard permits exactly one FUP-01 supersession, so FUP-02 may not
+#          drift it and does not)
+# Origin : FUP-02 finding FUP02-F1 (tests/mode4_corrective/test_fup02_scale.py)
+# Status : never applied. FUP-02 passes its own bool-aware schema expression
+#          (`scripts/run_fup02.py:engine_param_ranges`) to
+#          `run_cutoff_walk_forward(param_ranges=...)`, so the search space is
+#          the registered schema and the provider file stays byte-identical to
+#          the RF-05 freeze.
+#
+# Reproducer: `engine_param_ranges("A-VWAP")` raises
+#   TypeError: float() argument must be a string or a real number, not 'NoneType'
+# because a `bool` ParamSpec falls through to the numeric branch. The declared
+# choices are exactly (False, True) and the installed sampler already accepts a
+# two-element bool list via `trial.suggest_categorical(name, [True, False])`
+# (quantbt/optimization/space.py:_is_bool_choice), so a one-line fix is enough.
+# The corrected function is covered by the FUP-02 tests through the local
+# expression; if the provider is ever repaired, the FUP-02 search space must be
+# proven identical to the RG-04 schema before the artifact is superseded.
+#
+# The proposed patch (do NOT apply without a registered repair and a new
+# freeze/reproducibility supersession):
+
+--- a/src/crypto_regime_lab/experiments/dynamic_fold_provider.py
++++ b/src/crypto_regime_lab/experiments/dynamic_fold_provider.py
+@@
+-        elif spec.kind == "categorical":
++        elif spec.kind in ("categorical", "bool"):
+             ranges[name] = list(spec.choices)
+
+# ---------------------------------------------------------------------------
+#
+# PROPOSAL ONLY -- NOT APPLIED; FUP-02 records the failure honestly.
+#
+# Target : src/crypto_regime_lab/experiments/dynamic_fold_provider.py,
+#          EventAccountScorer._run_account (LAB-OWNED, frozen by RF-05)
+# Origin : FUP-02 finding FUP02-F2, reproduced on A-HMA/SOLUSDT fold 4
+#          (cutoff 2022-12-22): the engine raises
+#          quantbt.core.reactive.NativeEventStrategyError (a RuntimeError) whose
+#          cause is ValueError("limit commands require price > 0") at bar
+#          2022-11-09 21:00. The scorer catches only ValueError, so the fold
+#          aborts instead of excluding the infeasible sampled point.
+# Status : never applied. FUP-02 records the fold as ERROR/FAILED with the exact
+#          engine message and retries it only under an explicit --retry-errors.
+#
+# Why this is a repair and not a semantic change: the scorer already documents
+# "An infeasible sampled point is not a financial evaluation; it is excluded
+# from selection rather than scored as a return." The engine's wrapper merely
+# changes the exception type. The proposed catch is narrow (the engine's own
+# strategy-callback error class), so a genuine engine failure still propagates.
+# A registered repair must re-freeze the provider and rerun the affected folds
+# before any claim cites them.
+
+--- a/src/crypto_regime_lab/experiments/dynamic_fold_provider.py
++++ b/src/crypto_regime_lab/experiments/dynamic_fold_provider.py
+@@
+-        except ValueError as exc:
++        except (ValueError, NativeEventStrategyError) as exc:
+             # An infeasible sampled point is not a financial evaluation; it is
+             # excluded from selection rather than scored as a return.
+             self._cache[key] = {"equity": pd.Series(dtype=float), "status": "INFEASIBLE",
+                                 "engine_fill_count": 0,
+                                 "reason": f"{type(exc).__name__}: {exc}"[:200]}
+             return

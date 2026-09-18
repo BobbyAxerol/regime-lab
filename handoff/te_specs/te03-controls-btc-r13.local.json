@@ -1,0 +1,38 @@
+{
+  "purpose": "BTCUSDT-only TE03.7 engine full-path structural controls: observable world -> raw features -> mature target -> learned JM/M0 vintage -> emitted triggers -> public Mode 4 -> real accounts. One shard per condition on the BTCUSDT world; the 5-symbol expansion is a separate registered phase.",
+  "inputs": {},
+  "registered_scope": "TE-03 table TE03.7 positive/null full path and treatment funnel, BTCUSDT-first scope decision configs/time_edge_validation_v4/te_scope_decision_btc_first.json; TE-04 discovery stays closed until the P0 gate passes",
+  "worlds": [
+    "BTCUSDT"
+  ],
+  "tasks": [
+    {
+      "task_id": "structural-NULL_STATIONARY",
+      "kind": "full_control",
+      "condition": "NULL_STATIONARY",
+      "seed": 2026091200,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": [
+        "BTCUSDT"
+      ],
+      "wall_seconds": 27000
+    },
+    {
+      "task_id": "structural-RECURRING_OPPORTUNITY",
+      "kind": "full_control",
+      "condition": "RECURRING_OPPORTUNITY",
+      "seed": 2026091201,
+      "days": 1461,
+      "alpha_id": "A-SC",
+      "latency_seconds": 60,
+      "worlds": [
+        "BTCUSDT"
+      ],
+      "wall_seconds": 27000
+    }
+  ],
+  "cap_note": "REV10-registered 18000s per shard is kept; the controls-07 partial measured a 23662.2s lower bound for a full shard, so a shard checkpoints its nested stages and resumes with a bounded --retry-failed attempt instead of a cap raise.",
+  "shard_note": "each task asserts its own condition and world; the pipeline never iterates conditions or worlds inside a task, so no single task needs a cap larger than one full-path pass"
+}
