@@ -1,0 +1,49 @@
+{
+  "schema": "regime_lab.ra05_descriptive_returns.v1",
+  "by_arm": {
+    "STATIC": {
+      "status": "OK",
+      "equity_first": 20000.0,
+      "equity_last": 20868.327418722336,
+      "total_return": 0.04341637093611683,
+      "fill_count": 171,
+      "folds": 1,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL": {
+      "status": "OK",
+      "equity_first": 20000.0,
+      "equity_last": 20676.74237882262,
+      "total_return": 0.03383711894113084,
+      "fill_count": 274,
+      "folds": 2,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL_MATCHED": {
+      "status": "OK",
+      "equity_first": 20000.0,
+      "equity_last": 20526.78592433561,
+      "total_return": 0.02633929621678055,
+      "fill_count": 290,
+      "folds": 2,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 0
+    },
+    "M4_REGIME": {
+      "status": "OK",
+      "equity_first": 20000.0,
+      "equity_last": 20859.336252630535,
+      "total_return": 0.042966812631526796,
+      "fill_count": 160,
+      "folds": 3,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 1
+    }
+  },
+  "note": "point estimates only; this pilot's window does not clear the registered >=365-day confirmatory floor, so no CI/claim-gate verdict is offered here (RA-07 scope)",
+  "lab_run_id": "ra05-20260918T201236Z-de11db62",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T20:43:55.211287+00:00"
+}

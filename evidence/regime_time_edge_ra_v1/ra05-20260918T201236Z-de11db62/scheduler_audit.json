@@ -1,0 +1,30 @@
+{
+  "schema": "regime_lab.ra05_scheduler_audit.v1",
+  "f06_finding": "F-06: 28 accepted triggers, median gap ~28.17d with min-gap28 -- from a different (host-emissions) window/params; this is a fresh real-data re-audit of the SAME cited function, not a replay of that number",
+  "audited_function": "time_edge.schedule.triggers (time_edge/schedule.py:20-26)",
+  "window": [
+    "2021-01-01",
+    "2021-04-01"
+  ],
+  "min_gap_days": 45.0,
+  "max_age_days": 180.0,
+  "emissions_seen": 353,
+  "rejected_total": 0,
+  "rejected_by_reason": {},
+  "accepted_total": 1,
+  "accepted_by_reason": {
+    "STATE_CHANGE": 1,
+    "MAX_AGE": 0
+  },
+  "gap_days_between_accepted": [],
+  "gap_days_median": null,
+  "gap_days_min": null,
+  "median_close_to_min_gap_floor": null,
+  "deployed_scheduler_function": "experiments.regime_schedule.online_trigger_schedule (the function that actually drives M4_REGIME's cutoffs)",
+  "deployed_triggers": 2,
+  "deployed_source": "online controller: 2 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE']",
+  "claim_limit": "this is a replay/audit over one real bounded window, not 'N actual deployments' -- F-06's own caution, still true here",
+  "lab_run_id": "ra05-20260918T201236Z-de11db62",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T20:17:23.446318+00:00"
+}

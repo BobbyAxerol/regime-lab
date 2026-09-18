@@ -1,0 +1,50 @@
+{
+  "schema": "regime_lab.ra05_discovery_spec.v1",
+  "frozen_at_utc": "2026-09-18T18:07:42.688868+00:00",
+  "phase_owned_scale_note": "90-day window, 45-day rolling train memory (registered: 180), 8 trials/cutoff (registered: 50) -- same precedent as RA-02/03/04's phase-owned real-but-small experiments; the full registered contract is not spent proving plumbing here",
+  "pilot_cell": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT"
+  },
+  "window": {
+    "start": "2021-01-01",
+    "end": "2021-01-08"
+  },
+  "data_load_start": "2020-12-01",
+  "arms": {
+    "STATIC": "one selection at window_start, never refits (diagnostic)",
+    "M4_CAL": "calendar_cutoffs, test_days=4, train_memory_days=20",
+    "M4_CAL_MATCHED": "calendar_cutoffs at a cadence FORECAST from a development prefix disjoint from the evaluation window -- see cal_matched_forecast.json",
+    "M4_REGIME": "shared initial cutoff + real trigger cutoffs, min_gap_days=45.0, max_age_days=180.0, budget=2 (experiments.regime_schedule.online_trigger_schedule)"
+  },
+  "train_memory_days": 20,
+  "cal_test_days": 4,
+  "trial_budget_per_cutoff": 2,
+  "seed": 20260918,
+  "route": "event",
+  "cost_profile": {
+    "per_selection_wall_seconds_measured": 54.602,
+    "measured_from": "STATIC arm's own real single-fold run (necessarily precedes this freeze -- there is no cost to forecast from before one real measurement exists)"
+  },
+  "cal_matched_chosen_test_days": 180,
+  "cal_matched_menu": [
+    28,
+    56,
+    90,
+    180
+  ],
+  "data_sources": {
+    "market": "snapshots/server_core_v1/manifest.json",
+    "emissions": "evidence/time_edge_validation_v4/host-emissions-03.json"
+  },
+  "primary_contrast": "M4_REGIME - M4_CAL_MATCHED (guide 3.1, RA-01 registered H-BUDGET)",
+  "secondary_contrasts": [
+    "M4_REGIME - M4_CAL",
+    "M4_CAL_MATCHED - M4_CAL"
+  ],
+  "common_valid_dates_rule": "all four arms share window_start/window_end; no arm is shifted separately to skip a bad period (guide RA05.1)",
+  "not_run": "the full registered 50-trial/multi-year discovery contract; the >=365-day confirmatory floor (RA01.4 migration table); RA-07's bootstrap/claim-gate machinery",
+  "lab_run_id": "ra05-20260918T180636Z-027ff0ce",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T18:07:42.689142+00:00"
+}

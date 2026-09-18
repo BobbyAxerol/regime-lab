@@ -1,0 +1,28 @@
+{
+  "schema": "regime_lab.ra05_cal_matched_forecast.v1",
+  "method": "development-prefix trigger rate (from real emissions OUTSIDE the evaluation window) x measured per-selection wall time, matched to the registered 28/56/90/180-day menu -- never the window's own realized trigger count",
+  "development_window": [
+    "2021-02-01T04:00:00+00:00",
+    "2023-04-18T20:00:00+00:00"
+  ],
+  "development_days": 806,
+  "development_triggers": 18,
+  "development_trigger_source": "online controller: 18 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE']",
+  "trigger_rate_per_day": 0.022332506203473945,
+  "evaluation_window_days": 7,
+  "predicted_trigger_count_in_window": 0.15632754342431762,
+  "predicted_trigger_count_floored_to_one": false,
+  "per_selection_wall_seconds_measured": 41.563,
+  "predicted_regime_work_seconds": 41.563,
+  "menu": [
+    28,
+    56,
+    90,
+    180
+  ],
+  "chosen_test_days": 180,
+  "never_uses_realized_window_trigger_count": true,
+  "lab_run_id": "ra05-20260918T184220Z-b1f26a57",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T18:43:10.935975+00:00"
+}
