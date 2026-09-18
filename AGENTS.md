@@ -114,11 +114,11 @@ not superseded. Read the active guide before changing anything.
   fix), `db228594` (RA-04 implementation), `0226eebd` (evidence, 2 runs kept).
   `research_status: NOT_ASSESSED` — no economic/market claim; none of Q01-Q07/G04-* require
   ranking IC>0, Sharpe>0, or regime beating a synthetic calendar.
-- **Test suite (2026-09-18, 1150 collected): 1150 passed, 0 failed** (full run ≈5m51s) — the
-  first fully green run recorded in this lab. All three previously-documented pre-existing
-  failures were RESOLVED this session, at the owner's explicit request to handle them rather than
-  leave them open (R-17 still respected: each was root-caused before being touched, nothing was
-  papered over to force a pass):
+- **Test suite (2026-09-18, 1172 collected): 1172 passed, 0 failed** (full run ≈13m33s — grew
+  from the ≈5m51s/1150 figure below by the 22 new RA-05 tests) — still fully green. All three
+  previously-documented pre-existing failures were RESOLVED earlier this same session, at the
+  owner's explicit request to handle them rather than leave them open (R-17 still respected: each
+  was root-caused before being touched, nothing was papered over to force a pass):
   - **T62/T63 forbidden-claims false positive.** `check_regime_works()` in
     `scripts/audit_forbidden_claims.py` read T62/T63 `COVERED` in `acceptance_test_coverage.json`
     as a proxy for "a regime-works claim is being made" — but T62/T63 are about testing
@@ -184,20 +184,71 @@ not superseded. Read the active guide before changing anything.
   is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (90 tests, green: 14 RA-01 + 23 RA-02
-  (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates) + 24 RA-04 (9 Q-cases + 15 gates)).
-  RA-01/RA-02/RA-03/RA-04 all complete; **RA-05 needs its own owner approval before starting**
-  (R-18 — the RA-03→RA-04 approval in `owner_decisions.jsonl` does not extend to RA-05; check the
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (112 tests, green: 14 RA-01 + 23 RA-02
+  (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates) + 24 RA-04 (9 Q-cases + 15 gates) +
+  22 RA-05 (8 D-cases incl. D01b + 14 gates)).
+  RA-01/RA-02/RA-03/RA-04/RA-05 all complete; **RA-06 needs its own owner approval before starting**
+  (R-18 — the RA-04→RA-05 approval in `owner_decisions.jsonl` does not extend to RA-06; check the
   ledger's LAST entry covers the transition you're about to start, never assume an earlier one
   still applies). Sequence:
   RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission (done) →
-  RA-05 4-arm discovery (STATIC, M4_CAL, M4_CAL_MATCHED=CAL_BUDGET canonical, M4_REGIME; primary
-  H-BUDGET) → RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
+  RA-05 4-arm discovery (done) →
+  RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
   `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
-  RA-01 and RA-02 are now both done — the file's own prose is stale on that point, its per-phase
+  RA-01 through RA-05 are now all done — the file's own prose is stale on that point, its per-phase
   task lists are not). Still one phase finished → report → owner review before the next, per
-  R-18. Reuse `M4_CAL_MATCHED`
-  as the canonical CAL_BUDGET arm id — do not create a second economically identical arm.
+  R-18. `M4_CAL_MATCHED` is the canonical CAL_BUDGET arm id — do not create a second economically
+  identical arm.
+- **RA-05 is COMPLETE, technical_gate PASS, 5/5 gates** (final run
+  `ra05-20260918T201236Z-de11db62`, 2026-09-18; 4 earlier same-day attempts kept append-only —
+  2 smoke-scale dry runs and 2 real full-scale runs that surfaced real bugs before this one).
+  **The first real economic comparison in the RA track**: real BTCUSDT 1m bars
+  (`snapshots/server_core_v1/manifest.json`) and real regime emissions
+  (`evidence/time_edge_validation_v4/host-emissions-03.json`, the SAME 29-vintage JM/M0 ladder
+  F-05 measured — reused, not re-fit), all four arms (STATIC/M4_CAL/M4_CAL_MATCHED/M4_REGIME)
+  through the SAME `dynamic_fold_provider.run_cutoff_walk_forward` (RF-04-proven, real per-fill
+  "event" route for A-SC), differing only in `schedule`. Phase-owned scale (90-day window
+  2021-01-01→2021-04-01, 45-day rolling train memory vs the registered 180, 8 trials/cutoff vs
+  50) — explicitly disclosed as not the full registered 50-trial/multi-year contract, matching
+  RA-02/03/04 precedent. `research_status: DISCOVERY_ONLY` throughout — no CI/claim-gate verdict
+  offered (this pilot's window does not clear the registered ≥365-day confirmatory floor,
+  RA01.4's migration table); that machinery belongs to RA-07.
+  **F-06 re-audited at its own cited source** (`time_edge/schedule.py::triggers`,
+  confirmations=2): 1 accepted trigger on the real window, vs 2 via the function that actually
+  drives M4_REGIME (`experiments.regime_schedule.online_trigger_schedule`, no confirmation
+  requirement) — a real, reported divergence between two real scheduler implementations on the
+  same data, not an error. **CAL_MATCHED's cadence forecast** used a development prefix
+  disjoint from the evaluation window (747 real days, 16 real triggers outside
+  `[2021-01-01, 2021-04-01)`, rate 0.0214/day → predicted 1.93 triggers in-window → menu choice
+  **56 days**, vs M4_CAL's fixed 60) — verified by a dedicated test (D02) that mutating the
+  window's OWN realized emissions changes nothing about the forecast.
+  **Real mechanism result** (descriptive only, no claim): all four arms shared the identical
+  fold-0 selection (guide 3.1's requirement, verified); M4_CAL and M4_CAL_MATCHED's fold-1
+  landed on the same winning params despite different cadences (60d vs 56d), while M4_REGIME's
+  event-triggered refreshes (2021-02-02, 2021-03-19) picked genuinely different params — real
+  action divergence, independent of PnL. `STOCK_MODE4_PLUS_ADMISSION_V1` (RA-04) fired for real
+  on M4_REGIME's 2nd opportunity (`KEEP_INCUMBENT`, "only 1 finite subperiod shards of 3, need
+  >= 2"), the first real deployment of the guard outside RA-04's own tests. Returns (point
+  estimates, 1-3 folds/arm — not a claim): STATIC +4.34%, M4_CAL +3.38%, M4_CAL_MATCHED +2.63%,
+  M4_REGIME +4.30%.
+  **4 real bugs found and fixed during build, each with its own regression test**: (1) STATIC's
+  schedule builder silently defaulted to the registered 180-day train memory instead of the
+  phase's own `train_memory_days`, violating guide 3.1's shared-initial-selection requirement —
+  caught by D01, which now pins `static.train_memory_days == cal.train_memory_days ==
+  regime.train_memory_days`; (2) `run_one_arm` did not catch `run_cutoff_walk_forward`'s early
+  precondition raises (`ProviderError` on an empty schedule executes before that function's own
+  try/except), which would have aborted the whole 4-arm comparison instead of recording one
+  arm's failure — caught by D07; (3) `TrainingScorer`'s candidate cache (keyed only by
+  `digest(params)`) collided across different (arm, fold) pairs that coincidentally selected
+  byte-identical params at different cutoffs — a real full-scale run crashed on
+  `ContractError: partial candidate cache identity drift`; fixed with a per-(arm,fold) cache
+  subdirectory; (4) `classify_regime_trigger_reasons` compared consecutive CHOSEN CUTOFFS'
+  states directly instead of replaying every eligible emission in between (as
+  `online_trigger_schedule` itself does), silently mislabeling both real `SEMANTIC_STATE_CHANGE`
+  triggers as `MAX_AGE` — caught by cross-checking a completed real run's own `deployed_source`
+  against the funnel's labels, not by any test at the time; fixed and given a dedicated
+  regression test (D01b) using the real 90-day window, since D01's own 7-day smoke window
+  contains no real trigger and would pass the same check vacuously.
   Raw financial artifacts at TE paths are referenced by path/hash, not copied.
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
@@ -228,6 +279,7 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/verify_ra01.py        # thin 
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra02.py --pytest-xml <junit of tests/ra_corrective>   # RA-02 semantic cache
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra03.py --pytest-xml <junit of tests/ra_corrective>   # RA-03 lazy prep/retention/route/profiler
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra04.py --pytest-xml <junit of tests/ra_corrective>   # RA-04 Mode 4 support/admission/controls
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra05.py --pytest-xml <junit of tests/ra_corrective>   # RA-05 4-arm discovery (real data); --smoke for a tiny/fast dry run
 $LAB/environments/lab_venv/bin/python $LAB/scripts/record_owner_decision.py --decides "RA-0N->RA-0M" --quote "<verbatim>" --reference "<where>"  # append to owner_decisions.jsonl
 $LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
 $LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
