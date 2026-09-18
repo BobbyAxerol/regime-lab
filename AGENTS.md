@@ -114,30 +114,49 @@ not superseded. Read the active guide before changing anything.
   fix), `db228594` (RA-04 implementation), `0226eebd` (evidence, 2 runs kept).
   `research_status: NOT_ASSESSED` — no economic/market claim; none of Q01-Q07/G04-* require
   ranking IC>0, Sharpe>0, or regime beating a synthetic calendar.
-- **Test suite (2026-09-18, 1145 collected): 1142 passed, 3 failed** (full run ≈6m14s, verified
-  three times this session — before the RA03.1 execution.py fix, after it, and again after the
-  full RA-04 turn (a_vwap.py fix + all new `ra/`/`ra_corrective` files), same 3 failures every
-  time, confirming no regression anywhere execution.py or a_vwap.py is imported from). All three
-  pre-exist RA-02/RA-03/RA-04 and are unrelated to any of them (confirmed: none touch
-  `src/crypto_regime_lab/ra/`, `src/crypto_regime_lab/time_edge/`, `src/crypto_regime_lab/alphas/`,
-  or `tests/ra_corrective/`); do
-  not fix them as a side effect of an unrelated phase without the owner's separate say-so (R-17):
-  - `test_guide_publishing_discipline.py::test_all_nine_forbidden_claims_are_checked` +
-    `test_each_check_names_the_evidence_the_claim_would_need` — forbidden-claims check #1
-    ("regime works") now structurally FAILs because `acceptance_test_coverage.json` marks
-    T62/T63 `COVERED` since the LAB-09 close-out (commit `ac01a8d`, 2026-09-11) while the LAB-05
-    group ablation FAILED out of fold. Flagged `REVIEW_REQUIRED` for the owner in commit
-    `161c34a`'s message; still open, still the owner's call, still not silently edited.
-  - `test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason`
-    — `configs/assertion_vacuity_audit.json` lists 21 unreached-and-undeclared assert lines, all
-    in `test_rf04_decay_and_controls.py`, `test_rf04_scaling.py`, `test_rf05_claims.py` and
-    `test_te03_7.py` (none in RA-02's own tests). None of these five test names ever appeared in
-    `scripts/audit_assertion_vacuity.py`'s `ACCEPTED` dict, so this predates today's RA-02 work
-    and is most likely TE-03.7's stalled funnel state (still never reaching `MEASURED` — see the
-    TE study note below) rather than a regression; not independently re-diagnosed this session —
-    re-run `scripts/audit_assertion_vacuity.py` and read each of the 21 lines before deciding
-    whether to declare or fix.
+- **Test suite (2026-09-18, 1150 collected): 1150 passed, 0 failed** (full run ≈5m51s) — the
+  first fully green run recorded in this lab. All three previously-documented pre-existing
+  failures were RESOLVED this session, at the owner's explicit request to handle them rather than
+  leave them open (R-17 still respected: each was root-caused before being touched, nothing was
+  papered over to force a pass):
+  - **T62/T63 forbidden-claims false positive.** `check_regime_works()` in
+    `scripts/audit_forbidden_claims.py` read T62/T63 `COVERED` in `acceptance_test_coverage.json`
+    as a proxy for "a regime-works claim is being made" — but T62/T63 are about testing
+    DISCIPLINE (no untested heatmap cell presented as evidence, the paired bootstrap done
+    correctly across 5 symbols), not a published verdict; the proxy was sound only before LAB-09
+    built that machinery, and went stale the moment it did. The actual verdict lives in
+    `configs/lab09_claim_report.json`: `conclusion_level=FAILED_VALIDITY`,
+    `forbidden.fund_grade_alpha_proven=False` — no regime-works claim has ever been made. Fixed to
+    read that instead. 9/9 forbidden-claim checks now pass legitimately; the two fields
+    `test_the_negative_findings_the_lab_actually_reports_are_preserved` pins
+    (`group_ablation_ran`/`group_ablation_improved_out_of_fold`) are unchanged.
+  - **21 undeclared vacuity lines** across `test_rf04_decay_and_controls.py`,
+    `test_rf04_scaling.py`, `test_rf05_claims.py`, `test_te03_7.py`. Traced with
+    `scripts/audit_assertion_vacuity.py` and triaged individually against the real committed
+    artifacts (not guessed): all 21 are legitimate contingencies, not bugs — e.g. RF-05's
+    `POSITIVE_WITHIN_SCOPE` guard never fires because no RF-05 contrast is ever POSITIVE (the
+    study's own honest result), RF-04's placebo-reason/coverage-reason guards never fire because
+    the real placebo ran and every cell is RUN_VALID or BLOCKED_CAPABILITY (never NOT_RUN_BUDGET),
+    and TE-03.7's 14-line `MEASURED`-branch guard never fires because that controls funnel is
+    still `NOT_RUN_BUDGET` (TE02-PILOT-R03 ledger has ~106442s left as of 2026-09-18 — a separate
+    study, not touched). Declared with real driving tests (constructed inputs exercising both the
+    pass and fail path, matching the file's established LAB-03/04 pattern — not bare
+    self-reference) in 5 new `tests/test_contingency_paths.py` functions.
+  - **Self-referential ratio miscalculation** (found while fixing the above; not previously
+    documented anywhere). The gate's own `reached > 0.99` line is inside `SELF_REFERENTIAL_TESTS`
+    (excluded from `never_reached` reporting because reading it is circular — the gate reads its
+    own prior run's artifact), but the ratio's denominator never excluded those same lines, a
+    standing ~0.1pp undercount. It had been invisible because this exact assertion had apparently
+    never once been reached: the same test's earlier `undeclared == []` assert had been failing
+    first, on every run, since before the 21 lines above were introduced — a guard auditing guard
+    vacuity that was itself vacuous. Fixed by emitting `self_referential_tracked_lines` /
+    `self_referential_lines_reached` from the script and excluding them symmetrically in the
+    consuming test's formula (verified: 3481/3513 = 99.09% once correctly excluded, vs the
+    uncorrected 3482/3519 = 98.9% that had been silently failing this assertion for the first time
+    it ever ran).
   Before-repair tests in `tests/mode4_corrective/` are green — never delete or weaken them.
+  TE-03.7 itself remains genuinely un-executed (`NOT_RUN_BUDGET`, separate study/approval track —
+  advancing it was not part of this cleanup and was not attempted).
   RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
 - **Disk cleanup (2026-09-18)**: `git gc --prune=now` (832M→661M .git), removed regenerable
   `.cache/lab0{4,8,9}_*`/`numba`/`te_*` intermediate caches for COMPLETED historical phases
