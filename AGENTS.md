@@ -42,17 +42,56 @@ not superseded. Read the active guide before changing anything.
   RUNNING row `bc9d8951…` classified `ORPHAN_NO_LIVE_PROCESS` (recovery belongs to the TE
   supervisor, not RA-01); 7-row protocol migration (incl. T02 run-output-dedup scoping); 4-arm
   registration with M4_CAL_MATCHED as canonical CAL_BUDGET and economic fields
-  `PENDING_CALIBRATION`. Approvals (scope, migration, arms, tuning, risk caps) are all `PENDING`
-  — **RA-02 must not start until the owner approves RA-01** (WAITING_OWNER_REVIEW). Two earlier
-  attempts (08:33Z FAIL — verifier did not read the nested identity schema; 09:36Z PASS) are kept
-  append-only. RA-01 code/artifacts are committed (commits `b2a58af`, `fa3be63`).
-- **Test suite is all-green (2026-09-18, 1069 collected): 1069 passed, 0 failed** (full run
-  ≈ 4m30s). The two former failures were fixed, not skipped: T02 aliasing check was re-scoped via
-  protocol migration row 7 (run-output dedup in `evidence/`/`snapshots/` is informational; a
-  hardlink in any source/config tree or a symlink into a protected root still FAILS) and the
-  unused `ALLOWED_DISPOSITIONS` import was removed from
-  `tests/ra_corrective/test_ra01_gates.py`. Before-repair tests in `tests/mode4_corrective/` are
-  green — never delete or weaken them. RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
+  `PENDING_CALIBRATION`. Approvals in RA-01's OWN frozen `registration.json` stay `PENDING`
+  forever by design (`ra/verifier.py` enforces this — a script cannot self-approve its own
+  phase). Two earlier attempts (08:33Z FAIL — verifier did not read the nested identity schema;
+  09:36Z PASS) are kept append-only. RA-01 code/artifacts are committed (commits `b2a58af`, `fa3be63`).
+- **Owner approved RA-01→RA-02 on 2026-09-18** — recorded, not inferred, in
+  `evidence/regime_time_edge_ra_v1/owner_decisions.jsonl` (append-only; `scripts/
+  record_owner_decision.py` writes it, never overwrites a `decision_id`). This is a SEPARATE
+  ledger from any phase's own frozen gate — RA-01/RA-02's own `phase_gate.json`/`registration.json`
+  correctly keep reading `PENDING`/`false`; the decision ledger is what the *next* phase's
+  admission must consult. Before recording, verify the ledger's last entry actually covers the
+  transition you are about to start — do not assume today's approval extends past RA-02.
+- **RA-02 is COMPLETE, technical_gate PASS, 5/5 gates** (run `ra02-20260918T134757Z-76c16f60`,
+  2026-09-18; two earlier same-day drafts FAILED on real bugs then were fixed — see their kept
+  `phase_gate.json`s — a third draft already reached 5/5 before this run). 1 real QuantBT
+  engine call (1440 bars), cross-run reuse HIT with 0 new engine runs and a byte-equal payload,
+  resume-parity PASS with the red control (tell-dropping restart) actually diverging — proving
+  the parity check isn't vacuous. Ledger `TE02-PILOT-R03` unchanged by the phase (RA-02 charges
+  nothing to the shared TE budget). Commits `2819fbd6` (implementation), `91c3591b` (evidence,
+  4 runs kept). `research_status: NOT_ASSESSED` — no economic/market claim.
+- **Test suite (2026-09-18, 1092 collected): 1089 passed, 3 failed** (full run ≈3m53s). All
+  three pre-exist RA-02 and are unrelated to it (confirmed: none touch `src/crypto_regime_lab/ra/`
+  or `tests/ra_corrective/`); do not fix them as a side effect of an unrelated phase without the
+  owner's separate say-so (R-17):
+  - `test_guide_publishing_discipline.py::test_all_nine_forbidden_claims_are_checked` +
+    `test_each_check_names_the_evidence_the_claim_would_need` — forbidden-claims check #1
+    ("regime works") now structurally FAILs because `acceptance_test_coverage.json` marks
+    T62/T63 `COVERED` since the LAB-09 close-out (commit `ac01a8d`, 2026-09-11) while the LAB-05
+    group ablation FAILED out of fold. Flagged `REVIEW_REQUIRED` for the owner in commit
+    `161c34a`'s message; still open, still the owner's call, still not silently edited.
+  - `test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason`
+    — `configs/assertion_vacuity_audit.json` lists 21 unreached-and-undeclared assert lines, all
+    in `test_rf04_decay_and_controls.py`, `test_rf04_scaling.py`, `test_rf05_claims.py` and
+    `test_te03_7.py` (none in RA-02's own tests). None of these five test names ever appeared in
+    `scripts/audit_assertion_vacuity.py`'s `ACCEPTED` dict, so this predates today's RA-02 work
+    and is most likely TE-03.7's stalled funnel state (still never reaching `MEASURED` — see the
+    TE study note below) rather than a regression; not independently re-diagnosed this session —
+    re-run `scripts/audit_assertion_vacuity.py` and read each of the 21 lines before deciding
+    whether to declare or fix.
+  Before-repair tests in `tests/mode4_corrective/` are green — never delete or weaken them.
+  RF-05 guards live in `tests/mode4_corrective/test_rf05_claims.py`.
+- **Disk cleanup (2026-09-18)**: `git gc --prune=now` (832M→661M .git), removed regenerable
+  `.cache/lab0{4,8,9}_*`/`numba`/`te_*` intermediate caches for COMPLETED historical phases
+  (70M→13M, gitignored, regenerates on demand — never rerun those phases though), and
+  hardlink-deduplicated byte-identical files inside `evidence/time_edge_validation_v4/runs/`
+  (mostly the same synthetic 5-symbol world parquet copied across many timed-out shard attempts
+  before the identity-keyed compute cache existed) — verified by sha256 before linking, same
+  inode after, zero bytes deleted, ~2.0 GB reclaimed. All targets were gitignored; nothing
+  git-tracked changed. Host disk: 6.7G→8.8G free. Do not delete (only dedupe) anything under
+  `evidence/` — hardlinking is fine (content/path/hash unchanged); the explicit rule below still
+  says never delete a large evidence tree.
 - The lab marker keeps `study_id=crypto_regime_timeedge_v2` (LAB-01 bootstrap evidence; not
   rewritten).
 - **Time-Edge study (TE, `study_id=time_edge_validation_v4`)** runs between RF-05 and RA:
@@ -60,18 +99,26 @@ not superseded. Read the active guide before changing anything.
   `src/crypto_regime_lab/time_edge/` + `experiments/dynamic_fold_provider.py`, evidence under
   `evidence/time_edge_validation_v4/`, handoffs `handoff/SESSION_TE_CURRENT.md`,
   `TE_MASTER_PLAN_V1.md/.json`, `TE_PHASE_PLAN_V1.md`, `TE_CLI_RUNBOOK.md`. Ledger
-  `TE02-PILOT-R03` had budget 300000s with ~134542s remaining at RA-01 lock (2026-09-18), and one
-  RUNNING-or-orphan row with no live process — reconcile, never silently drop. Its binary/run
+  `TE02-PILOT-R03` had budget 300000s with ~134542s remaining at RA-01 lock (2026-09-18); the
+  orphan RUNNING row (`bc9d8951…`) was then reconciled as FAILED at its reservation (commit
+  `7d1b2e5a`), so spent is now 193557.8s, **~106442s remaining**. Reread the ledger before
+  admitting any new job — do not reuse either number without checking it live. Its binary/run
   outputs are largely gitignored (manifests, ledgers and small JSON stay in git); large untracked
-  evidence trees are left alone, not committed wholesale and never deleted.
+  evidence trees are left alone, not committed wholesale and **never deleted — dedup by hardlink
+  is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (11 tests, green). Sequence:
-  RA-01 lock → RA-02 semantic cache → RA-03 memory/fast routes → RA-04 Mode 4 support/admission →
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (37 tests, green: 14 RA-01 + 10
+  C01-C10 cache cases + 13 RA-02 gate-mutation tests). RA-01 and RA-02 both complete; **RA-03
+  needs its own owner approval before starting** (R-18 — the RA-01→RA-02 approval in
+  `owner_decisions.jsonl` does not extend to RA-03). Sequence:
+  RA-01 lock → RA-02 semantic cache (done) → RA-03 memory/fast routes → RA-04 Mode 4 support/admission →
   RA-05 4-arm discovery (STATIC, M4_CAL, M4_CAL_MATCHED=CAL_BUDGET canonical, M4_REGIME; primary
   H-BUDGET) → RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
-  `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (PLAN ONLY, awaiting RA-01 approval;
-  one phase finished → report → owner review before the next, per R-18). Reuse `M4_CAL_MATCHED`
+  `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
+  RA-01 and RA-02 are now both done — the file's own prose is stale on that point, its per-phase
+  task lists are not). Still one phase finished → report → owner review before the next, per
+  R-18. Reuse `M4_CAL_MATCHED`
   as the canonical CAL_BUDGET arm id — do not create a second economically identical arm.
   Raw financial artifacts at TE paths are referenced by path/hash, not copied.
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
