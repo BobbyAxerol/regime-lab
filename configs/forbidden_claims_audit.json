@@ -1,7 +1,7 @@
 {
   "schema": "crypto_regime_lab.forbidden_claims_audit.v1",
   "guide_section": "13.6",
-  "checked_at_utc": "2026-09-11T00:52:41.569437+00:00",
+  "checked_at_utc": "2026-09-18T09:52:10.714486+00:00",
   "method": "each claim is checked STRUCTURALLY: does the evidence the guide demands exist, and is the lab making the claim at all. A lexical scan cannot tell a claim from a denial of one -- two earlier attempts in this lab flagged a requirement's own title, then its own negation",
   "checks": [
     {
@@ -11,8 +11,8 @@
       "outer_evaluation_touched": false,
       "group_ablation_ran": true,
       "group_ablation_improved_out_of_fold": false,
-      "claim_is_being_made": false,
-      "passed": true,
+      "claim_is_being_made": true,
+      "passed": false,
       "note": "the ablation FAILED -- variance resolved out of fold went +0.335 -> +0.095 -> -0.036 as blocks were added -- and the lab reports that rather than a working regime"
     },
     {
@@ -139,7 +139,9 @@
     }
   ],
   "checks_total": 9,
-  "checks_passed": 9,
-  "unsupported_claims": [],
-  "status": "NO_FORBIDDEN_CLAIM_IS_SUPPORTED"
+  "checks_passed": 8,
+  "unsupported_claims": [
+    "regime works"
+  ],
+  "status": "REVIEW_REQUIRED"
 }
