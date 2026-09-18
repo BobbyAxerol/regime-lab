@@ -35,3 +35,11 @@ __pycache__/
 # Numba JIT caches inside the lab (regenerable, machine-specific)
 numba_cache/
 
+
+# ---------------------------------------------------------------------------
+# KHÔNG commit: market-slice parquet do runner ghi trong từng run
+# (evidence/**/runs/*/tasks/*/raw-*/observable_market.parquet, mỗi file >100MB).
+# Đây là bản sao byte của snapshot đã có read-lock; GitHub từ chối file >100MB.
+# Giữ file trên disk local, giữ manifest/receipt JSON (có sha256) trong git.
+# ---------------------------------------------------------------------------
+evidence/**/observable_market.parquet
