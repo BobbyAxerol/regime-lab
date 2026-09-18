@@ -61,10 +61,32 @@ not superseded. Read the active guide before changing anything.
   the parity check isn't vacuous. Ledger `TE02-PILOT-R03` unchanged by the phase (RA-02 charges
   nothing to the shared TE budget). Commits `2819fbd6` (implementation), `91c3591b` (evidence,
   4 runs kept). `research_status: NOT_ASSESSED` — no economic/market claim.
-- **Test suite (2026-09-18, 1092 collected): 1089 passed, 3 failed** (full run ≈3m53s). All
-  three pre-exist RA-02 and are unrelated to it (confirmed: none touch `src/crypto_regime_lab/ra/`
-  or `tests/ra_corrective/`); do not fix them as a side effect of an unrelated phase without the
-  owner's separate say-so (R-17):
+- **RA-03 is COMPLETE, technical_gate PASS, 6/6 gates** (run `ra03-20260918T151853Z-d5135816`,
+  2026-09-18; two earlier same-day attempts kept append-only — one crashed on a report-formatting
+  bug AFTER its verify_ra03() already recorded PASS on all 6 gates, one PASSED but carried a dead
+  `schema_declares()` function caught by the reachability gate, same defect class as RA-02's
+  `json_bytes_strict`). Real RA03.1 defect found and FIXED in `time_edge/execution.py`:
+  `PreparedAccount.__init__` eagerly packed the full frame via `prepare_native_event_strategy`
+  even though every real caller (TrainingScorer, candidate_targets, every deploy/decay/
+  full_control task) passes a non-zero `account_start` — measured 0.0423s/+7.8 MiB wasted per
+  construction, `was_ever_used=False`. Fixed: `first==0` is now just another `_window()` cache
+  key, packed lazily. Verified byte-identical output before/after (M02). All 4 alphas' one real
+  event route qualified with real fills/exit tags (A-HASH surfaced `ladder`, A-VWAP `tp`); no
+  fast/vectorized route exists in this codebase for any alpha. Peak RSS 0.319/0.383 GiB on the two
+  profiled scopes against a 2.4 GiB target (80% of the registered 3.0 GiB cap). Capacity forecast
+  built from measurement correctly got `BLOCKED_BUDGET` on an over-envelope probe and `ADMIT` on
+  an in-envelope one. Ledger `TE02-PILOT-R03` unchanged by the phase. Commits `37191d56` (the
+  RA03.1 fix), `0b2246c2` (RA-03 implementation), `16e6f9b2` (the schema_declares fix),
+  `8d768c61`/`dc9ca8c0` (evidence, 3 runs kept). `research_status: NOT_ASSESSED` — no economic/
+  market claim. Known gap recorded, not changed: `TrainingScorer` persists FULL fills/commands/
+  order_events per trial, more than the CANDIDATE_COMPACT retention tier specifies (wider blast
+  radius than this phase's scope — other code reads those files).
+- **Test suite (2026-09-18, 1121 collected): 1118 passed, 3 failed** (full run ≈4m25s, verified
+  twice this session — once before and once after the RA03.1 execution.py fix, same 3 failures
+  both times, confirming no regression elsewhere execution.py is imported from). All three
+  pre-exist RA-02/RA-03 and are unrelated to either (confirmed: none touch
+  `src/crypto_regime_lab/ra/`, `src/crypto_regime_lab/time_edge/`, or `tests/ra_corrective/`); do
+  not fix them as a side effect of an unrelated phase without the owner's separate say-so (R-17):
   - `test_guide_publishing_discipline.py::test_all_nine_forbidden_claims_are_checked` +
     `test_each_check_names_the_evidence_the_claim_would_need` — forbidden-claims check #1
     ("regime works") now structurally FAILs because `acceptance_test_coverage.json` marks
@@ -108,11 +130,12 @@ not superseded. Read the active guide before changing anything.
   is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (37 tests, green: 14 RA-01 + 10
-  C01-C10 cache cases + 13 RA-02 gate-mutation tests). RA-01 and RA-02 both complete; **RA-03
-  needs its own owner approval before starting** (R-18 — the RA-01→RA-02 approval in
-  `owner_decisions.jsonl` does not extend to RA-03). Sequence:
-  RA-01 lock → RA-02 semantic cache (done) → RA-03 memory/fast routes → RA-04 Mode 4 support/admission →
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (66 tests, green: 14 RA-01 + 23 RA-02
+  (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates)). RA-01/RA-02/RA-03 all complete;
+  **RA-04 needs its own owner approval before starting** (R-18 — the RA-02→RA-03 approval in
+  `owner_decisions.jsonl` does not extend to RA-04; check the ledger's LAST entry covers the
+  transition you're about to start, never assume an earlier one still applies). Sequence:
+  RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission →
   RA-05 4-arm discovery (STATIC, M4_CAL, M4_CAL_MATCHED=CAL_BUDGET canonical, M4_REGIME; primary
   H-BUDGET) → RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
   `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
@@ -147,6 +170,9 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/run_rf05.py --force   # RF-05
 $LAB/environments/lab_venv/bin/python $LAB/scripts/write_rf05_report.py --force  # report.md/json + integrity/repro refresh
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra01.py           # RA-01 baseline lock (writes evidence/regime_time_edge_ra_v1/<run_id>/)
 $LAB/environments/lab_venv/bin/python $LAB/scripts/verify_ra01.py        # thin verifier over the RA-01 run dir
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra02.py --pytest-xml <junit of tests/ra_corrective>   # RA-02 semantic cache
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra03.py --pytest-xml <junit of tests/ra_corrective>   # RA-03 lazy prep/retention/route/profiler
+$LAB/environments/lab_venv/bin/python $LAB/scripts/record_owner_decision.py --decides "RA-0N->RA-0M" --quote "<verbatim>" --reference "<where>"  # append to owner_decisions.jsonl
 $LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
 $LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
 ```
