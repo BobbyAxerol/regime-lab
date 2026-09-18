@@ -1,0 +1,177 @@
+{
+  "schema": "regime_lab.ra04_search_registration.v1",
+  "budget": {
+    "optuna_trials": 32,
+    "is_subperiods": 6,
+    "search_seed": 20260912,
+    "source": "configs/time_edge_validation_v4/mode4_binding_r01.json",
+    "reused_not_refrozen": true,
+    "guide_allowance": "32-64 coverage revision documented in place of the 50/cutoff default"
+  },
+  "search_dimensions": {
+    "A-SC": [
+      "AP",
+      "coeff",
+      "alpha.condition_threshold"
+    ],
+    "A-HMA": [
+      "max_length",
+      "take_profit",
+      "max_sl"
+    ],
+    "A-VWAP": [
+      "dev_mult",
+      "rsi_len",
+      "stop_atr"
+    ],
+    "A-HASH": [
+      "mom_len",
+      "mom_threshold_mult",
+      "stop_loss_perc"
+    ]
+  },
+  "dead_on_fixture": {
+    "A-HMA": [
+      "min_length",
+      "mult"
+    ]
+  },
+  "fixed_defaults": {
+    "A-SC": {
+      "AP": 10,
+      "coeff": 2,
+      "novolumedata": false,
+      "src_col": "close",
+      "alpha.condition_threshold": 40
+    },
+    "A-HMA": {
+      "min_length": 60,
+      "max_length": 120,
+      "minor_min": 15,
+      "minor_max": 40,
+      "flat": 10.0,
+      "atr_fast": 8,
+      "atr_slow": 21,
+      "mult": 2.0,
+      "max_sl": 4.0,
+      "take_profit": 3.0,
+      "min_profit": 1.0,
+      "sl_input": "ATR Only",
+      "tick_size": 0.01
+    },
+    "A-VWAP": {
+      "rsi_len": 14,
+      "rsi_os": 30,
+      "rsi_ob": 70,
+      "dev_mult": 2.0,
+      "atr_len": 14,
+      "stop_atr": 2.0,
+      "target_r": 2.0,
+      "htf_ema_len": 50,
+      "exit_at_vwap": true,
+      "time_stop_on": true,
+      "time_stop_bars": 30,
+      "htf_tf": "1h"
+    },
+    "A-HASH": {
+      "mom_len": 37,
+      "ema_len": 45,
+      "cooldown_bars": 20,
+      "stop_loss_perc": 4.25,
+      "rr_ratio": 3.0,
+      "tp1_ratio": 1.0,
+      "tp2_ratio": 2.0,
+      "mom_threshold_mult": 3.75,
+      "tp1_qty_perc": 45,
+      "tp2_qty_perc": 45
+    }
+  },
+  "fixed_defaults_source": "src/crypto_regime_lab/ra/route_qualification.py PROBE_PARAMS (RA-03) -- reused, not re-derived; already validated to produce real fills for every alpha, incl. the AH-07 ladder-feasibility fix",
+  "geometry_or_selector_extension": "out of scope for this study per RA04.4 -- a separate future study, not folded into this factorial",
+  "behavior_witnesses": [
+    {
+      "schema": "regime_lab.ra04_behavior_witness.v1",
+      "alpha_id": "A-SC",
+      "dimension": "AP",
+      "low_value": 5,
+      "high_value": 40,
+      "low_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 6,
+        "terminal_equity": 19236.565868261296
+      },
+      "high_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 4,
+        "terminal_equity": 19474.412524566407
+      },
+      "behavior_differs": true
+    },
+    {
+      "schema": "regime_lab.ra04_behavior_witness.v1",
+      "alpha_id": "A-HMA",
+      "dimension": "max_length",
+      "low_value": 65,
+      "high_value": 300,
+      "low_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 3,
+        "terminal_equity": 20439.30242370444
+      },
+      "high_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 1,
+        "terminal_equity": 20135.282348814442
+      },
+      "behavior_differs": true
+    },
+    {
+      "schema": "regime_lab.ra04_behavior_witness.v1",
+      "alpha_id": "A-VWAP",
+      "dimension": "dev_mult",
+      "low_value": 0.7,
+      "high_value": 4.0,
+      "low_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 4,
+        "terminal_equity": 20769.57885691766
+      },
+      "high_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 0,
+        "terminal_equity": 20000.0
+      },
+      "behavior_differs": true
+    },
+    {
+      "schema": "regime_lab.ra04_behavior_witness.v1",
+      "alpha_id": "A-HASH",
+      "dimension": "mom_len",
+      "low_value": 6,
+      "high_value": 60,
+      "low_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 8,
+        "terminal_equity": 20069.88683830725
+      },
+      "high_result": {
+        "status": "OK",
+        "engine_status": "EVALUATED",
+        "fills": 9,
+        "terminal_equity": 20202.425101353572
+      },
+      "behavior_differs": true
+    }
+  ],
+  "all_witnesses_differ": true,
+  "lab_run_id": "ra04-20260918T162015Z-85cc39de",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T16:23:24.049822+00:00"
+}
