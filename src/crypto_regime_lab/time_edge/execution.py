@@ -224,23 +224,31 @@ def endpoint(*, fee=.0004, slippage=1., native_backend="rust", reactive_kernel_m
 
 
 class PreparedAccount:
-    """One account per candidate, prepared per account window.
+    """One account per candidate, prepared per account window, lazily.
 
     The account only exists from ``account_start`` onward while the alpha keeps
     the registered causal warmup history. Handing the full history to the engine
     made every audit replay trace O(history) even though no position could exist
     before the window; each requested window therefore prepares its own immutable
     market and runs absolute bar coordinates back onto the full frame.
+
+    RA-GUIDE-1.0 RA03.1: nothing is packed at construction time. Measured
+    (`evidence/regime_time_edge_ra_v1/ra03-*/memory_profile.json`): a 10-day
+    history + 2-day window fixture spent 0.042s / +7.8 MiB packing the full
+    14,400+2,880-row frame in ``__init__`` and then never touched it, because
+    every real caller in this codebase (`TrainingScorer`, `candidate_targets`,
+    every `deploy`/`decay`/`full_control` task) passes a non-zero
+    ``account_start`` — the frame is built to include pre-roll warmup before
+    it. ``first == 0`` is therefore just another window key, not a special
+    case: the very first ``.run()`` call packs it, exactly once, and every
+    later call at the same ``first`` (including a second account_start=None
+    call) reuses that same cached window.
     """
 
     def __init__(self, frame, *, fee=.0004, slippage=1., native_backend="rust"):
         validate_market(frame)
         self.frame = frame
         self.fee, self.slippage, self.native_backend = fee, slippage, native_backend
-        started = time.perf_counter()
-        self.endpoint = endpoint(fee=fee, slippage=slippage, native_backend=native_backend)
-        self.runner = self.endpoint.prepare_native_event_strategy(data=frame)
-        self.packing_seconds = time.perf_counter()-started
         self.runs = 0
         self._windows = {}
 
@@ -261,10 +269,7 @@ class PreparedAccount:
         strategy = ClockedStrategy(alpha_id, self.frame, selections, account_start=account_start,
                                    engine_offset=first)
         started = time.perf_counter()
-        if first == 0:
-            window, engine_endpoint, runner, packing = self.frame, self.endpoint, self.runner, self.packing_seconds
-        else:
-            window, engine_endpoint, runner, packing = self._window(first)
+        window, engine_endpoint, runner, packing = self._window(first)
         try:
             if cold:
                 result = engine_endpoint.simulate(data=window, strategy=strategy)
