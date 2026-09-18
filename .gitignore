@@ -43,3 +43,25 @@ numba_cache/
 # Giữ file trên disk local, giữ manifest/receipt JSON (có sha256) trong git.
 # ---------------------------------------------------------------------------
 evidence/**/observable_market.parquet
+
+# ---------------------------------------------------------------------------
+# KHÔNG commit: mọi file dữ liệu nhị phân (parquet/arrow/feather/HDF5/pickle/
+# numpy/model binaries) ở bất cứ đâu trong repo. Lý do: GitHub từ chối file
+# >100MB và dữ liệu lớn làm phình repo; manifest JSON (có sha256) + receipt +
+# ledger sqlite vẫn ở trong git làm bằng chứng. File đã track trước đây không
+# bị ảnh hưởng. Trường hợp ngoại lệ thật sự cần: git add -f <file>.
+# ---------------------------------------------------------------------------
+*.parquet
+*.arrow
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.npy
+*.npz
+*.bin
+*.onnx
+*.pt
+*.pth
+*.ckpt
