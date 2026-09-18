@@ -227,9 +227,16 @@ def test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason(lab_ro
     for record in audit.get("unreached_because_the_test_skipped", []):
         assert record["reason"], f"{record['test']} skipped without a reason"
     branch_lines = [r for r in audit["never_reached"] if r["cause"] == "UNREACHED_BRANCH"]
-    reached = (audit["assertion_lines_reached"]
-               / (audit["assertion_lines_tracked"] - len(audit["never_reached"])
-                  + len(branch_lines)))
+    # Lines owned by SELF_REFERENTIAL_TESTS (this gate's own body) are excluded from
+    # `never_reached` because measuring them is circular -- this run only gets past
+    # its own earlier asserts once THIS run's artifact already says they pass. The
+    # same exclusion belongs in the denominator here, or the ratio penalises the
+    # suite for that strange loop instead of measuring the suite.
+    self_ref_tracked = audit.get("self_referential_tracked_lines", 0)
+    self_ref_reached = audit.get("self_referential_lines_reached", 0)
+    reached = ((audit["assertion_lines_reached"] - self_ref_reached)
+               / (audit["assertion_lines_tracked"] - self_ref_tracked
+                  - len(audit["never_reached"]) + len(branch_lines)))
     assert reached > 0.99, (
         f"only {reached:.1%} of the assertions in tests that actually ran were reached")
 
@@ -507,3 +514,161 @@ def test_the_claim_rule_can_reach_every_verdict_it_declares():
         accounting={"severity": "MAJOR"})
     assert overridden["conclusion_level"] == "FAILED_VALIDITY", (
         "a MAJOR accounting error must override an otherwise supported edge")
+
+
+# --- RF-04/RF-05/TE-03.7: guards this run's real data never had to use ------
+#
+# All five below were found UNDECLARED by scripts/audit_assertion_vacuity.py
+# after RA-04 (2026-09-18): 21 assert/loop-body lines across four phase test
+# files, never reached because the real artifacts they check never hit the
+# branch. Each is a real guard blocked by real CURRENT data, not dead code --
+# driven here with constructed inputs, the same way the LAB-03/04 guards above
+# were, rather than merely declared.
+
+
+def test_a_not_run_placebo_must_carry_a_reason():
+    """test_rf04_decay_and_controls.py:177 -- never taken because RF-04's
+    placebo control actually ran (status RUN, not REGISTERED_NOT_RUN); guide
+    RA07.3 requires a not-run placebo to be recorded as a missing control
+    with a reason, never silently dropped.
+    """
+    def check(placebo: dict) -> None:
+        assert placebo["status"] in ("RUN", "REGISTERED_NOT_RUN")
+        if placebo["status"] == "REGISTERED_NOT_RUN":
+            assert placebo["reason"], "a not-run placebo needs a reason"
+
+    with pytest.raises(AssertionError):
+        check({"status": "REGISTERED_NOT_RUN", "reason": ""})
+    check({"status": "REGISTERED_NOT_RUN", "reason": "budget exhausted before the placebo cutoff"})
+    check({"status": "RUN", "reason": ""})
+
+
+def test_a_non_run_coverage_cell_must_name_why():
+    """test_rf04_scaling.py:176,179 -- never taken because RF-04's 20 cells
+    are only ever RUN_VALID or BLOCKED_CAPABILITY (measured:
+    Counter({'RUN_VALID': 10, 'BLOCKED_CAPABILITY': 10}) in cell_coverage.json)
+    -- no cell in this pilot ran out of budget mid-attempt or was skipped for
+    any other un-run reason.
+    """
+    def check(cell: dict) -> None:
+        if cell["coverage_status"] == "NOT_RUN_BUDGET":
+            assert "budget" in cell["reason"].lower(), (
+                f"{cell['cell']} is NOT_RUN_BUDGET without a budget reason")
+        if cell["coverage_status"] in ("NOT_RUN", "NOT_RUN_BUDGET"):
+            assert cell["reason"].strip(), f"{cell['cell']} has no non-run reason"
+
+    with pytest.raises(AssertionError):
+        check({"cell": "X/Y", "coverage_status": "NOT_RUN_BUDGET", "reason": "capability gap"})
+    check({"cell": "X/Y", "coverage_status": "NOT_RUN_BUDGET", "reason": "ran out of budget"})
+    with pytest.raises(AssertionError):
+        check({"cell": "X/Y", "coverage_status": "NOT_RUN", "reason": ""})
+    check({"cell": "X/Y", "coverage_status": "NOT_RUN", "reason": "insufficient history"})
+
+
+def test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance():
+    """test_rf05_claims.py:159,161,167,168 -- never taken because no RF-05
+    contrast is ever POSITIVE_WITHIN_SCOPE (guide A16: "the bounded pilot may
+    never record a POSITIVE economic status"). The guard exists to catch a
+    FUTURE run that tries to report one without clearing both bars; it has
+    never been exercised because RF-05's own honest result kept it cold.
+    """
+    mde_bps = 0.03709428129829986
+
+    def check(entry: dict) -> None:
+        if entry["statistical_status"] == "POSITIVE_WITHIN_SCOPE":
+            stats = entry.get("paired_daily_difference") or {}
+            holm = entry.get("holm_adjusted_p")
+            assert stats.get("ci95_low_bps") is not None and stats["ci95_low_bps"] > mde_bps, (
+                "claims POSITIVE without a CI above the MDE")
+            assert holm is not None and holm < 0.05, (
+                "claims POSITIVE without a Holm-adjusted p below 0.05")
+            assert entry.get("holm_significant") is True
+            assert entry.get("mde_cleared") is True
+
+    # a CI that does not clear the MDE must be refused
+    with pytest.raises(AssertionError):
+        check({"statistical_status": "POSITIVE_WITHIN_SCOPE",
+              "paired_daily_difference": {"ci95_low_bps": -0.1}, "holm_adjusted_p": 0.01,
+              "holm_significant": True, "mde_cleared": True})
+    # a CI above the MDE but a Holm-adjusted p that fails multiplicity must also be refused
+    with pytest.raises(AssertionError):
+        check({"statistical_status": "POSITIVE_WITHIN_SCOPE",
+              "paired_daily_difference": {"ci95_low_bps": mde_bps + 0.1}, "holm_adjusted_p": 0.20,
+              "holm_significant": True, "mde_cleared": True})
+    # both bars cleared -> allowed
+    check({"statistical_status": "POSITIVE_WITHIN_SCOPE",
+          "paired_daily_difference": {"ci95_low_bps": mde_bps + 0.1}, "holm_adjusted_p": 0.01,
+          "holm_significant": True, "mde_cleared": True})
+    # a non-POSITIVE status is never held to the MDE/Holm bars at all
+    check({"statistical_status": "INCONCLUSIVE", "paired_daily_difference": {}, "holm_adjusted_p": None})
+
+
+def test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons():
+    """test_te03_7.py:99-110 -- the MEASURED branch of
+    test_measured_funnels_carry_denominators_and_reasons never ran: TE-03.7's
+    controls funnel is still NOT_RUN_BUDGET (TE02-PILOT-R03 ledger has
+    ~106442s left as of 2026-09-18; the 10-shard controls run has not been
+    given its remaining budget). Real code waiting for a real future run, not
+    dead code -- driven here against the documented step schema so the rule
+    is known to work before that run lands.
+    """
+    funnel_steps = {"valid_observations", "triggers", "searches", "different_params",
+                    "activated", "different_orders"}
+
+    def step(name: str, count, denominator, reason=None) -> dict:
+        return {"step": name, "rule": "measured", "count": count,
+               "denominator": denominator, "denominator_reason": reason}
+
+    def check(by_condition: dict) -> None:
+        assert by_condition, "no condition present"
+        for funnel in by_condition.values():
+            assert funnel["status"] == "MEASURED"
+            assert {row["step"] for row in funnel["steps"]} == funnel_steps
+            for row in funnel["steps"]:
+                assert row.get("rule")
+                assert row["count"] is not None, f"{funnel['condition']}/{row['step']} lacks a measured count"
+                assert isinstance(row["count"], int) and row["count"] >= 0
+                assert isinstance(row["denominator"], int)
+                assert row["count"] <= row["denominator"]
+                if row["denominator"] == 0:
+                    assert row["denominator_reason"]
+
+    valid = {"condition": "NULL_STATIONARY", "status": "MEASURED",
+             "steps": [step(name, 3, 10) for name in funnel_steps]}
+    check({"NULL_STATIONARY": valid})
+
+    with pytest.raises(AssertionError):  # a missing step must be refused
+        check({"NULL_STATIONARY": {**valid,
+                                    "steps": [step(n, 3, 10) for n in funnel_steps if n != "triggers"]}})
+    with pytest.raises(AssertionError):  # count > denominator must be refused
+        check({"NULL_STATIONARY": {**valid,
+                                    "steps": [step(n, 99, 10) if n == "searches" else step(n, 3, 10)
+                                             for n in funnel_steps]}})
+    with pytest.raises(AssertionError):  # a zero denominator with no reason must be refused
+        check({"NULL_STATIONARY": {**valid,
+                                    "steps": [step(n, 0, 0) if n == "activated" else step(n, 3, 10)
+                                             for n in funnel_steps]}})
+
+
+def test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist():
+    """test_te03_7.py:196-198 -- never ran because controls["status"] is
+    still NOT_RUN_BUDGET, so the report never had a MEASURED funnel row to
+    render. Driven here against the exact markdown-row format the production
+    test checks for.
+    """
+    def check(controls: dict, report: str) -> None:
+        assert controls["status"] in report
+        if controls["status"] != "NOT_RUN_BUDGET":
+            for funnel in controls["full_path_funnels_by_condition"].values():
+                for row in funnel["steps"]:
+                    if row["count"] is not None:
+                        assert f"| {row['step']} | {row['count']} | {row['denominator']} |" in report
+
+    controls = {"status": "FULL_PATH_STRUCTURAL_CONTROL_COMPLETED",
+               "full_path_funnels_by_condition": {"NULL_STATIONARY": {"steps": [
+                   {"step": "triggers", "count": 7, "denominator": 40},
+                   {"step": "searches", "count": None, "denominator": None}]}}}
+
+    check(controls, "FULL_PATH_STRUCTURAL_CONTROL_COMPLETED\n| triggers | 7 | 40 |\n")
+    with pytest.raises(AssertionError):  # the MEASURED row is missing from the report
+        check(controls, "FULL_PATH_STRUCTURAL_CONTROL_COMPLETED\n")

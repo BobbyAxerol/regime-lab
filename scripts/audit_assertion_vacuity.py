@@ -111,6 +111,137 @@ ACCEPTED: dict[str, tuple[str, str]] = {
         "is 1.64%, so every cell reports BLOCKED_BY_STATE_NAMESPACING instead",
         "tests/test_lab08_factorial.py::"
         "test_risk_only_is_blocked_rather_than_silently_returning_the_baseline"),
+    # RA-04 (2026-09-18): 21 lines found UNDECLARED across four phase test files.
+    "test_rf04_decay_and_controls.py::"
+    "test_rf04_paired_endpoints_fail_closed_on_identical_or_deviated::"
+    'assert placebo["reason"], "a not-run placebo needs a reason"': (
+        "RF-04's placebo control actually ran (status RUN); the not-run branch is for a future "
+        "pilot where compute runs out before the placebo cutoff (guide RA07.3)",
+        "tests/test_contingency_paths.py::test_a_not_run_placebo_must_carry_a_reason"),
+    "test_rf04_scaling.py::"
+    "test_rf04_coverage_20_unique_statuses_with_reasons_and_no_fabricated_equity::"
+    'assert "budget" in cell["reason"].lower(), (': (
+        "RF-04's 20 cells are only ever RUN_VALID or BLOCKED_CAPABILITY; no cell ran out of "
+        "budget mid-attempt",
+        "tests/test_contingency_paths.py::test_a_non_run_coverage_cell_must_name_why"),
+    "test_rf04_scaling.py::"
+    "test_rf04_coverage_20_unique_statuses_with_reasons_and_no_fabricated_equity::"
+    'assert cell["reason"].strip(), f"{cell[\'cell\']} has no non-run reason"': (
+        "same as the budget branch above: no cell in this pilot is NOT_RUN or NOT_RUN_BUDGET",
+        "tests/test_contingency_paths.py::test_a_non_run_coverage_cell_must_name_why"),
+    "test_rf05_claims.py::"
+    "test_rf05_no_positive_without_ci_clearing_mde::"
+    'assert stats.get("ci95_low_bps") is not None and stats["ci95_low_bps"]': (
+        "no RF-05 contrast is ever POSITIVE_WITHIN_SCOPE (guide A16: the bounded pilot may never "
+        "record one); the guard is for a future run that tries to, without a CI above the MDE",
+        "tests/test_contingency_paths.py::"
+        "test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"),
+    "test_rf05_claims.py::"
+    "test_rf05_no_positive_without_ci_clearing_mde::"
+    'assert holm is not None and holm < 0.05, (': (
+        "same POSITIVE-only branch: no contrast reaches it without an above-MDE CI first",
+        "tests/test_contingency_paths.py::"
+        "test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"),
+    "test_rf05_claims.py::"
+    "test_rf05_no_positive_without_ci_clearing_mde::"
+    'assert entry["holm_significant"] is True': (
+        "the `positives` list this loop walks is always empty -- no RF-05 family entry is "
+        "POSITIVE_WITHIN_SCOPE",
+        "tests/test_contingency_paths.py::"
+        "test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"),
+    "test_rf05_claims.py::"
+    "test_rf05_no_positive_without_ci_clearing_mde::"
+    'assert entry["mde_cleared"] is True': (
+        "same empty `positives` loop as the line above",
+        "tests/test_contingency_paths.py::"
+        "test_a_positive_within_scope_status_needs_ci_above_mde_and_holm_significance"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert by_condition': (
+        "TE-03.7's controls funnel is still NOT_RUN_BUDGET (TE02-PILOT-R03 ledger has ~106442s "
+        "left as of 2026-09-18); the MEASURED branch is real code waiting for that run, not dead "
+        "code",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert funnel["status"] == "MEASURED"': (
+        "same NOT_RUN_BUDGET reason as the line above",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert {row["step"] for row in funnel["steps"]} == FUNNEL_STEPS': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'for step in funnel["steps"]:': (
+        "same NOT_RUN_BUDGET reason; this is the loop body over a MEASURED funnel's steps",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert step.get("rule")': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert step["count"] is not None, f"{funnel[\'condition\']}/{step[\'step\'': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert isinstance(step["count"], int) and step["count"] >= 0': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert isinstance(step["denominator"], int)': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert step["count"] <= step["denominator"]': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'if step["denominator"] == 0:': (
+        "same NOT_RUN_BUDGET reason; guards the zero-denominator escape hatch",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_measured_funnels_carry_denominators_and_reasons::"
+    'assert step["denominator_reason"]': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_a_measured_te03_7_funnel_carries_full_denominators_and_reasons"),
+    "test_te03_7.py::"
+    "test_report_renders_the_revised_controls::"
+    'for step in funnel["steps"]:': (
+        "controls[\"status\"] is still NOT_RUN_BUDGET, so the report never had a MEASURED funnel "
+        "row to render",
+        "tests/test_contingency_paths.py::"
+        "test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"),
+    "test_te03_7.py::"
+    "test_report_renders_the_revised_controls::"
+    'if step["count"] is not None:': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"),
+    "test_te03_7.py::"
+    "test_report_renders_the_revised_controls::"
+    'assert f"| {step[\'step\']} | {step[\'count\']} | {step[\'denominator\']} |"': (
+        "same NOT_RUN_BUDGET reason",
+        "tests/test_contingency_paths.py::"
+        "test_the_te03_7_report_shows_measured_funnel_rows_once_they_exist"),
 }
 
 
@@ -214,9 +345,15 @@ def main() -> int:
     monitoring.free_tool_id(tool)
 
     never = []
+    self_referential_tracked = 0
+    self_referential_reached = 0
     for filename, table in targets.items():
         name = pathlib.Path(filename).name
         for line, (kind, owner, snippet) in sorted(table.items()):
+            if owner in SELF_REFERENTIAL_TESTS:
+                self_referential_tracked += 1
+                if (filename, line) in hit:
+                    self_referential_reached += 1
             if (filename, line) not in hit:
                 if owner in SELF_REFERENTIAL_TESTS:
                     continue
@@ -249,6 +386,14 @@ def main() -> int:
         "tests_passed": exit_code == 0,
         "assertion_lines_tracked": sum(len(t) for t in targets.values()),
         "assertion_lines_reached": len(hit),
+        "self_referential_tracked_lines": self_referential_tracked,
+        "self_referential_lines_reached": self_referential_reached,
+        "self_referential_ratio_note": ("lines owned by SELF_REFERENTIAL_TESTS are excluded from "
+                                        "`never_reached` because measuring them is circular (this "
+                                        "audit's own gate reading its own prior output); the same "
+                                        "exclusion must apply to any reached-ratio computed over "
+                                        "this document, or that ratio silently penalises the suite "
+                                        "for the strange loop instead of measuring the suite"),
         "never_reached": never,
         "never_reached_count": len(never),
         "undeclared": undeclared,
