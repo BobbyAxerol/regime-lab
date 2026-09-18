@@ -5,73 +5,73 @@
       "invariant": "the trace reports an account reset",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_recorded_account_never_reset_and_was_never_spliced"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "the trace says the account was spliced",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_recorded_account_never_reset_and_was_never_spliced"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "the prefix stops surviving a future mutation",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_lab07_integration.py::test_the_prefix_holds_when_the_future_is_replaced"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "an activation becomes regime-driven",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_lab07_integration.py::test_the_run_records_that_regime_information_reached_nothing"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "the refit latency loses its provenance",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_lab07_integration.py::test_refit_latency_is_measured_and_never_zero"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "the exit fixed point stops converging",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_the_recorded_exit_fixed_point_converged"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "a failure mode goes unexercised",
       "artifact": "configs/lab07_continuous_trace.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_lab07_integration.py::test_all_nine_failure_modes_were_exercised"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "a decision loses its reason",
       "artifact": "configs/lab06_decision_ledger.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_a_verdict_cannot_silently_lose_its_population"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "a real verdict silently becomes vacuous",
       "artifact": "configs/lab06_decision_ledger.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_a_verdict_cannot_silently_lose_its_population"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "an open segment gains an end",
       "artifact": "configs/operational_segments.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_guide_publishing_discipline.py::test_no_completed_phase_has_a_broken_evidence_pointer"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "a requirement is COVERED with no tests",
       "artifact": "configs/acceptance_test_coverage.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_requirement_is_covered_without_tests"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "a checklist clause is DONE with no evidence",
       "artifact": "configs/lab07_task_audit.json",
       "caught": true,
-      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_audit_clause_is_done_without_evidence[07]"
+      "first_failure": "FAILED tests/test_contingency_paths.py::test_no_assertion_in_the_suite_is_unreached_without_a_declared_reason"
     },
     {
       "invariant": "an undeclared unreachable assertion appears",
