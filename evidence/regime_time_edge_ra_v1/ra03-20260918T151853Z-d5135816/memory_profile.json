@@ -1,0 +1,157 @@
+{
+  "schema": "regime_lab.ra03_memory_profile.v1",
+  "profiles": [
+    {
+      "schema": "regime_lab.ra03_task_profile.v1",
+      "alpha_id": "A-SC",
+      "profiled_at_utc": "2026-09-18T15:19:23.837514+00:00",
+      "stages": {
+        "load_build_frame_seconds": 0.002527425007428974,
+        "prepare_construct_seconds": 0.0015498779830522835
+      },
+      "repeats": [
+        {
+          "iteration": 0,
+          "window_cache_hit": false,
+          "run_wall_seconds": 2.5906520599965006,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.5606683410005644,
+          "serialize_wall_seconds": 0.01735532603925094,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.30340576171875
+        },
+        {
+          "iteration": 1,
+          "window_cache_hit": true,
+          "run_wall_seconds": 2.501612648018636,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.4715688939904794,
+          "serialize_wall_seconds": 0.01650694798445329,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.3076667785644531
+        },
+        {
+          "iteration": 2,
+          "window_cache_hit": true,
+          "run_wall_seconds": 2.556543262966443,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.5266453299554996,
+          "serialize_wall_seconds": 0.016555576003156602,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.3091773986816406
+        },
+        {
+          "iteration": 3,
+          "window_cache_hit": true,
+          "run_wall_seconds": 2.569192849972751,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.539249668014236,
+          "serialize_wall_seconds": 0.01839844399364665,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.3101844787597656
+        },
+        {
+          "iteration": 4,
+          "window_cache_hit": true,
+          "run_wall_seconds": 2.753965221985709,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.7235097610391676,
+          "serialize_wall_seconds": 0.01621581503422931,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.3111915588378906
+        },
+        {
+          "iteration": 5,
+          "window_cache_hit": true,
+          "run_wall_seconds": 2.4896075330325402,
+          "window_pack_seconds": 0.022175549005623907,
+          "engine_wall_seconds": 2.4594541109981947,
+          "serialize_wall_seconds": 0.01646046101814136,
+          "serialized_bytes": 316366,
+          "peak_rss_gib_after": 0.3124504089355469
+        }
+      ],
+      "windows_cached_total": 1,
+      "peak_rss_gib_after_construct": 0.30340576171875,
+      "peak_rss_gib_sequence": [
+        0.30340576171875,
+        0.3076667785644531,
+        0.3091773986816406,
+        0.3101844787597656,
+        0.3111915588378906,
+        0.3124504089355469
+      ],
+      "peak_rss_gib_max": 0.3124504089355469,
+      "retained_rss_growth_gib_per_extra_repeat": 0.0011959075927734375,
+      "registered_per_process_rss_cap_gib": 3.0,
+      "target_headroom_fraction": 0.8,
+      "target_peak_rss_gib": 2.4000000000000004,
+      "under_target_headroom": true,
+      "extrapolated": false,
+      "note": "this process's own RSS via getrusage(RUSAGE_SELF); a real probe of THIS process, not an extrapolation from a smaller fixture",
+      "scope": "representative_train_candidate"
+    },
+    {
+      "schema": "regime_lab.ra03_task_profile.v1",
+      "alpha_id": "A-SC",
+      "profiled_at_utc": "2026-09-18T15:19:47.083970+00:00",
+      "stages": {
+        "load_build_frame_seconds": 0.006568095996044576,
+        "prepare_construct_seconds": 0.002413805981632322
+      },
+      "repeats": [
+        {
+          "iteration": 0,
+          "window_cache_hit": false,
+          "run_wall_seconds": 7.674661480996292,
+          "window_pack_seconds": 0.0394735709996894,
+          "engine_wall_seconds": 7.62468903302215,
+          "serialize_wall_seconds": 0.05395900702569634,
+          "serialized_bytes": 1007810,
+          "peak_rss_gib_after": 0.33968353271484375
+        },
+        {
+          "iteration": 1,
+          "window_cache_hit": true,
+          "run_wall_seconds": 7.611521571001504,
+          "window_pack_seconds": 0.0394735709996894,
+          "engine_wall_seconds": 7.559311090968549,
+          "serialize_wall_seconds": 0.05289844796061516,
+          "serialized_bytes": 1007810,
+          "peak_rss_gib_after": 0.3708992004394531
+        },
+        {
+          "iteration": 2,
+          "window_cache_hit": true,
+          "run_wall_seconds": 7.788915823970456,
+          "window_pack_seconds": 0.0394735709996894,
+          "engine_wall_seconds": 7.736245960986707,
+          "serialize_wall_seconds": 0.05420914100250229,
+          "serialized_bytes": 1007810,
+          "peak_rss_gib_after": 0.3748741149902344
+        }
+      ],
+      "windows_cached_total": 1,
+      "peak_rss_gib_after_construct": 0.3124504089355469,
+      "peak_rss_gib_sequence": [
+        0.33968353271484375,
+        0.3708992004394531,
+        0.3748741149902344
+      ],
+      "peak_rss_gib_max": 0.3748741149902344,
+      "retained_rss_growth_gib_per_extra_repeat": 0.00397491455078125,
+      "registered_per_process_rss_cap_gib": 3.0,
+      "target_headroom_fraction": 0.8,
+      "target_peak_rss_gib": 2.4000000000000004,
+      "under_target_headroom": true,
+      "extrapolated": false,
+      "note": "this process's own RSS via getrusage(RUSAGE_SELF); a real probe of THIS process, not an extrapolation from a smaller fixture",
+      "scope": "deployment_scope"
+    }
+  ],
+  "registered_per_process_rss_cap_gib": 3.0,
+  "target_headroom_fraction": 0.8,
+  "lab_run_id": "ra03-20260918T151853Z-d5135816",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:19:47.091547+00:00"
+}
