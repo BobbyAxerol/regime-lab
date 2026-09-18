@@ -1,0 +1,44 @@
+{
+  "schema": "crypto_regime_lab.ra05_verification.v1",
+  "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/regime_time_edge_ra_v1/ra05-20260918T181151Z-2d9f17fc",
+  "gates": {
+    "G05-EXEC": {
+      "pass": true,
+      "reasons": [],
+      "tests": {
+        "tests": 90,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "G05-TRACE": {
+      "pass": false,
+      "reasons": [
+        "D01 has no matching test in the junit report",
+        "D02 has no matching test in the junit report",
+        "D03 has no matching test in the junit report",
+        "D04 has no matching test in the junit report",
+        "D05 has no matching test in the junit report",
+        "D06 has no matching test in the junit report",
+        "D07 has no matching test in the junit report"
+      ]
+    },
+    "G05-LEARN": {
+      "pass": true,
+      "reasons": []
+    },
+    "G05-SCOPE": {
+      "pass": true,
+      "reasons": []
+    },
+    "G05-MANIFEST": {
+      "pass": true,
+      "reasons": []
+    }
+  },
+  "overall": "FAIL",
+  "lab_run_id": "ra05-20260918T181151Z-2d9f17fc",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T18:15:18.164412+00:00"
+}

@@ -1,0 +1,3102 @@
+{
+  "schema": "regime_lab.ra05_arms_result.v1",
+  "arms": {
+    "STATIC": {
+      "arm": "STATIC",
+      "schedule": {
+        "arm": "STATIC",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 180-day test spacing, 180-day training memory -- STATIC diagnostic: one selection, never refits",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 3,
+            "AP": 37,
+            "alpha.condition_threshold": 50,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 3,
+          "AP": 37,
+          "alpha.condition_threshold": 50,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-1ff2145dda9391b6",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 2.9614535314916837,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 41.86746241304469
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20593.226647669042,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              20006.443935855925
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              20181.758776338032
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20250.89366321765
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20314.485566762247
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20417.793741761507
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20531.81885623832
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20593.226647669042
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 7.640584326670787,
+            "total_return_pct": 2.9661332383452033,
+            "num_trades": 54,
+            "max_drawdown_pct": 0.7771434927077018
+          },
+          "entries": 27,
+          "engine_fill_count": 54,
+          "fills": [
+            {
+              "bar_index": 44706,
+              "side": 1,
+              "qty": 0.06870177350193206,
+              "price": 29111.41085,
+              "fee": 0.8000022218153551,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 44922,
+              "side": -1,
+              "qty": 0.06870177350193206,
+              "price": 29182.151493,
+              "fee": 0.8019462248684619,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45202,
+              "side": 1,
+              "qty": 0.0685718909418932,
+              "price": 29182.928000999997,
+              "fee": 0.8004514224998772,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45414,
+              "side": -1,
+              "qty": 0.0685718909418932,
+              "price": 29202.019506,
+              "fee": 0.800975078739388,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45654,
+              "side": 1,
+              "qty": 0.06808698384534179,
+              "price": 29351.254832,
+              "fee": 0.7993753654347576,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45701,
+              "side": -1,
+              "qty": 0.06808698384534179,
+              "price": 29192.940414,
+              "fee": 0.7950637049464173,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45822,
+              "side": 1,
+              "qty": 0.0687166445112752,
+              "price": 29094.839193,
+              "fee": 0.7997198887752393,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46103,
+              "side": -1,
+              "qty": 0.0687166445112752,
+              "price": 29008.268882999997,
+              "fee": 0.7973403602882387,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46175,
+              "side": 1,
+              "qty": 0.06834022772330682,
+              "price": 29251.884896,
+              "fee": 0.7996321900514397,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46335,
+              "side": -1,
+              "qty": 0.06834022772330682,
+              "price": 29261.643543,
+              "fee": 0.7998989533147403,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46385,
+              "side": 1,
+              "qty": 0.06793457492826958,
+              "price": 29455.955300999998,
+              "fee": 0.8004311209918177,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46686,
+              "side": -1,
+              "qty": 0.06793457492826958,
+              "price": 29622.217482,
+              "fee": 0.8049491012289705,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46813,
+              "side": 1,
+              "qty": 0.06687352878236678,
+              "price": 29903.150016,
+              "fee": 0.7998916653113631,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47287,
+              "side": -1,
+              "qty": 0.06687352878236678,
+              "price": 32681.581514999998,
+              "fee": 0.8742130728386476,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47423,
+              "side": 1,
+              "qty": 0.062402496099843996,
+              "price": 32093.70905,
+              "fee": 0.8010910215288612,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47732,
+              "side": -1,
+              "qty": 0.062402496099843996,
+              "price": 32551.174557000002,
+              "fee": 0.8125098173354135,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47810,
+              "side": 1,
+              "qty": 0.06084429367228472,
+              "price": 32877.117383000004,
+              "fee": 0.8001539940597717,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48090,
+              "side": -1,
+              "qty": 0.06084429367228472,
+              "price": 34022.5974,
+              "fee": 0.8280323630798043,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48231,
+              "side": 1,
+              "qty": 0.05814594107897353,
+              "price": 34422.4419,
+              "fee": 0.8006101114047158,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48339,
+              "side": -1,
+              "qty": 0.05814594107897353,
+              "price": 34015.248135,
+              "fee": 0.7911394455377497,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48728,
+              "side": 1,
+              "qty": 0.060344822384067034,
+              "price": 33223.131981,
+              "fee": 0.8019375993743448,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48850,
+              "side": -1,
+              "qty": 0.060344822384067034,
+              "price": 33336.396027,
+              "fee": 0.8046715588696932,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49066,
+              "side": 1,
+              "qty": 0.06023189278723084,
+              "price": 33283.818048999994,
+              "fee": 0.8018989441108265,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49264,
+              "side": -1,
+              "qty": 0.06023189278723084,
+              "price": 33192.080460000005,
+              "fee": 0.799688732660744,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49343,
+              "side": 1,
+              "qty": 0.05981837943635534,
+              "price": 33425.032169000006,
+              "fee": 0.7997725027830503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49389,
+              "side": -1,
+              "qty": 0.05981837943635534,
+              "price": 32923.657305,
+              "fee": 0.7877759300412089,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49623,
+              "side": 1,
+              "qty": 0.0655437707855683,
+              "price": 30345.0342,
+              "fee": 0.7955711864340124,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49930,
+              "side": -1,
+              "qty": 0.0655437707855683,
+              "price": 31463.283357,
+              "fee": 0.8248888930050376,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50070,
+              "side": 1,
+              "qty": 0.06353129154350862,
+              "price": 31403.150000999998,
+              "fee": 0.7980330712392255,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50218,
+              "side": -1,
+              "qty": 0.06353129154350862,
+              "price": 31305.819105000002,
+              "fee": 0.7955596482272389,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50321,
+              "side": 1,
+              "qty": 0.06368777704183012,
+              "price": 31415.541240000002,
+              "fee": 0.8003143944566159,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50604,
+              "side": -1,
+              "qty": 0.06368777704183012,
+              "price": 32129.386739999998,
+              "fee": 0.8184996876751413,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50808,
+              "side": 1,
+              "qty": 0.06394215536856737,
+              "price": 31227.642452,
+              "fee": 0.7987051061839416,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51037,
+              "side": -1,
+              "qty": 0.06394215536856737,
+              "price": 31185.511137,
+              "fee": 0.7976275193480968,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51100,
+              "side": 1,
+              "qty": 0.06312539512552011,
+              "price": 31630.252709,
+              "fee": 0.7986688800702711,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51241,
+              "side": -1,
+              "qty": 0.06312539512552011,
+              "price": 31378.341852,
+              "fee": 0.7923080911164578,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51284,
+              "side": 1,
+              "qty": 0.062757954806114,
+              "price": 31978.637543999997,
+              "fee": 0.8027655558989809,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51799,
+              "side": -1,
+              "qty": 0.062757954806114,
+              "price": 33911.498511,
+              "fee": 0.8512865163843761,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51978,
+              "side": 1,
+              "qty": 0.05856896114476549,
+              "price": 34168.576516,
+              "fee": 0.8004872121350203,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52294,
+              "side": -1,
+              "qty": 0.05856896114476549,
+              "price": 34936.40601,
+              "fee": 0.8184756024549765,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52488,
+              "side": 1,
+              "qty": 0.05784052961102533,
+              "price": 34540.433698,
+              "fee": 0.7991347912347305,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52607,
+              "side": -1,
+              "qty": 0.05784052961102533,
+              "price": 34626.546999000006,
+              "fee": 0.8011271268092881,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52760,
+              "side": 1,
+              "qty": 0.0575929874778447,
+              "price": 34714.031056,
+              "fee": 0.799713902365488,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52854,
+              "side": -1,
+              "qty": 0.0575929874778447,
+              "price": 34481.881467,
+              "fee": 0.7943658270165824,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52895,
+              "side": 1,
+              "qty": 0.05703764712861077,
+              "price": 35028.652515,
+              "fee": 0.7991807686165178,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53040,
+              "side": -1,
+              "qty": 0.05703764712861077,
+              "price": 35033.286321,
+              "fee": 0.7992864891731138,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53072,
+              "side": 1,
+              "qty": 0.05647901889166703,
+              "price": 35329.512598,
+              "fee": 0.7981504837823322,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53661,
+              "side": -1,
+              "qty": 0.05647901889166703,
+              "price": 37079.421686999995,
+              "fee": 0.8376837431808645,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53809,
+              "side": 1,
+              "qty": 0.05345516835304359,
+              "price": 37334.223049,
+              "fee": 0.7982828713657503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53931,
+              "side": -1,
+              "qty": 0.05345516835304359,
+              "price": 37116.278001,
+              "fee": 0.7936227556727293,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53978,
+              "side": 1,
+              "qty": 0.05327667536497187,
+              "price": 37614.35105899999,
+              "fee": 0.8015870281737714,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54383,
+              "side": -1,
+              "qty": 0.05327667536497187,
+              "price": 38966.782932,
+              "fee": 0.8304082577141962,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54464,
+              "side": 1,
+              "qty": 0.05098072902952319,
+              "price": 39237.343342,
+              "fee": 0.8001393475027473,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54671,
+              "side": -1,
+              "qty": 0.05098072902952319,
+              "price": 39084.731136,
+              "fee": 0.7970272348944738,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 54,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 40.989,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "STATIC-0",
+          "arm": "STATIC",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "1ff2145dda9391b6",
+          "raw_selector": {
+            "params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 2.9614535314916837,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "1ff2145dda9391b6",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "1ff2145dda9391b6",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL": {
+      "arm": "M4_CAL",
+      "schedule": {
+        "arm": "M4_CAL",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00",
+          "2021-01-05T00:00:00+00:00"
+        ],
+        "count": 2,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 4-day test spacing, 180-day training memory",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 3,
+            "AP": 37,
+            "alpha.condition_threshold": 50,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "1": {
+            "coeff": 7,
+            "AP": 49,
+            "alpha.condition_threshold": 30,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 7,
+          "AP": 49,
+          "alpha.condition_threshold": 30,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-32a04d8abdc15641",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-04T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 2.9614535314916837,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 30.82564140215589
+          },
+          {
+            "fold_id": 1,
+            "train_start": "2020-12-16T00:00:00+00:00",
+            "train_end": "2021-01-04T23:59:00+00:00",
+            "test_start": "2021-01-05T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 7,
+              "AP": 49,
+              "alpha.condition_threshold": 30,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 6.003709471433863,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 10.530676193687244
+          }
+        ],
+        "trial_count": 4,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 6,
+          "event_scorer_calls": 6
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20605.463883160945,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              20006.443935855925
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              20181.758776338032
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20250.89366321765
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20314.485566762247
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20450.16170992813
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20627.64492806207
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20605.463883160945
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 6.634919489370974,
+            "total_return_pct": 3.027319415804719,
+            "num_trades": 35,
+            "max_drawdown_pct": 1.3975338006343236
+          },
+          "entries": 18,
+          "engine_fill_count": 35,
+          "fills": [
+            {
+              "bar_index": 44706,
+              "side": 1,
+              "qty": 0.06870177350193206,
+              "price": 29111.41085,
+              "fee": 0.8000022218153551,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 44922,
+              "side": -1,
+              "qty": 0.06870177350193206,
+              "price": 29182.151493,
+              "fee": 0.8019462248684619,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45202,
+              "side": 1,
+              "qty": 0.0685718909418932,
+              "price": 29182.928000999997,
+              "fee": 0.8004514224998772,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45414,
+              "side": -1,
+              "qty": 0.0685718909418932,
+              "price": 29202.019506,
+              "fee": 0.800975078739388,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45654,
+              "side": 1,
+              "qty": 0.06808698384534179,
+              "price": 29351.254832,
+              "fee": 0.7993753654347576,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45701,
+              "side": -1,
+              "qty": 0.06808698384534179,
+              "price": 29192.940414,
+              "fee": 0.7950637049464173,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45822,
+              "side": 1,
+              "qty": 0.0687166445112752,
+              "price": 29094.839193,
+              "fee": 0.7997198887752393,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46103,
+              "side": -1,
+              "qty": 0.0687166445112752,
+              "price": 29008.268882999997,
+              "fee": 0.7973403602882387,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46175,
+              "side": 1,
+              "qty": 0.06834022772330682,
+              "price": 29251.884896,
+              "fee": 0.7996321900514397,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46335,
+              "side": -1,
+              "qty": 0.06834022772330682,
+              "price": 29261.643543,
+              "fee": 0.7998989533147403,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46385,
+              "side": 1,
+              "qty": 0.06793457492826958,
+              "price": 29455.955300999998,
+              "fee": 0.8004311209918177,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46686,
+              "side": -1,
+              "qty": 0.06793457492826958,
+              "price": 29622.217482,
+              "fee": 0.8049491012289705,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46813,
+              "side": 1,
+              "qty": 0.06687352878236678,
+              "price": 29903.150016,
+              "fee": 0.7998916653113631,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47287,
+              "side": -1,
+              "qty": 0.06687352878236678,
+              "price": 32681.581514999998,
+              "fee": 0.8742130728386476,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47423,
+              "side": 1,
+              "qty": 0.062402496099843996,
+              "price": 32093.70905,
+              "fee": 0.8010910215288612,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47732,
+              "side": -1,
+              "qty": 0.062402496099843996,
+              "price": 32551.174557000002,
+              "fee": 0.8125098173354135,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47810,
+              "side": 1,
+              "qty": 0.06084429367228472,
+              "price": 32877.117383000004,
+              "fee": 0.8001539940597717,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48090,
+              "side": -1,
+              "qty": 0.06084429367228472,
+              "price": 34022.5974,
+              "fee": 0.8280323630798043,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48231,
+              "side": 1,
+              "qty": 0.05814594107897353,
+              "price": 34422.4419,
+              "fee": 0.8006101114047158,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48339,
+              "side": -1,
+              "qty": 0.05814594107897353,
+              "price": 34015.248135,
+              "fee": 0.7911394455377497,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48728,
+              "side": 1,
+              "qty": 0.060344822384067034,
+              "price": 33223.131981,
+              "fee": 0.8019375993743448,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48850,
+              "side": -1,
+              "qty": 0.060344822384067034,
+              "price": 33336.396027,
+              "fee": 0.8046715588696932,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49066,
+              "side": 1,
+              "qty": 0.06023189278723084,
+              "price": 33283.818048999994,
+              "fee": 0.8018989441108265,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49264,
+              "side": -1,
+              "qty": 0.06023189278723084,
+              "price": 33192.080460000005,
+              "fee": 0.799688732660744,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49343,
+              "side": 1,
+              "qty": 0.05981837943635534,
+              "price": 33425.032169000006,
+              "fee": 0.7997725027830503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49389,
+              "side": -1,
+              "qty": 0.05981837943635534,
+              "price": 32923.657305,
+              "fee": 0.7877759300412089,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49623,
+              "side": 1,
+              "qty": 0.0655437707855683,
+              "price": 30345.0342,
+              "fee": 0.7955711864340124,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49930,
+              "side": -1,
+              "qty": 0.0655437707855683,
+              "price": 31463.283357,
+              "fee": 0.8248888930050376,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50070,
+              "side": 1,
+              "qty": 0.06353129154350862,
+              "price": 31403.150000999998,
+              "fee": 0.7980330712392255,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50218,
+              "side": -1,
+              "qty": 0.06353129154350862,
+              "price": 31305.819105000002,
+              "fee": 0.7955596482272389,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50321,
+              "side": 1,
+              "qty": 0.06368777704183012,
+              "price": 31415.541240000002,
+              "fee": 0.8003143944566159,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50604,
+              "side": -1,
+              "qty": 0.06368777704183012,
+              "price": 32129.386739999998,
+              "fee": 0.8184996876751413,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51120,
+              "side": 1,
+              "qty": 0.06284460446077288,
+              "price": 31914.451125999996,
+              "fee": 0.8022604230384549,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54408,
+              "side": -1,
+              "qty": 0.06284460446077288,
+              "price": 36860.033628000005,
+              "fee": 0.9265816935049791,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54635,
+              "side": 1,
+              "qty": 0.05002502501876564,
+              "price": 39953.484949,
+              "fee": 0.7994696336642406,
+              "tag": "entry"
+            }
+          ],
+          "fill_count": 35,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00",
+          "2021-01-05T00:00:00+00:00"
+        ],
+        "fold_count": 2,
+        "wall_seconds": 65.812,
+        "trial_records_count": 4
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL-0",
+          "arm": "M4_CAL",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "1ff2145dda9391b6",
+          "raw_selector": {
+            "params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 2.9614535314916837,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "1ff2145dda9391b6",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        },
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL-1",
+          "arm": "M4_CAL",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "CALENDAR",
+          "request_time": "2021-01-05T00:00:00+00:00",
+          "train_cutoff": "2021-01-04T23:59:00+00:00",
+          "selected_time": "2021-01-05T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "32a04d8abdc15641",
+          "raw_selector": {
+            "params": {
+              "coeff": 7,
+              "AP": 49,
+              "alpha.condition_threshold": 30,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 6.003709471433863,
+            "candidate_count": 2
+          },
+          "admission_decision": "KEEP_INCUMBENT",
+          "admission_reason": "only 0 finite subperiod shards of 3, need >= 2",
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": false,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-05T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-05T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": "1ff2145dda9391b6",
+          "candidate_version": "32a04d8abdc15641",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 1
+          }
+        }
+      ],
+      "final_incumbent_version": "1ff2145dda9391b6",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 1
+    },
+    "M4_CAL_MATCHED": {
+      "arm": "M4_CAL_MATCHED",
+      "schedule": {
+        "arm": "M4_CAL_MATCHED",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 180-day test spacing, 180-day training memory",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 3,
+            "AP": 37,
+            "alpha.condition_threshold": 50,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 3,
+          "AP": 37,
+          "alpha.condition_threshold": 50,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-1ff2145dda9391b6",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 2.9614535314916837,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 41.86746241304469
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20593.226647669042,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              20006.443935855925
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              20181.758776338032
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20250.89366321765
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20314.485566762247
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20417.793741761507
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20531.81885623832
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20593.226647669042
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 7.640584326670787,
+            "total_return_pct": 2.9661332383452033,
+            "num_trades": 54,
+            "max_drawdown_pct": 0.7771434927077018
+          },
+          "entries": 27,
+          "engine_fill_count": 54,
+          "fills": [
+            {
+              "bar_index": 44706,
+              "side": 1,
+              "qty": 0.06870177350193206,
+              "price": 29111.41085,
+              "fee": 0.8000022218153551,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 44922,
+              "side": -1,
+              "qty": 0.06870177350193206,
+              "price": 29182.151493,
+              "fee": 0.8019462248684619,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45202,
+              "side": 1,
+              "qty": 0.0685718909418932,
+              "price": 29182.928000999997,
+              "fee": 0.8004514224998772,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45414,
+              "side": -1,
+              "qty": 0.0685718909418932,
+              "price": 29202.019506,
+              "fee": 0.800975078739388,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45654,
+              "side": 1,
+              "qty": 0.06808698384534179,
+              "price": 29351.254832,
+              "fee": 0.7993753654347576,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45701,
+              "side": -1,
+              "qty": 0.06808698384534179,
+              "price": 29192.940414,
+              "fee": 0.7950637049464173,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45822,
+              "side": 1,
+              "qty": 0.0687166445112752,
+              "price": 29094.839193,
+              "fee": 0.7997198887752393,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46103,
+              "side": -1,
+              "qty": 0.0687166445112752,
+              "price": 29008.268882999997,
+              "fee": 0.7973403602882387,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46175,
+              "side": 1,
+              "qty": 0.06834022772330682,
+              "price": 29251.884896,
+              "fee": 0.7996321900514397,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46335,
+              "side": -1,
+              "qty": 0.06834022772330682,
+              "price": 29261.643543,
+              "fee": 0.7998989533147403,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46385,
+              "side": 1,
+              "qty": 0.06793457492826958,
+              "price": 29455.955300999998,
+              "fee": 0.8004311209918177,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46686,
+              "side": -1,
+              "qty": 0.06793457492826958,
+              "price": 29622.217482,
+              "fee": 0.8049491012289705,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46813,
+              "side": 1,
+              "qty": 0.06687352878236678,
+              "price": 29903.150016,
+              "fee": 0.7998916653113631,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47287,
+              "side": -1,
+              "qty": 0.06687352878236678,
+              "price": 32681.581514999998,
+              "fee": 0.8742130728386476,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47423,
+              "side": 1,
+              "qty": 0.062402496099843996,
+              "price": 32093.70905,
+              "fee": 0.8010910215288612,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47732,
+              "side": -1,
+              "qty": 0.062402496099843996,
+              "price": 32551.174557000002,
+              "fee": 0.8125098173354135,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47810,
+              "side": 1,
+              "qty": 0.06084429367228472,
+              "price": 32877.117383000004,
+              "fee": 0.8001539940597717,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48090,
+              "side": -1,
+              "qty": 0.06084429367228472,
+              "price": 34022.5974,
+              "fee": 0.8280323630798043,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48231,
+              "side": 1,
+              "qty": 0.05814594107897353,
+              "price": 34422.4419,
+              "fee": 0.8006101114047158,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48339,
+              "side": -1,
+              "qty": 0.05814594107897353,
+              "price": 34015.248135,
+              "fee": 0.7911394455377497,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48728,
+              "side": 1,
+              "qty": 0.060344822384067034,
+              "price": 33223.131981,
+              "fee": 0.8019375993743448,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48850,
+              "side": -1,
+              "qty": 0.060344822384067034,
+              "price": 33336.396027,
+              "fee": 0.8046715588696932,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49066,
+              "side": 1,
+              "qty": 0.06023189278723084,
+              "price": 33283.818048999994,
+              "fee": 0.8018989441108265,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49264,
+              "side": -1,
+              "qty": 0.06023189278723084,
+              "price": 33192.080460000005,
+              "fee": 0.799688732660744,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49343,
+              "side": 1,
+              "qty": 0.05981837943635534,
+              "price": 33425.032169000006,
+              "fee": 0.7997725027830503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49389,
+              "side": -1,
+              "qty": 0.05981837943635534,
+              "price": 32923.657305,
+              "fee": 0.7877759300412089,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49623,
+              "side": 1,
+              "qty": 0.0655437707855683,
+              "price": 30345.0342,
+              "fee": 0.7955711864340124,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49930,
+              "side": -1,
+              "qty": 0.0655437707855683,
+              "price": 31463.283357,
+              "fee": 0.8248888930050376,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50070,
+              "side": 1,
+              "qty": 0.06353129154350862,
+              "price": 31403.150000999998,
+              "fee": 0.7980330712392255,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50218,
+              "side": -1,
+              "qty": 0.06353129154350862,
+              "price": 31305.819105000002,
+              "fee": 0.7955596482272389,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50321,
+              "side": 1,
+              "qty": 0.06368777704183012,
+              "price": 31415.541240000002,
+              "fee": 0.8003143944566159,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50604,
+              "side": -1,
+              "qty": 0.06368777704183012,
+              "price": 32129.386739999998,
+              "fee": 0.8184996876751413,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50808,
+              "side": 1,
+              "qty": 0.06394215536856737,
+              "price": 31227.642452,
+              "fee": 0.7987051061839416,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51037,
+              "side": -1,
+              "qty": 0.06394215536856737,
+              "price": 31185.511137,
+              "fee": 0.7976275193480968,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51100,
+              "side": 1,
+              "qty": 0.06312539512552011,
+              "price": 31630.252709,
+              "fee": 0.7986688800702711,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51241,
+              "side": -1,
+              "qty": 0.06312539512552011,
+              "price": 31378.341852,
+              "fee": 0.7923080911164578,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51284,
+              "side": 1,
+              "qty": 0.062757954806114,
+              "price": 31978.637543999997,
+              "fee": 0.8027655558989809,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51799,
+              "side": -1,
+              "qty": 0.062757954806114,
+              "price": 33911.498511,
+              "fee": 0.8512865163843761,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51978,
+              "side": 1,
+              "qty": 0.05856896114476549,
+              "price": 34168.576516,
+              "fee": 0.8004872121350203,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52294,
+              "side": -1,
+              "qty": 0.05856896114476549,
+              "price": 34936.40601,
+              "fee": 0.8184756024549765,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52488,
+              "side": 1,
+              "qty": 0.05784052961102533,
+              "price": 34540.433698,
+              "fee": 0.7991347912347305,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52607,
+              "side": -1,
+              "qty": 0.05784052961102533,
+              "price": 34626.546999000006,
+              "fee": 0.8011271268092881,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52760,
+              "side": 1,
+              "qty": 0.0575929874778447,
+              "price": 34714.031056,
+              "fee": 0.799713902365488,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52854,
+              "side": -1,
+              "qty": 0.0575929874778447,
+              "price": 34481.881467,
+              "fee": 0.7943658270165824,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52895,
+              "side": 1,
+              "qty": 0.05703764712861077,
+              "price": 35028.652515,
+              "fee": 0.7991807686165178,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53040,
+              "side": -1,
+              "qty": 0.05703764712861077,
+              "price": 35033.286321,
+              "fee": 0.7992864891731138,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53072,
+              "side": 1,
+              "qty": 0.05647901889166703,
+              "price": 35329.512598,
+              "fee": 0.7981504837823322,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53661,
+              "side": -1,
+              "qty": 0.05647901889166703,
+              "price": 37079.421686999995,
+              "fee": 0.8376837431808645,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53809,
+              "side": 1,
+              "qty": 0.05345516835304359,
+              "price": 37334.223049,
+              "fee": 0.7982828713657503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53931,
+              "side": -1,
+              "qty": 0.05345516835304359,
+              "price": 37116.278001,
+              "fee": 0.7936227556727293,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53978,
+              "side": 1,
+              "qty": 0.05327667536497187,
+              "price": 37614.35105899999,
+              "fee": 0.8015870281737714,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54383,
+              "side": -1,
+              "qty": 0.05327667536497187,
+              "price": 38966.782932,
+              "fee": 0.8304082577141962,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54464,
+              "side": 1,
+              "qty": 0.05098072902952319,
+              "price": 39237.343342,
+              "fee": 0.8001393475027473,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54671,
+              "side": -1,
+              "qty": 0.05098072902952319,
+              "price": 39084.731136,
+              "fee": 0.7970272348944738,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 54,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 40.426,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL_MATCHED-0",
+          "arm": "M4_CAL_MATCHED",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "1ff2145dda9391b6",
+          "raw_selector": {
+            "params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 2.9614535314916837,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "1ff2145dda9391b6",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "1ff2145dda9391b6",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_REGIME": {
+      "arm": "M4_REGIME",
+      "schedule": {
+        "arm": "M4_REGIME",
+        "kind": "regime",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "online controller: 0 triggers, no forced count; reasons [] -- shared initial cutoff 2021-01-01T00:00:00+00:00 prepended so M4_REGIME starts from the SAME initial selection as the other arms (guide 3.1: STATIC/all arms share initial selection)",
+        "diagnostics": {
+          "min_gap_days": 45.0,
+          "max_age_days": 180.0,
+          "budget": 2,
+          "eligibility_filter": "decision_eligible=True and quality_status in ('OK',)"
+        }
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 3,
+            "AP": 37,
+            "alpha.condition_threshold": 50,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 3,
+          "AP": 37,
+          "alpha.condition_threshold": 50,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-1ff2145dda9391b6",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 2.9614535314916837,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 41.86746241304469
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20593.226647669042,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              20006.443935855925
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              20181.758776338032
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20250.89366321765
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20314.485566762247
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20417.793741761507
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20531.81885623832
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20593.226647669042
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 7.640584326670787,
+            "total_return_pct": 2.9661332383452033,
+            "num_trades": 54,
+            "max_drawdown_pct": 0.7771434927077018
+          },
+          "entries": 27,
+          "engine_fill_count": 54,
+          "fills": [
+            {
+              "bar_index": 44706,
+              "side": 1,
+              "qty": 0.06870177350193206,
+              "price": 29111.41085,
+              "fee": 0.8000022218153551,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 44922,
+              "side": -1,
+              "qty": 0.06870177350193206,
+              "price": 29182.151493,
+              "fee": 0.8019462248684619,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45202,
+              "side": 1,
+              "qty": 0.0685718909418932,
+              "price": 29182.928000999997,
+              "fee": 0.8004514224998772,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45414,
+              "side": -1,
+              "qty": 0.0685718909418932,
+              "price": 29202.019506,
+              "fee": 0.800975078739388,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45654,
+              "side": 1,
+              "qty": 0.06808698384534179,
+              "price": 29351.254832,
+              "fee": 0.7993753654347576,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45701,
+              "side": -1,
+              "qty": 0.06808698384534179,
+              "price": 29192.940414,
+              "fee": 0.7950637049464173,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45822,
+              "side": 1,
+              "qty": 0.0687166445112752,
+              "price": 29094.839193,
+              "fee": 0.7997198887752393,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46103,
+              "side": -1,
+              "qty": 0.0687166445112752,
+              "price": 29008.268882999997,
+              "fee": 0.7973403602882387,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46175,
+              "side": 1,
+              "qty": 0.06834022772330682,
+              "price": 29251.884896,
+              "fee": 0.7996321900514397,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46335,
+              "side": -1,
+              "qty": 0.06834022772330682,
+              "price": 29261.643543,
+              "fee": 0.7998989533147403,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46385,
+              "side": 1,
+              "qty": 0.06793457492826958,
+              "price": 29455.955300999998,
+              "fee": 0.8004311209918177,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46686,
+              "side": -1,
+              "qty": 0.06793457492826958,
+              "price": 29622.217482,
+              "fee": 0.8049491012289705,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46813,
+              "side": 1,
+              "qty": 0.06687352878236678,
+              "price": 29903.150016,
+              "fee": 0.7998916653113631,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47287,
+              "side": -1,
+              "qty": 0.06687352878236678,
+              "price": 32681.581514999998,
+              "fee": 0.8742130728386476,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47423,
+              "side": 1,
+              "qty": 0.062402496099843996,
+              "price": 32093.70905,
+              "fee": 0.8010910215288612,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47732,
+              "side": -1,
+              "qty": 0.062402496099843996,
+              "price": 32551.174557000002,
+              "fee": 0.8125098173354135,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47810,
+              "side": 1,
+              "qty": 0.06084429367228472,
+              "price": 32877.117383000004,
+              "fee": 0.8001539940597717,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48090,
+              "side": -1,
+              "qty": 0.06084429367228472,
+              "price": 34022.5974,
+              "fee": 0.8280323630798043,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48231,
+              "side": 1,
+              "qty": 0.05814594107897353,
+              "price": 34422.4419,
+              "fee": 0.8006101114047158,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48339,
+              "side": -1,
+              "qty": 0.05814594107897353,
+              "price": 34015.248135,
+              "fee": 0.7911394455377497,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 48728,
+              "side": 1,
+              "qty": 0.060344822384067034,
+              "price": 33223.131981,
+              "fee": 0.8019375993743448,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 48850,
+              "side": -1,
+              "qty": 0.060344822384067034,
+              "price": 33336.396027,
+              "fee": 0.8046715588696932,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49066,
+              "side": 1,
+              "qty": 0.06023189278723084,
+              "price": 33283.818048999994,
+              "fee": 0.8018989441108265,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49264,
+              "side": -1,
+              "qty": 0.06023189278723084,
+              "price": 33192.080460000005,
+              "fee": 0.799688732660744,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49343,
+              "side": 1,
+              "qty": 0.05981837943635534,
+              "price": 33425.032169000006,
+              "fee": 0.7997725027830503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49389,
+              "side": -1,
+              "qty": 0.05981837943635534,
+              "price": 32923.657305,
+              "fee": 0.7877759300412089,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49623,
+              "side": 1,
+              "qty": 0.0655437707855683,
+              "price": 30345.0342,
+              "fee": 0.7955711864340124,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49930,
+              "side": -1,
+              "qty": 0.0655437707855683,
+              "price": 31463.283357,
+              "fee": 0.8248888930050376,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50070,
+              "side": 1,
+              "qty": 0.06353129154350862,
+              "price": 31403.150000999998,
+              "fee": 0.7980330712392255,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50218,
+              "side": -1,
+              "qty": 0.06353129154350862,
+              "price": 31305.819105000002,
+              "fee": 0.7955596482272389,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50321,
+              "side": 1,
+              "qty": 0.06368777704183012,
+              "price": 31415.541240000002,
+              "fee": 0.8003143944566159,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50604,
+              "side": -1,
+              "qty": 0.06368777704183012,
+              "price": 32129.386739999998,
+              "fee": 0.8184996876751413,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50808,
+              "side": 1,
+              "qty": 0.06394215536856737,
+              "price": 31227.642452,
+              "fee": 0.7987051061839416,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51037,
+              "side": -1,
+              "qty": 0.06394215536856737,
+              "price": 31185.511137,
+              "fee": 0.7976275193480968,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51100,
+              "side": 1,
+              "qty": 0.06312539512552011,
+              "price": 31630.252709,
+              "fee": 0.7986688800702711,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51241,
+              "side": -1,
+              "qty": 0.06312539512552011,
+              "price": 31378.341852,
+              "fee": 0.7923080911164578,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51284,
+              "side": 1,
+              "qty": 0.062757954806114,
+              "price": 31978.637543999997,
+              "fee": 0.8027655558989809,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51799,
+              "side": -1,
+              "qty": 0.062757954806114,
+              "price": 33911.498511,
+              "fee": 0.8512865163843761,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51978,
+              "side": 1,
+              "qty": 0.05856896114476549,
+              "price": 34168.576516,
+              "fee": 0.8004872121350203,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52294,
+              "side": -1,
+              "qty": 0.05856896114476549,
+              "price": 34936.40601,
+              "fee": 0.8184756024549765,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52488,
+              "side": 1,
+              "qty": 0.05784052961102533,
+              "price": 34540.433698,
+              "fee": 0.7991347912347305,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52607,
+              "side": -1,
+              "qty": 0.05784052961102533,
+              "price": 34626.546999000006,
+              "fee": 0.8011271268092881,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52760,
+              "side": 1,
+              "qty": 0.0575929874778447,
+              "price": 34714.031056,
+              "fee": 0.799713902365488,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 52854,
+              "side": -1,
+              "qty": 0.0575929874778447,
+              "price": 34481.881467,
+              "fee": 0.7943658270165824,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52895,
+              "side": 1,
+              "qty": 0.05703764712861077,
+              "price": 35028.652515,
+              "fee": 0.7991807686165178,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53040,
+              "side": -1,
+              "qty": 0.05703764712861077,
+              "price": 35033.286321,
+              "fee": 0.7992864891731138,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53072,
+              "side": 1,
+              "qty": 0.05647901889166703,
+              "price": 35329.512598,
+              "fee": 0.7981504837823322,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53661,
+              "side": -1,
+              "qty": 0.05647901889166703,
+              "price": 37079.421686999995,
+              "fee": 0.8376837431808645,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53809,
+              "side": 1,
+              "qty": 0.05345516835304359,
+              "price": 37334.223049,
+              "fee": 0.7982828713657503,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53931,
+              "side": -1,
+              "qty": 0.05345516835304359,
+              "price": 37116.278001,
+              "fee": 0.7936227556727293,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 53978,
+              "side": 1,
+              "qty": 0.05327667536497187,
+              "price": 37614.35105899999,
+              "fee": 0.8015870281737714,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54383,
+              "side": -1,
+              "qty": 0.05327667536497187,
+              "price": 38966.782932,
+              "fee": 0.8304082577141962,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54464,
+              "side": 1,
+              "qty": 0.05098072902952319,
+              "price": 39237.343342,
+              "fee": 0.8001393475027473,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54671,
+              "side": -1,
+              "qty": 0.05098072902952319,
+              "price": 39084.731136,
+              "fee": 0.7970272348944738,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 54,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 40.394,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_REGIME-0",
+          "arm": "M4_REGIME",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "1ff2145dda9391b6",
+          "raw_selector": {
+            "params": {
+              "coeff": 3,
+              "AP": 37,
+              "alpha.condition_threshold": 50,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 2.9614535314916837,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "1ff2145dda9391b6",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "1ff2145dda9391b6",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    }
+  },
+  "lab_run_id": "ra05-20260918T190605Z-9ac5e045",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T19:09:50.220113+00:00"
+}

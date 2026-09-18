@@ -1,0 +1,52 @@
+{
+  "required_gates": [
+    "G05-EXEC",
+    "G05-TRACE",
+    "G05-LEARN",
+    "G05-SCOPE",
+    "G05-MANIFEST"
+  ],
+  "artifacts": [
+    {
+      "relpath": "discovery_spec.json",
+      "sha256": "02dc31c72ce1278a2efce17911cedac0b721cd9bd3f997278c67c842c2399375",
+      "size_bytes": 2297
+    },
+    {
+      "relpath": "cal_matched_forecast.json",
+      "sha256": "f1b2936a84c3fda871fed651928045e1838d044d7296a9906bb31b0f957fbd6d",
+      "size_bytes": 1499
+    },
+    {
+      "relpath": "scheduler_audit.json",
+      "sha256": "c462b64db7635091e125a6e645744bd7f16d0eec9ea3ec024ec67b8ef4b59d80",
+      "size_bytes": 1346
+    },
+    {
+      "relpath": "arms_result.json",
+      "sha256": "6197bbeec2c82bb89f5212cf6da1006aa32b93dd909a65f95cfead4dbacd8464",
+      "size_bytes": 319133
+    },
+    {
+      "relpath": "action_divergence.json",
+      "sha256": "19d19b1ce057d3b3583317e47bcd478075f6dee5e867ec91d09ce851c3983f98",
+      "size_bytes": 1479
+    },
+    {
+      "relpath": "descriptive_returns.json",
+      "sha256": "b6355ba10fea99085b8fc87c4eec362f1b362253c9d1d55135a879bfd4e41157",
+      "size_bytes": 1475
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "855e4a994888e1c4d26e6fb5b31ae065c7d9e138",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra05_review": "PENDING"
+  },
+  "schema": "regime_lab.ra05_manifest.v1",
+  "lab_run_id": "ra05-20260918T201236Z-de11db62",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T20:43:55.224432+00:00"
+}
