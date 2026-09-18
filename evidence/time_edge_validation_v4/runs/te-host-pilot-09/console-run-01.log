@@ -1,0 +1,215 @@
+{
+  "identity": "3e173dc27c0a0ab3c80af75c8e4ff0d88f5851d5863f8590638c868655353fda",
+  "allocated_wall_seconds": 8100.0,
+  "charged_wall_seconds": 1753.1516458420083,
+  "remaining_wall_seconds": 6346.848354157992,
+  "budget_revisions": [],
+  "attempts": [
+    {
+      "id": "0e7bc79df29a40aaa73f8460baf51d57",
+      "task": "611fc6bdd7b9d24cfcc600eed0fb2809341b03668d720466e913a1866c943c71",
+      "started": "2026-09-12T15:53:01.997347+00:00",
+      "ended": "2026-09-12T15:53:10.335615+00:00",
+      "status": "COMPLETE",
+      "reserved": 60.0,
+      "wall": 7.610655868425965,
+      "result_path": "attempts/0e7bc79df29a40aaa73f8460baf51d57/result.json",
+      "result_hash": "16c84e04fb62371f641966124a96f228b98f7599e01dc4b07ff7f1d04fc1dc62",
+      "reason": null
+    },
+    {
+      "id": "d2b220e99a8d4580b17cbadd37f6dec8",
+      "task": "e65ce77be98ea0fed516810223a58659bc6b38bc74b38d9a08986b12dc4d5324",
+      "started": "2026-09-12T15:53:10.340841+00:00",
+      "ended": "2026-09-12T16:22:16.748914+00:00",
+      "status": "COMPLETE",
+      "reserved": 2700.0,
+      "wall": 1745.5409899735823,
+      "result_path": "attempts/d2b220e99a8d4580b17cbadd37f6dec8/result.json",
+      "result_hash": "645b288a483d7fafeaea4f4ed94e75fec41688c173e47938f1e5cacec37c3a68",
+      "reason": null
+    }
+  ],
+  "allocation": {
+    "identity": "07aece7eb0400ac6b3ab8adc434dbdc931839fcd5fcb8a5f48a55ebca0fb1c9b",
+    "allocated_wall_seconds": 8100.0,
+    "charged_wall_seconds": 5230.20958066266,
+    "remaining_wall_seconds": 2869.7904193373397,
+    "budget_revisions": [
+      {
+        "id": "TE02-PILOT-R03-REV01",
+        "applied_at": "2026-09-12T15:47:46.633645+00:00",
+        "old_budget": 1800.0,
+        "new_budget": 5400.0,
+        "prior_charged": 769.4438257096335,
+        "artifact_hash": "fe8b9ddb9d941a85402e0fb8e6f4b163c9bcf2577dede9268de393f4d27723aa"
+      },
+      {
+        "id": "TE02-PILOT-R03-REV02",
+        "applied_at": "2026-09-12T15:53:01.993534+00:00",
+        "old_budget": 5400.0,
+        "new_budget": 8100.0,
+        "prior_charged": 3477.057934820652,
+        "artifact_hash": "5ee8f00079eaf8441ed7b2df0b8ec9bec63a8f6469bd34fda7a54708a3669d41"
+      }
+    ],
+    "attempts": [
+      {
+        "id": "4084a21033ff40ad906c83735fcb3098",
+        "task": "4ba69814f4566cd564059bb6ae1ddc622508490d677f5a0087c12021f162e163",
+        "started": "2026-09-12T09:16:06.175488+00:00",
+        "ended": "2026-09-12T09:16:16.281871+00:00",
+        "status": "FAILED",
+        "reserved": 60.0,
+        "wall": 9.213590398430824,
+        "result_path": "attempts/4084a21033ff40ad906c83735fcb3098/result.json",
+        "result_hash": "d795a4515bb76c2d6ad0a08d0a01c37f0ed614093af17df4f07880fed934243a",
+        "reason": "isolated child exited 1; see stderr.log"
+      },
+      {
+        "id": "6cf97df72c6b4d59876c796f21f2b7d2",
+        "task": "8ae8c7c17d48291f7ce8263c1d3604ee62589c5a7dd7eb4a867b246dc23d87df",
+        "started": "2026-09-12T09:20:05.340526+00:00",
+        "ended": "2026-09-12T09:20:14.824807+00:00",
+        "status": "FAILED",
+        "reserved": 60.0,
+        "wall": 8.623268094845116,
+        "result_path": "attempts/6cf97df72c6b4d59876c796f21f2b7d2/result.json",
+        "result_hash": "b4dc58fd91d9048b560f1c55a3f9785c1c2a113125690c1085be1812df45aaf2",
+        "reason": "isolated child exited 1; see stderr.log"
+      },
+      {
+        "id": "d1ffdc0783a642cb89d746e88c545e90",
+        "task": "6621c2e1089990f0ce576bbf0a314a84d2de28064b229ff130822cc81a413dda",
+        "started": "2026-09-12T09:25:01.007644+00:00",
+        "ended": "2026-09-12T09:25:09.930344+00:00",
+        "status": "FAILED",
+        "reserved": 60.0,
+        "wall": 8.212754166685045,
+        "result_path": "attempts/d1ffdc0783a642cb89d746e88c545e90/result.json",
+        "result_hash": "99877284c8703226acc2c5cf7966cf363318d6a08d263644c5e9f79c3dddc9b8",
+        "reason": "isolated child exited 1; see stderr.log"
+      },
+      {
+        "id": "35d64049c7cb4f989fc499b3e680cf9b",
+        "task": "293d2c3954578f0f1295617aa98eabf9371a5fa1bb28424e026bbf8731645950",
+        "started": "2026-09-12T09:25:41.148622+00:00",
+        "ended": "2026-09-12T09:25:50.283658+00:00",
+        "status": "FAILED",
+        "reserved": 60.0,
+        "wall": 8.218828368000686,
+        "result_path": "attempts/35d64049c7cb4f989fc499b3e680cf9b/result.json",
+        "result_hash": "f0541a687733cca762538da03c994335bda641885d70a711f692d6fb86cef99b",
+        "reason": "isolated child exited 1; see stderr.log"
+      },
+      {
+        "id": "8160f2feb808467bb412e7ffd4595e4b",
+        "task": "43d42fcf197ba2f11d05d186efbe64882903f8d403e9ef36eafeff1f44912e15",
+        "started": "2026-09-12T09:26:59.950831+00:00",
+        "ended": "2026-09-12T09:27:09.238218+00:00",
+        "status": "FAILED",
+        "reserved": 60.0,
+        "wall": 8.21577474847436,
+        "result_path": "attempts/8160f2feb808467bb412e7ffd4595e4b/result.json",
+        "result_hash": "4318f1812bad23a7debc16ab847bac0d6bab7859c77e1d53c40b6a1a4390e4ea",
+        "reason": "isolated child exited 1; see stderr.log"
+      },
+      {
+        "id": "1d507c045162486cba79972f6c408d11",
+        "task": "ebed60ad8240b449a8f2d7d2b3693be746745d1949eb99fa1a839e81fe468e5d",
+        "started": "2026-09-12T09:28:25.294127+00:00",
+        "ended": "2026-09-12T09:28:34.281120+00:00",
+        "status": "COMPLETE",
+        "reserved": 60.0,
+        "wall": 8.211422800086439,
+        "result_path": "attempts/1d507c045162486cba79972f6c408d11/result.json",
+        "result_hash": "5663eab531348d7c013acab1d14c88f541580f107058dfc5e34345c45800d327",
+        "reason": null
+      },
+      {
+        "id": "07d86970c27b46bca4c1c73957b7d7d3",
+        "task": "15c220f5fcdf8527d9c49ead41d9fbafaaa5b4497d59e2a47c31c2eab0dbb03c",
+        "started": "2026-09-12T09:28:34.282487+00:00",
+        "ended": "2026-09-12T09:30:24.905039+00:00",
+        "status": "FAILED",
+        "reserved": 600.0,
+        "wall": 109.88211901765317,
+        "result_path": "attempts/07d86970c27b46bca4c1c73957b7d7d3/result.json",
+        "result_hash": "ae3006bd8c82b4e0ae4e1bab23d327ac80308a4f511e71b6c68eac9807b2a836",
+        "reason": "isolated child exited 2; see stderr.log"
+      },
+      {
+        "id": "e062ae8f12df4f95a50af3513a219e51",
+        "task": "4407fbacb96fa782e8df9ded92ce3cc974249a3673d51b22e9414e773172cd31",
+        "started": "2026-09-12T14:51:32.998019+00:00",
+        "ended": "2026-09-12T14:51:42.931518+00:00",
+        "status": "COMPLETE",
+        "reserved": 60.0,
+        "wall": 8.81682104151696,
+        "result_path": "attempts/e062ae8f12df4f95a50af3513a219e51/result.json",
+        "result_hash": "1c058dfe72f320bacfd28920cb181d61716f9170551c87a98101948f14daad69",
+        "reason": null
+      },
+      {
+        "id": "12495e81f1c04671957648c08719710a",
+        "task": "f8d2fbec40d03049c01b2904523fd235b1c846b002d01a8eb04cb5c70c25810e",
+        "started": "2026-09-12T14:51:42.933069+00:00",
+        "ended": "2026-09-12T15:01:43.694191+00:00",
+        "status": "TIMED_OUT",
+        "reserved": 600.0,
+        "wall": 600.0492470739409,
+        "result_path": "attempts/12495e81f1c04671957648c08719710a/result.json",
+        "result_hash": "1fe3ba1c7e1f7f6bcb156324ca16e0c257bb25431bce9ac49698aa8af2dd9f48",
+        "reason": "task wall cap reached"
+      },
+      {
+        "id": "f8b0863c86af46dd91809864fb8ace5d",
+        "task": "b2f2671f860e8cccaa8a9251090f0d98a3c807e7ff59957dd4898678ca8b1a61",
+        "started": "2026-09-12T15:47:46.635614+00:00",
+        "ended": "2026-09-12T15:47:54.951586+00:00",
+        "status": "COMPLETE",
+        "reserved": 60.0,
+        "wall": 7.614109111018479,
+        "result_path": "attempts/f8b0863c86af46dd91809864fb8ace5d/result.json",
+        "result_hash": "9b343b123179a79833adc654f8dbc435d7218e164d7922c77a8d8b2ff08b8a1e",
+        "reason": null
+      },
+      {
+        "id": "43842b32ca184a2f83e74ddf991c8d25",
+        "task": "b2d318f117d62d018e8f46ffe38b67607e2cb11b9c0fab03dc26a933378f35eb",
+        "started": "2026-09-12T15:47:54.954280+00:00",
+        "ended": "2026-09-12T15:53:01.995169+00:00",
+        "status": "INTERRUPTED",
+        "reserved": 2700.0,
+        "wall": null,
+        "result_path": null,
+        "result_hash": null,
+        "reason": "unknown duration charged at reserved cap"
+      },
+      {
+        "id": "3497c3df2bb44e1badb8bc6f7b6ecc1f",
+        "task": "3855199944925f94efb9b1a2abf62f17a2ee5652853af8765e3f97c12604784e",
+        "started": "2026-09-12T15:53:01.996562+00:00",
+        "ended": "2026-09-12T15:53:10.337900+00:00",
+        "status": "COMPLETE",
+        "reserved": 60.0,
+        "wall": 7.610655868425965,
+        "result_path": "attempts/3497c3df2bb44e1badb8bc6f7b6ecc1f/result.json",
+        "result_hash": "3c2b4ac05f5931c49bf844194145d6750f803513cc4a3630947476415db706f1",
+        "reason": null
+      },
+      {
+        "id": "d6d0d1dc4dfe4dd2901eb77ac704e5e5",
+        "task": "aa40d3597f12eaae39b1b7d30188cc6f699cf1be26fb0036ddeb622af2ca019c",
+        "started": "2026-09-12T15:53:10.339400+00:00",
+        "ended": "2026-09-12T16:22:16.751564+00:00",
+        "status": "COMPLETE",
+        "reserved": 2700.0,
+        "wall": 1745.5409899735823,
+        "result_path": "attempts/d6d0d1dc4dfe4dd2901eb77ac704e5e5/result.json",
+        "result_hash": "24c117f06d8724682c0c90d3a2f872a3093b5e89faade1127ead4d49c828df6e",
+        "reason": null
+      }
+    ]
+  }
+}
