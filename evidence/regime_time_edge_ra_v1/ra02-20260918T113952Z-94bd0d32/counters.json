@@ -1,0 +1,33 @@
+{
+  "schema": "regime_lab.ra02_counters.v1",
+  "scope": "RA-02 phase-owned experiments run by scripts/run_ra02.py: one real QuantBT deployment computation plus a cross-run reuse lookup, and the crash/resume TPE study over cached objectives; requested_trials counts every trial and every deployment request that consumed an evaluation",
+  "requested_trials": 14,
+  "unique_evaluations": 7,
+  "cache_hits": 7,
+  "cache_misses": 7,
+  "new_engine_runs": 1,
+  "visited_bars": 1440,
+  "unique_evaluation_requests": 14,
+  "cache_hit_bars_counted_as_executed": false,
+  "breakdown": {
+    "engine": {
+      "new_engine_runs": 1,
+      "visited_bars": 1440,
+      "reused_lookups": 1,
+      "reused_lookup_bars_not_executed": 1440
+    },
+    "search": {
+      "requested_trials": 12,
+      "replayed_trials": 3,
+      "evaluations_reference": 6,
+      "evaluations_resumed": 3
+    },
+    "deployment": {
+      "requests": 2
+    }
+  },
+  "note": "visited_bars counts only bars the engine actually executed; cache-hit bars are reported separately and never counted as executed work",
+  "lab_run_id": "ra02-20260918T113952Z-94bd0d32",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T11:39:54.780031+00:00"
+}
