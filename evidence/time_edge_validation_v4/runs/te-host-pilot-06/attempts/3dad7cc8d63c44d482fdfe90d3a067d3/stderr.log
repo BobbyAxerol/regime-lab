@@ -1,0 +1,30 @@
+[I 2026-09-12 09:28:43,238] A new study created in memory with name: no-name-36772730-d3c6-47d0-b16c-efb2af07d41d
+[W 2026-09-12 09:30:24,001] Trial 0 failed with parameters: {'coeff': 6, 'AP': 58, 'alpha.condition_threshold': 40} because of the following error: ContractError('ContractError: MemoryError: Unable to allocate 73.6 MiB for an array with shape (4823991,) and data type complex128; unmapped=[]; rejected=[]').
+Traceback (most recent call last):
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py", line 1728, in objective
+    record = self.evaluate_params_is(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/execution.py", line 357, in evaluate_params_is
+    record = super().evaluate_params_is(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py", line 1901, in evaluate_params_is
+    scored = self._score_strategy_outputs_with_scope(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py", line 2460, in _score_strategy_outputs_with_scope
+    return self._score_strategy_outputs_batch(data, tasks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/environments/lab_venv/lib/python3.12/site-packages/quantbt/walkforward.py", line 2528, in _score_strategy_outputs_batch
+    scored_misses = list(endpoint_batch(payloads))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/execution.py", line 273, in score_batch
+    return [self._score(t) for t in tasks]
+            ^^^^^^^^^^^^^^
+  File "/root/bobby/pool_alpha/lab_regime_model_quantbt/src/crypto_regime_lab/time_edge/execution.py", line 315, in _score
+    if record["status"] == "FAILED_TECHNICAL": raise ContractError(record["reason"])
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+crypto_regime_lab.experiments.time_edge_contracts.ContractError: ContractError: MemoryError: Unable to allocate 73.6 MiB for an array with shape (4823991,) and data type complex128; unmapped=[]; rejected=[]
+[W 2026-09-12 09:30:24,006] Trial 0 failed with value None.
+{"status": "BLOCKED", "reason": "ContractError: ContractError: MemoryError: Unable to allocate 73.6 MiB for an array with shape (4823991,) and data type complex128; unmapped=[]; rejected=[]"}
