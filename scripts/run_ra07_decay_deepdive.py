@@ -79,6 +79,20 @@ REGIME_MAX_AGE_DAYS = 180.0
 DEEPDIVE_REGIME_BUDGET = 10  # the user's requested floor exactly; reduced from an initial 12 to
 # cut real-run memory/compute after the first attempt's OOM kill (this is a shared, busy box --
 # other unrelated live processes were already holding ~4.6 GiB when that attempt ran)
+DEEPDIVE_TRIALS = 2  # deliberately BELOW DEFAULT_TRIALS=8 (RA-05/07's own frozen contract value)
+# for THIS deep-dive only -- disclosed deviation, not silently reused. Root cause of the OOM that
+# survived the PreparedAccount fix: run_cutoff_walk_forward's optimization_config hardcodes
+# research_retention="full_trial_ledger" (dynamic_fold_provider.py) -- the engine itself, not
+# anything in this lab's own code, is asked to retain a full per-trial ledger for EVERY Optuna
+# trial of the WHOLE arm run, for its entire duration. RA-05/06/07's own real runs stayed safe at
+# 2-3 folds x 8 trials = 16-24 total trials; M4_CAL here is ~8 folds x 8 trials = 64, M4_REGIME
+# ~11 folds x 8 = 88 -- confirmed by dmesg: M4_CAL was OOM-killed (anon-rss 4.75 GiB) within the
+# last ~60s of an otherwise-stable 30-minute run, i.e. right as the trial count neared its peak,
+# not gradually -- consistent with ledger accumulation, not with the per-fold PreparedAccount
+# mechanism already fixed (that pattern was a slow, steady climb from the start). This constant
+# is NOT something this script can safely fix at its root: research_retention is hardcoded inside
+# run_cutoff_walk_forward, which is shared, already-tested infrastructure other RA phases depend
+# on -- reducing the total trial count is the only lever available without touching it.
 
 
 def _prepared_for_fold(frame: pd.DataFrame, *, fold_row: dict) -> "PreparedAccount":
@@ -216,7 +230,7 @@ def orchestrate(args) -> int:
     else:
         window_start, window_end = "2021-01-01", "2022-05-15"
         data_load_start = "2020-11-01"
-        regime_budget, trials = DEEPDIVE_REGIME_BUDGET, DEFAULT_TRIALS
+        regime_budget, trials = DEEPDIVE_REGIME_BUDGET, DEEPDIVE_TRIALS
 
     policy = SandboxPolicy.load(LAB / "configs" / "sandbox_policy.json")
     writer = EvidenceWriter.open(policy, study_id=STUDY, lab_run_id=new_lab_run_id("ra07decaydive"))
