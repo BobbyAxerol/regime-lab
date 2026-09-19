@@ -114,9 +114,9 @@ not superseded. Read the active guide before changing anything.
   fix), `db228594` (RA-04 implementation), `0226eebd` (evidence, 2 runs kept).
   `research_status: NOT_ASSESSED` — no economic/market claim; none of Q01-Q07/G04-* require
   ranking IC>0, Sharpe>0, or regime beating a synthetic calendar.
-- **Test suite (2026-09-19, 1202 collected): 1202 passed, 0 failed** (full run ≈15m12s — grew
-  from the 1172 figure by the 30 new RA-06 tests, and before that from ≈5m51s/1150 by the 22
-  RA-05 tests) — still fully green. All three
+- **Test suite (2026-09-19, 1243 collected): 1243 passed, 0 failed** (full run ≈18m08s — grew
+  from the 1202 figure by the 41 new RA-07 tests, and before that from ≈15m12s/1172 by the 30
+  RA-06 tests) — still fully green. All three
   previously-documented pre-existing failures were RESOLVED earlier this same session, at the
   owner's explicit request to handle them rather than leave them open (R-17 still respected: each
   was root-caused before being touched, nothing was papered over to force a pass):
@@ -185,16 +185,19 @@ not superseded. Read the active guide before changing anything.
   is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (142 tests, green: 14 RA-01 + 23 RA-02
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (183 tests, green: 14 RA-01 + 23 RA-02
   (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates) + 24 RA-04 (9 Q-cases + 15 gates) +
-  22 RA-05 (8 D-cases incl. D01b + 14 gates) + 30 RA-06 (15 P-cases + 15 gates)).
-  RA-01/RA-02/RA-03/RA-04/RA-05/RA-06 all complete; **RA-07 needs its own owner approval before
-  starting** (R-18 — the RA-05→RA-06 approval in `owner_decisions.jsonl` does not extend to RA-07;
-  check the ledger's LAST entry covers the transition you're about to start, never assume an
-  earlier one still applies). Sequence:
+  22 RA-05 (8 D-cases incl. D01b + 14 gates) + 30 RA-06 (15 P-cases + 15 gates) + 41 RA-07
+  (23 R01-R09 cases + 18 gates)).
+  RA-01/RA-02/RA-03/RA-04/RA-05/RA-06/RA-07 all complete; **RA-08 needs its own owner approval
+  before starting** (R-18 — the RA-06→RA-07 approval in `owner_decisions.jsonl` does not extend
+  to RA-08; check the ledger's LAST entry covers the transition you're about to start, never
+  assume an earlier one still applies). The user has also asked to revisit/challenge the
+  assumptions made across RA-05/06/07 before RA-08 starts — do not treat RA-07's own conclusion
+  as final or push toward RA-08 unprompted. Sequence:
   RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission (done) →
-  RA-05 4-arm discovery (done) → RA-06 panel/refit-vs-keep (done) →
-  RA-07 replication/falsification → RA-08 freeze/claims.
+  RA-05 4-arm discovery (done) → RA-06 panel/refit-vs-keep (done) → RA-07 replication/falsification (done) →
+  RA-08 freeze/claims.
   `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
   RA-01 through RA-06 are now all done — the file's own prose is stale on that point, its per-phase
   task lists are not). Still one phase finished → report → owner review before the next, per
@@ -289,6 +292,77 @@ not superseded. Read the active guide before changing anything.
   `CutoffSchedule`/timestamp comparisons without an explicit UTC offset, in three separate spots)
   was caught by the same `--smoke` dry-run discipline RA-05 established, before it ever reached
   a real full-scale run.
+- **RA-07 is COMPLETE, technical_gate PASS, 6/6 gates** (final run
+  `ra07-20260919T071527Z-4463ccde`, 2026-09-19; 4 earlier same-day attempts kept append-only —
+  1 crash caught by `--smoke` before any real-scale run, 2 smoke runs that surfaced a
+  report/verify ordering bug, 1 smoke PASS). `conclusion_level: INCONCLUSIVE_SUPPORT` on the
+  registered vocabulary (guide 13.5) — the guide's own sanctioned outcome for a ~90-day pilot,
+  not a surprise.
+  **RA07.1 freeze** (before any RA-07 outcome existed): delta materialized from cell 1's real
+  fills (guide 13.3's formula, `|N_j|/E_j-` summed per day * 0.0005, flat days kept in the
+  denominator) = **0.0001452/day** (≈1.45 bps/day) over 151 calibration days; MDE from cell 1's
+  own real paired-return bootstrap SE (guide 13.6, never a synthetic-noise scale) =
+  **0.000245/day** (≈2.45 bps/day) — **the MDE is LARGER than delta itself**, meaning this
+  pilot's own sample cannot reliably resolve an effect the size of its own calibrated hurdle; said
+  plainly in the report, not glossed over. RF-05's unrelated 0.0371 bps/day MDE (different
+  contract: window/train_memory/seed all differ) is cited only as a cross-reference, never
+  substituted.
+  **Cell 2** (RA07.2): A-SC/ETHUSDT, RA-05's EXACT frozen contract (same window/train_memory/
+  trials/seed/route) with only the symbol swapped — deliberately NOT RF-04's own earlier
+  A-SC/ETHUSDT numbers, which used a different window/train_memory/seed and would have mixed
+  contracts in a paired comparison. Explicitly a cross-symbol transfer test (BTC-derived regime
+  tape used to trade ETH), not an ETH-fit regime claim. Coverage matrix: 2 RUN_VALID / 10
+  BLOCKED_CAPABILITY (A-VWAP/A-HASH, reused verbatim from RF-04's route matrix) / 8 NOT_RUN_BUDGET
+  of 20 planned cells.
+  **Controls** (RA07.3): AGE_ONLY is `NOT_APPLICABLE` (RA-06 locked KEEP_BASELINE, nothing
+  action-aware to contrast). DELAYED_INFORMATION (state availability delayed 1 observation/4h,
+  `state_id`+`state_namespace`+`state_common` all shifted together) landed on the IDENTICAL 3
+  cutoffs as the real M4_REGIME schedule in this window — equity_last 20859.34, byte-identical to
+  M4_REGIME's own — a real but WEAK test at this delay size (too small to reschedule anything
+  here), not evidence the edge survives a meaningful delay. **PLACEBO_TIMING is the load-bearing
+  finding**: a seeded synthetic state tape (switch-rate 0.964x the real one, `matched=True`, not
+  a strawman) reached equity_last **20822.54** — essentially matching M4_REGIME's real 20859.34
+  and far above M4_CAL_MATCHED's 20526.79. A placebo carrying NO market information reproduces
+  nearly all of M4_REGIME's apparent advantage at matched cadence — directly echoing LAB-08's
+  STATE_PLACEBO finding, now reproduced independently in the RA track.
+  **D1/D2/D3 decay** (RA07.4, 41 rows: 28 D1 + 5 D2 + 8 D3): D1 (one cheap deterministic
+  `TrainingScorer` replay per fold against RA-05's own real fold table, zero new search) shows
+  OOS < IS in 11 of 14 mean-daily-return rows — the selection-bias decay guide 13.2 warns to
+  expect, now measured rather than assumed. D2 (RA-06 Panel B's fixed-theta KEEP anchors, 0 new
+  engine calls) shows no clean aging pattern (+0.46%, +2.92%, −0.07%, +0.98%, −0.03% across 5
+  successive 20-day segments). D3 (adjacent operational folds, different params, `diagnostic_only`)
+  is descriptive only, never read as decay of one theta.
+  **Bootstrap statistics** (RA07.5, zero engine calls anywhere — verified by a source-inspection
+  test, not assumed): circular moving block bootstrap, 28-day primary block, 5000 resamples, seed
+  20260919, verified against a synthetic numeric-reference check (known true delta, known analytic
+  SE) before being trusted on real data. Primary contrast (cell 1 H-BUDGET, M4_REGIME −
+  M4_CAL_MATCHED): point estimate **+0.0001075/day**, CI_95 **[−0.0000234, +0.0003038]**,
+  p=0.1684 → `INCONCLUSIVE_SUPPORT` (only 5 blocks of 28 days vs the 12-block legacy floor — a
+  floor, not proof of power, guide 13.6 — and the CI still straddles the calibrated delta
+  regardless). Secondary Holm family (guide 13.4, primary itself left unadjusted): cell1
+  M4_REGIME−M4_CAL p=0.4472, cell1 M4_CAL_MATCHED−M4_CAL p=0.1452→0.2904 adjusted, cell2 transfer
+  check p=0.0788→0.2364 adjusted — none reach significance.
+  **Sensitivity** (RA07.7): cell1_alone and cell2_alone point estimates have the SAME sign
+  (+0.0001075 and +0.0000656/day) but no pooled 2-cell aggregate is computed (no pre-registered
+  capital weighting exists with only 2/20 cells run — guide RA07.2 forbids one otherwise).
+  **3 real bugs found and fixed while building this phase**: (1) D1's `daily_returns` cache field
+  is a list of `(date, value)` PAIRS, not bare scalars — a naive `if r is not None` filter would
+  have kept every row (a tuple is never `None`) and summed/averaged the tuples themselves; caught
+  before any run, not by a crash. (2) The first `--smoke` attempt crashed
+  (`ContractError: incomplete requested account window`): `cell1_arms` always comes from RA-05's
+  real, full-scale evidence (never re-run), but D1's replay frame and delta's fill `bar_index`
+  resolution were loaded at THIS run's own smoke-or-real scale — in `--smoke` mode the two frames
+  start on different dates, so the same `bar_index` silently pointed at a different calendar day.
+  Fixed by always loading cell 1's D1/delta frame at RA-05's own real window, independent of
+  `--smoke` (verified: in the non-smoke real run these two loads are identical, so the fix only
+  changes smoke behavior). (3) `report.md`'s own `conclusion_level` text was written AFTER the
+  verify call that produced `verification.json`, so `G07-CLAIM` failed structurally on the
+  `PENDING_VERIFICATION` placeholder regardless of content — fixed with a two-pass verify/write so
+  the persisted verdict and the report's own displayed gate table agree.
+  `experiments/controls.py`'s `delayed_states` is deliberately NOT reused unmodified for
+  DELAYED_INFORMATION: it only shifts `state_id`/`state_namespace`, but this lab's real emissions
+  always populate `state_common`, which the trigger logic reads FIRST — a local, schema-correct
+  `delayed_emissions()` in `ra07_controls.py` shifts all three fields together instead.
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
 - Lab git: repo on `main`, remote `regime-lab`; corrective work is on **`mode4-corrective`**.
@@ -302,7 +376,7 @@ Run from the lab root. Use only the lab venv — never the shared `/root/bobby/p
 
 ```bash
 LAB=/root/bobby/pool_alpha/lab_regime_model_quantbt
-$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # currently 862 passed
+$LAB/environments/lab_venv/bin/python -m pytest $LAB/tests -q            # currently 1243 passed
 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/test_x.py::test_y -q
 $LAB/environments/lab_venv/bin/python -m pytest $LAB/tests/mode4_corrective -q   # 76 passed (RF guards)
 $LAB/environments/lab_venv/bin/python -m pyflakes src scripts tests     # clean except src/.../alphas/raw-supplied/
@@ -320,6 +394,7 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra03.py --pytest-xml <jun
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra04.py --pytest-xml <junit of tests/ra_corrective>   # RA-04 Mode 4 support/admission/controls
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra05.py --pytest-xml <junit of tests/ra_corrective>   # RA-05 4-arm discovery (real data); --smoke for a tiny/fast dry run
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra06.py --pytest-xml <junit of tests/ra_corrective>   # RA-06 panel/refit-vs-keep (real data); --smoke for a tiny/fast dry run
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra07.py --pytest-xml <junit of tests/ra_corrective>   # RA-07 cell2/controls/decay/bootstrap (real data); --smoke for a tiny/fast dry run
 $LAB/environments/lab_venv/bin/python $LAB/scripts/record_owner_decision.py --decides "RA-0N->RA-0M" --quote "<verbatim>" --reference "<where>"  # append to owner_decisions.jsonl
 $LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
 $LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
