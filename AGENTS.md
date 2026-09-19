@@ -114,8 +114,9 @@ not superseded. Read the active guide before changing anything.
   fix), `db228594` (RA-04 implementation), `0226eebd` (evidence, 2 runs kept).
   `research_status: NOT_ASSESSED` — no economic/market claim; none of Q01-Q07/G04-* require
   ranking IC>0, Sharpe>0, or regime beating a synthetic calendar.
-- **Test suite (2026-09-18, 1172 collected): 1172 passed, 0 failed** (full run ≈13m33s — grew
-  from the ≈5m51s/1150 figure below by the 22 new RA-05 tests) — still fully green. All three
+- **Test suite (2026-09-19, 1202 collected): 1202 passed, 0 failed** (full run ≈15m12s — grew
+  from the 1172 figure by the 30 new RA-06 tests, and before that from ≈5m51s/1150 by the 22
+  RA-05 tests) — still fully green. All three
   previously-documented pre-existing failures were RESOLVED earlier this same session, at the
   owner's explicit request to handle them rather than leave them open (R-17 still respected: each
   was root-caused before being touched, nothing was papered over to force a pass):
@@ -184,18 +185,18 @@ not superseded. Read the active guide before changing anything.
   is fine (content/path/hash unchanged), delete is not**.
 - **RA study (`study_id=regime_time_edge_ra_v1`, new namespace)**: current phase work per
   RA-GUIDE-1.0. Evidence dirs `evidence/regime_time_edge_ra_v1/<run_id>/`; code
-  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (112 tests, green: 14 RA-01 + 23 RA-02
+  `src/crypto_regime_lab/ra/`; tests `tests/ra_corrective/` (142 tests, green: 14 RA-01 + 23 RA-02
   (10 C-cases + 13 gates) + 29 RA-03 (12 M-cases + 17 gates) + 24 RA-04 (9 Q-cases + 15 gates) +
-  22 RA-05 (8 D-cases incl. D01b + 14 gates)).
-  RA-01/RA-02/RA-03/RA-04/RA-05 all complete; **RA-06 needs its own owner approval before starting**
-  (R-18 — the RA-04→RA-05 approval in `owner_decisions.jsonl` does not extend to RA-06; check the
-  ledger's LAST entry covers the transition you're about to start, never assume an earlier one
-  still applies). Sequence:
+  22 RA-05 (8 D-cases incl. D01b + 14 gates) + 30 RA-06 (15 P-cases + 15 gates)).
+  RA-01/RA-02/RA-03/RA-04/RA-05/RA-06 all complete; **RA-07 needs its own owner approval before
+  starting** (R-18 — the RA-05→RA-06 approval in `owner_decisions.jsonl` does not extend to RA-07;
+  check the ledger's LAST entry covers the transition you're about to start, never assume an
+  earlier one still applies). Sequence:
   RA-01 lock (done) → RA-02 semantic cache (done) → RA-03 memory/fast routes (done) → RA-04 Mode 4 support/admission (done) →
-  RA-05 4-arm discovery (done) →
-  RA-06 panel/refit-vs-keep → RA-07 replication/falsification → RA-08 freeze/claims.
+  RA-05 4-arm discovery (done) → RA-06 panel/refit-vs-keep (done) →
+  RA-07 replication/falsification → RA-08 freeze/claims.
   `handoff/RA_EXECUTION_PLAN_V1.md` is the committed plan (written when only RA-01 was approved;
-  RA-01 through RA-05 are now all done — the file's own prose is stale on that point, its per-phase
+  RA-01 through RA-06 are now all done — the file's own prose is stale on that point, its per-phase
   task lists are not). Still one phase finished → report → owner review before the next, per
   R-18. `M4_CAL_MATCHED` is the canonical CAL_BUDGET arm id — do not create a second economically
   identical arm.
@@ -250,6 +251,44 @@ not superseded. Read the active guide before changing anything.
   regression test (D01b) using the real 90-day window, since D01's own 7-day smoke window
   contains no real trigger and would pass the same check vacuously.
   Raw financial artifacts at TE paths are referenced by path/hash, not copied.
+- **RA-06 is COMPLETE, technical_gate PASS, 4/4 gates** (final run
+  `ra06-20260919T035313Z-59cd3ae0`, 2026-09-19; earlier same-day smoke/dry-run attempts kept
+  append-only). `research_status: INCONCLUSIVE_SUPPORT` — the guide's own explicitly-sanctioned,
+  non-financial-claim mechanical PASS.
+  **Panel A** (guide 10.1) reused RA-05's real evidence directly — 8 rows, 4 unique candidates,
+  0 new engine calls, each row's matured outcome sliced from the arm's own real
+  `equity_daily` over its real deployment window.
+  **Panel B** (guide 10.1/10.2/10.3) is new: real KEEP-vs-REFIT branches at 5 real origins (a
+  disclosed, budget-conscious reduction from guide 10.3's "8-12 origins if budget allows"
+  ceiling), via a **deterministic replay prefix** through `run_cutoff_walk_forward` — confirmed
+  by inspection that no native QuantBT checkpoint/clone-state capability exists in this install
+  before choosing that path (guide 10.3's own sanctioned fallback). KEEP = one continuous real
+  account (`schedule=[window_start]`, RA-05's STATIC arm's own selection, never refits) covering
+  every origin's KEEP reading in one pass; REFIT = one real account per origin
+  (`schedule=[window_start, origin]`) — the same initial selection reproduced deterministically
+  plus one real search exactly at the origin. All 5 origins measured OK, 0 censored.
+  **Real g_t(H) result** (28-day horizon, point estimates only — `research_status` forbids a
+  claim): REFIT underperformed KEEP at 4 of 5 origins (g = −0.00033, −0.00522, −0.01202,
+  −0.01344) and outperformed at 1 (+0.00281) — directionally consistent with the rest of this
+  lab's pattern (no robust refit/timing benefit found anywhere so far), but N=5 is far too small
+  to treat as anything but descriptive.
+  **Model ladder** (guide 10.5/10.6): `INSUFFICIENT_SUPPORT` (support=5 <
+  `MIN_SUPPORT_FOR_MODEL_FIT=8`) — AGE_ONLY/AGE_CONTEXT ridge fit (hand-rolled closed-form, no
+  sklearn in this venv) correctly not attempted on a sample the guide itself says is too small
+  to trust. **G06-SCOPE lock decision: `KEEP_BASELINE`** (current JM/M0 reference policy
+  unchanged) — no context-policy revision carried to RA-07, exactly guide's "or KEEP_BASELINE
+  with a reason" branch.
+  **A real, load-bearing bug found and fixed while building this phase**: `E_t` (guide 10.2's
+  "common equity before decision") read on the origin's OWN calendar day disagreed between KEEP
+  and REFIT (e.g. keep=20640.20 vs refit=20677.36) despite a byte-identical shared prefix —
+  because REFIT's new fold's `test_start` IS the origin, so that whole day already carries a day
+  of NEW-params trading for REFIT while KEEP's reading is still old-params. Root-caused by direct
+  inspection of both branches' real `equity_daily`/fold tables (not guessed), fixed by reading
+  `E_t` strictly BEFORE origin, verified the two branches' `E_t` then match exactly at all 5 real
+  origins. P02 is the regression test. A second, minor bug (bare date strings passed to
+  `CutoffSchedule`/timestamp comparisons without an explicit UTC offset, in three separate spots)
+  was caught by the same `--smoke` dry-run discipline RA-05 established, before it ever reached
+  a real full-scale run.
 - `reports/improvement_opinions.md` = opinions that are **written, never run**, and never mixed
   into results. Do not implement them without the user picking one.
 - Lab git: repo on `main`, remote `regime-lab`; corrective work is on **`mode4-corrective`**.
@@ -280,6 +319,7 @@ $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra02.py --pytest-xml <jun
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra03.py --pytest-xml <junit of tests/ra_corrective>   # RA-03 lazy prep/retention/route/profiler
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra04.py --pytest-xml <junit of tests/ra_corrective>   # RA-04 Mode 4 support/admission/controls
 $LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra05.py --pytest-xml <junit of tests/ra_corrective>   # RA-05 4-arm discovery (real data); --smoke for a tiny/fast dry run
+$LAB/environments/lab_venv/bin/python $LAB/scripts/run_ra06.py --pytest-xml <junit of tests/ra_corrective>   # RA-06 panel/refit-vs-keep (real data); --smoke for a tiny/fast dry run
 $LAB/environments/lab_venv/bin/python $LAB/scripts/record_owner_decision.py --decides "RA-0N->RA-0M" --quote "<verbatim>" --reference "<where>"  # append to owner_decisions.jsonl
 $LAB/environments/lab_venv/bin/python $LAB/scripts/check_p0_gate.py      # P0 gate from handoff/te_specs
 $LAB/environments/lab_venv/bin/python $LAB/scripts/supervise_te_controls.py  # TE controls supervisor (charges the ledger)
