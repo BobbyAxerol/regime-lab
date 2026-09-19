@@ -1,0 +1,163 @@
+{
+  "schema": "regime_lab.ra07_sensitivity_report.v1",
+  "leave_one_period_out_cell1_primary": {
+    "status": "OK",
+    "full_sample_mean": 0.00010749611360878338,
+    "periods": {
+      "2020-11": {
+        "held_out_period": "2020-11",
+        "held_out_days": 29,
+        "remaining_days": 121,
+        "mean_with_period_excluded": 0.00013325964496956616,
+        "delta_vs_full_sample": 2.5763531360782784e-05
+      },
+      "2020-12": {
+        "held_out_period": "2020-12",
+        "held_out_days": 31,
+        "remaining_days": 119,
+        "mean_with_period_excluded": 0.00013549930286821434,
+        "delta_vs_full_sample": 2.800318925943096e-05
+      },
+      "2021-01": {
+        "held_out_period": "2021-01",
+        "held_out_days": 31,
+        "remaining_days": 119,
+        "mean_with_period_excluded": 0.00013549930286821434,
+        "delta_vs_full_sample": 2.800318925943096e-05
+      },
+      "2021-02": {
+        "held_out_period": "2021-02",
+        "held_out_days": 28,
+        "remaining_days": 122,
+        "mean_with_period_excluded": 0.00013685320648107593,
+        "delta_vs_full_sample": 2.935709287229255e-05
+      },
+      "2021-03": {
+        "held_out_period": "2021-03",
+        "held_out_days": 31,
+        "remaining_days": 119,
+        "mean_with_period_excluded": -4.803984448518972e-06,
+        "delta_vs_full_sample": -0.00011230009805730236
+      }
+    },
+    "n_periods": 5
+  },
+  "contribution_by_period_cell1_primary": {
+    "2020-11": {
+      "days": 29,
+      "sum_diff": 0.0,
+      "share_of_total": 0.0
+    },
+    "2020-12": {
+      "days": 31,
+      "sum_diff": 0.0,
+      "share_of_total": 0.0
+    },
+    "2021-01": {
+      "days": 31,
+      "sum_diff": 0.0,
+      "share_of_total": 0.0
+    },
+    "2021-02": {
+      "days": 28,
+      "sum_diff": -0.0005716741493737576,
+      "share_of_total": -0.03545394217408847
+    },
+    "2021-03": {
+      "days": 31,
+      "sum_diff": 0.016696091190691265,
+      "share_of_total": 1.0354539421740885
+    }
+  },
+  "leave_one_cell_out": {
+    "cell1_alone": {
+      "point_estimate": 0.00010749611360878338,
+      "ci_95": [
+        -2.3388865982025994e-05,
+        0.00030376434689337214
+      ]
+    },
+    "cell2_alone": {
+      "point_estimate": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "pooled_2_cell_aggregate": {
+      "computed": false,
+      "reason": "no pre-registered partial-scope capital weighting exists"
+    },
+    "agreement": {
+      "same_sign": false
+    }
+  },
+  "regime_vintage_attribution_cell1": {
+    "status": "NO_EMISSIONS_IN_WINDOW",
+    "vintages": []
+  },
+  "search_frequency_and_cost_cell1": {
+    "STATIC": {
+      "status": "OK",
+      "wall_seconds": 250.185,
+      "fold_count": 1,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL": {
+      "status": "OK",
+      "wall_seconds": 414.47,
+      "fold_count": 2,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL_MATCHED": {
+      "status": "OK",
+      "wall_seconds": 409.482,
+      "fold_count": 2,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 0
+    },
+    "M4_REGIME": {
+      "status": "OK",
+      "wall_seconds": 572.874,
+      "fold_count": 3,
+      "switches_admitted": 2,
+      "switches_kept_incumbent": 1
+    }
+  },
+  "search_frequency_and_cost_cell2": {
+    "STATIC": {
+      "status": "OK",
+      "wall_seconds": 40.807,
+      "fold_count": 1,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL": {
+      "status": "OK",
+      "wall_seconds": 65.978,
+      "fold_count": 2,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 1
+    },
+    "M4_CAL_MATCHED": {
+      "status": "OK",
+      "wall_seconds": 40.214,
+      "fold_count": 1,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_REGIME": {
+      "status": "OK",
+      "wall_seconds": 40.215,
+      "fold_count": 1,
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    }
+  },
+  "rule": "all periods/cells reported, none dropped as an outlier (guide RA07.7); relative improvement when both arms lose money is a separate question from live deployment eligibility and is never conflated here",
+  "lab_run_id": "ra07-20260919T065543Z-69973d51",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T07:04:18.142002+00:00"
+}

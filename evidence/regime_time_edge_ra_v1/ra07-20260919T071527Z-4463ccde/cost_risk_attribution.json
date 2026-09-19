@@ -1,0 +1,62 @@
+{
+  "cell1": {
+    "schema": "regime_lab.ra07_risk_exposure_attribution.v1",
+    "M4_REGIME": {
+      "status": "OK",
+      "exposure_days": 51.71805555555556,
+      "exposure_fraction_of_window": 0.5746450617283951,
+      "turnover_notional": 321122.44561351306,
+      "fill_count": 160,
+      "max_drawdown_fraction": 0.01771609100048629,
+      "equity_last": 20859.336252630535,
+      "equity_first": 20000.0
+    },
+    "M4_CAL_MATCHED": {
+      "status": "OK",
+      "exposure_days": 51.580555555555556,
+      "exposure_fraction_of_window": 0.5731172839506173,
+      "turnover_notional": 580776.6323422047,
+      "fill_count": 290,
+      "max_drawdown_fraction": 0.01771609100048629,
+      "equity_last": 20526.78592433561,
+      "equity_first": 20000.0
+    },
+    "exposure_fraction_delta": 0.0015277777777777946,
+    "max_drawdown_deterioration_vs_comparator": 0.0,
+    "risk_cap_registered": 0.02,
+    "risk_cap_breached": false,
+    "interpretation_note": "a positive Delta-hat driven mostly by a large exposure_fraction_delta is an exposure-timing contribution, not a parameter-selection/information-timing contribution, even if both arms use the same selector (guide 13.5)"
+  },
+  "cell2": {
+    "schema": "regime_lab.ra07_risk_exposure_attribution.v1",
+    "M4_REGIME": {
+      "status": "OK",
+      "exposure_days": 49.78888888888889,
+      "exposure_fraction_of_window": 0.5532098765432099,
+      "turnover_notional": 565074.749277967,
+      "fill_count": 282,
+      "max_drawdown_fraction": 0.02287885618131604,
+      "equity_last": 20898.50121209976,
+      "equity_first": 20000.0
+    },
+    "M4_CAL_MATCHED": {
+      "status": "OK",
+      "exposure_days": 51.63333333333333,
+      "exposure_fraction_of_window": 0.5737037037037037,
+      "turnover_notional": 468903.88009309233,
+      "fill_count": 234,
+      "max_drawdown_fraction": 0.02287885618131604,
+      "equity_last": 20691.575237015622,
+      "equity_first": 20000.0
+    },
+    "exposure_fraction_delta": -0.02049382716049386,
+    "max_drawdown_deterioration_vs_comparator": 0.0,
+    "risk_cap_registered": 0.02,
+    "risk_cap_breached": false,
+    "interpretation_note": "a positive Delta-hat driven mostly by a large exposure_fraction_delta is an exposure-timing contribution, not a parameter-selection/information-timing contribution, even if both arms use the same selector (guide 13.5)"
+  },
+  "schema": "regime_lab.ra07_cost_risk_attribution.v1",
+  "lab_run_id": "ra07-20260919T071527Z-4463ccde",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T08:05:59.657632+00:00"
+}
