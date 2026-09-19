@@ -523,8 +523,21 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                             one_way_fee: float = ONE_WAY_TAKER_FEE,
                             slippage_bps: float = SLIPPAGE_BPS,
                             alloc_per_trade: float = ALLOC_PER_TRADE,
-                            account_capital: float = ACCOUNT_CAPITAL) -> dict:
-    """Run one arm's cutoff list through the installed Mode 4 pipeline."""
+                            account_capital: float = ACCOUNT_CAPITAL,
+                            research_retention: str = "full_trial_ledger") -> dict:
+    """Run one arm's cutoff list through the installed Mode 4 pipeline.
+
+    ``research_retention`` is passed straight through to the installed engine's
+    ``optimization_config`` (verified values: "full_trial_ledger", "selected_only",
+    "none" -- quantbt/core/research_audit.py::RESEARCH_RETENTION_LEVELS_V1). It
+    only controls an optional audit sidecar (walkforward.py's
+    ``_capture_research_records`` / ``self._research_full_trial_records`` and
+    ``_research_full_candidate_records``, extended once per fold and never
+    cleared for the engine instance's lifetime); it never affects the public
+    ``trial_table``, selection, scoring, or the final account. Defaults to the
+    prior hardcoded value so every existing caller (RA-05, RA-07) is
+    byte-identical.
+    """
     import warnings
 
     import optuna
@@ -548,7 +561,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
     optimization_config: dict[str, Any] = {
         "candidate_selection_metric": METRIC,
         "scoring_backend": "endpoint",
-        "research_retention": "full_trial_ledger",
+        "research_retention": research_retention,
         "inner_split_frequency": "quarterly",
         "inner_window_mode": "expanding",
         "inner_train_window": "365D",

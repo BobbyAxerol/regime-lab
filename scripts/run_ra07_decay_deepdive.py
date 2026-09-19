@@ -199,10 +199,22 @@ def run_single_arm(args) -> int:
             schedule = replace(schedule, arm="M4_CAL_MATCHED")
 
     try:
+        # research_retention="none": the confirmed 3rd OOM root cause. Traced in the
+        # installed engine (quantbt/walkforward.py): _capture_research_records extends
+        # self._research_full_trial_records / _research_full_candidate_records once per
+        # fold, for the WHOLE arm's fold sequence, never cleared -- guarded only by this
+        # flag (RA-05/07 default it to "full_trial_ledger", the heaviest level). This
+        # script's D1 computation reads none of it (fresh TrainingScorer replay + real
+        # equity_daily), and _trial_records() reads the SEPARATE compact wf_result.trial_table,
+        # which this flag does not affect. Real memtrace evidence: with the flag still at
+        # its RA-05/07 default, M4_CAL held a healthy 2.5-3.8GB sawtooth for ~15 minutes,
+        # then climbed to OOM territory as more folds accumulated into that ledger
+        # (run ra07decaydive-20260919T143621Z-38d3b0b5, killed by the watchdog at
+        # avail=384MB before any kernel OOM could fire).
         run_result = run_cutoff_walk_forward(
             ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
             strategy_class=ZeroSignalStrategy, optuna_trials=args.trials, seed=args.seed,
-            route=args.route)
+            route=args.route, research_retention="none")
     except Exception as exc:  # noqa: BLE001 -- one arm's failure must not crash the orchestrator
         run_result = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
     outcome = {"arm": args.run_arm, "ok": run_result.get("ok", False),
