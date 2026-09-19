@@ -1,0 +1,476 @@
+{
+  "schema": "regime_lab.ra07_decay_deepdive.v1",
+  "purpose": "user-requested follow-up: does M4_REGIME show LESS IS->OOS decay than calendar scheduling, with enough folds (>=10) to trust the pattern? Not a formal RA-0N phase -- extends RA-07's own D1 measurement, same function, more real folds.",
+  "window": [
+    "2021-01-01",
+    "2021-02-15"
+  ],
+  "regime_budget": 2,
+  "train_memory_days": 45,
+  "trials": 2,
+  "seed": 20260918,
+  "route": "event",
+  "cal_matched_forecast": {
+    "schema": "regime_lab.ra05_cal_matched_forecast.v1",
+    "method": "development-prefix trigger rate (from real emissions OUTSIDE the evaluation window) x measured per-selection wall time, matched to the registered 28/56/90/180-day menu -- never the window's own realized trigger count",
+    "development_window": [
+      "2021-02-15T00:00:00+00:00",
+      "2023-04-18T20:00:00+00:00"
+    ],
+    "development_days": 792,
+    "development_triggers": 17,
+    "development_trigger_source": "online controller: 17 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE']",
+    "trigger_rate_per_day": 0.021464646464646464,
+    "evaluation_window_days": 45,
+    "predicted_trigger_count_in_window": 0.9659090909090908,
+    "predicted_trigger_count_floored_to_one": false,
+    "per_selection_wall_seconds_measured": 83.886,
+    "predicted_regime_work_seconds": 83.886,
+    "menu": [
+      28,
+      56,
+      90,
+      180
+    ],
+    "chosen_test_days": 180,
+    "never_uses_realized_window_trigger_count": true
+  },
+  "arm_summaries": {
+    "M4_CAL": {
+      "meta": {
+        "ok": true,
+        "fold_count": 1,
+        "equity_last": 20353.791283401628
+      },
+      "mean_daily_return_decay": {
+        "n": 1,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 0,
+        "mean_signed_delta": -0.0012633204634874447,
+        "median_signed_delta": -0.0012633204634874447,
+        "min_signed_delta": -0.0012633204634874447,
+        "max_signed_delta": -0.0012633204634874447,
+        "mean_is": 0.001701504107981139,
+        "mean_oos": 0.00043818364449369434,
+        "per_fold_deltas": [
+          -0.0012633204634874447
+        ]
+      },
+      "sharpe_decay": {
+        "n": 1,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 0,
+        "mean_signed_delta": -7.879412080741632,
+        "median_signed_delta": -7.879412080741632,
+        "min_signed_delta": -7.879412080741632,
+        "max_signed_delta": -7.879412080741632,
+        "mean_is": 9.494111088327474,
+        "mean_oos": 1.6146990075858416,
+        "per_fold_deltas": [
+          -7.879412080741632
+        ]
+      }
+    },
+    "M4_CAL_MATCHED": {
+      "meta": {
+        "ok": true,
+        "fold_count": 1,
+        "equity_last": 20353.791283401628
+      },
+      "mean_daily_return_decay": {
+        "n": 1,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 0,
+        "mean_signed_delta": -0.0012633204634874447,
+        "median_signed_delta": -0.0012633204634874447,
+        "min_signed_delta": -0.0012633204634874447,
+        "max_signed_delta": -0.0012633204634874447,
+        "mean_is": 0.001701504107981139,
+        "mean_oos": 0.00043818364449369434,
+        "per_fold_deltas": [
+          -0.0012633204634874447
+        ]
+      },
+      "sharpe_decay": {
+        "n": 1,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 0,
+        "mean_signed_delta": -7.879412080741632,
+        "median_signed_delta": -7.879412080741632,
+        "min_signed_delta": -7.879412080741632,
+        "max_signed_delta": -7.879412080741632,
+        "mean_is": 9.494111088327474,
+        "mean_oos": 1.6146990075858416,
+        "per_fold_deltas": [
+          -7.879412080741632
+        ]
+      }
+    },
+    "M4_REGIME": {
+      "meta": {
+        "ok": true,
+        "fold_count": 2,
+        "equity_last": 20260.376636924917
+      },
+      "mean_daily_return_decay": {
+        "n": 2,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 1,
+        "mean_signed_delta": -0.0006031666635633428,
+        "median_signed_delta": 0.0002155603523998729,
+        "min_signed_delta": -0.0014218936795265585,
+        "max_signed_delta": 0.0002155603523998729,
+        "mean_is": 0.0008279857594981153,
+        "mean_oos": 0.00022481909593477243,
+        "per_fold_deltas": [
+          -0.0014218936795265585,
+          0.0002155603523998729
+        ]
+      },
+      "sharpe_decay": {
+        "n": 2,
+        "oos_worse_than_is": 1,
+        "oos_better_than_is": 1,
+        "mean_signed_delta": -3.1778043876799984,
+        "median_signed_delta": 2.0371352345805662,
+        "min_signed_delta": -8.392744009940563,
+        "max_signed_delta": 2.0371352345805662,
+        "mean_is": 3.956048481744066,
+        "mean_oos": 0.7782440940640678,
+        "per_fold_deltas": [
+          -8.392744009940563,
+          2.0371352345805662
+        ]
+      }
+    }
+  },
+  "all_d1_rows": [
+    {
+      "selection_id": "M4_CAL-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_CAL",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        45
+      ],
+      "metric_name": "mean_daily_return",
+      "metric_definition": "mean of r_d=E_d/E_d-1-1 over the window",
+      "unit": "fraction_per_day",
+      "raw_or_penalized": "raw",
+      "left_value": 0.001701504107981139,
+      "right_value": 0.00043818364449369434,
+      "signed_delta": -0.0012633204634874447,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_CAL-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_CAL",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        45
+      ],
+      "metric_name": "sharpe",
+      "metric_definition": "annualised, ddof=1, sqrt(365)",
+      "unit": "ratio",
+      "raw_or_penalized": "raw",
+      "left_value": 9.494111088327474,
+      "right_value": 1.6146990075858416,
+      "signed_delta": -7.879412080741632,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_CAL_MATCHED-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_CAL_MATCHED",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        45
+      ],
+      "metric_name": "mean_daily_return",
+      "metric_definition": "mean of r_d=E_d/E_d-1-1 over the window",
+      "unit": "fraction_per_day",
+      "raw_or_penalized": "raw",
+      "left_value": 0.001701504107981139,
+      "right_value": 0.00043818364449369434,
+      "signed_delta": -0.0012633204634874447,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_CAL_MATCHED-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_CAL_MATCHED",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        45
+      ],
+      "metric_name": "sharpe",
+      "metric_definition": "annualised, ddof=1, sqrt(365)",
+      "unit": "ratio",
+      "raw_or_penalized": "raw",
+      "left_value": 9.494111088327474,
+      "right_value": 1.6146990075858416,
+      "signed_delta": -7.879412080741632,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_REGIME-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_REGIME",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-02T12:00:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        33
+      ],
+      "metric_name": "mean_daily_return",
+      "metric_definition": "mean of r_d=E_d/E_d-1-1 over the window",
+      "unit": "fraction_per_day",
+      "raw_or_penalized": "raw",
+      "left_value": 0.001701504107981139,
+      "right_value": 0.0002796104284545804,
+      "signed_delta": -0.0014218936795265585,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_REGIME-0",
+      "theta_digest": "4b5bd1731c5f14f1",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_REGIME",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-01T00:00:00+00:00",
+        "2021-01-01T00:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-02T12:00:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        31,
+        33
+      ],
+      "metric_name": "sharpe",
+      "metric_definition": "annualised, ddof=1, sqrt(365)",
+      "unit": "ratio",
+      "raw_or_penalized": "raw",
+      "left_value": 9.494111088327474,
+      "right_value": 1.1013670783869107,
+      "signed_delta": -8.392744009940563,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 31,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_REGIME-1",
+      "theta_digest": "32a04d8abdc15641",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_REGIME",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-19T12:00:00+00:00",
+        "2021-02-02T12:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-02-02T12:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        44,
+        12
+      ],
+      "metric_name": "mean_daily_return",
+      "metric_definition": "mean of r_d=E_d/E_d-1-1 over the window",
+      "unit": "fraction_per_day",
+      "raw_or_penalized": "raw",
+      "left_value": -4.553258898490847e-05,
+      "right_value": 0.00017002776341496444,
+      "signed_delta": 0.0002155603523998729,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 44,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    },
+    {
+      "selection_id": "M4_REGIME-1",
+      "theta_digest": "32a04d8abdc15641",
+      "alpha": "A-SC",
+      "symbol": "BTCUSDT",
+      "arm": "M4_REGIME",
+      "selector_contract": "STOCK_MODE4_PLUS_ADMISSION_V1",
+      "comparison_kind": "D1_IS_TO_OOS",
+      "left_window": [
+        "2020-12-19T12:00:00+00:00",
+        "2021-02-02T12:00:00+00:00"
+      ],
+      "right_window": [
+        "2021-02-02T12:00:00+00:00",
+        "2021-02-14T23:59:00+00:00"
+      ],
+      "horizon": null,
+      "observed_days": [
+        44,
+        12
+      ],
+      "metric_name": "sharpe",
+      "metric_definition": "annualised, ddof=1, sqrt(365)",
+      "unit": "ratio",
+      "raw_or_penalized": "raw",
+      "left_value": -1.5820141248393413,
+      "right_value": 0.4551211097412248,
+      "signed_delta": 2.0371352345805662,
+      "validity_status": "OK",
+      "fills": null,
+      "campaigns_closed": null,
+      "campaigns_open": null,
+      "exposure_days": null,
+      "support_count": 11,
+      "regime_at_selection": null,
+      "regime_in_window": null,
+      "parameter_age": 0.0,
+      "diagnostic_only": true
+    }
+  ],
+  "market_partitions_used": [
+    "2020-12",
+    "2021-01",
+    "2021-02"
+  ],
+  "phase_wall_seconds": 457.6,
+  "smoke": true,
+  "protected_before": {
+    "git_status_porcelain": "",
+    "git_head": "880025f44d45120d9349472097489fab1751fce7",
+    "endpoint_sha256": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "lab_run_id": "ra07decaydive-20260919T092142Z-4066d47f",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T09:29:19.852559+00:00"
+}
