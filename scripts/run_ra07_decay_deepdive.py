@@ -54,12 +54,13 @@ LAB = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(LAB / "src"))
 
 from crypto_regime_lab.evidence.manifest import EvidenceWriter, new_lab_run_id  # noqa: E402
+from crypto_regime_lab.experiments.dynamic_fold_provider import (  # noqa: E402
+    ZeroSignalStrategy, engine_param_ranges, run_cutoff_walk_forward,
+)
 from crypto_regime_lab.ra.phase_common import protected_fingerprint, sh, utcnow, write_text_atomic  # noqa: E402
 from crypto_regime_lab.ra.ra05_arms import (  # noqa: E402
-    build_calendar_schedule, build_regime_schedule, classify_regime_trigger_reasons,
-    forecast_cal_matched_test_days,
+    build_calendar_schedule, build_regime_schedule, forecast_cal_matched_test_days,
 )
-from crypto_regime_lab.ra.ra05_discovery import run_one_arm  # noqa: E402
 from crypto_regime_lab.ra.ra05_market import EMISSIONS_ARTIFACT, load_real_bars, load_real_emissions  # noqa: E402
 from crypto_regime_lab.ra.ra07_decay import compute_d1_rows  # noqa: E402
 from crypto_regime_lab.safety.paths import SandboxPolicy  # noqa: E402
@@ -80,7 +81,33 @@ DEEPDIVE_REGIME_BUDGET = 10  # the user's requested floor exactly; reduced from 
 # other unrelated live processes were already holding ~4.6 GiB when that attempt ran)
 
 
-def build_d1_for_arm(*, prepared, alpha_id, symbol, arm_name, outcome, evidence_dir, lab_run_id):
+def _prepared_for_fold(frame: pd.DataFrame, *, fold_row: dict) -> "PreparedAccount":
+    """A FRESH PreparedAccount over a frame slice truncated just past this
+    fold's own cutoff -- never the full multi-month deep-dive frame.
+
+    Root cause of every OOM crash in this script's earlier attempts:
+    PreparedAccount._window(first) caches `self.frame.iloc[key:]` -- from
+    `first` (the fold's own train_start) all the way to the END of
+    whatever frame it was built from -- and prepares a FULL native engine
+    session over that whole slice, forever (`self._windows` is never
+    cleared). Reusing ONE PreparedAccount across every fold of a long
+    window means each fold adds another near-full-length cached window,
+    and an EARLY fold's slice is almost the entire frame. That accumulates
+    as O(fold_count x frame_length), which is exactly what scaled a 90-day/
+    2-3-fold run (cheap) into a 10-16.5-month/8-13-fold run (~5 GiB, OOM-
+    killed four times) -- independent of trial count or (within the range
+    tried) window length alone. TrainingScorer only ever needs
+    account_returns over [train_start, cutoff) (guide's own ~45-day train
+    window), so each fold gets its OWN small, disposable PreparedAccount
+    here instead of sharing one that never shrinks.
+    """
+    cutoff = pd.Timestamp(fold_row["test_start"])
+    buffer_end = cutoff + pd.Timedelta(days=2)
+    sliced = frame.loc[frame.index < buffer_end]
+    return PreparedAccount(sliced)
+
+
+def build_d1_for_arm(*, frame, alpha_id, symbol, arm_name, outcome, evidence_dir, lab_run_id):
     if not outcome.get("ok"):
         return [], {"ok": False, "error": outcome.get("error")}
     fold_table = outcome["run"].get("fold_selection_table") or []
@@ -90,11 +117,13 @@ def build_d1_for_arm(*, prepared, alpha_id, symbol, arm_name, outcome, evidence_
     for index, fold_row in enumerate(fold_table):
         deploy_end = (fold_table[index + 1]["test_start"] if index + 1 < len(fold_table)
                      else fold_row.get("test_end") or window_end_fallback)
+        fold_prepared = _prepared_for_fold(frame, fold_row=fold_row)
         rows.extend(compute_d1_rows(
-            prepared=prepared, alpha_id=alpha_id, symbol=symbol, arm=arm_name, fold_row=fold_row,
-            equity_daily=equity_daily, deploy_end=deploy_end,
+            prepared=fold_prepared, alpha_id=alpha_id, symbol=symbol, arm=arm_name,
+            fold_row=fold_row, equity_daily=equity_daily, deploy_end=deploy_end,
             evidence_dir=evidence_dir / arm_name / str(index), lab_run_id=lab_run_id,
             regime_at_selection=None))
+        del fold_prepared  # drop the reference now, don't wait for the loop to end
     return rows, {"ok": True, "fold_count": len(fold_table),
                  "equity_last": (outcome["run"].get("account") or {}).get("equity_last"),
                  "wall_seconds": outcome["run"].get("wall_seconds")}
@@ -123,12 +152,22 @@ def summarize(rows, *, metric_name):
 def run_single_arm(args) -> int:
     """One arm, one process. Writes a compact JSON (D1 rows + summary only,
     never the full fold table / account) to --out, then exits -- memory is
-    reclaimed by the OS the moment this process ends."""
+    reclaimed by the OS the moment this process ends.
+
+    Calls `run_cutoff_walk_forward` DIRECTLY instead of going through
+    `ra05_discovery.run_one_arm` -- `run_one_arm` unconditionally runs a
+    second pass (`score_fold_for_admission`) over every fold to build the
+    admission/funnel record, which this script never reads (`outcome
+    ["funnel"]`, `switches_admitted` etc. are used nowhere below -- grepped
+    to confirm before removing this call, not assumed). That second pass is
+    what was actually driving every OOM crash (see `_prepared_for_fold`'s
+    docstring for the mechanism); skipping it removes the single biggest
+    cost this script was paying for nothing.
+    """
     out_dir = Path(args.evidence_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     frame, partitions = load_real_bars(SYMBOL, start=args.data_load_start, end=args.window_end)
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
-    prepared = PreparedAccount(frame)
 
     if args.run_arm == "M4_REGIME":
         window_emissions = load_real_emissions(window_start=args.window_start,
@@ -137,21 +176,23 @@ def run_single_arm(args) -> int:
             window_emissions, window_start=args.window_start, window_end=args.window_end,
             train_memory_days=args.train_memory_days, min_gap_days=REGIME_MIN_GAP_DAYS,
             max_age_days=REGIME_MAX_AGE_DAYS, budget=args.regime_budget)
-        trigger_lookup = classify_regime_trigger_reasons(
-            schedule.cutoffs, window_emissions,
-            shared_initial=pd.Timestamp(args.window_start, tz="UTC").isoformat())
     else:
         schedule = build_calendar_schedule(args.window_start, args.window_end,
                                            test_days=args.test_days,
                                            train_memory_days=args.train_memory_days)
         if args.run_arm == "M4_CAL_MATCHED":
             schedule = replace(schedule, arm="M4_CAL_MATCHED")
-        trigger_lookup = None
 
-    outcome = run_one_arm(ALPHA_ID, frame, schedule, prepared=prepared, trials=args.trials,
-                          seed=args.seed, route=args.route, evidence_dir=out_dir / "cache",
-                          lab_run_id=args.lab_run_id, trigger_lookup=trigger_lookup)
-    d1_rows, meta = build_d1_for_arm(prepared=prepared, alpha_id=ALPHA_ID, symbol=SYMBOL,
+    try:
+        run_result = run_cutoff_walk_forward(
+            ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
+            strategy_class=ZeroSignalStrategy, optuna_trials=args.trials, seed=args.seed,
+            route=args.route)
+    except Exception as exc:  # noqa: BLE001 -- one arm's failure must not crash the orchestrator
+        run_result = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+    outcome = {"arm": args.run_arm, "ok": run_result.get("ok", False),
+              "error": run_result.get("error"), "run": run_result}
+    d1_rows, meta = build_d1_for_arm(frame=frame, alpha_id=ALPHA_ID, symbol=SYMBOL,
                                      arm_name=args.run_arm, outcome=outcome,
                                      evidence_dir=out_dir / "d1", lab_run_id=args.lab_run_id)
     result = {
