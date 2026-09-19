@@ -1,0 +1,41 @@
+{
+  "schema": "regime_lab.ra06_controller_examples.v1",
+  "threshold": 0.002,
+  "cooldown_days": 20,
+  "model_available": false,
+  "examples": [
+    {
+      "origin": "2021-01-08T00:00:00+00:00",
+      "decision": {
+        "schema": "regime_lab.ra06_request_search_decision.v1",
+        "cheap_score": {
+          "status": "NOT_APPLICABLE_INSUFFICIENT_SUPPORT",
+          "predicted_g": null
+        },
+        "request_search": false,
+        "veto_reasons": [
+          "NOT_APPLICABLE_INSUFFICIENT_SUPPORT"
+        ],
+        "note": "a vetoed request still means no search ran and nothing is charged here -- the charge-even-if-vetoed rule applies once a search DID run and its quality was consulted before deciding; that path is not exercised by a clean veto"
+      }
+    },
+    {
+      "origin": "2021-01-15T00:00:00+00:00",
+      "decision": {
+        "schema": "regime_lab.ra06_request_search_decision.v1",
+        "cheap_score": {
+          "status": "NOT_APPLICABLE_INSUFFICIENT_SUPPORT",
+          "predicted_g": null
+        },
+        "request_search": false,
+        "veto_reasons": [
+          "NOT_APPLICABLE_INSUFFICIENT_SUPPORT"
+        ],
+        "note": "a vetoed request still means no search ran and nothing is charged here -- the charge-even-if-vetoed rule applies once a search DID run and its quality was consulted before deciding; that path is not exercised by a clean veto"
+      }
+    }
+  ],
+  "lab_run_id": "ra06-20260919T035018Z-fbbe9520",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:52:57.647984+00:00"
+}

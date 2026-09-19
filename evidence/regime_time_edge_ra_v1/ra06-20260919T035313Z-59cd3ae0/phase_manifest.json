@@ -1,0 +1,51 @@
+{
+  "required_gates": [
+    "G06-PANEL",
+    "G06-MODEL",
+    "G06-SCOPE",
+    "G06-MANIFEST"
+  ],
+  "artifacts": [
+    {
+      "relpath": "panel_a.json",
+      "sha256": "d937e4586d913432cb9d7ff88222cd611613e6c7a2a137f1ef01b4f265c757b0",
+      "size_bytes": 7767
+    },
+    {
+      "relpath": "origins.json",
+      "sha256": "0bcc08eace08d3c1570d843e1f259baea847fe604a9a77c5f23bd1f1523d45d0",
+      "size_bytes": 921
+    },
+    {
+      "relpath": "panel_b.json",
+      "sha256": "6b254cedd25a1c1594f24d8a21014f8489955af9e95466b86d3275407f2563c4",
+      "size_bytes": 6041
+    },
+    {
+      "relpath": "model_ladder.json",
+      "sha256": "c36513dc77794b1e7ad63bdc80a9099502720f537eb73edb89781f91bb388cca",
+      "size_bytes": 571
+    },
+    {
+      "relpath": "controller_examples.json",
+      "sha256": "97b7f851798b778a8afb9a13a7749b8bc0c612aef3c2dbe98ec5cd8d917f411b",
+      "size_bytes": 3475
+    },
+    {
+      "relpath": "lock_decision.json",
+      "sha256": "e6c8151cf1a5a9c93ec951e89f5037d720b13c6450a8851a5c33c66f4b7afbff",
+      "size_bytes": 551
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "07c2ddd50f327d014491ba3710a00d5972af0806",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra06_review": "PENDING"
+  },
+  "schema": "regime_lab.ra06_manifest.v1",
+  "lab_run_id": "ra06-20260919T035313Z-59cd3ae0",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T04:31:42.396897+00:00"
+}

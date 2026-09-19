@@ -1,0 +1,21 @@
+{
+  "schema": "regime_lab.ra06_origins.v1",
+  "rule": "pure calendar grid: window_start + spacing_days*(i+1) for i in range(5), spacing_days=20 -- chosen before any branch ran, never adjusted after seeing an outcome",
+  "window_start": "2021-01-01",
+  "origin_count": 5,
+  "spacing_days": 20,
+  "origins": [
+    "2021-01-21T00:00:00+00:00",
+    "2021-02-10T00:00:00+00:00",
+    "2021-03-02T00:00:00+00:00",
+    "2021-03-22T00:00:00+00:00",
+    "2021-04-11T00:00:00+00:00"
+  ],
+  "horizon_days": 28,
+  "data_needed_through": "2021-05-09T00:00:00+00:00",
+  "excludes_window_start_itself": true,
+  "exclusion_reason": "an origin at window_start would make KEEP and REFIT identical by construction (both repeat the same initial search) -- not a real test of the refit decision",
+  "lab_run_id": "ra06-20260919T035313Z-59cd3ae0",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:53:13.886056+00:00"
+}
