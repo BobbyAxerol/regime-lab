@@ -1,0 +1,269 @@
+{
+  "schema": "regime_lab.ra06_panel_a.v1",
+  "source_run_id": "ra05-20260918T201236Z-de11db62",
+  "reused_no_new_engine_calls": true,
+  "rows": [
+    {
+      "origin": "2021-01-01T00:00:00+00:00",
+      "arm": "STATIC",
+      "fold_index": 0,
+      "candidate_id": "de096c115a3194ed",
+      "candidate_source_digest": "de096c115a3194ed",
+      "params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.560182021576615,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2020-11-17T00:00:00+00:00",
+        "train_end": "2020-12-31T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-03-31T23:59:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 90,
+        "return": 0.04341637093611683,
+        "equity_first": 20000.0,
+        "equity_last": 20868.327418722336
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-01-01T00:00:00+00:00",
+      "arm": "M4_CAL",
+      "fold_index": 0,
+      "candidate_id": "de096c115a3194ed",
+      "candidate_source_digest": "de096c115a3194ed",
+      "params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.560182021576615,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2020-11-17T00:00:00+00:00",
+        "train_end": "2020-12-31T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-03-02T00:00:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 60,
+        "return": 0.033263679703386506,
+        "equity_first": 20000.0,
+        "equity_last": 20665.27359406773
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-03-02T00:00:00+00:00",
+      "arm": "M4_CAL",
+      "fold_index": 1,
+      "candidate_id": "66444fb4205a4268",
+      "candidate_source_digest": "66444fb4205a4268",
+      "params": {
+        "coeff": 3,
+        "AP": 43,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 2.934120143250179,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2021-01-16T00:00:00+00:00",
+        "train_end": "2021-03-01T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-03-02T00:00:00+00:00",
+        "2021-03-31T23:59:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 30,
+        "return": 0.0013208170393581575,
+        "equity_first": 20649.468209358012,
+        "equity_last": 20676.74237882262
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-01-01T00:00:00+00:00",
+      "arm": "M4_CAL_MATCHED",
+      "fold_index": 0,
+      "candidate_id": "de096c115a3194ed",
+      "candidate_source_digest": "de096c115a3194ed",
+      "params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.560182021576615,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2020-11-17T00:00:00+00:00",
+        "train_end": "2020-12-31T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-26T00:00:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 56,
+        "return": 0.02610108843562342,
+        "equity_first": 20000.0,
+        "equity_last": 20522.021768712468
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-02-26T00:00:00+00:00",
+      "arm": "M4_CAL_MATCHED",
+      "fold_index": 1,
+      "candidate_id": "66444fb4205a4268",
+      "candidate_source_digest": "66444fb4205a4268",
+      "params": {
+        "coeff": 3,
+        "AP": 43,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.0806722997848968,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2021-01-12T00:00:00+00:00",
+        "train_end": "2021-02-25T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-02-26T00:00:00+00:00",
+        "2021-03-31T23:59:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 34,
+        "return": 0.001442944810823077,
+        "equity_first": 20497.20958213272,
+        "equity_last": 20526.78592433561
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-01-01T00:00:00+00:00",
+      "arm": "M4_REGIME",
+      "fold_index": 0,
+      "candidate_id": "de096c115a3194ed",
+      "candidate_source_digest": "de096c115a3194ed",
+      "params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.560182021576615,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2020-11-17T00:00:00+00:00",
+        "train_end": "2020-12-31T23:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-02T12:00:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 33,
+        "return": 0.018958611287793525,
+        "equity_first": 20000.0,
+        "equity_last": 20379.172225755872
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-02-02T12:00:00+00:00",
+      "arm": "M4_REGIME",
+      "fold_index": 1,
+      "candidate_id": "32a04d8abdc15641",
+      "candidate_source_digest": "32a04d8abdc15641",
+      "params": {
+        "coeff": 7,
+        "AP": 49,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 2.9858014240166195,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2020-12-19T12:00:00+00:00",
+        "train_end": "2021-02-02T11:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-02-02T12:00:00+00:00",
+        "2021-03-19T12:00:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 45,
+        "return": 0.02374017762082392,
+        "equity_first": 20454.076768643983,
+        "equity_last": 20939.66018420156
+      },
+      "status": "OK"
+    },
+    {
+      "origin": "2021-03-19T12:00:00+00:00",
+      "arm": "M4_REGIME",
+      "fold_index": 2,
+      "candidate_id": "009ec1b12c3a30a9",
+      "candidate_source_digest": "009ec1b12c3a30a9",
+      "params": {
+        "coeff": 7,
+        "AP": 12,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "training_objective": 3.9583285906339776,
+      "candidate_count_at_selection": 2,
+      "available_context": {
+        "train_start": "2021-02-02T12:00:00+00:00",
+        "train_end": "2021-03-19T11:59:00+00:00"
+      },
+      "deployment_window": [
+        "2021-03-19T12:00:00+00:00",
+        "2021-03-31T23:59:00+00:00"
+      ],
+      "matured_outcome": {
+        "status": "OK",
+        "days": 12,
+        "return": -0.004524586392608332,
+        "equity_first": 20954.14509238428,
+        "equity_last": 20859.336252630535
+      },
+      "status": "OK"
+    }
+  ],
+  "row_count": 8,
+  "unique_candidates": 4,
+  "matured_ok_count": 8,
+  "lab_run_id": "ra06-20260919T035018Z-fbbe9520",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:50:18.113402+00:00"
+}

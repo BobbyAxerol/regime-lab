@@ -1,0 +1,73 @@
+{
+  "schema": "regime_lab.ra_phase_gate.v1",
+  "phase_id": "RA-06",
+  "guide_version": "RA-GUIDE-1.0",
+  "registration_digest": null,
+  "source_dependency_digest": null,
+  "implementation_status": "COMPLETE",
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "required_gates": [
+    "G06-PANEL",
+    "G06-MODEL",
+    "G06-SCOPE",
+    "G06-MANIFEST"
+  ],
+  "gate_results": [
+    {
+      "gate_id": "G06-PANEL",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G06-MODEL",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G06-SCOPE",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G06-MANIFEST",
+      "status": "PASS",
+      "reasons": []
+    }
+  ],
+  "mandatory_tests": [
+    {
+      "command": "scripts/run_ra06.py --pytest-xml /tmp/claude-0/-root-bobby-pool-alpha-lab-regime-model-quantbt/167d39ac-87ec-42b5-bcdd-8ed5b7c149dc/scratchpad/ra06_junit.xml --smoke",
+      "tests": 142,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "actual_run_refs": [
+    "panel_b.json",
+    "model_ladder.json",
+    "lock_decision.json"
+  ],
+  "verified_reuse_refs": [
+    "ra06_panel_a (RA-05 real evidence, no new engine calls)",
+    "dynamic_fold_provider.run_cutoff_walk_forward (RF-04/RA-05)"
+  ],
+  "measured_resources": {
+    "phase_wall_s": 159.6
+  },
+  "protected_state_before_ref": "baseline/protected_before",
+  "protected_state_after_ref": "protected status: clean",
+  "open_blockers": [],
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "notes": [
+    "verify ran over the frozen artifact set incl. this receipt"
+  ],
+  "lab_run_id": "ra06-20260919T035018Z-fbbe9520",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:52:57.683783+00:00"
+}

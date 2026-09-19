@@ -1,0 +1,68 @@
+{
+  "schema": "regime_lab.ra06_model_ladder.v1",
+  "status": "FIT_ATTEMPTED",
+  "support": 2,
+  "min_required": 2,
+  "age_only": {
+    "schema": "regime_lab.ra06_model_fit.v1",
+    "label": "AGE_ONLY",
+    "feature_names": [
+      "intercept",
+      "age_days"
+    ],
+    "n": 2,
+    "inner_cv": {
+      "schema": "regime_lab.ra06_inner_cv.v1",
+      "method": "leave_one_origin_out",
+      "alpha_grid": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "per_alpha_loo_mse": {
+        "0.1": null,
+        "1.0": null,
+        "10.0": null
+      },
+      "selected_alpha": null,
+      "selected_loo_mse": null
+    },
+    "full_sample_beta": null,
+    "calibrated_probability_language_used": false
+  },
+  "age_context": {
+    "schema": "regime_lab.ra06_model_fit.v1",
+    "label": "AGE_CONTEXT",
+    "feature_names": [
+      "intercept",
+      "age_days",
+      "realized_vol_20d",
+      "regime_transitions_since_incumbent",
+      "incumbent_trailing_return"
+    ],
+    "n": 2,
+    "inner_cv": {
+      "schema": "regime_lab.ra06_inner_cv.v1",
+      "method": "leave_one_origin_out",
+      "alpha_grid": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "per_alpha_loo_mse": {
+        "0.1": null,
+        "1.0": null,
+        "10.0": null
+      },
+      "selected_alpha": null,
+      "selected_loo_mse": null
+    },
+    "full_sample_beta": null,
+    "calibrated_probability_language_used": false
+  },
+  "primary_contribution_loo_mse_reduction": null,
+  "primary_contribution_note": "AGE_CONTEXT's inner-CV MSE improvement over AGE_ONLY at EQUAL budget/admission/execution -- guide 10.6: never use AGE_CONTEXT beating a slow calendar as standalone evidence about regime; this compares AGE_CONTEXT to AGE_ONLY only",
+  "lab_run_id": "ra06-20260919T035018Z-fbbe9520",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:52:57.646516+00:00"
+}

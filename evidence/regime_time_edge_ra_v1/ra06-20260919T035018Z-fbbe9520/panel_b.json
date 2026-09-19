@@ -1,0 +1,92 @@
+{
+  "schema": "regime_lab.ra06_panel_b.v1",
+  "capability_status": "EXECUTED",
+  "window_start": "2021-01-01",
+  "horizon_days": 3,
+  "train_memory_days": 20,
+  "trials": 2,
+  "seed": 20260918,
+  "route": "event",
+  "state_fork_method": "deterministic replay prefix through run_cutoff_walk_forward -- no native QuantBT checkpoint/clone-state capability exists in this install (guide 10.3's sanctioned fallback)",
+  "keep_run": {
+    "ok": true,
+    "wall_seconds": 45.141,
+    "fold_count": 1
+  },
+  "rows": [
+    {
+      "origin": "2021-01-08T00:00:00+00:00",
+      "horizon_end": "2021-01-11T00:00:00+00:00",
+      "horizon_days": 3,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": 0.011154863668110018,
+        "e_t_keep": 20593.226647669042,
+        "e_t_refit": 20593.226647669042,
+        "e_keep_h": 20367.200120423164,
+        "e_refit_h": 20596.914756164402
+      },
+      "features": {
+        "age_days": 7.0,
+        "realized_vol_20d": 0.0015399470096428656,
+        "regime_transitions_since_incumbent": 0,
+        "incumbent_trailing_return": 0.029661332383452033
+      },
+      "keep_incumbent_params": {
+        "coeff": 3,
+        "AP": 37,
+        "alpha.condition_threshold": 50,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 7,
+        "AP": 49,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 45.141,
+      "refit_wall_seconds": 68.354
+    },
+    {
+      "origin": "2021-01-15T00:00:00+00:00",
+      "horizon_end": "2021-01-18T00:00:00+00:00",
+      "horizon_days": 3,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": 0.0,
+        "e_t_keep": 20347.836625292257,
+        "e_t_refit": 20347.836625292257,
+        "e_keep_h": 20347.836625292257,
+        "e_refit_h": 20347.836625292257
+      },
+      "features": {
+        "age_days": 14.0,
+        "realized_vol_20d": 0.00208849593249461,
+        "regime_transitions_since_incumbent": 0,
+        "incumbent_trailing_return": 0.017391831264612856
+      },
+      "keep_incumbent_params": {
+        "coeff": 3,
+        "AP": 37,
+        "alpha.condition_threshold": 50,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": null,
+      "keep_wall_seconds": 45.141,
+      "refit_wall_seconds": 45.661
+    }
+  ],
+  "row_count": 2,
+  "ok_count": 2,
+  "censored_count": 0,
+  "lab_run_id": "ra06-20260919T035018Z-fbbe9520",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T03:52:57.644374+00:00"
+}
