@@ -64,6 +64,7 @@ from crypto_regime_lab.ra.ra05_arms import (  # noqa: E402
 from crypto_regime_lab.ra.ra05_market import EMISSIONS_ARTIFACT, load_real_bars, load_real_emissions  # noqa: E402
 from crypto_regime_lab.ra.ra07_decay import compute_d1_rows  # noqa: E402
 from crypto_regime_lab.safety.paths import SandboxPolicy  # noqa: E402
+from crypto_regime_lab.safety.process import lab_worker_env  # noqa: E402
 from crypto_regime_lab.time_edge.execution import PreparedAccount  # noqa: E402
 
 STUDY = "regime_time_edge_ra_v1"
@@ -239,6 +240,20 @@ def orchestrate(args) -> int:
     scratch.mkdir(parents=True, exist_ok=True)
     py = sys.executable
     script = str(Path(__file__).resolve())
+    # Root cause of the OOM that survived BOTH the PreparedAccount fix and the
+    # trials cut: every arm subprocess inherited this orchestrator's own
+    # environment as-is, with no OMP_NUM_THREADS/OPENBLAS_NUM_THREADS/
+    # MKL_NUM_THREADS/NUMBA_NUM_THREADS limit -- on this 4-CPU box, BLAS/Numba
+    # were therefore free to fan out across all 4 cores for array ops inside
+    # the native engine, each thread holding its own working buffers. That
+    # matches what was actually observed far better than gradual accumulation
+    # does: RSS jumped ~1.6 GiB -> ~3.6 GiB within seconds, not a steady climb.
+    # The lab already has a dedicated utility for exactly this
+    # (safety/process.py::lab_worker_env, built from the registered
+    # sandbox_policy.json resource_budget.cpu_limit=2) -- this script simply
+    # never called it when spawning subprocesses. Fixed by passing it as the
+    # subprocess env instead of inventing a new thread-limiting mechanism.
+    worker_env = lab_worker_env(policy)
 
     def spawn(arm, test_days=None):
         out_path = scratch / f"{arm}.json"
@@ -250,7 +265,7 @@ def orchestrate(args) -> int:
               "--evidence-dir", str(scratch / arm), "--out", str(out_path)]
         if test_days is not None:
             cmd += ["--test-days", str(test_days)]
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, env=worker_env)
         return json.loads(out_path.read_text())
 
     with writer.attempt("decay_deepdive") as att:
