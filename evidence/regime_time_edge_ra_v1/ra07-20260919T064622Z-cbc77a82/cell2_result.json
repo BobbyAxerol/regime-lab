@@ -1,0 +1,2263 @@
+{
+  "capability_status": "EXECUTED",
+  "symbol": "ETHUSDT",
+  "alpha_id": "A-SC",
+  "transfer_kind": "cross_symbol_same_alpha_shared_btc_derived_regime_tape",
+  "transfer_kind_note": "A-SC trades ETHUSDT using the SAME BTC-derived regime emissions tape as cell 1 (BTCUSDT) -- this tests whether a BTC-fit regime model's TIMING transfers to trading a different, correlated symbol, not whether an ETH-fit regime model would help ETH.",
+  "market_partitions_used": [
+    "2020-12",
+    "2021-01"
+  ],
+  "per_selection_wall_seconds_measured": 40.086,
+  "cal_matched_forecast": {
+    "schema": "regime_lab.ra05_cal_matched_forecast.v1",
+    "method": "development-prefix trigger rate (from real emissions OUTSIDE the evaluation window) x measured per-selection wall time, matched to the registered 28/56/90/180-day menu -- never the window's own realized trigger count",
+    "development_window": [
+      "2021-02-01T04:00:00+00:00",
+      "2023-04-18T20:00:00+00:00"
+    ],
+    "development_days": 806,
+    "development_triggers": 18,
+    "development_trigger_source": "online controller: 18 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE']",
+    "trigger_rate_per_day": 0.022332506203473945,
+    "evaluation_window_days": 7,
+    "predicted_trigger_count_in_window": 0.15632754342431762,
+    "predicted_trigger_count_floored_to_one": false,
+    "per_selection_wall_seconds_measured": 40.086,
+    "predicted_regime_work_seconds": 40.086,
+    "menu": [
+      28,
+      56,
+      90,
+      180
+    ],
+    "chosen_test_days": 180,
+    "never_uses_realized_window_trigger_count": true
+  },
+  "arms": {
+    "STATIC": {
+      "arm": "STATIC",
+      "schedule": {
+        "arm": "STATIC",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 180-day test spacing, 180-day training memory -- STATIC diagnostic: one selection, never refits",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 6,
+            "AP": 20,
+            "alpha.condition_threshold": 60,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 6,
+          "AP": 20,
+          "alpha.condition_threshold": 60,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-4b5bd1731c5f14f1",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 0.1239531390036282,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 8.793598318196073
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20529.264099364904,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              19936.67998410103
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              19964.323467004808
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20472.03057945092
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20518.40988432789
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20540.07307750041
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20654.47628506756
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20529.264099364904
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 3.070765392803117,
+            "total_return_pct": 2.646320496824517,
+            "num_trades": 20,
+            "max_drawdown_pct": 2.876472113687435
+          },
+          "entries": 10,
+          "engine_fill_count": 20,
+          "fills": [
+            {
+              "bar_index": 44739,
+              "side": 1,
+              "qty": 2.6687660959955166,
+              "price": 748.104803,
+              "fee": 0.798606693799122,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45129,
+              "side": -1,
+              "qty": 2.6687660959955166,
+              "price": 736.136379,
+              "fee": 0.7858303241216426,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45326,
+              "side": 1,
+              "qty": 2.6974899855684287,
+              "price": 740.554048,
+              "fee": 0.7990548513008646,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45700,
+              "side": -1,
+              "qty": 2.6974899855684287,
+              "price": 730.096983,
+              "fee": 0.7877717200544894,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46204,
+              "side": 1,
+              "qty": 2.728512960436562,
+              "price": 732.583251,
+              "fee": 0.7995451579809004,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46684,
+              "side": -1,
+              "qty": 2.728512960436562,
+              "price": 726.0773849999999,
+              "fee": 0.7924446221009549,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46839,
+              "side": 1,
+              "qty": 2.6753705388196267,
+              "price": 748.184811,
+              "fee": 0.8006686403766923,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47379,
+              "side": -1,
+              "qty": 2.6753705388196267,
+              "price": 766.353357,
+              "fee": 0.8201116774573278,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47689,
+              "side": 1,
+              "qty": 2.556825445526834,
+              "price": 781.358128,
+              "fee": 0.7991185374958452,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49476,
+              "side": -1,
+              "qty": 2.556825445526834,
+              "price": 1025.857404,
+              "fee": 1.0491753256117207,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49858,
+              "side": 1,
+              "qty": 1.913106693960322,
+              "price": 1043.00429,
+              "fee": 0.7981513956113333,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50354,
+              "side": -1,
+              "qty": 1.913106693960322,
+              "price": 1007.649225,
+              "fee": 0.7710961910045724,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50403,
+              "side": 1,
+              "qty": 1.880989776820563,
+              "price": 1062.0361930000001,
+              "fee": 0.7990716886585724,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50624,
+              "side": -1,
+              "qty": 1.880989776820563,
+              "price": 1027.7272169999999,
+              "fee": 0.7732577554148993,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51122,
+              "side": 1,
+              "qty": 1.893939393939394,
+              "price": 1054.525442,
+              "fee": 0.7988829106060608,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51926,
+              "side": -1,
+              "qty": 1.893939393939394,
+              "price": 1075.522437,
+              "fee": 0.8147897250000001,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52105,
+              "side": 1,
+              "qty": 1.7820547090795689,
+              "price": 1120.152004,
+              "fee": 0.7984688614452464,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53751,
+              "side": -1,
+              "qty": 1.7820547090795689,
+              "price": 1186.121376,
+              "fee": 0.8454932734562952,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54053,
+              "side": 1,
+              "qty": 1.6403526758253024,
+              "price": 1220.632051,
+              "fee": 0.8009068204223909,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54409,
+              "side": -1,
+              "qty": 1.6403526758253024,
+              "price": 1174.5825300000001,
+              "fee": 0.7706918384252616,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 20,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 40.086,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "STATIC-0",
+          "arm": "STATIC",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "4b5bd1731c5f14f1",
+          "raw_selector": {
+            "params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 0.1239531390036282,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "4b5bd1731c5f14f1",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "4b5bd1731c5f14f1",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_CAL": {
+      "arm": "M4_CAL",
+      "schedule": {
+        "arm": "M4_CAL",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00",
+          "2021-01-05T00:00:00+00:00"
+        ],
+        "count": 2,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 4-day test spacing, 180-day training memory",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 6,
+            "AP": 20,
+            "alpha.condition_threshold": 60,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "1": {
+            "coeff": 3,
+            "AP": 58,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 3,
+          "AP": 58,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-3198a346c9e72fe2",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-04T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 0.1239531390036282,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 13.583110589986354
+          },
+          {
+            "fold_id": 1,
+            "train_start": "2020-12-16T00:00:00+00:00",
+            "train_end": "2021-01-04T23:59:00+00:00",
+            "test_start": "2021-01-05T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 3,
+              "AP": 58,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 6.68424032487981,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 21.54043522119151
+          }
+        ],
+        "trial_count": 4,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 6,
+          "event_scorer_calls": 6
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20586.28402672709,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              19936.67998410103
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              19964.323467004808
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20472.03057945092
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20518.40988432789
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20452.30272177464
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20561.197836259144
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20586.28402672709
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 3.4715104880962406,
+            "total_return_pct": 2.931420133635454,
+            "num_trades": 15,
+            "max_drawdown_pct": 2.622520037070244
+          },
+          "entries": 8,
+          "engine_fill_count": 15,
+          "fills": [
+            {
+              "bar_index": 44739,
+              "side": 1,
+              "qty": 2.6687660959955166,
+              "price": 748.104803,
+              "fee": 0.798606693799122,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45129,
+              "side": -1,
+              "qty": 2.6687660959955166,
+              "price": 736.136379,
+              "fee": 0.7858303241216426,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45326,
+              "side": 1,
+              "qty": 2.6974899855684287,
+              "price": 740.554048,
+              "fee": 0.7990548513008646,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45700,
+              "side": -1,
+              "qty": 2.6974899855684287,
+              "price": 730.096983,
+              "fee": 0.7877717200544894,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46204,
+              "side": 1,
+              "qty": 2.728512960436562,
+              "price": 732.583251,
+              "fee": 0.7995451579809004,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46684,
+              "side": -1,
+              "qty": 2.728512960436562,
+              "price": 726.0773849999999,
+              "fee": 0.7924446221009549,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46839,
+              "side": 1,
+              "qty": 2.6753705388196267,
+              "price": 748.184811,
+              "fee": 0.8006686403766923,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47379,
+              "side": -1,
+              "qty": 2.6753705388196267,
+              "price": 766.353357,
+              "fee": 0.8201116774573278,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47689,
+              "side": 1,
+              "qty": 2.556825445526834,
+              "price": 781.358128,
+              "fee": 0.7991185374958452,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49476,
+              "side": -1,
+              "qty": 2.556825445526834,
+              "price": 1025.857404,
+              "fee": 1.0491753256117207,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49858,
+              "side": 1,
+              "qty": 1.913106693960322,
+              "price": 1043.00429,
+              "fee": 0.7981513956113333,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50354,
+              "side": -1,
+              "qty": 1.913106693960322,
+              "price": 1007.649225,
+              "fee": 0.7710961910045724,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50403,
+              "side": 1,
+              "qty": 1.880989776820563,
+              "price": 1062.0361930000001,
+              "fee": 0.7990716886585724,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50624,
+              "side": -1,
+              "qty": 1.880989776820563,
+              "price": 1027.7272169999999,
+              "fee": 0.7732577554148993,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52511,
+              "side": 1,
+              "qty": 1.7324717173992132,
+              "price": 1149.3249210000001,
+              "fee": 0.7964691678938342,
+              "tag": "entry"
+            }
+          ],
+          "fill_count": 15,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00",
+          "2021-01-05T00:00:00+00:00"
+        ],
+        "fold_count": 2,
+        "wall_seconds": 63.509,
+        "trial_records_count": 4
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL-0",
+          "arm": "M4_CAL",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "4b5bd1731c5f14f1",
+          "raw_selector": {
+            "params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 0.1239531390036282,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "4b5bd1731c5f14f1",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        },
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL-1",
+          "arm": "M4_CAL",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "CALENDAR",
+          "request_time": "2021-01-05T00:00:00+00:00",
+          "train_cutoff": "2021-01-04T23:59:00+00:00",
+          "selected_time": "2021-01-05T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "3198a346c9e72fe2",
+          "raw_selector": {
+            "params": {
+              "coeff": 3,
+              "AP": 58,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 6.68424032487981,
+            "candidate_count": 2
+          },
+          "admission_decision": "KEEP_INCUMBENT",
+          "admission_reason": "only 0 finite subperiod shards of 3, need >= 2",
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": false,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-05T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-05T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": "4b5bd1731c5f14f1",
+          "candidate_version": "3198a346c9e72fe2",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 1
+          }
+        }
+      ],
+      "final_incumbent_version": "4b5bd1731c5f14f1",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 1
+    },
+    "M4_CAL_MATCHED": {
+      "arm": "M4_CAL_MATCHED",
+      "schedule": {
+        "arm": "M4_CAL_MATCHED",
+        "kind": "calendar",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "registered CalendarSpec cadence: first cutoff 2021-01-01, 180-day test spacing, 180-day training memory",
+        "diagnostics": {}
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 6,
+            "AP": 20,
+            "alpha.condition_threshold": 60,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 6,
+          "AP": 20,
+          "alpha.condition_threshold": 60,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-4b5bd1731c5f14f1",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 0.1239531390036282,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 8.793598318196073
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20529.264099364904,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              19936.67998410103
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              19964.323467004808
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20472.03057945092
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20518.40988432789
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20540.07307750041
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20654.47628506756
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20529.264099364904
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 3.070765392803117,
+            "total_return_pct": 2.646320496824517,
+            "num_trades": 20,
+            "max_drawdown_pct": 2.876472113687435
+          },
+          "entries": 10,
+          "engine_fill_count": 20,
+          "fills": [
+            {
+              "bar_index": 44739,
+              "side": 1,
+              "qty": 2.6687660959955166,
+              "price": 748.104803,
+              "fee": 0.798606693799122,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45129,
+              "side": -1,
+              "qty": 2.6687660959955166,
+              "price": 736.136379,
+              "fee": 0.7858303241216426,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45326,
+              "side": 1,
+              "qty": 2.6974899855684287,
+              "price": 740.554048,
+              "fee": 0.7990548513008646,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45700,
+              "side": -1,
+              "qty": 2.6974899855684287,
+              "price": 730.096983,
+              "fee": 0.7877717200544894,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46204,
+              "side": 1,
+              "qty": 2.728512960436562,
+              "price": 732.583251,
+              "fee": 0.7995451579809004,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46684,
+              "side": -1,
+              "qty": 2.728512960436562,
+              "price": 726.0773849999999,
+              "fee": 0.7924446221009549,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46839,
+              "side": 1,
+              "qty": 2.6753705388196267,
+              "price": 748.184811,
+              "fee": 0.8006686403766923,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47379,
+              "side": -1,
+              "qty": 2.6753705388196267,
+              "price": 766.353357,
+              "fee": 0.8201116774573278,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47689,
+              "side": 1,
+              "qty": 2.556825445526834,
+              "price": 781.358128,
+              "fee": 0.7991185374958452,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49476,
+              "side": -1,
+              "qty": 2.556825445526834,
+              "price": 1025.857404,
+              "fee": 1.0491753256117207,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49858,
+              "side": 1,
+              "qty": 1.913106693960322,
+              "price": 1043.00429,
+              "fee": 0.7981513956113333,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50354,
+              "side": -1,
+              "qty": 1.913106693960322,
+              "price": 1007.649225,
+              "fee": 0.7710961910045724,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50403,
+              "side": 1,
+              "qty": 1.880989776820563,
+              "price": 1062.0361930000001,
+              "fee": 0.7990716886585724,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50624,
+              "side": -1,
+              "qty": 1.880989776820563,
+              "price": 1027.7272169999999,
+              "fee": 0.7732577554148993,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51122,
+              "side": 1,
+              "qty": 1.893939393939394,
+              "price": 1054.525442,
+              "fee": 0.7988829106060608,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51926,
+              "side": -1,
+              "qty": 1.893939393939394,
+              "price": 1075.522437,
+              "fee": 0.8147897250000001,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52105,
+              "side": 1,
+              "qty": 1.7820547090795689,
+              "price": 1120.152004,
+              "fee": 0.7984688614452464,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53751,
+              "side": -1,
+              "qty": 1.7820547090795689,
+              "price": 1186.121376,
+              "fee": 0.8454932734562952,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54053,
+              "side": 1,
+              "qty": 1.6403526758253024,
+              "price": 1220.632051,
+              "fee": 0.8009068204223909,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54409,
+              "side": -1,
+              "qty": 1.6403526758253024,
+              "price": 1174.5825300000001,
+              "fee": 0.7706918384252616,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 20,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 39.217,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_CAL_MATCHED-0",
+          "arm": "M4_CAL_MATCHED",
+          "alpha_id": "A-SC",
+          "observation_available": true,
+          "model_ready": true,
+          "semantic_transition": false,
+          "eligibility": true,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "4b5bd1731c5f14f1",
+          "raw_selector": {
+            "params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 0.1239531390036282,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "4b5bd1731c5f14f1",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "4b5bd1731c5f14f1",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    },
+    "M4_REGIME": {
+      "arm": "M4_REGIME",
+      "schedule": {
+        "arm": "M4_REGIME",
+        "kind": "regime",
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "count": 1,
+        "train_memory_days": 20,
+        "train_memory_rule": "rolling 20 days",
+        "source": "online controller: 0 triggers, no forced count; reasons [] -- shared initial cutoff 2021-01-01T00:00:00+00:00 prepended so M4_REGIME starts from the SAME initial selection as the other arms (guide 3.1: STATIC/all arms share initial selection)",
+        "diagnostics": {
+          "min_gap_days": 45.0,
+          "max_age_days": 180.0,
+          "budget": 2,
+          "eligibility_filter": "decision_eligible=True and quality_status in ('OK',)"
+        }
+      },
+      "ok": true,
+      "run": {
+        "alpha_id": "A-SC",
+        "route": "event",
+        "requested": {
+          "mode": "mode_4_is_only_robust",
+          "schedule": "per_fold_causal",
+          "metric": "is_only_robust",
+          "optuna_trials_per_cutoff": 2,
+          "seed": 20260918,
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          },
+          "account_capital": 20000.0,
+          "alloc_per_trade": 0.1,
+          "train_memory_days": 20
+        },
+        "ok": true,
+        "error": null,
+        "params_by_fold": {
+          "0": {
+            "coeff": 6,
+            "AP": 20,
+            "alpha.condition_threshold": 60,
+            "novolumedata": false,
+            "src_col": "close"
+          }
+        },
+        "selected_params": {
+          "coeff": 6,
+          "AP": 20,
+          "alpha.condition_threshold": 60,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "selected_digest": "pv-4b5bd1731c5f14f1",
+        "fold_selection_table": [
+          {
+            "fold_id": 0,
+            "train_start": "2020-12-12T00:00:00+00:00",
+            "train_end": "2020-12-31T23:59:00+00:00",
+            "test_start": "2021-01-01T00:00:00+00:00",
+            "test_end": "2021-01-07T23:59:00+00:00",
+            "selected_params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "selected_is_objective": 0.1239531390036282,
+            "candidate_count": 2,
+            "outer_oos_used_for_selection": false,
+            "causality_claim": "strict_fold_local_retraining",
+            "outer_oos_metric": 8.793598318196073
+          }
+        ],
+        "trial_count": 2,
+        "oos_used_for_selection": false,
+        "validation_claim": "strict_fold_local_retraining",
+        "causality_claim": "strict_fold_local_retraining",
+        "scoring_backend": "endpoint",
+        "candidate_selection_metric": "is_only_robust",
+        "optimization_mode": "mode_4_is_only_robust",
+        "optimization_schedule": "per_fold_causal",
+        "trace": {
+          "optimization_mode": "mode_4_is_only_robust",
+          "optimization_schedule": "per_fold_causal",
+          "scoring_backend": "endpoint",
+          "candidate_selection_metric": "is_only_robust",
+          "resolved_evaluator": "lab_event_account_scorer",
+          "event_account_runs": 3,
+          "event_scorer_calls": 3
+        },
+        "resolved_evaluator": "lab_event_account_scorer",
+        "account": {
+          "status": "EVALUATED",
+          "equity_last": 20529.264099364904,
+          "equity_first": 20000.0,
+          "equity_daily": [
+            [
+              "2020-12-01T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-02T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-03T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-04T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-05T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-06T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-07T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-08T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-09T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-10T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-11T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-12T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-13T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-14T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-15T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-16T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-17T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-18T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-19T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-20T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-21T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-22T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-23T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-24T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-25T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-26T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-27T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-28T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-29T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-30T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2020-12-31T00:00:00+00:00",
+              20000.0
+            ],
+            [
+              "2021-01-01T00:00:00+00:00",
+              19936.67998410103
+            ],
+            [
+              "2021-01-02T00:00:00+00:00",
+              19964.323467004808
+            ],
+            [
+              "2021-01-03T00:00:00+00:00",
+              20472.03057945092
+            ],
+            [
+              "2021-01-04T00:00:00+00:00",
+              20518.40988432789
+            ],
+            [
+              "2021-01-05T00:00:00+00:00",
+              20540.07307750041
+            ],
+            [
+              "2021-01-06T00:00:00+00:00",
+              20654.47628506756
+            ],
+            [
+              "2021-01-07T00:00:00+00:00",
+              20529.264099364904
+            ]
+          ],
+          "engine_report": {
+            "sharpe": 3.070765392803117,
+            "total_return_pct": 2.646320496824517,
+            "num_trades": 20,
+            "max_drawdown_pct": 2.876472113687435
+          },
+          "entries": 10,
+          "engine_fill_count": 20,
+          "fills": [
+            {
+              "bar_index": 44739,
+              "side": 1,
+              "qty": 2.6687660959955166,
+              "price": 748.104803,
+              "fee": 0.798606693799122,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45129,
+              "side": -1,
+              "qty": 2.6687660959955166,
+              "price": 736.136379,
+              "fee": 0.7858303241216426,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 45326,
+              "side": 1,
+              "qty": 2.6974899855684287,
+              "price": 740.554048,
+              "fee": 0.7990548513008646,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 45700,
+              "side": -1,
+              "qty": 2.6974899855684287,
+              "price": 730.096983,
+              "fee": 0.7877717200544894,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46204,
+              "side": 1,
+              "qty": 2.728512960436562,
+              "price": 732.583251,
+              "fee": 0.7995451579809004,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 46684,
+              "side": -1,
+              "qty": 2.728512960436562,
+              "price": 726.0773849999999,
+              "fee": 0.7924446221009549,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 46839,
+              "side": 1,
+              "qty": 2.6753705388196267,
+              "price": 748.184811,
+              "fee": 0.8006686403766923,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 47379,
+              "side": -1,
+              "qty": 2.6753705388196267,
+              "price": 766.353357,
+              "fee": 0.8201116774573278,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 47689,
+              "side": 1,
+              "qty": 2.556825445526834,
+              "price": 781.358128,
+              "fee": 0.7991185374958452,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 49476,
+              "side": -1,
+              "qty": 2.556825445526834,
+              "price": 1025.857404,
+              "fee": 1.0491753256117207,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 49858,
+              "side": 1,
+              "qty": 1.913106693960322,
+              "price": 1043.00429,
+              "fee": 0.7981513956113333,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50354,
+              "side": -1,
+              "qty": 1.913106693960322,
+              "price": 1007.649225,
+              "fee": 0.7710961910045724,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 50403,
+              "side": 1,
+              "qty": 1.880989776820563,
+              "price": 1062.0361930000001,
+              "fee": 0.7990716886585724,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 50624,
+              "side": -1,
+              "qty": 1.880989776820563,
+              "price": 1027.7272169999999,
+              "fee": 0.7732577554148993,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 51122,
+              "side": 1,
+              "qty": 1.893939393939394,
+              "price": 1054.525442,
+              "fee": 0.7988829106060608,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 51926,
+              "side": -1,
+              "qty": 1.893939393939394,
+              "price": 1075.522437,
+              "fee": 0.8147897250000001,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 52105,
+              "side": 1,
+              "qty": 1.7820547090795689,
+              "price": 1120.152004,
+              "fee": 0.7984688614452464,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 53751,
+              "side": -1,
+              "qty": 1.7820547090795689,
+              "price": 1186.121376,
+              "fee": 0.8454932734562952,
+              "tag": "exit"
+            },
+            {
+              "bar_index": 54053,
+              "side": 1,
+              "qty": 1.6403526758253024,
+              "price": 1220.632051,
+              "fee": 0.8009068204223909,
+              "tag": "entry"
+            },
+            {
+              "bar_index": 54409,
+              "side": -1,
+              "qty": 1.6403526758253024,
+              "price": 1174.5825300000001,
+              "fee": 0.7706918384252616,
+              "tag": "exit"
+            }
+          ],
+          "fill_count": 20,
+          "fills_source": "integration.event_account.run_event_account",
+          "versions": [
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY",
+            "FLAT_UNTIL_READY"
+          ],
+          "unmapped_intents": [],
+          "rejections": [],
+          "fee_binding": {
+            "fee": 0.0008,
+            "fee_rate": 0.0004
+          }
+        },
+        "cutoffs": [
+          "2021-01-01T00:00:00+00:00"
+        ],
+        "fold_count": 1,
+        "wall_seconds": 38.949,
+        "trial_records_count": 2
+      },
+      "funnel": [
+        {
+          "schema": "regime_lab.ra05_funnel_record.v1",
+          "opportunity_id": "M4_REGIME-0",
+          "arm": "M4_REGIME",
+          "alpha_id": "A-SC",
+          "observation_available": false,
+          "model_ready": true,
+          "semantic_transition": null,
+          "eligibility": false,
+          "confirmed": true,
+          "budget_admitted": true,
+          "trigger_reason": "INITIAL",
+          "request_time": "2021-01-01T00:00:00+00:00",
+          "train_cutoff": "2020-12-31T23:59:00+00:00",
+          "selected_time": "2021-01-01T00:00:00+00:00",
+          "search_ready": true,
+          "trials_completed": null,
+          "selected_params_digest": "4b5bd1731c5f14f1",
+          "raw_selector": {
+            "params": {
+              "coeff": 6,
+              "AP": 20,
+              "alpha.condition_threshold": 60,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "objective": 0.1239531390036282,
+            "candidate_count": 2
+          },
+          "admission_decision": "ADMIT",
+          "admission_reason": null,
+          "admission_day_support_ok": true,
+          "admission_shard_support_ok": true,
+          "unchanged_params_reason": null,
+          "warm_indicator_ready": null,
+          "warm_indicator_ready_reason": "not modeled by this arm's execution path (installed WFO fold boundary, no bar-by-bar warm-up gate); see integration/continuous_account.py for the model that has one",
+          "campaign_or_pending_order_wait": null,
+          "campaign_or_pending_order_wait_reason": "same as warm_indicator_ready",
+          "activation_time": "2021-01-01T00:00:00+00:00",
+          "activation_time_is_fold_boundary_not_a_delayed_bar": true,
+          "first_affected_target": "2021-01-01T00:00:00+00:00",
+          "first_affected_order": null,
+          "first_affected_fill": null,
+          "first_affected_fill_reason": "resolved separately from the arm's full fill ledger by timestamp >= this fold's test_start, see first_fill_after_activation in the discovery record",
+          "incumbent_version": null,
+          "candidate_version": "4b5bd1731c5f14f1",
+          "actual_costs": {
+            "mode": "mode_4_is_only_robust",
+            "schedule": "per_fold_causal",
+            "metric": "is_only_robust",
+            "optuna_trials_per_cutoff": 2,
+            "seed": 20260918,
+            "fee_binding": {
+              "fee": 0.0008,
+              "fee_rate": 0.0004
+            },
+            "account_capital": 20000.0,
+            "alloc_per_trade": 0.1,
+            "train_memory_days": 20
+          },
+          "engine_trace_refs": {
+            "route": null,
+            "fold_id": 0
+          }
+        }
+      ],
+      "final_incumbent_version": "4b5bd1731c5f14f1",
+      "switches_admitted": 1,
+      "switches_kept_incumbent": 0
+    }
+  },
+  "action_divergence": {
+    "schema": "regime_lab.ra05_action_divergence.v1",
+    "per_arm_digests": {
+      "STATIC": [
+        "4b5bd1731c5f14f1"
+      ],
+      "M4_CAL": [
+        "4b5bd1731c5f14f1",
+        "3198a346c9e72fe2"
+      ],
+      "M4_CAL_MATCHED": [
+        "4b5bd1731c5f14f1"
+      ],
+      "M4_REGIME": [
+        "4b5bd1731c5f14f1"
+      ]
+    },
+    "pairwise": {
+      "STATIC_vs_M4_CAL": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      },
+      "STATIC_vs_M4_CAL_MATCHED": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      },
+      "STATIC_vs_M4_REGIME": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      },
+      "M4_CAL_vs_M4_CAL_MATCHED": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      },
+      "M4_CAL_vs_M4_REGIME": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      },
+      "M4_CAL_MATCHED_vs_M4_REGIME": {
+        "compared_folds": 1,
+        "identical_selection_folds": 1,
+        "diverged_folds": 0,
+        "diverged": false
+      }
+    }
+  },
+  "descriptive_returns": {
+    "schema": "regime_lab.ra05_descriptive_returns.v1",
+    "by_arm": {
+      "STATIC": {
+        "status": "OK",
+        "equity_first": 20000.0,
+        "equity_last": 20529.264099364904,
+        "total_return": 0.02646320496824517,
+        "fill_count": 20,
+        "folds": 1,
+        "switches_admitted": 1,
+        "switches_kept_incumbent": 0
+      },
+      "M4_CAL": {
+        "status": "OK",
+        "equity_first": 20000.0,
+        "equity_last": 20586.28402672709,
+        "total_return": 0.02931420133635454,
+        "fill_count": 15,
+        "folds": 2,
+        "switches_admitted": 1,
+        "switches_kept_incumbent": 1
+      },
+      "M4_CAL_MATCHED": {
+        "status": "OK",
+        "equity_first": 20000.0,
+        "equity_last": 20529.264099364904,
+        "total_return": 0.02646320496824517,
+        "fill_count": 20,
+        "folds": 1,
+        "switches_admitted": 1,
+        "switches_kept_incumbent": 0
+      },
+      "M4_REGIME": {
+        "status": "OK",
+        "equity_first": 20000.0,
+        "equity_last": 20529.264099364904,
+        "total_return": 0.02646320496824517,
+        "fill_count": 20,
+        "folds": 1,
+        "switches_admitted": 1,
+        "switches_kept_incumbent": 0
+      }
+    },
+    "note": "point estimates only; this pilot's window does not clear the registered >=365-day confirmatory floor, so no CI/claim-gate verdict is offered here (RA-07 scope)"
+  },
+  "schema": "regime_lab.ra07_cell2_result.v1",
+  "lab_run_id": "ra07-20260919T064622Z-cbc77a82",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T06:50:00.649797+00:00"
+}

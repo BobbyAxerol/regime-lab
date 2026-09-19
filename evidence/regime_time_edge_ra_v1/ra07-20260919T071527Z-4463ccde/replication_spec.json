@@ -1,0 +1,135 @@
+{
+  "schema": "regime_lab.ra07_replication_spec.v1",
+  "primary_contrast": "M4_REGIME - M4_CAL_MATCHED (information timing only; RA-01 H-BUDGET)",
+  "action_aware_contrast": {
+    "applicable": false,
+    "reason": "RA-06's G06-SCOPE lock decision was KEEP_BASELINE (support=5 below the registered floor min_required=8); no AGE_CONTEXT policy revision was locked, so there is no action-aware policy for RA-07 to close a separate AGE_CONTEXT-AGE_ONLY contrast against (guide RA07.1's own conditional: 'neu RA-06 action-aware duoc chon'; it was not)."
+  },
+  "secondary_contrasts": [
+    "M4_REGIME - M4_CAL (secondary_timing_incl_cadence)",
+    "M4_CAL_MATCHED - M4_CAL (secondary_cadence)",
+    "cell2: M4_REGIME - M4_CAL_MATCHED (cross-symbol transfer check)"
+  ],
+  "development_source": {
+    "ra05_run_id": "ra05-20260918T201236Z-de11db62",
+    "cell": "A-SC/BTCUSDT",
+    "note": "cell-1 development evidence, reused for freeze inputs only"
+  },
+  "delta_economic_threshold": {
+    "status": "OK",
+    "delta": 0.0001452334300587376,
+    "delta_c_increment": 0.0005,
+    "calibration_days": 151,
+    "days_with_fills": 86,
+    "skipped_zero_equity_days": 0,
+    "method": "mean over calibration days of sum_j(|N_j|/E_j-)*delta_c; E_j- approximated at daily granularity as the previous day's closing equity mark (equity_daily has no intraday resolution); flat days with 0 fills contribute 0 and are kept in the denominator"
+  },
+  "mde": {
+    "status": "OK",
+    "mde": 0.00024543616119755305,
+    "bootstrap_se_used": 8.765577185626895e-05,
+    "z_factor": 2.8,
+    "formula": "MDE = z * bootstrap_SE(Delta-hat), z = z_(1-alpha/2) + z_(1-beta), alpha=0.05, beta=0.20",
+    "source_block_length_days": 28,
+    "source_n_resamples": 5000,
+    "source_seed": 20260919,
+    "source_n_common_days": 150
+  },
+  "mde_cross_reference": {
+    "rf05_corrected_daily_account_bps": 0.0371,
+    "note": "RF-04/RF-05's own frozen MDE (corrective_mode4_v3, a DIFFERENT contract: window 2021-01-01..2022-06-30, train_memory_days=180, seed=20260911) -- reported here only as a directional cross-reference, never substituted for RA-07's own development-variability MDE above (different window/trials/seed, not the same contract)."
+  },
+  "risk_caps": {
+    "max_drawdown_deterioration_vs_comparator": 0.02,
+    "leverage_sizing": "same as comparator",
+    "source": "RA-01 registration.json, reused verbatim, never changed after seeing outcomes"
+  },
+  "bootstrap_plan": {
+    "method": "circular moving block bootstrap, percentile CI",
+    "block_length_days_primary": 28,
+    "block_length_days_sensitivity": [
+      7,
+      14,
+      56
+    ],
+    "n_resamples": 5000,
+    "seed": 20260919,
+    "same_block_indices_for_paired_arms": true,
+    "recompute_per_resample": [
+      "Delta_hat",
+      "Sharpe_a",
+      "Sharpe_b",
+      "PF_a",
+      "PF_b"
+    ],
+    "engine_calls_during_bootstrap": 0,
+    "pooled_aggregate": {
+      "computed": false,
+      "reason": "only 2 of 20 planned cells run this phase; guide RA07.2: 'Full20 aggregate chi khi du planned cells hoac da freeze mot partial-scope aggregate khac truoc outcomes' -- no partial-scope capital-weighted aggregate is registered here, so cell1 and cell2 are reported as SEPARATE paired comparisons, never averaged or capital-weighted together."
+    }
+  },
+  "seed_schedule": {
+    "primary_seed": 20260918,
+    "primary_seed_status": "ALREADY_SPENT_AT_DISCOVERY (RA-05)",
+    "registered_replication_seeds": [
+      20260919,
+      20260920
+    ],
+    "registered_replication_seeds_status": "NOT_RUN_BUDGET",
+    "not_run_budget_reason": "budget this phase is spent on: cell-2 (cross-symbol transfer), the mandatory placebo-timing and delayed-information controls, and D1/D2/D3 decay -- re-running cell 1 under 2 more seeds is disclosed as skipped, not silently dropped. Seeds are search-randomness replication, never independent market samples (guide RA07.1), and no seed is ever chosen post-hoc as a headline."
+  },
+  "cell_expansion_plan": {
+    "alpha_id": "A-SC",
+    "symbol": "ETHUSDT",
+    "selection_rule": "capability/coverage: A-SC is one of only 2 route-qualified alphas (A-SC, A-HMA) on the event route; ETHUSDT chosen for cross-symbol transfer, explicitly testing whether a BTC-derived regime tape's timing transfers to a different, correlated symbol -- never chosen for its PnL, which was not known before this plan was written",
+    "contract": "identical to RA-05 cell 1's discovery_spec (window/train_memory/trials/seed/route), symbol swapped only"
+  },
+  "controls_plan": {
+    "order": [
+      "CALENDAR_BUDGET_MATCHED",
+      "AGE_ONLY",
+      "DELAYED_INFORMATION",
+      "PLACEBO_TIMING",
+      "RISK_EXPOSURE_ATTRIBUTION"
+    ],
+    "CALENDAR_BUDGET_MATCHED": {
+      "status": "ALREADY_AVAILABLE",
+      "source": "RA-05 M4_CAL_MATCHED arm, both cells"
+    },
+    "AGE_ONLY": {
+      "status": "NOT_APPLICABLE",
+      "reason": "RA-06 locked KEEP_BASELINE; no action-aware policy exists to contrast against AGE_ONLY"
+    },
+    "DELAYED_INFORMATION": {
+      "status": "PLANNED",
+      "scope": "cell 1 only (A-SC/BTCUSDT)",
+      "delay_observations": 1,
+      "rule": "state_id/state_namespace/state_common all shifted back by 1 observation(s); available_at and every other field stay real -- the delay is on availability, never on the world (guide RA07.3 point 3)"
+    },
+    "PLACEBO_TIMING": {
+      "status": "PLANNED",
+      "scope": "cell 1 only (A-SC/BTCUSDT)",
+      "seed": 20260921,
+      "fidelity_tolerance": 0.35,
+      "dwell_profile_source": "development-prefix real state_common sequence, disjoint from the evaluation window -- the SAME prefix rule forecast_cal_matched_test_days uses, never the evaluation window's own realized sequence",
+      "rule": "seeded synthetic state labels reproducing the development profile's dwell/switch-rate statistics only, laid onto the REAL observation timestamp grid (observation cadence is not market information); no future market data read; not a circular shift of the real future tape (guide RA07.3 point 4)"
+    },
+    "RISK_EXPOSURE_ATTRIBUTION": {
+      "status": "PLANNED",
+      "scope": "both cells, from actual real fill/equity paths"
+    }
+  },
+  "multiplicity_family": {
+    "primary_one_hypothesis": "cell1: M4_REGIME - M4_CAL_MATCHED",
+    "secondary_family_holm": [
+      "cell1: M4_REGIME - M4_CAL",
+      "cell1: M4_CAL_MATCHED - M4_CAL",
+      "cell2: M4_REGIME - M4_CAL_MATCHED"
+    ],
+    "note": "family fixed here, before any RA-07 p-value is computed (guide 13.4)"
+  },
+  "frozen_before_outcomes": true,
+  "lab_run_id": "ra07-20260919T071527Z-4463ccde",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T07:15:29.901483+00:00"
+}

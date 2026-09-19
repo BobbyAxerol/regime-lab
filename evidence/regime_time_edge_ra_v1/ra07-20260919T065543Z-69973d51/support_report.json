@@ -1,0 +1,42 @@
+{
+  "schema": "regime_lab.ra07_support_report.v1",
+  "per_contrast": {
+    "primary": {
+      "n_common_days": 150,
+      "n_blocks": 5,
+      "status": "OK"
+    },
+    "cell1: M4_REGIME - M4_CAL": {
+      "n_common_days": 150,
+      "n_blocks": 5,
+      "status": "OK"
+    },
+    "cell1: M4_CAL_MATCHED - M4_CAL": {
+      "n_common_days": 150,
+      "n_blocks": 5,
+      "status": "OK"
+    },
+    "cell2: M4_REGIME - M4_CAL_MATCHED": {
+      "n_common_days": 37,
+      "n_blocks": 1,
+      "status": "OK"
+    }
+  },
+  "parameter_versions": {
+    "cell1_unique_selections": 3,
+    "cell2_unique_selections": 1
+  },
+  "recurrent_episodes": {
+    "cell1_switches_admitted": 2,
+    "cell2_switches_admitted": 1
+  },
+  "legacy_floor_reference": {
+    "days": 365,
+    "blocks": 12,
+    "note": "named for orientation only, not proof of power (guide 13.6)"
+  },
+  "honest_summary": "both cells run a ~90-day phase-owned pilot window (~3 blocks of 28 days at the primary bootstrap block length); every contrast in this phase falls well short of the legacy 12-block/365-day floor, so INCONCLUSIVE_SUPPORT is the expected, not a surprising, outcome here.",
+  "lab_run_id": "ra07-20260919T065543Z-69973d51",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T07:04:18.129367+00:00"
+}
