@@ -14,18 +14,28 @@ improvement (+3.97 Sharpe), one huge additional decay (-4.91 Sharpe), one
 mid-sized decay (-3.83) -- a 3-point average hiding two outliers pulling in
 opposite directions, not a consistent trend.
 
-This script re-runs M4_CAL / M4_CAL_MATCHED / M4_REGIME over a MUCH LONGER
-real BTCUSDT window (2021-01-01 -> 2022-05-15, ~16.5 months instead of 90
-days) so M4_REGIME clears exactly the user's requested >=10 real folds --
-verified via a cheap, 0-engine-call query against the real emissions
-artifact before committing to this run (10 real triggers land inside this
-window at the SAME frozen min_gap/max_age parameters RA-05/07 already used,
-the last one on 2022-03-17 with 58 days of runway to mature before
-window_end, comparable to the ~45-day gap between the others). Everything
-else (train_memory, trials/cutoff, seed, route, economics) is held
-IDENTICAL to RA-05/07's frozen contract -- only the window length and the
-regime budget cap (2 -> 10, since RA-05's cap was a 90-day phase-owned
-scale limit, not a methodological one) change.
+This script re-runs M4_CAL / M4_CAL_MATCHED / M4_REGIME over a real BTCUSDT
+window MUCH LONGER than RA-07's 90-day pilot: 2021-01-01 -> 2022-01-01 (12
+months). Originally this targeted 2022-05-15 (~16.5 months) and a 10-fold
+regime budget, but 5 real-scale attempts at that size were stopped before
+completing: 2 kernel OOM, 1 manual proactive kill (a sudden RSS spike, ahead
+of the kernel), 1 caught by this script's own memory watchdog, 1 reaped by
+the Claude Code harness's own system-wide low-memory protection -- none of
+them a code-correctness bug, all confirmed via dmesg / harness notification,
+not guessed. Per the user's explicit direction (2026-09-20), the window was cut
+back and the regime budget lowered to 8 -- verified via a cheap, 0-engine-call
+query against the real emissions artifact BEFORE committing to this window
+that this loses nothing: the 8th and last real regime trigger inside the
+original window lands on 2021-12-17, so 2021-01-01 -> 2022-01-01 still
+captures all 8 (a 9th/10th never existed in this window in the first place --
+the original ">=10" target was never actually reachable here). M4_CAL's own
+test_days (the width of each CALENDAR fold, i.e. how much OOS time one
+train/select/test cycle covers) also moved 60 -> 100 days at the user's
+request, cutting M4_CAL from 9 folds to 4 in one subprocess -- M4_CAL, not
+M4_REGIME, is the arm that actually crashed in every real-scale attempt so
+far. Everything else (train_memory, trials/cutoff, seed, route, economics)
+stays IDENTICAL to RA-05/07's frozen contract; every deviation here (trials,
+research_retention, test_days, window, budget) is disclosed, not silent.
 
 ONE PROCESS PER ARM (--run-arm), never all three at once: the first attempt
 ran all three arms sequentially inside one process and was OOM-killed by the
@@ -71,29 +81,30 @@ STUDY = "regime_time_edge_ra_v1"
 ALPHA_ID = "A-SC"
 SYMBOL = "BTCUSDT"
 DEFAULT_TRAIN_MEMORY_DAYS = 45
-DEFAULT_CAL_TEST_DAYS = 60
+DEFAULT_CAL_TEST_DAYS = 60  # RA-05/07's frozen-contract calendar fold width; kept here only as a
+# reference value for disclosure math, not used by the real (non-smoke) run below.
 DEFAULT_TRIALS = 8
 DEFAULT_SEED = 20260918
 DEFAULT_ROUTE = "event"
 REGIME_MIN_GAP_DAYS = 45.0
 REGIME_MAX_AGE_DAYS = 180.0
-DEEPDIVE_REGIME_BUDGET = 10  # the user's requested floor exactly; reduced from an initial 12 to
-# cut real-run memory/compute after the first attempt's OOM kill (this is a shared, busy box --
-# other unrelated live processes were already holding ~4.6 GiB when that attempt ran)
+DEEPDIVE_REGIME_BUDGET = 8  # user's explicit direction (2026-09-20), down from an original ">=10"
+# ask that 5 real-scale attempts at the larger window never completed. Verified harmless against
+# the real emissions tape BEFORE adopting: inside this deep-dive's (now-shortened) window, only 8
+# real regime triggers ever exist at RA-05/07's own frozen min_gap/max_age parameters -- a 9th/10th
+# was never reachable here even at the original window length, so 8 is the true ceiling this
+# window supports, not a weaker compromise.
+DEEPDIVE_CAL_TEST_DAYS = 100  # user's explicit direction (2026-09-20), up from
+# DEFAULT_CAL_TEST_DAYS=60. M4_CAL -- not M4_REGIME -- is the arm that crashed in every real-scale
+# attempt so far, and its fold count is driven by test_days (build_calendar_schedule), a knob
+# entirely independent of DEEPDIVE_REGIME_BUDGET (M4_REGIME uses build_regime_schedule instead).
+# Verified: 100-day folds over the shortened window below give M4_CAL 4 folds, down from 9.
 DEEPDIVE_TRIALS = 2  # deliberately BELOW DEFAULT_TRIALS=8 (RA-05/07's own frozen contract value)
-# for THIS deep-dive only -- disclosed deviation, not silently reused. Root cause of the OOM that
-# survived the PreparedAccount fix: run_cutoff_walk_forward's optimization_config hardcodes
-# research_retention="full_trial_ledger" (dynamic_fold_provider.py) -- the engine itself, not
-# anything in this lab's own code, is asked to retain a full per-trial ledger for EVERY Optuna
-# trial of the WHOLE arm run, for its entire duration. RA-05/06/07's own real runs stayed safe at
-# 2-3 folds x 8 trials = 16-24 total trials; M4_CAL here is ~8 folds x 8 trials = 64, M4_REGIME
-# ~11 folds x 8 = 88 -- confirmed by dmesg: M4_CAL was OOM-killed (anon-rss 4.75 GiB) within the
-# last ~60s of an otherwise-stable 30-minute run, i.e. right as the trial count neared its peak,
-# not gradually -- consistent with ledger accumulation, not with the per-fold PreparedAccount
-# mechanism already fixed (that pattern was a slow, steady climb from the start). This constant
-# is NOT something this script can safely fix at its root: research_retention is hardcoded inside
-# run_cutoff_walk_forward, which is shared, already-tested infrastructure other RA phases depend
-# on -- reducing the total trial count is the only lever available without touching it.
+# for THIS deep-dive only -- disclosed deviation, not silently reused. Un-related to the ledger
+# issue below; kept low because it was already proven safe, not re-tested at 8 after that fix.
+# The research_retention="full_trial_ledger" default (dynamic_fold_provider.py) was a real,
+# confirmed OOM contributor -- fixed at the run_cutoff_walk_forward call site below (passes
+# "none"), not by this constant. See that call site's comment for the full trace.
 
 
 def _prepared_for_fold(frame: pd.DataFrame, *, fold_row: dict) -> "PreparedAccount":
@@ -239,11 +250,18 @@ def orchestrate(args) -> int:
     if args.smoke:
         window_start, window_end = "2021-01-01", "2021-02-15"
         data_load_start = "2020-12-01"
-        regime_budget, trials = 2, 2
+        regime_budget, trials, cal_test_days = 2, 2, DEFAULT_CAL_TEST_DAYS
     else:
-        window_start, window_end = "2021-01-01", "2022-05-15"
+        # Window shortened 2022-05-15 -> 2022-01-01 and regime_budget 10 -> 8 per the user's
+        # explicit direction (2026-09-20), after 5 real-scale attempts at the larger size never
+        # completed. Verified against the real emissions tape before adopting: this window still
+        # contains all 8 real regime triggers the original window had (the 8th lands 2021-12-17,
+        # well inside 2022-01-01) -- no loss versus the original ">=10" ask, which this window
+        # never actually supported past 8 anyway.
+        window_start, window_end = "2021-01-01", "2022-01-01"
         data_load_start = "2020-11-01"
-        regime_budget, trials = DEEPDIVE_REGIME_BUDGET, DEEPDIVE_TRIALS
+        regime_budget, trials, cal_test_days = (
+            DEEPDIVE_REGIME_BUDGET, DEEPDIVE_TRIALS, DEEPDIVE_CAL_TEST_DAYS)
 
     policy = SandboxPolicy.load(LAB / "configs" / "sandbox_policy.json")
     writer = EvidenceWriter.open(policy, study_id=STUDY, lab_run_id=new_lab_run_id("ra07decaydive"))
@@ -281,7 +299,7 @@ def orchestrate(args) -> int:
         return json.loads(out_path.read_text())
 
     with writer.attempt("decay_deepdive") as att:
-        cal_result = spawn("M4_CAL", test_days=DEFAULT_CAL_TEST_DAYS)
+        cal_result = spawn("M4_CAL", test_days=cal_test_days)
         if not cal_result["meta"].get("ok"):
             raise RuntimeError(f"M4_CAL failed: {cal_result['meta'].get('error')}")
 
