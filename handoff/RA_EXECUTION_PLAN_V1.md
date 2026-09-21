@@ -74,7 +74,59 @@ Một worker trừ khi allocation duyệt nhiều hơn; run-id mới mỗi attem
 envelope thật; giữ failed attempts; bootstrap/report không gọi engine; CI chứa 0 không
 phải NO_EDGE; MDE freeze trước paired outcome dùng claim; prospective không tự chạy live.
 
-## 5. Xin duyệt
+## 6. FUP-04/FUP-05 — kết luận deep-dive 12 tháng + placebo (2026-09-21, đã commit, chờ push)
 
-**Duyệt RA-01** để tôi bắt đầu đúng §5 guide. Mỗi phase sau xong sẽ báo cáo theo mẫu §14.4
-rồi chờ duyệt tiếp.
+Trạng thái: **DONE — chờ owner duyệt hướng tiếp theo.** RA-01→RA-07 đã COMPLETE
+trước đó ( xem `owner_decisions.jsonl` + AGENTS.md); deep-dive và FUP-04/FUP-05 là
+follow-up do owner chỉ đạo trực tiếp, ngoài phase plan, không thay thế RA-08.
+
+### 6.1. Bối cảnh: vì sao có deep-dive
+
+- RA-07 D1 chỉ có 2–3 folds/arm (pilot 90 ngày) — không đủ đọc pattern decay.
+- Deep-dive chạy M4_CAL / M4_CAL_MATCHED / M4_REGIME trên BTCUSDT 12 tháng
+  (2021-01-01 → 2022-01-01), 50 trials/cutoff, route `event`, profile `score`:
+  run `ra07decaydive-20260921T072850Z-22eb0631`, wall 1.91h, cả 3 arms ok=True,
+  không OOM. Folds: M4_CAL 10 / M4_CAL_MATCHED 7 / M4_REGIME 9.
+- Kết quả mô tả (DESCRIPTIVE_ONLY, không claim): mean return-decay M4_CAL
+  −0.000169, MATCHED −0.000186, **M4_REGIME +0.000109** (5/9 folds OOS tốt hơn
+  IS). Nhìn từng fold: REGIME tốt lên chủ yếu từ IS âm hồi lại (mean-revert),
+  không phải giữ edge tốt — câu hỏi mở cần đối chứng trả lời.
+
+### 6.2. FUP-04 — sửa root cause OOM (commit `16fdd844`, đã xong)
+
+- 1 call `run_event_account` trên frame 613,440 bars đẩy RSS tới 4.24 GiB →
+  kernel OOM-kill worker M4_CAL (dmesg 2026-09-20 08:29:01). Đo từng stage:
+  frame ~340 MiB, scorer transient ~676 MiB, D1 ~0 — deployment account giữ
+  per-bar audit ledger của engine là accumulator duy nhất.
+- Fix: thread kwarg `report_level` của engine qua scorer→walkforward→deployment
+  →CLI (`--engine-report-level`), **opt-in only** (default None, mọi caller cũ
+  byte-identical). Parity s7 trên call RA-05 fold-0 thật: equity byte-equal
+  (max|diff|=0.0), counts strategy-level đồng nhất, peak giảm nửa (895→452
+  MiB); dưới cap 4 GiB default FAIL, `score` COMPLETE (peak 1110 MiB).
+- Kèm: `MALLOC_ARENA_MAX` trong `lab_worker_env`; RF-05 freeze guards sang
+  ceiling từ supersession đã đăng ký (2/1). Đăng ký FUP-04 + declaration + 3
+  measurement artifacts. Pure technical, không claim thị trường.
+
+### 6.3. FUP-05 — đăng ký deep-dive + PLACEBO_TIMING (commit `f473e679`, đã xong)
+
+- Khóa deep-dive thành discovery dataset (DESCRIPTIVE_ONLY, deviations disclosed,
+  hashes pinned) + chạy placebo trên cùng window/contract: synthetic tape
+  (seed 20260921, switch-rate 0.786× real, `matched=true` — đối chứng thật,
+  không strawman), cùng trigger mechanics + 50-trial search.
+- Kết quả (`fup05placebo-20260921T125029Z-32fc0c83`, wall 0.67h): placebo 9 folds,
+  **mean decay −0.000031** — nằm trong/trên calendar band (worst −0.000169).
+  Tape không mang market info tái hiện được pattern REGIME.
+- **Verdict: `CADENCE_ARTIFACT` — không mở RA-08 trên tín hiệu này.**
+  Đây là falsification độc lập thứ hai (RA-07 90d + FUP-05 12m) cùng kết luận.
+- Artifacts: `evidence/corrective_mode4_v3/FUP-05/placebo_result.json` (+ run dir
+  gốc), registration studies[4], `scripts/run_fup05.py`, 4 declaration tests
+  (4/4 pass). Không động tới frozen RF-05/RA-07.
+
+### 6.4. Hướng REGIME còn mở (đề xuất, chưa chạy — chờ owner chọn)
+
+- (a) DELAYED_INFORMATION ở delay có ý nghĩa (RA-07 làm 4h quá yếu);
+- (b) cross-symbol transfer (ETHUSDT cell 2 mới là check);
+- (c) regime làm filter/risk gate thay vì trigger refit (câu hỏi khác, cần
+  registration mới).
+- Con đường "REGIME timing tốt hơn calendar" ở khung hiện tại đã qua 2
+  falsification độc lập và đều rớt — đi tiếp cần đổi câu hỏi, không phải thêm folds.
