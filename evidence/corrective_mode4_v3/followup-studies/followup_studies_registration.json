@@ -80,13 +80,34 @@
       ],
       "exit": "the full-length deployment account completes inside the registered memory budget, with every existing caller byte-identical (engine default unchanged)",
       "budget": "T0 host-only: no charge to any shared TE ledger; minutes of engine time per measurement"
+    },
+    {
+      "id": "FUP-05",
+      "title": "12-month decay deep-dive registration + PLACEBO_TIMING control",
+      "scope": [
+        "register deep-dive ra07decaydive-20260921T072850Z-22eb0631 (10/7/9 folds, 50 trials, score profile) as FUP-05 discovery dataset, verdict DESCRIPTIVE_ONLY",
+        "PLACEBO_TIMING on the same window/contract: seeded synthetic tape at the development prefix dwell profile through the same trigger mechanics and 50-trial search",
+        "close with either a cadence-artifact verdict or a survived-falsification recommendation toward RA-08"
+      ],
+      "non_goals": [
+        "any economic, market or edge claim (DESCRIPTIVE_ONLY by registration)",
+        "rerunning, restating or superseding any frozen RF-05 or RA-07 number",
+        "making the reduced engine profile or 50-trial budget a default for any registered phase"
+      ],
+      "required_inputs": [
+        "snapshots/server_core_v1 (read-only) and the deep-dive's own committed artifacts",
+        "ra07_controls.build_placebo_schedule (same function RA-07 used, same seed convention)"
+      ],
+      "exit": "placebo measured against the pre-registered calendar band; verdict recorded either way, recommendation toward RA-08 only on survival",
+      "budget": "T0 host-only: no charge to any shared TE ledger; ~2h engine time for one arm"
     }
   ],
   "current_blockers": {
     "FUP-01": "needs native-event command projection code",
     "FUP-02": "needs a compute-budget revision + hours of engine runs",
     "FUP-03": "BLOCKED_NO_POST_FREEZE_DATA (snapshot ends 2026-09-09; freeze 2026-09-11)",
-    "FUP-04": "none at registration: host-only measurement, no shared compute budget, no market claim"
+    "FUP-04": "none at registration: host-only measurement, no shared compute budget, no market claim",
+    "FUP-05": "none at registration: host-only measurement, no shared compute budget, no market claim"
   },
   "lab_run_id": "followup-studies",
   "study_id": "corrective_mode4_v3",
