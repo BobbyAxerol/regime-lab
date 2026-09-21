@@ -1,0 +1,72 @@
+{
+  "schema_version": "regime_lab.te_compute_cache.v1",
+  "kinds": [
+    "causal_event",
+    "deployment",
+    "features",
+    "fit",
+    "search",
+    "targets",
+    "world"
+  ],
+  "deployment_key_facets": [
+    "market content digest + precise coverage (rows/first/last)",
+    "symbol/interval and observed/available clock contract",
+    "requested scoring window + account start + data prefix cutoff",
+    "alpha id and source/dependency contract digests",
+    "execution clock + sizing + economics (fee, slippage, contract)",
+    "engine/native build digests",
+    "initial account/strategy state (fresh vs carry, typed)"
+  ],
+  "search_key_extension": [
+    "search space + constraints",
+    "sampler version/seed (n_startup_trials)",
+    "trial budget",
+    "ask/tell contract"
+  ],
+  "model_key_extension": [
+    "training cutoff",
+    "feature protocol",
+    "mature-label panel digest",
+    "target/horizon",
+    "design-selection rule"
+  ],
+  "deployment_key_extension": [
+    "ordered causal selections",
+    "activation policy",
+    "initial state"
+  ],
+  "provenance_excluded_from_key": [
+    "lab_run_id",
+    "output path",
+    "wall-clock creation time",
+    "producer id",
+    "engine wall seconds"
+  ],
+  "provenance_fields_recorded": [
+    "producer.lab_run_id",
+    "producer.source_identity",
+    "producer.created_at",
+    "seal sha256 + source_identity"
+  ],
+  "invalidation_triggers": [
+    "market content/coverage/correction vintage change",
+    "fee/slippage/funding/sizing/constraint change",
+    "alpha helper or shared execution bridge change",
+    "engine/native build change",
+    "feature/warmup protocol change",
+    "initial-state mode change (fresh vs carry)"
+  ],
+  "backend_change_policy": "RA02.3 extended every kind's closure with the shared financial semantics files; because equivalence of the previous backend was never certified, all pre-RA-02 entries are invalidated rather than assumed equivalent",
+  "causality_coordinates": [
+    "physical_compute_at",
+    "simulated_cutoff",
+    "simulated_ready_at"
+  ],
+  "checkpoint_policy": "task artifacts, search trial receipts and independent cells may checkpoint; a continuous-account checkpoint is used only when the engine exposes a full certified restore, otherwise the prefix is replayed deterministically",
+  "lab_run_id_in_key": false,
+  "schema": "regime_lab.ra02_cache_contract.v1",
+  "lab_run_id": "ra02-20260918T113848Z-8843674d",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T11:38:50.926733+00:00"
+}

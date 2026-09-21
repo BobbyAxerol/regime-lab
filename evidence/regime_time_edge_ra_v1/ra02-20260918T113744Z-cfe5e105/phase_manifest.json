@@ -1,0 +1,64 @@
+{
+  "required_gates": [
+    "G02-SEM",
+    "G02-NUM",
+    "G02-COUNT",
+    "G02-LEDGER",
+    "G02-MANIFEST"
+  ],
+  "artifacts": [
+    {
+      "relpath": "cache_contract.json",
+      "sha256": "22e248bd3e7f1f1b7fd72d40b3ab7c10d869c07f6c54eb362070a3ba3359c9b2",
+      "size_bytes": 2528
+    },
+    {
+      "relpath": "dependency_manifest.json",
+      "sha256": "9026f2197ce070b527af3f6c1a831e1979ec3b3e38331766685c4afda2944904",
+      "size_bytes": 44117
+    },
+    {
+      "relpath": "cache_test_matrix.json",
+      "sha256": "c399c60228e63fb79cb43bb12e5f9c700ffb928fa9c5f97a9617e1f893f179f2",
+      "size_bytes": 3698
+    },
+    {
+      "relpath": "actual_cross_run_reuse.json",
+      "sha256": "fe35332cd6c3bf9a74ee0213322507e029100ea5e6615240276c7c77ad577a9d",
+      "size_bytes": 1142
+    },
+    {
+      "relpath": "resume_parity.json",
+      "sha256": "7155bfc7fab2a97fc87d1bef74d08bed54a6e59324fa2624d39cd8df997d9ea1",
+      "size_bytes": 806
+    },
+    {
+      "relpath": "counters.json",
+      "sha256": "29144b6cb73fa30959e9c39cb0475d5b0a5b1ddc3cb1b70dda99e1b3202c9d52",
+      "size_bytes": 1157
+    },
+    {
+      "relpath": "resource_envelope.json",
+      "sha256": "a723be27d31200860a62a78a10781d97f2c445f3517bbd6683fc3439ce19ec1c",
+      "size_bytes": 645
+    },
+    {
+      "relpath": "phase_gate.json",
+      "sha256": "ac8b9600f65bfc141b7d31a605d87e225ddc1982603cd15188d4d4d9b39ae78c",
+      "size_bytes": 1975
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "161c34a7a1e4e737d3ac0acd58ca85d86c70d925",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra01_scope": "PENDING",
+    "ra01_migration": "PENDING",
+    "ra02_review": "PENDING"
+  },
+  "schema": "regime_lab.ra02_manifest.v1",
+  "lab_run_id": "ra02-20260918T113744Z-cfe5e105",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T11:37:47.178640+00:00"
+}

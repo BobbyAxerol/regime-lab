@@ -1,6 +1,6 @@
 {
   "schema": "crypto_regime_lab.evidence_pointer_audit.v1",
-  "generated_at_utc": "2026-09-11T11:09:07.788190+00:00",
+  "generated_at_utc": "2026-09-18T09:52:23.154981+00:00",
   "question": "does every phase audit's evidence pointer still resolve, or has some of it rotted since it was written?",
   "why": "COR-15: an audit that counts the PRESENCE of an evidence string cannot tell a real pointer from a stale one, and every phase report quotes its audit",
   "classification": {
@@ -6266,7 +6266,7 @@
             {
               "fragment": "evidence/**/attempts.jsonl",
               "verdict": "RESOLVED",
-              "detail": "479 paths match"
+              "detail": "545 paths match"
             }
           ]
         },

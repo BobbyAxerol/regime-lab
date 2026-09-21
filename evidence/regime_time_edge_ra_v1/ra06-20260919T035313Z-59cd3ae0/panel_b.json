@@ -1,0 +1,209 @@
+{
+  "schema": "regime_lab.ra06_panel_b.v1",
+  "capability_status": "EXECUTED",
+  "window_start": "2021-01-01",
+  "horizon_days": 28,
+  "train_memory_days": 45,
+  "trials": 8,
+  "seed": 20260918,
+  "route": "event",
+  "state_fork_method": "deterministic replay prefix through run_cutoff_walk_forward -- no native QuantBT checkpoint/clone-state capability exists in this install (guide 10.3's sanctioned fallback)",
+  "keep_run": {
+    "ok": true,
+    "wall_seconds": 283.985,
+    "fold_count": 1
+  },
+  "rows": [
+    {
+      "origin": "2021-01-21T00:00:00+00:00",
+      "horizon_end": "2021-02-18T00:00:00+00:00",
+      "horizon_days": 28,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": -0.00032890915821713406,
+        "e_t_keep": 20091.844920373922,
+        "e_t_refit": 20091.844920373922,
+        "e_keep_h": 20506.66914846138,
+        "e_refit_h": 20500.06075666159
+      },
+      "features": {
+        "age_days": 20.0,
+        "realized_vol_20d": 0.0021304872275734166,
+        "regime_transitions_since_incumbent": 0,
+        "incumbent_trailing_return": 0.004592246018696011
+      },
+      "keep_incumbent_params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 7,
+        "AP": 49,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 283.985,
+      "refit_wall_seconds": 373.879
+    },
+    {
+      "origin": "2021-02-10T00:00:00+00:00",
+      "horizon_end": "2021-03-10T00:00:00+00:00",
+      "horizon_days": 28,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": -0.005218878471970219,
+        "e_t_keep": 20678.945335037275,
+        "e_t_refit": 20678.945335037275,
+        "e_keep_h": 20818.417256244506,
+        "e_refit_h": 20710.49635361243
+      },
+      "features": {
+        "age_days": 40.0,
+        "realized_vol_20d": 0.001718995344965659,
+        "regime_transitions_since_incumbent": 7,
+        "incumbent_trailing_return": 0.03226563540691574
+      },
+      "keep_incumbent_params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 4,
+        "AP": 47,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 283.985,
+      "refit_wall_seconds": 395.183
+    },
+    {
+      "origin": "2021-03-02T00:00:00+00:00",
+      "horizon_end": "2021-03-30T00:00:00+00:00",
+      "horizon_days": 28,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": -0.012024964972988978,
+        "e_t_keep": 20665.27359406773,
+        "e_t_refit": 20665.27359406773,
+        "e_keep_h": 20931.12916176098,
+        "e_refit_h": 20682.62997063508
+      },
+      "features": {
+        "age_days": 60.0,
+        "realized_vol_20d": 0.001698098442659418,
+        "regime_transitions_since_incumbent": 39,
+        "incumbent_trailing_return": 0.00470475422482175
+      },
+      "keep_incumbent_params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 3,
+        "AP": 43,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 283.985,
+      "refit_wall_seconds": 396.711
+    },
+    {
+      "origin": "2021-03-22T00:00:00+00:00",
+      "horizon_end": "2021-04-19T00:00:00+00:00",
+      "horizon_days": 28,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": -0.013437544340977159,
+        "e_t_keep": 20867.40493901789,
+        "e_t_refit": 20867.40493901789,
+        "e_keep_h": 20791.224278029644,
+        "e_refit_h": 20510.817598880465
+      },
+      "features": {
+        "age_days": 80.0,
+        "realized_vol_20d": 0.001192473958122327,
+        "regime_transitions_since_incumbent": 84,
+        "incumbent_trailing_return": 0.013817923362009266
+      },
+      "keep_incumbent_params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 3,
+        "AP": 43,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 283.985,
+      "refit_wall_seconds": 419.653
+    },
+    {
+      "origin": "2021-04-11T00:00:00+00:00",
+      "horizon_end": "2021-05-09T00:00:00+00:00",
+      "horizon_days": 28,
+      "status": "OK",
+      "g": {
+        "status": "OK",
+        "reason": null,
+        "g": 0.002810518587851547,
+        "e_t_keep": 20860.37496635699,
+        "e_t_refit": 20860.37496635699,
+        "e_keep_h": 20856.300934082243,
+        "e_refit_h": 20914.929405674742
+      },
+      "features": {
+        "age_days": 100.0,
+        "realized_vol_20d": 0.0009302116656439676,
+        "regime_transitions_since_incumbent": 138,
+        "incumbent_trailing_return": 0.0028857468898182415
+      },
+      "keep_incumbent_params": {
+        "coeff": 7,
+        "AP": 32,
+        "alpha.condition_threshold": 35,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "refit_selected_params": {
+        "coeff": 7,
+        "AP": 49,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "keep_wall_seconds": 283.985,
+      "refit_wall_seconds": 438.273
+    }
+  ],
+  "row_count": 5,
+  "ok_count": 5,
+  "censored_count": 0,
+  "lab_run_id": "ra06-20260919T035313Z-59cd3ae0",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T04:31:42.363111+00:00"
+}

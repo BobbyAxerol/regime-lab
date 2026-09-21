@@ -1,0 +1,58 @@
+{
+  "required_gates": [
+    "G03-PARITY",
+    "G03-MEM",
+    "G03-ROUTE",
+    "G03-COST",
+    "G03-LEDGER",
+    "G03-MANIFEST"
+  ],
+  "artifacts": [
+    {
+      "relpath": "route_matrix.json",
+      "sha256": "3dea7e7ae4da6c83e6fad70de262a4931ef05de7e3d625bdf8d0b47596c1d3d3",
+      "size_bytes": 5122
+    },
+    {
+      "relpath": "retention_contract.json",
+      "sha256": "9e6ef288fad35a4b06d69f42e1784f7627bc0ac722bb4565c568587bbbfb136f",
+      "size_bytes": 2405
+    },
+    {
+      "relpath": "memory_profile.json",
+      "sha256": "a39d45b2a8010da610f80fcb5ea5fbdacd9bdbb8e4be8eddfb4db4216ffb5a76",
+      "size_bytes": 5950
+    },
+    {
+      "relpath": "parity_report.json",
+      "sha256": "ab901545617057bb53d35bc19b106376aea1909e6ceb80abc9378b0bdb3ef7e5",
+      "size_bytes": 1943
+    },
+    {
+      "relpath": "work_profile.json",
+      "sha256": "9002034fae681c6006b991b211a42ab2f5b30b7c600229d8916aa2c4dd496ce7",
+      "size_bytes": 1201
+    },
+    {
+      "relpath": "capacity_forecast.json",
+      "sha256": "8cea46ab53498120b93c4e10dad5a8fb6b4bb8ad243aadc8cc97c12b51d81ef3",
+      "size_bytes": 901
+    },
+    {
+      "relpath": "resource_receipts.json",
+      "sha256": "b8b4e536be3c706db1561ea12cfe180f59dcad8745cdbd2fc87e1c7a44d61f23",
+      "size_bytes": 598
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "0385b20cc3c8337bdb512ffa713f0d9bdd9e2717",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra03_review": "PENDING"
+  },
+  "schema": "regime_lab.ra03_manifest.v1",
+  "lab_run_id": "ra03-20260918T151157Z-6d0ec74c",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:12:53.550947+00:00"
+}

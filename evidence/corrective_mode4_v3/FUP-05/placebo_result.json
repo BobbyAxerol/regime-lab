@@ -1,0 +1,195 @@
+{
+  "schema": "regime_lab.fup05_placebo.v1",
+  "phase": "FUP-05",
+  "registration_ref": "evidence/corrective_mode4_v3/followup-studies/followup_studies_registration.json#/studies/4",
+  "purpose": "PLACEBO_TIMING on the deep-dive window: does a synthetic tape with no market information reproduce M4_REGIME's positive mean decay at matched mechanics?",
+  "window": [
+    "2021-01-01",
+    "2022-01-01"
+  ],
+  "trials": 50,
+  "engine_report_level": "score",
+  "placebo_seed": 20260921,
+  "deepdive_run_id": "ra07decaydive-20260921T072850Z-22eb0631",
+  "discovery_dataset": {
+    "deepdive_run_id": "ra07decaydive-20260921T072850Z-22eb0631",
+    "files": {
+      "decay_deepdive.json": {
+        "sha256": "81e72a3743c19d63f4d381eb97b8a4dcca596b0e5b5e9f27a3954b4778b5f0e4",
+        "bytes": 66800
+      },
+      "note.md": {
+        "sha256": "f91d42c3300e9814346a1d7b942862f6022d331edc58ed86c1b4f9dd7b66ca35",
+        "bytes": 413
+      },
+      "attempts.jsonl": {
+        "sha256": "2b98d8bfecdd9ce35b7351c15b34360c413f33ca802ef7e232ef315b49e08c88",
+        "bytes": 821
+      },
+      "scratch/M4_CAL.json": {
+        "sha256": "19f4d54c0d16a462a98dd0ee3744136c5edd42e52637332aa1746035ea3aa98b",
+        "bytes": 19222
+      },
+      "scratch/M4_CAL_MATCHED.json": {
+        "sha256": "07567b6069a2df5ab656d9adc8f756a4811b135426611286c2be11771213ef63",
+        "bytes": 14005
+      },
+      "scratch/M4_REGIME.json": {
+        "sha256": "f89bfa99caefa8eaaf47ef1106d73c8dddffe3f7383f05b93c6c8b7aefdd2dbc",
+        "bytes": 17502
+      }
+    },
+    "fold_counts": {
+      "M4_CAL": 10,
+      "M4_CAL_MATCHED": 7,
+      "M4_REGIME": 9
+    },
+    "trials": 50,
+    "window": [
+      "2021-01-01",
+      "2022-01-01"
+    ],
+    "engine_report_level": "score",
+    "verdict": "DESCRIPTIVE_ONLY"
+  },
+  "disclosed_deviations": [
+    {
+      "knob": "trials",
+      "frozen_contract": 8,
+      "deepdive_value": 50,
+      "reason": "user direction 2026-09-21: a 2-trial search cannot optimise; 50 trials scales wall time, not peak (s2/s6 ratchet probe: flat ~450 MiB transient per trial, no retention)"
+    },
+    {
+      "knob": "M4_CAL test_days",
+      "frozen_contract": 60,
+      "deepdive_value": 40,
+      "reason": "user direction 2026-09-21: 100-day folds gave 4 folds, too few to read decay; measured 40-day folds give 10, balanced vs M4_REGIME's 9 real-trigger cutoffs"
+    },
+    {
+      "knob": "engine output profile",
+      "frozen_contract": "engine default",
+      "deepdive_value": "score",
+      "reason": "FUP-04 parity: byte-equal equity, identical strategy-level counts, peak halved; the default profile OOM-killed this frame"
+    },
+    {
+      "knob": "window",
+      "frozen_contract": "RA-05/07 90-day pilot",
+      "deepdive_value": "2021-01-01 -> 2022-01-01 (12 months)",
+      "reason": "user-requested follow-up: RA-07's 2-3 folds/arm cannot show a decay pattern; 12 months capture all 8 real regime triggers"
+    }
+  ],
+  "calendar_band": {
+    "M4_CAL_mean_decay": -0.0001687721463185716,
+    "M4_CAL_MATCHED_mean_decay": -0.00018628576617384083,
+    "M4_REGIME_mean_decay": 0.00010944061223924072
+  },
+  "placebo": {
+    "schedule": {
+      "cutoffs": [
+        "2021-01-01T00:00:00+00:00",
+        "2021-02-01T08:00:00+00:00",
+        "2021-03-18T16:00:00+00:00",
+        "2021-05-03T12:00:00+00:00",
+        "2021-06-17T12:00:00+00:00",
+        "2021-08-01T16:00:00+00:00",
+        "2021-09-15T20:00:00+00:00",
+        "2021-10-31T20:00:00+00:00",
+        "2021-12-16T00:00:00+00:00"
+      ],
+      "count": 9,
+      "source": "online controller: 8 triggers, no forced count; reasons ['SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE', 'SEMANTIC_STATE_CHANGE'] -- PLACEBO_TIMING control: seeded synthetic labels (seed=20260921) matching the development prefix's dwell profile; shared initial cutoff 2021-01-01T00:00:00+00:00 prepended"
+    },
+    "fidelity": {
+      "schema": "crypto_regime_lab.placebo_fidelity.v1",
+      "real": {
+        "observations": 2003,
+        "switches": 723,
+        "mean_dwell_observations": 2.766574585635359,
+        "switch_rate": 0.3611388611388611,
+        "state_shares": {
+          "0": 0.3379930104842736,
+          "1": 0.32101847229156266,
+          "2": 0.34098851722416373
+        }
+      },
+      "placebo": {
+        "observations": 2003,
+        "switches": 568,
+        "mean_dwell_observations": 3.5202108963093144,
+        "switch_rate": 0.2837162837162837,
+        "state_shares": {
+          "0": 0.3869196205691463,
+          "1": 0.35596605092361455,
+          "2": 0.25711432850723914
+        }
+      },
+      "switch_rate_ratio": 0.7856154910096819,
+      "tolerance": 0.35,
+      "matched": true,
+      "why_it_matters": "a placebo that switches far more often loses on transaction costs alone, and beating it would say nothing about the states. The control is only a control while the rates match (guide 10.2)"
+    },
+    "development_states_count": 2838,
+    "window_observations_count": 2003,
+    "fold_count": 9,
+    "wall_seconds": 2291.1,
+    "equity_last": 21191.081807418846,
+    "mean_daily_return_decay": {
+      "n": 9,
+      "mean_signed_delta": -3.096428371831564e-05,
+      "median_signed_delta": -0.00028491205372040726,
+      "per_fold_deltas": [
+        -0.00069980427030266,
+        0.001074425139900952,
+        -0.00035109869258672077,
+        0.00017052107142940455,
+        0.0011005401168974875,
+        -0.0006295102784422993,
+        0.00020716794330063917,
+        -0.0008660075299412367,
+        -0.00028491205372040726
+      ]
+    },
+    "sharpe_decay": {
+      "n": 9,
+      "mean_signed_delta": -0.5001749184412816,
+      "median_signed_delta": -1.7397272157620092,
+      "per_fold_deltas": [
+        -4.707582074381699,
+        7.2334844694220255,
+        -2.8319394729219454,
+        1.5239174988383812,
+        8.04443995913846,
+        -6.06870737508962,
+        1.430632628388427,
+        -7.386092683603554,
+        -1.7397272157620092
+      ]
+    },
+    "market_partitions_used": [
+      "2020-11",
+      "2020-12",
+      "2021-01",
+      "2021-02",
+      "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
+      "2021-10",
+      "2021-11",
+      "2021-12"
+    ]
+  },
+  "verdict": {
+    "label": "CADENCE_ARTIFACT",
+    "reason": "placebo mean decay -0.000031 lands inside/above the calendar band (worst -0.000169): a tape with no market information reproduces the REGIME pattern",
+    "recommendation": "do not open RA-08 on this signal"
+  },
+  "verdict_vocabulary": "DESCRIPTIVE_ONLY",
+  "phase_wall_seconds": 2413.9,
+  "lab_run_id": "fup05placebo-20260921T125029Z-32fc0c83",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-21T13:30:43.651592+00:00"
+}

@@ -8,6 +8,7 @@ identity; every consumer records the producer in its own cache ledger, so a reus
 is never silent. A corrupt or drifted seal raises instead of recomputing.
 """
 from pathlib import Path
+import threading
 
 from .runtime import local, source_identity
 from .storage import EvidenceError, canonical, digest, file_digest, jsonable, read, save, utcnow
@@ -18,7 +19,25 @@ CACHE_ROOT = "evidence/time_edge_validation_v4/compute-cache"
 
 # The cache root may never contain a path seed/exclusion pattern that the read
 # guard refuses; contracts name files relative to LAB_ROOT.
+#
+# RA-02 (RA-GUIDE-1.0 §6 RA02.3): every kind also hashes the shared financial
+# semantics closure — alpha adapter base, the evaluator/engine bridge, the
+# event/continuous account execution bridge and the shared contract helpers.
+# Editing any of these must MISS every dependent kind. This deliberately
+# invalidates pre-RA-02 cache entries: backend changes invalidate unless
+# equivalence is certified, and it was not.
+SHARED_FINANCIAL_CLOSURE = (
+    "src/crypto_regime_lab/alphas/base.py",
+    "src/crypto_regime_lab/experiments/time_edge_contracts.py",
+    "src/crypto_regime_lab/experiments/evaluator.py",
+    "src/crypto_regime_lab/experiments/dynamic_fold_provider.py",
+    "src/crypto_regime_lab/integration/event_account.py",
+    "src/crypto_regime_lab/integration/continuous_account.py",
+)
+
 CONTRACT_FILES = {
+    kind: SHARED_FINANCIAL_CLOSURE + files
+    for kind, files in {
     "world": ("src/crypto_regime_lab/time_edge/controls.py",),
     "targets": ("src/crypto_regime_lab/time_edge/workers.py",
                 "src/crypto_regime_lab/time_edge/execution.py",
@@ -41,6 +60,8 @@ CONTRACT_FILES = {
                    "src/crypto_regime_lab/time_edge/metrics.py",
                    "src/crypto_regime_lab/time_edge/eligibility.py",
                    "src/crypto_regime_lab/time_edge/storage.py"),
+    "causal_event": ("src/crypto_regime_lab/time_edge/execution.py",),
+    }.items()
 }
 
 
@@ -66,6 +87,9 @@ def engine_contract(root):
 class ComputeCache:
     """Append-only content-addressed publication, keyed by computed identity."""
 
+    _identity_locks: dict = {}
+    _identity_locks_guard = threading.Lock()
+
     def __init__(self, root, namespace, *, source=None):
         self.root = Path(root).resolve()
         if not str(namespace).replace("-", "").replace("_", "").isalnum():
@@ -82,6 +106,11 @@ class ComputeCache:
 
     def _paths(self, identity):
         return self.directory / (identity + ".json"), self.directory / (identity + ".seal.json")
+
+    def _lock_for(self, identity) -> threading.Lock:
+        with ComputeCache._identity_locks_guard:
+            return ComputeCache._identity_locks.setdefault(
+                (self.namespace, identity), threading.Lock())
 
     def lookup(self, kind, facets):
         identity = self.identity(kind, facets)
@@ -135,3 +164,15 @@ class ComputeCache:
         record = self.publish(kind, facets, payload, producer=producer)
         return record["payload"], {"status": "MISS", "kind": kind, "identity": identity,
                                    "producer": record["producer"]}
+
+    def get_or_compute_singleflight(self, kind, facets, callback, *, producer):
+        """One owner computation per semantic key among same-process racers.
+
+        RA-02 §6 RA02.4/C06: a per-identity lock plus a re-check after
+        acquiring means concurrent consumers of one key perform the callback
+        exactly once and the rest receive the published, seal-validated
+        payload. Never publishes twice for one key.
+        """
+        identity = self.identity(kind, facets)
+        with self._lock_for(identity):
+            return self.get_or_compute(kind, facets, callback, producer=producer)

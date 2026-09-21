@@ -1,0 +1,54 @@
+{
+  "schema": "regime_lab.fup04_mem_audit_measurement.v1",
+  "phase": "FUP-04",
+  "measurement": "s3_deployment_full_frame_score_profile",
+  "raw_source": {
+    "path": "/tmp/s3_score.json",
+    "sha256": "bfde27a855ceb85f4e27e862fdf239688794ee0a5e5d209f22cc13278d11fcf5"
+  },
+  "headline": {
+    "frame_rows": 613440,
+    "report_level": "score",
+    "peak_mib": 1109.9,
+    "delta_mib": 797.2,
+    "wall_s": 62.226,
+    "rlimit_as_gib": 4.0,
+    "outcome": "COMPLETED",
+    "equity_len": 613440,
+    "status": "EVALUATED"
+  },
+  "raw_stages": {
+    "rlimit": {
+      "rlimit_as_gib": 4.0,
+      "previous_soft": null
+    },
+    "s1_frame_load": {
+      "base_mib": 99.4,
+      "peak_mib": 444.2,
+      "after_gc_mib": 312.7,
+      "delta_mib": 344.8,
+      "residual_mib": 213.3,
+      "wall_s": 1.111,
+      "rows": 613440,
+      "cols": 5,
+      "purpose": "s3/s4 host frame"
+    },
+    "s3_deployment_full_frame": {
+      "base_mib": 312.7,
+      "peak_mib": 1109.9,
+      "after_gc_mib": 917.6,
+      "delta_mib": 797.2,
+      "residual_mib": 605.0,
+      "wall_s": 62.226,
+      "frame_rows": 613440,
+      "activations": 1,
+      "report_level": "score",
+      "equity_len": 613440,
+      "fills": 0,
+      "status": "EVALUATED"
+    }
+  },
+  "lab_run_id": "FUP-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-20T10:51:29.248391+00:00"
+}

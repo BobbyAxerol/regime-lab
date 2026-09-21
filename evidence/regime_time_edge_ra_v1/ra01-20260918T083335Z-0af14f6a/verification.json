@@ -1,0 +1,43 @@
+{
+  "schema": "crypto_regime_lab.ra01_verification.v1",
+  "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/regime_time_edge_ra_v1/ra01-20260918T083335Z-0af14f6a",
+  "gates": {
+    "G01-ID": {
+      "pass": false,
+      "reasons": [
+        "git HEAD not a full 40-hex sha: ''",
+        "git branch not recorded",
+        "engine/native versions not pinned",
+        "installed endpoint hash not recorded",
+        "protected-source endpoint hash not recorded"
+      ]
+    },
+    "G01-MIG": {
+      "pass": true,
+      "reasons": []
+    },
+    "G01-VERIFY": {
+      "pass": false,
+      "reasons": [
+        "missing artifacts: ['report.md', 'handoff.md']"
+      ],
+      "tests": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "G01-BUDGET": {
+      "pass": true,
+      "reasons": []
+    },
+    "G01-REPORT": {
+      "pass": true,
+      "reasons": []
+    }
+  },
+  "overall": "FAIL",
+  "lab_run_id": "ra01-20260918T083335Z-0af14f6a",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T08:33:35.700590+00:00"
+}

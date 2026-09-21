@@ -1,0 +1,84 @@
+{
+  "schema": "regime_lab.ra_phase_gate.v1",
+  "phase_id": "RA-05",
+  "guide_version": "RA-GUIDE-1.0",
+  "registration_digest": null,
+  "source_dependency_digest": null,
+  "implementation_status": "COMPLETE",
+  "technical_gate": "FAIL",
+  "research_status": "DISCOVERY_ONLY",
+  "required_gates": [
+    "G05-EXEC",
+    "G05-TRACE",
+    "G05-LEARN",
+    "G05-SCOPE",
+    "G05-MANIFEST"
+  ],
+  "gate_results": [
+    {
+      "gate_id": "G05-EXEC",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G05-TRACE",
+      "status": "FAIL",
+      "reasons": [
+        "D01 has no matching test in the junit report",
+        "D02 has no matching test in the junit report",
+        "D03 has no matching test in the junit report"
+      ]
+    },
+    {
+      "gate_id": "G05-LEARN",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G05-SCOPE",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "gate_id": "G05-MANIFEST",
+      "status": "PASS",
+      "reasons": []
+    }
+  ],
+  "mandatory_tests": [
+    {
+      "command": "scripts/run_ra05.py --pytest-xml /tmp/claude-0/-root-bobby-pool-alpha-lab-regime-model-quantbt/167d39ac-87ec-42b5-bcdd-8ed5b7c149dc/scratchpad/ra05_smoke_junit.xml --smoke",
+      "tests": 90,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "actual_run_refs": [
+    "arms_result.json",
+    "action_divergence.json",
+    "descriptive_returns.json"
+  ],
+  "verified_reuse_refs": [
+    "dynamic_fold_provider.run_cutoff_walk_forward (RF-04)",
+    "mode4_admission.admit_selection (RA-04)",
+    "experiments.regime_schedule (RF-04)"
+  ],
+  "measured_resources": {
+    "phase_wall_s": 207.0
+  },
+  "protected_state_before_ref": "baseline/protected_before",
+  "protected_state_after_ref": "protected status: clean",
+  "open_blockers": [],
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "notes": [
+    "verify ran over the frozen artifact set incl. this receipt"
+  ],
+  "lab_run_id": "ra05-20260918T181151Z-2d9f17fc",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T18:15:18.155532+00:00"
+}

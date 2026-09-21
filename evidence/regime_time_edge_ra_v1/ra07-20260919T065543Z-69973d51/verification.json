@@ -1,0 +1,42 @@
+{
+  "schema": "crypto_regime_lab.ra07_verification.v1",
+  "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/regime_time_edge_ra_v1/ra07-20260919T065543Z-69973d51",
+  "gates": {
+    "G07-VALID": {
+      "pass": true,
+      "reasons": [],
+      "tests": {
+        "tests": 183,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "G07-CONTROL": {
+      "pass": true,
+      "reasons": []
+    },
+    "G07-STATS": {
+      "pass": true,
+      "reasons": []
+    },
+    "G07-DECAY": {
+      "pass": true,
+      "reasons": []
+    },
+    "G07-CLAIM": {
+      "pass": false,
+      "reasons": [
+        "report.md does not state a conclusion_level"
+      ]
+    },
+    "G07-MANIFEST": {
+      "pass": true,
+      "reasons": []
+    }
+  },
+  "overall": "FAIL",
+  "lab_run_id": "ra07-20260919T065543Z-69973d51",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T07:04:18.202100+00:00"
+}

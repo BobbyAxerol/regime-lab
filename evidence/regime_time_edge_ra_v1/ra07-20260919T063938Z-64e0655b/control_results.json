@@ -1,0 +1,250 @@
+{
+  "CALENDAR_BUDGET_MATCHED": {
+    "status": "ALREADY_AVAILABLE",
+    "cell1_ref": "M4_CAL_MATCHED arm in RA-05 arms_result.json",
+    "cell2_ref": "M4_CAL_MATCHED arm in cell2_result.json"
+  },
+  "AGE_ONLY": {
+    "status": "NOT_APPLICABLE",
+    "reason": "RA-06 locked KEEP_BASELINE (support=5 < min_required=8); no action-aware policy exists to contrast against AGE_ONLY"
+  },
+  "DELAYED_INFORMATION": {
+    "status": "OK",
+    "delay_observations": 1,
+    "schedule_cutoff_count": 1,
+    "fold_count": 1,
+    "wall_seconds": 39.703,
+    "equity_last": 20593.226647669042,
+    "equity_daily": [
+      [
+        "2020-12-01T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-02T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-03T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-04T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-05T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-06T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-07T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-08T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-09T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-10T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-11T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-12T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-13T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-14T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-15T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-16T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-17T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-18T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-19T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-20T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-21T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-22T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-23T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-24T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-25T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-26T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-27T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-28T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-29T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-30T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2020-12-31T00:00:00+00:00",
+        20000.0
+      ],
+      [
+        "2021-01-01T00:00:00+00:00",
+        20006.443935855925
+      ],
+      [
+        "2021-01-02T00:00:00+00:00",
+        20181.758776338032
+      ],
+      [
+        "2021-01-03T00:00:00+00:00",
+        20250.89366321765
+      ],
+      [
+        "2021-01-04T00:00:00+00:00",
+        20314.485566762247
+      ],
+      [
+        "2021-01-05T00:00:00+00:00",
+        20417.793741761507
+      ],
+      [
+        "2021-01-06T00:00:00+00:00",
+        20531.81885623832
+      ],
+      [
+        "2021-01-07T00:00:00+00:00",
+        20593.226647669042
+      ]
+    ],
+    "error": null
+  },
+  "PLACEBO_TIMING": {
+    "status": "INSUFFICIENT_WINDOW_OBSERVATIONS",
+    "seed": 20260921,
+    "development_states_count": null,
+    "window_observations_count": null,
+    "schedule_cutoff_count": null,
+    "fidelity": null,
+    "fold_count": null,
+    "wall_seconds": null,
+    "equity_last": null,
+    "equity_daily": null,
+    "error": "INSUFFICIENT_WINDOW_OBSERVATIONS"
+  },
+  "RISK_EXPOSURE_ATTRIBUTION": {
+    "status": "OK",
+    "cell1": {
+      "schema": "regime_lab.ra07_risk_exposure_attribution.v1",
+      "M4_REGIME": {
+        "status": "OK",
+        "exposure_days": 51.71805555555556,
+        "exposure_fraction_of_window": 7.388293650793651,
+        "turnover_notional": 321122.44561351306,
+        "fill_count": 160,
+        "max_drawdown_fraction": 0.01771609100048629,
+        "equity_last": 20859.336252630535,
+        "equity_first": 20000.0
+      },
+      "M4_CAL_MATCHED": {
+        "status": "OK",
+        "exposure_days": 51.580555555555556,
+        "exposure_fraction_of_window": 7.368650793650794,
+        "turnover_notional": 580776.6323422047,
+        "fill_count": 290,
+        "max_drawdown_fraction": 0.01771609100048629,
+        "equity_last": 20526.78592433561,
+        "equity_first": 20000.0
+      },
+      "exposure_fraction_delta": 0.019642857142857295,
+      "max_drawdown_deterioration_vs_comparator": 0.0,
+      "risk_cap_registered": 0.02,
+      "risk_cap_breached": false,
+      "interpretation_note": "a positive Delta-hat driven mostly by a large exposure_fraction_delta is an exposure-timing contribution, not a parameter-selection/information-timing contribution, even if both arms use the same selector (guide 13.5)"
+    },
+    "cell2": {
+      "schema": "regime_lab.ra07_risk_exposure_attribution.v1",
+      "M4_REGIME": {
+        "status": "OK",
+        "exposure_days": 4.926388888888889,
+        "exposure_fraction_of_window": 0.7037698412698413,
+        "turnover_notional": 40507.84502586048,
+        "fill_count": 20,
+        "max_drawdown_fraction": 0.00606222999675773,
+        "equity_last": 20529.264099364904,
+        "equity_first": 20000.0
+      },
+      "M4_CAL_MATCHED": {
+        "status": "OK",
+        "exposure_days": 4.926388888888889,
+        "exposure_fraction_of_window": 0.7037698412698413,
+        "turnover_notional": 40507.84502586048,
+        "fill_count": 20,
+        "max_drawdown_fraction": 0.00606222999675773,
+        "equity_last": 20529.264099364904,
+        "equity_first": 20000.0
+      },
+      "exposure_fraction_delta": 0.0,
+      "max_drawdown_deterioration_vs_comparator": 0.0,
+      "risk_cap_registered": 0.02,
+      "risk_cap_breached": false,
+      "interpretation_note": "a positive Delta-hat driven mostly by a large exposure_fraction_delta is an exposure-timing contribution, not a parameter-selection/information-timing contribution, even if both arms use the same selector (guide 13.5)"
+    }
+  },
+  "schema": "regime_lab.ra07_control_results.v1",
+  "lab_run_id": "ra07-20260919T063938Z-64e0655b",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T06:43:59.160207+00:00"
+}

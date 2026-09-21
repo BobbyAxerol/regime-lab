@@ -1,0 +1,82 @@
+{
+  "required_gates": [
+    "G07-VALID",
+    "G07-CONTROL",
+    "G07-STATS",
+    "G07-DECAY",
+    "G07-CLAIM"
+  ],
+  "artifacts": [
+    {
+      "relpath": "replication_spec.json",
+      "sha256": "3ce912907ffce0e3ccd2172669ec2de57d1eb8307e30918a4633e2e0365ae3b1",
+      "size_bytes": 6706
+    },
+    {
+      "relpath": "complete_coverage_matrix.json",
+      "sha256": "c1d97f9507b8d8b9c3d0f4ebd580af67f191a00912423194e5c689507e2f4773",
+      "size_bytes": 8826
+    },
+    {
+      "relpath": "cell2_result.json",
+      "sha256": "d6acef9e9c508b83a0974772ed55ebb5990d79cdcf1348e5299bace614dfbc2a",
+      "size_bytes": 70152
+    },
+    {
+      "relpath": "paired_accounts.json",
+      "sha256": "47304467820d7357d3027be4a9c2ce032f30f9ea83d3c0558844450e204e44c4",
+      "size_bytes": 25309
+    },
+    {
+      "relpath": "control_results.json",
+      "sha256": "b9668e89ced26f175b2a197b20fe66da23ec73e055b4b1a2dd49e7aeb7aa2da8",
+      "size_bytes": 6464
+    },
+    {
+      "relpath": "decay_table.json",
+      "sha256": "341d4e437d0ea8e7ae2b896c47bbb87afbe5b8e5046eddd031217991928bf16c",
+      "size_bytes": 37423
+    },
+    {
+      "relpath": "uncertainty_results.json",
+      "sha256": "4a2437ba7d7edba56086f4a7ccb52dca50380fb3808bfabd122c7d406f476ae3",
+      "size_bytes": 11255
+    },
+    {
+      "relpath": "multiplicity_ledger.json",
+      "sha256": "a20774d55d5f3267406db93a88b13f5745d09f80860a510cf4c1cda04a39943f",
+      "size_bytes": 800
+    },
+    {
+      "relpath": "bootstrap_self_check.json",
+      "sha256": "0d4b9333e067053f710852ee548179b5699dc364e1929997550e0fefc4d7a7fe",
+      "size_bytes": 621
+    },
+    {
+      "relpath": "support_report.json",
+      "sha256": "b66c40087fed01f66d7cb45ba612c03ec032d1835bc6a025c0d19ec43e471787",
+      "size_bytes": 1295
+    },
+    {
+      "relpath": "sensitivity_report.json",
+      "sha256": "19715efb18b8ae38f1d68024de45eb311ad42093c5067f5f1f2c8c5753426c53",
+      "size_bytes": 4374
+    },
+    {
+      "relpath": "cost_risk_attribution.json",
+      "sha256": "438589e4d936f62aaf07662279b58742fee5f9e9e8f457aa46f1d75b8616135a",
+      "size_bytes": 2557
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "53601c568d55b48eda1ea9c9d71dc94bf767b9ab",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra07_review": "PENDING"
+  },
+  "schema": "regime_lab.ra07_manifest.v1",
+  "lab_run_id": "ra07-20260919T065543Z-69973d51",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T07:04:18.157721+00:00"
+}

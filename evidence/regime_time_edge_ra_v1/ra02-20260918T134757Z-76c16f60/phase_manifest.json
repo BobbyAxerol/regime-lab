@@ -1,0 +1,59 @@
+{
+  "required_gates": [
+    "G02-SEM",
+    "G02-NUM",
+    "G02-COUNT",
+    "G02-LEDGER",
+    "G02-MANIFEST"
+  ],
+  "artifacts": [
+    {
+      "relpath": "cache_contract.json",
+      "sha256": "192c4ba86a27d02ce948322724fcb931cef9d8e4fbc4f5eb876606e7586d0510",
+      "size_bytes": 2528
+    },
+    {
+      "relpath": "dependency_manifest.json",
+      "sha256": "010fb3e8371ce7f409582dfaa8e2f8933fbc8cd5f80432ed40e025aa5e59ea5d",
+      "size_bytes": 44117
+    },
+    {
+      "relpath": "cache_test_matrix.json",
+      "sha256": "33661d35454cbf5a6b516c8b8ffd152fe0a05a118d38a3b800ff2c7a76312f25",
+      "size_bytes": 4853
+    },
+    {
+      "relpath": "actual_cross_run_reuse.json",
+      "sha256": "0cda05db6c4db1a46e04829b4b74ff8279d682c55bcc518309a30c8643dad6d3",
+      "size_bytes": 1188
+    },
+    {
+      "relpath": "resume_parity.json",
+      "sha256": "50a8d6a2307a2439c48c49dccfc8a05c8bbcae5e5a6c4028f5d6cac878a3150d",
+      "size_bytes": 806
+    },
+    {
+      "relpath": "counters.json",
+      "sha256": "a212896969fe14d3e6ad0c51aa573f66276d2bb2804b0fbd9c9afc7532e50eb1",
+      "size_bytes": 1219
+    },
+    {
+      "relpath": "resource_envelope.json",
+      "sha256": "5e7ebe00ce00215a3cb2188c854d90c2a4347ee22e19ea9f4b5f7aa71e66d8ce",
+      "size_bytes": 645
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "161c34a7a1e4e737d3ac0acd58ca85d86c70d925",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "ra01_scope": "PENDING",
+    "ra01_migration": "PENDING",
+    "ra02_review": "PENDING"
+  },
+  "schema": "regime_lab.ra02_manifest.v1",
+  "lab_run_id": "ra02-20260918T134757Z-76c16f60",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T13:48:00.872151+00:00"
+}

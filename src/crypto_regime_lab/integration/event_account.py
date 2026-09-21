@@ -628,20 +628,42 @@ class EventAccountStrategy:
 def run_event_account(alpha_id: str, frame: pd.DataFrame, *, initial, schedule,
                       backend: str = "native_event", initial_capital: float = 20000.0,
                       one_way_fee: float = ONE_WAY_TAKER_FEE,
-                      slippage_bps: float = SLIPPAGE_BPS) -> EventAccountRun:
-    """Run one carried account on the public native-event strategy route."""
+                      slippage_bps: float = SLIPPAGE_BPS,
+                      report_level: str | None = None) -> EventAccountRun:
+    """Run one carried account on the public native-event strategy route.
+
+    ``report_level`` (documented engine kwarg, 1.1.1) selects the engine's own
+    output retention profile: None keeps the engine default (audit ledgers);
+    "score" asks the engine for its compact profile (dense equity/position
+    paths only, no per-bar audit ledgers) -- the memory audit
+    (scripts/mem_audit.py, 2026-09-20) measured the audit ledgers as the
+    dominant per-call accumulator on long frames (kernel OOM at anon-rss
+    4.24 GiB on a 613k-bar deployment account). Equity parity under each
+    level is asserted by tests + mem_audit s7 before any caller opts in;
+    fill/decision records here are strategy-level and unaffected.
+    """
     import quantbt as q
 
     arrays = [frame[c].to_numpy(float) for c in ("open", "high", "low", "close", "volume")]
     market = MarketSlice(*arrays, index=frame.index)
     strategy = EventAccountStrategy(alpha_id, frame, market, initial=initial, schedule=schedule)
-    endpoint = q.QuantBTEndpoint.native_event_strategy(
+    endpoint_kwargs = dict(
         account=q.AccountConfig(initial_capital=initial_capital),
         slippage_bps=slippage_bps, symbols=[SYMBOL], use_funding=False,
         **bound_fee_kwargs(one_way_fee),
     )
+    if report_level is not None:
+        endpoint_kwargs["report_level"] = str(report_level)
+    endpoint = q.QuantBTEndpoint.native_event_strategy(**endpoint_kwargs)
     result = endpoint.simulate(data=frame, strategy=strategy)
     status = "EVALUATED" if not strategy.unmapped and not strategy.rejections else "NOT_EVALUATED"
+    # What the ENGINE says it retained (not what we asked for): the native
+    # metadata reports its resolved output profile, so a reduced-profile run is
+    # distinguishable from an engine-default one even when several levels
+    # normalise to the same engine profile.
+    engine_metadata = getattr(result, "metadata", None) or {}
+    resolved_level = (engine_metadata.get("rust_output_profile")
+                      or engine_metadata.get("output_profile"))
     return EventAccountRun(
         equity=np.asarray(result.equity, dtype=float).reshape(-1),
         positions=np.asarray(result.positions, dtype=float).reshape(-1),
@@ -662,5 +684,9 @@ def run_event_account(alpha_id: str, frame: pd.DataFrame, *, initial, schedule,
                          getattr(result, "metadata", None) or {}).get(
                              "native_event_backend_resolved"),
                      "command_count": len(strategy.commands_out),
-                     "order_event_count": len(strategy.order_events_out)},
+                     "order_event_count": len(strategy.order_events_out),
+                     "report_level": (None if report_level is None
+                                      else str(report_level)),
+                     "resolved_report_level": (None if resolved_level is None
+                                               else str(resolved_level))},
     )

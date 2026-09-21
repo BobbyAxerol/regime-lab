@@ -1,0 +1,54 @@
+{
+  "required_gates": [
+    "G01-ID",
+    "G01-MIG",
+    "G01-VERIFY",
+    "G01-BUDGET",
+    "G01-REPORT"
+  ],
+  "artifacts": [
+    {
+      "relpath": "baseline_identity.json",
+      "sha256": "d7491ef88482e367922bfe1921da87c1fc70903fe884a4d16d3c6a60af71dc66",
+      "size_bytes": 62354
+    },
+    {
+      "relpath": "finding_disposition.json",
+      "sha256": "0e6f54b96bc86c3688050a02aa1fe7662417eda83c0dd82ce32965e5e5246b03",
+      "size_bytes": 5992
+    },
+    {
+      "relpath": "protocol_migration.json",
+      "sha256": "d1bdbbe828e7b4c84dd0365f29797c210775479fd99a75ff648c8df5eb52c409",
+      "size_bytes": 2895
+    },
+    {
+      "relpath": "registration.json",
+      "sha256": "cb918d1ed41057af580d4800aa5407793892f7c0693c929d01ca8436770b1fc9",
+      "size_bytes": 2564
+    },
+    {
+      "relpath": "resource_budget.json",
+      "sha256": "e688eed22e7d0014d0b57ff97d7ad0613e2a5b16b6fc9bae12c45b2f61885492",
+      "size_bytes": 2140
+    },
+    {
+      "relpath": "test_registry.json",
+      "sha256": "a950512b76e520d890bdb226f85bf16f23920b81637042e432a9059b97b91a21",
+      "size_bytes": 952
+    }
+  ],
+  "source_dependency_digests": {
+    "lab_head": "a98fc58999426ea5557a13f46c536be494d1dbd9",
+    "endpoint_installed": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6",
+    "endpoint_protected": "45ede55d0d66dd3a30089584b92199a455acca83e8f0418df3305874c28929a6"
+  },
+  "approvals": {
+    "scope": "PENDING",
+    "migration": "PENDING"
+  },
+  "schema": "crypto_regime_lab.ra01_manifest.v1",
+  "lab_run_id": "ra01-20260918T093646Z-7b4e50a6",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T09:36:46.082927+00:00"
+}

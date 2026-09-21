@@ -1,0 +1,20 @@
+{
+  "schema": "regime_lab.ra03_capacity_forecast.v1",
+  "measured_cost_per_task_seconds": 2.6336344049777836,
+  "measured_on_scope": "representative_train_candidate",
+  "ledger_budget_seconds": 300000.0,
+  "ledger_charged_seconds": 193557.80508357903,
+  "ledger_remaining_seconds": 106442.19491642097,
+  "forecast_affordable_tasks_at_measured_cost": 40416,
+  "unmeasured_speedup_commitment": false,
+  "admission_probe": {
+    "over_envelope_request_seconds": 106444.82855082594,
+    "over_envelope_status": "BLOCKED_BUDGET",
+    "in_envelope_request_seconds": 2.6336344049777836,
+    "in_envelope_status": "ADMIT"
+  },
+  "rule": "a job whose requested_wall_s exceeds the ledger's remaining budget must be refused BLOCKED_BUDGET before launch, not after",
+  "lab_run_id": "ra03-20260918T151157Z-6d0ec74c",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T15:12:53.537603+00:00"
+}

@@ -290,11 +290,16 @@ class EventAccountScorer:
 
     def __init__(self, alpha_id: str, *, one_way_fee: float = ONE_WAY_TAKER_FEE,
                  slippage_bps: float = SLIPPAGE_BPS,
-                 initial_capital: float = ACCOUNT_CAPITAL) -> None:
+                 initial_capital: float = ACCOUNT_CAPITAL,
+                 engine_report_level: str | None = None) -> None:
         self.alpha_id = alpha_id
         self.one_way_fee = float(one_way_fee)
         self.slippage_bps = float(slippage_bps)
         self.initial_capital = float(initial_capital)
+        # The engine's own output-retention profile (event_account.run_event_account).
+        # None keeps the engine default; "score" drops per-bar audit ledgers
+        # (measured: equity exact-equal, ~3.4x less peak transient memory).
+        self.engine_report_level = engine_report_level
         self._cache: dict[tuple, dict] = {}
         self.calls = 0
         self.account_runs = 0
@@ -368,6 +373,7 @@ class EventAccountScorer:
                 self.alpha_id, base, initial=initial, schedule=[],
                 initial_capital=self.initial_capital,
                 one_way_fee=self.one_way_fee, slippage_bps=self.slippage_bps,
+                report_level=self.engine_report_level,
             )
         except ValueError as exc:
             # An infeasible sampled point is not a financial evaluation; it is
@@ -377,10 +383,22 @@ class EventAccountScorer:
                                 "reason": f"{type(exc).__name__}: {exc}"[:200]}
             return
         self.account_runs += 1
+        # Fill counting source note (mem_audit 2026-09-20): `engine_fill_count`
+        # is derived from the native audit trail, which the engine's reduced
+        # output profiles (report_level="score"/"minimal") do not retain (it
+        # reads 0 there). The strategy-level fill records (`run.fills`) are
+        # profile-invariant: on the real RA-05 fold-0 account call the audit
+        # and strategy levels measured IDENTICAL equity (exact float equality,
+        # mem_audit s7) and identical strategy-level fill/entry counts
+        # (81/81 fills, 41/41 entries) -- so scores use the strategy-level
+        # count, and the audit-trail count is kept only as provenance for
+        # default-profile runs.
+        strategy_fill_count = len(getattr(run, "fills", None) or [])
         self._cache[key] = {
             "equity": pd.Series(np.asarray(run.equity, dtype=float), index=run.index),
             "status": run.status,
             "engine_fill_count": int(run.engine_fill_count),
+            "strategy_fill_count": int(strategy_fill_count),
             "unmapped": len(run.unmapped_intents),
             "rejections": len(run.rejections),
         }
@@ -399,10 +417,15 @@ class EventAccountScorer:
         if len(sample) < 2:
             return {"sharpe": float("-inf"), "turnover": 0.0, "trade_count": 0.0,
                     "status": "INSUFFICIENT_BARS"}
+        # turnover/trade_count come from the profile-invariant strategy-level
+        # fill records (see _run_account's note) so a reduced engine output
+        # profile cannot silently zero a scorer field.
+        fills = float(cached.get("strategy_fill_count",
+                                 cached["engine_fill_count"]))
         return {
             "sharpe": _annualised_sharpe(sample, int(task["trading_days"])),
-            "turnover": float(cached["engine_fill_count"]),
-            "trade_count": float(cached["engine_fill_count"]),
+            "turnover": fills,
+            "trade_count": fills,
             "status": cached["status"],
         }
 
@@ -523,8 +546,33 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                             one_way_fee: float = ONE_WAY_TAKER_FEE,
                             slippage_bps: float = SLIPPAGE_BPS,
                             alloc_per_trade: float = ALLOC_PER_TRADE,
-                            account_capital: float = ACCOUNT_CAPITAL) -> dict:
-    """Run one arm's cutoff list through the installed Mode 4 pipeline."""
+                            account_capital: float = ACCOUNT_CAPITAL,
+                            research_retention: str = "full_trial_ledger",
+                            engine_report_level: str | None = None) -> dict:
+    """Run one arm's cutoff list through the installed Mode 4 pipeline.
+
+    ``research_retention`` is passed straight through to the installed engine's
+    ``optimization_config`` (verified values: "full_trial_ledger", "selected_only",
+    "none" -- quantbt/core/research_audit.py::RESEARCH_RETENTION_LEVELS_V1). It
+    only controls an optional audit sidecar (walkforward.py's
+    ``_capture_research_records`` / ``self._research_full_trial_records`` and
+    ``_research_full_candidate_records``, extended once per fold and never
+    cleared for the engine instance's lifetime); it never affects the public
+    ``trial_table``, selection, scoring, or the final account. Defaults to the
+    prior hardcoded value so every existing caller (RA-05, RA-07) is
+    byte-identical.
+
+    ``engine_report_level`` is the engine's own output-retention profile, passed
+    to every ``run_event_account`` this route makes (both the per-candidate
+    scorer calls and the final deployment account). ``None`` keeps the engine
+    default so all existing callers are unchanged. ``"score"`` was measured
+    (scripts/mem_audit.py, 2026-09-20) to reproduce the default profile's account
+    path EXACTLY -- byte-equal equity, identical strategy-level fill/entry
+    counts -- while roughly halving peak transient memory, which is what makes a
+    full-length deployment account fit in budget. Scores are read from the
+    profile-invariant strategy-level records (see ``EventAccountScorer``), never
+    from the audit-only counter a reduced profile zeroes out.
+    """
     import warnings
 
     import optuna
@@ -548,7 +596,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
     optimization_config: dict[str, Any] = {
         "candidate_selection_metric": METRIC,
         "scoring_backend": "endpoint",
-        "research_retention": "full_trial_ledger",
+        "research_retention": research_retention,
         "inner_split_frequency": "quarterly",
         "inner_window_mode": "expanding",
         "inner_train_window": "365D",
@@ -607,6 +655,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                 scorer = EventAccountScorer(
                     alpha_id, one_way_fee=one_way_fee, slippage_bps=slippage_bps,
                     initial_capital=account_capital,
+                    engine_report_level=engine_report_level,
                 )
                 wf_config = _event_walkforward_config(
                     optuna_trials=int(optuna_trials), seed=int(seed), metadata=config_metadata,
@@ -622,6 +671,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                     "resolved_evaluator": "lab_event_account_scorer",
                     "event_account_runs": int(scorer.account_runs),
                     "event_scorer_calls": int(scorer.calls),
+                    "engine_report_level": engine_report_level,
                 }))
                 payload["scoring_backend"] = "endpoint"
                 payload["resolved_evaluator"] = "lab_event_account_scorer"
@@ -629,6 +679,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                     alpha_id, frame, payload["params_by_fold"], schedule.cutoffs, idx,
                     one_way_fee=one_way_fee, slippage_bps=slippage_bps,
                     account_capital=account_capital,
+                    engine_report_level=engine_report_level,
                 )
                 payload["account"] = account
             else:
@@ -760,7 +811,8 @@ def _account_payload(*, equity, positions, fills: list[dict], index: pd.Datetime
 def _event_account_payload(alpha_id: str, frame: pd.DataFrame, params_by_fold: dict,
                            cutoffs: Sequence[str], idx: pd.DatetimeIndex, *,
                            one_way_fee: float, slippage_bps: float,
-                           account_capital: float) -> dict:
+                           account_capital: float,
+                           engine_report_level: str | None = None) -> dict:
     """Deploy the selected params through the actual native-event account."""
     from ..integration.event_account import run_event_account
 
@@ -787,6 +839,7 @@ def _event_account_payload(alpha_id: str, frame: pd.DataFrame, params_by_fold: d
         alpha_id, frame, initial=initial, schedule=schedule,
         initial_capital=float(account_capital),
         one_way_fee=one_way_fee, slippage_bps=slippage_bps,
+        report_level=engine_report_level,
     )
     equity = pd.Series(np.asarray(run.equity, dtype=float), index=run.index)
     peak = equity.cummax()

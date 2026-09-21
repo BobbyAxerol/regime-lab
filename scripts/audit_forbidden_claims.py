@@ -34,12 +34,29 @@ def load(name: str):
 
 
 def check_regime_works() -> dict:
-    """"Regime works" from states correlating with price after a full-sample fit."""
+    """"Regime works" from states correlating with price after a full-sample fit.
+
+    T62/T63 (guide 13.1 acceptance requirements) being COVERED in
+    `acceptance_test_coverage.json` used to be read as a stand-in for
+    "claim_is_being_made" -- but T62/T63 are about testing DISCIPLINE
+    ("no untested heatmap cell is presented as evidence", "the paired
+    bootstrap is done correctly across all 5 symbols"), not about whether the
+    lab publishes an efficacy verdict. Before LAB-09 existed, "T62/T63 not yet
+    built" was a safe (if indirect) proxy for "no claim possible yet" -- but
+    once LAB-09 landed that machinery and used it to reach its OWN registered
+    conclusion, the proxy started firing on the existence of the testing
+    infrastructure, not on the verdict it produced. The actual verdict lives
+    in `lab09_claim_report.json`: `conclusion_level` (registered vocabulary,
+    `configs/hypothesis_registry.json`) and `forbidden.fund_grade_alpha_proven`
+    are what the guide's claim actually turns on.
+    """
     registry = load("lab05_regime_model_registry.json") or {}
-    coverage = load("acceptance_test_coverage.json") or {}
+    claim_report = load("lab09_claim_report.json") or {}
     ablation = registry.get("group_ablation", {})
-    claimed = [r["id"] for r in coverage.get("requirements", [])
-               if r.get("status") == "COVERED" and r["id"] in ("T62", "T63")]
+    forbidden = claim_report.get("forbidden", {})
+    conclusion_level = claim_report.get("conclusion_level")
+    edge_levels = ("NET_PARAMETER_SELECTION_EDGE", "NET_TIMING_EDGE", "NET_POLICY_EDGE")
+    claimed = bool(forbidden.get("fund_grade_alpha_proven")) or conclusion_level in edge_levels
     return {
         "claim": "regime works",
         "would_need": "an out-of-fold contribution, not an in-sample correlation",
@@ -48,12 +65,17 @@ def check_regime_works() -> dict:
         "group_ablation_ran": bool(ablation.get("ladder")),
         "group_ablation_improved_out_of_fold": bool(
             ablation.get("blocks_that_improved_out_of_fold")),
-        "claim_is_being_made": bool(claimed),
+        "lab09_conclusion_level": conclusion_level,
+        "fund_grade_alpha_proven": forbidden.get("fund_grade_alpha_proven"),
+        "claim_is_being_made": claimed,
         "passed": (registry.get("outer_evaluation_touched") is False
-                   and bool(ablation.get("ladder")) and not claimed),
+                   and bool(ablation.get("ladder")) and not claimed
+                   and conclusion_level is not None),
         "note": ("the ablation FAILED -- variance resolved out of fold went +0.335 -> +0.095 -> "
-                 "-0.036 as blocks were added -- and the lab reports that rather than a working "
-                 "regime"),
+                 "-0.036 as blocks were added -- and LAB-09's own claim report closes with "
+                 f"conclusion_level={conclusion_level!r} and fund_grade_alpha_proven="
+                 f"{forbidden.get('fund_grade_alpha_proven')!r}, confirming no regime-works claim "
+                 "is made, not merely that its test machinery exists"),
     }
 
 

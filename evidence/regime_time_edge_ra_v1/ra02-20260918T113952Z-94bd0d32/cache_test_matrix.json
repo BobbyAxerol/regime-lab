@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "case_id": "C01",
+      "test_node_ids": [
+        "test_c01_cross_run_hit_with_zero_new_engine_runs"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C02",
+      "test_node_ids": [
+        "test_c02_changed_semantics_miss_in_dependent_scope"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C03",
+      "test_node_ids": [
+        "test_c03_doc_only_change_keeps_numeric_cache"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C04",
+      "test_node_ids": [
+        "test_c04_future_suffix_never_changes_prefix_key_or_output"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C05",
+      "test_node_ids": [
+        "test_c05_partial_or_corrupt_publication_is_never_a_hit"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C06",
+      "test_node_ids": [
+        "test_c06_concurrent_same_key_runs_one_computation"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C07",
+      "test_node_ids": [
+        "test_c07_duplicate_params_keep_trial_ledger_and_reuse"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C08",
+      "test_node_ids": [
+        "test_c08_resume_parity_with_replay_and_red_control"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C09",
+      "test_node_ids": [
+        "test_c09_future_or_zero_ready_rejected"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    },
+    {
+      "case_id": "C10",
+      "test_node_ids": [
+        "test_c10_initial_state_difference_is_never_a_false_hit"
+      ],
+      "test_file": "tests/ra_corrective/test_ra02_cache_cases.py",
+      "present_in_junit": true,
+      "passed": true,
+      "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+    }
+  ],
+  "gate_tests": {
+    "test_file": "tests/ra_corrective/test_ra02_gates.py",
+    "command": "scripts/run_ra02.py --pytest-xml /tmp/ra02_junit.xml"
+  },
+  "junit": {
+    "tests": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "schema": "regime_lab.ra02_test_matrix.v1",
+  "lab_run_id": "ra02-20260918T113952Z-94bd0d32",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-18T11:39:54.776628+00:00"
+}

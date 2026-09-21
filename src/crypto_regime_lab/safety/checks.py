@@ -63,27 +63,56 @@ def check_t01_lab_root(policy: SandboxPolicy) -> dict:
     )
 
 
+T02_RUN_OUTPUT_TREES = ("evidence", "snapshots")
+
+
 def check_t02_no_alias_copies(policy: SandboxPolicy) -> dict:
-    """No symlink or hardlink inside the lab may alias a protected source."""
+    """No symlink or hardlink inside the lab may alias a protected source.
+
+    Escaping symlinks, symlinks resolving into a protected root and any
+    multi-link file OUTSIDE the declared run-output trees (``evidence/``,
+    ``snapshots/``) are FAIL. Content-sealed run-output dedup inside those
+    trees is recorded as informational only (RA-01 protocol_migration row 7:
+    the old form flagged benign parquet dedup between sealed TE run outputs
+    as FAIL, contradicting this check's own intent).
+    """
     offenders: list[dict] = []
+    informational: list[dict] = []
     skip_dirs = {"environments", ".cache", "wheelhouse", ".git"}
+    protected = {str(realpath(p)) for p in policy.protected_roots}
     for path in policy.lab_root.rglob("*"):
         rel_first = path.relative_to(policy.lab_root).parts[0] if path != policy.lab_root else ""
         if rel_first in skip_dirs:
             continue
         if path.is_symlink():
-            target = realpath(path)
-            escapes = not str(target).startswith(str(policy.lab_root))
-            offenders.append({"path": str(path), "target": str(target), "escapes_lab": escapes, "code": "SYMLINK"})
+            target_str = str(realpath(path))
+            escapes = not target_str.startswith(str(policy.lab_root))
+            into_protected = any(
+                target_str == p or target_str.startswith(p + os.sep) for p in protected
+            )
+            entry = {"path": str(path), "target": target_str,
+                     "escapes_lab": escapes, "into_protected": into_protected,
+                     "code": "SYMLINK"}
+            if escapes or into_protected:
+                offenders.append(entry)
+            else:
+                informational.append(entry)
         elif path.is_file() and path.stat().st_nlink > 1:
-            offenders.append({"path": str(path), "nlink": path.stat().st_nlink, "code": "HARDLINK"})
-    escaping = [o for o in offenders if o.get("escapes_lab") or o["code"] == "HARDLINK"]
+            entry = {"path": str(path), "nlink": path.stat().st_nlink, "code": "HARDLINK"}
+            if rel_first in T02_RUN_OUTPUT_TREES:
+                entry["dedup_zone"] = rel_first
+                informational.append(entry)
+            else:
+                offenders.append(entry)
     return _record(
         "T02", "editable copies are physical, not aliases",
-        "PASS" if not escaping else "FAIL",
-        "no symlink escaping LAB_ROOT and no multi-link file among lab-owned sources",
-        {"offender_count": len(escaping)},
-        {"offenders": offenders[:20]},
+        "PASS" if not offenders else "FAIL",
+        "no symlink escaping LAB_ROOT or resolving into a protected root; no "
+        "multi-link file outside the declared run-output trees (evidence/, "
+        "snapshots/) — dedup inside those trees is informational and never "
+        "excuses a source/config tree",
+        {"offender_count": len(offenders), "informational_count": len(informational)},
+        {"offenders": offenders[:20], "informational": informational[:20]},
     )
 
 

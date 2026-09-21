@@ -1,0 +1,27 @@
+{
+  "schema": "regime_lab.ra07_multiplicity_ledger.v1",
+  "primary_unadjusted": {
+    "name": "cell1: M4_REGIME - M4_CAL_MATCHED",
+    "p_value": 0.1684,
+    "adjustment": "NONE (single pre-registered primary hypothesis, guide 13.4)"
+  },
+  "secondary_family_holm": {
+    "cell1: M4_REGIME - M4_CAL": {
+      "raw_p": 0.4472,
+      "holm_adjusted_p": 0.4472
+    },
+    "cell1: M4_CAL_MATCHED - M4_CAL": {
+      "raw_p": 0.1452,
+      "holm_adjusted_p": 0.2904
+    },
+    "cell2: M4_REGIME - M4_CAL_MATCHED": {
+      "raw_p": 0.0788,
+      "holm_adjusted_p": 0.2364
+    }
+  },
+  "method": "Holm step-down, standard",
+  "not_evaluable_excluded_from_family": [],
+  "lab_run_id": "ra07-20260919T071527Z-4463ccde",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T08:13:03.392409+00:00"
+}

@@ -1,0 +1,225 @@
+{
+  "schema": "regime_lab.ra07_coverage_matrix.v1",
+  "status_vocabulary": [
+    "RUN_VALID",
+    "BLOCKED_CAPABILITY",
+    "NOT_RUN_BUDGET"
+  ],
+  "registered_cohort": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "DOGEUSDT"
+    ],
+    "alphas": [
+      "A-SC",
+      "A-HMA",
+      "A-VWAP",
+      "A-HASH"
+    ]
+  },
+  "rows": [
+    {
+      "cell": "A-SC/BTCUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BTCUSDT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed this phase on the event route, real per-fill account",
+      "run_ref": "ra05-20260918T201236Z-de11db62",
+      "arms_present": [
+        "STATIC",
+        "M4_CAL",
+        "M4_CAL_MATCHED",
+        "M4_REGIME"
+      ]
+    },
+    {
+      "cell": "A-SC/ETHUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "ETHUSDT",
+      "coverage_status": "RUN_VALID",
+      "reason": "executed this phase on the event route, real per-fill account",
+      "run_ref": "ra07-20260919T064622Z-cbc77a82",
+      "arms_present": [
+        "STATIC",
+        "M4_CAL",
+        "M4_CAL_MATCHED",
+        "M4_REGIME"
+      ]
+    },
+    {
+      "cell": "A-SC/SOLUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "SOLUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-SC/BNBUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "BNBUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-SC/DOGEUSDT",
+      "alpha_id": "A-SC",
+      "symbol": "DOGEUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HMA/BTCUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BTCUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HMA/ETHUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "ETHUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HMA/SOLUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "SOLUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HMA/BNBUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "BNBUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HMA/DOGEUSDT",
+      "alpha_id": "A-HMA",
+      "symbol": "DOGEUSDT",
+      "coverage_status": "NOT_RUN_BUDGET",
+      "reason": "capability/route qualified (event route, RF-02) but not executed this phase; budget was spent on the 2 cells above plus the mandatory controls and decay/bootstrap machinery -- disclosed scope limit, never a silent zero",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-VWAP/BTCUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BTCUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-VWAP/ETHUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "ETHUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-VWAP/SOLUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "SOLUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-VWAP/BNBUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "BNBUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-VWAP/DOGEUSDT",
+      "alpha_id": "A-VWAP",
+      "symbol": "DOGEUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "AMEND_PROTECTION is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HASH/BTCUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BTCUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HASH/ETHUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "ETHUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HASH/SOLUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "SOLUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HASH/BNBUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "BNBUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    },
+    {
+      "cell": "A-HASH/DOGEUSDT",
+      "alpha_id": "A-HASH",
+      "symbol": "DOGEUSDT",
+      "coverage_status": "BLOCKED_CAPABILITY",
+      "reason": "partial TP ladder is not expressible on the event route (RF-02 route matrix, reused verbatim from evidence/corrective_mode4_v3/RF-04/cell_coverage.json)",
+      "run_ref": null,
+      "arms_present": null
+    }
+  ],
+  "counts": {
+    "RUN_VALID": 2,
+    "BLOCKED_CAPABILITY": 10,
+    "NOT_RUN_BUDGET": 8,
+    "planned_cells": 20
+  },
+  "rule": "one row per (alpha, symbol) of the registered 4x5 cohort; a non-executed cell carries null run_ref with a reason, never a fabricated metric; changing which cells run is governed only by capability/coverage/behavior/cost, never by a cell's own PnL (guide RA07.2, RA-01 scope.change_rule)",
+  "lab_run_id": "ra07-20260919T064622Z-cbc77a82",
+  "study_id": "regime_time_edge_ra_v1",
+  "written_at_utc": "2026-09-19T06:50:00.657755+00:00"
+}

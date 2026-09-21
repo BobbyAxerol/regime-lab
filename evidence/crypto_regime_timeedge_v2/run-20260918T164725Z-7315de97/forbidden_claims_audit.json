@@ -1,0 +1,150 @@
+{
+  "schema": "crypto_regime_lab.forbidden_claims_audit.v1",
+  "guide_section": "13.6",
+  "checked_at_utc": "2026-09-18T16:47:25.553241+00:00",
+  "method": "each claim is checked STRUCTURALLY: does the evidence the guide demands exist, and is the lab making the claim at all. A lexical scan cannot tell a claim from a denial of one -- two earlier attempts in this lab flagged a requirement's own title, then its own negation",
+  "checks": [
+    {
+      "claim": "regime works",
+      "would_need": "an out-of-fold contribution, not an in-sample correlation",
+      "model_fit_role": "development",
+      "outer_evaluation_touched": false,
+      "group_ablation_ran": true,
+      "group_ablation_improved_out_of_fold": false,
+      "lab09_conclusion_level": "FAILED_VALIDITY",
+      "fund_grade_alpha_proven": false,
+      "claim_is_being_made": false,
+      "passed": true,
+      "note": "the ablation FAILED -- variance resolved out of fold went +0.335 -> +0.095 -> -0.036 as blocks were added -- and LAB-09's own claim report closes with conclusion_level='FAILED_VALIDITY' and fund_grade_alpha_proven=False, confirming no regime-works claim is made, not merely that its test machinery exists"
+    },
+    {
+      "claim": "no leakage",
+      "would_need": "a future-mutation test per layer, plus a leaky control that IS detected",
+      "layers_verified": [
+        "model",
+        "online_filter",
+        "resampler",
+        "scaler"
+      ],
+      "leaky_control_detected": true,
+      "passed": true,
+      "note": "a suite that can never fail proves nothing, so the leaky control must be caught"
+    },
+    {
+      "claim": "out-of-sample",
+      "would_need": "a window never used for design, and presets that were not full-sample tuned",
+      "preset_role": "retrospective_reference_only",
+      "outer_evaluation_contamination_declared": true,
+      "phases_run_in_development": {
+        "LAB-05": "development",
+        "LAB-07": "development"
+      },
+      "outer_touched_by_any_phase": false,
+      "passed": true,
+      "note": "the outer window is declared NOT an untouched holdout: the supplied presets were TPE-tuned on the full sample with an unknown cutoff",
+      "contamination_note": {
+        "claim_level": "RETROSPECTIVE_NESTED_CAUSAL_RESEARCH",
+        "reason": "supplied presets were TPE-tuned on the full sample and the tuning cutoff is unknown, so no interval of this dataset can be called an untouched holdout",
+        "prospective_protocol_required_for_strong_claim": true
+      }
+    },
+    {
+      "claim": "better on every dimension",
+      "would_need": "every reported dimension moving the same way, not one",
+      "dimensions_reported": [
+        "net_return",
+        "sharpe"
+      ],
+      "verdict": "no separation: B better in 9 cells, A better in 6, sign-test p=0.60723876953125. The neighborhood selector is not shown to improve stable performance on this ca",
+      "conclusion_level": "INCONCLUSIVE_SAMPLE",
+      "blockers": [
+        "the sign reverses inside A-VWAP",
+        "the arms switched parameters at materially different rates, so the contrast mixes selection quality with switching frequency",
+        "4 of 15 cells had an arm that never exercised its selector at any cutoff, so part of this contrast compares a fixed seed point against a selector rather than two selectors"
+      ],
+      "passed": true,
+      "note": "the measured verdict is NO SEPARATION, which is not a superiority claim"
+    },
+    {
+      "claim": "rust parity",
+      "would_need": "every bar of the account trace compared, and the missing fill trace disclosed",
+      "cases": 7,
+      "trace_fields_compared": [
+        "equity",
+        "fees",
+        "funding",
+        "positions"
+      ],
+      "fill_trace_parity": {
+        "comparable_cases": [],
+        "status": "BLOCKED_CAPABILITY",
+        "detail": "The rust backend returns an empty fill sequence at every report level tried (standard and full, with and without audit_detail_limit), so a fill-by-fill comparison is not available on this install. The ACCOUNT trace \u2014 equity, positions, fees, funding \u2014 is compared exactly and matches. Recorded as a blocked capability rather than described as full-trace parity (guide L02.8)."
+      },
+      "claim_boundary_declared": true,
+      "passed": true,
+      "note": "equity, positions, fees and funding are compared bar by bar; the rust backend exposes no fill trace and that is disclosed rather than claimed"
+    },
+    {
+      "claim": "spot-perp carry",
+      "would_need": "a funding series, and a spot inventory or borrow leg",
+      "funding_status": "MISSING",
+      "symbols_with_spot_coverage": [
+        "BTCUSDT"
+      ],
+      "carry_claimed_anywhere": false,
+      "passed": true,
+      "note": "funding does not exist in this storage, so every run is a labelled no-funding cohort and no carry claim is available to make"
+    },
+    {
+      "claim": "whale netflow",
+      "would_need": "a complete flow dataset, not an alert feed",
+      "enrichment_acquired": [],
+      "primary_depends_on_enrichment": false,
+      "passed": true,
+      "note": "nothing was acquired, so no flow claim exists to be wrong"
+    },
+    {
+      "claim": "all four alphas certified",
+      "would_need": "an execution suite per alpha, not a parse",
+      "alphas": 4,
+      "ready_for_research": [
+        "A-HMA",
+        "A-SC",
+        "A-VWAP"
+      ],
+      "blocked": [
+        "A-HASH"
+      ],
+      "every_record_cites_verified_engine_capabilities": true,
+      "passed": true,
+      "note": "A-HASH is NOT_READY_SPECIFIC_BLOCKER and keeps null metrics; a phase that certified all four would be the failure"
+    },
+    {
+      "claim": "absolutely production-safe",
+      "would_need": "measured OS-level write isolation, not a path convention",
+      "os_isolation_available": true,
+      "mechanism": [
+        "bubblewrap 0.6.1",
+        "Worker writes outside LAB_ROOT are refused by the kernel (read-only bind mounts) and repla"
+      ],
+      "fake_protected_write_refused": true,
+      "refusal_errno": 30,
+      "protected_roots_measured_read_only": [
+        "/root/bobby/pool_alpha/alphas_storage/_get_data",
+        "/root/bobby/pool_alpha/alphas_storage/alpha_to_tes_regime_model",
+        "/root/bobby/pool_alpha/quantbt"
+      ],
+      "network_blocked": true,
+      "market_execution_allowed": false,
+      "passed": true,
+      "note": "the write refusal is measured against a FAKE protected fixture, never against a production repo, and market execution stays disabled"
+    }
+  ],
+  "checks_total": 9,
+  "checks_passed": 9,
+  "unsupported_claims": [],
+  "status": "NO_FORBIDDEN_CLAIM_IS_SUPPORTED",
+  "lab_run_id": "run-20260918T164725Z-7315de97",
+  "study_id": "crypto_regime_timeedge_v2",
+  "written_at_utc": "2026-09-18T16:47:25.556242+00:00"
+}
