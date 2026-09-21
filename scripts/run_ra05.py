@@ -263,6 +263,10 @@ def main() -> int:
     parser.add_argument("--pytest-xml", required=True)
     parser.add_argument("--smoke", action="store_true",
                         help="tiny/fast config to dry-run the pipeline, not a real discovery run")
+    parser.add_argument("--engine-report-level", default=None,
+                        help=("engine output retention profile for run_event_account "
+                              "(None=engine default; 'score' drops per-bar audit "
+                              "ledgers; measured equity-exact, see mem_audit.py)"))
     args = parser.parse_args()
     phase_started = time.perf_counter()
     prot_before = protected_fingerprint()
@@ -299,7 +303,8 @@ def main() -> int:
                                                 train_memory_days=train_memory_days)
         static_outcome = run_one_arm(
             ALPHA_ID, frame, static_schedule, prepared=prepared, trials=trials, seed=seed,
-            route=route, evidence_dir=scratch, lab_run_id=writer.lab_run_id)
+            route=route, evidence_dir=scratch, lab_run_id=writer.lab_run_id,
+            engine_report_level=args.engine_report_level)
         if not static_outcome.get("ok"):
             raise RuntimeError(f"STATIC arm (the pre-freeze profiling run) failed: "
                               f"{static_outcome.get('error')}")
@@ -343,13 +348,16 @@ def main() -> int:
 
         cal_outcome = run_one_arm(ALPHA_ID, frame, cal_schedule, prepared=prepared, trials=trials,
                                   seed=seed, route=route, evidence_dir=scratch,
-                                  lab_run_id=writer.lab_run_id)
+                                  lab_run_id=writer.lab_run_id,
+                                  engine_report_level=args.engine_report_level)
         cal_matched_outcome = run_one_arm(ALPHA_ID, frame, cal_matched_schedule, prepared=prepared,
                                           trials=trials, seed=seed, route=route,
-                                          evidence_dir=scratch, lab_run_id=writer.lab_run_id)
+                                          evidence_dir=scratch, lab_run_id=writer.lab_run_id,
+                                          engine_report_level=args.engine_report_level)
         regime_outcome = run_one_arm(ALPHA_ID, frame, regime_schedule, prepared=prepared,
                                      trials=trials, seed=seed, route=route, evidence_dir=scratch,
-                                     lab_run_id=writer.lab_run_id, trigger_lookup=regime_trigger_lookup)
+                                     lab_run_id=writer.lab_run_id, trigger_lookup=regime_trigger_lookup,
+                                     engine_report_level=args.engine_report_level)
 
         arms = {"STATIC": static_outcome, "M4_CAL": cal_outcome,
                "M4_CAL_MATCHED": cal_matched_outcome, "M4_REGIME": regime_outcome}
