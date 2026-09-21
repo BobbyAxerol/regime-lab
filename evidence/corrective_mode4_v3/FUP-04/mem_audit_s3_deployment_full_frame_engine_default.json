@@ -1,0 +1,56 @@
+{
+  "schema": "regime_lab.fup04_mem_audit_measurement.v1",
+  "phase": "FUP-04",
+  "measurement": "s3_deployment_full_frame_engine_default",
+  "raw_source": {
+    "path": "/tmp/s3_default.json",
+    "sha256": "a46a65c890f3e1221288511002bb9a9e722de3b632d96ae5413c1928dab975b1"
+  },
+  "headline": {
+    "frame_rows": 613440,
+    "report_level": "engine-default",
+    "peak_mib": 2117.5,
+    "delta_mib": 1801.3,
+    "wall_s": 81.807,
+    "rlimit_as_gib": 4.0,
+    "outcome": "FAILED",
+    "error_type": "SystemError",
+    "error": "SystemError: error return without exception set"
+  },
+  "raw_stages": {
+    "rlimit": {
+      "rlimit_as_gib": 4.0,
+      "previous_soft": null
+    },
+    "s1_frame_load": {
+      "base_mib": 102.5,
+      "peak_mib": 442.6,
+      "after_gc_mib": 316.2,
+      "delta_mib": 340.1,
+      "residual_mib": 213.6,
+      "wall_s": 1.316,
+      "rows": 613440,
+      "cols": 5,
+      "purpose": "s3/s4 host frame"
+    },
+    "s3_deployment_full_frame": {
+      "base_mib": 316.2,
+      "peak_mib": 2117.5,
+      "after_gc_mib": 1489.0,
+      "delta_mib": 1801.3,
+      "residual_mib": 1172.9,
+      "wall_s": 81.807,
+      "frame_rows": 613440,
+      "activations": 1,
+      "report_level": "engine-default"
+    },
+    "s3_deployment_full_frame__FAILED": {
+      "error_type": "SystemError",
+      "error": "SystemError: error return without exception set",
+      "wall_s": 82.21
+    }
+  },
+  "lab_run_id": "FUP-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-20T10:51:29.246172+00:00"
+}

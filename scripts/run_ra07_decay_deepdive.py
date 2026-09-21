@@ -225,7 +225,8 @@ def run_single_arm(args) -> int:
         run_result = run_cutoff_walk_forward(
             ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
             strategy_class=ZeroSignalStrategy, optuna_trials=args.trials, seed=args.seed,
-            route=args.route, research_retention="none")
+            route=args.route, research_retention="none",
+            engine_report_level=getattr(args, "engine_report_level", None))
     except Exception as exc:  # noqa: BLE001 -- one arm's failure must not crash the orchestrator
         run_result = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
     outcome = {"arm": args.run_arm, "ok": run_result.get("ok", False),
@@ -243,7 +244,7 @@ def run_single_arm(args) -> int:
     return 0 if outcome.get("ok") else 1
 
 
-def orchestrate(args) -> int:
+def orchestrate(args, engine_report_level: str | None = None) -> int:
     started = time.perf_counter()
     prot_before = protected_fingerprint()
 
@@ -295,6 +296,8 @@ def orchestrate(args) -> int:
               "--evidence-dir", str(scratch / arm), "--out", str(out_path)]
         if test_days is not None:
             cmd += ["--test-days", str(test_days)]
+        if engine_report_level:
+            cmd += ["--engine-report-level", engine_report_level]
         subprocess.run(cmd, check=True, env=worker_env)
         return json.loads(out_path.read_text())
 
@@ -328,6 +331,7 @@ def orchestrate(args) -> int:
                        "formal RA-0N phase -- extends RA-07's own D1 measurement, same function, "
                        "more real folds. Each arm ran in its OWN subprocess (memory isolation; "
                        "the first attempt OOM-killed running all 3 arms in one process)."),
+            "engine_report_level": engine_report_level,
             "window": [window_start, window_end], "regime_budget": regime_budget,
             "train_memory_days": DEFAULT_TRAIN_MEMORY_DAYS, "trials": trials, "seed": DEFAULT_SEED,
             "route": DEFAULT_ROUTE, "cal_matched_forecast": forecast,
@@ -344,6 +348,7 @@ def orchestrate(args) -> int:
             f"# RA-07 decay deep-dive ({'smoke' if args.smoke else 'real'})\n\n"
             f"- window: {window_start} -> {window_end}\n"
             f"- regime_budget: {regime_budget}\n"
+            f"- engine_report_level: {engine_report_level or 'engine-default'}\n"
             f"- fold counts: {fold_counts_str}\n"
             f"- one subprocess per arm (memory isolation after the first attempt's OOM kill)\n"
             f"- git_branch: {sh(['git', 'branch', '--show-current'], cwd=LAB)}\n"
@@ -380,13 +385,17 @@ def main() -> int:
     parser.add_argument("--route")
     parser.add_argument("--test-days", type=int, default=None)
     parser.add_argument("--regime-budget", type=int, default=None)
+    parser.add_argument("--engine-report-level", default=None,
+                        help=("engine output retention profile passed to "
+                              "run_event_account (None=engine default; 'score' "
+                              "drops per-bar audit ledgers; measured equity-exact)"))
     parser.add_argument("--lab-run-id")
     parser.add_argument("--evidence-dir")
     parser.add_argument("--out")
     args = parser.parse_args()
     if args.run_arm:
         return run_single_arm(args)
-    return orchestrate(args)
+    return orchestrate(args, engine_report_level=args.engine_report_level)
 
 
 if __name__ == "__main__":

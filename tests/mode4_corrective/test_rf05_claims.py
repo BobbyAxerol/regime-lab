@@ -4,8 +4,11 @@ Each guard has a denominator and can go red:
 
 * every freeze-manifest component hash equals the committed file (no
   self-referential entry and no hash recorded without a file). A component that
-  changed after the freeze passes only when a later registered study declares
-  the exact old/new hashes in its FUP-01 artifact; an undeclared drift fails;
+  changed after the freeze passes only when a later REGISTERED study declares
+  the exact old/new hashes in its OWN declaration artifact, tied to its entry in
+  the follow-up registration; an undeclared drift, a declaration naming another
+  study's id, a broken supersession chain, or a drift beyond the registered
+  ceiling all fail;
 * every evaluated CI carries a positive common-date denominator and the frozen
   MDE 0.0371 bps/day, and the Holm family is exactly {TIMING, BUDGET_AWARE};
 * no contrast is ``POSITIVE_WITHIN_SCOPE`` without a CI lower bound above the
@@ -40,27 +43,82 @@ def _load(lab_root, parts: tuple, name: str) -> dict:
     return json.loads(lab_root.joinpath(*parts).joinpath(name).read_text(encoding="utf-8"))
 
 
+# Registered follow-up studies that may declare a frozen RF-05 component
+# repaired, in registration order, as (study_id, artifact path). A source is
+# trusted for its OWN study_id only: the loader asserts the row's
+# `registered_study` equals the source's id AND that the row's
+# `registration_ref` resolves to that id inside the follow-up registration, so a
+# declaration cannot be attached to a study that never registered it.
+_SUPERSESSION_SOURCES = (
+    ("FUP-01", ("evidence", "corrective_mode4_v3", "FUP-01", "native_event_capability.json")),
+    ("FUP-04", ("evidence", "corrective_mode4_v3", "FUP-04", "report_level_memory_repair.json")),
+)
+# The ceiling on how many frozen components of a manifest may carry a
+# supersession is DECLARED in a registered artifact (FUP-04, which raised it from
+# the original hardcoded 1 so its own second repair could be admitted). The
+# ceiling can therefore only move by registration, never by editing a guard.
+_CEILING_SOURCE = ("evidence", "corrective_mode4_v3", "FUP-04", "report_level_memory_repair.json")
+
+
+def _registration_ref_study(lab_root, ref: str) -> str:
+    """Resolve `<registration file>#/studies/N` to the study id registered there."""
+    path_part, _, pointer = ref.partition("#")
+    assert pointer.startswith("/studies/"), f"unexpected registration_ref {ref!r}"
+    payload = json.loads(lab_root.joinpath(path_part).read_text(encoding="utf-8"))
+    return payload["studies"][int(pointer.split("/")[-1])]["id"]
+
+
+def _declared_ceiling(lab_root, manifest_name: str) -> int:
+    payload = json.loads(lab_root.joinpath(*_CEILING_SOURCE).read_text(encoding="utf-8"))
+    ceilings = payload["frozen_supersession_ceilings"]
+    assert manifest_name in ceilings, (
+        f"{manifest_name} has no registered supersession ceiling: a drift there "
+        "cannot be accepted without a registered study declaring one")
+    return int(ceilings[manifest_name])
+
+
 def _declared_supersessions(lab_root, manifest_name: str, prior_hashes: dict) -> dict:
     """Frozen components a registered follow-up declares it has repaired.
 
     The freeze and reproducibility manifests stay honest RF-05 records: a file
-    whose committed hash no longer matches may pass only when a later registered
-    study declares the exact old and new hashes. An undeclared drift still fails.
+    whose committed hash no longer matches may pass only when a later REGISTERED
+    study declares the exact old and new hashes in its OWN artifact. An
+    undeclared drift still fails, and so does a declaration that names another
+    study's id or a prior hash other than the frozen one.
+
+    When two registered studies declare the same path (a second repair of an
+    already-repaired component) the later source wins, and the chain is checked
+    rather than assumed: the later row must name the earlier row's current hash
+    as the one it supersedes. A registered study that has not produced its
+    declaration artifact yet simply declares nothing.
     """
-    capability_path = lab_root.joinpath(
-        "evidence", "corrective_mode4_v3", "FUP-01", "native_event_capability.json")
-    if not capability_path.is_file():
-        return {}
-    capability = json.loads(capability_path.read_text(encoding="utf-8"))
-    declared = {}
-    for row in capability.get("frozen_component_supersessions", []):
-        if not row["frozen_by"].endswith(manifest_name):
+    declared: dict = {}
+    for study_id, parts in _SUPERSESSION_SOURCES:
+        source = lab_root.joinpath(*parts)
+        if not source.is_file():
             continue
-        assert row["registered_study"] == "FUP-01", row
-        assert prior_hashes.get(row["path"]) == row["frozen_sha256"], (
-            f"{row['path']}: the declaration does not match the RF-05 prior hash")
-        assert row["rf05_results_recomputed"] is False, row
-        declared[row["path"]] = row
+        payload = json.loads(source.read_text(encoding="utf-8"))
+        for row in payload.get("frozen_component_supersessions", []):
+            if not row["frozen_by"].endswith(manifest_name):
+                continue
+            assert row["registered_study"] == study_id, (
+                f"{row['path']}: {source.name} declares for "
+                f"{row['registered_study']!r} but is {study_id!r}'s artifact")
+            assert _registration_ref_study(lab_root, row["registration_ref"]) == study_id, (
+                f"{row['path']}: registration_ref does not resolve to {study_id!r}")
+            assert prior_hashes.get(row["path"]) == row["frozen_sha256"], (
+                f"{row['path']}: the declaration does not match the RF-05 prior hash")
+            assert row["rf05_results_recomputed"] is False, row
+            previous = declared.get(row["path"])
+            if previous is None:
+                assert not row.get("supersedes_previous_current_sha256"), (
+                    f"{row['path']}: names a superseded declaration no source holds")
+            else:
+                assert (row.get("supersedes_previous_current_sha256")
+                        == previous["current_sha256"]), (
+                    f"{row['path']}: the supersession chain is broken -- "
+                    f"{study_id} must supersede {previous['current_sha256']}")
+            declared[row["path"]] = row
     return declared
 
 
@@ -89,7 +147,10 @@ def test_rf05_freeze_manifest_hashes_match_committed_files(lab_root):
                 superseded += 1
             checked += 1
     assert superseded == len(declared), "a declared supersession matched no frozen component"
-    assert superseded <= 1, "more frozen components drifted than the follow-up declares"
+    ceiling = _declared_ceiling(lab_root, "freeze_manifest.json")
+    assert superseded <= ceiling, (
+        f"{superseded} frozen components drifted but only {ceiling} are declared "
+        "by registered follow-ups")
     assert checked >= 30, "the freeze component denominator collapsed"
     contamination = manifest["contamination"]
     assert contamination["status"] == "NESTED_RETROSPECTIVE"
@@ -289,6 +350,9 @@ def test_rf05_reproducibility_and_handoff_guardrails(lab_root):
                 f"{row['path']}: the declared supersession hash does not match the file")
             superseded += 1
     assert superseded == len(declared), "a declared supersession matched no canonical runner"
+    repro_ceiling = _declared_ceiling(lab_root, "reproducibility_manifest.json")
+    assert superseded <= repro_ceiling, (
+        f"{superseded} canonical runners drifted but only {repro_ceiling} are declared")
     assert repro["artifact_hashes"]["rf05"]
     handoff = lab_root.joinpath(*RF05).joinpath("handoff.md").read_text(encoding="utf-8")
     for token in ("Canonical commands", "Rollback", "Remaining blockers", "no production merge"):

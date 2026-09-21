@@ -1,0 +1,50 @@
+{
+  "schema": "regime_lab.fup04_mem_audit_measurement.v1",
+  "phase": "FUP-04",
+  "measurement": "s7_parity_engine_default_vs_score",
+  "raw_source": {
+    "path": ".cache/mem_audit/mem_audit-20260920T102801Z.json",
+    "sha256": "769d53cfd6983e5144712cfba6cb8fbc2880ac3bb5ec56e63334364bac5846f4"
+  },
+  "headline": {
+    "account_window": "RA-05 M4_CAL fold 0 train window",
+    "default_peak_mib": 895.5,
+    "score_peak_mib": 452.1,
+    "default_wall_s": 20.1,
+    "score_wall_s": 5.12,
+    "equity_len": 64800,
+    "max_abs_equity_diff": 0.0,
+    "exact_equal": true,
+    "strategy_fills_default": 81,
+    "strategy_fills_score": 81,
+    "entries_default": 41,
+    "entries_score": 41,
+    "engine_fill_count_default": 81,
+    "engine_fill_count_score": 0
+  },
+  "raw_stages": {
+    "s7_report_level_parity": {
+      "default_peak_mib": 895.5,
+      "score_peak_mib": 452.1,
+      "default_wall_s": 20.1,
+      "score_wall_s": 5.12,
+      "equity_len_default": 64800,
+      "equity_len_score": 64800,
+      "same_len": true,
+      "max_abs_equity_diff": 0.0,
+      "exact_equal": true,
+      "status_default": "EVALUATED",
+      "status_score": "EVALUATED",
+      "strategy_fills_default": 81,
+      "strategy_fills_score": 81,
+      "entries_default": 41,
+      "entries_score": 41,
+      "engine_fill_count_default": 81,
+      "engine_fill_count_score": 0,
+      "note": "exact_equal + equal strategy-level counts => the compact profile reproduces the default profile's account path here"
+    }
+  },
+  "lab_run_id": "FUP-04",
+  "study_id": "corrective_mode4_v3",
+  "written_at_utc": "2026-09-20T10:51:29.250094+00:00"
+}

@@ -21,7 +21,8 @@ from .ra05_funnel import build_funnel_record, score_fold_for_admission
 
 def run_one_arm(alpha_id: str, frame: pd.DataFrame, schedule: CutoffSchedule, *,
                 prepared: PreparedAccount, trials: int, seed: int, route: str,
-                evidence_dir, lab_run_id: str, trigger_lookup: dict | None = None) -> dict:
+                evidence_dir, lab_run_id: str, trigger_lookup: dict | None = None,
+                engine_report_level: str | None = None) -> dict:
     """Run one arm's full schedule, then build one funnel record per fold
     using the SAME real per-fold results `run_cutoff_walk_forward` returned
     -- no separate/refabricated selection."""
@@ -30,6 +31,7 @@ def run_one_arm(alpha_id: str, frame: pd.DataFrame, schedule: CutoffSchedule, *,
         result = run_cutoff_walk_forward(
             alpha_id, frame, schedule, param_ranges=engine_param_ranges(alpha_id),
             strategy_class=ZeroSignalStrategy, optuna_trials=trials, seed=seed, route=route,
+            engine_report_level=engine_report_level,
         )
     except Exception as exc:
         # run_cutoff_walk_forward's OWN try/except only wraps its route

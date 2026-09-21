@@ -79,6 +79,14 @@ def lab_worker_env(policy: SandboxPolicy, *, network: bool = False, base: dict[s
     env["CRYPTO_REGIME_LAB_ROOT"] = str(policy.lab_root)
     for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS", "NUMBA_NUM_THREADS"):
         env[name] = str(budget.cpu_limit)
+    # glibc grows one heap arena per thread by default; under native-engine
+    # churn (endpoint/native-prep created and freed per trial x shard x fold)
+    # those arenas ratchet RSS upward even when Python's objects are freed,
+    # which is exactly the sawtooth-with-climb every reused worker here showed.
+    # Capping arena count at the CPU budget lets freed heap actually be trimmed
+    # back. Ignored harmlessly on non-glibc; an explicit operator override wins
+    # (setdefault).
+    env.setdefault("MALLOC_ARENA_MAX", str(max(2, budget.cpu_limit)))
     if not network:
         # Advisory only: a real block needs an OS mechanism. Recorded, not claimed as enforcement.
         env["CRYPTO_REGIME_LAB_NETWORK"] = "disabled"
