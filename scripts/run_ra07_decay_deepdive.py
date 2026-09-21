@@ -94,12 +94,18 @@ DEEPDIVE_REGIME_BUDGET = 8  # user's explicit direction (2026-09-20), down from 
 # real regime triggers ever exist at RA-05/07's own frozen min_gap/max_age parameters -- a 9th/10th
 # was never reachable here even at the original window length, so 8 is the true ceiling this
 # window supports, not a weaker compromise.
-DEEPDIVE_CAL_TEST_DAYS = 100  # user's explicit direction (2026-09-20), up from
-# DEFAULT_CAL_TEST_DAYS=60. M4_CAL -- not M4_REGIME -- is the arm that crashed in every real-scale
-# attempt so far, and its fold count is driven by test_days (build_calendar_schedule), a knob
-# entirely independent of DEEPDIVE_REGIME_BUDGET (M4_REGIME uses build_regime_schedule instead).
-# Verified: 100-day folds over the shortened window below give M4_CAL 4 folds, down from 9.
-DEEPDIVE_TRIALS = 2  # deliberately BELOW DEFAULT_TRIALS=8 (RA-05/07's own frozen contract value)
+DEEPDIVE_CAL_TEST_DAYS = 40  # user's explicit direction (2026-09-21), down from
+# the interim 100 (which gave only 4 folds -- too few to read a decay pattern).
+# Measured, 0 engine calls: 40-day folds over the 2021-01-01 -> 2022-01-01 window
+# give M4_CAL 10 folds, balanced against M4_REGIME's 9 real-trigger cutoffs.
+DEEPDIVE_TRIALS = 50  # user's explicit direction (2026-09-21): a 2-trial search
+# cannot find an optimum, it can only confirm the pipeline runs. 50 trials is
+# ABOVE RA-05/07's frozen contract (8) -- disclosed deviation for THIS deep-dive
+# only, not silently reused. Memory-safe by measurement, not by hope: each trial
+# is one transient scorer account call (~450 MiB peak at score profile, freed
+# after; s2/s6 ratchet probe showed a flat peak, no per-trial retention), and
+# research_retention="none" (call site below) stops the per-fold ledger from
+# accumulating across the arm. What scales with trials is wall time, not peak.
 # for THIS deep-dive only -- disclosed deviation, not silently reused. Un-related to the ledger
 # issue below; kept low because it was already proven safe, not re-tested at 8 after that fix.
 # The research_retention="full_trial_ledger" default (dynamic_fold_provider.py) was a real,
