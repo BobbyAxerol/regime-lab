@@ -62,6 +62,42 @@ These override any convenience default. They restate and tighten the guide.
 
 12. **Report the `../quantbt` status in EVERY reply.** The user has forbidden any modification of `/root/bobby/pool_alpha/quantbt`. At the end of each response, state honestly whether anything there was touched — verified, not assumed: run `git -C /root/bobby/pool_alpha/quantbt status --porcelain` (and compare digests where relevant) and report the result. If something *was* touched, say so immediately and plainly rather than burying it.
 
+## Forward-persistent parameter plateau — authoritative from 2026-09-22, current main direction
+
+`REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md` (FP-GUIDE-1.0) supersedes the timing-only primary
+hypothesis below wherever they conflict, and is the lab's current main line of work — **not** a
+parallel or competing plan; do not write another top-level guide document alongside it. It does not
+delete or rewrite the RA/RF/FUP history; it changes what the primary contrast is. Motivation, stated
+in its own registered migration: two independent falsifications (RA-07's 90-day placebo and FUP-05's
+12-month placebo, both below) reproduced the apparent regime-timing advantage using market-free
+synthetic tapes, so the open question moves from *when* to deploy parameters to *which* parameter
+region a forward-persistent selector (with/without market context) picks, and whether that holds up
+better out-of-sample than the stock Mode 4 selector. New namespace `FP-01`…`FP-10`
+(`study_id=forward_persistence_fp_v1`); work lives on branch `research/forward-persistent-plateau-v1`
+(created 2026-09-22 off `mode4-corrective`'s tip, which is confirmed — via `git fetch` against
+`origin`, not assumed — fully merged into `main` through GitHub PRs #1–#3).
+
+**FP-01 (contracts, migration and validity repairs) is complete: all four gates PASS**
+(`FP01-G-VALIDITY`/`FP01-G-IDENTITY`/`FP01-G-MIGRATION`/`FP01-G-BUDGET`), `owner_review: PENDING` —
+**FP-02 has not been approved and must not start** without an explicit R-18 decision recorded in
+`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl` (`configs/forward_persistence_fp_v1/`
+handoff/`FP_CURRENT.md`). All nine FP01.2 audit findings (source
+`REGIME_LAB_RA_FUP05_OBJECTIVE_REVIEW_2026-09-22_VI.md`) got a disposition: 6 `FIXED_WITH_PROOF`
+(admission wired before deployment consumes params; D1/OOS boundary repaired; a direct-contrast claim
+gate that refuses a band-alone verdict — invalidating FUP-05's `CADENCE_ARTIFACT` for causal citation,
+kept as DESCRIPTIVE; a chronological-split guard against future-label LOO; a behavioral verifier), 2
+`NOT_REPRODUCED_WITH_SCOPE`, 1 genuinely `PRESENT` (raw-artifact export, not silently closed).
+
+Verification was independent, not just read back from the run's own JSON: 13/13 `tests/fp_corrective`
+re-run directly, pyflakes clean, then the **full lab suite** run before any commit (not only the new
+tests) — which surfaced a real regression the FP-01 build itself hadn't caught: `dynamic_fold_provider.py`
+is an RF-05-frozen file FUP-04 had already superseded once, and FP-01's own further change
+(`admission_policy`) needed a second, chained supersession declaration
+(`evidence/forward_persistence_fp_v1/FP-01/component_supersession.json`) plus a real fix to
+`test_fup04_declaration.py`'s ceiling test (it could not represent a multi-hop chain at all, not just
+an undeclared one). Final full-suite result after the fix: **1268 passed, 0 failed, 1290.02s**
+(`evidence/forward_persistence_fp_v1/FP-01/full_suite_final.log`).
+
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
 `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` supersedes this digest wherever they conflict. The five corrective phases **RF-01 … RF-05** on branch `mode4-corrective` are complete (`study_id=corrective_mode4_v3`): RF-01 identity/invalidation/before-repair probes; RF-02 real-snapshot native-event account and public Mode 4 baseline; RF-03 causal controller; RF-04 10-cell event-route paired discovery (`RF-04/paired_discovery_full.json`) plus design freeze/decay/controls; RF-05 freeze/recompute/claims/integrity/handoff (`evidence/corrective_mode4_v3/RF-05/`). Final RF-05 claim: `TECHNICALLY_VALID_WITH_PARTIAL_COVERAGE`, economic `INCONCLUSIVE` — 10 of 20 planned cells executed (A-VWAP/A-HASH stay `BLOCKED_CAPABILITY`, null metrics + reasons); paired common-date `M4_REGIME − M4_CAL` (10 cells) mean −0.1123 bps/day, block-bootstrap 95% CI [−0.4940, +0.1907]; `M4_REGIME − M4_CAL_MATCHED` (1 evaluable cell) +0.1620 [−0.2142, +0.6154]; Holm m=2 over {TIMING, BUDGET_AWARE} → both `INCONCLUSIVE` against the frozen MDE 0.0371 bps/day, no `POSITIVE`; `NESTED_RETROSPECTIVE` (no untouched holdout) and `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED`. `tests/mode4_corrective/` is green (76 passed; full suite 862 passed). Historical LAB-01…LAB-09 evidence and its `FAILED_VALIDITY` conclusion are preserved and never rewritten.
