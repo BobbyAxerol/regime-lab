@@ -1,0 +1,66 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-02",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp02-20260922T180314Z-fa3a6166",
+  "required_gates": [
+    "FP02-G-PARITY",
+    "FP02-G-CACHE",
+    "FP02-G-LATENCY",
+    "FP02-G-MEMORY",
+    "FP02-G-LINEAGE",
+    "FP02-G-RESUME"
+  ],
+  "technical_gate": "FAIL",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp02_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp02-20260922T180314Z-fa3a6166",
+    "gates": {
+      "FP02-G-PARITY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-CACHE": {
+        "pass": false,
+        "reasons": [
+          "first candidate evaluation was not a MISS (nothing was computed)",
+          "a changed economic dependency did not MISS"
+        ]
+      },
+      "FP02-G-LATENCY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-MEMORY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-LINEAGE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-RESUME": {
+        "pass": false,
+        "reasons": [
+          "total_misses (0) != unique_candidates (3): a naive restart would have recomputed some candidates twice",
+          "pre-resume pass recorded no MISS: nothing was actually computed before the simulated crash"
+        ]
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "FAIL"
+  },
+  "verified_at_utc": "2026-09-22T18:03:31.826429+00:00"
+}

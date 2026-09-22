@@ -1,0 +1,60 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-02",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp02-20260922T175825Z-82d4405b",
+  "required_gates": [
+    "FP02-G-PARITY",
+    "FP02-G-CACHE",
+    "FP02-G-LATENCY",
+    "FP02-G-MEMORY",
+    "FP02-G-LINEAGE",
+    "FP02-G-RESUME"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp02_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp02-20260922T175825Z-82d4405b",
+    "gates": {
+      "FP02-G-PARITY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-CACHE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-LATENCY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-MEMORY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-LINEAGE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP02-G-RESUME": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-22T17:59:17.598069+00:00"
+}

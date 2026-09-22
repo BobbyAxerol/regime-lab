@@ -61,6 +61,17 @@ CONTRACT_FILES = {
                    "src/crypto_regime_lab/time_edge/eligibility.py",
                    "src/crypto_regime_lab/time_edge/storage.py"),
     "causal_event": ("src/crypto_regime_lab/time_edge/execution.py",),
+    # FP-02 (forward_persistence_fp_v1): the common evaluator's own two
+    # account types. SHARED_FINANCIAL_CLOSURE already covers event_account.py
+    # / continuous_account.py / evaluator.py / dynamic_fold_provider.py for
+    # every kind; these add only what FP-02 itself introduces, so an edit to
+    # fp/evaluator.py or fp/lineage.py correctly misses every cached FP-02
+    # entry without touching any TE kind above.
+    "fp_candidate": ("src/crypto_regime_lab/fp/evaluator.py",
+                     "src/crypto_regime_lab/fp/retention_fp02.py"),
+    "fp_deployment": ("src/crypto_regime_lab/fp/evaluator.py",
+                      "src/crypto_regime_lab/fp/lineage.py",
+                      "src/crypto_regime_lab/fp/retention_fp02.py"),
     }.items()
 }
 
@@ -90,13 +101,16 @@ class ComputeCache:
     _identity_locks: dict = {}
     _identity_locks_guard = threading.Lock()
 
-    def __init__(self, root, namespace, *, source=None):
+    def __init__(self, root, namespace, *, source=None, cache_root=CACHE_ROOT):
         self.root = Path(root).resolve()
         if not str(namespace).replace("-", "").replace("_", "").isalnum():
             raise EvidenceError("unsafe cache namespace")
         self.namespace = str(namespace)
         self.source = source if source is not None else digest(source_identity(self.root))
-        self.directory = local(self.root, f"{CACHE_ROOT}/{self.namespace}")
+        # cache_root defaults to the TE study's own path (CACHE_ROOT) so every
+        # existing caller is unchanged; a different study (e.g. FP-02) passes
+        # its own evidence-tree path instead of nesting its cache inside TE's.
+        self.directory = local(self.root, f"{cache_root}/{self.namespace}")
 
     def identity(self, kind, facets):
         if kind not in CONTRACT_FILES or not isinstance(facets, dict):

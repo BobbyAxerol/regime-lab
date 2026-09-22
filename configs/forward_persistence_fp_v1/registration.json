@@ -42,6 +42,28 @@
       ],
       "exit": "FP01-G-VALIDITY / FP01-G-IDENTITY / FP01-G-MIGRATION / FP01-G-BUDGET all PASS",
       "budget": "T0 host-only: zero engine calls, zero shared TE ledger charge"
+    },
+    {
+      "id": "FP-02",
+      "title": "Evaluator and reusable runtime",
+      "scope": [
+        "common evaluator mapped onto the qualified event-account route (report_level audit/score, FUP-04-proven)",
+        "standardized candidate (5.1) and continuous deployment (5.2) accounts, same underlying call",
+        "semantic cache/invalidation (ComputeCache, fp_candidate/fp_deployment kinds)",
+        "compact vs full retention tiers (fp/retention_fp02.py)",
+        "lineage from selection to actual activation/orders/fills (fp/lineage.py)"
+      ],
+      "non_goals": [
+        "any market/edge claim",
+        "an actual TPE search loop (FP-03)",
+        "a new execution route (the guide's own qualified-route exit clause applies)"
+      ],
+      "required_inputs": [
+        "FP-01 (admission hook, boundary repair, chronology guard)",
+        "snapshots/server_core_v1 (read-only), a small real A-SC window"
+      ],
+      "exit": "FP02-G-PARITY / FP02-G-CACHE / FP02-G-LATENCY / FP02-G-MEMORY / FP02-G-LINEAGE / FP02-G-RESUME all PASS",
+      "budget": "T0 host-only: a handful of small real engine calls, no shared TE ledger charge"
     }
   ],
   "phases": [

@@ -1,0 +1,45 @@
+{
+  "schema": "regime_lab.fp02_route_parity.v1",
+  "alpha_id": "A-SC",
+  "audit": {
+    "report_level": null,
+    "entries": 122,
+    "fill_count": 243,
+    "engine_fill_count": 243,
+    "resolved_report_level": null
+  },
+  "fast": {
+    "report_level": "score",
+    "entries": 122,
+    "fill_count": 243,
+    "engine_fill_count": 0,
+    "resolved_report_level": null
+  },
+  "equity_exact_equal": true,
+  "max_abs_equity_diff": 0.0,
+  "entries_match": true,
+  "fill_count_match": true,
+  "instrumentation": {
+    "route_parity_audit": {
+      "base_mib": 161.6,
+      "peak_mib": 431.2,
+      "after_gc_mib": 349.4,
+      "delta_mib": 269.7,
+      "residual_mib": 187.8,
+      "wall_s": 6.318
+    },
+    "route_parity_fast": {
+      "base_mib": 349.4,
+      "peak_mib": 349.4,
+      "after_gc_mib": 347.4,
+      "delta_mib": 0.0,
+      "residual_mib": -2.0,
+      "wall_s": 1.074
+    }
+  },
+  "status": "PASS",
+  "precedent": "FUP-04 evidence/corrective_mode4_v3/FUP-04/report_level_memory_repair.json s7_parity_engine_default_vs_score: max_abs_equity_diff 0.0, exact_equal true, strategy_fills 81==81, entries 41==41 on a different (RA-05 M4_CAL) window -- this run is FP-02's OWN evidence, not a substitute for that one",
+  "lab_run_id": "fp02-20260922T175825Z-82d4405b",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T17:59:17.577374+00:00"
+}

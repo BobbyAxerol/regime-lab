@@ -1,0 +1,65 @@
+{
+  "schema": "regime_lab.fp02_phase_manifest.v1",
+  "lab_run_id": "fp02-20260922T180514Z-e4aad0b7",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-02",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-22T18:05:14.544052+00:00",
+  "market_window": {
+    "alpha_id": "A-SC",
+    "start": "2023-06-01",
+    "end": "2023-06-11",
+    "rows": 14400
+  },
+  "required_gates": [
+    "FP02-G-PARITY",
+    "FP02-G-CACHE",
+    "FP02-G-LATENCY",
+    "FP02-G-MEMORY",
+    "FP02-G-LINEAGE",
+    "FP02-G-RESUME"
+  ],
+  "artifacts": [
+    {
+      "path": "route_parity.json",
+      "sha256": "90de9a33453d7df5cf7c5e09633a66d224aa76e42cc71f68b4b44a36295083ee"
+    },
+    {
+      "path": "cache_reuse.json",
+      "sha256": "3b09a8f570dec751b56691c7f711929eb666a09b2bac37d75a7a77c4c54cdf00"
+    },
+    {
+      "path": "lineage_demo.json",
+      "sha256": "7e26f3712538391915988442966c91a142e0ce966920690223a74683c9c3678b"
+    },
+    {
+      "path": "resume_demo.json",
+      "sha256": "8e343d7e1864bcf88f7e749b7fe867ce9e40589c9b14aefa1a4efdac33f17ec0"
+    },
+    {
+      "path": "memory_audit.json",
+      "sha256": "d5557b498ad92e4396637b00a1fc8815b1538b57fb1a726894758bb07bb3dd79"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "64e0456b766e6cd6e4531e504d8374b491e44f4cf2356f2c08e49439141d0063"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "bc5a51e239d6feb62414104702eb4ff691a235688b13f26a8d335d34a1e43efe"
+    },
+    {
+      "path": "report.md",
+      "sha256": "5b229817141d77e5d9ebd15cce1e2c44dfee903e19ac37d455ad11d8e26aacc7"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "8a971404330ddb67f173a0bd60d7975086f10034f75ceae76ccab36071e189d9"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "a264f034891dd6db28b11256566f1e49d69091106f66fc92ea85bb6bdc1a0e88"
+    }
+  ],
+  "written_at_utc": "2026-09-22T18:06:05.761203+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "regime_lab.fp02_test_registry.v1",
+  "lab_run_id": "fp02-20260922T175825Z-82d4405b",
+  "test_node_ids": [
+    "test_fp02_g_parity_audit_vs_score_route",
+    "test_fp02_g_cache_same_semantics_hit_different_economics_miss",
+    "test_fp02_g_latency_causal_hit_guard",
+    "test_fp02_g_memory_peak_bounded_and_not_growing_with_repeats",
+    "test_fp02_g_lineage_reconstructs_activation_and_fills",
+    "test_fp02_g_resume_cache_hit_after_simulated_crash",
+    "test_fp02_lineage_rejects_a_fabricated_disagreement",
+    "test_fp02_verifier_passes_on_a_valid_bundle",
+    "test_fp02_verifier_fails_on_empty_dir",
+    "test_fp02_verifier_fails_on_tampered_artifact",
+    "test_fp02_verifier_fails_when_parity_route_disagrees",
+    "test_fp02_verifier_fails_when_lineage_fills_do_not_reconcile",
+    "test_fp02_verifier_fails_when_resume_recomputes_twice"
+  ],
+  "pytest_xml": "/tmp/fp02_junit.xml",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T17:59:17.589421+00:00"
+}
