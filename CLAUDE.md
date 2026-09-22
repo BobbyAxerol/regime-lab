@@ -78,10 +78,11 @@ better out-of-sample than the stock Mode 4 selector. New namespace `FP-01`…`FP
 `origin`, not assumed — fully merged into `main` through GitHub PRs #1–#3).
 
 **FP-01 (contracts, migration and validity repairs) is complete: all four gates PASS**
-(`FP01-G-VALIDITY`/`FP01-G-IDENTITY`/`FP01-G-MIGRATION`/`FP01-G-BUDGET`), `owner_review: PENDING` —
-**FP-02 has not been approved and must not start** without an explicit R-18 decision recorded in
-`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl` (`configs/forward_persistence_fp_v1/`
-handoff/`FP_CURRENT.md`). All nine FP01.2 audit findings (source
+(`FP01-G-VALIDITY`/`FP01-G-IDENTITY`/`FP01-G-MIGRATION`/`FP01-G-BUDGET`). R-18 approval for FP-01 ->
+FP-02 is recorded in `evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`; **FP-03 has not been
+approved and must not start** without its own explicit R-18 decision there (see current phase state
+in `configs/forward_persistence_fp_v1/registration.json` / handoff/`FP_CURRENT.md`). All nine FP01.2
+audit findings (source
 `REGIME_LAB_RA_FUP05_OBJECTIVE_REVIEW_2026-09-22_VI.md`) got a disposition: 6 `FIXED_WITH_PROOF`
 (admission wired before deployment consumes params; D1/OOS boundary repaired; a direct-contrast claim
 gate that refuses a band-alone verdict — invalidating FUP-05's `CADENCE_ARTIFACT` for causal citation,
@@ -97,6 +98,27 @@ is an RF-05-frozen file FUP-04 had already superseded once, and FP-01's own furt
 `test_fup04_declaration.py`'s ceiling test (it could not represent a multi-hop chain at all, not just
 an undeclared one). Final full-suite result after the fix: **1268 passed, 0 failed, 1290.02s**
 (`evidence/forward_persistence_fp_v1/FP-01/full_suite_final.log`).
+
+**FP-02 (common evaluator, cache, memory, runtime and lineage) is complete: all six gates PASS**
+(`FP02-G-PARITY`/`CACHE`/`LATENCY`/`MEMORY`/`LINEAGE`/`RESUME`,
+`evidence/forward_persistence_fp_v1/fp02-20260922T180514Z-e4aad0b7/`). Built as a thin wiring layer
+over infrastructure the lab already had (`ComputeCache`, causality/state-compatibility guards,
+retention tiers, `report_level`'s FUP-04-proven audit/score parity) rather than a new simulator, on
+the one qualified execution route this lab has (`ra/route_qualification.py`:
+`event_account.run_event_account`, no separate fast route exists). All five guide-mandated real runs
+(no mocked run) ran on a real 10-day BTCUSDT/A-SC window: audit-vs-score parity (equity exact-equal),
+cross-run cache reuse plus a genuine economic-dependency miss, a real multi-selection deployment with
+an actual pending/activation case, cache-based resume after a simulated crash, and a 5-call memory
+audit (~400–430 MiB against the 4096 MiB budget, not growing). Two real bugs found and fixed during
+the build, before committing: `fp/lineage.py`'s first design reconstructed activation boundaries from
+switch metadata that (a real run showed) never records the INITIAL version's own
+`FLAT_UNTIL_READY`/`WARMING` sentinel period — rewritten to scan `version_by_bar` directly as ground
+truth; and an independent, standalone re-verification (not the runner's own internal check) of the
+already-committed FP-01 bundle surfaced that `gate_receipt.json` is written twice by design, so every
+fresh re-verification after the one baked into the runner falsely failed on both FP-01 and FP-02 —
+fixed in both verifiers, with a regression test that reproduces the actual two-write sequence. Full
+lab suite after FP-02: **1283 passed, 0 failed** (1268 + 14 new FP-02 tests + 1 new FP-01 regression
+test). R-18 approval for FP-01 -> FP-02 recorded; FP-03 needs its own.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
