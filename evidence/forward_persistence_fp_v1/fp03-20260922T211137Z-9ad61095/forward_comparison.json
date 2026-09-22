@@ -1,0 +1,887 @@
+{
+  "schema": "regime_lab.fp03_forward_comparison.v1",
+  "origins": [
+    {
+      "origin_cutoff": "2021-06-01",
+      "forward_comparison": [
+        {
+          "level": 32,
+          "status": "REACHED",
+          "selected_trial_id": 22,
+          "is_search_objective": 1.875838886726839,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 35,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "HIT",
+            "forward_status": "HIT",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0002859485249075923,
+              "total_return": 0.053172493589727754,
+              "daily_sharpe": {
+                "value": 1.5875580999469825,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.2839403300864727,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.23920890709315534,
+                "loss_sum": 0.18630842998525077,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.2839403300864727,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.03170560019588953,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.0001556834224505672,
+              "total_return": -0.004720750762267301,
+              "daily_sharpe": {
+                "value": -0.7552735090559171,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.8945026668797962,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.03828075782690821,
+                "loss_sum": 0.042795577077974656,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.8945026668797962,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.01536937498989277,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0004416319473581595,
+            "D_daily_sharpe": 2.3428316090028996,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": null,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": null,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": null
+        },
+        {
+          "level": 64,
+          "status": "REACHED",
+          "selected_trial_id": 41,
+          "is_search_objective": 2.0583368341241783,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 38,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0003161936041631172,
+              "total_return": 0.05908399814963339,
+              "daily_sharpe": {
+                "value": 1.7584986152698117,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.3209366640815903,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.2407617381088043,
+                "loss_sum": 0.18226592133862762,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.3209366640815903,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.024822263931516653,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.0003774912535866784,
+              "total_return": -0.010976221770703787,
+              "daily_sharpe": {
+                "value": -2.8833458121314455,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.6501917315223513,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.020347743903522675,
+                "loss_sum": 0.03129499025753635,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.6501917315223513,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.013206688386987353,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0006936848577497956,
+            "D_daily_sharpe": 4.641844427401257,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.18249794739733938,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": -0.0002218078311361112,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 348.065
+        },
+        {
+          "level": 128,
+          "status": "REACHED",
+          "selected_trial_id": 123,
+          "is_search_objective": 2.818387478520859,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 24,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0004531283219597513,
+              "total_return": 0.08640324200240745,
+              "daily_sharpe": {
+                "value": 2.7062923340954272,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.5361811996476777,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.24017278821184918,
+                "loss_sum": 0.1563440486492952,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.5361811996476777,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.01753138402890897,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.00024497553770212017,
+              "total_return": 0.006932166929469075,
+              "daily_sharpe": {
+                "value": 1.2512865137709541,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.2173938597307343,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.03978364318483263,
+                "loss_sum": 0.032679352591471145,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.2173938597307343,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.010953660984191482,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.00020815278425763114,
+            "D_daily_sharpe": 1.4550058203244731,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.7600506443966806,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0006224667912887985,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 696.129
+        },
+        {
+          "level": 256,
+          "status": "REACHED",
+          "selected_trial_id": 123,
+          "is_search_objective": 2.818387478520859,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 24,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "HIT",
+            "forward_status": "HIT",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0004531283219597513,
+              "total_return": 0.08640324200240745,
+              "daily_sharpe": {
+                "value": 2.7062923340954272,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.5361811996476777,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.24017278821184918,
+                "loss_sum": 0.1563440486492952,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.5361811996476777,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.01753138402890897,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.00024497553770212017,
+              "total_return": 0.006932166929469075,
+              "daily_sharpe": {
+                "value": 1.2512865137709541,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.2173938597307343,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.03978364318483263,
+                "loss_sum": 0.032679352591471145,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.2173938597307343,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.010953660984191482,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.00020815278425763114,
+            "D_daily_sharpe": 1.4550058203244731,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.0,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 1392.2599999999998
+        }
+      ]
+    },
+    {
+      "origin_cutoff": "2022-06-01",
+      "forward_comparison": [
+        {
+          "level": 32,
+          "status": "REACHED",
+          "selected_trial_id": 31,
+          "is_search_objective": -0.6698204588392864,
+          "decay": {
+            "params": {
+              "coeff": 7,
+              "AP": 23,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": -8.213061592886145e-05,
+              "total_return": -0.015572731451792055,
+              "daily_sharpe": {
+                "value": -0.6719666147420083,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.9019710567327677,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.1398025486609793,
+                "loss_sum": 0.15499671260781867,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.9019710567327677,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.033536981437650604,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.000870757860782026,
+              "total_return": -0.02502966435763232,
+              "daily_sharpe": {
+                "value": -6.75188455994972,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.3371986345471123,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.012846884349447363,
+                "loss_sum": 0.038098862312126114,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.3371986345471123,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.02872960238545219,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0007886272448531645,
+            "D_daily_sharpe": 6.079917945207711,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": null,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": null,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": null
+        },
+        {
+          "level": 64,
+          "status": "REACHED",
+          "selected_trial_id": 40,
+          "is_search_objective": 0.42997431855255597,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 21,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 4.290308621094333e-05,
+              "total_return": 0.007440877400852752,
+              "daily_sharpe": {
+                "value": 0.3430861899730201,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.0569660353615966,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.14726695231856857,
+                "loss_sum": 0.13932988136954405,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.0569660353615966,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.0254551270926614,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.0007280392085357177,
+              "total_return": -0.021008407469089385,
+              "daily_sharpe": {
+                "value": -4.935238928168101,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.4681444328998385,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.018583988175108868,
+                "loss_sum": 0.03969712522264468,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.4681444328998385,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.024286424433619835,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0007709422947466609,
+            "D_daily_sharpe": 5.278325118141121,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 1.0997947773918424,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0001427186522463083,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 321.63800000000003
+        },
+        {
+          "level": 128,
+          "status": "REACHED",
+          "selected_trial_id": 94,
+          "is_search_objective": 0.8627180236645782,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 27,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0001073893763022594,
+              "total_return": 0.019529192153108887,
+              "daily_sharpe": {
+                "value": 0.8575020822492398,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.1459266123842924,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.15601104763253537,
+                "loss_sum": 0.13614401301661738,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.1459266123842924,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.027555510435207764,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.0006710500439740875,
+              "total_return": -0.019402525643206325,
+              "daily_sharpe": {
+                "value": -4.273363723679646,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.5293646911330574,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.021888871456400505,
+                "loss_sum": 0.04134932273164904,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.5293646911330574,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.023043867036564247,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0007784394202763468,
+            "D_daily_sharpe": 5.130865805928885,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.4327437051120222,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 5.6989164561630184e-05,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 643.277
+        },
+        {
+          "level": 256,
+          "status": "REACHED",
+          "selected_trial_id": 94,
+          "is_search_objective": 0.8627180236645782,
+          "decay": {
+            "params": {
+              "coeff": 8,
+              "AP": 27,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "HIT",
+            "forward_status": "HIT",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.0001073893763022594,
+              "total_return": 0.019529192153108887,
+              "daily_sharpe": {
+                "value": 0.8575020822492398,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.1459266123842924,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.15601104763253537,
+                "loss_sum": 0.13614401301661738,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.1459266123842924,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.027555510435207764,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": -0.0006710500439740875,
+              "total_return": -0.019402525643206325,
+              "daily_sharpe": {
+                "value": -4.273363723679646,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 0.5293646911330574,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.021888871456400505,
+                "loss_sum": 0.04134932273164904,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 0.5293646911330574,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.023043867036564247,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.0007784394202763468,
+            "D_daily_sharpe": 5.130865805928885,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.0,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 1286.554
+        }
+      ]
+    },
+    {
+      "origin_cutoff": "2023-06-01",
+      "forward_comparison": [
+        {
+          "level": 32,
+          "status": "REACHED",
+          "selected_trial_id": 20,
+          "is_search_objective": 2.891313907539722,
+          "decay": {
+            "params": {
+              "coeff": 7,
+              "AP": 46,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.00027940850647497777,
+              "total_return": 0.052688071960460325,
+              "daily_sharpe": {
+                "value": 2.786272976554531,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.673939101461474,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.1283897496112094,
+                "loss_sum": 0.07669917591333852,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.673939101461474,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.01103017365985881,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.0002544701217971078,
+              "total_return": 0.007345700476201422,
+              "daily_sharpe": {
+                "value": 2.3490271968643786,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.4443268613953022,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.0239882029734102,
+                "loss_sum": 0.016608569441294074,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.4443268613953022,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.007263553398506373,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 2.4938384677869972e-05,
+            "D_daily_sharpe": 0.4372457796901523,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": null,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": null,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": null
+        },
+        {
+          "level": 64,
+          "status": "REACHED",
+          "selected_trial_id": 20,
+          "is_search_objective": 2.891313907539722,
+          "decay": {
+            "params": {
+              "coeff": 7,
+              "AP": 46,
+              "alpha.condition_threshold": 75,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "HIT",
+            "forward_status": "HIT",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.00027940850647497777,
+              "total_return": 0.052688071960460325,
+              "daily_sharpe": {
+                "value": 2.786272976554531,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.673939101461474,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.1283897496112094,
+                "loss_sum": 0.07669917591333852,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.673939101461474,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.01103017365985881,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.0002544701217971078,
+              "total_return": 0.007345700476201422,
+              "daily_sharpe": {
+                "value": 2.3490271968643786,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.4443268613953022,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.0239882029734102,
+                "loss_sum": 0.016608569441294074,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.4443268613953022,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.007263553398506373,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 2.4938384677869972e-05,
+            "D_daily_sharpe": 0.4372457796901523,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.0,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 379.968
+        },
+        {
+          "level": 128,
+          "status": "REACHED",
+          "selected_trial_id": 67,
+          "is_search_objective": 3.4442535036263435,
+          "decay": {
+            "params": {
+              "coeff": 7,
+              "AP": 54,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "MISS",
+            "forward_status": "MISS",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.00034787354045882907,
+              "total_return": 0.06607740973376774,
+              "daily_sharpe": {
+                "value": 3.355705937322671,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 2.0572371062613435,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.1252290475086466,
+                "loss_sum": 0.060872442523763226,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 2.0572371062613435,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.010225733364097822,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.00010510969517048609,
+              "total_return": 0.003020171894585255,
+              "daily_sharpe": {
+                "value": 1.3181916760867547,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.357893190668808,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.011565194725493777,
+                "loss_sum": 0.00851701356554968,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.357893190668808,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.004937823149892884,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.00024276384528834296,
+            "D_daily_sharpe": 2.0375142612359163,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.5529395960866217,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": -0.0001493604266266217,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 759.937
+        },
+        {
+          "level": 256,
+          "status": "REACHED",
+          "selected_trial_id": 67,
+          "is_search_objective": 3.4442535036263435,
+          "decay": {
+            "params": {
+              "coeff": 7,
+              "AP": 54,
+              "alpha.condition_threshold": 80,
+              "novolumedata": false,
+              "src_col": "close"
+            },
+            "is_status": "HIT",
+            "forward_status": "HIT",
+            "is_metrics": {
+              "days": 185,
+              "mean_daily_return": 0.00034787354045882907,
+              "total_return": 0.06607740973376774,
+              "daily_sharpe": {
+                "value": 3.355705937322671,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 2.0572371062613435,
+                "status": "OK",
+                "observations": 185,
+                "gain_sum": 0.1252290475086466,
+                "loss_sum": 0.060872442523763226,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 2.0572371062613435,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.010225733364097822,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "forward_metrics": {
+              "days": 29,
+              "mean_daily_return": 0.00010510969517048609,
+              "total_return": 0.003020171894585255,
+              "daily_sharpe": {
+                "value": 1.3181916760867547,
+                "status": "OK"
+              },
+              "daily_observation_pf": {
+                "value": 1.357893190668808,
+                "status": "OK",
+                "observations": 29,
+                "gain_sum": 0.011565194725493777,
+                "loss_sum": 0.00851701356554968,
+                "definition": "daily_return_observation_pf_not_trade_pf"
+              },
+              "profit_factor_daily": 1.357893190668808,
+              "profit_factor_daily_status": "OK",
+              "max_drawdown": 0.004937823149892884,
+              "trade_pf": {
+                "value": null,
+                "reason": "requires engine closed-trade ledger; daily PF is separate"
+              }
+            },
+            "D_mean_daily_return": 0.00024276384528834296,
+            "D_daily_sharpe": 2.0375142612359163,
+            "D_daily_sharpe_reason": null,
+            "decay_sign_convention": "D = IS - FORWARD; positive D is WORSE decay (guide 10.2)"
+          },
+          "is_improvement_vs_prior_checkpoint": 0.0,
+          "forward_mean_daily_return_improvement_vs_prior_checkpoint": 0.0,
+          "incremental_estimated_wall_seconds_vs_prior_checkpoint": 1519.874
+        }
+      ]
+    }
+  ],
+  "lab_run_id": "fp03-20260922T211137Z-9ad61095",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T21:15:40.135221+00:00"
+}

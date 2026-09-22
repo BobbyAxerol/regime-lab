@@ -1,0 +1,55 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-03",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp03-20260922T211626Z-6bf07360",
+  "required_gates": [
+    "FP03-G-SCHEMA",
+    "FP03-G-PREFIX",
+    "FP03-G-COVERAGE",
+    "FP03-G-CURVE",
+    "FP03-G-FREEZE"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp03_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp03-20260922T211626Z-6bf07360",
+    "gates": {
+      "FP03-G-SCHEMA": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP03-G-PREFIX": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP03-G-COVERAGE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP03-G-CURVE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP03-G-FREEZE": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-22T21:17:24.845455+00:00"
+}

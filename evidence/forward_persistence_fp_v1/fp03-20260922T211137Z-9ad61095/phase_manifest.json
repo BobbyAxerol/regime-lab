@@ -1,0 +1,58 @@
+{
+  "schema": "regime_lab.fp03_phase_manifest.v1",
+  "lab_run_id": "fp03-20260922T211137Z-9ad61095",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-03",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-22T21:11:37.202208+00:00",
+  "required_gates": [
+    "FP03-G-SCHEMA",
+    "FP03-G-PREFIX",
+    "FP03-G-COVERAGE",
+    "FP03-G-CURVE",
+    "FP03-G-FREEZE"
+  ],
+  "artifacts": [
+    {
+      "path": "schema_qualification.json",
+      "sha256": "8f27402e8b82891b0e1640c16665722785456c0dfdf19cce4e4c7c3e19edd2cf"
+    },
+    {
+      "path": "search_introspection.json",
+      "sha256": "bdfa89df7a607a0e5e5a6fcadc82904eebe19976b3f67df6eb1aa47eb6a95c80"
+    },
+    {
+      "path": "origin_searches.json",
+      "sha256": "213beb433837cc696340a464d0c42745ad769d44decc9168cad0a3334f028bab"
+    },
+    {
+      "path": "forward_comparison.json",
+      "sha256": "849009f3e00bb5649d34f9bb75b3cff207d4134be780c38d174543f49c8c3c86"
+    },
+    {
+      "path": "search_policy.json",
+      "sha256": "d2ad070e0d34a2b382fa2a2e2422f913296ee4168b3ea99580c7c93d7e977a8b"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "73000f74971a3fec1af65fcd2527d31a2f9132f23b877c9a107d22b2ae3c2ac0"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "5f291a6f3bc7bf37b2f5c6bd989e09b7c933118ad83e0e1980687c7665da7509"
+    },
+    {
+      "path": "report.md",
+      "sha256": "b2f44768a9006fb96981e0f44b4d450942ede98907d4cc08df8ec34d84dcbe85"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "f7caa21c13b5f6e7a57ff866e6b5c3d9e4fb7f71c113fd7d859e6eabff0a0dd5"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "600f63b8dd4ec5fb128876e9ade1dc27e8463a39054d0095bb9e7515ab4a06bd"
+    }
+  ],
+  "written_at_utc": "2026-09-22T21:15:40.147830+00:00"
+}

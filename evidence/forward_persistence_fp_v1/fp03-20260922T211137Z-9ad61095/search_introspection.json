@@ -1,0 +1,145 @@
+{
+  "schema": "regime_lab.fp03_search_introspection.v1",
+  "sampler_identity": {
+    "optuna_version_installed": "4.8.0",
+    "guide_source_cites": "4.2.1 (S1/S2) -- verify-not-assume applies: installed differs",
+    "sampler_class": "optuna.samplers.TPESampler",
+    "stock_construction": "optuna.samplers.TPESampler(seed=study_seed) -- quantbt/walkforward.py, every other arg left default",
+    "n_startup_trials_default": 10
+  },
+  "n_trials": 15,
+  "seed": 42,
+  "ask_tell_sequence": [
+    {
+      "trial_number": 0,
+      "params": {
+        "x": 0.3745401188473625,
+        "y": 8
+      }
+    },
+    {
+      "trial_number": 1,
+      "params": {
+        "x": 0.7319939418114051,
+        "y": 5
+      }
+    },
+    {
+      "trial_number": 2,
+      "params": {
+        "x": 0.15601864044243652,
+        "y": 2
+      }
+    },
+    {
+      "trial_number": 3,
+      "params": {
+        "x": 0.05808361216819946,
+        "y": 7
+      }
+    },
+    {
+      "trial_number": 4,
+      "params": {
+        "x": 0.6011150117432088,
+        "y": 6
+      }
+    },
+    {
+      "trial_number": 5,
+      "params": {
+        "x": 0.020584494295802447,
+        "y": 8
+      }
+    },
+    {
+      "trial_number": 6,
+      "params": {
+        "x": 0.8324426408004217,
+        "y": 2
+      }
+    },
+    {
+      "trial_number": 7,
+      "params": {
+        "x": 0.18182496720710062,
+        "y": 2
+      }
+    },
+    {
+      "trial_number": 8,
+      "params": {
+        "x": 0.3042422429595377,
+        "y": 5
+      }
+    },
+    {
+      "trial_number": 9,
+      "params": {
+        "x": 0.43194501864211576,
+        "y": 3
+      }
+    },
+    {
+      "trial_number": 10,
+      "params": {
+        "x": 0.5215732040182659,
+        "y": 3
+      }
+    },
+    {
+      "trial_number": 11,
+      "params": {
+        "x": 0.5180371644945151,
+        "y": 3
+      }
+    },
+    {
+      "trial_number": 12,
+      "params": {
+        "x": 0.598199447932436,
+        "y": 4
+      }
+    },
+    {
+      "trial_number": 13,
+      "params": {
+        "x": 0.6499083419756606,
+        "y": 4
+      }
+    },
+    {
+      "trial_number": 14,
+      "params": {
+        "x": 0.9469618763901494,
+        "y": 4
+      }
+    }
+  ],
+  "n_startup_trials_used_for_split": 10,
+  "startup_trial_numbers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "adaptive_trial_numbers": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "startup_mean_distance_to_optimum": 0.538831249979248,
+  "adaptive_mean_distance_to_optimum": 0.1969360069622054,
+  "empirically_concentrating": true,
+  "lab_run_id": "fp03-20260922T211137Z-9ad61095",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T21:15:40.088912+00:00"
+}

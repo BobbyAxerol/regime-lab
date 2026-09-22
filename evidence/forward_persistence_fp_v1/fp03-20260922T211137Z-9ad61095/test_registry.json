@@ -1,0 +1,23 @@
+{
+  "schema": "regime_lab.fp03_test_registry.v1",
+  "lab_run_id": "fp03-20260922T211137Z-9ad61095",
+  "test_node_ids": [
+    "test_fp03_t_schema_mapping_matches_declared_bounds",
+    "test_fp03_t_unknown_values_are_typed_rejections_not_silent_acceptance",
+    "test_fp03_t_fixed_dimensions_never_enter_the_search_ranges",
+    "test_fp03_t_sampler_identity_is_read_not_assumed",
+    "test_fp03_t_ask_tell_sequence_empirically_concentrates",
+    "test_fp03_t_classify_real_trials_counts_duplicates_and_uniques",
+    "test_fp03_g_prefix_lower_checkpoint_is_a_true_prefix_of_higher",
+    "test_fp03_g_prefix_not_reached_when_fewer_trials_than_level",
+    "test_fp03_g_coverage_is_measured_not_a_fixed_adjective",
+    "test_fp03_checkpoint_search_raises_on_missing_trial_records",
+    "test_fp03_verifier_passes_on_a_valid_bundle",
+    "test_fp03_verifier_fails_on_empty_dir",
+    "test_fp03_verifier_fails_on_tampered_artifact",
+    "test_fp03_verifier_fails_when_a_checkpoint_leaks_higher_budget_information"
+  ],
+  "pytest_xml": "/tmp/fp03_junit.xml",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T21:15:40.139541+00:00"
+}
