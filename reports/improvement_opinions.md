@@ -815,3 +815,53 @@ code change and is not recorded as one.
 `configs/time_edge_validation_v4/` are all inside the live run's `source_identity`
 (`e5807d05…`, verified identical to the working tree at 12:22) and must not change while
 `te-host-controls-btc-02` is in flight.
+
+---
+
+## OP-21 — every phase runner's `--pytest-xml` input lives outside `LAB_ROOT`, by an established pattern, not a new defect
+
+**Measured (FP-01, 2026-09-22).** `src/crypto_regime_lab/fp/verifier_fp01.py::verify_fp01` genuinely
+re-parses the JUnit XML it is given *(`_check_tests` calls `ET.parse` on the path and cross-checks
+node IDs/failures against `test_registry.json` — a real behavioral check, not a token match)*, which
+is correct. But the path it was given for FP-01's own PASS run was `/tmp/fp01_junit.xml` — outside
+`LAB_ROOT`, unversioned, not run-scoped (the filename has no `lab_run_id` in it), and gone the moment
+`/tmp` is cleared. This is not unique to FP-01: `scripts/run_ra01.py` through `run_ra07.py` all take
+the identical `--pytest-xml <path>` contract, and grepping their own usage lines shows the same
+`/tmp`-rooted convention across all seven — the lab has been doing this since RA-01. Guide §0.2 /
+Appendix C ("All writes stay inside `LAB_ROOT`") is inherited by the new FP guide via source I2, so
+the convention sits on the wrong side of a hard boundary the lab has otherwise held to strictly.
+
+**Why it matters, and why it is filed as an opinion rather than a blocker.** The gate's own PASS
+verdict is genuinely re-derived from that file at verify time, so nothing here is a fabricated
+receipt — the risk is reproducibility and boundary discipline, not a false PASS today. And because
+the pattern is seven phases deep and none of them flagged it in their own extensive self-review
+passes (LAB-06/07's "gate that passed because nothing happened" audits, RA's guard-strength audits),
+fixing it now would mean touching already-PASSED, already-owner-reviewed gate receipts across RA-01
+through RA-07, which is a much larger blast radius than finishing FP-01 calls for.
+
+**Options.**
+
+1. *Leave the CLI contract as `--pytest-xml <path>` (caller supplies it, caller's choice where),
+   but change the convention every runner script's own docstring/example recommends to a path under
+   `LAB_ROOT/.cache/pytest_junit/<lab_run_id>.xml`.* Why it might work: zero change to the verifier
+   or its behavioral check, just where the next invocation happens to point it; run-scoped, so two
+   runs cannot collide or overwrite each other. Cost: a one-line docstring/example edit per script
+   (8 files). Risk: none — it changes a convention, not a contract; old runs' receipts are untouched.
+2. *Have each runner copy the supplied JUnit XML into its own evidence dir before handing the path
+   to the verifier* (e.g. `evidence/<study>/<run_id>/pytest_junit.xml`), so the append-only evidence
+   tree is self-contained and a future re-verify does not depend on `/tmp` surviving. Why it might
+   work: makes `FP02-G-...`-style "re-verify from committed artifacts only" claims literally true
+   for the test evidence, not just the JSON summaries. Cost: ~10 lines per runner (copy + path
+   rewrite in the receipt); touches 8 already-PASSED scripts. Risk: a receipt that recorded the old
+   `/tmp` path stays correct for what it *measured*, but would read stale once the convention moves —
+   needs `verified_reuse_of`/`recomputed_from` framing per §24.4, not a silent overwrite.
+3. *Do nothing now; note it once, here.* Correct for today's actual risk (the check is real, only
+   reproducibility is at stake), and keeps FP-01's scope to what the guide actually asked this phase
+   to fix (§13, FP01.2's nine named findings — this was not one of them).
+
+**What would settle it.** Whether option 1 or 2 is worth doing depends on whether a FUTURE phase
+(FP-02's `FP02-G-CACHE`/`FP02-G-RESUME`, or FP-10's frozen replay) ever needs to re-verify a PASSED
+FP gate from committed artifacts alone, with no live `/tmp` state — at that point this stops being
+cosmetic. Until then, option 3.
+
+**Not run.** No runner script, verifier, or evidence path was changed for this entry.
