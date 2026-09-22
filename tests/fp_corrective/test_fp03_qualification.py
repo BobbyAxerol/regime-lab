@@ -127,3 +127,29 @@ def test_fp03_g_coverage_is_measured_not_a_fixed_adjective():
 def test_fp03_checkpoint_search_raises_on_missing_trial_records():
     with pytest.raises(ValueError, match="trial_records"):
         cs._trial_records({"ok": True})
+
+
+def test_fp03_run_origin_search_measures_real_wall_and_instrumentation():
+    """Regression test: an earlier edit silently dropped the Stage/timer
+    wrapping from run_origin_search, so a FRESH (non-cached) call returned
+    wall_seconds_measured=None and instrumentation=None -- invisible in
+    FP-03's own committed evidence only because all three of its origins
+    happened to hit a stale .cache/ file written by an earlier, still-working
+    version of this function. Found while auditing FP-03 before reusing
+    run_origin_search for FP-04's 12 brand-new (never-cached) origins, none
+    of which could have hit that same stale cache. Small real engine call
+    (2 trials, 3-day train memory) so this runs in a few seconds, not the
+    ~45 minutes a real 256-trial/180-day origin costs."""
+    result = cs.run_origin_search(origin_cutoff="2023-06-05", trials=2, seed=20260922,
+                                  train_memory_days=3, forward_days=2)
+    assert result["wf_result"]["ok"] is True
+    assert isinstance(result["wall_seconds_measured"], float)
+    assert result["wall_seconds_measured"] > 0.0
+    instrumentation = result["instrumentation"]
+    assert instrumentation is not None
+    for key in ("base_mib", "peak_mib", "after_gc_mib", "delta_mib", "residual_mib", "wall_s"):
+        assert key in instrumentation
+    assert instrumentation["peak_mib"] > 0.0
+    # the lab-level wrapper's wall-clock (data load + engine call) must be at
+    # least the engine-only Stage's own wall_s, never less
+    assert result["wall_seconds_measured"] >= instrumentation["wall_s"]

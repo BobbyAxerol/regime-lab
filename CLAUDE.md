@@ -118,7 +118,49 @@ already-committed FP-01 bundle surfaced that `gate_receipt.json` is written twic
 fresh re-verification after the one baked into the runner falsely failed on both FP-01 and FP-02 —
 fixed in both verifiers, with a regression test that reproduces the actual two-write sequence. Full
 lab suite after FP-02: **1283 passed, 0 failed** (1268 + 14 new FP-02 tests + 1 new FP-01 regression
-test). R-18 approval for FP-01 -> FP-02 recorded; FP-03 needs its own.
+test). R-18 approval for FP-01 -> FP-02 recorded.
+
+**The owner pre-approved FP-03 -> FP-04 -> FP-05 as one sequential batch on 2026-09-22**
+(`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`, quoting the instruction verbatim: each
+phase must actually complete, report and commit before the next starts — no shortcuts — and FP-06
+onward still needs its own separate R-18).
+
+**FP-03 (search-space qualification and learning curve) is complete: all five gates PASS**
+(`FP03-G-SCHEMA`/`PREFIX`/`COVERAGE`/`CURVE`/`FREEZE`,
+`evidence/forward_persistence_fp_v1/fp03-20260922T211626Z-6bf07360/`). A-SC's 3 tunable dimensions
+cross-checked against the engine's own param ranges, out-of-schema values proved to be typed
+rejections, all 3 dimensions showed real `BEHAVIOR_DIFFERS` on a real engine fixture. Three real
+calibration origins (2021/2022/2023-06-01, calendar-spaced, fixed before any outcome was known), each
+a REAL `run_cutoff_walk_forward` search to 256/256 trials — the exact engine RA-05..RA-07/FUP-01..05
+already depend on, never a hand-rolled objective (the per-trial objective is `mean_is`, mean shard-IS
+Sharpe with a trade-count penalty, computed inside the engine and not independently reproducible
+outside it). Sampler identity read from the actually-installed Optuna **4.8.0** (guide source cites
+4.2.1 — disclosed mismatch), `n_startup_trials=10` confirmed both via `inspect.signature` and an
+empirical ask/tell demonstration. Real wall times 2786.63s / 2575.28s / 3042.21s (~43–51 min/origin);
+peak RSS 1483.3 / 1474.7 / 1520.0 MiB against the 4096 MiB budget — `engine_report_level="score"` was
+required after a real, RLIMIT_AS-caught `MemoryError` under the engine's default profile hit on this
+exact ~300k-bar/180-day scale (the same audit-ledger accumulator FUP-04 already found and fixed on
+long frames). `B_search` frozen at **256**, no blocker.
+
+**Honest finding, not glossed over**: `D_mean_daily_return` (IS − forward; positive = worse decay)
+stayed positive at EVERY checkpoint of EVERY origin — deeper search never turned decay negative on
+this alpha/window — and all three origins showed zero IS-objective improvement from checkpoint 128 to
+256 (the identical trial stayed selected). Two real bugs, both found by re-auditing the already-built
+code rather than being asked: a first version of `FP03-G-PREFIX` compared `records[:lo]` to
+`records[:hi][:lo]` from the SAME sorted list — mathematically identical by construction, so it could
+never fail regardless of what a checkpoint claimed, caught while writing the test meant to prove a
+broken prefix gets caught and it did not; fixed to independently re-derive each checkpoint's
+`selected` from the raw trial records. And, found only AFTER FP-03 was already committed, while
+re-auditing before reusing this code for FP-04: `checkpoint_search.run_origin_search` had silently
+stopped measuring/returning `wall_seconds_measured`/`instrumentation` (the `Stage` timer wrapper was
+missing from the function actually on disk) — FP-03's own committed report shows real numbers only
+because all 3 origins happened to hit a stale `.cache/` file written by an earlier, still-working
+version of the function; a fresh call would have silently written `None`. Fixed with the wrapper
+restored plus a real small-engine regression test. FP-03's own published numbers are unaffected (they
+came from the real measured run); only the code's reproducibility was at risk, and it is disclosed
+here rather than quietly folded into the fix. Full lab suite after FP-03: **1297 passed, 0 failed**
+(1283 + 14 new FP-03 tests). R-18 approval for FP-01 -> FP-02 -> FP-03 (batch) recorded; FP-04 is
+in progress under the same pre-approval, and FP-05 needs FP-04 to fully complete first.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 

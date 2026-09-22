@@ -32,14 +32,24 @@ def run_origin_search(*, origin_cutoff: str, trials: int, seed: int,
     origin), trials spent entirely on searching AT that origin. Loads only
     [origin - train_memory_days - buffer, origin + forward_days]: enough for
     the search itself plus FP03.4's forward comparison window, nothing more.
+
+    Returns real, measured ``wall_seconds_measured`` (the whole call, data
+    load included) and ``instrumentation`` (peak/base/residual RSS + the
+    engine call's own wall time, via the same ``instrumentation.Stage``
+    every other real engine call in this study is wrapped in -- guide 11.6:
+    a cost claim needs a measurement, never an estimate presented as one).
     """
+    import time
+
     import pandas as pd
 
     from ..experiments.dynamic_fold_provider import (
         CutoffSchedule, ZeroSignalStrategy, engine_param_ranges, run_cutoff_walk_forward,
     )
     from ..ra.ra05_market import load_real_bars
+    from .instrumentation import Stage
 
+    t0 = time.time()
     cutoff_ts = pd.Timestamp(origin_cutoff, tz="UTC")
     load_start = (cutoff_ts - pd.Timedelta(days=train_memory_days + 5)).strftime("%Y-%m-%d")
     load_end = (cutoff_ts + pd.Timedelta(days=forward_days + 1)).strftime("%Y-%m-%d")
@@ -60,16 +70,20 @@ def run_origin_search(*, origin_cutoff: str, trials: int, seed: int,
     # (not just the final deployment account), and FUP-04 measured "score"
     # equity-exact against the engine default -- so this changes retention,
     # never the objective value a trial is scored on.
-    result = run_cutoff_walk_forward(
-        ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
-        strategy_class=ZeroSignalStrategy, optuna_trials=trials, seed=seed, route=route,
-        research_retention="none", engine_report_level="score")
+    perf: dict = {}
+    with Stage("origin_search", perf):
+        result = run_cutoff_walk_forward(
+            ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
+            strategy_class=ZeroSignalStrategy, optuna_trials=trials, seed=seed, route=route,
+            research_retention="none", engine_report_level="score")
     return {
         "origin_cutoff": origin_cutoff, "train_memory_days": train_memory_days,
         "forward_days": forward_days, "trials_requested": trials, "seed": seed,
         "market_partitions_used": partitions, "load_start": load_start, "load_end": load_end,
         "frame_rows": int(len(frame)), "wf_result": result,
         "frame_index_last": frame.index[-1].isoformat(),
+        "wall_seconds_measured": round(time.time() - t0, 6),
+        "instrumentation": perf["origin_search"],
     }
 
 
