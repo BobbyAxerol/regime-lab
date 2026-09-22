@@ -29,7 +29,8 @@ source). test_fup04_declaration.py's own ceiling test could not represent a mult
 regardless of whether it is properly chained) -- fixed to resolve the chain the same way
 test_rf05_claims.py's own freeze guard does, not by loosening the assertion. Targeted re-runs after
 the fix: tests/mode4_corrective 105/105 passed; the combined fp01+rf05+fup04 set 26/26 passed.
-Full-suite re-run launched to confirm nothing else regressed; see the next report for the number.
+Full lab-suite re-run confirms it: **1268 passed, 0 failed, 1290.02s** (log kept at
+evidence/forward_persistence_fp_v1/FP-01/full_suite_final.log).
 
 ## Dieu da biet tu evidence
 - Admission was descriptive-only in all published runs; the wired hook exists and is proved by FP01-T02 (FP-F02).
