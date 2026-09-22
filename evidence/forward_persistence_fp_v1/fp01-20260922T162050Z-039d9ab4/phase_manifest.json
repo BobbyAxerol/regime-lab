@@ -1,0 +1,65 @@
+{
+  "schema": "regime_lab.fp01_phase_manifest.v1",
+  "lab_run_id": "fp01-20260922T162050Z-039d9ab4",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-01",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-22T16:20:50.073822+00:00",
+  "configs": {
+    "registration": "configs/forward_persistence_fp_v1/registration.json",
+    "protocol_migration": "configs/forward_persistence_fp_v1/protocol_migration.json"
+  },
+  "required_gates": [
+    "FP01-G-VALIDITY",
+    "FP01-G-IDENTITY",
+    "FP01-G-MIGRATION",
+    "FP01-G-BUDGET"
+  ],
+  "artifacts": [
+    {
+      "path": "baseline_identity.json",
+      "sha256": "f413f259bdd62481a2b01d2a02975e63f318aafe209d33e198746185feff90a4"
+    },
+    {
+      "path": "finding_disposition.json",
+      "sha256": "a052f1a846e55c77147aa9e69a30155c59dc25b352870e84c3451fe26f0717f5"
+    },
+    {
+      "path": "protocol_migration.json",
+      "sha256": "bb51d0bcbb2ecc61b2391387a235d7fd7aa61fcc7a0403a793dfb6887fe9098d"
+    },
+    {
+      "path": "registration.json",
+      "sha256": "29e14b45449d962e4aa556c47bcc3021f4c988d6e717695c49d23fbce8e44c38"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "c28f4588b8666b868cf5f4a54f30dc6494b569b6cfde6977c55a48e4385099a2"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "178ff0c2d8079d6369ae600989b2085dd8d9bf2c35e197ff2a936a8ef961ba69"
+    },
+    {
+      "path": "decay_reconciliation.json",
+      "sha256": "0d31292ff1a3e7a84c39ae489e02f8a79a69de79178ef7fb002704d89b251643"
+    },
+    {
+      "path": "artifact_inventory.json",
+      "sha256": "afc899c61f6357081600723e1c8a23221817a1762571174b66644754b744b69d"
+    },
+    {
+      "path": "report.md",
+      "sha256": "568be2389a4d90f58559c44c6355c6db8dfbda3d995115be9310da488f194778"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "df7a1ef524e55e147ddc56394c98490e1695beef27b20fbf9b889f1d10190f3e"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "acd76efbda8700af840d9928120d783563b9445a848c3174f39a4a13d62a1650"
+    }
+  ],
+  "written_at_utc": "2026-09-22T16:21:12.229229+00:00"
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "regime_lab.fp01_resource_budget.v1",
+  "lab_run_id": "fp01-20260922T162253Z-3538bb29",
+  "fp01_wall_seconds_charged_to_shared_ledger": 0,
+  "shared_ledger_untouched_proof": {
+    "ledger_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/time_edge_validation_v4/allocations/TE02-PILOT-R03/ledger.sqlite",
+    "by_status_reread_at_utc": "2026-09-22T16:23:14.833923+00:00",
+    "by_status": [
+      [
+        "CANCELLED",
+        1,
+        7301.9
+      ],
+      [
+        "COMPLETE",
+        106,
+        13511.0
+      ],
+      [
+        "FAILED",
+        12,
+        52742.3
+      ],
+      [
+        "INTERRUPTED",
+        2,
+        null
+      ],
+      [
+        "TIMED_OUT",
+        19,
+        116702.7
+      ]
+    ],
+    "read_error": null,
+    "note": "read-only sqlite open (mode=ro); no attempt row written"
+  },
+  "engine_calls": 0,
+  "note": "FP-01 is identity/migration/validity: zero engine calls, zero ledger charge",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T16:23:14.845225+00:00"
+}
