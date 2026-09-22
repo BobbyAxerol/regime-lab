@@ -118,6 +118,41 @@ def bootstrap_paired_delta(rows: list, *, block_length: int, n_resamples: int, s
     r_a = np.array([r["r_a"] for r in rows], dtype=float)
     r_b = np.array([r["r_b"] for r in rows], dtype=float)
     point_estimate = float(np.mean(diffs))
+    if bool(np.all(diffs == 0.0)):
+        # Degenerate identical-arms input: every paired diff is exactly zero,
+        # so NO resample can produce a nonzero delta. The percentile machinery
+        # below would return p=0.0 (frac_above == frac_below == 0 means
+        # "no resample exceeded zero on either side" -- read backwards as
+        # significance). Short-circuit with the maximal p-value and a CI
+        # collapsed on zero, flagged as degenerate. Caught by FP01-T06; the
+        # non-degenerate path below is unchanged.
+        return {
+            "status": "OK",
+            "n_common_days": n,
+            "block_length_days": block_length,
+            "n_resamples": n_resamples,
+            "seed": seed,
+            "point_estimate": 0.0,
+            "bootstrap_mean": 0.0,
+            "bootstrap_se": 0.0,
+            "ci_95": [0.0, 0.0],
+            "ci_method": "percentile",
+            "p_value_two_sided": 1.0,
+            "degenerate_identical_arms": True,
+            "degenerate_reason": ("every paired diff is exactly 0.0: no resample can "
+                                  "leave zero, so significance is impossible by "
+                                  "construction, not measured"),
+            "sharpe_a": {"resample_mean": None, "resample_n_valid": 0,
+                         "resample_n_invalid": n_resamples},
+            "sharpe_b": {"resample_mean": None, "resample_n_valid": 0,
+                         "resample_n_invalid": n_resamples},
+            "pf_a": {"resample_mean": None, "resample_n_valid": 0,
+                     "resample_n_invalid": n_resamples},
+            "pf_b": {"resample_mean": None, "resample_n_valid": 0,
+                     "resample_n_invalid": n_resamples},
+            "whole_sample_sharpe_a": sharpe(list(r_a)),
+            "whole_sample_sharpe_b": sharpe(list(r_b)),
+        }
 
     rng = np.random.default_rng(seed)
     deltas = np.empty(n_resamples, dtype=float)

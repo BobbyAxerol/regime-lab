@@ -52,6 +52,7 @@ def _load(lab_root, parts: tuple, name: str) -> dict:
 _SUPERSESSION_SOURCES = (
     ("FUP-01", ("evidence", "corrective_mode4_v3", "FUP-01", "native_event_capability.json")),
     ("FUP-04", ("evidence", "corrective_mode4_v3", "FUP-04", "report_level_memory_repair.json")),
+    ("FP-01", ("evidence", "forward_persistence_fp_v1", "FP-01", "component_supersession.json")),
 )
 # The ceiling on how many frozen components of a manifest may carry a
 # supersession is DECLARED in a registered artifact (FUP-04, which raised it from
