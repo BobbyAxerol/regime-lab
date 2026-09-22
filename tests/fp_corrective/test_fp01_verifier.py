@@ -93,6 +93,36 @@ def test_fp01_verifier_passes_on_a_valid_bundle(lab_tmp):
     assert all(g["pass"] for g in verdict["gates"].values())
 
 
+def test_fp01_verifier_survives_the_real_two_stage_gate_receipt_write(lab_tmp):
+    """The actual bug this exclusion fixes, found on the COMMITTED FP-01
+    bundle by an independent fresh re-verification, not invented: run_fp01.py
+    hashes gate_receipt.json into phase_manifest.json BEFORE updating
+    gate_receipt.json in place with the verdict that verification run
+    produces, so every fresh re-verification after the one baked into the
+    runner saw a false 'bytes changed after writing'. Reproduce the exact
+    sequence -- hash a placeholder gate_receipt.json into the manifest, then
+    overwrite it with different (verdict-added) bytes -- and require the
+    verifier to still PASS. No other test in this file exercises this: they
+    all write gate_receipt.json once, already final."""
+    root = Path(str(lab_tmp)) / "two-stage"
+    root.mkdir()
+    xml = root / "junit.xml"
+    _junit(xml)
+    docs = _bundle(root)
+    docs["gate_receipt.json"]["technical_gate"] = "PASS"
+    docs["gate_receipt.json"]["verification"] = {"overall": "PASS"}
+    docs["gate_receipt.json"]["verified_at_utc"] = "2026-09-22T18:00:00+00:00"
+    (root / "gate_receipt.json").write_text(json.dumps(docs["gate_receipt.json"], indent=2),
+                                            encoding="utf-8")
+    assert hashlib.sha256((root / "gate_receipt.json").read_bytes()).hexdigest() != next(
+        e["sha256"] for e in json.loads((root / "phase_manifest.json").read_text())["artifacts"]
+        if e["path"] == "gate_receipt.json"), "the fixture must actually reproduce the drift"
+    verdict = verify_fp01(root, pytest_xml=xml)
+    assert verdict["overall"] == "PASS", verdict
+    assert not any("gate_receipt.json" in r
+                  for g in verdict["gates"].values() for r in g["reasons"])
+
+
 def test_fp01_verifier_fails_on_empty_dir(lab_tmp):
     root = Path(str(lab_tmp)) / "empty"
     root.mkdir()

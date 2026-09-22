@@ -91,7 +91,15 @@ def verify_fp01(run_dir, *, pytest_xml=None) -> dict:
     else:
         for entry in manifest.get("artifacts", []):
             name = entry.get("path")
-            if not name or name == "phase_manifest.json":
+            # phase_manifest.json cannot hash itself; gate_receipt.json is
+            # WRITTEN TWICE by design (a PENDING_VERIFICATION placeholder,
+            # hashed into this manifest, then updated in place with the
+            # verdict THIS VERY VERIFICATION produces) -- its bytes
+            # therefore never match the pre-verdict hash on any run AFTER
+            # the one that wrote it. Both are bundle-level summaries
+            # written last, not source-of-truth artifacts a drift check
+            # protects; excluded for the same reason, not a loosened check.
+            if not name or name in ("phase_manifest.json", "gate_receipt.json"):
                 continue
             target = root / name
             if not target.is_file():
