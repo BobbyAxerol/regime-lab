@@ -27,11 +27,20 @@ SYMBOL = "BTCUSDT"
 
 def run_origin_search(*, origin_cutoff: str, trials: int, seed: int,
                       route: str = "event", train_memory_days: int = TRAIN_MEMORY_DAYS,
-                      forward_days: int = 28) -> dict:
+                      forward_days: int = 28, symbol: str = SYMBOL,
+                      alpha_id: str = ALPHA_ID) -> dict:
     """One real run_cutoff_walk_forward call, ONE cutoff (this calibration
     origin), trials spent entirely on searching AT that origin. Loads only
     [origin - train_memory_days - buffer, origin + forward_days]: enough for
     the search itself plus FP03.4's forward comparison window, nothing more.
+
+    ``symbol``/``alpha_id`` default to this module's own FP-03-qualified
+    cell (A-SC/BTCUSDT) so every existing caller is unaffected; FP-08's
+    replication cell (guide FP08.1: a second cell by a pre-registered rule)
+    passes a different symbol explicitly -- search-space qualification
+    (guide's own FP-03 findings: schema, BEHAVIOR_DIFFERS, B_search=256) is
+    an ALPHA-level property, not symbol-level, so it is reused verbatim for
+    any symbol running the SAME alpha, never re-derived per symbol.
 
     Returns real, measured ``wall_seconds_measured`` (the whole call, data
     load included) and ``instrumentation`` (peak/base/residual RSS + the
@@ -53,7 +62,7 @@ def run_origin_search(*, origin_cutoff: str, trials: int, seed: int,
     cutoff_ts = pd.Timestamp(origin_cutoff, tz="UTC")
     load_start = (cutoff_ts - pd.Timedelta(days=train_memory_days + 5)).strftime("%Y-%m-%d")
     load_end = (cutoff_ts + pd.Timedelta(days=forward_days + 1)).strftime("%Y-%m-%d")
-    frame, partitions = load_real_bars(SYMBOL, start=load_start, end=load_end)
+    frame, partitions = load_real_bars(symbol, start=load_start, end=load_end)
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
 
     schedule = CutoffSchedule(arm="FP03_calibration", cutoffs=(cutoff_ts.isoformat(),),
@@ -73,12 +82,13 @@ def run_origin_search(*, origin_cutoff: str, trials: int, seed: int,
     perf: dict = {}
     with Stage("origin_search", perf):
         result = run_cutoff_walk_forward(
-            ALPHA_ID, frame, schedule, param_ranges=engine_param_ranges(ALPHA_ID),
+            alpha_id, frame, schedule, param_ranges=engine_param_ranges(alpha_id),
             strategy_class=ZeroSignalStrategy, optuna_trials=trials, seed=seed, route=route,
             research_retention="none", engine_report_level="score")
     return {
         "origin_cutoff": origin_cutoff, "train_memory_days": train_memory_days,
         "forward_days": forward_days, "trials_requested": trials, "seed": seed,
+        "symbol": symbol, "alpha_id": alpha_id,
         "market_partitions_used": partitions, "load_start": load_start, "load_end": load_end,
         "frame_rows": int(len(frame)), "wf_result": result,
         "frame_index_last": frame.index[-1].isoformat(),

@@ -102,21 +102,23 @@ def normalized_params(schema, params: dict) -> dict:
            for name in sorted(active)}
 
 
-def load_origin_is_frame(alpha_id: str, origin_cutoff, *, train_memory_days=None):
+def load_origin_is_frame(alpha_id: str, origin_cutoff, *, train_memory_days=None, symbol=None):
     """The SAME IS-window frame FP-04 loaded for this origin -- load ONCE
     per origin and reuse across every one of that origin's records/regions
     (a caller iterating many records from the same origin must not reload
-    the frame per record)."""
+    the frame per record). ``symbol`` defaults to checkpoint_search's own
+    SYMBOL (BTCUSDT); FP-08's second cell passes its own symbol."""
     import pandas as pd
 
     from ..ra.ra05_market import load_real_bars
     from .checkpoint_search import SYMBOL, TRAIN_MEMORY_DAYS
 
     train_memory_days = TRAIN_MEMORY_DAYS if train_memory_days is None else train_memory_days
+    symbol = SYMBOL if symbol is None else symbol
     origin_ts = pd.Timestamp(origin_cutoff, tz="UTC")
     load_start = (origin_ts - pd.Timedelta(days=train_memory_days + 5)).strftime("%Y-%m-%d")
     load_end = origin_ts.strftime("%Y-%m-%d")
-    frame, _partitions = load_real_bars(SYMBOL, start=load_start, end=load_end)
+    frame, _partitions = load_real_bars(symbol, start=load_start, end=load_end)
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
     return frame.loc[frame.index < origin_ts]
 
