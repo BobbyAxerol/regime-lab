@@ -1,0 +1,67 @@
+{
+  "schema": "regime_lab.fp07_phase_manifest.v1",
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-07",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-23T19:02:07.308921+00:00",
+  "required_gates": [
+    "FP07-G-POOL",
+    "FP07-G-EXEC",
+    "FP07-G-ACCOUNT",
+    "FP07-G-DECAY",
+    "FP07-G-COST",
+    "FP07-G-SCOPE"
+  ],
+  "artifacts": [
+    {
+      "path": "study_freeze.json",
+      "sha256": "205ccaaf21be3085b0db90405edb6c0ed2c9933d8c74f24d22a84ba55cab837e"
+    },
+    {
+      "path": "common_candidate_pools.json",
+      "sha256": "8719bcbd3a994062dba39b4736ea64105e9fa072674f8e3dd8eae3b0c9c46b7f"
+    },
+    {
+      "path": "selections.json",
+      "sha256": "95a0b93b52d0c6dd8db97845448050c384ad5f8f66434984a3b24490867342fa"
+    },
+    {
+      "path": "admission_and_schedules.json",
+      "sha256": "3bdb4115bcb2d2f9677d1e81b1c5807154782d152b776281b30ca77611ddab67"
+    },
+    {
+      "path": "accounts.json",
+      "sha256": "348d17f96505df658f1de72c1305615cf299c41fe1c2fbda6d6052c19eba8e55"
+    },
+    {
+      "path": "d1_table.json",
+      "sha256": "3c0cb018ea943d57cffe1d295d1a72cd487a9115b3ae87d838c99b75412d94bc"
+    },
+    {
+      "path": "paired_contrasts.json",
+      "sha256": "166698e6e3ed129b1b46e90a2f32c541f3356944a2743ad28648e236b3a572ed"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "2426c0e5dfb4419aa2ed86bb9e7a9a9d78241e78749b6c9c2d5876a4ee878e1f"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "bc3189b2fb282a245f95f49d582a2c74e54b5f06f33a0167b99230eca0a1fb83"
+    },
+    {
+      "path": "report.md",
+      "sha256": "8fe6c55c4b3601b90ebec25f4e1de4bff1ed4fecec79d8ec4c72b379936fe4bd"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "a5203dd216eb9585cd390b80c4778585c460cac43ea8d15ee50a3723d18d0ff1"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "4b97a444f20807900a8d1425a2ce8528f0b3de2e6a95148a02fbb9a7fb8200bb"
+    }
+  ],
+  "written_at_utc": "2026-09-23T19:16:03.536701+00:00"
+}

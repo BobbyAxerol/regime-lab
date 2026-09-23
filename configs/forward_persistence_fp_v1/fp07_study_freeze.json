@@ -1,0 +1,73 @@
+{
+  "schema": "regime_lab.fp07_study_freeze.v1",
+  "primary_cell": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT"
+  },
+  "origins": [
+    "2021-01-01",
+    "2021-04-01",
+    "2021-07-01",
+    "2021-10-01",
+    "2022-01-01",
+    "2022-04-01",
+    "2022-07-01",
+    "2022-10-01",
+    "2023-01-01",
+    "2023-04-01",
+    "2023-07-01",
+    "2023-10-01"
+  ],
+  "frame_span": {
+    "start": "2021-01-01",
+    "end": "2024-01-01",
+    "reason": "the full registered `development` data role (configs/study_registration.json, 2020-01-01..2023-12-31) -- gives the LAST origin's selection genuine deployed forward time (2023-10-01 through the role's own end) rather than stopping at its bare 28-day forward-label maturity window, while never touching `outer_evaluation` (2024-01-01 onward)"
+  },
+  "arms": [
+    "A_STOCK_CAL",
+    "B_FP_PERSISTENCE",
+    "C_FP_CONTEXT"
+  ],
+  "economics": {
+    "initial_capital": 20000.0,
+    "one_way_fee": 0.0004,
+    "slippage_bps": 1.0,
+    "use_funding": false
+  },
+  "model_hyperparameters": {
+    "alpha_b": 10.0,
+    "alpha_b_source": "evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/model_selection.json:selected_alpha",
+    "alpha_c": 10.0,
+    "alpha_c_source": "evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/oof_diagnostics_c.json:selected_alpha_c",
+    "frozen_reason": "guide 19 item 9 (b\u00e1o prefix progress nh\u01b0ng kh\u00f4ng \u0111\u1ed5i algorithm theo prefix outcome): the ridge alpha was already selected via nested walk-forward OOF in FP-05/FP-06, before this locked study started; only the model's COEFFICIENTS refit per origin, from that origin's own matured training rows -- the hyperparameter itself never moves"
+  },
+  "utility_floor_daily": 6.4e-05,
+  "support_floor": 2,
+  "d1_method": "per-selection lookup of the SAME record's own (is_mean_daily_return, forward label) already computed in FP-04's archive -- never re-derived by slicing the continuous deployment account (guide 19 precondition: candidate-forward and deployment metrics kept separate)",
+  "primary_contrast": "C_FP_CONTEXT - B_FP_PERSISTENCE",
+  "secondary_contrasts": [
+    "B_FP_PERSISTENCE - A_STOCK_CAL",
+    "C_FP_CONTEXT - A_STOCK_CAL"
+  ],
+  "bootstrap": {
+    "method": "time_edge.inference.block_mean (RA-07/RF-05's own registered 28-day block bootstrap, reused verbatim, never reimplemented)",
+    "delta": 6.4e-05,
+    "delta_source": "configs/minimum_economic_effect.json (reused verbatim): guide 8.6/FP08.5's 'OOS utility/risk safeguard' names no concrete number anywhere in the guide text -- reusing the lab's OWN already-registered economic-significance threshold (registered 2026-09-09, before any FP arm comparison existed) is a disclosed, non-arbitrary choice rather than inventing a new number for this phase alone"
+  },
+  "cost_estimate": {
+    "pilot_measurement": "84,960 one-minute bars processed via run_deployment in 12.17s (report_level='score', real cache miss) -- measured in this study's own planning step before any full-span account ran",
+    "pilot_bars_per_second": 6979.0,
+    "frame_span_days": 1095,
+    "estimated_bars_per_arm": 1576800,
+    "estimated_minutes_per_arm": 3.77,
+    "estimated_total_minutes_3_arms": 11.3
+  },
+  "resource_budget_exception": {
+    "registered_working_memory_gib": 4.0,
+    "applied_working_memory_gib": 7.0,
+    "decision_id": "dec-9cc3ec3e712cf61b",
+    "decision_ref": "evidence/regime_time_edge_ra_v1/owner_decisions.jsonl",
+    "reason": "a first real attempt at the full ~1.58M-bar/3-arm span hit a real RLIMIT_AS MemoryError at bar_index=1,360,272 against the registered 4 GiB cap. Four real probe runs (100k/400k/800k/1.2M bars, single-activation schedule, report_level='score') measured linear RSS growth (~1.77 MiB per 1000 bars: 454/979/1687 MiB, then a MemoryError at 1.2M bars with RSS at 2403 MiB) -- the failure is a virtual-address-space ceiling, not an actual host RAM shortage: the full span's ACTUAL resident memory projects to ~3.1 GiB, against a then-measured host state of 9.7 GiB total / ~4.1 GiB available. Presented to the owner via AskUserQuestion with this real data before being applied; scoped to FP-07's own run_deployment calls ONLY -- configs/study_registration.json's registered 4 GiB stays unchanged for every other phase/call in this lab."
+  },
+  "frozen_at_utc": "2026-09-23T19:02:11.812305+00:00"
+}

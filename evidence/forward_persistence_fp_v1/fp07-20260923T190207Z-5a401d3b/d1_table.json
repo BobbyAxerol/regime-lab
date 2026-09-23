@@ -1,0 +1,335 @@
+{
+  "schema": "regime_lab.fp07_d1_table.v1",
+  "convention": "D = IS - forward; positive = worse decay (guide 8.5, FP-01 repaired)",
+  "arm_a_exact_match_count": 1,
+  "arm_a_exact_match_denominator": 12,
+  "rows": [
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2021-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet))"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2021-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet)))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2021-04-01",
+      "record_id": "2021-04-01:R03",
+      "is_mean_daily_return": 0.0004737134302422442,
+      "forward_label": -0.00039572308108116024,
+      "D_mean_daily_return": 0.0008694365113234044,
+      "reason": null
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2021-04-01",
+      "record_id": "2021-04-01:R03",
+      "is_mean_daily_return": 0.0004737134302422442,
+      "forward_label": -0.00039572308108116024,
+      "D_mean_daily_return": 0.0008694365113234044,
+      "reason": null
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2021-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2021-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2021-10-01",
+      "record_id": "2021-10-01:R15",
+      "is_mean_daily_return": -0.0016040515434003742,
+      "forward_label": -0.0007375497026459732,
+      "D_mean_daily_return": -0.000866501840754401,
+      "reason": null
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2021-10-01",
+      "record_id": "2021-10-01:R15",
+      "is_mean_daily_return": -0.0016040515434003742,
+      "forward_label": -0.0007375497026459732,
+      "D_mean_daily_return": -0.000866501840754401,
+      "reason": null
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2022-01-01",
+      "record_id": "2022-01-01:R00",
+      "is_mean_daily_return": 0.000251589728991954,
+      "forward_label": -0.00027433686829040585,
+      "D_mean_daily_return": 0.0005259265972823599,
+      "reason": null
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2022-01-01",
+      "record_id": "2022-01-01:R00",
+      "is_mean_daily_return": 0.000251589728991954,
+      "forward_label": -0.00027433686829040585,
+      "D_mean_daily_return": 0.0005259265972823599,
+      "reason": null
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2022-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2022-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2022-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2022-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2022-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2022-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2023-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2023-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2023-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2023-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2023-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2023-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "B_FP_PERSISTENCE",
+      "origin_cutoff": "2023-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (no candidate cleared the utility/support floor at this origin)"
+    },
+    {
+      "arm": "C_FP_CONTEXT",
+      "origin_cutoff": "2023-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "FALLBACK_TO_A: no forward-labelled record for this origin's selection (Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin))"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2021-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2021-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2021-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2021-10-01",
+      "record_id": "2021-10-01:R00",
+      "is_mean_daily_return": 0.00023953852482020753,
+      "forward_label": 0.0006521438086987963,
+      "D_mean_daily_return": -0.00041260528387858874,
+      "reason": null
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2022-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2022-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2022-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2022-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2023-01-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2023-04-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2023-07-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    },
+    {
+      "arm": "A_STOCK_CAL",
+      "origin_cutoff": "2023-10-01",
+      "record_id": null,
+      "is_mean_daily_return": null,
+      "forward_label": null,
+      "D_mean_daily_return": null,
+      "reason": "Arm A's stock selection does not exactly match a region-archive medoid at this origin -- no forward-labelled record exists for it in this archive"
+    }
+  ],
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T19:10:37.280814+00:00"
+}
