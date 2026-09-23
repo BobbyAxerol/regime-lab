@@ -159,8 +159,52 @@ version of the function; a fresh call would have silently written `None`. Fixed 
 restored plus a real small-engine regression test. FP-03's own published numbers are unaffected (they
 came from the real measured run); only the code's reproducibility was at risk, and it is disclosed
 here rather than quietly folded into the fix. Full lab suite after FP-03: **1297 passed, 0 failed**
-(1283 + 14 new FP-03 tests). R-18 approval for FP-01 -> FP-02 -> FP-03 (batch) recorded; FP-04 is
-in progress under the same pre-approval, and FP-05 needs FP-04 to fully complete first.
+(1283 + 14 new FP-03 tests). R-18 approval for FP-01 -> FP-02 -> FP-03 (batch) recorded.
+
+**FP-04 (historical forward ledger and parameter regions) is complete: all five gates PASS**
+(`FP04-G-LEDGER`/`CAUSAL`/`REGION`/`SUPPORT`/`REUSE`,
+`evidence/forward_persistence_fp_v1/fp04-20260923T145511Z-34cb31b6/`). A real historical archive at
+**12 chronological origins** (quarter-start dates, 2021-01-01 .. 2023-10-01) — an EXPLICIT, disclosed
+partial scope against guide 3.2's ~26-39-origin research-default target: at FP-03's measured cost,
+the full target would have cost ~19.5-29 hours of strictly-sequential engine wall-clock, so FP-04
+froze 12 instead, citing guide 16's own permission for a short origin count and its incremental-
+rebuild guarantee (FP04-T07/T08) to extend later without recomputing. Each origin: a REAL 256/256-
+trial search (B_search reused verbatim from FP-03's frozen policy, never re-derived), real region
+clustering from the search's own candidates (Gower distance on params only,
+`selector.schema_distance.ParamSchema.distance`, `distance_threshold=0.12`, capped at the frozen
+`representative_subset_size=16` — every one of the 12 origins hit this cap, real clustering found
+more than 16 distinct regions every time), real forward evaluation of every region's medoid.
+**3072 real search-trial engine calls, 384 real forward-evaluation calls, 0 reused (first run of
+this grid).** Sum of per-origin search-only wall time **34254.3s (9.52h)**, mean 2854.5s/origin;
+peak RSS 1556.5-2289.6 MiB against the 4096 MiB budget, no monotonic growth. **192 ledger records
+(12×16), 192/192 matured, 0 censored** — no forward window hit a data gap across the entire grid.
+155 model-ready (support ≥2), 37 descriptive-only. `decay_D_mean_daily_return` mean **-0.000045**
+(slightly negative — forward marginally BETTER than IS on average at this region-medoid granularity,
+a different population from FP-03's single-best-candidate-per-origin measurement, not a
+contradiction of it), 84/192 (43.8%) individual records still positive (worse).
+
+**A real operational incident, disclosed in full.** The first launch of the 12-origin build (22:46
+UTC 2026-09-22, an ordinary `run_in_background` task) was **killed after ~5 hours with 0/12 origins
+completed** — verified via an empty raw-search cache, no OOM event near that window in `dmesg`/
+`journalctl` (host uptime unbroken, 10 days), and a brand-new `claude` CLI process tree starting at
+03:38 UTC 2026-09-23: the interactive session that launched the background task ended and took its
+child process down with it, not an application bug, not a resource-budget breach. Zero progress was
+lost (nothing had completed yet), but ~5 hours produced nothing. Relaunched at 03:43 UTC with
+`setsid nohup ... & disown` (confirmed detached: PPID=1, own session) specifically so a repeat
+session interruption could not kill it again; the second launch ran the full **11h08m38s** to a
+verified PASS undisturbed. Total wall-clock across both attempts: **~16 hours**, ~5 of them wasted
+to the session-death incident — reported plainly rather than only citing the successful run's time.
+
+One more real bug, found before any FP-04 engine call ran: `ledger_record()` reformatted
+`origin_cutoff` through `origin_ts.isoformat()`, which silently stopped string-matching
+`origin_ledger.json`'s own plain-date `origin_cutoff` field — making `FP04-G-CAUSAL`'s cross-origin-
+leak check **vacuous** (it would never have fired on the real run either). Found because the gate's
+own regression test failed for the wrong reason (a dict-key miss, not the corruption the test meant
+to catch); fixed to keep `origin_cutoff` as the plain join key. The incremental-rebuild guarantee was
+also proven on the real grid, not just synthetic tests: a later re-run (to add an aggregate-summary
+section to the report) hit 0 fresh engine calls and reused all 12 origins verbatim, finishing in
+14m26s instead of ~11h. Full lab suite after FP-04: **1340 passed, 0 failed**. R-18 approval for
+FP-01 -> FP-02 -> FP-03 -> FP-04 (batch) recorded; FP-05 has not been started.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 

@@ -364,9 +364,10 @@ def run_fp04(pytest_xml: str | None) -> tuple[int, dict]:
     (run_dir / "region_policy.json").write_text(
         json.dumps(region_policy, indent=2) + "\n", encoding="utf-8")
 
+    finished = utcnow()
     report_text = render_report(lab_run_id=lab_run_id, run_dir=run_dir, origin_entries=origin_entries,
                                 ledger_records_doc=ledger_records_doc, region_policy=region_policy,
-                                resource_budget=resource_budget, started=started)
+                                resource_budget=resource_budget, started=started, finished=finished)
     handoff_text = render_handoff(lab_run_id=lab_run_id, run_dir=run_dir, region_policy=region_policy,
                                   ledger_records_doc=ledger_records_doc)
     (run_dir / "report.md").write_text(report_text, encoding="utf-8")
@@ -402,8 +403,46 @@ def run_fp04(pytest_xml: str | None) -> tuple[int, dict]:
 
 
 def render_report(*, lab_run_id, run_dir, origin_entries, ledger_records_doc, region_policy,
-                  resource_budget, started) -> str:
+                  resource_budget, started, finished=None) -> str:
     support = ledger_records_doc["support_summary"]
+    records = ledger_records_doc["records"]
+    matured = [r for r in records if r["maturity_state"] == "matured_forward_record"]
+    censored = [r for r in records if r["maturity_state"] == "censored_or_failed_record"]
+    decays = [r["decay_D_mean_daily_return"] for r in matured
+             if r["decay_D_mean_daily_return"] is not None]
+    labels = [r["label"] for r in matured if r["label"] is not None]
+    wall_times = [e["wall_seconds_measured"] for e in origin_entries
+                 if e.get("wall_seconds_measured") is not None]
+    total_wall_search = sum(wall_times)
+    n_ok = sum(1 for e in origin_entries if e["wf_ok"])
+    aggregate_lines = [
+        f"- origins searched OK / total: {n_ok}/{len(origin_entries)}",
+        f"- total records: {len(records)} = {len(origin_entries)} origins x "
+        f"{region_policy['representative_subset_size']} representative_subset_size cap",
+        f"- matured_forward_record: {len(matured)}, censored_or_failed_record: {len(censored)}",
+        f"- sum of per-origin search-only wall_seconds_measured: {total_wall_search:.1f}s "
+        f"({total_wall_search / 3600:.2f}h) over {len(wall_times)} origins, "
+        f"mean {total_wall_search / len(wall_times):.1f}s/origin" if wall_times else
+        "- no origin wall times recorded",
+    ]
+    if finished is not None:
+        aggregate_lines.append(f"- TOTAL wall clock, launch to report-write (includes region "
+                               f"build + forward eval, not just search; verification follows "
+                               f"this and adds a few more seconds): started={started}, "
+                               f"report_written={finished}")
+    if decays:
+        positive = sum(1 for d in decays if d > 0)
+        aggregate_lines += [
+            f"- decay_D_mean_daily_return (IS - forward; positive=worse) over {len(decays)} "
+            f"matured records: min={min(decays):.6f}, max={max(decays):.6f}, "
+            f"mean={sum(decays) / len(decays):.6f}",
+            f"- positive (worse) decay: {positive}/{len(decays)} "
+            f"({100 * positive / len(decays):.1f}%)",
+        ]
+    if labels:
+        aggregate_lines.append(
+            f"- label (forward mean_daily_return) over {len(labels)} matured records: "
+            f"min={min(labels):.6f}, max={max(labels):.6f}, mean={sum(labels) / len(labels):.6f}")
     lines = [f"# FP-04 — Historical forward ledger and parameter regions ({lab_run_id})", "",
             f"- run_dir: {run_dir}", f"- started_at: {started}",
             f"- alpha: {ALPHA_ID}, symbol: {SYMBOL}, origins: {len(region_policy['origin_grid'])} "
@@ -414,6 +453,8 @@ def render_report(*, lab_run_id, run_dir, origin_entries, ledger_records_doc, re
             f"{resource_budget['engine_calls_search_trials_fresh']}",
             f"- origins reused verbatim from .cache (no fresh engine call): "
             f"{resource_budget['reused_origins'] or 'none'}",
+            "", "## Aggregate summary (measured, not asserted -- see Per-origin results for the "
+            "full per-region breakdown this rolls up)"] + aggregate_lines + [
             "", "## Per-origin results"]
     for e in origin_entries:
         lines.append(f"### {e['origin_cutoff']}")
