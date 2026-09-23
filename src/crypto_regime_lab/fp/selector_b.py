@@ -268,18 +268,27 @@ def predict_ridge(model: dict, X):
 # ---------------------------------------------------------------------------
 
 def walk_forward_oof(rows: list[dict], *, min_train_origins: int = MIN_TRAIN_ORIGINS,
-                     alpha_grid=ALPHA_GRID) -> dict:
+                     alpha_grid=ALPHA_GRID, feature_matrix_fn=None) -> dict:
     """One fold per validation origin (sorted chronologically, from
     min_train_origins onward): training rows are exactly those a
     fp.forward_ledger.training_view call would accept at that origin's own
     decision time -- the SAME guard FP-04 already proved catches a future-
     label leak (guide 8.4's dormant-risk regression). Returns, per alpha,
     every fold's (record_id, predicted, actual, residual) plus the
-    aggregate weighted MSE used to select alpha."""
+    aggregate weighted MSE used to select alpha.
+
+    ``feature_matrix_fn`` (default build_feature_matrix, Selector B's own):
+    the ONLY thing FP-06's Selector C is allowed to vary (guide 9.1:
+    candidate pool, target, inner split policy, regularization-selection
+    rule all stay identical). Passing fp.selector_c's own context-augmented
+    builder here means B and C run through the LITERAL SAME walk-forward
+    loop and the LITERAL SAME training_view guard -- not two similar-
+    looking copies, structurally the same code path."""
     import numpy as np
 
     from .forward_ledger import origin_weights, training_view
 
+    feature_matrix_fn = feature_matrix_fn or build_feature_matrix
     origins = sorted({row["origin_cutoff"] for row in rows},
                      key=lambda o: rows_by_origin_time(rows, o))
     if len(origins) < min_train_origins + 1:
@@ -298,8 +307,8 @@ def walk_forward_oof(rows: list[dict], *, min_train_origins: int = MIN_TRAIN_ORI
         if not train_rows or not val_rows:
             continue
         validation_origins.append(val_origin)
-        X_tr, y_tr, w_tr, _names, _kept_tr, _exc_tr = build_feature_matrix(train_rows)
-        X_va, y_va, _w_va, _names2, kept_va, _exc_va = build_feature_matrix(val_rows)
+        X_tr, y_tr, w_tr, _names, _kept_tr, _exc_tr = feature_matrix_fn(train_rows)
+        X_va, y_va, _w_va, _names2, kept_va, _exc_va = feature_matrix_fn(val_rows)
         if len(X_tr) == 0 or len(X_va) == 0:
             continue
         for alpha in alpha_grid:
