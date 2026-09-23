@@ -251,6 +251,38 @@ discipline (guide R25) or of measuring and disclosing any large new real-compute
 it (the same discipline FP-04's 12-origin scope decision already demonstrated), which the owner's
 instruction reaffirmed applies even under this open-ended advance.
 
+**FP-06 (Implement C_FP_CONTEXT — Selector C) is complete: all five gates PASS**
+(`FP06-G-ABLATION`/`CAUSAL`/`SUPPORT`/`FREEZE`/`CLAIM`,
+`evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/`). Built on the IDENTICAL
+12-origin/192-record archive B used, through the LITERAL SAME `fp.selector_b.walk_forward_oof` loop
+— that function was generalised to accept an optional `feature_matrix_fn` (the ONLY change made to
+Selector B's own code), so C's chronological guard is structurally, not just conventionally, the
+same code path guide 9.1 requires. Two frozen context features (guide 9.3, JM/M0 explicitly NOT
+used — LAB-08's own measured 1.64% JM/M0 support was too thin to build on, a disclosed choice, still
+recorded in the exposure count at zero): `ctx_direction_efficiency` and `ctx_volatility_ratio`, both
+from the same causal IS frame B already loads. Two registered candidate-descriptor × context
+interaction terms (guide 9.2: `norm_AP` × `ctx_direction_efficiency`, `norm_coeff` ×
+`ctx_volatility_ratio` — 2 of 18 possible pairs, never the full Cartesian product guide 9.2
+explicitly forbids).
+
+**Guide 9.2's own counterexample, proven not merely avoided**: a designed fixture (two candidates
+differing only in `norm_AP`, a true label with a context-dependent crossover) shows a purely additive
+model (candidate + context as separate columns, no product term) predicts the SAME relative candidate
+ranking regardless of context — it structurally cannot represent a crossover, exactly guide 9.2's
+argument — while Selector C's interaction architecture correctly FLIPS the predicted ranking between
+the two contexts (`FP06-T04`, both directions tested). Real held-out demo on the same 16 candidates
+FP-05 scored: alpha=10.0 selected independently for both B and C (same value); all 16 stayed
+in-distribution (0 OOD fallback); **mean(C − B) = 4.79e-07** — a tiny, real, honest adjustment, C's
+predictions staying far below the utility floor on every candidate, same as B's. Guide 9.2's own
+permitted outcome: *"C không tạo khác biệt trên real data vẫn là kết quả hợp lệ nếu execution
+đúng."* **Zero new engine calls of any kind** — no search trials, no deployment (FP-06's own exit
+gate does not require re-proving admission/deployment wiring; FP05-G-ACTION already did that
+generically); context features came from 12 real disk reads of already-loaded market frames. Full
+lab suite after FP-06: **1403 passed, 0 failed**. Research status NOT_ASSESSED throughout.
+FP-07 (the locked A/B/C study) is next and is the FIRST phase that actually touches the research
+question — its real compute cost is unknown and unmeasured as of this writing, and will be measured
+and disclosed before running anything at scale, per the owner's explicit reaffirmation.
+
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
 `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` supersedes this digest wherever they conflict. The five corrective phases **RF-01 … RF-05** on branch `mode4-corrective` are complete (`study_id=corrective_mode4_v3`): RF-01 identity/invalidation/before-repair probes; RF-02 real-snapshot native-event account and public Mode 4 baseline; RF-03 causal controller; RF-04 10-cell event-route paired discovery (`RF-04/paired_discovery_full.json`) plus design freeze/decay/controls; RF-05 freeze/recompute/claims/integrity/handoff (`evidence/corrective_mode4_v3/RF-05/`). Final RF-05 claim: `TECHNICALLY_VALID_WITH_PARTIAL_COVERAGE`, economic `INCONCLUSIVE` — 10 of 20 planned cells executed (A-VWAP/A-HASH stay `BLOCKED_CAPABILITY`, null metrics + reasons); paired common-date `M4_REGIME − M4_CAL` (10 cells) mean −0.1123 bps/day, block-bootstrap 95% CI [−0.4940, +0.1907]; `M4_REGIME − M4_CAL_MATCHED` (1 evaluable cell) +0.1620 [−0.2142, +0.6154]; Holm m=2 over {TIMING, BUDGET_AWARE} → both `INCONCLUSIVE` against the frozen MDE 0.0371 bps/day, no `POSITIVE`; `NESTED_RETROSPECTIVE` (no untouched holdout) and `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED`. `tests/mode4_corrective/` is green (76 passed; full suite 862 passed). Historical LAB-01…LAB-09 evidence and its `FAILED_VALIDITY` conclusion are preserved and never rewritten.

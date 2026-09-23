@@ -1,0 +1,27 @@
+{
+  "schema": "regime_lab.fp06_exposure.v1",
+  "jm_observations": 0,
+  "m0_observations": 0,
+  "unknown_stale_ambiguous": 0,
+  "jm_m0_note": "LAB-08's own measured history found JM/M0 calibration-vintage state support too thin to build on (only 1.64% of scoring observations carried a state key seen during calibration) -- a disclosed design choice, not a silent omission; guide 9.4's exposure count is still recorded, at zero.",
+  "fallback_to_b_count": 0,
+  "context_conditioned_count": 16,
+  "n_scored_total": 16,
+  "demo_origin": "2023-10-01",
+  "demo_train_origins": [
+    "2021-01-01",
+    "2021-04-01",
+    "2021-07-01",
+    "2021-10-01",
+    "2022-01-01",
+    "2022-04-01",
+    "2022-07-01",
+    "2022-10-01",
+    "2023-01-01",
+    "2023-04-01",
+    "2023-07-01"
+  ],
+  "lab_run_id": "fp06-20260923T173537Z-1fa316c7",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T17:35:37.924359+00:00"
+}

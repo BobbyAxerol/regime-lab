@@ -1,0 +1,53 @@
+{
+  "schema": "regime_lab.fp06_oof_diagnostics.v1",
+  "n_fit_origins": 12,
+  "n_validation_origins": 8,
+  "validation_origins": [
+    "2022-01-01",
+    "2022-04-01",
+    "2022-07-01",
+    "2022-10-01",
+    "2023-01-01",
+    "2023-04-01",
+    "2023-07-01",
+    "2023-10-01"
+  ],
+  "alpha_grid": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "by_alpha_b": {
+    "0.1": {
+      "n": 128,
+      "weighted_mse": 1.8794355404886332e-07
+    },
+    "1.0": {
+      "n": 128,
+      "weighted_mse": 1.750281030244164e-07
+    },
+    "10.0": {
+      "n": 128,
+      "weighted_mse": 1.744905388068486e-07
+    }
+  },
+  "by_alpha_c": {
+    "0.1": {
+      "n": 128,
+      "weighted_mse": 3.9749711519961853e-07
+    },
+    "1.0": {
+      "n": 128,
+      "weighted_mse": 2.3235076695845083e-07
+    },
+    "10.0": {
+      "n": 128,
+      "weighted_mse": 1.8334256982073326e-07
+    }
+  },
+  "selected_alpha_b": 10.0,
+  "selected_alpha_c": 10.0,
+  "lab_run_id": "fp06-20260923T173537Z-1fa316c7",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T17:35:37.919799+00:00"
+}

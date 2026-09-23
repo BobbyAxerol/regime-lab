@@ -14,6 +14,9 @@
 - FP-05: run fp05-20260923T163839Z-79516650 (evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/; an earlier run fp05-20260923T163548Z-9e78d592 is preserved, superseded only by the FP05-G-ACTION plumbing-proof strengthening below)
 - FP-05 overall: PASS
 - FP-05 gates: FP05-G-SPLIT=PASS / FP05-G-MODEL=PASS / FP05-G-SCORE=PASS / FP05-G-SUPPORT=PASS / FP05-G-ACTION=PASS / FP05-G-REPORT=PASS
+- FP-06: run fp06-20260923T173537Z-1fa316c7 (evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/)
+- FP-06 overall: PASS
+- FP-06 gates: FP06-G-ABLATION=PASS / FP06-G-CAUSAL=PASS / FP06-G-SUPPORT=PASS / FP06-G-FREEZE=PASS / FP06-G-CLAIM=PASS
 
 ## Phase state
 | Phase | Technical | Research | Owner | Evidence |
@@ -23,8 +26,42 @@
 | FP-03 | PASS | NOT_ASSESSED | PENDING (auto-advance pre-approved, R-18 2026-09-22) | evidence/forward_persistence_fp_v1/fp03-20260922T211626Z-6bf07360/ |
 | FP-04 | PASS | NOT_ASSESSED | PENDING (auto-advance pre-approved, R-18 2026-09-22) | evidence/forward_persistence_fp_v1/fp04-20260923T145511Z-34cb31b6/ |
 | FP-05 | PASS | NOT_ASSESSED | PENDING (open-ended auto-advance, R-18 2026-09-23) | evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/ |
+| FP-06 | PASS | NOT_ASSESSED | PENDING (open-ended auto-advance, R-18 2026-09-23) | evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/ |
 
 ## Latest run
+FP-06 PASS: Selector C (Selector B plus a frozen context family, guide section 9) built on the
+IDENTICAL 12-origin/192-record archive B used, through the LITERAL SAME
+`fp.selector_b.walk_forward_oof` loop (now generalised to accept a `feature_matrix_fn`, the ONLY
+change made to Selector B's own code) -- guide 9.1's "candidate pool, target, inner split policy,
+regularization-selection rule stay identical" enforced structurally, not by convention.
+
+**Two frozen context features** (guide 9.3, JM/M0 explicitly NOT used -- LAB-08's own measured
+1.64% JM/M0 calibration-vintage support was too thin to build on, a disclosed choice, exposure still
+recorded at zero): `ctx_direction_efficiency` (signed path efficiency) and `ctx_volatility_ratio`
+(short/long realized-vol ratio), both computed from the same causal IS frame B already loads.
+**Two registered interaction terms** (guide 9.2: `norm_AP × ctx_direction_efficiency`,
+`norm_coeff × ctx_volatility_ratio` — 2 of 18 possible pairs, never the full Cartesian product).
+
+**Guide 9.2's own counterexample, proven not just avoided**: a designed fixture (two candidates
+differing only in `norm_AP`, a true label with a context-dependent crossover — high-AP wins when
+trending, low-AP wins when choppy) shows a purely additive model (candidate + context as separate
+columns, no product term) predicts the SAME relative candidate ranking regardless of context — it
+structurally cannot represent a crossover — while Selector C's interaction architecture correctly
+FLIPS the predicted ranking between the two contexts (`FP06-T04`, both directions tested and passed).
+
+**Real held-out demo, same 16 candidates FP-05 scored**: alpha=10.0 selected for both B and C
+independently (same value). All 16 candidates stayed **in-distribution** (0 OOD fallback,
+16/16 context-conditioned). **mean(C − B) = 4.79e-07** — a tiny, real, honest adjustment; C's
+predictions remained far below the utility floor on every candidate, same as B's. Guide 9.2's own
+permitted outcome: *"C không tạo khác biệt trên real data vẫn là kết quả hợp lệ nếu execution
+đúng"* (C creating no difference on real data is still a valid result if execution is correct).
+
+**Cost: zero new engine calls of any kind** — no new search trials, no new deployment calls (FP-06's
+own exit gate does not require re-proving admission/deployment wiring; FP05-G-ACTION already did
+that generically). Context features come from 12 real disk reads of already-real-loaded market
+frames. Full lab suite: **1403 passed, 0 failed**.
+
+### FP-05 (superseded as "latest" by FP-06 above, unchanged)
 FP-05 PASS: Selector B (forward-persistent selection, no regime) built and demonstrated on FP-04's
 full 12-origin/192-record archive. True chronological walk-forward OOF (guide 8.3/8.4):
 `min_train_origins=4` on 12 origins gives exactly **8 validation origins**, guide 8.7's own stated
@@ -101,13 +138,14 @@ completion: ~16 hours**, of which ~5 were wasted to the session-death incident.
 - **`FP05-G-ACTION` passed vacuously the first time it ran for real**: Selector B's own real, honest `COMMON_FLAT_FALLBACK` verdict meant the gate's own ADMIT+real-fills check was never exercised by real data, only by a synthetic test. Fixed by adding an unconditional "plumbing proof" (a second real deployment, independent of B's own verdict) and requiring it in the verifier -- the same "gate passed because nothing happened" defect class this lab's history (LAB-06/07) keeps finding in itself, caught here before it could ship as a silent gap.
 
 ## Blockers
-- None recorded for FP-05 at this evidence.
+- None recorded for FP-06 at this evidence.
 
 ## Budget
 - FP-02 charged 0 to the shared TE ledger; ~16 small real engine calls, all on a 10-day/1m real window.
 - FP-03 charged 0 to the shared TE ledger; 768 real search-trial engine calls (256 × 3 origins) plus forward-comparison calls, all real A-SC/BTCUSDT windows.
 - FP-04 charged 0 to the shared TE ledger; 3072 real search-trial engine calls (256 × 12 origins) plus 384 real forward-evaluation engine calls, all real A-SC/BTCUSDT windows. Peak RSS never exceeded 2289.6 MiB against the 4096 MiB budget across any of the 12 origins.
 - FP-05 charged 0 to the shared TE ledger; 0 NEW search-trial engine calls (pure cache-hit reuse of FP-04's own calls) plus 1 new real small (10-day) deployment call for the plumbing proof.
+- FP-06 charged 0 to the shared TE ledger; **0 new engine calls of any kind** (no search trials, no deployment calls) -- context features came from 12 real disk reads of already-loaded market frames, reusing FP-05's own feature cache entirely.
 
 ## FP-04 scope decision (frozen before any FP-04 engine call, disclosed here per CLAUDE.md rule 4)
 Guide 3.2's research-default target for the eventual outer/model study is ~26-39 origins ("blocks 28
@@ -135,20 +173,22 @@ study is operating at the guide's own minimum, not with headroom. FP-06/07 inher
 constraint since they reuse this same archive (guide 18's "Reuse toàn bộ B pipeline").
 
 ## Next authorized action
-- FP-05 is COMPLETE and committed. Per the owner's 2026-09-23 decision (recorded in
+- FP-06 is COMPLETE and committed. Per the owner's 2026-09-23 open-ended decision (recorded in
   `evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`, decision_id `dec-f08d01887b889afb`),
-  FP-06 onward may proceed WITHOUT an intermediate approval message between phases -- the owner will
-  review all evidence together once enough phases have run. This does NOT waive per-phase discipline
-  (build/test/real-run/independent-verify/report/commit, guide R25) or resource-safety disclosure
-  (any large new real-compute cost, especially FP-07's locked A/B/C study, gets measured and
-  disclosed BEFORE running, same as FP-04's scope decision above).
-- FP-06 (guide section 9, Selector C) is next: MUST reuse fp.selector_b's feature/model/OOF machinery
-  wholesale (guide 18.1: "Reuse toàn bộ B pipeline"), adding ONLY a frozen context family on top --
-  never a second candidate pool, target, or base-feature schema.
+  FP-07 may proceed WITHOUT an intermediate approval message. This does NOT waive per-phase
+  discipline (build/test/real-run/independent-verify/report/commit, guide R25) or resource-safety
+  disclosure.
+- **FP-07 (the locked A/B/C study) is next and is the FIRST phase that actually touches the research
+  question** -- arms A (stock), B (fp.selector_b), C (fp.selector_c) on a common fixed calendar,
+  guide 1.2/section 19-ish. Its real compute cost is UNKNOWN and UNMEASURED as of this writing --
+  MUST be measured and disclosed BEFORE running anything at scale, the same discipline FP-04's
+  12-origin scope decision already demonstrated (that decision alone saved ~15-20 hours of
+  undisclosed engine time versus the guide's raw default).
 
 ## Khong duoc lam
 - No bulk search beyond the frozen B_search=256 without a new search_policy.json revision.
 - No economics change without a new upgrade record.
 - No silent expansion of the FP-04 origin grid beyond the frozen 12 without disclosing it as a policy revision first.
-- No claim that Selector B (or C) beats or loses to the stock selector -- FP-05/06 build and demonstrate only; FP-07 compares, and only with FP-08's replication is that comparison trustworthy.
+- No claim that Selector B or C beats or loses to the stock selector -- FP-05/06 build and demonstrate only; FP-07 compares, and only with FP-08's replication is that comparison trustworthy.
 - No large new real-compute commitment (a new search, a new multi-arm study) without measuring and disclosing the cost first, per the owner's explicit 2026-09-23 instruction reaffirming this even under the open-ended auto-advance.
+- No FP-07 claim of "regime/context works" or "doesn't work" without FP-08 replication (guide's own repeated standard throughout this lab's history: one unreplicated result is not evidence).

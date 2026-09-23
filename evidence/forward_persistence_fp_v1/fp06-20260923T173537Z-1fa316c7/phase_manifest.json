@@ -1,0 +1,58 @@
+{
+  "schema": "regime_lab.fp06_phase_manifest.v1",
+  "lab_run_id": "fp06-20260923T173537Z-1fa316c7",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-06",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-23T17:35:32.652239+00:00",
+  "required_gates": [
+    "FP06-G-ABLATION",
+    "FP06-G-CAUSAL",
+    "FP06-G-SUPPORT",
+    "FP06-G-FREEZE",
+    "FP06-G-CLAIM"
+  ],
+  "artifacts": [
+    {
+      "path": "context_policy.json",
+      "sha256": "d2120fc83ef06cd92c35513017a8aca12dc74c37222972d59d1d6f83fea8d8ef"
+    },
+    {
+      "path": "oof_diagnostics_c.json",
+      "sha256": "0e866308cf2430077ebc38c0be38613b4e5135157e88ff98a13b60b71e6864a7"
+    },
+    {
+      "path": "candidate_scores_c.json",
+      "sha256": "af9277eb84d8715dd45a8f84b7389ff677f3641aba5906f0b250cdfba08e3a5b"
+    },
+    {
+      "path": "ablation.json",
+      "sha256": "11aaa696379c1ad350b21fc6e95e38d8b29c7278c12ccf25fc4c117880087d84"
+    },
+    {
+      "path": "exposure.json",
+      "sha256": "d88444d5f2f3e8ba9fefccd60b04a45baf3524b7dea001b84866585da3ac570d"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "a733a9e7dace211da62af366d856f6fdf75380e63c1a7b08126a546e495faf1f"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "bfaf476a14ad2369436e2ef03e147de1ae25503ce198b0cd66dc8fa40ba03f32"
+    },
+    {
+      "path": "report.md",
+      "sha256": "6acb481f2d0471d88dd8d17238c13c67796650b6c6b168aff4c811affda33f8e"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "123d92562df0301529fc02b6482881b7d6d9916a69abf9878cc0aa24a8972819"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "1a1a88d005fa843eebdda030baa1c5cb649cc118bfc0171233b09d81dec188fd"
+    }
+  ],
+  "written_at_utc": "2026-09-23T17:35:37.932015+00:00"
+}
