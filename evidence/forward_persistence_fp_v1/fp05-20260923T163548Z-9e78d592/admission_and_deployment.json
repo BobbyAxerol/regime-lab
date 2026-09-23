@@ -1,0 +1,34 @@
+{
+  "schema": "regime_lab.fp05_admission_and_deployment.v1",
+  "selector_b_decision": "COMMON_FLAT_FALLBACK",
+  "reason": "no candidate cleared both the utility floor and the support floor",
+  "selected_params": null,
+  "admission_lineage": {
+    "0": {
+      "fold": "0",
+      "decision": "COMMON_FLAT_FALLBACK",
+      "reason": "no candidate cleared both the utility floor and the support floor",
+      "supplied_digest": null,
+      "consumed": null,
+      "consumed_digest": null,
+      "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+    }
+  },
+  "deployment_result": null,
+  "stock_comparator": {
+    "record_id": "2023-10-01:R00",
+    "params": {
+      "coeff": 3,
+      "AP": 56,
+      "alpha.condition_threshold": 80,
+      "novolumedata": false,
+      "src_col": "close"
+    },
+    "is_mean_daily_return": -3.892231528041958e-05,
+    "actual_forward_label": 3.959825617615352e-05
+  },
+  "selected_vs_stock_same_candidate": false,
+  "lab_run_id": "fp05-20260923T163548Z-9e78d592",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T16:35:48.713115+00:00"
+}

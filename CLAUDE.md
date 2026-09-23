@@ -204,7 +204,52 @@ to catch); fixed to keep `origin_cutoff` as the plain join key. The incremental-
 also proven on the real grid, not just synthetic tests: a later re-run (to add an aggregate-summary
 section to the report) hit 0 fresh engine calls and reused all 12 origins verbatim, finishing in
 14m26s instead of ~11h. Full lab suite after FP-04: **1340 passed, 0 failed**. R-18 approval for
-FP-01 -> FP-02 -> FP-03 -> FP-04 (batch) recorded; FP-05 has not been started.
+FP-01 -> FP-02 -> FP-03 -> FP-04 (batch) recorded.
+
+**FP-05 (Implement B_FP — Selector B, forward-persistent selection, no regime) is complete: all
+six gates PASS** (`FP05-G-SPLIT`/`MODEL`/`SCORE`/`SUPPORT`/`ACTION`/`REPORT`,
+`evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/`). Built on FP-04's full
+12-origin/192-record archive with ZERO new search-trial engine calls (feature building is 192 real
+cache-HIT re-reads of FP-04's own `evaluate_candidate` calls). True chronological walk-forward OOF
+(guide 8.3/8.4, reusing `fp.forward_ledger.training_view`/`fp.chronology.chronological_split`
+verbatim): `min_train_origins=4` on 12 origins gives exactly **8 validation origins** — guide 8.7's
+own stated OOF-diagnostics floor, hit by deliberate design, not coincidence. A closed-form weighted
+ridge regression (implemented directly in numpy — no sklearn is installed in the lab venv, and guide
+8.3 frames this as a design to implement and verify, not a library call to trust) selected
+**alpha=10.0** from `[0.1, 1.0, 10.0]` by aggregate OOF MSE (1.745e-07, narrowly beating 1.0's
+1.750e-07). Decay-risk branch **MEAN_DECAY** (`TAIL_ESTIMATE_UNSUPPORTED`): 12 fit origins clears
+guide 8.7's model-fit floor (>=12) but 8 OOF origins is below its tail-quantile floor (>=20) — the
+guide's own registered fallback, not an improvisation.
+
+**Real, honest held-out demo**: scored all 16 regions of origin 2023-10-01 with a model trained ONLY
+on the 11 earlier origins. **Zero cleared the predicted-utility floor** (6.4e-05/day, reused verbatim
+from `configs/minimum_economic_effect.json` since guide 8.6/FP08.5's "OOS utility/risk safeguard"
+names no concrete number anywhere in the guide text) — Selector B's real output was
+**COMMON_FLAT_FALLBACK**, not cherry-picked; the eligibility gate did exactly what it should.
+
+**A real gap self-caught before shipping**: because B declined everything, its own ADMIT+real-
+deployment path was never exercised by real data — only by a synthetic gate test, the exact "gate
+passed because nothing happened" shape LAB-06/07's history keeps finding in itself. Fixed by adding
+an unconditional "plumbing proof" (a second real small deployment, the stock comparator's real
+params, independent of B's own verdict, required by the verifier every run): real result **19
+fills, 10 entries** on a real 10-day window (2023-11-01, inside `development`, never touching
+`outer_evaluation`). One real bug found before any engine call: `FEATURE_NAMES` declared a feature
+key (`norm_threshold`) that `normalized_params()` never actually produces (the real key is
+`norm_alpha.condition_threshold`) — would have raised on every real call. Also proved, not just
+declared: guide 8.4's dormant-risk regression — a naive time-sorted LOO
+(`fp.chronology.naive_time_sorted_loo_train`, FP-01's own "before" control) really does leak a later
+origin's record on FP-05's real archive shape, and `training_view` correctly excludes it. Full lab
+suite after FP-05: **1375 passed, 0 failed**. Research status NOT_ASSESSED throughout — FP-05 builds
+and demonstrates Selector B; it makes no claim B beats the stock selector, and neither will FP-06
+(Selector C); that comparison is FP-07's job, trustworthy only once FP-08 replicates it.
+
+**Owner approval, 2026-09-23**: after FP-05's report, the owner gave an open-ended instruction to
+proceed through FP-06 onward without an intermediate approval message between phases, reviewing all
+evidence together once enough phases have run (`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`,
+decision_id `dec-f08d01887b889afb`) — explicitly NOT a waiver of per-phase build/test/report/commit
+discipline (guide R25) or of measuring and disclosing any large new real-compute cost before running
+it (the same discipline FP-04's 12-origin scope decision already demonstrated), which the owner's
+instruction reaffirmed applies even under this open-ended advance.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 

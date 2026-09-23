@@ -1,0 +1,16 @@
+{
+  "schema": "regime_lab.fp05_resource_budget.v1",
+  "lab_run_id": "fp05-20260923T163839Z-79516650",
+  "fp05_wall_seconds_charged_to_shared_ledger": 0,
+  "feature_rows_reused_from_cache": true,
+  "engine_calls_feature_building": 0,
+  "engine_calls_demo_deployment": 0,
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 4,
+    "previous_soft_gib": null
+  },
+  "note": "FP-05 spends no NEW real search-trial engine calls -- feature building is real cache-hit re-reads of FP-04's own evaluate_candidate calls, plus one small real demo deployment",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T16:38:45.908085+00:00"
+}
