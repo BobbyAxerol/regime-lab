@@ -17,6 +17,9 @@
 - FP-06: run fp06-20260923T173537Z-1fa316c7 (evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/)
 - FP-06 overall: PASS
 - FP-06 gates: FP06-G-ABLATION=PASS / FP06-G-CAUSAL=PASS / FP06-G-SUPPORT=PASS / FP06-G-FREEZE=PASS / FP06-G-CLAIM=PASS
+- FP-07: run fp07-20260923T190207Z-5a401d3b (evidence/forward_persistence_fp_v1/fp07-20260923T190207Z-5a401d3b/)
+- FP-07 overall: PASS
+- FP-07 gates: FP07-G-POOL=PASS / FP07-G-EXEC=PASS / FP07-G-ACCOUNT=PASS / FP07-G-DECAY=PASS / FP07-G-COST=PASS / FP07-G-SCOPE=PASS
 
 ## Phase state
 | Phase | Technical | Research | Owner | Evidence |
@@ -27,8 +30,79 @@
 | FP-04 | PASS | NOT_ASSESSED | PENDING (auto-advance pre-approved, R-18 2026-09-22) | evidence/forward_persistence_fp_v1/fp04-20260923T145511Z-34cb31b6/ |
 | FP-05 | PASS | NOT_ASSESSED | PENDING (open-ended auto-advance, R-18 2026-09-23) | evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/ |
 | FP-06 | PASS | NOT_ASSESSED | PENDING (open-ended auto-advance, R-18 2026-09-23) | evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/ |
+| FP-07 | PASS | NOT_ASSESSED (guide forbids a verdict from one cell) | PENDING (open-ended auto-advance, R-18 2026-09-23; separate exception decision dec-9cc3ec3e712cf61b for the 7 GiB budget) | evidence/forward_persistence_fp_v1/fp07-20260923T190207Z-5a401d3b/ |
 
 ## Latest run
+FP-07 PASS: the locked A/B/C study (guide section 19), the FIRST phase that actually touches the
+research question. Real 3-arm continuous-account run, A-SC/BTCUSDT, **1,576,800 real one-minute
+bars per arm** (2021-01-01..2023-12-31, the full registered `development` role, never touching
+`outer_evaluation`). All three arms select from the SAME shared per-origin pool at all 12 of
+FP-04's frozen origins (FP07-G-POOL). Arm A = the engine's own installed `is_only_robust` pick,
+already cached from FP-04, admitted at all 12/12 origins. Arm B/C = walk-forward selection through
+`fp.selector_b`/`fp.selector_c` verbatim (frozen alpha=10.0 for both, read from FP-05/FP-06's own
+committed evidence, never re-selected here) -- **3/12 real admissions each**: the first 4 origins
+(2021-01-01..2021-10-01) have no new admission at all (MIN_TRAIN_ORIGINS=4's genuine cold start),
+and 5 of the remaining 8 had no candidate clear the utility/support floor. A no-admission origin
+means the account keeps whatever version is already active (or stays FLAT_UNTIL_READY
+pre-first-admission) -- never a value silently borrowed from Arm A, confirmed against the engine's
+own `_one_sweep` "A02" flat-until-ready contract.
+
+**A real capacity finding, measured and disclosed before use.** A first real attempt at the full
+span hit a genuine `MemoryError` (RLIMIT_AS-caught) at `bar_index=1,360,272` against the registered
+4 GiB working-memory cap -- a single-call bar count no prior phase in this lab has run. Four real
+probe runs (100k/400k/800k/1.2M bars, single-activation schedule) measured linear RSS growth
+(~1.77 MiB per 1000 bars: 454/979/1687 MiB, then a MemoryError at 1.2M bars with RSS at 2403 MiB),
+showing the failure is a virtual-address-space ceiling, not an actual host RAM shortage (projected
+~3.1 GiB real RSS for the full span against a then-measured ~4.1 GiB available). Presented to the
+owner via AskUserQuestion with this real data; a disclosed, scoped, ONE-TIME exception to 7 GiB was
+approved (decision `dec-9cc3ec3e712cf61b`, `owner_decisions.jsonl`) for FP-07's own three
+`run_deployment` calls only -- the registered 4 GiB budget is unchanged for every other phase/call
+in this lab. Measured peak RSS on the successful run: **3357.7 MiB**, comfortably under the 7 GiB
+cap. Total measured wall time: **509.41s** (~8.5 min) across all 3 arms (Arm A 25.02s -- a
+legitimate, content-verified cache HIT reusing a real, complete computation from the earlier failed
+attempt, which had finished Arm A before crashing on Arm B; Arm B 241.55s; Arm C 236.22s, both real
+cache MISSes).
+
+**Honest, load-bearing finding: C_FP_CONTEXT == B_FP_PERSISTENCE in this run.** At all 3 origins
+where B admitted a selection (2021-04-01, 2021-10-01, 2022-01-01), C's own utility-maximizing
+candidate was out-of-distribution relative to its training window's context range, so C fell back
+to B's exact prediction every single time (`source=FALLBACK_TO_B`, never `CONTEXT_CONDITIONED`,
+0/12 origins). C's params are IDENTICAL to B's at every real admission -- the two accounts are
+byte-for-byte the same (3312 fills each, identical D1 at every origin). This is guide 20/FP08.5's
+own named outcome category verbatim: *"C≈B vì fallback → Context mechanism chưa được exercise đủ"*
+(C looks like B because of fallback -> the context mechanism was not exercised enough). The
+**PRIMARY contrast (C-B) is therefore DEGENERATE BY CONSTRUCTION**: estimate exactly 0.0,
+ci95=[0.0, 0.0], p_one_sided=1.0 over 1095 common days -- reported as a degenerate artifact of this
+run, explicitly NOT as a measured absence of a context effect.
+
+**Secondary/diagnostic contrasts** (guide 19 draws no verdict from these; FP08.5 owns decision
+rules): B_FP_PERSISTENCE − A_STOCK_CAL and C_FP_CONTEXT − A_STOCK_CAL are identical for the same
+reason (C≡B) -- both **estimate = −0.0001889748502425521/day**, 95% CI
+**[−0.0003208041703683213, −0.0000387272697232]** (block bootstrap, 28-day blocks, 39
+non-overlapping blocks, seed 2026091201), i.e. the forward-persistent selector UNDERPERFORMED the
+stock installed selector over this single cell/window, with a CI entirely below zero. This is ONE
+unreplicated cell with no placebo control of its own -- guide 19/FP07-G-SCOPE explicitly forbids
+treating this as a verdict; FP-08's replication is required before any claim.
+
+**D1 table** (guide 8.5, per-selection IS-vs-realized-forward-label lookup, never derived by slicing
+the deployment account): only 7 of 36 (arm, origin) rows carry a real value -- the rest are null
+with a disclosed reason (a fallback origin has no forward-labelled record; Arm A's stock pick
+matched a region-archive medoid at only 1/12 origins, measured across all 12, not assumed). Where
+present: A_STOCK_CAL mean D1=−0.000413 (1 selection), B_FP_PERSISTENCE and C_FP_CONTEXT both
+mean D1=+0.000176 (3 selections each, identical by the C≡B finding above).
+
+**A cache-hit correctness check, done rather than assumed**: Arm A's "HIT" was independently
+content-verified (not just trusted) -- the cached payload's equity array has exactly 1,576,800
+rows, 1,460 fills, and a 12-entry schedule, all matching the report -- confirming it is a real,
+complete result, not a stale/partial entry from the earlier crashed attempt.
+
+**Independently re-verified with fresh test evidence** after the orchestrator's own internal check
+ran against a stale pre-flight `junit.xml` missing 2 last-minute budget-exception-disclosure tests
+(added after that pytest run) -- re-verified via `scripts/verify_fp07.py` against 182/182
+`tests/fp_corrective` passing, never trusting the runner's own PASS/FAIL. Full lab suite:
+**1437 passed, 0 failed**.
+
+### FP-06 (superseded as "latest" by FP-07 above, unchanged)
 FP-06 PASS: Selector C (Selector B plus a frozen context family, guide section 9) built on the
 IDENTICAL 12-origin/192-record archive B used, through the LITERAL SAME
 `fp.selector_b.walk_forward_oof` loop (now generalised to accept a `feature_matrix_fn`, the ONLY
@@ -118,12 +192,15 @@ completion: ~16 hours**, of which ~5 were wasted to the session-death incident.
 - The incremental-rebuild design (FP04-T07/T08) is now proven on the REAL 12-origin grid, not just synthetic tests: a full re-run of `run_fp04.py` after the report enhancement hit 0 fresh engine calls and reused all 12 origins verbatim (resource_budget.json), completing in 14m26s instead of ~11h.
 - A naive time-sorted LOO (`fp.chronology.naive_time_sorted_loo_train`, FP-01's own "before" control) really does leak a later origin's record into an earlier origin's training set on FP-05's real archive shape -- `fp.forward_ledger.training_view` (the guard `walk_forward_oof` uses) correctly excludes it. Guide 8.4's dormant-risk regression, proved, not just declared.
 - 12 fit origins / 8 OOF origins is exactly guide 8.7's own OOF-diagnostics floor -- confirms `MIN_TRAIN_ORIGINS=4` was the intended design point for a 12-origin archive, not an arbitrary choice.
+- A single `run_deployment` call over ~1.58M one-minute bars needs a virtual-address-space ceiling well above its own actual resident-memory need (measured: ~3.1 GiB projected RSS vs a genuine MemoryError below a 4 GiB RLIMIT_AS cap) -- the constraint is fragmentation/transient-allocation headroom in the installed quantbt engine, not a host RAM shortage. This is now a MEASURED fact for future phases (FP-08's own continuous accounts will hit the same shape).
+- At this cell/window, Selector C's context mechanism was available (16 candidates scored, 10-13 eligible) but its OWN utility-maximizing pick was out-of-distribution relative to C's training window's context range at every one of B's 3 real admissions -- context conditioning never actually fired in a real walk-forward setting, distinct from FP-06's held-out demo (0/16 OOD there). Whether this is specific to A-SC/BTCUSDT's narrow early-history context range or a more general early-cold-start pattern is unknown -- FP-08's second cell will show whether it recurs.
 
 ## Dieu chua biet
 - Sampler-state resume (Optuna) is unmeasured -- no search loop needed it yet.
-- Whether B_search=256 (or a lower committed depth) generalizes to alphas/symbols beyond A-SC/BTCUSDT -- FP-03/04/05 are a single-cell pilot, matching this lab's established A-SC-first pilot order; full-matrix replication is FP-08's job (guide "Replication scope"), not before.
-- Whether Selector B (or C, once built) actually beats the stock selector -- FP-05 makes NO such claim (research status NOT_ASSESSED); that is FP-07's job (the locked A/B/C comparison), and even FP-07 alone is not enough to trust a result without FP-08's replication.
-- Whether the demo's COMMON_FLAT_FALLBACK outcome is representative or specific to this one held-out origin/alpha/symbol -- only one held-out fold was used for the demo; FP-07's locked study evaluates every origin/decision point, not just one.
+- Whether B_search=256 (or a lower committed depth) generalizes to alphas/symbols beyond A-SC/BTCUSDT -- FP-03/04/05/06/07 are a single-cell pilot, matching this lab's established A-SC-first pilot order; full-matrix replication is FP-08's job (guide "Replication scope"), not before.
+- Whether Selector B or C actually beats the stock selector -- FP-07 measured ONE cell's real numbers (B/C underperformed A by ~0.000189/day, CI entirely below zero) but guide 19/FP07-G-SCOPE explicitly forbids treating one unreplicated cell as a verdict; that needs FP-08.
+- Whether C≡B (context mechanism never firing) is a property of this one cell/window or a more general pattern -- FP-08's second cell is the first real evidence either way.
+- Whether B/C's measured underperformance vs A in this cell reflects a real cost of the walk-forward cold-start (9/12 origins with no new admission) or something else -- FP-07 draws no verdict; FP-08's own inference machinery (guide 20 FP08.3) is where this gets tested properly.
 
 ## Corrections made after FP-03 was committed (2026-09-22, before FP-04 build)
 - **A real regression, self-caught before it could propagate**: `checkpoint_search.run_origin_search` had silently stopped measuring/returning `wall_seconds_measured`/`instrumentation` (the `Stage`/timer wrapping was missing from the function actually on disk). FP-03's own committed evidence still shows real numbers only because all 3 of its origins happened to hit a stale `.cache/fp03_search_raw/*.json` file written by an EARLIER, still-working version of the function -- a fresh (non-cached) call would have silently written `None`. Found while auditing FP-03 before reusing `run_origin_search` for FP-04's 12 brand-new (never-cached) origins. Fixed with the `Stage` wrapper restored + a new regression test (`test_fp03_run_origin_search_measures_real_wall_and_instrumentation`, a real small 2-trial engine call) that would have caught this the first time. FP-03's own published numbers are unaffected (they came from the real measured run); only the CODE's reproducibility was at risk.
@@ -137,8 +214,14 @@ completion: ~16 hours**, of which ~5 were wasted to the session-death incident.
 - **The first draft of the demo deployment window used `2024-01-01`**, which falls inside the registered `outer_evaluation` data role that must stay untouched per this lab's standing discipline -- moved to `2023-11-01` (inside `development`, strictly after every origin's own forward window) before any real deployment call was made.
 - **`FP05-G-ACTION` passed vacuously the first time it ran for real**: Selector B's own real, honest `COMMON_FLAT_FALLBACK` verdict meant the gate's own ADMIT+real-fills check was never exercised by real data, only by a synthetic test. Fixed by adding an unconditional "plumbing proof" (a second real deployment, independent of B's own verdict) and requiring it in the verifier -- the same "gate passed because nothing happened" defect class this lab's history (LAB-06/07) keeps finding in itself, caught here before it could ship as a silent gap.
 
+## Corrections made during FP-07's own build (2026-09-23)
+- **A frame-tuple unpacking bug**: `load_real_bars` returns `(frame, partitions)`; the first draft of `run_fp07.py` used the return value directly as the frame, crashing immediately with `TypeError`. Caught on the very first launch, before any real engine call.
+- **A genuine capacity gap, not a bug**: the registered 4 GiB working-memory budget cannot fit a single `run_deployment` call over the full ~1.58M-bar span (real `MemoryError` at bar 1,360,272). Root-caused with 4 real probe runs rather than guessed at; resolved via a disclosed, owner-approved, scoped exception (see "Latest run" above), not a silent workaround and not a violation of the guide's "one continuous account, no stitching" design.
+- **A report-wording bug found during real-number review, not by being asked**: `render_report`'s "Technical" conclusion cited "the 4 GiB budget" after the exception raised the APPLIED cap to 7 GiB -- misleading next to the exception disclosure two paragraphs above it. Fixed to cite the actual applied cap. Re-rendered from the already-computed artifacts (0 engine calls re-run), re-verified (182/182 fresh test evidence), gate_receipt.json updated to reflect the corrected, independently re-verified state.
+- **The C≡B degenerate pattern was present in the raw artifacts but not prominently disclosed in the first rendering** of report.md -- added an explicit `DEGENERATE` callout naming guide 20/FP08.5's own outcome category, matching the LAB-08 "Arm E was a copy of Arm D" disclosure precedent, so a reader cannot mistake the primary contrast's exact-zero estimate for a measured null effect.
+
 ## Blockers
-- None recorded for FP-06 at this evidence.
+- None recorded for FP-07 at this evidence. FP-07 itself concludes nothing (guide 19/FP07-G-SCOPE by design) -- FP-08 is required before any claim.
 
 ## Budget
 - FP-02 charged 0 to the shared TE ledger; ~16 small real engine calls, all on a 10-day/1m real window.
@@ -146,6 +229,7 @@ completion: ~16 hours**, of which ~5 were wasted to the session-death incident.
 - FP-04 charged 0 to the shared TE ledger; 3072 real search-trial engine calls (256 × 12 origins) plus 384 real forward-evaluation engine calls, all real A-SC/BTCUSDT windows. Peak RSS never exceeded 2289.6 MiB against the 4096 MiB budget across any of the 12 origins.
 - FP-05 charged 0 to the shared TE ledger; 0 NEW search-trial engine calls (pure cache-hit reuse of FP-04's own calls) plus 1 new real small (10-day) deployment call for the plumbing proof.
 - FP-06 charged 0 to the shared TE ledger; **0 new engine calls of any kind** (no search trials, no deployment calls) -- context features came from 12 real disk reads of already-loaded market frames, reusing FP-05's own feature cache entirely.
+- FP-07 charged 0 to the shared TE ledger; 3 real `run_deployment` calls (1 per arm, 1,576,800 bars each; Arm A a content-verified real cache HIT reusing a prior attempt's completed work, B/C real cache MISSes), plus 4 small real memory-probe calls (100k/400k/800k/1.2M bars) used only for the capacity diagnostic. Total measured wall time 509.41s for the successful run; peak RSS 3357.7 MiB against the disclosed, owner-approved 7 GiB exception (registered budget stays 4 GiB everywhere else in this lab).
 
 ## FP-04 scope decision (frozen before any FP-04 engine call, disclosed here per CLAUDE.md rule 4)
 Guide 3.2's research-default target for the eventual outer/model study is ~26-39 origins ("blocks 28
@@ -173,22 +257,30 @@ study is operating at the guide's own minimum, not with headroom. FP-06/07 inher
 constraint since they reuse this same archive (guide 18's "Reuse toàn bộ B pipeline").
 
 ## Next authorized action
-- FP-06 is COMPLETE and committed. Per the owner's 2026-09-23 open-ended decision (recorded in
+- FP-07 is COMPLETE and committed. Per the owner's 2026-09-23 open-ended decision (recorded in
   `evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`, decision_id `dec-f08d01887b889afb`),
-  FP-07 may proceed WITHOUT an intermediate approval message. This does NOT waive per-phase
+  FP-08 may proceed WITHOUT an intermediate approval message. This does NOT waive per-phase
   discipline (build/test/real-run/independent-verify/report/commit, guide R25) or resource-safety
-  disclosure.
-- **FP-07 (the locked A/B/C study) is next and is the FIRST phase that actually touches the research
-  question** -- arms A (stock), B (fp.selector_b), C (fp.selector_c) on a common fixed calendar,
-  guide 1.2/section 19-ish. Its real compute cost is UNKNOWN and UNMEASURED as of this writing --
-  MUST be measured and disclosed BEFORE running anything at scale, the same discipline FP-04's
-  12-origin scope decision already demonstrated (that decision alone saved ~15-20 hours of
-  undisclosed engine time versus the guide's raw default).
+  disclosure -- FP-08's own D2 continuations and a second cell are further real compute that must be
+  measured and disclosed before running, the same discipline FP-07's memory-cap exception just
+  demonstrated.
+- **FP-08 (replication, D2 age-decline continuations, and the family-level inference guide 20
+  specifies) is next.** FP-07 alone reaches no verdict by design (guide 19/FP07-G-SCOPE) -- it is
+  ONE cell, ONE replication, with C≡B degenerate in this specific run and B/C measured to
+  underperform A with a CI below zero, but none of that may be cited as a conclusion until FP-08
+  adds a second cell (chosen by a pre-registered rule, never by which cell's PnL looks better) and
+  runs the guide 20 FP08.3 statistics (B-A/C-B utility+decay, OOS non-inferiority,
+  risk/exposure/turnover changes, D2 age decline, concentration by period/cell) -- guide states
+  engine calls for statistics/bootstraps must be zero, reusing FP-07's own machinery.
+- FP-07's real capacity finding (a single ~1.58M-bar continuous account needs ~5-6 GiB of virtual
+  address space, ~3.1 GiB actual RSS) applies directly to FP-08's own continuous accounts -- budget
+  for the SAME disclosed exception pattern, not a fresh surprise.
 
 ## Khong duoc lam
 - No bulk search beyond the frozen B_search=256 without a new search_policy.json revision.
 - No economics change without a new upgrade record.
 - No silent expansion of the FP-04 origin grid beyond the frozen 12 without disclosing it as a policy revision first.
-- No claim that Selector B or C beats or loses to the stock selector -- FP-05/06 build and demonstrate only; FP-07 compares, and only with FP-08's replication is that comparison trustworthy.
-- No large new real-compute commitment (a new search, a new multi-arm study) without measuring and disclosing the cost first, per the owner's explicit 2026-09-23 instruction reaffirming this even under the open-ended auto-advance.
-- No FP-07 claim of "regime/context works" or "doesn't work" without FP-08 replication (guide's own repeated standard throughout this lab's history: one unreplicated result is not evidence).
+- No claim that Selector B or C beats or loses to the stock selector -- FP-07 measured one cell's raw numbers only; guide 19/FP07-G-SCOPE forbids a verdict from it, and only FP-08's replication can support one.
+- No claim from FP-07's C≡B finding that context conditioning "doesn't work" in general -- it is a property of this one cell/window's early-history context range, disclosed as DEGENERATE, not generalized.
+- No large new real-compute commitment (a new search, a new multi-arm study, FP-08's D2 continuations) without measuring and disclosing the cost first, per the owner's explicit 2026-09-23 instruction reaffirming this even under the open-ended auto-advance -- and no working-memory budget exception beyond the registered 4 GiB without its own disclosed decision record (the dec-9cc3ec3e712cf61b pattern), scoped to the specific calls that need it.
+- No FP-08 claim of "regime/context works" or "doesn't work" without completing guide 20's full inference protocol (guide's own repeated standard throughout this lab's history: one unreplicated result is not evidence, and neither is a second cell without the family-level statistics).

@@ -279,9 +279,77 @@ permitted outcome: *"C không tạo khác biệt trên real data vẫn là kết
 gate does not require re-proving admission/deployment wiring; FP05-G-ACTION already did that
 generically); context features came from 12 real disk reads of already-loaded market frames. Full
 lab suite after FP-06: **1403 passed, 0 failed**. Research status NOT_ASSESSED throughout.
-FP-07 (the locked A/B/C study) is next and is the FIRST phase that actually touches the research
-question — its real compute cost is unknown and unmeasured as of this writing, and will be measured
-and disclosed before running anything at scale, per the owner's explicit reaffirmation.
+
+**FP-07 (the locked A/B/C study) is complete: all six gates PASS**
+(`FP07-G-POOL`/`EXEC`/`ACCOUNT`/`DECAY`/`COST`/`SCOPE`,
+`evidence/forward_persistence_fp_v1/fp07-20260923T190207Z-5a401d3b/`) — the FIRST phase that
+actually touches the research question. A real 3-arm continuous-account run, A-SC/BTCUSDT,
+**1,576,800 real one-minute bars per arm** (2021-01-01..2023-12-31, the full registered
+`development` role). All three arms select from the SAME shared per-origin pool at FP-04's 12
+frozen origins. Arm A = the engine's own installed `is_only_robust` pick (already cached from
+FP-04, 12/12 origins admitted). Arm B/C = `fp.selector_b`/`fp.selector_c` walk-forward selection,
+frozen alpha=10.0 for both (read from FP-05/06's own committed evidence, never re-selected) —
+**3/12 real admissions each**: the first 4 origins have no new admission at all (`MIN_TRAIN_ORIGINS
+=4`'s genuine cold start), 5 of the remaining 8 had nothing clear the utility/support floor. A
+no-admission origin means the account keeps whatever version is already active, or stays
+`FLAT_UNTIL_READY` pre-first-admission — never a value borrowed from Arm A (confirmed against the
+engine's own `_one_sweep` "A02" flat-until-ready contract; the module's docstrings were corrected
+to say this precisely after the check, rather than left with the earlier looser "falls back to A"
+phrasing).
+
+**A real capacity finding, measured before use, not worked around silently.** A first real attempt
+at the full span hit a genuine `MemoryError` (RLIMIT_AS-caught) at `bar_index=1,360,272` against
+the registered 4 GiB cap — a single-call bar count no prior phase here has run. Four real probe
+runs (100k/400k/800k/1.2M bars) measured linear RSS growth (~1.77 MiB/1000 bars: 454/979/1687 MiB,
+then `MemoryError` at 1.2M bars with RSS at 2403 MiB), showing the failure is a
+virtual-address-space ceiling, not a host RAM shortage (projected ~3.1 GiB real RSS for the full
+span against a then-measured ~4.1 GiB available, on a 9.7 GiB host). Presented to the owner via
+`AskUserQuestion` with this data; a disclosed, scoped, ONE-TIME exception to 7 GiB was approved
+(`dec-9cc3ec3e712cf61b`, `owner_decisions.jsonl`) for FP-07's three `run_deployment` calls only —
+the registered 4 GiB budget is unchanged everywhere else in this lab. Measured peak RSS on the
+successful run: **3357.7 MiB**. Total wall time **509.41s** (Arm A 25.02s, a content-verified real
+cache HIT reusing a complete computation from the earlier failed attempt — independently confirmed:
+1,576,800-row equity array, 1,460 fills, 12-entry schedule, all matching; Arm B 241.55s, Arm C
+236.22s, both real cache MISSes).
+
+**Honest, load-bearing finding: C_FP_CONTEXT == B_FP_PERSISTENCE in this run.** At all 3 origins
+where B admitted a selection, C's own utility-maximizing candidate was out-of-distribution relative
+to its training window's context range, so C fell back to B's exact prediction every time
+(`FALLBACK_TO_B`, never `CONTEXT_CONDITIONED`, 0/12 origins) — the two accounts are byte-for-byte
+identical (3312 fills each, identical D1 at every origin). This is guide 20/FP08.5's own named
+category verbatim: *"C≈B vì fallback → Context mechanism chưa được exercise đủ"* (C looks like B
+because of fallback — the context mechanism was not exercised enough). The **primary contrast
+(C−B) is therefore degenerate by construction**: estimate exactly 0.0, ci95=[0.0, 0.0],
+p_one_sided=1.0 over 1095 common days — reported as a degenerate artifact of this run, explicitly
+not a measured absence of a context effect, with its own callout in `report.md` naming the guide
+category so it cannot be mistaken for a null result.
+
+**Secondary/diagnostic only** (guide 19 draws no verdict; FP08.5 owns decision rules): B−A and C−A
+are identical for the same reason, both **estimate = −0.0001890/day**, 95% CI
+**[−0.0003208, −0.0000387]** (28-day block bootstrap, 39 blocks) — the forward-persistent selector
+underperformed the stock installed selector over this single cell/window, CI entirely below zero.
+ONE unreplicated cell, no placebo control of its own — guide 19/FP07-G-SCOPE explicitly forbids a
+verdict here; FP-08 replication is required before any claim. D1 table: only 7/36 (arm, origin)
+rows carry a real value (Arm A matched a region-archive medoid at just 1/12 origins, measured not
+assumed); the rest are null with a disclosed reason, never a fabricated number.
+
+Three real defects, all found and fixed before/while reporting, none needing a re-run of the
+expensive part: (1) `load_real_bars` returns `(frame, partitions)`, and the first draft used the
+return value directly — caught on the first launch, before any engine call. (2) `report.md`'s
+"Technical" conclusion cited "the 4 GiB budget" after the disclosed exception raised the applied
+cap to 7 GiB — fixed and re-rendered from the already-computed artifacts (0 engine calls re-run,
+182/182 fresh test evidence, gate_receipt.json updated). (3) The C≡B degenerate pattern was present
+in the raw artifacts but not prominently called out in the first rendering — added the explicit
+`DEGENERATE` disclosure above, matching LAB-08's "Arm E was a copy of Arm D" precedent. The
+orchestrator's OWN internal verification also passed on a stale pre-flight `junit.xml` missing 2
+last-minute tests; independently re-verified via `scripts/verify_fp07.py` against fresh evidence
+before trusting it, per this lab's standing "never trust the runner's own check" discipline. Full
+lab suite after FP-07: **1437 passed, 0 failed**.
+
+FP-08 (replication, D2 age-decline continuations, guide 20's family-level inference) is next and is
+the phase that can make FP-07's raw numbers trustworthy enough to draw any conclusion from — its
+own real compute cost, including the same working-memory exception pattern FP-07 just established,
+will be measured and disclosed before running anything at scale.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
