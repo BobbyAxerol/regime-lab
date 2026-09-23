@@ -24,7 +24,11 @@ class ForwardComparisonError(ValueError):
     """Raised when the IS/forward windows or metrics are not comparable."""
 
 
-def _window_metrics(payload: dict, frame, *, initial_capital: float) -> dict:
+def window_metrics(payload: dict, frame, *, initial_capital: float) -> dict:
+    """time_edge.metrics.describe() over one evaluate_candidate payload's
+    equity, sliced to frame's own span. Public: fp.selector_b (FP-05) reuses
+    this verbatim for the SAME IS-window metric computation FP-04 already
+    established, rather than a second implementation."""
     from ..time_edge.metrics import account_returns, describe
 
     audit = payload["selected_audit"]
@@ -46,7 +50,7 @@ def candidate_decay(cache, root, alpha_id: str, is_frame, forward_frame, params:
     ~180-day scale that hit a real, RLIMIT_AS-caught MemoryError in the
     engine's default profile during checkpoint_search's own pilot (the
     audit-ledger accumulator FUP-04 already found and fixed on long
-    frames). _window_metrics only reads equity/index/fills from
+    frames). window_metrics only reads equity/index/fills from
     selected_audit, all of which FUP-04 measured unaffected by report_level
     -- this changes retention, never the metric values."""
     from . import evaluator as ev
@@ -59,9 +63,9 @@ def candidate_decay(cache, root, alpha_id: str, is_frame, forward_frame, params:
     fwd_payload, fwd_event = ev.evaluate_candidate(cache, root, alpha_id, forward_frame, params,
                                                     cutoff=forward_end, producer=f"{producer}-fwd",
                                                     report_level=report_level)
-    is_metrics = _window_metrics(is_payload, is_frame, initial_capital=economics["initial_capital"])
-    fwd_metrics = _window_metrics(fwd_payload, forward_frame,
-                                  initial_capital=economics["initial_capital"])
+    is_metrics = window_metrics(is_payload, is_frame, initial_capital=economics["initial_capital"])
+    fwd_metrics = window_metrics(fwd_payload, forward_frame,
+                                 initial_capital=economics["initial_capital"])
     # daily_sharpe is a TYPED dict ({"value", "status"} -- time_edge_contracts.
     # daily_sharpe: null value stays typed with a reason, e.g.
     # INSUFFICIENT_OBSERVATIONS/ZERO_VARIANCE, never silently coerced to 0).
