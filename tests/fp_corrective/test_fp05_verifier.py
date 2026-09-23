@@ -71,6 +71,11 @@ def _bundle(root: Path) -> dict:
             "selector_b_decision": "ADMIT", "selected_params": {"coeff": 4},
             "admission_lineage": {"0": {"decision": "ADMIT", "consumed": {"coeff": 4}}},
             "deployment_result": {"fills": [{"bar_index": 0, "qty": 1.0}], "fill_count": 1},
+            "plumbing_proof": {
+                "params": {"coeff": 3},
+                "admission_lineage": {"0": {"decision": "ADMIT", "consumed": {"coeff": 3}}},
+                "deployment_result": {"fills": [{"bar_index": 0, "qty": 1.0}], "fill_count": 1},
+            },
         },
         "resource_budget.json": {"fp05_wall_seconds_charged_to_shared_ledger": 0},
         "test_registry.json": {"test_node_ids": list(TEST_NODE_IDS)},
@@ -181,6 +186,45 @@ def test_fp05_g_support_fails_when_stored_branch_disagrees_with_recomputation(la
     assert verdict["overall"] == "FAIL"
     assert not verdict["gates"]["FP05-G-SUPPORT"]["pass"]
     assert any("does not match" in r for r in verdict["gates"]["FP05-G-SUPPORT"]["reasons"])
+
+
+def test_fp05_g_action_fails_when_plumbing_proof_is_missing_even_on_common_flat_fallback(lab_tmp):
+    """The real gap this lab's own real run exposed: Selector B genuinely
+    declined every candidate (COMMON_FLAT_FALLBACK, a valid outcome on its
+    own), which means the ADMIT+deployment code path was never exercised by
+    that real run -- only by a synthetic gate test. FP05-G-ACTION must
+    still require a real, unconditional plumbing proof in THIS case too, or
+    it passes vacuously whenever B happens to decline."""
+    root = Path(str(lab_tmp)) / "fallback-no-proof"
+    root.mkdir()
+    xml = root / "junit.xml"
+    _junit(xml)
+    docs = _bundle(root)
+    admission = docs["admission_and_deployment.json"]
+    admission["selector_b_decision"] = "COMMON_FLAT_FALLBACK"
+    admission["selected_params"] = None
+    admission["deployment_result"] = None
+    admission["plumbing_proof"] = None
+    _rewrite(root, "admission_and_deployment.json", admission, docs["phase_manifest.json"])
+    verdict = verify_fp05(root, pytest_xml=xml)
+    assert verdict["overall"] == "FAIL"
+    assert not verdict["gates"]["FP05-G-ACTION"]["pass"]
+    assert any("no plumbing_proof" in r for r in verdict["gates"]["FP05-G-ACTION"]["reasons"])
+
+
+def test_fp05_g_action_fails_when_plumbing_proof_itself_has_no_fills(lab_tmp):
+    root = Path(str(lab_tmp)) / "empty-proof"
+    root.mkdir()
+    xml = root / "junit.xml"
+    _junit(xml)
+    docs = _bundle(root)
+    admission = docs["admission_and_deployment.json"]
+    admission["plumbing_proof"]["deployment_result"] = {"fills": [], "fill_count": 0}
+    _rewrite(root, "admission_and_deployment.json", admission, docs["phase_manifest.json"])
+    verdict = verify_fp05(root, pytest_xml=xml)
+    assert verdict["overall"] == "FAIL"
+    assert not verdict["gates"]["FP05-G-ACTION"]["pass"]
+    assert any("not actually exercised" in r for r in verdict["gates"]["FP05-G-ACTION"]["reasons"])
 
 
 def test_fp05_g_action_fails_when_admit_has_no_deployment_fills(lab_tmp):

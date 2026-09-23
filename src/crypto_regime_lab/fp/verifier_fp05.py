@@ -199,6 +199,26 @@ def verify_fp05(run_dir, *, pytest_xml=None) -> dict:
                                "selector B selected")
         elif admission.get("selector_b_decision") not in ("COMMON_FLAT_FALLBACK", "ADMIT"):
             reasons.append(f"unrecognised selector_b_decision {admission.get('selector_b_decision')!r}")
+        # The plumbing proof is checked UNCONDITIONALLY, regardless of
+        # Selector B's own verdict: a real ADMIT+deployment path must be
+        # demonstrated in every run, never only by a synthetic gate test --
+        # the "gate passed because nothing happened" shape this lab's own
+        # history (LAB-06/07) keeps finding in itself, applied here so a
+        # COMMON_FLAT_FALLBACK outcome (a real, valid result on its own)
+        # cannot leave FP05-G-ACTION vacuously passing.
+        proof = admission.get("plumbing_proof")
+        if proof is None:
+            reasons.append("no plumbing_proof recorded -- FP05-G-ACTION would otherwise pass "
+                           "vacuously whenever Selector B itself admits nothing")
+        else:
+            proof_deployment = proof.get("deployment_result")
+            if not proof_deployment or not proof_deployment.get("fills"):
+                reasons.append("plumbing_proof.deployment_result has zero fills -- the "
+                               "admission/deployment path was not actually exercised for real")
+            proof_lineage = (proof.get("admission_lineage", {}).get("0") or {})
+            if proof_lineage.get("consumed") != proof.get("params"):
+                reasons.append("plumbing_proof's admission lineage does not show the same "
+                               "params that were actually deployed")
     gates["FP05-G-ACTION"] = _gate(not reasons, reasons)
 
     # -- FP05-G-REPORT: technical and scientific status kept separate --

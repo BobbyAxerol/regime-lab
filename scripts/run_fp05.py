@@ -99,6 +99,8 @@ TEST_NODE_IDS = [
     "test_fp05_g_support_fails_when_stored_branch_disagrees_with_recomputation",
     "test_fp05_g_action_fails_when_admit_has_no_deployment_fills",
     "test_fp05_g_report_fails_when_technical_and_research_status_are_not_separated",
+    "test_fp05_g_action_fails_when_plumbing_proof_is_missing_even_on_common_flat_fallback",
+    "test_fp05_g_action_fails_when_plumbing_proof_itself_has_no_fills",
 ]
 
 
@@ -293,12 +295,38 @@ def run_fp05(pytest_xml: str | None) -> tuple[int, dict]:
         deployment_result = run_demo_deployment(cache, economics, chosen_params,
                                                  producer=f"{lab_run_id}-demo")
 
+    # Plumbing proof, run UNCONDITIONALLY regardless of Selector B's own
+    # eligibility verdict: guide's own admission_wiring/run_deployment path
+    # must be shown to reach a REAL account with REAL fills at least once
+    # in every run, never only via a synthetic gate test -- the exact
+    # "gate passed because nothing happened" shape LAB-06/07's own history
+    # (CLAUDE.md) records finding repeatedly. Uses the stock comparator's
+    # REAL, already-evaluated params (never invented) through the SAME
+    # admission_wiring + run_deployment call chosen_params would have used;
+    # entirely separate from selector_b_decision/admission_lineage above,
+    # which report B's OWN verdict honestly, unmodified by this proof.
+    plumbing_proof = None
+    if stock_pick is not None:
+        proof_decision = {"decision": "ADMIT",
+                          "reason": "FP05 plumbing proof (independent of Selector B's own "
+                          "eligibility verdict): the stock comparator's real params, run "
+                          "through the identical admission_wiring + run_deployment path",
+                          "kept": None}
+        proof_admission = aw.deployment_params_from_decisions(
+            params_by_fold={"0": stock_pick["params"]}, decisions={"0": proof_decision})
+        proof_deployment = run_demo_deployment(cache, economics, stock_pick["params"],
+                                               producer=f"{lab_run_id}-plumbing-proof")
+        plumbing_proof = {"admission_lineage": proof_admission["lineage"],
+                          "deployment_result": proof_deployment,
+                          "params": stock_pick["params"]}
+
     admission_and_deployment = {
         "schema": "regime_lab.fp05_admission_and_deployment.v1",
         "selector_b_decision": decision["decision"], "reason": decision["reason"],
         "selected_params": chosen_params,
         "admission_lineage": admission_out["lineage"],
         "deployment_result": deployment_result,
+        "plumbing_proof": plumbing_proof,
         "stock_comparator": {
             "record_id": stock_pick["record_id"] if stock_pick else None,
             "params": stock_pick["params"] if stock_pick else None,
@@ -471,10 +499,19 @@ def render_report(*, lab_run_id, run_dir, oof_diagnostics, model_selection, cand
              f"```json\n{json.dumps(admission_and_deployment['admission_lineage'], indent=2)}\n```"]
     if admission_and_deployment["deployment_result"]:
         d = admission_and_deployment["deployment_result"]
-        lines.append(f"- REAL demo deployment: {d['fill_count']} fills, {d['entries']} entries, "
-                     f"window {d['window']}")
+        lines.append(f"- REAL demo deployment (Selector B's own ADMIT): {d['fill_count']} fills, "
+                     f"{d['entries']} entries, window {d['window']}")
     else:
-        lines.append("- no deployment attempted (COMMON_FLAT_FALLBACK)")
+        lines.append("- Selector B itself deployed nothing (COMMON_FLAT_FALLBACK) -- a real, "
+                     "disclosed outcome, not cherry-picked")
+    proof = admission_and_deployment.get("plumbing_proof")
+    if proof:
+        d = proof["deployment_result"]
+        lines.append(f"- **Plumbing proof** (independent of Selector B's own verdict above -- "
+                     f"proves the admission_wiring + run_deployment path itself is real, using "
+                     f"the stock comparator's real params, so FP05-G-ACTION has something to "
+                     f"check even when B declines): {d['fill_count']} fills, {d['entries']} "
+                     f"entries, window {d['window']}")
     lines += ["", "## Glossary",
              "- **OOF (out-of-fold)** (a prediction made for an origin whose data was NEVER used "
              "to fit the model that produced it -- guide 8.3's walk-forward exercise)",
