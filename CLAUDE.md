@@ -346,10 +346,75 @@ last-minute tests; independently re-verified via `scripts/verify_fp07.py` agains
 before trusting it, per this lab's standing "never trust the runner's own check" discipline. Full
 lab suite after FP-07: **1437 passed, 0 failed**.
 
-FP-08 (replication, D2 age-decline continuations, guide 20's family-level inference) is next and is
-the phase that can make FP-07's raw numbers trustworthy enough to draw any conclusion from — its
-own real compute cost, including the same working-memory exception pattern FP-07 just established,
-will be measured and disclosed before running anything at scale.
+**FP-08 (replication, D2 and inference) is complete: all five gates PASS**
+(`FP08-G-REPLICATION`/`D2`/`INFERENCE`/`CONCENTRATION`/`VERDICT`,
+`evidence/forward_persistence_fp_v1/fp08-20260924T152905Z-5b68e8f8/`). Combines cell 1 (FP-04..07,
+reused unchanged) with a real cell 2 (A-SC/ETHUSDT, 3 origins — owner-approved `dec-b5a96eb125bb80cd`
+— reusing FP-03's own precedented calibration dates) into guide FP08.3/.4/.5's statistics,
+contribution checks and decision rules, plus the full 20-cell coverage matrix (2 COMPLETED, 18
+honestly `NOT_RUN` with a disclosed reason). `verifier_fp04` was reused **verbatim, unmodified** for
+cell 2's own archive — its gates are generic over whatever origins/symbol the ledger contains.
+
+**Real cell-2 archive**: 512 fresh 256-trial search calls (origin 1 reused from a survived cache
+after a real incident, below). Measured search wall time — origin 1 **3439.3s** (57.3min), origin 2
+**3109.3s** (51.8min), origin 3 **2795.5s** (46.6min) — total **9344.1s (2.60h)**, all `wf_ok=True`,
+peak RSS 1487.8/1624.6/2278.8 MiB, all within the registered 4 GiB budget (no exception needed for
+the archive stage itself). 48 ledger records (3×16-region cap), 40 model-ready, 8 descriptive-only.
+
+**A real operational incident — a genuinely new failure mode for this lab, disclosed in full.** The
+first cell-2 archive attempt was killed by the Linux kernel **OOM-killer** at 04:43 UTC 2026-09-24,
+verified via `dmesg`: `total-vm:3835932kB` (≈3.66 GiB) — **under** this process's own 4 GiB
+`RLIMIT_AS` cap. This was host-wide memory pressure from OTHER always-on tenants on this **shared**
+host (7 live market-data collectors, several IDE servers), not this process misbehaving — the host
+has **zero swap configured**, so there is no cushion once physical RAM is exhausted. A real,
+disclosed limitation now on record: **`RLIMIT_AS` protects a process from exceeding its own budget;
+it cannot protect against the kernel OOM-killing it for host-wide pressure caused by other
+processes** — fundamentally different from every prior FP-03/04/07 `MemoryError`, which were all
+this lab's own RLIMIT_AS catching ITS OWN process. Origin 1 was already safely cached — zero lost
+work; relaunched on the owner's explicit confirmation once host memory recovered, origins 2-3
+completed cleanly on the second attempt with no further OOM.
+
+**Real cell-2 study — Selector B/C fell back to A at ALL 3 origins**, a real, honest, MEASURED
+finding, not a structural impossibility: origins 2 and 3 genuinely had matured training data and
+attempted a real fit (a self-caught correction recorded before this run, `dec-61a43dad79d0ec5c` —
+`locked_study.py`'s walk-forward selection does NOT enforce `selector_b.MIN_FIT_ORIGINS=12`, a floor
+that gates a different, unrelated diagnostic-only path) — they simply never found a candidate
+clearing the registered utility/support floor. Arm A: **4516 real fills** on ETHUSDT. Two real code
+bugs found running this for real, both fixed before committing: (1) `run_fp08_cell2_study.py` didn't
+handle an arm with ZERO admissions and crashed on `LockedStudyError` — fixed to record
+`NEVER_ADMITTED` (null metrics, a reason, never fabricated) and mark dependent contrasts
+`NOT_EVALUABLE`. (2) A **vacuous-truth bug**, self-caught by manually inspecting cell 2's own real
+`statistics.json` before trusting the auto-generated report (not by a failing test) — the exact
+"`all()` over an empty population reads like a verified claim" shape this lab's own history (LAB-06
+defect #15) had already found once: `fp08_statistics.primary_regime_comparison`'s `degenerate` flag
+used `all(... for o in common if b_row.D is not None)`, which is vacuously `True` when EVERY D value
+is null (both arms never admitted anything) — reporting a comparison that never happened at all as
+"degenerate" (identical) rather than "nothing to compare". Fixed with a regression test reproducing
+the exact real shape; cell 2's report now correctly reads **"Inconclusive effect/support"**, not the
+misleading degenerate label the bug would have produced.
+
+**Findings (guide FP08.5's registered six-label vocabulary, never a stronger invented one)**: cell 1
+— C−B is `Context mechanism chưa được exercise đủ` (genuinely degenerate, C≡B); B−A and C−A both
+**−0.0001890/day**, CI entirely below the registered 6.4e-05/day threshold → `No meaningful
+improvement tại threshold đã thử`. Cell 2 — all three contrasts `NOT_EVALUABLE` (B/C never deployed)
+→ `Inconclusive effect/support`. I_D (guide 10.6): cell 1 = 0.0 (degenerate); cell 2 =
+`NOT_EVALUABLE` (correctly `degenerate=False` post-fix, not the vacuous `True` the bug would show).
+`delta_decay`/`epsilon_OOS_noninferiority` stay `NOT_REGISTERED` (guide 10.7's own fallback) —
+decay-reduction and non-inferiority claims stay descriptive throughout, never judged against an
+invented threshold. Guide FP08.4: context changed **zero** candidate rankings in either cell
+(cell1: 0/12, cell2: 0/3 `CONTEXT_CONDITIONED`) — `CONSISTENT_ACROSS_CELLS`, though the underlying
+admission RATE itself differs (0/3 vs 3/12), not further diagnosed here (a real candidate for
+`reports/improvement_opinions.md`, write-only, not run).
+
+Independently re-verified via `scripts/verify_fp08.py` against fresh test evidence (**1503/1503
+passed**) before finalizing, never trusting the orchestrator's own internal check. Full lab suite
+after FP-08: **1503 passed, 0 failed**.
+
+FP-08 draws no verdict beyond these registered dispositions. FP-09 (guide section 21, secondary
+timing extension) is its own explicit CONDITIONAL branch requiring a specific mechanistic hypothesis,
+not opened automatically from the open-ended auto-advance — present these findings and ask before
+starting it. FP-10 (freeze, replay, final handoff) is the other path once the owner decides no
+further phase is needed.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
