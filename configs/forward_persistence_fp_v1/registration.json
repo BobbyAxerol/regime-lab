@@ -1,0 +1,82 @@
+{
+  "schema": "regime_lab.fp_registration.v1",
+  "study_id": "forward_persistence_fp_v1",
+  "guide_version": "FP-GUIDE-1.0",
+  "guide_source": "REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md",
+  "registered_at_utc": "2026-09-22T16:20:50.073984+00:00",
+  "registered_by_phase": "FP-01",
+  "primary": {
+    "contrast": "C_FP_CONTEXT minus B_FP_PERSISTENCE on a common fixed calendar",
+    "decision_rule": "retention within scope only when valid, decays better, and meets the OOS utility/risk safeguard (guide 20.5)",
+    "fixed_timing": true
+  },
+  "secondary": {
+    "timing": "conditional FP-09 only: SELECTOR_FIXED_CAL / SELECTOR_CAL_MATCHED / SELECTOR_REGIME_TIMING under the same frozen selector; needs a mechanism hypothesis + owner approval, never automatic"
+  },
+  "arms": {
+    "A_STOCK_CAL": "stock comparator: installed Mode 4 selection, calendar",
+    "B_FP_PERSISTENCE": "forward-persistence selector, NO signed regime/context",
+    "C_FP_CONTEXT": "B pipeline + one frozen context family, same pool/target/base"
+  },
+  "trial_episode_rule": "a trial is one evaluated candidate; an episode is a matured train->deploy->forward-outcome run; trials do not substitute episodes",
+  "decay_primary_rule": "decay is the primary selector objective but never optimized alone: always beside the OOS utility/risk safeguard",
+  "historical_invariance": "RA/RF/FUP registrations, runs, verdicts are append-only; FP cites them via invalidated_by / superseded_by / recomputed_from / verified_reuse_of",
+  "studies": [
+    {
+      "id": "FP-01",
+      "title": "Contracts, migration and validity repairs",
+      "scope": [
+        "map the nine FP01.2 audit findings to current code with a disposition each",
+        "wire admission before the deployment account consumes params (FP-F02)",
+        "repair the D1/OOS boundary convention (FP-F04)",
+        "a registered frozen-component supersession for any RF-05 lab_source file this repair touches, so no frozen hash drifts silently"
+      ],
+      "non_goals": [
+        "any market/edge claim (guide FP-01 is identity/migration/validity only)",
+        "rerunning, restating or superseding any frozen RF-05, RA or FUP number"
+      ],
+      "required_inputs": [
+        "REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md",
+        "REGIME_LAB_MODE4_CORRECTIVE_AGENT_PHASE_GUIDE_VI.md",
+        "an explicit supersession declaration for each drift of a freeze-manifest component"
+      ],
+      "exit": "FP01-G-VALIDITY / FP01-G-IDENTITY / FP01-G-MIGRATION / FP01-G-BUDGET all PASS",
+      "budget": "T0 host-only: zero engine calls, zero shared TE ledger charge"
+    },
+    {
+      "id": "FP-02",
+      "title": "Evaluator and reusable runtime",
+      "scope": [
+        "common evaluator mapped onto the qualified event-account route (report_level audit/score, FUP-04-proven)",
+        "standardized candidate (5.1) and continuous deployment (5.2) accounts, same underlying call",
+        "semantic cache/invalidation (ComputeCache, fp_candidate/fp_deployment kinds)",
+        "compact vs full retention tiers (fp/retention_fp02.py)",
+        "lineage from selection to actual activation/orders/fills (fp/lineage.py)"
+      ],
+      "non_goals": [
+        "any market/edge claim",
+        "an actual TPE search loop (FP-03)",
+        "a new execution route (the guide's own qualified-route exit clause applies)"
+      ],
+      "required_inputs": [
+        "FP-01 (admission hook, boundary repair, chronology guard)",
+        "snapshots/server_core_v1 (read-only), a small real A-SC window"
+      ],
+      "exit": "FP02-G-PARITY / FP02-G-CACHE / FP02-G-LATENCY / FP02-G-MEMORY / FP02-G-LINEAGE / FP02-G-RESUME all PASS",
+      "budget": "T0 host-only: a handful of small real engine calls, no shared TE ledger charge"
+    }
+  ],
+  "phases": [
+    "FP-01",
+    "FP-02",
+    "FP-03",
+    "FP-04",
+    "FP-05",
+    "FP-06",
+    "FP-07",
+    "FP-08",
+    "FP-09",
+    "FP-10"
+  ],
+  "owner_approval": "each phase starts only on the owner's explicit approval recorded in evidence/regime_time_edge_ra_v1/owner_decisions.jsonl (R-18)"
+}

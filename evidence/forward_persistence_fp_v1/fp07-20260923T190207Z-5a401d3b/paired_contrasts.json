@@ -1,0 +1,80 @@
+{
+  "schema": "regime_lab.fp07_paired_contrasts.v1",
+  "primary": {
+    "label": "C_FP_CONTEXT - B_FP_PERSISTENCE",
+    "status": "ESTIMATED",
+    "estimate": 0.0,
+    "threshold": 6.4e-05,
+    "n": 1095,
+    "block": 28,
+    "nonoverlapping_blocks": 39,
+    "draws": 4999,
+    "seed": 2026091201,
+    "invalid_draws": 0,
+    "ci95_basic": [
+      0.0,
+      0.0
+    ],
+    "ci_simultaneous_basic": [
+      0.0,
+      0.0
+    ],
+    "p_one_sided": 1.0,
+    "n_common_days": 1095,
+    "unmatched_dates": [],
+    "partial": false
+  },
+  "secondary": {
+    "B_FP_PERSISTENCE - A_STOCK_CAL": {
+      "label": "B_FP_PERSISTENCE - A_STOCK_CAL",
+      "status": "ESTIMATED",
+      "estimate": -0.0001889748502425521,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -0.0003208041703683213,
+        -3.872726972319523e-05
+      ],
+      "ci_simultaneous_basic": [
+        -0.00035034625943803304,
+        7.005358600174923e-06
+      ],
+      "p_one_sided": 0.9994,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    },
+    "C_FP_CONTEXT - A_STOCK_CAL": {
+      "label": "C_FP_CONTEXT - A_STOCK_CAL",
+      "status": "ESTIMATED",
+      "estimate": -0.0001889748502425521,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -0.0003208041703683213,
+        -3.872726972319523e-05
+      ],
+      "ci_simultaneous_basic": [
+        -0.00035034625943803304,
+        7.005358600174923e-06
+      ],
+      "p_one_sided": 0.9994,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    }
+  },
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T19:10:37.282791+00:00"
+}

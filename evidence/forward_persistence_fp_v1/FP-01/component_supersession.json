@@ -1,0 +1,40 @@
+{
+  "schema": "regime_lab.fp01_component_supersession.v1",
+  "phase": "FP-01",
+  "study_id": "forward_persistence_fp_v1",
+  "registration_ref": "configs/forward_persistence_fp_v1/registration.json#/studies/0",
+  "purpose": "FP-F02's admission-wiring repair (guide FP01.2) adds an opt-in `admission_policy` parameter to run_cutoff_walk_forward, an RF-05-frozen lab_source file already superseded once by FUP-04. This declares the second, chained supersession so tests/mode4_corrective/test_rf05_claims.py's freeze guard does not read the drift as undeclared.",
+  "frozen_component_supersessions": [
+    {
+      "path": "src/crypto_regime_lab/experiments/dynamic_fold_provider.py",
+      "frozen_by": "evidence/corrective_mode4_v3/RF-05/freeze_manifest.json",
+      "frozen_sha256": "018274ca038f63c7f6764e06e55583fd84f050d353d01e9bf857efa0a84c734a",
+      "current_sha256": "fd05eb96f2146ad3a9b0b50654b6d21f7313b0e2e2e638b29d22c30be4dd48aa",
+      "registered_study": "FP-01",
+      "registration_ref": "configs/forward_persistence_fp_v1/registration.json#/studies/0",
+      "reason": "FP-01 (FP-F02 repair) adds an opt-in `admission_policy` parameter to run_cutoff_walk_forward: when None (default) every existing caller (RA-05/06/07, FUP-02, FP-01 itself when unwired) is byte-identical to before; when a policy callable is supplied, it is consulted per fold from TRAINING-ONLY evidence BEFORE the deployment account is built, and the account consumes only the admitted params_by_fold. Chained from FUP-04's own supersession of the same file (engine_report_level); this is the file's second registered repair since the RF-05 freeze.",
+      "rf05_results_recomputed": false,
+      "supersedes_previous_current_sha256": "d9a78955e4fbe0a003368ed7164377d3fd749e89e0b89a96d89215c08b088f26"
+    },
+    {
+      "path": "tests/mode4_corrective/test_rf05_claims.py",
+      "frozen_by": "evidence/corrective_mode4_v3/RF-05/reproducibility_manifest.json",
+      "frozen_sha256": "ce5b9d45055fd25fe3971a767db03d578f5d08c41778ef314be0cde2b6441d60",
+      "current_sha256": "c753edbbf78dea607fd94de2cd8c69ceac38687afc1f9df8cf0e6e50c9317b1d",
+      "registered_study": "FP-01",
+      "registration_ref": "configs/forward_persistence_fp_v1/registration.json#/studies/0",
+      "reason": "FP-01 adds a third _SUPERSESSION_SOURCES entry, (\"FP-01\", (\"evidence\", \"forward_persistence_fp_v1\", \"FP-01\", \"component_supersession.json\")), so this exact declaration is discoverable by the freeze/reproducibility guards this file itself defines. No other line changes. Chained from FUP-04's own supersession of the same file (which itself chained from FUP-01's); this is the file's third registered repair since the RF-05 freeze.",
+      "rf05_results_recomputed": false,
+      "supersedes_previous_current_sha256": "8247ec27d1014b49587147c3d47b42d25a45cad58027fc92303e340d35976559"
+    }
+  ],
+  "opt_in_contract": {
+    "default": "None everywhere; every pre-existing caller (RA-05/06/07, FUP-02) is unchanged",
+    "wired_behavior": "admission_policy(fold_row) -> {decision, reason, kept}; decision one of ADMIT / KEEP_INCUMBENT / COMMON_FLAT_FALLBACK; payload['admission_wiring'] records the raw stock selection AS-IS plus the per-fold decision and consumed digests",
+    "no_admitted_deployment": "if every fold is rejected without an incumbent, no account is run (no_admitted_deployment_payload); never PnL=0",
+    "verification": "FP01-T02 on the real engine path (tests/fp_corrective/test_fp01_engine_path.py): forced rejection of every fold yields NO_ADMITTED_DEPLOYMENT with empty equity/fills; forced admission deploys exactly the raw stock record"
+  },
+  "rf05_results_recomputed": false,
+  "claim": "mechanical/technical only: an opt-in admission hook exists and is proved on the real engine path. No market, economic or edge claim is made or implied by this declaration.",
+  "written_at_utc": "2026-09-22T16:57:52.446474Z"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "regime_lab.fp02_memory_audit.v1",
+  "budget_mib": 4096,
+  "per_call_peak_mib": [
+    427.6,
+    427.6,
+    427.6,
+    426.7,
+    426.7
+  ],
+  "current_process_rss_mib": 426.7,
+  "within_budget": true,
+  "not_growing_unboundedly": true,
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 4,
+    "previous_soft_gib": null
+  },
+  "lab_run_id": "fp02-20260922T180514Z-e4aad0b7",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T18:06:05.754680+00:00"
+}

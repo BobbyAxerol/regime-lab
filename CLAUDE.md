@@ -62,6 +62,360 @@ These override any convenience default. They restate and tighten the guide.
 
 12. **Report the `../quantbt` status in EVERY reply.** The user has forbidden any modification of `/root/bobby/pool_alpha/quantbt`. At the end of each response, state honestly whether anything there was touched — verified, not assumed: run `git -C /root/bobby/pool_alpha/quantbt status --porcelain` (and compare digests where relevant) and report the result. If something *was* touched, say so immediately and plainly rather than burying it.
 
+## Forward-persistent parameter plateau — authoritative from 2026-09-22, current main direction
+
+`REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md` (FP-GUIDE-1.0) supersedes the timing-only primary
+hypothesis below wherever they conflict, and is the lab's current main line of work — **not** a
+parallel or competing plan; do not write another top-level guide document alongside it. It does not
+delete or rewrite the RA/RF/FUP history; it changes what the primary contrast is. Motivation, stated
+in its own registered migration: two independent falsifications (RA-07's 90-day placebo and FUP-05's
+12-month placebo, both below) reproduced the apparent regime-timing advantage using market-free
+synthetic tapes, so the open question moves from *when* to deploy parameters to *which* parameter
+region a forward-persistent selector (with/without market context) picks, and whether that holds up
+better out-of-sample than the stock Mode 4 selector. New namespace `FP-01`…`FP-10`
+(`study_id=forward_persistence_fp_v1`); work lives on branch `research/forward-persistent-plateau-v1`
+(created 2026-09-22 off `mode4-corrective`'s tip, which is confirmed — via `git fetch` against
+`origin`, not assumed — fully merged into `main` through GitHub PRs #1–#3).
+
+**FP-01 (contracts, migration and validity repairs) is complete: all four gates PASS**
+(`FP01-G-VALIDITY`/`FP01-G-IDENTITY`/`FP01-G-MIGRATION`/`FP01-G-BUDGET`). R-18 approval for FP-01 ->
+FP-02 is recorded in `evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`; **FP-03 has not been
+approved and must not start** without its own explicit R-18 decision there (see current phase state
+in `configs/forward_persistence_fp_v1/registration.json` / handoff/`FP_CURRENT.md`). All nine FP01.2
+audit findings (source
+`REGIME_LAB_RA_FUP05_OBJECTIVE_REVIEW_2026-09-22_VI.md`) got a disposition: 6 `FIXED_WITH_PROOF`
+(admission wired before deployment consumes params; D1/OOS boundary repaired; a direct-contrast claim
+gate that refuses a band-alone verdict — invalidating FUP-05's `CADENCE_ARTIFACT` for causal citation,
+kept as DESCRIPTIVE; a chronological-split guard against future-label LOO; a behavioral verifier), 2
+`NOT_REPRODUCED_WITH_SCOPE`, 1 genuinely `PRESENT` (raw-artifact export, not silently closed).
+
+Verification was independent, not just read back from the run's own JSON: 13/13 `tests/fp_corrective`
+re-run directly, pyflakes clean, then the **full lab suite** run before any commit (not only the new
+tests) — which surfaced a real regression the FP-01 build itself hadn't caught: `dynamic_fold_provider.py`
+is an RF-05-frozen file FUP-04 had already superseded once, and FP-01's own further change
+(`admission_policy`) needed a second, chained supersession declaration
+(`evidence/forward_persistence_fp_v1/FP-01/component_supersession.json`) plus a real fix to
+`test_fup04_declaration.py`'s ceiling test (it could not represent a multi-hop chain at all, not just
+an undeclared one). Final full-suite result after the fix: **1268 passed, 0 failed, 1290.02s**
+(`evidence/forward_persistence_fp_v1/FP-01/full_suite_final.log`).
+
+**FP-02 (common evaluator, cache, memory, runtime and lineage) is complete: all six gates PASS**
+(`FP02-G-PARITY`/`CACHE`/`LATENCY`/`MEMORY`/`LINEAGE`/`RESUME`,
+`evidence/forward_persistence_fp_v1/fp02-20260922T180514Z-e4aad0b7/`). Built as a thin wiring layer
+over infrastructure the lab already had (`ComputeCache`, causality/state-compatibility guards,
+retention tiers, `report_level`'s FUP-04-proven audit/score parity) rather than a new simulator, on
+the one qualified execution route this lab has (`ra/route_qualification.py`:
+`event_account.run_event_account`, no separate fast route exists). All five guide-mandated real runs
+(no mocked run) ran on a real 10-day BTCUSDT/A-SC window: audit-vs-score parity (equity exact-equal),
+cross-run cache reuse plus a genuine economic-dependency miss, a real multi-selection deployment with
+an actual pending/activation case, cache-based resume after a simulated crash, and a 5-call memory
+audit (~400–430 MiB against the 4096 MiB budget, not growing). Two real bugs found and fixed during
+the build, before committing: `fp/lineage.py`'s first design reconstructed activation boundaries from
+switch metadata that (a real run showed) never records the INITIAL version's own
+`FLAT_UNTIL_READY`/`WARMING` sentinel period — rewritten to scan `version_by_bar` directly as ground
+truth; and an independent, standalone re-verification (not the runner's own internal check) of the
+already-committed FP-01 bundle surfaced that `gate_receipt.json` is written twice by design, so every
+fresh re-verification after the one baked into the runner falsely failed on both FP-01 and FP-02 —
+fixed in both verifiers, with a regression test that reproduces the actual two-write sequence. Full
+lab suite after FP-02: **1283 passed, 0 failed** (1268 + 14 new FP-02 tests + 1 new FP-01 regression
+test). R-18 approval for FP-01 -> FP-02 recorded.
+
+**The owner pre-approved FP-03 -> FP-04 -> FP-05 as one sequential batch on 2026-09-22**
+(`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`, quoting the instruction verbatim: each
+phase must actually complete, report and commit before the next starts — no shortcuts — and FP-06
+onward still needs its own separate R-18).
+
+**FP-03 (search-space qualification and learning curve) is complete: all five gates PASS**
+(`FP03-G-SCHEMA`/`PREFIX`/`COVERAGE`/`CURVE`/`FREEZE`,
+`evidence/forward_persistence_fp_v1/fp03-20260922T211626Z-6bf07360/`). A-SC's 3 tunable dimensions
+cross-checked against the engine's own param ranges, out-of-schema values proved to be typed
+rejections, all 3 dimensions showed real `BEHAVIOR_DIFFERS` on a real engine fixture. Three real
+calibration origins (2021/2022/2023-06-01, calendar-spaced, fixed before any outcome was known), each
+a REAL `run_cutoff_walk_forward` search to 256/256 trials — the exact engine RA-05..RA-07/FUP-01..05
+already depend on, never a hand-rolled objective (the per-trial objective is `mean_is`, mean shard-IS
+Sharpe with a trade-count penalty, computed inside the engine and not independently reproducible
+outside it). Sampler identity read from the actually-installed Optuna **4.8.0** (guide source cites
+4.2.1 — disclosed mismatch), `n_startup_trials=10` confirmed both via `inspect.signature` and an
+empirical ask/tell demonstration. Real wall times 2786.63s / 2575.28s / 3042.21s (~43–51 min/origin);
+peak RSS 1483.3 / 1474.7 / 1520.0 MiB against the 4096 MiB budget — `engine_report_level="score"` was
+required after a real, RLIMIT_AS-caught `MemoryError` under the engine's default profile hit on this
+exact ~300k-bar/180-day scale (the same audit-ledger accumulator FUP-04 already found and fixed on
+long frames). `B_search` frozen at **256**, no blocker.
+
+**Honest finding, not glossed over**: `D_mean_daily_return` (IS − forward; positive = worse decay)
+stayed positive at EVERY checkpoint of EVERY origin — deeper search never turned decay negative on
+this alpha/window — and all three origins showed zero IS-objective improvement from checkpoint 128 to
+256 (the identical trial stayed selected). Two real bugs, both found by re-auditing the already-built
+code rather than being asked: a first version of `FP03-G-PREFIX` compared `records[:lo]` to
+`records[:hi][:lo]` from the SAME sorted list — mathematically identical by construction, so it could
+never fail regardless of what a checkpoint claimed, caught while writing the test meant to prove a
+broken prefix gets caught and it did not; fixed to independently re-derive each checkpoint's
+`selected` from the raw trial records. And, found only AFTER FP-03 was already committed, while
+re-auditing before reusing this code for FP-04: `checkpoint_search.run_origin_search` had silently
+stopped measuring/returning `wall_seconds_measured`/`instrumentation` (the `Stage` timer wrapper was
+missing from the function actually on disk) — FP-03's own committed report shows real numbers only
+because all 3 origins happened to hit a stale `.cache/` file written by an earlier, still-working
+version of the function; a fresh call would have silently written `None`. Fixed with the wrapper
+restored plus a real small-engine regression test. FP-03's own published numbers are unaffected (they
+came from the real measured run); only the code's reproducibility was at risk, and it is disclosed
+here rather than quietly folded into the fix. Full lab suite after FP-03: **1297 passed, 0 failed**
+(1283 + 14 new FP-03 tests). R-18 approval for FP-01 -> FP-02 -> FP-03 (batch) recorded.
+
+**FP-04 (historical forward ledger and parameter regions) is complete: all five gates PASS**
+(`FP04-G-LEDGER`/`CAUSAL`/`REGION`/`SUPPORT`/`REUSE`,
+`evidence/forward_persistence_fp_v1/fp04-20260923T145511Z-34cb31b6/`). A real historical archive at
+**12 chronological origins** (quarter-start dates, 2021-01-01 .. 2023-10-01) — an EXPLICIT, disclosed
+partial scope against guide 3.2's ~26-39-origin research-default target: at FP-03's measured cost,
+the full target would have cost ~19.5-29 hours of strictly-sequential engine wall-clock, so FP-04
+froze 12 instead, citing guide 16's own permission for a short origin count and its incremental-
+rebuild guarantee (FP04-T07/T08) to extend later without recomputing. Each origin: a REAL 256/256-
+trial search (B_search reused verbatim from FP-03's frozen policy, never re-derived), real region
+clustering from the search's own candidates (Gower distance on params only,
+`selector.schema_distance.ParamSchema.distance`, `distance_threshold=0.12`, capped at the frozen
+`representative_subset_size=16` — every one of the 12 origins hit this cap, real clustering found
+more than 16 distinct regions every time), real forward evaluation of every region's medoid.
+**3072 real search-trial engine calls, 384 real forward-evaluation calls, 0 reused (first run of
+this grid).** Sum of per-origin search-only wall time **34254.3s (9.52h)**, mean 2854.5s/origin;
+peak RSS 1556.5-2289.6 MiB against the 4096 MiB budget, no monotonic growth. **192 ledger records
+(12×16), 192/192 matured, 0 censored** — no forward window hit a data gap across the entire grid.
+155 model-ready (support ≥2), 37 descriptive-only. `decay_D_mean_daily_return` mean **-0.000045**
+(slightly negative — forward marginally BETTER than IS on average at this region-medoid granularity,
+a different population from FP-03's single-best-candidate-per-origin measurement, not a
+contradiction of it), 84/192 (43.8%) individual records still positive (worse).
+
+**A real operational incident, disclosed in full.** The first launch of the 12-origin build (22:46
+UTC 2026-09-22, an ordinary `run_in_background` task) was **killed after ~5 hours with 0/12 origins
+completed** — verified via an empty raw-search cache, no OOM event near that window in `dmesg`/
+`journalctl` (host uptime unbroken, 10 days), and a brand-new `claude` CLI process tree starting at
+03:38 UTC 2026-09-23: the interactive session that launched the background task ended and took its
+child process down with it, not an application bug, not a resource-budget breach. Zero progress was
+lost (nothing had completed yet), but ~5 hours produced nothing. Relaunched at 03:43 UTC with
+`setsid nohup ... & disown` (confirmed detached: PPID=1, own session) specifically so a repeat
+session interruption could not kill it again; the second launch ran the full **11h08m38s** to a
+verified PASS undisturbed. Total wall-clock across both attempts: **~16 hours**, ~5 of them wasted
+to the session-death incident — reported plainly rather than only citing the successful run's time.
+
+One more real bug, found before any FP-04 engine call ran: `ledger_record()` reformatted
+`origin_cutoff` through `origin_ts.isoformat()`, which silently stopped string-matching
+`origin_ledger.json`'s own plain-date `origin_cutoff` field — making `FP04-G-CAUSAL`'s cross-origin-
+leak check **vacuous** (it would never have fired on the real run either). Found because the gate's
+own regression test failed for the wrong reason (a dict-key miss, not the corruption the test meant
+to catch); fixed to keep `origin_cutoff` as the plain join key. The incremental-rebuild guarantee was
+also proven on the real grid, not just synthetic tests: a later re-run (to add an aggregate-summary
+section to the report) hit 0 fresh engine calls and reused all 12 origins verbatim, finishing in
+14m26s instead of ~11h. Full lab suite after FP-04: **1340 passed, 0 failed**. R-18 approval for
+FP-01 -> FP-02 -> FP-03 -> FP-04 (batch) recorded.
+
+**FP-05 (Implement B_FP — Selector B, forward-persistent selection, no regime) is complete: all
+six gates PASS** (`FP05-G-SPLIT`/`MODEL`/`SCORE`/`SUPPORT`/`ACTION`/`REPORT`,
+`evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/`). Built on FP-04's full
+12-origin/192-record archive with ZERO new search-trial engine calls (feature building is 192 real
+cache-HIT re-reads of FP-04's own `evaluate_candidate` calls). True chronological walk-forward OOF
+(guide 8.3/8.4, reusing `fp.forward_ledger.training_view`/`fp.chronology.chronological_split`
+verbatim): `min_train_origins=4` on 12 origins gives exactly **8 validation origins** — guide 8.7's
+own stated OOF-diagnostics floor, hit by deliberate design, not coincidence. A closed-form weighted
+ridge regression (implemented directly in numpy — no sklearn is installed in the lab venv, and guide
+8.3 frames this as a design to implement and verify, not a library call to trust) selected
+**alpha=10.0** from `[0.1, 1.0, 10.0]` by aggregate OOF MSE (1.745e-07, narrowly beating 1.0's
+1.750e-07). Decay-risk branch **MEAN_DECAY** (`TAIL_ESTIMATE_UNSUPPORTED`): 12 fit origins clears
+guide 8.7's model-fit floor (>=12) but 8 OOF origins is below its tail-quantile floor (>=20) — the
+guide's own registered fallback, not an improvisation.
+
+**Real, honest held-out demo**: scored all 16 regions of origin 2023-10-01 with a model trained ONLY
+on the 11 earlier origins. **Zero cleared the predicted-utility floor** (6.4e-05/day, reused verbatim
+from `configs/minimum_economic_effect.json` since guide 8.6/FP08.5's "OOS utility/risk safeguard"
+names no concrete number anywhere in the guide text) — Selector B's real output was
+**COMMON_FLAT_FALLBACK**, not cherry-picked; the eligibility gate did exactly what it should.
+
+**A real gap self-caught before shipping**: because B declined everything, its own ADMIT+real-
+deployment path was never exercised by real data — only by a synthetic gate test, the exact "gate
+passed because nothing happened" shape LAB-06/07's history keeps finding in itself. Fixed by adding
+an unconditional "plumbing proof" (a second real small deployment, the stock comparator's real
+params, independent of B's own verdict, required by the verifier every run): real result **19
+fills, 10 entries** on a real 10-day window (2023-11-01, inside `development`, never touching
+`outer_evaluation`). One real bug found before any engine call: `FEATURE_NAMES` declared a feature
+key (`norm_threshold`) that `normalized_params()` never actually produces (the real key is
+`norm_alpha.condition_threshold`) — would have raised on every real call. Also proved, not just
+declared: guide 8.4's dormant-risk regression — a naive time-sorted LOO
+(`fp.chronology.naive_time_sorted_loo_train`, FP-01's own "before" control) really does leak a later
+origin's record on FP-05's real archive shape, and `training_view` correctly excludes it. Full lab
+suite after FP-05: **1375 passed, 0 failed**. Research status NOT_ASSESSED throughout — FP-05 builds
+and demonstrates Selector B; it makes no claim B beats the stock selector, and neither will FP-06
+(Selector C); that comparison is FP-07's job, trustworthy only once FP-08 replicates it.
+
+**Owner approval, 2026-09-23**: after FP-05's report, the owner gave an open-ended instruction to
+proceed through FP-06 onward without an intermediate approval message between phases, reviewing all
+evidence together once enough phases have run (`evidence/regime_time_edge_ra_v1/owner_decisions.jsonl`,
+decision_id `dec-f08d01887b889afb`) — explicitly NOT a waiver of per-phase build/test/report/commit
+discipline (guide R25) or of measuring and disclosing any large new real-compute cost before running
+it (the same discipline FP-04's 12-origin scope decision already demonstrated), which the owner's
+instruction reaffirmed applies even under this open-ended advance.
+
+**FP-06 (Implement C_FP_CONTEXT — Selector C) is complete: all five gates PASS**
+(`FP06-G-ABLATION`/`CAUSAL`/`SUPPORT`/`FREEZE`/`CLAIM`,
+`evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/`). Built on the IDENTICAL
+12-origin/192-record archive B used, through the LITERAL SAME `fp.selector_b.walk_forward_oof` loop
+— that function was generalised to accept an optional `feature_matrix_fn` (the ONLY change made to
+Selector B's own code), so C's chronological guard is structurally, not just conventionally, the
+same code path guide 9.1 requires. Two frozen context features (guide 9.3, JM/M0 explicitly NOT
+used — LAB-08's own measured 1.64% JM/M0 support was too thin to build on, a disclosed choice, still
+recorded in the exposure count at zero): `ctx_direction_efficiency` and `ctx_volatility_ratio`, both
+from the same causal IS frame B already loads. Two registered candidate-descriptor × context
+interaction terms (guide 9.2: `norm_AP` × `ctx_direction_efficiency`, `norm_coeff` ×
+`ctx_volatility_ratio` — 2 of 18 possible pairs, never the full Cartesian product guide 9.2
+explicitly forbids).
+
+**Guide 9.2's own counterexample, proven not merely avoided**: a designed fixture (two candidates
+differing only in `norm_AP`, a true label with a context-dependent crossover) shows a purely additive
+model (candidate + context as separate columns, no product term) predicts the SAME relative candidate
+ranking regardless of context — it structurally cannot represent a crossover, exactly guide 9.2's
+argument — while Selector C's interaction architecture correctly FLIPS the predicted ranking between
+the two contexts (`FP06-T04`, both directions tested). Real held-out demo on the same 16 candidates
+FP-05 scored: alpha=10.0 selected independently for both B and C (same value); all 16 stayed
+in-distribution (0 OOD fallback); **mean(C − B) = 4.79e-07** — a tiny, real, honest adjustment, C's
+predictions staying far below the utility floor on every candidate, same as B's. Guide 9.2's own
+permitted outcome: *"C không tạo khác biệt trên real data vẫn là kết quả hợp lệ nếu execution
+đúng."* **Zero new engine calls of any kind** — no search trials, no deployment (FP-06's own exit
+gate does not require re-proving admission/deployment wiring; FP05-G-ACTION already did that
+generically); context features came from 12 real disk reads of already-loaded market frames. Full
+lab suite after FP-06: **1403 passed, 0 failed**. Research status NOT_ASSESSED throughout.
+
+**FP-07 (the locked A/B/C study) is complete: all six gates PASS**
+(`FP07-G-POOL`/`EXEC`/`ACCOUNT`/`DECAY`/`COST`/`SCOPE`,
+`evidence/forward_persistence_fp_v1/fp07-20260923T190207Z-5a401d3b/`) — the FIRST phase that
+actually touches the research question. A real 3-arm continuous-account run, A-SC/BTCUSDT,
+**1,576,800 real one-minute bars per arm** (2021-01-01..2023-12-31, the full registered
+`development` role). All three arms select from the SAME shared per-origin pool at FP-04's 12
+frozen origins. Arm A = the engine's own installed `is_only_robust` pick (already cached from
+FP-04, 12/12 origins admitted). Arm B/C = `fp.selector_b`/`fp.selector_c` walk-forward selection,
+frozen alpha=10.0 for both (read from FP-05/06's own committed evidence, never re-selected) —
+**3/12 real admissions each**: the first 4 origins have no new admission at all (`MIN_TRAIN_ORIGINS
+=4`'s genuine cold start), 5 of the remaining 8 had nothing clear the utility/support floor. A
+no-admission origin means the account keeps whatever version is already active, or stays
+`FLAT_UNTIL_READY` pre-first-admission — never a value borrowed from Arm A (confirmed against the
+engine's own `_one_sweep` "A02" flat-until-ready contract; the module's docstrings were corrected
+to say this precisely after the check, rather than left with the earlier looser "falls back to A"
+phrasing).
+
+**A real capacity finding, measured before use, not worked around silently.** A first real attempt
+at the full span hit a genuine `MemoryError` (RLIMIT_AS-caught) at `bar_index=1,360,272` against
+the registered 4 GiB cap — a single-call bar count no prior phase here has run. Four real probe
+runs (100k/400k/800k/1.2M bars) measured linear RSS growth (~1.77 MiB/1000 bars: 454/979/1687 MiB,
+then `MemoryError` at 1.2M bars with RSS at 2403 MiB), showing the failure is a
+virtual-address-space ceiling, not a host RAM shortage (projected ~3.1 GiB real RSS for the full
+span against a then-measured ~4.1 GiB available, on a 9.7 GiB host). Presented to the owner via
+`AskUserQuestion` with this data; a disclosed, scoped, ONE-TIME exception to 7 GiB was approved
+(`dec-9cc3ec3e712cf61b`, `owner_decisions.jsonl`) for FP-07's three `run_deployment` calls only —
+the registered 4 GiB budget is unchanged everywhere else in this lab. Measured peak RSS on the
+successful run: **3357.7 MiB**. Total wall time **509.41s** (Arm A 25.02s, a content-verified real
+cache HIT reusing a complete computation from the earlier failed attempt — independently confirmed:
+1,576,800-row equity array, 1,460 fills, 12-entry schedule, all matching; Arm B 241.55s, Arm C
+236.22s, both real cache MISSes).
+
+**Honest, load-bearing finding: C_FP_CONTEXT == B_FP_PERSISTENCE in this run.** At all 3 origins
+where B admitted a selection, C's own utility-maximizing candidate was out-of-distribution relative
+to its training window's context range, so C fell back to B's exact prediction every time
+(`FALLBACK_TO_B`, never `CONTEXT_CONDITIONED`, 0/12 origins) — the two accounts are byte-for-byte
+identical (3312 fills each, identical D1 at every origin). This is guide 20/FP08.5's own named
+category verbatim: *"C≈B vì fallback → Context mechanism chưa được exercise đủ"* (C looks like B
+because of fallback — the context mechanism was not exercised enough). The **primary contrast
+(C−B) is therefore degenerate by construction**: estimate exactly 0.0, ci95=[0.0, 0.0],
+p_one_sided=1.0 over 1095 common days — reported as a degenerate artifact of this run, explicitly
+not a measured absence of a context effect, with its own callout in `report.md` naming the guide
+category so it cannot be mistaken for a null result.
+
+**Secondary/diagnostic only** (guide 19 draws no verdict; FP08.5 owns decision rules): B−A and C−A
+are identical for the same reason, both **estimate = −0.0001890/day**, 95% CI
+**[−0.0003208, −0.0000387]** (28-day block bootstrap, 39 blocks) — the forward-persistent selector
+underperformed the stock installed selector over this single cell/window, CI entirely below zero.
+ONE unreplicated cell, no placebo control of its own — guide 19/FP07-G-SCOPE explicitly forbids a
+verdict here; FP-08 replication is required before any claim. D1 table: only 7/36 (arm, origin)
+rows carry a real value (Arm A matched a region-archive medoid at just 1/12 origins, measured not
+assumed); the rest are null with a disclosed reason, never a fabricated number.
+
+Three real defects, all found and fixed before/while reporting, none needing a re-run of the
+expensive part: (1) `load_real_bars` returns `(frame, partitions)`, and the first draft used the
+return value directly — caught on the first launch, before any engine call. (2) `report.md`'s
+"Technical" conclusion cited "the 4 GiB budget" after the disclosed exception raised the applied
+cap to 7 GiB — fixed and re-rendered from the already-computed artifacts (0 engine calls re-run,
+182/182 fresh test evidence, gate_receipt.json updated). (3) The C≡B degenerate pattern was present
+in the raw artifacts but not prominently called out in the first rendering — added the explicit
+`DEGENERATE` disclosure above, matching LAB-08's "Arm E was a copy of Arm D" precedent. The
+orchestrator's OWN internal verification also passed on a stale pre-flight `junit.xml` missing 2
+last-minute tests; independently re-verified via `scripts/verify_fp07.py` against fresh evidence
+before trusting it, per this lab's standing "never trust the runner's own check" discipline. Full
+lab suite after FP-07: **1437 passed, 0 failed**.
+
+**FP-08 (replication, D2 and inference) is complete: all five gates PASS**
+(`FP08-G-REPLICATION`/`D2`/`INFERENCE`/`CONCENTRATION`/`VERDICT`,
+`evidence/forward_persistence_fp_v1/fp08-20260924T152905Z-5b68e8f8/`). Combines cell 1 (FP-04..07,
+reused unchanged) with a real cell 2 (A-SC/ETHUSDT, 3 origins — owner-approved `dec-b5a96eb125bb80cd`
+— reusing FP-03's own precedented calibration dates) into guide FP08.3/.4/.5's statistics,
+contribution checks and decision rules, plus the full 20-cell coverage matrix (2 COMPLETED, 18
+honestly `NOT_RUN` with a disclosed reason). `verifier_fp04` was reused **verbatim, unmodified** for
+cell 2's own archive — its gates are generic over whatever origins/symbol the ledger contains.
+
+**Real cell-2 archive**: 512 fresh 256-trial search calls (origin 1 reused from a survived cache
+after a real incident, below). Measured search wall time — origin 1 **3439.3s** (57.3min), origin 2
+**3109.3s** (51.8min), origin 3 **2795.5s** (46.6min) — total **9344.1s (2.60h)**, all `wf_ok=True`,
+peak RSS 1487.8/1624.6/2278.8 MiB, all within the registered 4 GiB budget (no exception needed for
+the archive stage itself). 48 ledger records (3×16-region cap), 40 model-ready, 8 descriptive-only.
+
+**A real operational incident — a genuinely new failure mode for this lab, disclosed in full.** The
+first cell-2 archive attempt was killed by the Linux kernel **OOM-killer** at 04:43 UTC 2026-09-24,
+verified via `dmesg`: `total-vm:3835932kB` (≈3.66 GiB) — **under** this process's own 4 GiB
+`RLIMIT_AS` cap. This was host-wide memory pressure from OTHER always-on tenants on this **shared**
+host (7 live market-data collectors, several IDE servers), not this process misbehaving — the host
+has **zero swap configured**, so there is no cushion once physical RAM is exhausted. A real,
+disclosed limitation now on record: **`RLIMIT_AS` protects a process from exceeding its own budget;
+it cannot protect against the kernel OOM-killing it for host-wide pressure caused by other
+processes** — fundamentally different from every prior FP-03/04/07 `MemoryError`, which were all
+this lab's own RLIMIT_AS catching ITS OWN process. Origin 1 was already safely cached — zero lost
+work; relaunched on the owner's explicit confirmation once host memory recovered, origins 2-3
+completed cleanly on the second attempt with no further OOM.
+
+**Real cell-2 study — Selector B/C fell back to A at ALL 3 origins**, a real, honest, MEASURED
+finding, not a structural impossibility: origins 2 and 3 genuinely had matured training data and
+attempted a real fit (a self-caught correction recorded before this run, `dec-61a43dad79d0ec5c` —
+`locked_study.py`'s walk-forward selection does NOT enforce `selector_b.MIN_FIT_ORIGINS=12`, a floor
+that gates a different, unrelated diagnostic-only path) — they simply never found a candidate
+clearing the registered utility/support floor. Arm A: **4516 real fills** on ETHUSDT. Two real code
+bugs found running this for real, both fixed before committing: (1) `run_fp08_cell2_study.py` didn't
+handle an arm with ZERO admissions and crashed on `LockedStudyError` — fixed to record
+`NEVER_ADMITTED` (null metrics, a reason, never fabricated) and mark dependent contrasts
+`NOT_EVALUABLE`. (2) A **vacuous-truth bug**, self-caught by manually inspecting cell 2's own real
+`statistics.json` before trusting the auto-generated report (not by a failing test) — the exact
+"`all()` over an empty population reads like a verified claim" shape this lab's own history (LAB-06
+defect #15) had already found once: `fp08_statistics.primary_regime_comparison`'s `degenerate` flag
+used `all(... for o in common if b_row.D is not None)`, which is vacuously `True` when EVERY D value
+is null (both arms never admitted anything) — reporting a comparison that never happened at all as
+"degenerate" (identical) rather than "nothing to compare". Fixed with a regression test reproducing
+the exact real shape; cell 2's report now correctly reads **"Inconclusive effect/support"**, not the
+misleading degenerate label the bug would have produced.
+
+**Findings (guide FP08.5's registered six-label vocabulary, never a stronger invented one)**: cell 1
+— C−B is `Context mechanism chưa được exercise đủ` (genuinely degenerate, C≡B); B−A and C−A both
+**−0.0001890/day**, CI entirely below the registered 6.4e-05/day threshold → `No meaningful
+improvement tại threshold đã thử`. Cell 2 — all three contrasts `NOT_EVALUABLE` (B/C never deployed)
+→ `Inconclusive effect/support`. I_D (guide 10.6): cell 1 = 0.0 (degenerate); cell 2 =
+`NOT_EVALUABLE` (correctly `degenerate=False` post-fix, not the vacuous `True` the bug would show).
+`delta_decay`/`epsilon_OOS_noninferiority` stay `NOT_REGISTERED` (guide 10.7's own fallback) —
+decay-reduction and non-inferiority claims stay descriptive throughout, never judged against an
+invented threshold. Guide FP08.4: context changed **zero** candidate rankings in either cell
+(cell1: 0/12, cell2: 0/3 `CONTEXT_CONDITIONED`) — `CONSISTENT_ACROSS_CELLS`, though the underlying
+admission RATE itself differs (0/3 vs 3/12), not further diagnosed here (a real candidate for
+`reports/improvement_opinions.md`, write-only, not run).
+
+Independently re-verified via `scripts/verify_fp08.py` against fresh test evidence (**1503/1503
+passed**) before finalizing, never trusting the orchestrator's own internal check. Full lab suite
+after FP-08: **1503 passed, 0 failed**.
+
+FP-08 draws no verdict beyond these registered dispositions. FP-09 (guide section 21, secondary
+timing extension) is its own explicit CONDITIONAL branch requiring a specific mechanistic hypothesis,
+not opened automatically from the open-ended auto-advance — present these findings and ask before
+starting it. FP-10 (freeze, replay, final handoff) is the other path once the owner decides no
+further phase is needed.
+
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
 `REGIME_LAB_MODE4_CAUSAL_REBUTTAL_REPAIR_5_PHASES_FINAL_VI.md` supersedes this digest wherever they conflict. The five corrective phases **RF-01 … RF-05** on branch `mode4-corrective` are complete (`study_id=corrective_mode4_v3`): RF-01 identity/invalidation/before-repair probes; RF-02 real-snapshot native-event account and public Mode 4 baseline; RF-03 causal controller; RF-04 10-cell event-route paired discovery (`RF-04/paired_discovery_full.json`) plus design freeze/decay/controls; RF-05 freeze/recompute/claims/integrity/handoff (`evidence/corrective_mode4_v3/RF-05/`). Final RF-05 claim: `TECHNICALLY_VALID_WITH_PARTIAL_COVERAGE`, economic `INCONCLUSIVE` — 10 of 20 planned cells executed (A-VWAP/A-HASH stay `BLOCKED_CAPABILITY`, null metrics + reasons); paired common-date `M4_REGIME − M4_CAL` (10 cells) mean −0.1123 bps/day, block-bootstrap 95% CI [−0.4940, +0.1907]; `M4_REGIME − M4_CAL_MATCHED` (1 evaluable cell) +0.1620 [−0.2142, +0.6154]; Holm m=2 over {TIMING, BUDGET_AWARE} → both `INCONCLUSIVE` against the frozen MDE 0.0371 bps/day, no `POSITIVE`; `NESTED_RETROSPECTIVE` (no untouched holdout) and `RF-05/prospective_protocol.json` is `SPECIFIED_NOT_EXECUTED`. `tests/mode4_corrective/` is green (76 passed; full suite 862 passed). Historical LAB-01…LAB-09 evidence and its `FAILED_VALIDITY` conclusion are preserved and never rewritten.

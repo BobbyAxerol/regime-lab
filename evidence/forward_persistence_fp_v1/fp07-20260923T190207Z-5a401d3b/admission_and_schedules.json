@@ -1,0 +1,458 @@
+{
+  "schema": "regime_lab.fp07_admission_and_schedules.v1",
+  "by_arm": {
+    "A_STOCK_CAL": {
+      "lineage": {
+        "0": {
+          "fold": "0",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2021-01-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "dbfe2c1294210359",
+          "consumed": {
+            "coeff": 8,
+            "AP": 52,
+            "alpha.condition_threshold": 35,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "dbfe2c1294210359",
+          "blocked_reason": null
+        },
+        "1": {
+          "fold": "1",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2021-04-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "50cfc768cb1d50fe",
+          "consumed": {
+            "coeff": 7,
+            "AP": 57,
+            "alpha.condition_threshold": 55,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "50cfc768cb1d50fe",
+          "blocked_reason": null
+        },
+        "2": {
+          "fold": "2",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2021-07-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "77970442e40b6d4b",
+          "consumed": {
+            "coeff": 1,
+            "AP": 43,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "77970442e40b6d4b",
+          "blocked_reason": null
+        },
+        "3": {
+          "fold": "3",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2021-10-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "27fe107b9a473e1c",
+          "consumed": {
+            "coeff": 2,
+            "AP": 53,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "27fe107b9a473e1c",
+          "blocked_reason": null
+        },
+        "4": {
+          "fold": "4",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2022-01-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "a5f220a369330835",
+          "consumed": {
+            "coeff": 3,
+            "AP": 52,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "a5f220a369330835",
+          "blocked_reason": null
+        },
+        "5": {
+          "fold": "5",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2022-04-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "36fbd6e68ad1dd53",
+          "consumed": {
+            "coeff": 2,
+            "AP": 52,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "36fbd6e68ad1dd53",
+          "blocked_reason": null
+        },
+        "6": {
+          "fold": "6",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2022-07-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "6cdfc349ef5b15f1",
+          "consumed": {
+            "coeff": 8,
+            "AP": 27,
+            "alpha.condition_threshold": 75,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "6cdfc349ef5b15f1",
+          "blocked_reason": null
+        },
+        "7": {
+          "fold": "7",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2022-10-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "e4784e120f88a3a9",
+          "consumed": {
+            "coeff": 6,
+            "AP": 52,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "e4784e120f88a3a9",
+          "blocked_reason": null
+        },
+        "8": {
+          "fold": "8",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2023-01-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "63be8e347964f477",
+          "consumed": {
+            "coeff": 2,
+            "AP": 58,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "63be8e347964f477",
+          "blocked_reason": null
+        },
+        "9": {
+          "fold": "9",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2023-04-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "741e8175d4a968a0",
+          "consumed": {
+            "coeff": 2,
+            "AP": 59,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "741e8175d4a968a0",
+          "blocked_reason": null
+        },
+        "10": {
+          "fold": "10",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2023-07-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "d504f1cfd56bc8db",
+          "consumed": {
+            "coeff": 7,
+            "AP": 54,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "d504f1cfd56bc8db",
+          "blocked_reason": null
+        },
+        "11": {
+          "fold": "11",
+          "decision": "ADMIT",
+          "reason": "A_STOCK_CAL@2023-10-01: A_STOCK_INSTALLED -- selected",
+          "supplied_digest": "b08d2e0115a09cf3",
+          "consumed": {
+            "coeff": 8,
+            "AP": 43,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "b08d2e0115a09cf3",
+          "blocked_reason": null
+        }
+      },
+      "n_admitted": 12,
+      "n_origins": 12
+    },
+    "B_FP_PERSISTENCE": {
+      "lineage": {
+        "0": {
+          "fold": "0",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2021-01-01: FALLBACK_TO_A -- no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "1": {
+          "fold": "1",
+          "decision": "ADMIT",
+          "reason": "B_FP_PERSISTENCE@2021-04-01: B_SELECTED -- selected",
+          "supplied_digest": "3716a2b199a1f85f",
+          "consumed": {
+            "coeff": 7,
+            "AP": 34,
+            "alpha.condition_threshold": 70,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "3716a2b199a1f85f",
+          "blocked_reason": null
+        },
+        "2": {
+          "fold": "2",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2021-07-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "3": {
+          "fold": "3",
+          "decision": "ADMIT",
+          "reason": "B_FP_PERSISTENCE@2021-10-01: B_SELECTED -- selected",
+          "supplied_digest": "510e28497f081b65",
+          "consumed": {
+            "coeff": 1,
+            "AP": 52,
+            "alpha.condition_threshold": 40,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "510e28497f081b65",
+          "blocked_reason": null
+        },
+        "4": {
+          "fold": "4",
+          "decision": "ADMIT",
+          "reason": "B_FP_PERSISTENCE@2022-01-01: B_SELECTED -- selected",
+          "supplied_digest": "27fe107b9a473e1c",
+          "consumed": {
+            "coeff": 2,
+            "AP": 53,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "27fe107b9a473e1c",
+          "blocked_reason": null
+        },
+        "5": {
+          "fold": "5",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2022-04-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "6": {
+          "fold": "6",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2022-07-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "7": {
+          "fold": "7",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2022-10-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "8": {
+          "fold": "8",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2023-01-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "9": {
+          "fold": "9",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2023-04-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "10": {
+          "fold": "10",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2023-07-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "11": {
+          "fold": "11",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "B_FP_PERSISTENCE@2023-10-01: FALLBACK_TO_A -- no candidate cleared the utility/support floor at this origin",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        }
+      },
+      "n_admitted": 3,
+      "n_origins": 12
+    },
+    "C_FP_CONTEXT": {
+      "lineage": {
+        "0": {
+          "fold": "0",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2021-01-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet))",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "1": {
+          "fold": "1",
+          "decision": "ADMIT",
+          "reason": "C_FP_CONTEXT@2021-04-01: FALLBACK_TO_B -- selected",
+          "supplied_digest": "3716a2b199a1f85f",
+          "consumed": {
+            "coeff": 7,
+            "AP": 34,
+            "alpha.condition_threshold": 70,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "3716a2b199a1f85f",
+          "blocked_reason": null
+        },
+        "2": {
+          "fold": "2",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2021-07-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "3": {
+          "fold": "3",
+          "decision": "ADMIT",
+          "reason": "C_FP_CONTEXT@2021-10-01: FALLBACK_TO_B -- selected",
+          "supplied_digest": "510e28497f081b65",
+          "consumed": {
+            "coeff": 1,
+            "AP": 52,
+            "alpha.condition_threshold": 40,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "510e28497f081b65",
+          "blocked_reason": null
+        },
+        "4": {
+          "fold": "4",
+          "decision": "ADMIT",
+          "reason": "C_FP_CONTEXT@2022-01-01: FALLBACK_TO_B -- selected",
+          "supplied_digest": "27fe107b9a473e1c",
+          "consumed": {
+            "coeff": 2,
+            "AP": 53,
+            "alpha.condition_threshold": 80,
+            "novolumedata": false,
+            "src_col": "close"
+          },
+          "consumed_digest": "27fe107b9a473e1c",
+          "blocked_reason": null
+        },
+        "5": {
+          "fold": "5",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2022-04-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "6": {
+          "fold": "6",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2022-07-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "7": {
+          "fold": "7",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2022-10-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "8": {
+          "fold": "8",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2023-01-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "9": {
+          "fold": "9",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2023-04-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "10": {
+          "fold": "10",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2023-07-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        },
+        "11": {
+          "fold": "11",
+          "decision": "COMMON_FLAT_FALLBACK",
+          "reason": "C_FP_CONTEXT@2023-10-01: FALLBACK_TO_A -- Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)",
+          "supplied_digest": null,
+          "consumed": null,
+          "consumed_digest": null,
+          "blocked_reason": "RAW_NONE: no stock selection recorded for this fold"
+        }
+      },
+      "n_admitted": 3,
+      "n_origins": 12
+    }
+  },
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T19:10:37.277044+00:00"
+}

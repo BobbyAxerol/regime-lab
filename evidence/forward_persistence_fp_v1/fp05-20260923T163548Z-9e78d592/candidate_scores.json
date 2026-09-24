@@ -1,0 +1,381 @@
+{
+  "schema": "regime_lab.fp05_candidate_scores.v1",
+  "demo_origin": "2023-10-01",
+  "scored": [
+    {
+      "record_id": "2023-10-01:R00",
+      "region_id": "R00",
+      "params": {
+        "coeff": 3,
+        "AP": 56,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 26,
+      "is_mean_daily_return": -3.892231528041958e-05,
+      "region_support_within_origin": 50.0,
+      "predicted_forward_utility": 1.6136603384221933e-05,
+      "D_point_estimate": -5.505891866464151e-05,
+      "decay_risk_score": 0.0001528785767147688,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 3.959825617615352e-05,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000016 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R01",
+      "region_id": "R01",
+      "params": {
+        "coeff": 8,
+        "AP": 46,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 219,
+      "is_mean_daily_return": -5.777214504429197e-05,
+      "region_support_within_origin": 18.0,
+      "predicted_forward_utility": 1.5701976425259238e-05,
+      "D_point_estimate": -7.347412146955121e-05,
+      "decay_risk_score": 0.00014483688753433739,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.0005055525069778886,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000016 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R02",
+      "region_id": "R02",
+      "params": {
+        "coeff": 6,
+        "AP": 57,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 211,
+      "is_mean_daily_return": -5.9872601621782576e-05,
+      "region_support_within_origin": 21.0,
+      "predicted_forward_utility": 1.416064934136976e-05,
+      "D_point_estimate": -7.403325096315233e-05,
+      "decay_risk_score": 0.00014459663658005566,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.0004943781415028548,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000014 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R03",
+      "region_id": "R03",
+      "params": {
+        "coeff": 8,
+        "AP": 23,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 19,
+      "is_mean_daily_return": -5.6708036035131245e-05,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": 4.805164879498106e-06,
+      "D_point_estimate": -6.151320091462935e-05,
+      "decay_risk_score": 0.0001500044041503211,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 1.0037152773459005e-05,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000005 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R04",
+      "region_id": "R04",
+      "params": {
+        "coeff": 4,
+        "AP": 34,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 87,
+      "is_mean_daily_return": -0.00031758330435969264,
+      "region_support_within_origin": 3.0,
+      "predicted_forward_utility": -7.244209515603187e-06,
+      "D_point_estimate": -0.0003103390948440895,
+      "decay_risk_score": 6.360166090029539e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 7.004199864481055e-05,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000007 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R05",
+      "region_id": "R05",
+      "params": {
+        "coeff": 6,
+        "AP": 29,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 213,
+      "is_mean_daily_return": -0.00012193585380070165,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": 4.604076413176648e-06,
+      "D_point_estimate": -0.0001265399302138783,
+      "decay_risk_score": 0.000123734334887228,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00019931092603386085,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000005 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R06",
+      "region_id": "R06",
+      "params": {
+        "coeff": 8,
+        "AP": 60,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 13,
+      "is_mean_daily_return": -0.00012182256619631892,
+      "region_support_within_origin": 1.0,
+      "predicted_forward_utility": 3.0163377803618496e-06,
+      "D_point_estimate": -0.00012483890397668076,
+      "decay_risk_score": 0.00012437221972617707,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00023852802599934133,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000003 < floor 0.000064",
+        "support 1.0 < floor 2"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R07",
+      "region_id": "R07",
+      "params": {
+        "coeff": 8,
+        "AP": 48,
+        "alpha.condition_threshold": 60,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 220,
+      "is_mean_daily_return": -0.00014117568614858899,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": 3.8103859002599697e-07,
+      "D_point_estimate": -0.00014155672473861497,
+      "decay_risk_score": 0.00011810858468471495,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00023175047631987918,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000000 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R08",
+      "region_id": "R08",
+      "params": {
+        "coeff": 2,
+        "AP": 37,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 145,
+      "is_mean_daily_return": -0.00014573630956515692,
+      "region_support_within_origin": 6.0,
+      "predicted_forward_utility": -6.756938084961399e-06,
+      "D_point_estimate": -0.00013897937148019552,
+      "decay_risk_score": 0.00011906954441235905,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00021977767624184463,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000007 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R09",
+      "region_id": "R09",
+      "params": {
+        "coeff": 7,
+        "AP": 56,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 210,
+      "is_mean_daily_return": -0.0001784017853203362,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": -8.815089055961511e-06,
+      "D_point_estimate": -0.00016958669626437469,
+      "decay_risk_score": 0.00010804266249707736,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00013107197519196534,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000009 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R10",
+      "region_id": "R10",
+      "params": {
+        "coeff": 1,
+        "AP": 56,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 85,
+      "is_mean_daily_return": -0.00013529075220160004,
+      "region_support_within_origin": 4.0,
+      "predicted_forward_utility": -1.467387044664094e-05,
+      "D_point_estimate": -0.0001206168817549591,
+      "decay_risk_score": 0.00012598397390865175,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": -9.389124043180612e-05,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000015 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R11",
+      "region_id": "R11",
+      "params": {
+        "coeff": 7,
+        "AP": 31,
+        "alpha.condition_threshold": 50,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 29,
+      "is_mean_daily_return": -0.00021667237210225445,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": -5.486704253690442e-06,
+      "D_point_estimate": -0.000211185667848564,
+      "decay_risk_score": 9.34180240495108e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.0001851108692141929,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000005 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R12",
+      "region_id": "R12",
+      "params": {
+        "coeff": 7,
+        "AP": 10,
+        "alpha.condition_threshold": 75,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 21,
+      "is_mean_daily_return": -0.00023335798470717356,
+      "region_support_within_origin": 1.0,
+      "predicted_forward_utility": 1.9882035058691356e-06,
+      "D_point_estimate": -0.0002353461882130427,
+      "decay_risk_score": 8.53993526923489e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00018347202021370967,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility 0.000002 < floor 0.000064",
+        "support 1.0 < floor 2"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R13",
+      "region_id": "R13",
+      "params": {
+        "coeff": 3,
+        "AP": 44,
+        "alpha.condition_threshold": 30,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 5,
+      "is_mean_daily_return": -0.0003625900775737011,
+      "region_support_within_origin": 3.0,
+      "predicted_forward_utility": -3.2070376026391885e-05,
+      "D_point_estimate": -0.0003305197015473092,
+      "decay_risk_score": 5.841678889620071e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 1.845961405336216e-05,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000032 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R14",
+      "region_id": "R14",
+      "params": {
+        "coeff": 4,
+        "AP": 54,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 67,
+      "is_mean_daily_return": -0.00023444034828149225,
+      "region_support_within_origin": 7.0,
+      "predicted_forward_utility": -7.303326892143965e-06,
+      "D_point_estimate": -0.00022713702138934828,
+      "decay_risk_score": 8.804060822010827e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.00016748681306305975,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000007 < floor 0.000064"
+      ]
+    },
+    {
+      "record_id": "2023-10-01:R15",
+      "region_id": "R15",
+      "params": {
+        "coeff": 6,
+        "AP": 35,
+        "alpha.condition_threshold": 65,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "medoid_trial_id": 25,
+      "is_mean_daily_return": -0.000271804980197303,
+      "region_support_within_origin": 2.0,
+      "predicted_forward_utility": -4.248784273483298e-06,
+      "D_point_estimate": -0.0002675561959238197,
+      "decay_risk_score": 7.581175528248094e-05,
+      "branch": "MEAN_DECAY",
+      "actual_forward_label": 0.0002602858118262996,
+      "eligible": false,
+      "ineligibility_reasons": [
+        "predicted utility -0.000004 < floor 0.000064"
+      ]
+    }
+  ],
+  "winner_record_id": null,
+  "excluded_from_scoring": [],
+  "lab_run_id": "fp05-20260923T163548Z-9e78d592",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T16:35:48.711176+00:00"
+}

@@ -65,3 +65,16 @@ evidence/**/observable_market.parquet
 *.pt
 *.pth
 *.ckpt
+
+# ---------------------------------------------------------------------------
+# KHÔNG commit: compute-cache (payload thô của mỗi lần gọi engine thật, dùng để
+# tái sử dụng qua cache-hit -- xem time_edge/compute_cache.py). Đây là DỮ LIỆU
+# TRUNG GIAN có thể sinh lại (rerun sẽ cache-miss rồi ghi lại y hệt), không
+# phải bằng chứng cuối; report/gate_receipt/d1_table/paired_contrasts/v.v. mới
+# là bằng chứng và VẪN ở trong git. Vài file compute-cache thực tế đã vượt
+# 100MB (GitHub từ chối cứng) -- lý do trực tiếp khiến push thất bại trước khi
+# rule này được thêm. File đã track trước đây bị gỡ khỏi lịch sử bằng
+# git filter-branch một lần, ghi lại trong evidence/regime_time_edge_ra_v1/
+# owner_decisions.jsonl.
+# ---------------------------------------------------------------------------
+evidence/**/compute-cache/

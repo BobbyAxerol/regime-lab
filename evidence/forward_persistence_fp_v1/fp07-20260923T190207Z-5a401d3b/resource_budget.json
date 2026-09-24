@@ -1,0 +1,25 @@
+{
+  "schema": "regime_lab.fp07_resource_budget.v1",
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 7.0,
+    "registered_rlimit_as_gib": 4,
+    "exception_applied": true,
+    "exception_decision_id": "dec-9cc3ec3e712cf61b",
+    "previous_soft_gib": null
+  },
+  "measured": {
+    "peak_rss_mib": 3357.7,
+    "total_wall_seconds": 509.41,
+    "per_arm_wall_seconds": {
+      "A_STOCK_CAL": 25.02,
+      "B_FP_PERSISTENCE": 241.55,
+      "C_FP_CONTEXT": 236.22
+    },
+    "frame_bars": 1576800
+  },
+  "note": "3 real fp.evaluator.run_deployment calls (report_level='score', FUP-04/FP-02-proven equity-exact vs audit) over the SAME shared frame, one per arm -- zero new search-trial engine calls (Arm A/B/C selection reuses FP-04's already-cached search results and FP-05/06's already-built feature archive)",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T19:10:37.284098+00:00"
+}

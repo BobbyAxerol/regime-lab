@@ -1,0 +1,51 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-01",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp01-20260922T162253Z-3538bb29",
+  "registration_digest": "ddb014746cfa0d3b8e37e51b1aeb1a74b5f8440606fd0ded068c7b9f3eb2bed3",
+  "required_gates": [
+    "FP01-G-VALIDITY",
+    "FP01-G-IDENTITY",
+    "FP01-G-MIGRATION",
+    "FP01-G-BUDGET"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp01_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp01-20260922T162253Z-3538bb29",
+    "gates": {
+      "FP01-G-VALIDITY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP01-G-IDENTITY": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP01-G-MIGRATION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP01-G-BUDGET": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-22T16:23:14.864255+00:00"
+}

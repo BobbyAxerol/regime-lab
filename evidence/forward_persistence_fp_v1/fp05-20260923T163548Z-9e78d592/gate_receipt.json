@@ -1,0 +1,60 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-05",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp05-20260923T163548Z-9e78d592",
+  "required_gates": [
+    "FP05-G-SPLIT",
+    "FP05-G-MODEL",
+    "FP05-G-SCORE",
+    "FP05-G-SUPPORT",
+    "FP05-G-ACTION",
+    "FP05-G-REPORT"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp05_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp05-20260923T163548Z-9e78d592",
+    "gates": {
+      "FP05-G-SPLIT": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP05-G-MODEL": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP05-G-SCORE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP05-G-SUPPORT": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP05-G-ACTION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP05-G-REPORT": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 118,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-23T16:35:48.729821+00:00"
+}

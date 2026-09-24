@@ -1,0 +1,348 @@
+{
+  "schema": "regime_lab.fp07_selections.v1",
+  "by_origin": {
+    "2021-01-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 8,
+          "AP": 52,
+          "alpha.condition_threshold": 35,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet)"
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no matured training rows available before this origin's own decision time (guide 8.7's fit floor not met yet))"
+      }
+    },
+    "2021-04-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 7,
+          "AP": 57,
+          "alpha.condition_threshold": 55,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "B_SELECTED",
+        "params": {
+          "coeff": 7,
+          "AP": 34,
+          "alpha.condition_threshold": 70,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2021-04-01:R03",
+        "predicted_forward_utility": 0.00013234367074063907,
+        "n_scored": 16,
+        "n_eligible": 12
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_B",
+        "params": {
+          "coeff": 7,
+          "AP": 34,
+          "alpha.condition_threshold": 70,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2021-04-01:R03",
+        "predicted_forward_utility": 0.0001323436707406391,
+        "n_scored": 16,
+        "n_eligible": 12
+      }
+    },
+    "2021-07-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 1,
+          "AP": 43,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2021-10-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 2,
+          "AP": 53,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "B_SELECTED",
+        "params": {
+          "coeff": 1,
+          "AP": 52,
+          "alpha.condition_threshold": 40,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2021-10-01:R15",
+        "predicted_forward_utility": 0.0002841147390695457,
+        "n_scored": 16,
+        "n_eligible": 10
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_B",
+        "params": {
+          "coeff": 1,
+          "AP": 52,
+          "alpha.condition_threshold": 40,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2021-10-01:R15",
+        "predicted_forward_utility": 0.0002841147390695457,
+        "n_scored": 16,
+        "n_eligible": 10
+      }
+    },
+    "2022-01-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 3,
+          "AP": 52,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "B_SELECTED",
+        "params": {
+          "coeff": 2,
+          "AP": 53,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2022-01-01:R00",
+        "predicted_forward_utility": 0.00013221785966662083,
+        "n_scored": 16,
+        "n_eligible": 13
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_B",
+        "params": {
+          "coeff": 2,
+          "AP": 53,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        },
+        "model_alpha": 10.0,
+        "record_id": "2022-01-01:R00",
+        "predicted_forward_utility": 0.00013221785966662083,
+        "n_scored": 16,
+        "n_eligible": 13
+      }
+    },
+    "2022-04-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 2,
+          "AP": 52,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2022-07-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 8,
+          "AP": 27,
+          "alpha.condition_threshold": 75,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2022-10-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 6,
+          "AP": 52,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2023-01-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 2,
+          "AP": 58,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2023-04-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 2,
+          "AP": 59,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2023-07-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 7,
+          "AP": 54,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    },
+    "2023-10-01": {
+      "A_STOCK_CAL": {
+        "source": "A_STOCK_INSTALLED",
+        "params": {
+          "coeff": 8,
+          "AP": 43,
+          "alpha.condition_threshold": 80,
+          "novolumedata": false,
+          "src_col": "close"
+        }
+      },
+      "B_FP_PERSISTENCE": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "model_alpha": 10.0,
+        "reason": "no candidate cleared the utility/support floor at this origin",
+        "n_scored": 16
+      },
+      "C_FP_CONTEXT": {
+        "source": "FALLBACK_TO_A",
+        "params": null,
+        "reason": "Arm B itself fell back to A at this origin (no candidate cleared the utility/support floor at this origin)"
+      }
+    }
+  },
+  "lab_run_id": "fp07-20260923T190207Z-5a401d3b",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T19:10:37.275028+00:00"
+}

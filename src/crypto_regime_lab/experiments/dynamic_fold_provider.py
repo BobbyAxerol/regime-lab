@@ -548,7 +548,8 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                             alloc_per_trade: float = ALLOC_PER_TRADE,
                             account_capital: float = ACCOUNT_CAPITAL,
                             research_retention: str = "full_trial_ledger",
-                            engine_report_level: str | None = None) -> dict:
+                            engine_report_level: str | None = None,
+                            admission_policy=None) -> dict:
     """Run one arm's cutoff list through the installed Mode 4 pipeline.
 
     ``research_retention`` is passed straight through to the installed engine's
@@ -561,6 +562,18 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
     ``trial_table``, selection, scoring, or the final account. Defaults to the
     prior hardcoded value so every existing caller (RA-05, RA-07) is
     byte-identical.
+
+    ``admission_policy`` (FP-01 finding FP-F02 repair, opt-in) is a callable
+    taking one fold row (the same dict that lands in ``fold_selection_table``)
+    and returning ``{"decision", "reason", "kept"}`` with decision one of
+    ADMIT / KEEP_INCUMBENT / COMMON_FLAT_FALLBACK, decided from TRAINING-ONLY
+    evidence the policy itself computes. When present it is consulted per fold
+    BEFORE the deployment account is built and the account consumes ONLY the
+    admitted params -- ``payload["admission_wiring"]`` records the raw stock
+    selection AS-IS plus the per-fold decision and the consumed digests, so
+    the verifier can re-check admission without re-running the engine.
+    ``None`` (default) reproduces the legacy unwired behavior exactly, so
+    every published run is reproducible byte-for-byte.
 
     ``engine_report_level`` is the engine's own output-retention profile, passed
     to every ``run_event_account`` this route makes (both the per-candidate
@@ -624,6 +637,7 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
             "fee_binding": bound, "account_capital": float(account_capital),
             "alloc_per_trade": float(alloc_per_trade),
             "train_memory_days": memory,
+            "admission_wired": bool(admission_policy is not None),
         },
         "ok": False,
         "error": None,
@@ -675,12 +689,48 @@ def run_cutoff_walk_forward(alpha_id: str, frame: pd.DataFrame, schedule: Cutoff
                 }))
                 payload["scoring_backend"] = "endpoint"
                 payload["resolved_evaluator"] = "lab_event_account_scorer"
-                account = _event_account_payload(
-                    alpha_id, frame, payload["params_by_fold"], schedule.cutoffs, idx,
-                    one_way_fee=one_way_fee, slippage_bps=slippage_bps,
-                    account_capital=account_capital,
-                    engine_report_level=engine_report_level,
-                )
+                if admission_policy is None:
+                    deployment_params = payload["params_by_fold"]
+                    admission_record = {
+                        "wired": False,
+                        "note": ("legacy unwired behavior: the account consumes every "
+                                 "selected params_by_fold; admission, if any, was recorded "
+                                 "descriptively elsewhere"),
+                    }
+                else:
+                    from ..fp.admission_wiring import (
+                        deployment_params_from_decisions,
+                        no_admitted_deployment_payload,
+                    )
+                    fold_rows = payload.get("fold_selection_table") or []
+                    raw_keys = sorted(payload["params_by_fold"], key=lambda k: int(k))
+                    decisions = {key: admission_policy(dict(row))
+                                 for key, row in zip(raw_keys, fold_rows)}
+                    wired = deployment_params_from_decisions(
+                        params_by_fold=payload["params_by_fold"], decisions=decisions)
+                    deployment_params = wired["deployment_params_by_fold"]
+                    admission_record = {
+                        "wired": True,
+                        "policy": getattr(admission_policy, "__name__", "callable"),
+                        "lineage": wired["lineage"],
+                        "note": ("raw stock params_by_fold kept AS-IS above; ONLY the "
+                                 "admitted deployment_params reached the account"),
+                    }
+                if admission_policy is not None and not deployment_params:
+                    account = no_admitted_deployment_payload(
+                        arm=schedule.arm, cutoffs=list(schedule.cutoffs),
+                        lineage=admission_record.get("lineage") or {},
+                        reason=("every fold was rejected without an incumbent; "
+                                "no account was run rather than inventing PnL=0"))
+                else:
+                    account = _event_account_payload(
+                        alpha_id, frame, deployment_params, schedule.cutoffs, idx,
+                        one_way_fee=one_way_fee, slippage_bps=slippage_bps,
+                        account_capital=account_capital,
+                        engine_report_level=engine_report_level,
+                    )
+                payload["admission_wiring"] = admission_record
+                payload["deployment_params_by_fold"] = deployment_params
                 payload["account"] = account
             else:
                 raise ProviderError(f"unknown route {route!r}")

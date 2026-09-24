@@ -1,0 +1,26 @@
+{
+  "schema": "regime_lab.fp06_context_policy.v1",
+  "context_feature_names": [
+    "ctx_direction_efficiency",
+    "ctx_volatility_ratio"
+  ],
+  "interaction_specs": [
+    {
+      "a": "norm_AP",
+      "b": "ctx_direction_efficiency",
+      "reason": "AP is a lookback/period parameter; a shorter/longer effective lookback plausibly behaves differently in a trending vs. choppy market"
+    },
+    {
+      "a": "norm_coeff",
+      "b": "ctx_volatility_ratio",
+      "reason": "coeff scales signal sensitivity; plausibly interacts with whether recent volatility is elevated relative to the training-memory norm"
+    }
+  ],
+  "direction_lookback_days": 30,
+  "vol_short_days": 30,
+  "vol_long_days": 180,
+  "jm_m0_used": false,
+  "jm_m0_reason": "LAB-08's own measured history found JM/M0 calibration-vintage state support too thin to build on (only 1.64% of scoring observations carried a state key seen during calibration) -- a disclosed design choice, not a silent omission; guide 9.4's exposure count is still recorded, at zero.",
+  "not_full_cartesian": "2 of 18 possible candidate-descriptor x context pairs (guide 9.2's prohibition)",
+  "frozen_at_utc": "2026-09-23T17:35:37.859323+00:00"
+}

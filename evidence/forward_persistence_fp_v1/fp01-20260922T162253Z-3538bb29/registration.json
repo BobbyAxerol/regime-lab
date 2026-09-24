@@ -1,0 +1,39 @@
+{
+  "schema": "regime_lab.fp_registration.v1",
+  "study_id": "forward_persistence_fp_v1",
+  "guide_version": "FP-GUIDE-1.0",
+  "guide_source": "REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md",
+  "registered_at_utc": "2026-09-22T16:20:50.073984+00:00",
+  "registered_by_phase": "FP-01",
+  "primary": {
+    "contrast": "C_FP_CONTEXT minus B_FP_PERSISTENCE on a common fixed calendar",
+    "decision_rule": "retention within scope only when valid, decays better, and meets the OOS utility/risk safeguard (guide 20.5)",
+    "fixed_timing": true
+  },
+  "secondary": {
+    "timing": "conditional FP-09 only: SELECTOR_FIXED_CAL / SELECTOR_CAL_MATCHED / SELECTOR_REGIME_TIMING under the same frozen selector; needs a mechanism hypothesis + owner approval, never automatic"
+  },
+  "arms": {
+    "A_STOCK_CAL": "stock comparator: installed Mode 4 selection, calendar",
+    "B_FP_PERSISTENCE": "forward-persistence selector, NO signed regime/context",
+    "C_FP_CONTEXT": "B pipeline + one frozen context family, same pool/target/base"
+  },
+  "trial_episode_rule": "a trial is one evaluated candidate; an episode is a matured train->deploy->forward-outcome run; trials do not substitute episodes",
+  "decay_primary_rule": "decay is the primary selector objective but never optimized alone: always beside the OOS utility/risk safeguard",
+  "historical_invariance": "RA/RF/FUP registrations, runs, verdicts are append-only; FP cites them via invalidated_by / superseded_by / recomputed_from / verified_reuse_of",
+  "phases": [
+    "FP-01",
+    "FP-02",
+    "FP-03",
+    "FP-04",
+    "FP-05",
+    "FP-06",
+    "FP-07",
+    "FP-08",
+    "FP-09",
+    "FP-10"
+  ],
+  "owner_approval": "each phase starts only on the owner's explicit approval recorded in evidence/regime_time_edge_ra_v1/owner_decisions.jsonl (R-18)",
+  "lab_run_id": "fp01-20260922T162253Z-3538bb29",
+  "written_at_utc": "2026-09-22T16:23:14.843055+00:00"
+}

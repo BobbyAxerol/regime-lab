@@ -1,0 +1,28 @@
+{
+  "schema": "regime_lab.fp02_cache_reuse.v1",
+  "first": {
+    "status": "MISS",
+    "producer": "fp02-20260922T180514Z-e4aad0b7-a"
+  },
+  "first_causality": {
+    "physical_compute_at": "2026-09-22T18:05:27.001339+00:00",
+    "simulated_cutoff": "2023-06-10T23:59:00+00:00",
+    "simulated_ready_at": "2023-06-10T23:59:00+00:00"
+  },
+  "reused": {
+    "status": "HIT",
+    "producer_of_reused_payload": "fp02-20260922T180514Z-e4aad0b7-a",
+    "payload_identical": true
+  },
+  "changed_economics": {
+    "status": "MISS",
+    "terminal_equity_changed": true
+  },
+  "provenance_excluded_from_payload_key": [
+    "producer",
+    "physical_compute_at (only inside causality, semantic not provenance)"
+  ],
+  "lab_run_id": "fp02-20260922T180514Z-e4aad0b7",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T18:06:05.750012+00:00"
+}

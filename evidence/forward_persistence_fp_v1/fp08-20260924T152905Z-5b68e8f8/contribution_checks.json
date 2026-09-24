@@ -1,0 +1,38 @@
+{
+  "schema": "regime_lab.fp08_contribution_checks.v1",
+  "answers": [
+    {
+      "question": "Context c\u00f3 th\u1ef1c s\u1ef1 \u0111\u1ed5i candidate rankings/selections kh\u00f4ng?",
+      "question_en": "Does context actually change candidate rankings/selections?",
+      "answer": "No",
+      "evidence": "cell1: 0/12 origins CONTEXT_CONDITIONED; cell2: 0/3 origins CONTEXT_CONDITIONED"
+    },
+    {
+      "question": "Benefit c\u00f3 c\u00f2n sau common calendar?",
+      "question_en": "Does the benefit persist after a common calendar?",
+      "answer": "N/A",
+      "evidence": "no cell shows a single CONTEXT_CONDITIONED selection -- C's own predictions were always either FALLBACK_TO_A or FALLBACK_TO_B, so there is no context-driven effect for the next three questions to examine"
+    },
+    {
+      "question": "Context improvement c\u00f3 ch\u1ec9 l\u00e0 market-wide offset kh\u00f4ng?",
+      "question_en": "Is the context improvement just a market-wide offset?",
+      "answer": "N/A",
+      "evidence": "no cell shows a single CONTEXT_CONDITIONED selection -- C's own predictions were always either FALLBACK_TO_A or FALLBACK_TO_B, so there is no context-driven effect for the next three questions to examine"
+    },
+    {
+      "question": "C th\u1eafng do conditional selection hay ch\u1ec9 gi\u1ea3m exposure?",
+      "question_en": "Does C win via conditional selection or just reduced exposure?",
+      "answer": "N/A",
+      "evidence": "no cell shows a single CONTEXT_CONDITIONED selection -- C's own predictions were always either FALLBACK_TO_A or FALLBACK_TO_B, so there is no context-driven effect for the next three questions to examine"
+    },
+    {
+      "question": "K\u1ebft qu\u1ea3 c\u00f3 ph\u1ee5 thu\u1ed9c m\u1ed9t origin/model vintage kh\u00f4ng?",
+      "question_en": "Does the result depend on one origin/model vintage?",
+      "answer": "CONSISTENT_ACROSS_CELLS",
+      "evidence": "cell1 (A-SC/BTCUSDT, 12 origins) and cell2 (A-SC/ETHUSDT, 3 origins) both show 0/12 and 0/3 CONTEXT_CONDITIONED selections respectively"
+    }
+  ],
+  "lab_run_id": "fp08-20260924T152905Z-5b68e8f8",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T15:29:05.059323+00:00"
+}

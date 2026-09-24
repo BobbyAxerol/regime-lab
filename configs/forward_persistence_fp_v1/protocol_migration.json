@@ -1,0 +1,39 @@
+{
+  "schema": "regime_lab.fp_protocol_migration.v1",
+  "study_id": "forward_persistence_fp_v1",
+  "guide_version": "FP-GUIDE-1.0",
+  "stamped_at_utc": "2026-09-22T16:22:52.753479+00:00",
+  "rows": [
+    {
+      "old_rule": "Regime edge = timing: M4_REGIME schedule vs calendar WFO",
+      "new_rule": "Primary = C_FP_CONTEXT vs B_FP_PERSISTENCE on a common fixed calendar; timing moves to conditional FP-09",
+      "reason": "two independent falsifications (RA-07 90d placebo; FUP-05 12m placebo) reproduced the apparent timing advantage with market-free tapes; the open question is conditional SELECTION",
+      "affected_claims_or_tests": "FUP-05 verdict (invalidated for causal citation); FP-07/FP-09 registration"
+    },
+    {
+      "old_rule": "Admission funnel recorded descriptively after the account ran",
+      "new_rule": "admission_policy before the deployment account is built; only admitted params are consumed (FP-F02 repair)",
+      "reason": "KEEP_INCUMBENT never stopped the account from switching",
+      "affected_claims_or_tests": "FP01-T02; FP-07 must pass a policy"
+    },
+    {
+      "old_rule": "D1/OOS first return dropped (in-window base)",
+      "new_rule": "fp/decay_bounds.windowed_returns: preceding-mark base (FP-F04)",
+      "reason": "IS side kept the first return via prior equity; OOS did not",
+      "affected_claims_or_tests": "FP01-T03; FP-07 D1 recomputed_from"
+    },
+    {
+      "old_rule": "Verdict from a control-vs-band comparison (FUP-05)",
+      "new_rule": "fp/claim_logic.timing_verdict: band-alone is NOT_EVALUABLE_DIRECT_CONTRAST_MISSING (FP-F06)",
+      "reason": "guide 21 forbids CADENCE verdicts without the direct paired contrast",
+      "affected_claims_or_tests": "FUP-05 verdict (invalidated); FP-09 verdicts"
+    },
+    {
+      "old_rule": "LOO/model-fit chronology by convention only",
+      "new_rule": "fp/chronology.chronological_split before any FP-05 fit (FP-F07)",
+      "reason": "time-sorted LOO can train on future labels; no guard existed",
+      "affected_claims_or_tests": "FP01-T07; FP-05 model protocol"
+    }
+  ],
+  "note": "Deliberate methodology revision, not a certificate that old gates passed. Owner approval opens FP economics; no silent threshold/risk-cap loosening inside the same migration."
+}

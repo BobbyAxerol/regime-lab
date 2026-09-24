@@ -1,0 +1,500 @@
+{
+  "schema": "regime_lab.fp02_lineage_demo.v1",
+  "status": "MISS",
+  "requests": [
+    {
+      "activation_id": "fp02-20260922T180514Z-e4aad0b7-initial",
+      "params": {
+        "AP": 508,
+        "coeff": 2,
+        "novolumedata": false,
+        "src_col": "close",
+        "alpha.condition_threshold": 50
+      },
+      "requested_at_bar": 0
+    },
+    {
+      "activation_id": "fp02-20260922T180514Z-e4aad0b7-switch",
+      "params": {
+        "AP": 511,
+        "coeff": 3,
+        "novolumedata": false,
+        "src_col": "close",
+        "alpha.condition_threshold": 40
+      },
+      "requested_at_bar": 7200
+    }
+  ],
+  "switch_requested_at_bar": 7200,
+  "lineage": {
+    "activations": [
+      {
+        "activation_id": null,
+        "bar_range": [
+          0,
+          511
+        ],
+        "effective_at_bar": null,
+        "fill_count": 0,
+        "fills": [],
+        "note": "adapter warming, no decisions; fills here (if any) are a resting exit from the version being left, not attributed to any activation by this module",
+        "parameter_version": null,
+        "requested_at_bar": null,
+        "sentinel": "WARMING"
+      },
+      {
+        "activation_id": "fp02-20260922T180514Z-e4aad0b7-initial",
+        "bar_range": [
+          511,
+          7714
+        ],
+        "effective_at_bar": 511,
+        "fill_count": 30,
+        "fills": [
+          {
+            "bar_index": 753,
+            "fee": 0.8004993681111364,
+            "intent_kind": "enter_long",
+            "order_id": "lab-1",
+            "position_after": 0.07434861321249206,
+            "position_before": 0.0,
+            "price": 26917.09144,
+            "qty": 0.07434861321249206,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 860,
+            "fee": 0.7989089599744241,
+            "intent_kind": "exit_all",
+            "order_id": "lab-2",
+            "position_after": 0.0,
+            "position_before": 0.07434861321249206,
+            "price": 26863.61337,
+            "qty": 0.07434861321249206,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 913,
+            "fee": 0.7998630174646046,
+            "intent_kind": "enter_long",
+            "order_id": "lab-3",
+            "position_after": 0.07430165729846605,
+            "position_before": 0.0,
+            "price": 26912.691,
+            "qty": 0.07430165729846605,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 1006,
+            "fee": 0.7972662102068189,
+            "intent_kind": "exit_all",
+            "order_id": "lab-4",
+            "position_after": 0.0,
+            "position_before": 0.07430165729846605,
+            "price": 26825.3172,
+            "qty": 0.07430165729846605,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 1013,
+            "fee": 0.8026562172817548,
+            "intent_kind": "enter_long",
+            "order_id": "lab-5",
+            "position_after": 0.07410701052319549,
+            "position_before": 0.0,
+            "price": 27077.607490000002,
+            "qty": 0.07410701052319549,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 1173,
+            "fee": 0.7911080755891507,
+            "intent_kind": "exit_all",
+            "order_id": "lab-6",
+            "position_after": 0.0,
+            "position_before": 0.07410701052319549,
+            "price": 26688.03093,
+            "qty": 0.07410701052319549,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 1180,
+            "fee": 0.8005192645295746,
+            "intent_kind": "enter_long",
+            "order_id": "lab-7",
+            "position_after": 0.07469738223023974,
+            "position_before": 0.0,
+            "price": 26792.07894,
+            "qty": 0.07469738223023974,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 1355,
+            "fee": 0.8026177996392116,
+            "intent_kind": "exit_all",
+            "order_id": "lab-8",
+            "position_after": 0.0,
+            "position_before": 0.07469738223023974,
+            "price": 26862.3135,
+            "qty": 0.07469738223023974,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 1681,
+            "fee": 0.7999999323941156,
+            "intent_kind": "enter_long",
+            "order_id": "lab-9",
+            "position_after": 0.07412925918924829,
+            "position_before": 0.0,
+            "price": 26979.89772,
+            "qty": 0.07412925918924829,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 2233,
+            "fee": 0.8019390790922131,
+            "intent_kind": "exit_all",
+            "order_id": "lab-10",
+            "position_after": 0.0,
+            "position_before": 0.07412925918924829,
+            "price": 27045.2952,
+            "qty": 0.07412925918924829,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 2617,
+            "fee": 0.8004384113975179,
+            "intent_kind": "enter_long",
+            "order_id": "lab-11",
+            "position_after": 0.07343761474627304,
+            "position_before": 0.0,
+            "price": 27248.92462,
+            "qty": 0.07343761474627304,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 2674,
+            "fee": 0.7986276272306676,
+            "intent_kind": "exit_all",
+            "order_id": "lab-12",
+            "position_after": 0.0,
+            "position_before": 0.07343761474627304,
+            "price": 27187.281,
+            "qty": 0.07343761474627304,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 2748,
+            "fee": 0.8001858279659181,
+            "intent_kind": "enter_long",
+            "order_id": "lab-13",
+            "position_after": 0.07348429456914321,
+            "position_before": 0.0,
+            "price": 27223.02203,
+            "qty": 0.07348429456914321,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 3125,
+            "fee": 0.7969162624418098,
+            "intent_kind": "exit_all",
+            "order_id": "lab-14",
+            "position_after": 0.0,
+            "position_before": 0.07348429456914321,
+            "price": 27111.78855,
+            "qty": 0.07348429456914321,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 3178,
+            "fee": 0.7998826159607334,
+            "intent_kind": "enter_long",
+            "order_id": "lab-15",
+            "position_after": 0.0736433965807371,
+            "position_before": 0.0,
+            "price": 27153.91512,
+            "qty": 0.0736433965807371,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 3349,
+            "fee": 0.7998581457329175,
+            "intent_kind": "exit_all",
+            "order_id": "lab-16",
+            "position_after": 0.0,
+            "position_before": 0.0736433965807371,
+            "price": 27153.08442,
+            "qty": 0.0736433965807371,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 3520,
+            "fee": 0.7993998626613232,
+            "intent_kind": "enter_long",
+            "order_id": "lab-17",
+            "position_after": 0.0736005770285239,
+            "position_before": 0.0,
+            "price": 27153.315059999997,
+            "qty": 0.0736005770285239,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 3685,
+            "fee": 0.7989103010631604,
+            "intent_kind": "exit_all",
+            "order_id": "lab-18",
+            "position_after": 0.0,
+            "position_before": 0.0736005770285239,
+            "price": 27136.68606,
+            "qty": 0.0736005770285239,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 3701,
+            "fee": 0.8002684800164903,
+            "intent_kind": "enter_long",
+            "order_id": "lab-19",
+            "position_after": 0.0736176446770762,
+            "position_before": 0.0,
+            "price": 27176.517379999998,
+            "qty": 0.0736176446770762,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 3799,
+            "fee": 0.798968955144769,
+            "intent_kind": "exit_all",
+            "order_id": "lab-20",
+            "position_after": 0.0,
+            "position_before": 0.0736176446770762,
+            "price": 27132.386489999997,
+            "qty": 0.0736176446770762,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 3807,
+            "fee": 0.8011485748976236,
+            "intent_kind": "enter_long",
+            "order_id": "lab-21",
+            "position_after": 0.07358595391311706,
+            "position_before": 0.0,
+            "price": 27218.12154,
+            "qty": 0.07358595391311706,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 3939,
+            "fee": 0.7988516387959866,
+            "intent_kind": "exit_all",
+            "order_id": "lab-22",
+            "position_after": 0.0,
+            "position_before": 0.07358595391311706,
+            "price": 27140.08572,
+            "qty": 0.07358595391311706,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 4661,
+            "fee": 0.8002310009473621,
+            "intent_kind": "enter_long",
+            "order_id": "lab-23",
+            "position_after": 0.07401267096926993,
+            "position_before": 0.0,
+            "price": 27030.20275,
+            "qty": 0.07401267096926993,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 5501,
+            "fee": 0.8053164642666825,
+            "intent_kind": "exit_all",
+            "order_id": "lab-24",
+            "position_after": 0.0,
+            "position_before": 0.07401267096926993,
+            "price": 27201.97953,
+            "qty": 0.07401267096926993,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 5540,
+            "fee": 0.800288575257664,
+            "intent_kind": "enter_long",
+            "order_id": "lab-25",
+            "position_after": 0.0734346486702821,
+            "position_before": 0.0,
+            "price": 27244.92422,
+            "qty": 0.0734346486702821,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 5730,
+            "fee": 0.797126825309986,
+            "intent_kind": "exit_all",
+            "order_id": "lab-26",
+            "position_after": 0.0,
+            "position_before": 0.0734346486702821,
+            "price": 27137.286,
+            "qty": 0.0734346486702821,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 7232,
+            "fee": 0.8004534735793862,
+            "intent_kind": "enter_long",
+            "order_id": "lab-27",
+            "position_after": 0.07779921578390489,
+            "position_before": 0.0,
+            "price": 25721.77192,
+            "qty": 0.07779921578390489,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 7286,
+            "fee": 0.7979409858716623,
+            "intent_kind": "exit_all",
+            "order_id": "lab-28",
+            "position_after": 0.0,
+            "position_before": 0.07779921578390489,
+            "price": 25641.03564,
+            "qty": 0.07779921578390489,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 7380,
+            "fee": 0.7998407787891025,
+            "intent_kind": "enter_long",
+            "order_id": "lab-29",
+            "position_after": 0.07766145817153863,
+            "position_before": 0.0,
+            "price": 25747.674509999997,
+            "qty": 0.07766145817153863,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 7675,
+            "fee": 0.7986806470752696,
+            "intent_kind": "exit_all",
+            "order_id": "lab-30",
+            "position_after": 0.0,
+            "position_before": 0.07766145817153863,
+            "price": 25710.32871,
+            "qty": 0.07766145817153863,
+            "side": -1,
+            "tag": "exit"
+          }
+        ],
+        "parameter_version": "fp02-20260922T180514Z-e4aad0b7-initial",
+        "requested_at_bar": 0
+      },
+      {
+        "activation_id": null,
+        "bar_range": [
+          7714,
+          8228
+        ],
+        "effective_at_bar": null,
+        "fill_count": 0,
+        "fills": [],
+        "note": "adapter warming, no decisions; fills here (if any) are a resting exit from the version being left, not attributed to any activation by this module",
+        "parameter_version": null,
+        "requested_at_bar": null,
+        "sentinel": "WARMING"
+      },
+      {
+        "activation_id": "fp02-20260922T180514Z-e4aad0b7-switch",
+        "bar_range": [
+          8228,
+          14400
+        ],
+        "effective_at_bar": 7714,
+        "fill_count": 3,
+        "fills": [
+          {
+            "bar_index": 9283,
+            "fee": 0.8007998322567045,
+            "intent_kind": "enter_long",
+            "order_id": "lab-31",
+            "position_after": 0.07528873228832572,
+            "position_before": 0.0,
+            "price": 26590.95883,
+            "qty": 0.07528873228832572,
+            "side": 1,
+            "tag": "entry"
+          },
+          {
+            "bar_index": 13222,
+            "fee": 0.7859718986312508,
+            "intent_kind": "exit_all",
+            "order_id": "lab-32",
+            "position_after": 0.0,
+            "position_before": 0.07528873228832572,
+            "price": 26098.58988,
+            "qty": 0.07528873228832572,
+            "side": -1,
+            "tag": "exit"
+          },
+          {
+            "bar_index": 13732,
+            "fee": 0.8001798438535873,
+            "intent_kind": "enter_long",
+            "order_id": "lab-33",
+            "position_after": 0.07799521109403883,
+            "position_before": 0.0,
+            "price": 25648.364579999998,
+            "qty": 0.07799521109403883,
+            "side": 1,
+            "tag": "entry"
+          }
+        ],
+        "parameter_version": "fp02-20260922T180514Z-e4aad0b7-switch",
+        "requested_at_bar": 7200
+      }
+    ],
+    "activations_effected": 2,
+    "activations_pending": 0,
+    "fills_attributed": 33,
+    "fills_during_sentinel": 0,
+    "fills_total": 33,
+    "schema": "regime_lab.fp02_lineage.v1",
+    "total_bars": 14400
+  },
+  "trial_scalar": {
+    "engine_fill_count": 33,
+    "entries": 17,
+    "status": "EVALUATED",
+    "terminal_equity": 19893.862450641278,
+    "terminal_position": 0.07799521109403883
+  },
+  "lab_run_id": "fp02-20260922T180514Z-e4aad0b7",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T18:06:05.751227+00:00"
+}

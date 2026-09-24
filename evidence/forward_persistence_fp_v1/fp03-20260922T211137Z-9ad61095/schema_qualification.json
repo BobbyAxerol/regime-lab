@@ -1,0 +1,179 @@
+{
+  "schema": "regime_lab.fp03_schema_qualification.v1",
+  "alpha_id": "A-SC",
+  "fixture_window": {
+    "start": "2023-06-01",
+    "end": "2023-06-11",
+    "rows": 14400,
+    "market_partitions_used": [
+      "2023-06"
+    ]
+  },
+  "schema_mapping": [
+    {
+      "name": "coeff",
+      "kind": "int",
+      "declared_low": 1,
+      "declared_high": 8,
+      "declared_step": 1,
+      "declared_choices": null,
+      "declared_fixed_value": null,
+      "engine_value": [
+        1,
+        8,
+        1
+      ],
+      "engine_mapping_consistent": true
+    },
+    {
+      "name": "AP",
+      "kind": "int",
+      "declared_low": 5,
+      "declared_high": 60,
+      "declared_step": 1,
+      "declared_choices": null,
+      "declared_fixed_value": null,
+      "engine_value": [
+        5,
+        60,
+        1
+      ],
+      "engine_mapping_consistent": true
+    },
+    {
+      "name": "alpha.condition_threshold",
+      "kind": "int",
+      "declared_low": 30,
+      "declared_high": 80,
+      "declared_step": 5,
+      "declared_choices": null,
+      "declared_fixed_value": null,
+      "engine_value": [
+        30,
+        80,
+        5
+      ],
+      "engine_mapping_consistent": true
+    },
+    {
+      "name": "novolumedata",
+      "kind": "fixed",
+      "declared_low": null,
+      "declared_high": null,
+      "declared_step": null,
+      "declared_choices": null,
+      "declared_fixed_value": false,
+      "engine_value": false,
+      "engine_mapping_consistent": true
+    },
+    {
+      "name": "src_col",
+      "kind": "fixed",
+      "declared_low": null,
+      "declared_high": null,
+      "declared_step": null,
+      "declared_choices": null,
+      "declared_fixed_value": "close",
+      "engine_value": "close",
+      "engine_mapping_consistent": true
+    }
+  ],
+  "unknown_value_rejections": [
+    {
+      "dimension": "coeff",
+      "probed_value": 18.0,
+      "is_feasible": false,
+      "reason": "coeff=18.0 outside declared bounds",
+      "correctly_rejected": true
+    },
+    {
+      "dimension": "AP",
+      "probed_value": 70.0,
+      "is_feasible": false,
+      "reason": "AP=70.0 outside declared bounds",
+      "correctly_rejected": true
+    },
+    {
+      "dimension": "alpha.condition_threshold",
+      "probed_value": 130.0,
+      "is_feasible": false,
+      "reason": "alpha.condition_threshold=130.0 outside declared bounds",
+      "correctly_rejected": true
+    }
+  ],
+  "fixed_dimensions": [
+    {
+      "dimension": "novolumedata",
+      "declared_fixed_value": false,
+      "engine_value": false,
+      "engine_value_is_scalar": true,
+      "matches_declared": true
+    },
+    {
+      "dimension": "src_col",
+      "declared_fixed_value": "close",
+      "engine_value": "close",
+      "engine_value_is_scalar": true,
+      "matches_declared": true
+    }
+  ],
+  "behavioral_fixtures": [
+    {
+      "dimension": "coeff",
+      "low_value": 2,
+      "high_value": 7,
+      "low": {
+        "status": "HIT",
+        "terminal_equity": 19800.25187344751,
+        "engine_fill_count": 218,
+        "entries": 109
+      },
+      "high": {
+        "status": "HIT",
+        "terminal_equity": 19959.871484670537,
+        "engine_fill_count": 27,
+        "entries": 14
+      },
+      "outcome": "BEHAVIOR_DIFFERS"
+    },
+    {
+      "dimension": "AP",
+      "low_value": 10,
+      "high_value": 45,
+      "low": {
+        "status": "HIT",
+        "terminal_equity": 19834.91647663373,
+        "engine_fill_count": 83,
+        "entries": 42
+      },
+      "high": {
+        "status": "HIT",
+        "terminal_equity": 19892.432865912757,
+        "engine_fill_count": 81,
+        "entries": 41
+      },
+      "outcome": "BEHAVIOR_DIFFERS"
+    },
+    {
+      "dimension": "alpha.condition_threshold",
+      "low_value": 35,
+      "high_value": 75,
+      "low": {
+        "status": "HIT",
+        "terminal_equity": 19840.83487261582,
+        "engine_fill_count": 79,
+        "entries": 40
+      },
+      "high": {
+        "status": "HIT",
+        "terminal_equity": 19906.122686750652,
+        "engine_fill_count": 61,
+        "entries": 31
+      },
+      "outcome": "BEHAVIOR_DIFFERS"
+    }
+  ],
+  "lab_run_id": "fp03-20260922T211137Z-9ad61095",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T21:15:40.087200+00:00"
+}

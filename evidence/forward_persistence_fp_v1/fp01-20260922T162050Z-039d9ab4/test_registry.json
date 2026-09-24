@@ -1,0 +1,22 @@
+{
+  "schema": "regime_lab.fp01_test_registry.v1",
+  "lab_run_id": "fp01-20260922T162050Z-039d9ab4",
+  "test_node_ids": [
+    "test_fp01_t01_future_only_emissions_do_not_change_calibration",
+    "test_fp01_t02_forced_rejection_keeps_rejected_params_out_of_the_account",
+    "test_fp01_t03_boundary_keeps_exactly_two_returns_on_100_120_108",
+    "test_fp01_t04_warmup_outside_evaluation_does_not_grow_sample_count",
+    "test_fp01_t05_same_params_data_economics_reach_parity",
+    "test_fp01_t06_identical_arms_give_no_false_significant_p_value",
+    "test_fp01_t07_chronology_guard_refuses_future_labels",
+    "test_fp01_claim_logic_band_alone_cannot_form_a_verdict",
+    "test_fp01_verifier_passes_on_a_valid_bundle",
+    "test_fp01_verifier_fails_on_empty_dir",
+    "test_fp01_verifier_fails_on_tampered_artifact",
+    "test_fp01_verifier_fails_on_zero_tests",
+    "test_fp01_verifier_fails_on_disposition_without_evidence"
+  ],
+  "pytest_xml": "/tmp/fp01_junit.xml",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-22T16:21:12.216793+00:00"
+}

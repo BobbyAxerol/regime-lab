@@ -53,17 +53,53 @@ def test_fup04_declaration_is_registered_and_self_locating(lab_root):
         assert row["required_test"].strip() and row["reason"].strip(), row
 
 
+def _rf05_prior_hashes(lab_root, manifest_name: str) -> dict:
+    """The RF-05 manifest's OWN prior-hash mapping, keyed by path -- the same
+    inputs test_rf05_claims.py's own two guards build, reused here (not
+    re-derived from a single declared row) so a chain lookup for one path
+    does not spuriously reject an unrelated path's perfectly valid row."""
+    from test_rf05_claims import RF05, _load
+
+    if manifest_name == "freeze_manifest.json":
+        manifest = _load(lab_root, RF05, manifest_name)
+        return {row["path"]: row["sha256"]
+                for rows in manifest["components"].values() for row in rows}
+    if manifest_name == "reproducibility_manifest.json":
+        repro = _load(lab_root, RF05, manifest_name)
+        return {row["path"]: row["sha256"] for row in repro["canonical_runners"]}
+    raise AssertionError(f"unknown RF-05 manifest {manifest_name!r}")
+
+
 def test_fup04_ceilings_are_consistent_with_what_is_declared(lab_root):
     """A ceiling below the declared repairs would be a contradiction; a ceiling
     above them would silently pre-authorise drift nobody registered."""
+    from test_rf05_claims import _SUPERSESSION_SOURCES, _declared_supersessions
+
     declaration = _declaration(lab_root)
     declared_per_manifest: dict = {}
+    # A later registered study (e.g. FP-01) may have further superseded a row
+    # FUP-04 declared here -- a legitimate second hop on the SAME chain
+    # test_rf05_claims.py's own freeze guard checks. FUP-04's row is then an
+    # accurate HISTORICAL declaration, not a claim about the live file; the
+    # live file is that later study's responsibility. Detect this with the
+    # SAME chain loader and the SAME full RF-05 prior-hash mapping the freeze
+    # guard uses, rather than asserting FUP-04's row against a file only a
+    # LATER declared study is accountable for.
+    manifests_seen: set = set()
     for row in declaration["frozen_component_supersessions"]:
         manifest = row["frozen_by"].rsplit("/", 1)[-1]
         declared_per_manifest[manifest] = declared_per_manifest.get(manifest, 0) + 1
+        manifests_seen.add(manifest)
         assert row["registered_study"] == STUDY_ID, row
-        assert row["current_sha256"] == sha256_file(lab_root / row["path"]), (
-            f"{row['path']}: the declaration does not match the committed file")
+    for manifest in manifests_seen:
+        chain = _declared_supersessions(lab_root, manifest, _rf05_prior_hashes(lab_root, manifest))
+        for row in declaration["frozen_component_supersessions"]:
+            if row["frozen_by"].rsplit("/", 1)[-1] != manifest:
+                continue
+            head = chain.get(row["path"], row)
+            assert head["current_sha256"] == sha256_file(lab_root / row["path"]), (
+                f"{row['path']}: neither the FUP-04 declaration nor any later registered "
+                f"supersession ({_SUPERSESSION_SOURCES}) matches the committed file")
     assert declared_per_manifest, "no supersession declared"
     ceilings = declaration["frozen_supersession_ceilings"]
     assert set(ceilings) == set(declared_per_manifest), (

@@ -1,0 +1,24 @@
+{
+  "schema": "regime_lab.fp08_test_registry.v1",
+  "lab_run_id": "fp08-20260924T152905Z-5b68e8f8",
+  "test_node_ids": [
+    "test_positive_decay_clips_negative_to_zero",
+    "test_primary_regime_comparison_detects_the_real_cell1_degenerate_pattern",
+    "test_primary_regime_comparison_positive_when_c_reduces_decay",
+    "test_primary_regime_comparison_negative_decay_contributes_zero_not_negative",
+    "test_primary_regime_comparison_not_evaluable_is_never_vacuously_degenerate",
+    "test_economic_outperformance_check_clears_when_ci_lower_exceeds_the_registered_threshold",
+    "test_build_coverage_matrix_has_exactly_20_cells",
+    "test_build_coverage_matrix_marks_every_other_cell_not_run_with_a_reason",
+    "test_build_contribution_checks_all_na_when_no_cell_ever_used_context",
+    "test_build_contribution_checks_real_cell1_data_matches_the_committed_fp07_finding",
+    "test_technical_invalid_beats_everything_else",
+    "test_degenerate_contrast_is_context_not_exercised_even_with_a_clearing_ci",
+    "test_real_cell1_secondary_contrast_classifies_as_no_meaningful_improvement",
+    "test_fp08_verifier_passes_on_a_valid_bundle",
+    "test_fp08_g_d2_fails_when_signed_decline_does_not_match_the_raw_windows"
+  ],
+  "pytest_xml": "/tmp/fp08_final_junit.xml",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T15:29:05.063101+00:00"
+}

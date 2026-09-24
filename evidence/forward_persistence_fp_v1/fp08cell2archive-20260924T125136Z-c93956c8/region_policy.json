@@ -1,0 +1,38 @@
+{
+  "schema": "regime_lab.fp04_region_policy.v1",
+  "cell": "cell2_replication",
+  "alpha_id": "A-SC",
+  "symbol": "ETHUSDT",
+  "origin_grid": [
+    "2021-06-01",
+    "2022-06-01",
+    "2023-06-01"
+  ],
+  "origin_grid_scope_note": "guide FP08.1's replication cell: 3 origins, reusing FP-03's own precedented CALIBRATION_ORIGINS dates verbatim, not a new number invented for this phase. A disclosed, cost-proportionate partial scope: a real 8-trial probe measured ETHUSDT running ~2x slower per trial than BTCUSDT (24.1s vs ~11s), making a 12-origin cell-2 archive (matching cell 1) cost roughly 2x cell 1's own ~9.5h search -- owner-approved at 3 origins via AskUserQuestion, decision dec-b5a96eb125bb80cd, evidence/regime_time_edge_ra_v1/owner_decisions.jsonl.",
+  "b_search": 256,
+  "b_search_source": "configs/forward_persistence_fp_v1/search_policy.json (FP-03's own frozen depth, ALPHA-level, reused verbatim for this alpha regardless of symbol)",
+  "search_seed": 20260922,
+  "train_memory_days": 180,
+  "forward_horizon_days": 28,
+  "distance_threshold": 0.12,
+  "representative_subset_size": 16,
+  "geometry_version": "3e025b00d7955796",
+  "window_overlaps": {
+    "2021-06-01": {
+      "train_window_overlaps_with": [],
+      "forward_window_overlaps_with": []
+    },
+    "2022-06-01": {
+      "train_window_overlaps_with": [],
+      "forward_window_overlaps_with": []
+    },
+    "2023-06-01": {
+      "train_window_overlaps_with": [],
+      "forward_window_overlaps_with": []
+    }
+  },
+  "frozen_at_utc": "2026-09-24T12:51:36.387390+00:00",
+  "lab_run_id": "fp08cell2archive-20260924T125136Z-c93956c8",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T14:46:53.353733+00:00"
+}

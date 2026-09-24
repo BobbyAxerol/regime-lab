@@ -1,0 +1,115 @@
+{
+  "schema": "regime_lab.fp04_region_policy.v1",
+  "alpha_id": "A-SC",
+  "symbol": "BTCUSDT",
+  "origin_grid": [
+    "2021-01-01",
+    "2021-04-01",
+    "2021-07-01",
+    "2021-10-01",
+    "2022-01-01",
+    "2022-04-01",
+    "2022-07-01",
+    "2022-10-01",
+    "2023-01-01",
+    "2023-04-01",
+    "2023-07-01",
+    "2023-10-01"
+  ],
+  "origin_grid_scope_note": "12 of the guide 3.2 research-default target of ~26-39 blocks -- quarterly (Jan/Apr/Jul/Oct 1) across 2021-2023, the same three development-role years FP-03's CALIBRATION_ORIGINS already used. Explicit, disclosed partial coverage per guide 16's own closing permission ('Thi\u1ebfu s\u1ed1 origins cho model kh\u00f4ng l\u00e0m archive v\u00f4 gi\u00e1 tr\u1ecb, nh\u01b0ng kh\u00f4ng \u0111\u01b0\u1ee3c g\u1ecdi model study ho\u00e0n t\u1ea5t'); FP04-T07's incremental-rebuild guarantee means extending this grid later costs only the INCREMENTAL new origins.",
+  "b_search": 256,
+  "b_search_source": "configs/forward_persistence_fp_v1/search_policy.json (FP-03's own frozen depth, reused verbatim)",
+  "search_seed": 20260922,
+  "train_memory_days": 180,
+  "forward_horizon_days": 28,
+  "distance_threshold": 0.12,
+  "distance_threshold_reason": "Gower-like normalised distance (selector.schema_distance.ParamSchema.distance) averaged over A-SC's 3 active ordinal dimensions; 0.12 keeps candidates within roughly one declared step of each other in the same region -- a design choice, not a guide-specified number, frozen before any origin's real clustering result is seen",
+  "representative_subset_size": 16,
+  "representative_subset_size_source": "configs/forward_persistence_fp_v1/search_policy.json (FP-03's own frozen cap, reused verbatim)",
+  "geometry_version": "3e025b00d7955796",
+  "window_overlaps": {
+    "2021-01-01": {
+      "train_window_overlaps_with": [
+        "2021-04-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2021-04-01": {
+      "train_window_overlaps_with": [
+        "2021-01-01",
+        "2021-07-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2021-07-01": {
+      "train_window_overlaps_with": [
+        "2021-04-01",
+        "2021-10-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2021-10-01": {
+      "train_window_overlaps_with": [
+        "2021-07-01",
+        "2022-01-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2022-01-01": {
+      "train_window_overlaps_with": [
+        "2021-10-01",
+        "2022-04-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2022-04-01": {
+      "train_window_overlaps_with": [
+        "2022-01-01",
+        "2022-07-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2022-07-01": {
+      "train_window_overlaps_with": [
+        "2022-04-01",
+        "2022-10-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2022-10-01": {
+      "train_window_overlaps_with": [
+        "2022-07-01",
+        "2023-01-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2023-01-01": {
+      "train_window_overlaps_with": [
+        "2022-10-01",
+        "2023-04-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2023-04-01": {
+      "train_window_overlaps_with": [
+        "2023-01-01",
+        "2023-07-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2023-07-01": {
+      "train_window_overlaps_with": [
+        "2023-04-01",
+        "2023-10-01"
+      ],
+      "forward_window_overlaps_with": []
+    },
+    "2023-10-01": {
+      "train_window_overlaps_with": [
+        "2023-07-01"
+      ],
+      "forward_window_overlaps_with": []
+    }
+  },
+  "frozen_at_utc": "2026-09-23T03:43:16.220242+00:00"
+}

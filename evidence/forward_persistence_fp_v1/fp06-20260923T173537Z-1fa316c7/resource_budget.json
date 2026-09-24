@@ -1,0 +1,15 @@
+{
+  "schema": "regime_lab.fp06_resource_budget.v1",
+  "lab_run_id": "fp06-20260923T173537Z-1fa316c7",
+  "fp06_wall_seconds_charged_to_shared_ledger": 0,
+  "new_search_trial_engine_calls": 0,
+  "new_deployment_engine_calls": 0,
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 4,
+    "previous_soft_gib": null
+  },
+  "note": "FP-06 spends zero new real engine calls: context features are computed from market frames already real-loaded, and this phase's own exit gate does not require re-proving admission/deployment wiring (FP05-G-ACTION already did).",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-23T17:35:37.925557+00:00"
+}

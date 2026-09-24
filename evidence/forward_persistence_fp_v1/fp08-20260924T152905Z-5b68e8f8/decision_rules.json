@@ -1,0 +1,38 @@
+{
+  "schema": "regime_lab.fp08_decision_rules.v1",
+  "dispositions": [
+    {
+      "claim": "cell1: C_FP_CONTEXT - B_FP_PERSISTENCE",
+      "disposition": "Context mechanism ch\u01b0a \u0111\u01b0\u1ee3c exercise \u0111\u1ee7",
+      "reason": "the underlying contrast is degenerate (C==B via fallback) -- the context mechanism was never exercised, so this is not a genuine effect measurement"
+    },
+    {
+      "claim": "cell1: B_FP_PERSISTENCE - A_STOCK_CAL",
+      "disposition": "No meaningful improvement t\u1ea1i threshold \u0111\u00e3 th\u1eed",
+      "reason": "ci95_upper=-3.872726972319523e-05 is below the registered threshold 6.4e-05 -- the CI is narrow enough to exclude a meaningful effect at this threshold"
+    },
+    {
+      "claim": "cell1: C_FP_CONTEXT - A_STOCK_CAL",
+      "disposition": "No meaningful improvement t\u1ea1i threshold \u0111\u00e3 th\u1eed",
+      "reason": "ci95_upper=-3.872726972319523e-05 is below the registered threshold 6.4e-05 -- the CI is narrow enough to exclude a meaningful effect at this threshold"
+    },
+    {
+      "claim": "cell2: C_FP_CONTEXT - B_FP_PERSISTENCE (cell2)",
+      "disposition": "Inconclusive effect/support",
+      "reason": "contrast status is 'NOT_EVALUABLE', not ESTIMATED -- no CI to judge against a threshold"
+    },
+    {
+      "claim": "cell2: B_FP_PERSISTENCE - A_STOCK_CAL",
+      "disposition": "Inconclusive effect/support",
+      "reason": "contrast status is 'NOT_EVALUABLE', not ESTIMATED -- no CI to judge against a threshold"
+    },
+    {
+      "claim": "cell2: C_FP_CONTEXT - A_STOCK_CAL",
+      "disposition": "Inconclusive effect/support",
+      "reason": "contrast status is 'NOT_EVALUABLE', not ESTIMATED -- no CI to judge against a threshold"
+    }
+  ],
+  "lab_run_id": "fp08-20260924T152905Z-5b68e8f8",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T15:29:05.060667+00:00"
+}
