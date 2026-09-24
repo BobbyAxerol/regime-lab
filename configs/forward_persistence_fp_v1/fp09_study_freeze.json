@@ -80,5 +80,5 @@
     "estimated_total_seconds": 240,
     "note": "this is the SECOND real run of this phase's design (the first, fp09-20260924T194430Z-b5c1244a, caught its own CAL_MATCHED construction bug and is superseded, never cited as a claim). SELECTOR_FIXED_CAL and SELECTOR_REGIME_TIMING are UNCHANGED between the two runs (identical schedules, identical facets), so both are expected real cache HITs against this run's own prior attempt; only SELECTOR_CAL_MATCHED's schedule changed (seeded random draw replacing the buggy copy-of-REGIME_TIMING construction), so only it is expected to be a genuine fresh compute -- verified against the ACTUAL measured cache_event per arm in accounts.json, not assumed"
   },
-  "frozen_at_utc": "2026-09-24T20:00:51.787878+00:00"
+  "frozen_at_utc": "2026-09-24T20:57:39.280808+00:00"
 }
