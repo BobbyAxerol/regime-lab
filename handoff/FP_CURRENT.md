@@ -24,6 +24,9 @@
 - FP-08 final: run fp08-20260924T152905Z-5b68e8f8 (evidence/forward_persistence_fp_v1/fp08-20260924T152905Z-5b68e8f8/)
 - FP-08 overall: PASS
 - FP-08 gates: FP08-G-REPLICATION=PASS / FP08-G-D2=PASS / FP08-G-INFERENCE=PASS / FP08-G-CONCENTRATION=PASS / FP08-G-VERDICT=PASS
+- FP-09: run fp09-20260924T200048Z-3ae26f5a (evidence/forward_persistence_fp_v1/fp09-20260924T200048Z-3ae26f5a/; a first attempt fp09-20260924T194430Z-b5c1244a is preserved, superseded by the CAL_MATCHED redesign below)
+- FP-09 overall: PASS
+- FP-09 gates: FP09-G-CALIBRATION=PASS / FP09-G-BUDGET=PASS / FP09-G-EXEC=PASS / FP09-G-CONTRAST=PASS / FP09-G-SCOPE=PASS
 
 ## Phase state
 | Phase | Technical | Research | Owner | Evidence |
@@ -36,8 +39,57 @@
 | FP-06 | PASS | NOT_ASSESSED | PENDING (open-ended auto-advance, R-18 2026-09-23) | evidence/forward_persistence_fp_v1/fp06-20260923T173537Z-1fa316c7/ |
 | FP-07 | PASS | NOT_ASSESSED (guide forbids a verdict from one cell) | PENDING (open-ended auto-advance, R-18 2026-09-23; separate exception decision dec-9cc3ec3e712cf61b for the 7 GiB budget) | evidence/forward_persistence_fp_v1/fp07-20260923T190207Z-5a401d3b/ |
 | FP-08 | PASS | NOT_ASSESSED (2 of 20 cells; guide's own decision-rule dispositions applied, no stronger claim) | PENDING (open-ended auto-advance, R-18 2026-09-23/24: dec-b5a96eb125bb80cd cell-2 scope, dec-fa173dea205de5e2 + dec-61a43dad79d0ec5c corrected scope understanding) | evidence/forward_persistence_fp_v1/fp08-20260924T152905Z-5b68e8f8/ |
+| FP-09 | PASS | NOT_ASSESSED (primary contrast estimate +6e-06/day, CI=[-1.04e-05, 1.80e-05] straddles zero, an order of magnitude below the 6.4e-05/day MDE; n=3 real admission events, single cell) | PENDING (hypothesis SELECTION delegated to session, R-18 dec-dbdcfac62864f05b) | evidence/forward_persistence_fp_v1/fp09-20260924T200048Z-3ae26f5a/ |
 
-## Latest run
+## FP-09 run (latest; guide section 21, conditional secondary timing extension)
+
+Guide 21 is an explicit CONDITIONAL branch (owner must approve reason/scope/budget AND a specific
+mechanistic hypothesis, never automatic). The owner delegated hypothesis SELECTION to this session
+(`dec-dbdcfac62864f05b`: "Ban tu nghi sau, dua ra 3 huong roi lam theo cai do nhe" -- think it
+through, propose 3 directions, proceed with the chosen one, report clearly).
+
+**Chosen: `H_TRANSITION_COST_TIMING`** -- defer an ALREADY-DECIDED Selector-B switch's activation
+until realized volatility (a transition-cost proxy, reusing LAB-06's measured switch-cost(7bps) >
+edge(2.58bps) finding) is locally low, via `fp.selector_c`'s already-causal `ctx_volatility_ratio`
+mechanism reused for execution TIMING rather than candidate selection -- mechanistically distinct
+from "regime predicts which candidate", already falsified 3x (LAB-08/RA-07/FUP-05). Two other
+hypotheses considered and rejected (full reasoning in `fp09_study_freeze.json`): admission-check
+frequency (FP-04-scale cost, close to the falsified cadence-artifact shape) and decay-risk deferral
+(no measured causal link exists yet).
+
+**Real arms, single cell A-SC/BTCUSDT, FP-07's identical frame**: `SELECTOR_FIXED_CAL` = Selector
+B's own FP-07 schedule (3 real admission events: 2021-04-01/2021-10-01/2022-01-01).
+`SELECTOR_REGIME_TIMING` deferred them by 43200 (bounded fallback)/0/3206 bars. `SELECTOR_CAL_MATCHED`
+(seeded, market-blind, `cal_matched_seed=20260924`) deferred by 16022/2848/3019 bars.
+
+**Self-caught defect, before reporting — not a failing test.** The FIRST real run
+(`fp09-20260924T194430Z-b5c1244a`, superseded) built `SELECTOR_CAL_MATCHED` by copying
+`SELECTOR_REGIME_TIMING`'s OWN realized per-event deferral onto the same origin bar -- both reduce
+to `origin_bar + deferred_bars`, so the two schedules were mathematically GUARANTEED identical, not
+an independent control. Caught by reading the real primary contrast (exactly `0.0`, `CI=[0,0]`) and
+the cache event (`SELECTOR_REGIME_TIMING` cache-HIT `SELECTOR_CAL_MATCHED`'s own just-published
+entry) before trusting the report -- the LAB-08 "Arm E was a copy of Arm D" shape, self-inflicted
+this time, and none of this phase's own unit tests caught it. Fixed:
+`SELECTOR_CAL_MATCHED` now draws its deferral from `Uniform(0, k_max_bars)` with a fixed seed,
+taking NO input from `SELECTOR_REGIME_TIMING`'s realized schedule; `FP09-G-CALIBRATION` now
+explicitly fails on an identical-schedule shape, with a regression test. The corrected re-run needed
+only ONE genuinely new engine call (`SELECTOR_CAL_MATCHED`, 241.61s) -- `SELECTOR_FIXED_CAL` and
+`SELECTOR_REGIME_TIMING` were real cache HITs on the first run's own unaffected computations.
+
+**Real result: small, not significant, honestly disclosed.** Primary contrast
+`SELECTOR_REGIME_TIMING - SELECTOR_CAL_MATCHED`: estimate **+0.000006/day**, 95% CI
+**[-0.0000104, 0.0000180]** (1095 common days) -- CI straddles zero, point estimate an order of
+magnitude below the registered 6.4e-05/day MDE. Guide 21 forbids concluding `CADENCE_ARTIFACT` from
+a placebo beating a slow calendar alone; this report reports the direct contrast verbatim instead,
+with no decision-rule label. Peak RSS 2975.0 MiB against the disclosed 7 GiB exception (cited by
+reference from FP-07's identical-scale precedent `dec-9cc3ec3e712cf61b`, not re-asked). Independently
+re-verified against the FULL lab suite's fresh junit (1533 passed, 0 failed = 1503 + 30 new FP-09
+tests), not the orchestrator's own pre-run evidence.
+
+FP-09 does not gate FP-10 and reaches no verdict beyond NOT_ASSESSED -- see CLAUDE.md's own FP-09
+section for the complete writeup.
+
+## FP-08 run
 FP-08 PASS: replication, D2 and inference (guide section 20). Combines cell 1 (FP-04..FP-07,
 already committed, reused UNCHANGED) with cell 2 (A-SC/ETHUSDT, 3 origins, owner-approved
 `dec-b5a96eb125bb80cd`) into the guide FP08.3/.4/.5 statistics, contribution checks and decision
@@ -382,19 +434,18 @@ study is operating at the guide's own minimum, not with headroom. FP-06/07 inher
 constraint since they reuse this same archive (guide 18's "Reuse toàn bộ B pipeline").
 
 ## Next authorized action
-- FP-08 is COMPLETE and committed. All five gates PASS. Per the owner's 2026-09-23 open-ended
-  decision (`dec-f08d01887b889afb`) plus the explicit 2026-09-24 confirmation to rerun and finish
-  FP-08 after the OOM incident, FP-09 may be considered next -- but FP-09 (guide section 21,
-  secondary timing extension) is its OWN explicit CONDITIONAL branch: guide 21 requires the owner to
-  approve its reason, scope and budget, AND a specific mechanistic hypothesis, not just "no result
-  yet so try timing next". **Do not open FP-09 from the open-ended auto-advance alone** -- present
-  the FP-08 findings and ask.
-- FP-10 (freeze, replay, final handoff) is the OTHER path once the owner decides no further phase is
-  needed.
-- Both cells' own findings are now on record: cell 1 shows C≡B degenerate (context mechanism never
-  exercised) and B/C measurably underperforming A (CI entirely below the registered threshold, "No
-  meaningful improvement"); cell 2 shows B/C declining at EVERY origin (NOT_EVALUABLE, no comparison
-  possible at all) while Arm A traded normally. Neither cell found context conditioning to matter.
+- FP-09 is COMPLETE and committed. All five gates PASS (see "FP-09 run" above). Its hypothesis
+  (`H_TRANSITION_COST_TIMING`) was owner-delegated (`dec-dbdcfac62864f05b`); the primary contrast
+  came out small and not significant, disclosed as such, no stronger claim made.
+- FP-10 (freeze, replay, final handoff) is the remaining path once the owner reviews FP-01..09's
+  evidence together and decides no further phase is needed -- do not open it from the open-ended
+  auto-advance alone; FP-10 is a wrap-up/freeze phase, not another discovery phase, but still
+  deserves its own explicit go-ahead given it is the study's final action.
+- All findings now on record across FP-07/08/09: cell 1 shows C≡B degenerate (context mechanism
+  never exercised) and B/C measurably underperforming A ("No meaningful improvement"); cell 2 shows
+  B/C declining at EVERY origin (NOT_EVALUABLE); FP-09's transition-cost timing overlay on top of
+  B's own schedule shows a small, non-significant effect, an order of magnitude below the MDE.
+  Neither context conditioning nor transition-cost timing found a measurable effect at this scale.
 
 ## Khong duoc lam
 - No bulk search beyond the frozen B_search=256 without a new search_policy.json revision.
@@ -402,6 +453,8 @@ constraint since they reuse this same archive (guide 18's "Reuse toàn bộ B pi
 - No silent expansion of the FP-04 origin grid beyond the frozen 12, or the FP-08 cell-2 grid beyond its frozen 3, without disclosing it as a policy revision first.
 - No claim that Selector B or C beats or loses to the stock selector beyond guide FP08.5's own registered disposition labels already applied (`No meaningful improvement tại threshold đã thử` for cell 1's B-A/C-A; `Inconclusive effect/support` for all of cell 2's contrasts) -- never a stronger invented label.
 - No claim from FP-07/08's C≡B finding that context conditioning "doesn't work" in general -- it is a property of these two cells/windows, disclosed as DEGENERATE/NOT_EVALUABLE, not generalized beyond them.
-- No FP-09 without its own explicit R-18 approval carrying a specific mechanistic hypothesis (guide 21) -- the open-ended auto-advance does not cover it.
+- No claim from FP-09's small, non-significant primary contrast that transition-cost timing "doesn't work" in general -- it is a property of this single cell's 3 real admission events, not a general finding, and guide 21 forbids concluding CADENCE_ARTIFACT from it.
+- No FP-10 without its own explicit go-ahead once the owner has reviewed FP-01..09's evidence together.
+- No placebo/control construction that takes ANY input from the treatment arm's own REALIZED schedule/outcome -- FP-09's own self-caught defect (`SELECTOR_CAL_MATCHED` copying `SELECTOR_REGIME_TIMING`'s realized deferral verbatim) is the concrete cautionary example: a control derived from the treatment's own realized value is mathematically guaranteed to collapse, not an independent comparison.
 - No large new real-compute commitment without measuring and disclosing the cost first (the dec-9cc3ec3e712cf61b / dec-b5a96eb125bb80cd pattern), and no working-memory budget exception beyond the registered 4 GiB without its own disclosed decision record scoped to the specific calls that need it.
 - No claim that this lab's RLIMIT_AS mechanism protects against host-wide OOM kills from other tenants -- FP-08's own incident proved it does not; only this process's own budget is protected.
