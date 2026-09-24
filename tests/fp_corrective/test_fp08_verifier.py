@@ -113,7 +113,7 @@ def _bundle(root: Path) -> dict:
     (root / "phase_manifest.json").write_text(json.dumps(docs["phase_manifest.json"], indent=2),
                                               encoding="utf-8")
     (root / "report.md").write_text(
-        "# FP-08\n\n## Permitted conclusions\n- Technical: ok\n- Research: see decision_rules.json\n",
+        "# FP-08\n\n## 9. Kết luận được phép\n- Technical: ok\n- Research: see decision_rules.json\n",
         encoding="utf-8")
     (root / "handoff.md").write_text("# FP-08 handoff\n", encoding="utf-8")
     return docs
@@ -322,7 +322,7 @@ def test_fp08_g_verdict_fails_on_a_forbidden_overclaim_phrase(lab_tmp):
     _bundle(root)
     (root / "report.md").write_text(
         "# FP-08\n\nThis proves the edge across both cells.\n\n"
-        "## Permitted conclusions\n- Technical: ok\n",
+        "## 9. Kết luận được phép\n- Technical: ok\n",
         encoding="utf-8")
     verdict = verify_fp08(root, pytest_xml=xml)
     assert verdict["overall"] == "FAIL"

@@ -217,8 +217,9 @@ def verify_fp08(run_dir, *, pytest_xml=None) -> dict:
     # forbidden overclaim phrase --
     reasons = list(manifest_reasons)
     report_text = (root / "report.md").read_text(encoding="utf-8") if (root / "report.md").is_file() else ""
-    if "## Permitted conclusions" not in report_text:
-        reasons.append("report.md has no '## Permitted conclusions' section")
+    if "## 9. Kết luận được phép" not in report_text:
+        reasons.append("report.md has no '## 9. Kết luận được phép' section (guide 23.2's own "
+                       "run-report template, adopted from FP-08 onward)")
     if decisions is None:
         reasons.append("decision_rules.json missing or unreadable")
     else:
