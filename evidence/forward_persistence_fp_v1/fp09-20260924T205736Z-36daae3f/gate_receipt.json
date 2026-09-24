@@ -1,0 +1,55 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-09",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp09-20260924T205736Z-36daae3f",
+  "required_gates": [
+    "FP09-G-CALIBRATION",
+    "FP09-G-BUDGET",
+    "FP09-G-EXEC",
+    "FP09-G-CONTRAST",
+    "FP09-G-SCOPE"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp09_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp09-20260924T205736Z-36daae3f",
+    "gates": {
+      "FP09-G-CALIBRATION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP09-G-BUDGET": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP09-G-EXEC": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP09-G-CONTRAST": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP09-G-SCOPE": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-24T20:58:42.683255+00:00"
+}

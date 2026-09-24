@@ -1,0 +1,19 @@
+{
+  "schema": "regime_lab.fp10_test_registry.v1",
+  "lab_run_id": "fp10-20260924T205519Z-d05098ce",
+  "test_node_ids": [
+    "test_fp10_verifier_passes_on_a_valid_bundle",
+    "test_fp10_verifier_fails_on_empty_dir",
+    "test_fp10_g_freeze_fails_on_a_tampered_source_file",
+    "test_fp10_g_freeze_fails_when_a_component_category_is_missing",
+    "test_fp10_g_replay_fails_when_a_comparison_does_not_match",
+    "test_fp10_g_replay_fails_without_the_non_independence_disclosure",
+    "test_fp10_g_report_fails_when_a_required_question_is_unanswered",
+    "test_fp10_g_report_fails_on_a_forbidden_overclaim_phrase",
+    "test_fp10_g_exposure_fails_when_outer_evaluation_touched_is_not_declared_false",
+    "test_fp10_g_handoff_fails_without_a_replay_command_section"
+  ],
+  "pytest_xml": "/tmp/fp10_pre_junit.xml",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T20:56:28.829464+00:00"
+}

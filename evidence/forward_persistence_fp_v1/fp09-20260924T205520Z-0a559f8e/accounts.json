@@ -1,0 +1,52 @@
+{
+  "schema": "regime_lab.fp09_accounts.v1",
+  "frame_bars": 1576800,
+  "shared_initial_capital": 20000.0,
+  "by_arm": {
+    "SELECTOR_FIXED_CAL": {
+      "status": "OK",
+      "fill_count": 3312,
+      "bars": 1576800,
+      "entries": 1656,
+      "engine_fill_count": 0,
+      "cache_event": "HIT",
+      "wall_seconds_measured": 21.063,
+      "daily_returns_start": "2021-01-01",
+      "daily_returns_end": "2023-12-31",
+      "daily_return_days": 1095,
+      "initial_capital": 20000.0,
+      "n_activations_requested": 3
+    },
+    "SELECTOR_CAL_MATCHED": {
+      "status": "OK",
+      "fill_count": 3322,
+      "bars": 1576800,
+      "entries": 1661,
+      "engine_fill_count": 0,
+      "cache_event": "HIT",
+      "wall_seconds_measured": 20.894,
+      "daily_returns_start": "2021-01-01",
+      "daily_returns_end": "2023-12-31",
+      "daily_return_days": 1095,
+      "initial_capital": 20000.0,
+      "n_activations_requested": 3
+    },
+    "SELECTOR_REGIME_TIMING": {
+      "status": "OK",
+      "fill_count": 3300,
+      "bars": 1576800,
+      "entries": 1650,
+      "engine_fill_count": 0,
+      "cache_event": "HIT",
+      "wall_seconds_measured": 21.412,
+      "daily_returns_start": "2021-01-01",
+      "daily_returns_end": "2023-12-31",
+      "daily_return_days": 1095,
+      "initial_capital": 20000.0,
+      "n_activations_requested": 3
+    }
+  },
+  "lab_run_id": "fp09-20260924T205520Z-0a559f8e",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T20:56:28.254445+00:00"
+}

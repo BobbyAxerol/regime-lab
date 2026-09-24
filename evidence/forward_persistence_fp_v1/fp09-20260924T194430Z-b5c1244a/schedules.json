@@ -1,0 +1,158 @@
+{
+  "schema": "regime_lab.fp09_schedules.v1",
+  "SELECTOR_FIXED_CAL": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 129600
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 393120
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 525600
+    }
+  ],
+  "SELECTOR_CAL_MATCHED": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 172800
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 393120
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 528806
+    }
+  ],
+  "SELECTOR_REGIME_TIMING": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 172800
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 393120
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 528806
+    }
+  ],
+  "regime_timing_diagnostics": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "origin_bar": 129600,
+      "activation_bar": 172800,
+      "deferred_bars": 43200,
+      "hit_threshold": false,
+      "reason": "threshold never reached within k_max_bars -- bounded fallback applied"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "origin_bar": 393120,
+      "activation_bar": 393120,
+      "deferred_bars": 0,
+      "hit_threshold": true,
+      "reason": "volatility ratio crossed <= threshold within the bounded window"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "origin_bar": 525600,
+      "activation_bar": 528806,
+      "deferred_bars": 3206,
+      "hit_threshold": true,
+      "reason": "volatility ratio crossed <= threshold within the bounded window"
+    }
+  ],
+  "cal_matched_derivation": "same per-event bar count as SELECTOR_REGIME_TIMING's realized deferral (46406 bars total across 3 events), applied blindly -- no volatility or market data consulted for this arm at all",
+  "summary": {
+    "n_admission_events": 3,
+    "n_events_crossed_threshold": 2,
+    "n_events_bounded_fallback": 1,
+    "total_deferred_bars_regime_timing": 46406,
+    "origins": [
+      "2021-01-01",
+      "2021-04-01",
+      "2021-07-01",
+      "2021-10-01",
+      "2022-01-01",
+      "2022-04-01",
+      "2022-07-01",
+      "2022-10-01",
+      "2023-01-01",
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ]
+  },
+  "lab_run_id": "fp09-20260924T194430Z-b5c1244a",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T19:53:04.710890+00:00"
+}

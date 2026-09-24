@@ -1,0 +1,81 @@
+{
+  "schema": "regime_lab.fp10_replay_result.v1",
+  "replayed_phase": "FP-09",
+  "original_run_dir": "evidence/forward_persistence_fp_v1/fp09-20260924T200048Z-3ae26f5a",
+  "replay_run_dir": "evidence/forward_persistence_fp_v1/fp09-20260924T205736Z-36daae3f",
+  "replay_exit_code": 0,
+  "evaluation_label": "FROZEN_REPLAY",
+  "independence_note": "this is NOT an independent confirmation of FP-09's finding -- the SAME frozen market data, SAME code, SAME seed were replayed under the identical contract, which only proves REPRODUCIBILITY, not a new measurement (guide 22: 'Cung data cu chay lai khong la independent confirmation')",
+  "comparisons": [
+    {
+      "field": "SELECTOR_FIXED_CAL.fill_count",
+      "original": 3312,
+      "replay": 3312,
+      "match": true
+    },
+    {
+      "field": "SELECTOR_FIXED_CAL.entries",
+      "original": 1656,
+      "replay": 1656,
+      "match": true
+    },
+    {
+      "field": "SELECTOR_CAL_MATCHED.fill_count",
+      "original": 3322,
+      "replay": 3322,
+      "match": true
+    },
+    {
+      "field": "SELECTOR_CAL_MATCHED.entries",
+      "original": 1661,
+      "replay": 1661,
+      "match": true
+    },
+    {
+      "field": "SELECTOR_REGIME_TIMING.fill_count",
+      "original": 3300,
+      "replay": 3300,
+      "match": true
+    },
+    {
+      "field": "SELECTOR_REGIME_TIMING.entries",
+      "original": 1650,
+      "replay": 1650,
+      "match": true
+    },
+    {
+      "field": "primary_contrast.estimate",
+      "original": 5.531831561750376e-06,
+      "replay": 5.531831561750376e-06,
+      "match": true
+    },
+    {
+      "field": "primary_contrast.status",
+      "original": "ESTIMATED",
+      "replay": "ESTIMATED",
+      "match": true
+    }
+  ],
+  "all_match": true,
+  "cache_provenance": [
+    {
+      "field": "SELECTOR_FIXED_CAL.cache_event",
+      "original": "HIT",
+      "replay": "HIT"
+    },
+    {
+      "field": "SELECTOR_CAL_MATCHED.cache_event",
+      "original": "MISS",
+      "replay": "HIT"
+    },
+    {
+      "field": "SELECTOR_REGIME_TIMING.cache_event",
+      "original": "HIT",
+      "replay": "HIT"
+    }
+  ],
+  "cache_provenance_note": "not gated: a MISS->HIT transition here is EXPECTED and is itself evidence the replay found and reused the original run's exact computation, never required to 'match' literally",
+  "lab_run_id": "fp10-20260924T205735Z-49161e47",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T20:58:43.178610+00:00"
+}

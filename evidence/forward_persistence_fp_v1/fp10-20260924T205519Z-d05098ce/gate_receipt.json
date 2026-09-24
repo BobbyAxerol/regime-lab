@@ -1,0 +1,57 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-10",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp10-20260924T205519Z-d05098ce",
+  "required_gates": [
+    "FP10-G-FREEZE",
+    "FP10-G-REPLAY",
+    "FP10-G-REPORT",
+    "FP10-G-EXPOSURE",
+    "FP10-G-HANDOFF"
+  ],
+  "technical_gate": "FAIL",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp10_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp10-20260924T205519Z-d05098ce",
+    "gates": {
+      "FP10-G-FREEZE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP10-G-REPLAY": {
+        "pass": false,
+        "reasons": [
+          "SELECTOR_CAL_MATCHED.cache_event: original=MISS != replay=HIT"
+        ]
+      },
+      "FP10-G-REPORT": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP10-G-EXPOSURE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP10-G-HANDOFF": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "FAIL"
+  },
+  "verified_at_utc": "2026-09-24T20:56:28.868598+00:00"
+}

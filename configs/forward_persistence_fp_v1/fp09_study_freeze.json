@@ -1,0 +1,84 @@
+{
+  "schema": "regime_lab.fp09_study_freeze.v1",
+  "primary_cell": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT"
+  },
+  "frame_span": {
+    "start": "2021-01-01",
+    "end": "2024-01-01",
+    "reason": "identical span to FP-07 so this phase's own selection recomputation reuses the same shared candidate pool/economics -- NOTE: this arm's run_deployment call does NOT cache-HIT FP-07's own published entry (disclosed, corrected after the first real run: the two runs label the identical params/bars with different activation_id strings, so the deployment_facets identity differs even though the economics do not -- see resource_budget.json's own note)"
+  },
+  "hypothesis": {
+    "considered": [
+      {
+        "id": "H_ADMISSION_FREQUENCY",
+        "text": "check for new admissions more often than the fixed quarterly cadence, to catch transient opportunities between origins",
+        "rejected_because": "would require new 256-trial engine searches at new (non-quarterly) origins -- FP-04-scale cost (~1h/origin) for a secondary/conditional phase, and structurally close to the cadence-artifact shape already falsified three times (LAB-08/RA-07/FUP-05)"
+      },
+      {
+        "id": "H_DECAY_RISK_DEFERRAL",
+        "text": "defer deployment around detected regime transitions to avoid FP-03's measured IS-vs-forward decay",
+        "rejected_because": "no causal link between 'a regime transition was detected' and 'decay risk is locally elevated' has been measured anywhere in this lab; would need new groundwork before it is even testable"
+      },
+      {
+        "id": "H_TRANSITION_COST_TIMING",
+        "text": "defer an ALREADY-DECIDED Selector-B switch's activation until realized volatility (a transition-cost proxy) is locally low, reusing fp.selector_c's own already-causal ctx_volatility_ratio mechanism for a new purpose",
+        "rejected_because": null,
+        "chosen": true,
+        "why_chosen": "mechanistically distinct from the 3x-falsified 'regime predicts which candidate' hypothesis (this asks WHEN to execute a decision already made, not WHICH decision to make); grounded in LAB-06's own measured finding that switch cost (7bps) dominated the best candidate edge (2.58bps); reuses already-vetted, already-causal infrastructure (zero new search-trial engine calls); bounded compute (2 new run_deployment calls, ~8 minutes, versus FP-04-scale search cost for the other two candidates)"
+      }
+    ],
+    "owner_delegation": "evidence/regime_time_edge_ra_v1/owner_decisions.jsonl: the owner delegated hypothesis SELECTION to this session ('Ban tu nghi sau, dua ra 3 huong roi lam theo cai do nhe'), recorded there with this reasoning attached before any account ran"
+  },
+  "timing_design": {
+    "vol_threshold": 1.0,
+    "k_max_bars": 43200,
+    "vol_short_days": 30,
+    "vol_long_days": 180,
+    "cal_matched_seed": 20260924,
+    "mechanism_source": "src/crypto_regime_lab/fp/timing_policy.py -- module-level constants, fixed and unit-tested before this run; VOL_THRESHOLD/K_MAX_BARS/window lengths reuse fp.selector_c's own already-frozen ctx_volatility_ratio definition and lookback (VOL_SHORT_DAYS=30, VOL_LONG_DAYS=180), never a value fit to this run's own data",
+    "self_caught_correction": "a first real run of this design (fp09-20260924T194430Z-b5c1244a, superseded) built SELECTOR_CAL_MATCHED by copying SELECTOR_REGIME_TIMING's own REALIZED per-event deferral verbatim -- both reduce to the identical origin_bar + deferred_bars formula, so the two schedules were mathematically guaranteed to be byte-identical, not an independent control. Caught by reading the real primary contrast (exactly 0.0, CI=[0,0]) and the account cache event (SELECTOR_REGIME_TIMING was a real cache HIT on SELECTOR_CAL_MATCHED's just-published entry) before reporting it -- the LAB-08 'Arm E was a copy of Arm D' shape, this time in code this phase wrote itself. Fixed to draw CAL_MATCHED's per-event deferral from Uniform(0, k_max_bars) with a fixed, pre-registered seed, taking NO input from REGIME_TIMING's realized schedule at all -- see cal_matched_seed above and FP09-G-CALIBRATION's own added identical-schedule check."
+  },
+  "arms": [
+    "SELECTOR_FIXED_CAL",
+    "SELECTOR_CAL_MATCHED",
+    "SELECTOR_REGIME_TIMING"
+  ],
+  "base_selector": "SELECTOR_FIXED_CAL is Selector B's own FP-07 admission schedule, recomputed byte-identical via fp.locked_study (not read from FP-07's files) -- reused because C_FP_CONTEXT was byte-identical to B_FP_PERSISTENCE at every real admission in FP-07/FP-08 (0/12 and 0/3 CONTEXT_CONDITIONED); using C would just reproduce B's exact schedule",
+  "economics": {
+    "initial_capital": 20000.0,
+    "one_way_fee": 0.0004,
+    "slippage_bps": 1.0,
+    "use_funding": false
+  },
+  "model_hyperparameters": {
+    "alpha_b": 10.0,
+    "alpha_b_source": "evidence/forward_persistence_fp_v1/fp05-20260923T163839Z-79516650/model_selection.json:selected_alpha"
+  },
+  "primary_contrast": "SELECTOR_REGIME_TIMING - SELECTOR_CAL_MATCHED",
+  "secondary_contrasts": [
+    "SELECTOR_REGIME_TIMING - SELECTOR_FIXED_CAL",
+    "SELECTOR_CAL_MATCHED - SELECTOR_FIXED_CAL"
+  ],
+  "bootstrap": {
+    "method": "time_edge.inference.block_mean (RA-07/RF-05/FP-07's own registered 28-day block bootstrap, reused verbatim, never reimplemented)",
+    "delta": 6.4e-05,
+    "delta_source": "configs/minimum_economic_effect.json (reused verbatim): guide 8.6/FP08.5's 'OOS utility/risk safeguard' names no concrete number anywhere in the guide text -- reusing the lab's OWN already-registered economic-significance threshold (registered 2026-09-09, before any FP arm comparison existed) is a disclosed, non-arbitrary choice rather than inventing a new number for this phase alone"
+  },
+  "resource_budget_exception": {
+    "registered_working_memory_gib": 4.0,
+    "applied_working_memory_gib": 7.0,
+    "decision_id": "dec-9cc3ec3e712cf61b",
+    "decision_ref": "evidence/regime_time_edge_ra_v1/owner_decisions.jsonl",
+    "reason": "same shared BTCUSDT/A-SC 2021-01-01..2024-01-01 continuous frame FP-07 already ran at this scale (measured peak RSS there: 3357.7 MiB); the SAME already-approved, already-measured exception is cited by reference rather than re-asked, matching FP-08's own established reuse of this identical precedent for a same-scale deployment call. Registered 4 GiB stays unchanged for every other phase/call in this lab."
+  },
+  "cost_estimate": {
+    "basis": "FP-07's own measured per-arm wall time on the identical frame/economics/report_level (Arm B/C real cache MISSes: 241.55s / 236.22s)",
+    "estimated_new_calls": 1,
+    "estimated_seconds_per_call": 240,
+    "estimated_total_seconds": 240,
+    "note": "this is the SECOND real run of this phase's design (the first, fp09-20260924T194430Z-b5c1244a, caught its own CAL_MATCHED construction bug and is superseded, never cited as a claim). SELECTOR_FIXED_CAL and SELECTOR_REGIME_TIMING are UNCHANGED between the two runs (identical schedules, identical facets), so both are expected real cache HITs against this run's own prior attempt; only SELECTOR_CAL_MATCHED's schedule changed (seeded random draw replacing the buggy copy-of-REGIME_TIMING construction), so only it is expected to be a genuine fresh compute -- verified against the ACTUAL measured cache_event per arm in accounts.json, not assumed"
+  },
+  "frozen_at_utc": "2026-09-24T20:57:39.280808+00:00"
+}
