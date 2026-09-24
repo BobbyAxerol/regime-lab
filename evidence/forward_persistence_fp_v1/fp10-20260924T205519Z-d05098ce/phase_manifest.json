@@ -1,0 +1,46 @@
+{
+  "schema": "regime_lab.fp10_phase_manifest.v1",
+  "lab_run_id": "fp10-20260924T205519Z-d05098ce",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-10",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-24T20:55:19.860968+00:00",
+  "required_gates": [
+    "FP10-G-FREEZE",
+    "FP10-G-REPLAY",
+    "FP10-G-REPORT",
+    "FP10-G-EXPOSURE",
+    "FP10-G-HANDOFF"
+  ],
+  "artifacts": [
+    {
+      "path": "freeze_manifest.json",
+      "sha256": "97f3ff0b2e1b9c3f377b9f85767d16b11d7fb9bebee59efddce873967fc3243b"
+    },
+    {
+      "path": "replay_result.json",
+      "sha256": "0b6768d8f9b9e5fa5dbadab376d82d16ebaf5b6b6f97907a3ab88bf8e58f1b50"
+    },
+    {
+      "path": "artifact_index.json",
+      "sha256": "f0efc7371370a7ac89991c396a65caee8f83295e4294051ee4288aed27a8673b"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "b8a67cc1b7fe70b62994e9030de2a9567b31eaa0fb2088a81b629b11222c6573"
+    },
+    {
+      "path": "final_report.md",
+      "sha256": "72819fc27b78bdc14c666630b41322a5fc039e01350073f2c482bd6fdd8eb863"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "e7a474b6f4bf9fb38937a55e028213bfc7c8f7864d9e8a40d5402ed229998f48"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "b7fdefb69cdc70e621476dbd03296ec74efea7cb703351a378435b06f2eb4b34"
+    }
+  ],
+  "written_at_utc": "2026-09-24T20:56:28.835589+00:00"
+}
