@@ -55,6 +55,7 @@ TEST_NODE_IDS = [
     "test_primary_regime_comparison_detects_the_real_cell1_degenerate_pattern",
     "test_primary_regime_comparison_positive_when_c_reduces_decay",
     "test_primary_regime_comparison_negative_decay_contributes_zero_not_negative",
+    "test_primary_regime_comparison_not_evaluable_is_never_vacuously_degenerate",
     "test_economic_outperformance_check_clears_when_ci_lower_exceeds_the_registered_threshold",
     "test_build_coverage_matrix_has_exactly_20_cells",
     "test_build_coverage_matrix_marks_every_other_cell_not_run_with_a_reason",

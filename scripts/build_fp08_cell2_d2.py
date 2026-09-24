@@ -57,11 +57,21 @@ def main() -> int:
 
     frame, _partitions = load_real_bars(SYMBOL, start=FRAME_START, end=FRAME_END)
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
-    schedules = {arm: ls.build_run_deployment_schedule(admitted[arm], frame_index=frame.index)
-                for arm in ls.ARMS}
+
+    # Same real possibility run_fp08_cell2_study.py already disclosed: an
+    # arm that never admits anything across cell 2's 3 origins has no
+    # schedule at all -- its D2 anchor list is empty by construction
+    # (d2.anchors_from_selections excludes every FALLBACK_TO_* origin), so
+    # there is nothing to reuse for it here either.
+    schedules, never_admitted = {}, set()
+    for arm in ls.ARMS:
+        try:
+            schedules[arm] = ls.build_run_deployment_schedule(admitted[arm], frame_index=frame.index)
+        except ls.LockedStudyError:
+            never_admitted.add(arm)
 
     daily_returns, fills_by_arm = {}, {}
-    for arm in ls.ARMS:
+    for arm in schedules:
         payload, event = run_deployment(cache, LAB, ALPHA_ID, frame, schedules[arm],
                                         ready_at=frame.index[0], report_level="score",
                                         economics=economics, producer="fp08-cell2-d2-reuse")

@@ -201,11 +201,22 @@ def run_cell2_study(archive_run_dir: str, pytest_xml: str | None) -> tuple[int, 
 
     frame, _partitions = load_real_bars(SYMBOL, start=FRAME_START, end=FRAME_END)
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
-    schedules = {arm: ls.build_run_deployment_schedule(admitted[arm], frame_index=frame.index)
-                for arm in ls.ARMS}
+
+    # A real, disclosed possibility this study's own orchestration must
+    # handle rather than crash on: an arm that NEVER admits anything across
+    # all of cell 2's 3 origins has no schedule to deploy at all -- guide
+    # 19 item 8's "whole-policy fallback period" taken to its full extent
+    # for this small a cell. Recorded as NEVER_ADMITTED, never a crash and
+    # never a fabricated account.
+    schedules, never_admitted = {}, {}
+    for arm in ls.ARMS:
+        try:
+            schedules[arm] = ls.build_run_deployment_schedule(admitted[arm], frame_index=frame.index)
+        except ls.LockedStudyError as exc:
+            never_admitted[arm] = str(exc)
 
     per_arm_seconds, payloads = {}, {}
-    for arm in ls.ARMS:
+    for arm in schedules:
         t0 = time.perf_counter()
         payload, event = run_deployment(cache, LAB, ALPHA_ID, frame, schedules[arm],
                                         ready_at=frame.index[0], report_level="score",
@@ -218,6 +229,15 @@ def run_cell2_study(archive_run_dir: str, pytest_xml: str | None) -> tuple[int, 
 
     daily_returns, accounts_by_arm = {}, {}
     for arm in ls.ARMS:
+        if arm in never_admitted:
+            accounts_by_arm[arm] = {
+                "status": "NEVER_ADMITTED", "reason": never_admitted[arm],
+                "fill_count": None, "bars": len(frame), "entries": None,
+                "engine_fill_count": None, "cache_event": None, "wall_seconds_measured": None,
+                "daily_returns_start": None, "daily_returns_end": None, "daily_return_days": None,
+                "initial_capital": economics["initial_capital"], "n_activations_requested": 0,
+            }
+            continue
         payload = payloads[arm]["payload"]
         audit = payload["selected_audit"]
         dr = ls.account_daily_returns(payload, frame, initial_capital=economics["initial_capital"])
@@ -287,13 +307,21 @@ def run_cell2_study(archive_run_dir: str, pytest_xml: str | None) -> tuple[int, 
              "arm_a_exact_match_count": a_exact_matches, "arm_a_exact_match_denominator": len(origins_sorted),
              "rows": d1_rows}
 
-    delta = sb.UTILITY_FLOOR_DAILY
-    primary = ls.paired_contrast(daily_returns["C_FP_CONTEXT"], daily_returns["B_FP_PERSISTENCE"],
-                                 label="C_FP_CONTEXT - B_FP_PERSISTENCE (cell2)", delta=delta)
-    sec_ba = ls.paired_contrast(daily_returns["B_FP_PERSISTENCE"], daily_returns["A_STOCK_CAL"],
-                                label="B_FP_PERSISTENCE - A_STOCK_CAL (cell2)", delta=delta)
-    sec_ca = ls.paired_contrast(daily_returns["C_FP_CONTEXT"], daily_returns["A_STOCK_CAL"],
-                                label="C_FP_CONTEXT - A_STOCK_CAL (cell2)", delta=delta)
+    def _contrast_or_not_evaluable(left_arm: str, right_arm: str, *, label: str) -> dict:
+        if left_arm in never_admitted or right_arm in never_admitted:
+            missing = [a for a in (left_arm, right_arm) if a in never_admitted]
+            return {"label": label, "status": "NOT_EVALUABLE",
+                   "reason": f"{'/'.join(missing)} never admitted anything in cell 2 -- no "
+                            "deployment account exists to pair"}
+        return ls.paired_contrast(daily_returns[left_arm], daily_returns[right_arm], label=label,
+                                  delta=sb.UTILITY_FLOOR_DAILY)
+
+    primary = _contrast_or_not_evaluable("C_FP_CONTEXT", "B_FP_PERSISTENCE",
+                                         label="C_FP_CONTEXT - B_FP_PERSISTENCE (cell2)")
+    sec_ba = _contrast_or_not_evaluable("B_FP_PERSISTENCE", "A_STOCK_CAL",
+                                        label="B_FP_PERSISTENCE - A_STOCK_CAL (cell2)")
+    sec_ca = _contrast_or_not_evaluable("C_FP_CONTEXT", "A_STOCK_CAL",
+                                        label="C_FP_CONTEXT - A_STOCK_CAL (cell2)")
     contrasts_doc = {"schema": "regime_lab.fp08_cell2_paired_contrasts.v1", "cell": "cell2_replication",
                     "primary": primary,
                     "secondary": {"B_FP_PERSISTENCE - A_STOCK_CAL": sec_ba,

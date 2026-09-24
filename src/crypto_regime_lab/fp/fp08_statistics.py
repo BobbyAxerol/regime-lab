@@ -44,7 +44,7 @@ def primary_regime_comparison(d1_rows_b: list[dict], d1_rows_c: list[dict]) -> d
     b_by_origin = {r["origin_cutoff"]: r for r in d1_rows_b}
     c_by_origin = {r["origin_cutoff"]: r for r in d1_rows_c}
     common = sorted(set(b_by_origin) & set(c_by_origin))
-    per_origin, evaluable = [], []
+    per_origin, evaluable_origins, evaluable_diffs = [], [], []
     for origin in common:
         b_row, c_row = b_by_origin[origin], c_by_origin[origin]
         b_plus = positive_decay(b_row.get("D_mean_daily_return"))
@@ -53,17 +53,23 @@ def primary_regime_comparison(d1_rows_b: list[dict], d1_rows_c: list[dict]) -> d
               "diff": None if b_plus is None or c_plus is None else b_plus - c_plus}
         per_origin.append(row)
         if row["diff"] is not None:
-            evaluable.append(row["diff"])
-    degenerate = bool(common) and all(
-        b_by_origin[o].get("D_mean_daily_return") == c_by_origin[o].get("D_mean_daily_return")
-        for o in common if b_by_origin[o].get("D_mean_daily_return") is not None)
-    if not evaluable:
+            evaluable_origins.append(origin)
+            evaluable_diffs.append(row["diff"])
+    if not evaluable_diffs:
+        # Nothing was ever compared (e.g. both arms have zero accounts) --
+        # `all()` over an empty set is vacuously True in Python, the exact
+        # "gate passes because nothing happened" shape this lab's own
+        # history keeps finding; degenerate must be False here, never
+        # computed from a filtered-to-empty generator.
         return {"schema": "regime_lab.fp08_primary_regime_comparison.v1", "status": "NOT_EVALUABLE",
                "reason": "no common origin carries a non-null D1 value for both B and C",
-               "per_origin": per_origin, "degenerate": degenerate}
-    i_d = sum(evaluable) / len(evaluable)
+               "per_origin": per_origin, "degenerate": False}
+    degenerate = all(
+        b_by_origin[o].get("D_mean_daily_return") == c_by_origin[o].get("D_mean_daily_return")
+        for o in evaluable_origins)
+    i_d = sum(evaluable_diffs) / len(evaluable_diffs)
     return {"schema": "regime_lab.fp08_primary_regime_comparison.v1", "status": "DESCRIPTIVE",
-           "I_D": i_d, "n_common_origins_evaluable": len(evaluable), "per_origin": per_origin,
+           "I_D": i_d, "n_common_origins_evaluable": len(evaluable_diffs), "per_origin": per_origin,
            "degenerate": degenerate,
            "degenerate_reason": ("B and C carry IDENTICAL D1 at every common origin -- I_D is 0 by "
                                  "construction, not a measured decay-reduction effect")

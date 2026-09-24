@@ -63,6 +63,24 @@ def test_primary_regime_comparison_not_evaluable_with_no_common_origins():
     assert "no common origin" in result["reason"]
 
 
+def test_primary_regime_comparison_not_evaluable_is_never_vacuously_degenerate():
+    """Regression: the real bug found in FP-08's own first run. Common
+    origins EXIST (both B and C carry a row for them) but every D value is
+    null (e.g. neither arm ever admitted anything) -- `all()` over the
+    resulting empty filtered generator is vacuously True in Python, which
+    would wrongly report degenerate=True for a comparison that never
+    happened at all. Mirrors this lab's own recorded LAB-06 defect #15
+    ('all() over an empty population is True and reads like a verified
+    claim')."""
+    b_rows = [_d1_row("2021-06-01", None), _d1_row("2022-06-01", None),
+             _d1_row("2023-06-01", None)]
+    c_rows = [_d1_row("2021-06-01", None), _d1_row("2022-06-01", None),
+             _d1_row("2023-06-01", None)]
+    result = st.primary_regime_comparison(b_rows, c_rows)
+    assert result["status"] == "NOT_EVALUABLE"
+    assert result["degenerate"] is False
+
+
 def test_primary_regime_comparison_carries_the_disclosed_threshold_status():
     result = st.primary_regime_comparison([_d1_row("2022-01-01", 0.001)],
                                           [_d1_row("2022-01-01", 0.0005)])
