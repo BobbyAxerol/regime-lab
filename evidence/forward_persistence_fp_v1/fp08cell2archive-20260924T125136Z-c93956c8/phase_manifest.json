@@ -1,0 +1,50 @@
+{
+  "schema": "regime_lab.fp04_phase_manifest.v1",
+  "lab_run_id": "fp08cell2archive-20260924T125136Z-c93956c8",
+  "study_id": "forward_persistence_fp_v1",
+  "phase_id": "FP-08-CELL2-ARCHIVE",
+  "guide_version": "FP-GUIDE-1.0",
+  "started_at_utc": "2026-09-24T12:51:36.376001+00:00",
+  "required_gates": [
+    "FP04-G-LEDGER",
+    "FP04-G-CAUSAL",
+    "FP04-G-REGION",
+    "FP04-G-SUPPORT",
+    "FP04-G-REUSE"
+  ],
+  "artifacts": [
+    {
+      "path": "origin_ledger.json",
+      "sha256": "ded5e6973eff8bf7db8d8b456983d8f17d4dcb649a8fa64803676ad10ae55f59"
+    },
+    {
+      "path": "ledger_records.json",
+      "sha256": "ea09480ddf1b0dc58ef0627546007b36d95a2c6cf3378446f8e9e9a70b758015"
+    },
+    {
+      "path": "region_policy.json",
+      "sha256": "190413a747eeeceb3daa5512f2c37af3257ab0058c9128b7601181326abfaa1f"
+    },
+    {
+      "path": "resource_budget.json",
+      "sha256": "438ceb33abfd0f5f54ce92abf420cc8ff99e1c554692186b3ca9f51c871518a9"
+    },
+    {
+      "path": "test_registry.json",
+      "sha256": "ab0ccd07c3061ea1eff9dd2ceb0cc5d977c88df1881da4e4abb28d47d1e009d8"
+    },
+    {
+      "path": "report.md",
+      "sha256": "028c4a9ed7e05acc16c2049f88548ee13c8aef2d105376f030927e2bb2e01be8"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "d476882e6ffdb1db19fa8d1609e520128df9564af9383f90014d5300d2543bd5"
+    },
+    {
+      "path": "gate_receipt.json",
+      "sha256": "31b60b3c7d31cfed7cc58c049b5af01373c96c566f457f3cae8a809323868976"
+    }
+  ],
+  "written_at_utc": "2026-09-24T14:46:53.365432+00:00"
+}

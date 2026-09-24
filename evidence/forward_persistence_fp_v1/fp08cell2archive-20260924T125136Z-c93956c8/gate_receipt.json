@@ -1,0 +1,56 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-08-CELL2-ARCHIVE",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp08cell2archive-20260924T125136Z-c93956c8",
+  "required_gates": [
+    "FP04-G-LEDGER",
+    "FP04-G-CAUSAL",
+    "FP04-G-REGION",
+    "FP04-G-SUPPORT",
+    "FP04-G-REUSE"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": "dec-b5a96eb125bb80cd"
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp04_verification.v1",
+    "run_dir": "evidence/forward_persistence_fp_v1/fp08cell2archive-20260924T125136Z-c93956c8",
+    "gates": {
+      "FP04-G-LEDGER": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP04-G-CAUSAL": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP04-G-REGION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP04-G-SUPPORT": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP04-G-REUSE": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 247,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-24T14:54:28.933921+00:00",
+  "independent_reverification_note": "orchestrator internal check used a stale pre-flight junit.xml; this is an independent re-verify with fresh test evidence (247/247 passed)"
+}

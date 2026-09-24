@@ -1,0 +1,55 @@
+{
+  "schema": "regime_lab.fp_gate.v1",
+  "phase_id": "FP-08",
+  "guide_version": "FP-GUIDE-1.0",
+  "lab_run_id": "fp08-20260924T152905Z-5b68e8f8",
+  "required_gates": [
+    "FP08-G-REPLICATION",
+    "FP08-G-D2",
+    "FP08-G-INFERENCE",
+    "FP08-G-CONCENTRATION",
+    "FP08-G-VERDICT"
+  ],
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verification": {
+    "schema": "regime_lab.fp08_verification.v1",
+    "run_dir": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/forward_persistence_fp_v1/fp08-20260924T152905Z-5b68e8f8",
+    "gates": {
+      "FP08-G-REPLICATION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP08-G-D2": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP08-G-INFERENCE": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP08-G-CONCENTRATION": {
+        "pass": true,
+        "reasons": []
+      },
+      "FP08-G-VERDICT": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "missing_artifacts": [],
+    "pytest": {
+      "tests": 1503,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "overall": "PASS"
+  },
+  "verified_at_utc": "2026-09-24T15:29:05.084928+00:00"
+}

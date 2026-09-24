@@ -1,0 +1,22 @@
+{
+  "schema": "regime_lab.fp04_resource_budget.v1",
+  "lab_run_id": "fp08cell2archive-20260924T125136Z-c93956c8",
+  "cell": "cell2_replication",
+  "engine_calls_search_trials_fresh": 512,
+  "reused_origins": [
+    "2021-06-01"
+  ],
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 4,
+    "previous_soft_gib": null
+  },
+  "measured_search_wall_seconds_total": 9344.1,
+  "measured_search_wall_seconds_by_origin": {
+    "2021-06-01": 3439.270339,
+    "2022-06-01": 3109.325383,
+    "2023-06-01": 2795.502409
+  },
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T14:46:53.355164+00:00"
+}
