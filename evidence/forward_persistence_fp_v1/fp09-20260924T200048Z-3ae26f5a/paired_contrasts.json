@@ -1,0 +1,80 @@
+{
+  "schema": "regime_lab.fp09_paired_contrasts.v1",
+  "primary": {
+    "label": "SELECTOR_REGIME_TIMING - SELECTOR_CAL_MATCHED",
+    "status": "ESTIMATED",
+    "estimate": 5.531831561750376e-06,
+    "threshold": 6.4e-05,
+    "n": 1095,
+    "block": 28,
+    "nonoverlapping_blocks": 39,
+    "draws": 4999,
+    "seed": 2026091201,
+    "invalid_draws": 0,
+    "ci95_basic": [
+      -1.0440846789665458e-05,
+      1.7951575940689564e-05
+    ],
+    "ci_simultaneous_basic": [
+      -1.6126288422965064e-05,
+      2.1426820150390985e-05
+    ],
+    "p_one_sided": 1.0,
+    "n_common_days": 1095,
+    "unmatched_dates": [],
+    "partial": false
+  },
+  "secondary": {
+    "SELECTOR_REGIME_TIMING - SELECTOR_FIXED_CAL": {
+      "label": "SELECTOR_REGIME_TIMING - SELECTOR_FIXED_CAL",
+      "status": "ESTIMATED",
+      "estimate": 1.6487599329740414e-06,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -1.7891495006211973e-05,
+        1.832761690165906e-05
+      ],
+      "ci_simultaneous_basic": [
+        -2.3941147672418652e-05,
+        2.33117639593823e-05
+      ],
+      "p_one_sided": 1.0,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    },
+    "SELECTOR_CAL_MATCHED - SELECTOR_FIXED_CAL": {
+      "label": "SELECTOR_CAL_MATCHED - SELECTOR_FIXED_CAL",
+      "status": "ESTIMATED",
+      "estimate": -3.883071628776335e-06,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -1.1579220051383943e-05,
+        7.937017279278027e-06
+      ],
+      "ci_simultaneous_basic": [
+        -1.3203880626705054e-05,
+        1.3139706233221891e-05
+      ],
+      "p_one_sided": 1.0,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    }
+  },
+  "lab_run_id": "fp09-20260924T200048Z-3ae26f5a",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T20:05:40.430088+00:00"
+}

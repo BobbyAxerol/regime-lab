@@ -1,0 +1,24 @@
+{
+  "schema": "regime_lab.fp09_resource_budget.v1",
+  "lab_run_id": "fp09-20260924T194430Z-b5c1244a",
+  "resource_limits_applied": {
+    "cpu_limit": "2",
+    "rlimit_as_gib": 7.0,
+    "registered_rlimit_as_gib": 4,
+    "exception_applied": true,
+    "exception_decision_id": "dec-9cc3ec3e712cf61b"
+  },
+  "measured": {
+    "peak_rss_mib": 3032.9,
+    "total_wall_seconds": 513.66,
+    "per_arm_wall_seconds": {
+      "SELECTOR_FIXED_CAL": 241.52,
+      "SELECTOR_CAL_MATCHED": 244.41,
+      "SELECTOR_REGIME_TIMING": 24.42
+    },
+    "frame_bars": 1576800
+  },
+  "note": "SELECTOR_FIXED_CAL is a real cache HIT (FP-07's own Arm B, byte-identical facets); SELECTOR_CAL_MATCHED and SELECTOR_REGIME_TIMING are real cache MISSes -- 2 new fp.evaluator.run_deployment calls, zero new search-trial engine calls",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T19:53:04.716065+00:00"
+}

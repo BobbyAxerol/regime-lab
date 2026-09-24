@@ -1,0 +1,80 @@
+{
+  "schema": "regime_lab.fp09_paired_contrasts.v1",
+  "primary": {
+    "label": "SELECTOR_REGIME_TIMING - SELECTOR_CAL_MATCHED",
+    "status": "ESTIMATED",
+    "estimate": 0.0,
+    "threshold": 6.4e-05,
+    "n": 1095,
+    "block": 28,
+    "nonoverlapping_blocks": 39,
+    "draws": 4999,
+    "seed": 2026091201,
+    "invalid_draws": 0,
+    "ci95_basic": [
+      0.0,
+      0.0
+    ],
+    "ci_simultaneous_basic": [
+      0.0,
+      0.0
+    ],
+    "p_one_sided": 1.0,
+    "n_common_days": 1095,
+    "unmatched_dates": [],
+    "partial": false
+  },
+  "secondary": {
+    "SELECTOR_REGIME_TIMING - SELECTOR_FIXED_CAL": {
+      "label": "SELECTOR_REGIME_TIMING - SELECTOR_FIXED_CAL",
+      "status": "ESTIMATED",
+      "estimate": 1.6487599329740414e-06,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -1.7891495006211973e-05,
+        1.832761690165906e-05
+      ],
+      "ci_simultaneous_basic": [
+        -2.3941147672418652e-05,
+        2.33117639593823e-05
+      ],
+      "p_one_sided": 1.0,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    },
+    "SELECTOR_CAL_MATCHED - SELECTOR_FIXED_CAL": {
+      "label": "SELECTOR_CAL_MATCHED - SELECTOR_FIXED_CAL",
+      "status": "ESTIMATED",
+      "estimate": 1.6487599329740414e-06,
+      "threshold": 6.4e-05,
+      "n": 1095,
+      "block": 28,
+      "nonoverlapping_blocks": 39,
+      "draws": 4999,
+      "seed": 2026091201,
+      "invalid_draws": 0,
+      "ci95_basic": [
+        -1.7891495006211973e-05,
+        1.832761690165906e-05
+      ],
+      "ci_simultaneous_basic": [
+        -2.3941147672418652e-05,
+        2.33117639593823e-05
+      ],
+      "p_one_sided": 1.0,
+      "n_common_days": 1095,
+      "unmatched_dates": [],
+      "partial": false
+    }
+  },
+  "lab_run_id": "fp09-20260924T194430Z-b5c1244a",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T19:53:04.714453+00:00"
+}

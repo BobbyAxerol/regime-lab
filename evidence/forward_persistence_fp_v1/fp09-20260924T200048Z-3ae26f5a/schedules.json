@@ -1,0 +1,182 @@
+{
+  "schema": "regime_lab.fp09_schedules.v1",
+  "SELECTOR_FIXED_CAL": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 129600
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 393120
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 525600
+    }
+  ],
+  "SELECTOR_CAL_MATCHED": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 145622
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 395968
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 528619
+    }
+  ],
+  "SELECTOR_REGIME_TIMING": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "params": {
+        "coeff": 7,
+        "AP": 34,
+        "alpha.condition_threshold": 70,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 172800
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "params": {
+        "coeff": 1,
+        "AP": 52,
+        "alpha.condition_threshold": 40,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 393120
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "params": {
+        "coeff": 2,
+        "AP": 53,
+        "alpha.condition_threshold": 80,
+        "novolumedata": false,
+        "src_col": "close"
+      },
+      "requested_at_bar": 528806
+    }
+  ],
+  "regime_timing_diagnostics": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "origin_bar": 129600,
+      "activation_bar": 172800,
+      "deferred_bars": 43200,
+      "hit_threshold": false,
+      "reason": "threshold never reached within k_max_bars -- bounded fallback applied"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "origin_bar": 393120,
+      "activation_bar": 393120,
+      "deferred_bars": 0,
+      "hit_threshold": true,
+      "reason": "volatility ratio crossed <= threshold within the bounded window"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "origin_bar": 525600,
+      "activation_bar": 528806,
+      "deferred_bars": 3206,
+      "hit_threshold": true,
+      "reason": "volatility ratio crossed <= threshold within the bounded window"
+    }
+  ],
+  "cal_matched_diagnostics": [
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-04-01",
+      "origin_bar": 129600,
+      "activation_bar": 145622,
+      "deferred_bars": 16022,
+      "reason": "drawn from Uniform(0, 43200) with fixed seed=20260924, no market data consulted"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2021-10-01",
+      "origin_bar": 393120,
+      "activation_bar": 395968,
+      "deferred_bars": 2848,
+      "reason": "drawn from Uniform(0, 43200) with fixed seed=20260924, no market data consulted"
+    },
+    {
+      "activation_id": "SELECTOR_FIXED_CAL@2022-01-01",
+      "origin_bar": 525600,
+      "activation_bar": 528619,
+      "deferred_bars": 3019,
+      "reason": "drawn from Uniform(0, 43200) with fixed seed=20260924, no market data consulted"
+    }
+  ],
+  "cal_matched_derivation": "drawn from Uniform(0, 43200) with fixed seed=20260924 per event (21889 bars total across 3 events), no market or volatility data consulted for this arm at all, and no input taken from SELECTOR_REGIME_TIMING's own realized schedule",
+  "summary": {
+    "n_admission_events": 3,
+    "n_events_crossed_threshold": 2,
+    "n_events_bounded_fallback": 1,
+    "total_deferred_bars_regime_timing": 46406,
+    "total_deferred_bars_cal_matched": 21889,
+    "origins": [
+      "2021-01-01",
+      "2021-04-01",
+      "2021-07-01",
+      "2021-10-01",
+      "2022-01-01",
+      "2022-04-01",
+      "2022-07-01",
+      "2022-10-01",
+      "2023-01-01",
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ]
+  },
+  "lab_run_id": "fp09-20260924T200048Z-3ae26f5a",
+  "study_id": "forward_persistence_fp_v1",
+  "written_at_utc": "2026-09-24T20:05:40.427178+00:00"
+}
