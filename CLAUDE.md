@@ -488,8 +488,88 @@ it is the same frame/scale already measured there. Independently re-verified aga
 suite's own fresh junit (not the orchestrator's own pre-run evidence) before finalizing. Full lab
 suite after FP-09: **1533 passed, 0 failed** (1503 + 30 new FP-09 tests).
 
-FP-09 does not gate FP-10. FP-10 (freeze, replay, final handoff) is the remaining path once the
-owner reviews FP-01..09's evidence together.
+FP-09 does not gate FP-10.
+
+**FP-10 (freeze, replay and final handoff, guide section 22) is complete: all five gates PASS**
+(`FP10-G-FREEZE`/`REPLAY`/`REPORT`/`EXPOSURE`/`HANDOFF`,
+`evidence/forward_persistence_fp_v1/fp10-20260924T205735Z-49161e47/`), on the user's direct
+instruction ("OK bạn làm FP-10 luôn nhé") once FP-09 landed. This is a wrap-up phase, not another
+discovery phase: it freezes the whole study's dependencies into one detached-digest package,
+REPLAYS one already-committed real result under the identical frozen contract, and answers the
+guide's nine required final-report questions from already-committed evidence — it introduces no new
+measurement of its own.
+
+**Freeze package**: every guide-required component category present and RE-HASHED from disk at
+build time, never copied from an earlier claim — 13 key `fp/`/`experiments`/`integration` source
+files plus the installed engine's own identity, the `snapshots/server_core_v1` manifest digest,
+A-SC's 3-dimension search contract (`B_search=256`, `CHECKPOINT_LEVELS=(32,64,128,256)`,
+`TRAIN_MEMORY_DAYS=180`), Selector B/C's frozen feature/interaction protocol and alpha values
+(10.0/10.0), the admission/fallback vocabulary, the frozen economic contract, the registered MDE
+(6.4e-05/day) and 28-day block-bootstrap method, and every cohort/window/seed/budget this study used
+(FP-04's 12 origins, FP-08 cell-2's 3 ETHUSDT origins, FP-09's `vol_threshold=1.0`/
+`k_max_bars=43200`/`cal_matched_seed=20260924`).
+
+**Real replay, exact reproduction.** FP-09 (the cheapest, most recent, fully deterministic real
+result in this study) was re-run under its identical frozen contract into a fresh run_dir. All 8
+compared economic fields matched EXACTLY, down to full float precision: `SELECTOR_FIXED_CAL`/
+`SELECTOR_CAL_MATCHED`/`SELECTOR_REGIME_TIMING` fill counts (3312/3322/3300) and entries
+(1656/1661/1650) identical, primary contrast estimate identical to 16 significant figures
+(`5.531831561750376e-06`), status `ESTIMATED` both times. Explicitly disclosed, per guide 22's own
+caveat, as **NOT an independent confirmation** — same frozen market data, same code, same seed, only
+proving reproducibility, never a new measurement. Cache provenance recorded separately
+(informational, not gated): `SELECTOR_CAL_MATCHED` genuinely transitioned MISS→HIT between the
+original run and the replay (the cache warmed from the original), while the other two arms were HIT
+both times — itself evidence the replay found and reused the identical computation.
+
+**A real self-caught verifier defect, found on the first attempt — not by a failing unit test.**
+The first real FP-10 run (`fp10-20260924T205519Z-d05098ce`, superseded) FAILED `FP10-G-REPLAY` on
+exactly one comparison: `SELECTOR_CAL_MATCHED.cache_event: original=MISS != replay=HIT`. This was
+NOT a real discrepancy — a replay is SUPPOSED to turn a prior cache MISS into a HIT once the cache
+has warmed, so requiring `cache_event` to match literally was over-strict: it flagged the very proof
+of reproducibility as a failure. Fixed by moving cache-event comparisons to an unGated
+`cache_provenance` block (disclosed, not required to match) and keeping only genuinely economic
+fields (fill counts, entries, contrast estimate/status) in `FP10-G-REPLAY`'s gated comparisons. The
+corrected second run reproduced all 8 gated fields exactly, as reported above.
+
+**Final report answers the guide's nine required questions from already-committed evidence,
+citing a real path for every claim** (full text in `final_report.md`): (1) more search trials do NOT
+improve forward outcomes — FP-03's own measurement, decay stayed positive at every checkpoint,
+128→256 trials changed nothing. (2) B is NOT better than A on the one evaluable cell — FP-07/08's
+−0.0001890/day, CI entirely below zero. (3) C vs B is degenerate, not measured — C≡B at every real
+admission across both cells (0/12, 0/3 CONTEXT_CONDITIONED). (4) decay-vs-utility/risk stays
+descriptive only (`delta_decay` `NOT_REGISTERED`); decay was never observed to improve. (5) none of
+conditional selection, forward-persistent selection, or transition-cost timing showed a positive
+effect at this scale, consistent with this lab's three prior independent cadence-artifact
+falsifications (LAB-08, RA-07, FUP-05) that motivated this FP line in the first place. (6) support
+and uncertainty allow only WEAK conclusions — every contrast beyond descriptive rests on a single
+cell, no contrast anywhere in FP-01..09 cleared the registered MDE in the positive direction. (7)
+untried: `H_ADMISSION_FREQUENCY` and `H_DECAY_RISK_DEFERRAL` (FP-09's own considered-and-rejected
+list), a third replication cell, extending FP-04's archive toward guide 3.2's ~26-39-origin target.
+(8) real measured engine compute across the whole study ≈**52802.7s (~14.7h)** (FP-03 search
+8404.12s, FP-04 search 34254.3s/9.52h, FP-07 deployment 509.41s, FP-08 cell-2 search 9344.1s/2.60h,
+FP-09 deployment 290.72s) — FP-04's 192-record archive is the single biggest reusable asset for any
+future extension. (9) **recommendation (this session's synthesis, explicitly not a mandate): keep
+the stock/installed baseline selector (Arm A), do not deploy B/C/the FP-09 timing overlay** — every
+measured contrast across three independent mechanisms, on top of three prior historical
+falsifications, landed negative, degenerate, or an order of magnitude below the registered MDE; any
+further research should be a deliberately new, freshly-scoped research revision rather than
+continuing to probe the same mechanism space.
+
+**Data exposure, explicit**: `development` role (2020-01-01..2023-12-31) fully consumed by
+FP-01..09; `outer_evaluation` (2024-01-01 onward) **never touched**, `engineering_status=
+COMPLETE_WITHIN_SCOPE`, `prospective_status=NOT_RUN_NO_ELIGIBLE_NEW_DATA` — the guide's own
+anticipated no-fresh-data path, not a shortfall. Noted explicitly: `outer_evaluation` is not even a
+clean holdout by its own registration (supplied presets were TPE-tuned on the full sample with an
+unknown cutoff) — a second, independent reason not to open it without a deliberate owner decision.
+
+Independently re-verified against the full lab suite's fresh junit (not the orchestrator's own
+pre-run evidence) before finalizing. Full lab suite after FP-10: **1543 passed, 0 failed** (1533 +
+10 new FP-10 tests).
+
+This closes the guide's FP-01..FP-10 phase sequence. Any further work here is either (a) an owner-
+selected `research_revision_N` targeting one of the report's named untried hypotheses, or (b) a
+deliberate decision to open `outer_evaluation` for a genuinely prospective evaluation — both are the
+owner's to choose, not an automatic next step.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
