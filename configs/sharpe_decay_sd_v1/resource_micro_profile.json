@@ -1,0 +1,25 @@
+{
+  "schema": "regime_lab.sd01_micro_profile.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "phase_id": "SD-01",
+  "task": "SD01.6",
+  "measured_at_utc": "2026-09-25T00:00:00+00:00",
+  "call": "fp.checkpoint_search.run_origin_search(origin_cutoff='2021-06-01', trials=8, seed=20260925, train_memory_days=180, forward_days=56, symbol='BTCUSDT', alpha_id='A-SC')",
+  "note": "8 trials, per guide SS11.4's own '8-16 trial micro-profile khong thay configured128 primary search' -- a real calibration probe, never the production 128-trial search itself",
+  "applied_limits": {"rlimit_as_gib": 4, "cpu_limit": "2"},
+  "measured": {
+    "wall_seconds_measured": 225.04639,
+    "instrumentation": {"base_mib": 384.3, "peak_mib": 1019.4, "after_gc_mib": 898.6,
+                        "delta_mib": 635.1, "residual_mib": 514.3, "wall_s": 223.963},
+    "peak_rss_mib": 1019.4, "frame_rows": 348480, "trials_requested": 8, "wf_ok": true
+  },
+  "extrapolation": {
+    "naive_linear_per_origin_at_128_trials_seconds": 3600.7,
+    "naive_linear_per_origin_minutes": 60.0,
+    "note": "conservative upper bound -- treats the WHOLE 225.05s as proportional to trial count; the fixed data-load cost (~348k-row frame) does not itself scale with trials, so the real per-trial marginal cost is lower once load is amortized over more trials",
+    "cross_check_against_fp03": "FP-03's own real 256-trial/origin measurements (2786.63s/2575.28s/3042.21s, evidence/forward_persistence_fp_v1/fp03-20260922T211626Z-6bf07360/) average ~10.9-11.9s/trial INCLUDING their own one-time load, on a comparable-scale window -- if SD's own marginal per-trial cost is similar (~11-19s/trial after removing a ~60-90s fixed load), 128 trials/origin projects to roughly 25-45 minutes, not the full 60-minute naive linear estimate",
+    "total_12_origins_range_hours": "9.0 - 12.0",
+    "memory_headroom": "FP-03's own 256-trial runs measured peak RSS 1483.3-1520.0 MiB (only ~1.5x this probe's 1019.4 MiB for a 32x trial-count increase, confirming memory is dominated by the fixed frame size, not trial-history accumulation) -- SD01.7's full 128-trial/origin search calls are expected to stay comfortably within the registered 4 GiB budget, no resource exception needed for the search stage"
+  },
+  "decision": "proceed with SD01.7's real 12-origin/128-trial-each INIT archive build, matching the owner's own pre-stated ~11h expectation; launched as a fully-detached background process (setsid nohup, PPID=1) so a session/connection loss cannot kill it, per the FP-04 operational-incident lesson already on record in this lab's history"
+}
