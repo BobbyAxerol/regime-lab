@@ -4,9 +4,62 @@ Current source/runtime and approved registration:
 
 | Phase | Technical | Research/scope | Owner | Evidence |
 |---|---|---|---|---|
-| SD-01 | PASS (7/7 gates) | NOT_ASSESSED — measurement infrastructure + real archive only, no model fit yet | PENDING (SD-02 needs its own R-18) | `evidence/sharpe_decay_sd_v1/init_archive/` |
-| SD-02 | not started | — | — | — |
+| SD-01 | PASS (7/7 gates) | NOT_ASSESSED — measurement infrastructure + real archive only, no model fit yet | APPROVED (`dec-cefc167978e6c207`) | `evidence/sharpe_decay_sd_v1/init_archive/` |
+| SD-02 | IN PROGRESS (code built, INIT-side prep running/complete, 12 VALIDATION folds not yet run) | not assessed | APPROVED (`dec-9a35219678adf611`, "Qua phase 2 luôn nhé") | `evidence/sharpe_decay_sd_v1/sd02_model/`, `validation_folds/` (not yet populated) |
 | SD-03 | not started | — | — | — |
+
+## SD-02 in-progress state (2026-09-25, mid-build)
+
+All model-layer CODE is built and tested (114+ new SD-02 tests, all green,
+pyflakes clean): `jm_features.py`, `jm_model.py` (Statistical Jump Model K=2,
+verified prefix-by-prefix causal-filter parity), `jm_vintage.py` (per-origin
+causal tapes, measured raw-prehistory shortfall on 4/12 INIT origins),
+`daily_bars.py`, `contrast_features.py`/`ridge_contrast.py`/`model_bc.py`
+(intercept-free contrast ridge B + state-conditioned residual correction C),
+`r_rule.py`, `candidate_descriptors.py`, `training_rows.py` (wires in the
+REAL, verbatim-reused `fp.chronology`/`fp.forward_ledger` causality guard),
+`fold_scoring.py`, `recipe_selection.py` (guide SS5.8's locked rule),
+`model_quality.py` (MAE(Y), rank diagnostic, state occupancy/dwell/recurrence).
+
+**Owner decision `dec-c94ea602aeac0f1a` (2026-09-25, via AskUserQuestion):**
+B/C/R_RULE select among the SAME <=16-candidate representative panel + anchor
+SD-01/SD-02's own archive already forward-evaluates at each origin, NOT the
+full raw ~100-115-candidate unique-candidate pool -- avoids an estimated
+~10h of new, undisclosed real engine compute. Revises `protocol_migration.
+json`'s F03b disposition (dated `scope_revision_sd02_20260925`, original
+text preserved verbatim, never rewritten). Full protocol registered in
+`configs/sharpe_decay_sd_v1/sd02_model_protocol.json`.
+
+**A real, load-bearing bug caught before running real compute**: the
+orchestrator's `ratio_by_origin` dict was silently DROPPING origins with
+insufficient raw prehistory instead of keeping them mapped to `None`, which
+would have crashed `training_rows.retag_states`'s missing-key guard the
+moment R_RULE tried to tag INIT's 4 known-short origins during the real
+12-fold run. Fixed in `scripts/run_sd02_validation.py` (three call sites)
+before any real compute was spent on it.
+
+**INIT-side prep** (SD02.1/2.3, zero new engine compute, real I/O only):
+- `evidence/sharpe_decay_sd_v1/sd02_model/init_jm_tapes.json` -- REAL, 3
+  recipes x 12 origins, 24/36 OK (8/12 per recipe), 12/36
+  `INSUFFICIENT_RAW_PREHISTORY` (exactly the 4 measured-short origins x 3
+  recipes) -- complete.
+- `evidence/sharpe_decay_sd_v1/sd02_model/init_descriptors.json` (real
+  activity_entries backfill via guaranteed cache-HIT re-fetch) -- IN
+  PROGRESS as of this note, checkpointed per-origin under
+  `init_descriptors_partial/`, running fully detached
+  (`setsid nohup ... & disown`, matching the pattern proven to survive a
+  session restart in SD01.7/FP-04). A first attempt was accidentally killed
+  by my own `timeout 900 | tail` piping (which buffers all output until
+  EOF, so nothing appeared before the kill) -- fixed by adding per-origin
+  checkpointing to `scripts/run_sd02_descriptors.py` and relaunching
+  properly detached with direct-to-file logging.
+
+**Not yet run**: the real 12-fold VALIDATION build (`scripts/
+run_sd02_validation.py`, SD02.4) -- 12 real 128-trial searches, the major
+real-compute commitment of this phase (~9-12h, per SD01.6's own already-
+measured extrapolation for the identical search scale). Will launch fully
+detached once the descriptor backfill completes and a synthetic-data smoke
+test of the orchestrator's core scoring loop passes clean.
 
 ## Latest actual run and parent upgrade
 

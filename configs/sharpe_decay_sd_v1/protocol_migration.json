@@ -87,7 +87,14 @@
       "summary_vi": "A duoc chon tu toan search, B/C chi tu 16 medoids",
       "disposition": "PRESENT",
       "evidence": "FP-07's Arm A uses wf_result['selected_params'] (the full 256-trial search); Arm B/C predict only over b_rows/c_rows, which derive from FP-04's representative_subset_size=16-capped region archive -- verified against fp/locked_study.py, fp/checkpoint_search.py and CLAUDE.md's own FP-04 disclosure ('every one of the 12 origins hit this cap').",
-      "remedy_in_sd": "SD-GUIDE-1.0 SS3.2 requires A/B/C to select from the identical full eligible pool at each cutoff; the 16-representative panel is used ONLY to save label-evaluation cost, never to shrink the prediction domain. Tested via S1-T06-POOL."
+      "remedy_in_sd": "SD-GUIDE-1.0 SS3.2 requires A/B/C to select from the identical full eligible pool at each cutoff; the 16-representative panel is used ONLY to save label-evaluation cost, never to shrink the prediction domain. Tested via S1-T06-POOL.",
+      "scope_revision_sd02_20260925": {
+        "decision": "PANEL_ONLY_SELECTION_SCOPE",
+        "reason": "SD02.4 needs a real per-candidate descriptor (raw IS Sharpe + an activity/support descriptor) for every candidate B/C/R_RULE select among. That descriptor exists, without new engine compute, only for SD-01's 16-candidate representative panel + anchor per origin (the set with a real forward-evaluated IS/FWD Sharpe). Extending a real per-candidate descriptor to the full ~100-115-candidate raw pool at every origin would need ~100 new IS-window evaluate_candidate calls per origin x 24 origins (INIT+VALIDATION), estimated ~10h of NEW real engine compute, never measured or approved before this decision.",
+        "owner_decision": "presented via AskUserQuestion 2026-09-25; owner selected 'Panel-only selection scope (Recommended)' -- zero new compute beyond the 12 real VALIDATION searches.",
+        "effect": "B/C/R_RULE select among the SAME <=16-candidate representative panel + anchor SD-01/SD-02's own archive already forward-evaluates at each origin -- NOT the full raw unique-candidate pool. This revises F03b's original PRESENT/'full eligible pool' disposition above (preserved verbatim, never rewritten) to a narrower, disclosed scope. Arm A's own comparator is unaffected (still the installed selector's own pick, the search's own anchor).",
+        "not_reverted": "the ORIGINAL F03b text above is left completely unmodified as the historical record of what was found and why."
+      }
     },
     {
       "finding_id": "F05",

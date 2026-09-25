@@ -118,6 +118,14 @@ def candidate_window_sharpe(cache, root, alpha_id: str, load_real_bars_fn, param
                                               cutoff=origin_cutoff, report_level="score",
                                               economics=economics, producer=producer)
     audit = payload["selected_audit"]
+    #: SD02.1 panel-only scope decision (owner dec-c94ea602aeac0f1a,
+    #: protocol_migration.json F03b scope_revision_sd02_20260925): the IS-kind
+    #: call already computes this candidate's real entry count as a byproduct
+    #: -- exposing it here means SD-02's own activity/support descriptor never
+    #: needs a SEPARATE evaluate_candidate call for a freshly-built (VALIDATION)
+    #: origin. INIT's already-committed origin_*.json files predate this field
+    #: and are backfilled separately via candidate_descriptors.fetch_activity_entries.
+    entries = int(audit["entries"]) if kind == "IS" else None
     initial_equity = economics["initial_capital"]
     expected_days = IS_WINDOW_DAYS if kind == "IS" else FORWARD_WINDOW_DAYS
     try:
@@ -126,11 +134,13 @@ def candidate_window_sharpe(cache, root, alpha_id: str, load_real_bars_fn, param
                                end=bounds["score_end"].isoformat())
     except Exception as exc:   # noqa: BLE001 -- ContractError from time_edge; typed status below
         return {"sharpe": None, "sharpe_status": "WINDOW_BUILD_FAILED", "reason": str(exc),
-               "n_days": 0, "kind": kind}
+               "n_days": 0, "kind": kind, "entries": entries}
     returns = [r[1] for r in rows]
     if len(returns) != expected_days:
         return {"sharpe": None, "sharpe_status": "WRONG_DAY_COUNT",
-               "reason": f"expected {expected_days}, got {len(returns)}", "n_days": len(returns), "kind": kind}
+               "reason": f"expected {expected_days}, got {len(returns)}", "n_days": len(returns),
+               "kind": kind, "entries": entries}
     result = _typed_sharpe(returns)
     return {"sharpe": result["value"], "sharpe_status": result["status"],
-           "n_days": len(returns), "kind": kind, "cache_event": cache_event["status"]}
+           "n_days": len(returns), "kind": kind, "cache_event": cache_event["status"],
+           "entries": entries}
