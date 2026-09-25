@@ -80,8 +80,7 @@ def render_report(*, registration, migration, timeline, micro_profile, origin_re
              f"- measured full usable interval: {registration['data_role_exception']['measured_full_interval']['start']} "
              f".. {registration['data_role_exception']['measured_full_interval']['end']} "
              f"({registration['data_role_exception']['measured_full_interval']['days']} days)",
-             f"- feasibility verdict: **{timeline['feasibility_check']['verdict']}** "
-             f"({timeline['feasibility_check']['spare_days_after_d2_end']} days of disclosed margin)",
+             f"- feasibility verdict: **{timeline['feasibility_check']['verdict']}**",
              f"- INIT: {timeline['roles']['INIT']['first_origin']} .. {timeline['roles']['INIT']['last_origin']} "
              "(fully inside development, retrospective)",
              f"- VALIDATION: {timeline['roles']['VALIDATION']['first_origin']} .. "
