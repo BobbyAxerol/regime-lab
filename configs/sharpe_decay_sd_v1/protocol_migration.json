@@ -1,0 +1,123 @@
+{
+  "schema": "regime_lab.sd_protocol_migration.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "guide_version": "SD-GUIDE-1.0",
+  "parent_study_id": "forward_persistence_fp_v1",
+  "stamped_at_utc": "2026-09-25T00:00:00+00:00",
+  "explicit_rule_changes": [
+    {
+      "old_rule": "Primary target: predicted forward utility (mean daily return / bps-per-day), guide FP-GUIDE-1.0",
+      "new_rule": "Primary target: relative Sharpe decay Y = D(theta) - D(anchor), D = SR_IS - SR_FWD, in Sharpe points",
+      "reason": "SD-GUIDE-1.0 SS0.3 item 1: 'Target moi la relative Sharpe decay, khong phai predicted absolute daily return'",
+      "affected_claims_or_tests": "every FP-01..10 daily-return-based threshold (6.4e-05/day MDE), configs/minimum_economic_effect.json stays historical record only, not reused as an SD hurdle"
+    },
+    {
+      "old_rule": "Arms: A_STOCK_CAL / B_FP_PERSISTENCE / C_FP_CONTEXT, plus FP-09's SELECTOR_FIXED_CAL/SELECTOR_CAL_MATCHED/SELECTOR_REGIME_TIMING timing overlay",
+      "new_rule": "Arms: A_M4 (stock Mode 4) / B_SD_GLOBAL (global Sharpe-decay ridge) / C_SD_JM (B + JM K=2 conditioned correction); NO dynamic timing, random-delay or volatility-delay overlay this round",
+      "reason": "SD-GUIDE-1.0 SS0.3 items 2-3; FP-09's own transition-cost-timing finding (+6e-06/day, CI straddling zero) is preserved as historical evidence, not reopened or extended",
+      "affected_claims_or_tests": "fp/timing_policy.py is NOT reused for SD; SD builds its own selector_b/selector_c-equivalent modules under a new namespace"
+    },
+    {
+      "old_rule": "Candidate pool: FP-04's 12-origin/192-record archive, representative_subset_size=16 medoids, B_search=256",
+      "new_rule": "Candidate pool: strictly separate 12 INIT + 12 VALIDATION + 12 FINAL origins (36 total, non-overlapping roles); B/C predict over the FULL eligible candidate pool at each cutoff, not just 16 medoids; A also selects from that same full pool; search default 128 trials/cutoff (256-trial reuse only if full data/180-day training/schema/economics match and is declared before the run)",
+      "reason": "SD-GUIDE-1.0 SS0.3 items 4-5, SS3.2, SS4.1; audit finding F03 (candidate-pool asymmetry) confirmed PRESENT in the FP path -- see finding_dispositions below",
+      "affected_claims_or_tests": "FP-04's archive is NOT directly reused as SD's INIT archive (different search budget default, different candidate-pool-symmetry contract); may be reused as a coverage/feasibility reference only"
+    },
+    {
+      "old_rule": "Selection rule: winner = max(predicted_forward_utility) among eligible candidates (fp/locked_study.py:134)",
+      "new_rule": "Selection rule: winner = min(Y_hat) among eligible candidates, eligibility via Q_hat >= -0.10 relative-Sharpe guard (SD-GUIDE-1.0 SS3.4)",
+      "reason": "audit finding F03 (decay-ranking mismatch) confirmed PRESENT: verified fp/locked_study.py's own walk_forward_b_selection uses `max(passing, key=lambda r: r[\"predicted_forward_utility\"])`, not a decay-minimizing rule, despite decay-helper code existing elsewhere in the lab",
+      "affected_claims_or_tests": "fp/locked_study.py is NOT reused for SD's selection logic; a new minY selection rule is built and tested (S1-T09-DECAY-RANKING)"
+    },
+    {
+      "old_rule": "C's selection: fp/locked_study.py's walk_forward_c_selection short-circuits to FALLBACK_TO_A whenever B itself fell back (`if b_result[\"source\"] == \"FALLBACK_TO_A\": return {\"source\": \"FALLBACK_TO_A\", ...}`)",
+      "new_rule": "C is evaluated independently of B's admission/fallback status at every model-ready fold (SD-GUIDE-1.0 SS3.4, SS5.6)",
+      "reason": "audit finding F05 (C short-circuited by B) confirmed PRESENT in the verified code -- C's own eligible-candidate evaluation was never attempted when B had already fallen back to A",
+      "affected_claims_or_tests": "fp/selector_c.py's walk_forward_c_selection is NOT reused verbatim for SD; SD's C module fits/scores independently of B's status every fold"
+    },
+    {
+      "old_rule": "FP-05/06's ridge-regression target (mean-return based) and context model (JM/M0 explicitly not used, LAB-08's own 1.64% support finding)",
+      "new_rule": "SD's B/C ridge regression targets relative Sharpe decay; C uses a fresh JM K=2 model (SD-GUIDE-1.0 SS5.2-5.6), not LAB-05's old jump model or FP-06's ctx_volatility_ratio/ctx_direction_efficiency features",
+      "reason": "audit findings F05/F06: the old model neither used JM/M0 (a disclosed choice, not silently dropped) nor targeted Sharpe; SD-GUIDE-1.0 explicitly forbids calling the old return-prediction error a new Sharpe result and forbids denying the old negative evidence",
+      "affected_claims_or_tests": "FP-06's ctx_volatility_ratio/ctx_direction_efficiency features and LAB-05's own jump-model tape are NOT reused; LAB-08's 1.64% JM/M0 support finding and FP-05/06's own negative/degenerate findings stay on record, unchanged, cited as historical context only"
+    },
+    {
+      "old_rule": "FP-07's D1 table: only 7/36 (arm, origin) rows carried a real value (disclosed sparsity, Arm A rarely matched a region-archive medoid)",
+      "new_rule": "SD requires a full 12 paired D1 rows per comparison, plus explicit origin-vs-activation timestamp separation in D2 (SD-GUIDE-1.0 SS2.4, SS4.2, SS10.3)",
+      "reason": "audit finding F07 (D1 sparsity, D2 origin/activation conflation): FP-07's own sparse D1 table is an already-disclosed, real limitation, not something to deny; SD's new archive/selection design (full pool, not 16-medoid-capped) is expected to raise the real match rate, but this must be MEASURED in SD-01/02, not assumed",
+      "affected_claims_or_tests": "S1-T13-INIT-ARCHIVE, S3-T04-TWELVE-PAIR, S3-T09-D2-VERSION"
+    },
+    {
+      "old_rule": "Hyperparameters (Selector B/C's ridge alpha) selected via nested walk-forward OOF inside FP-05/06, frozen before FP-07's own final run",
+      "new_rule": "SD freezes ALL hyperparameters (JM penalty c, ridge lambda_global/lambda_state, margins) before FINAL OOS; feature-only inference must not read current future labels (SD-GUIDE-1.0 R10, SS5.8, SS9.2)",
+      "reason": "audit finding F04 (hyperparameter used late information; inference depended on label existence) -- NOT YET independently verified against FP-05/06's own actual code at the time of this migration; flagged NEEDS_RUNTIME below pending SD01.5's own repair-and-test pass",
+      "affected_claims_or_tests": "S1-T07-FEATURE-ONLY, S2-T01-PAST-TRANSFORM, S2-T10-MATURITY"
+    },
+    {
+      "old_rule": "FP-01's gate_receipt.json written twice by design (fixed then); FP-10's first attempt required a literal cache_event match between an original run and its replay, which self-caught-failed on the expected MISS->HIT transition (fixed before committing)",
+      "new_rule": "SD's own detached-seal/replay verifier must not require provenance fields (cache event, run id, timestamps) to match between runs -- only genuinely economic fields are gated; publication order is data artifact -> result hash -> manifest -> detached receipt seal, never receipt-then-patched-PASS (SD-GUIDE-1.0 SS11.2, SS13.1-13.2)",
+      "reason": "audit finding F10 (receipt/publication/replay scope did not match narrative) -- PARTIALLY addressed by this session's own FP-01 and FP-10 self-corrections (see finding_dispositions below); NOT independently confirmed against the full external audit text, which this lab does not yet have a copy of",
+      "affected_claims_or_tests": "S1-T14-GATE-NEGATIVE, S3-T11-REPORT-INTEGRITY"
+    }
+  ],
+  "finding_dispositions": [
+    {
+      "finding_id": "F02",
+      "summary_vi": "12 origins tong nhung tai tung decision chi co 0..11 prior origins; support floor khong duoc runner ap dung",
+      "disposition": "PRESENT",
+      "evidence": "src/crypto_regime_lab/fp/locked_study.py's walk_forward_b_selection never checks selector_b.MIN_FIT_ORIGINS=12 -- self-caught and corrected as a FALSE PREMISE in dec-61a43dad79d0ec5c during FP-08 (that floor gates a different, unrelated diagnostic path never called from locked_study.py). The runner's real gate is simply non-empty train_rows.",
+      "remedy_in_sd": "SD-GUIDE-1.0 SS4.1's own strict INIT/VALIDATION/FINAL role separation plus explicit prior_mature_origins_at_each_cutoff counting (SD01.3) replaces this ambiguity structurally; tested via S1-T03-MATURITY."
+    },
+    {
+      "finding_id": "F03a",
+      "summary_vi": "helper decay co nhung actual runner dung max(predicted_forward_utility)",
+      "disposition": "PRESENT",
+      "evidence": "src/crypto_regime_lab/fp/locked_study.py line 134 (walk_forward_b_selection): `winner = max(passing, key=lambda r: r[\"predicted_forward_utility\"])` -- verified directly against the committed source.",
+      "remedy_in_sd": "New minY(Y_hat) selection rule built fresh for SD (SS3.4); tested via S1-T09-DECAY-RANKING with a forced two-candidate fixture."
+    },
+    {
+      "finding_id": "F03b",
+      "summary_vi": "A duoc chon tu toan search, B/C chi tu 16 medoids",
+      "disposition": "PRESENT",
+      "evidence": "FP-07's Arm A uses wf_result['selected_params'] (the full 256-trial search); Arm B/C predict only over b_rows/c_rows, which derive from FP-04's representative_subset_size=16-capped region archive -- verified against fp/locked_study.py, fp/checkpoint_search.py and CLAUDE.md's own FP-04 disclosure ('every one of the 12 origins hit this cap').",
+      "remedy_in_sd": "SD-GUIDE-1.0 SS3.2 requires A/B/C to select from the identical full eligible pool at each cutoff; the 16-representative panel is used ONLY to save label-evaluation cost, never to shrink the prediction domain. Tested via S1-T06-POOL."
+    },
+    {
+      "finding_id": "F05",
+      "summary_vi": "C bi B short-circuit hoac OOD roi fallback; khong co C-specific selection",
+      "disposition": "PRESENT",
+      "evidence": "src/crypto_regime_lab/fp/locked_study.py's walk_forward_c_selection: `if b_result[\"source\"] == \"FALLBACK_TO_A\": return {\"source\": \"FALLBACK_TO_A\", ...}` -- C is never independently evaluated when B already fell back, verified directly against the committed source.",
+      "remedy_in_sd": "SD-GUIDE-1.0 SS3.4/SS5.6 requires C fit/scored independently of B's admission status at every model-ready fold. Tested via S1-T10-C-INDEPENDENT and S2-T07-INDEPENDENT-C."
+    },
+    {
+      "finding_id": "F05_F06_model",
+      "summary_vi": "model cu khong dung JM/M0 va predictive diagnostic target cu yeu",
+      "disposition": "SUPERSEDED_PATH_QUARANTINED",
+      "evidence": "LAB-08's own measured 1.64% JM/M0 support finding (disclosed, not silently dropped) and FP-05/06's mean-return-target ridge model are historical, already-published record; not denied, not restated as an SD result.",
+      "remedy_in_sd": "SD builds an entirely new JM K=2 model against a Sharpe-decay target (SS5); the old model/target stay quarantined as historical evidence only, per R19."
+    },
+    {
+      "finding_id": "F07",
+      "summary_vi": "D1 thieu paired origins; D2 gan origin thanh activation va bo fallback co params",
+      "disposition": "PRESENT",
+      "evidence": "FP-07's own committed D1 table: only 7/36 (arm, origin) rows carried a real value, disclosed in report.md and CLAUDE.md at the time.",
+      "remedy_in_sd": "SD-GUIDE-1.0 requires >=12 full paired D1 rows and explicit origin-vs-activation timestamp fields in D2 (SS2.4, SS4.2, SS10.3); measured fresh in SD-02/03, not assumed fixed by the new pool design alone."
+    },
+    {
+      "finding_id": "F04",
+      "summary_vi": "hyperparameter dung thong tin muon; inference phu thuoc label existence",
+      "disposition": "NEEDS_RUNTIME",
+      "evidence": "Not yet independently verified against FP-05/06's actual alpha-selection code at migration time; the external audit document [I1] (REGIME_LAB_FP01_FP10_OBJECTIVE_AUDIT_VI.md) that names this finding precisely is not present in this lab's directory as of this migration -- requested from the owner.",
+      "remedy_in_sd": "SD01.5's actual-path repair pass will verify feature-only inference (S1-T07-FEATURE-ONLY) directly against SD's own new code before this disposition can move to FIXED_WITH_PROOF or PRESENT."
+    },
+    {
+      "finding_id": "F10",
+      "summary_vi": "receipt/publication/replay scope chua khop narrative",
+      "disposition": "NEEDS_RUNTIME",
+      "evidence": "Partially overlaps two self-caught corrections already on record in THIS lab's own history: FP-02's gate_receipt.json double-write bug (fixed with a regression test, CLAUDE.md FP-02 section) and FP-10's own first-attempt FP10-G-REPLAY defect (requiring a literal cache_event match between an original run and its replay, which flagged the expected MISS->HIT transition as a failure -- fixed by moving cache_event to an ungated cache_provenance block, CLAUDE.md FP-10 section). Whether F10 refers to these exact defects, a third one, or a broader scope-vs-narrative mismatch is not confirmed without the full audit text.",
+      "remedy_in_sd": "SD's own gate-receipt/replay verifier (SD-GUIDE-1.0 SS11.2, SS13.1-13.2) is built with these two known failure shapes as explicit regression tests from day one, rather than discovered again the same way."
+    }
+  ],
+  "missing_source_note": "The external audit [I1] (REGIME_LAB_FP01_FP10_OBJECTIVE_AUDIT_VI.md, archive SHA-256 ce9bb179af6ba3bba4df4608a8e6c4a2c86f9ed633ca530e310a032fc958c6c1 per SD-GUIDE-1.0 SS0.1) and the ZIP it audited (regime-lab-main (2).zip) are NOT present anywhere in this lab's directory as of this migration -- searched and confirmed absent. Dispositions above for F02/F03a/F03b/F05 were independently re-derived by reading the actual committed source directly (not copied from the missing audit text) and are therefore CONFIRMED against real code. F04/F07/F10's dispositions rely on the guide's own compressed SS0.2 summary table plus this lab's own history; they should be revisited against the full audit text if the owner provides it.",
+  "note": "Deliberate methodology and target revision (mean-return -> Sharpe), not a certificate that FP-01..10's own gates were wrong. Old FP registrations, reports and negative/null results are preserved unchanged; SD cites them via parent_study_id, never rewrites them."
+}
