@@ -62,10 +62,15 @@ These override any convenience default. They restate and tighten the guide.
 
 12. **Report the `../quantbt` status in EVERY reply.** The user has forbidden any modification of `/root/bobby/pool_alpha/quantbt`. At the end of each response, state honestly whether anything there was touched — verified, not assumed: run `git -C /root/bobby/pool_alpha/quantbt status --porcelain` (and compare digests where relevant) and report the result. If something *was* touched, say so immediately and plainly rather than burying it.
 
-## Forward-persistent parameter plateau — authoritative from 2026-09-22, current main direction
+## Forward-persistent parameter plateau — complete (FP-01..FP-10), superseded as current main line
+
+Authoritative 2026-09-22..2026-09-25. Superseded as the lab's current main line of work by the
+Sharpe-decay final study below (2026-09-25) — this section's own FP-01..FP-10 history, evidence and
+conclusions are preserved unchanged, never rewritten; SD is a new study built on top of it.
 
 `REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md` (FP-GUIDE-1.0) supersedes the timing-only primary
-hypothesis below wherever they conflict, and is the lab's current main line of work — **not** a
+hypothesis below wherever they conflict, and was the lab's main line of work through 2026-09-25 (now
+superseded by the Sharpe-decay final study, see above) — **not** a
 parallel or competing plan; do not write another top-level guide document alongside it. It does not
 delete or rewrite the RA/RF/FUP history; it changes what the primary contrast is. Motivation, stated
 in its own registered migration: two independent falsifications (RA-07's 90-day placebo and FUP-05's
@@ -570,6 +575,116 @@ This closes the guide's FP-01..FP-10 phase sequence. Any further work here is ei
 selected `research_revision_N` targeting one of the report's named untried hypotheses, or (b) a
 deliberate decision to open `outer_evaluation` for a genuinely prospective evaluation — both are the
 owner's to choose, not an automatic next step.
+
+## Sharpe-decay final study — authoritative from 2026-09-25, current main direction
+
+`REGIME_LAB_SHARPE_DECAY_FINAL_3_PHASE_GUIDE_VI.md` (SD-GUIDE-1.0) is the lab's current main line of
+work, opened by the owner's explicit "Làm luôn đi ... SD01.6 → SD01.7 → SD01.8" instruction. It is a
+**new study** (`study_id=sharpe_decay_sd_v1`, `parent_study_id=forward_persistence_fp_v1`), branch
+`research/sharpe-decay-sd-v1` off `main` @ `f22851db5761` (main's tip immediately after FP-01..10
+merged in). It does not delete or rewrite FP/RA/RF history; it changes the primary metric from
+mean-return/day to **Sharpe and Sharpe decay** (D = SR_IS − SR_FWD, in Sharpe points), explicitly
+excludes FP-09's own dynamic-timing mechanism this round, and replaces FP-04's single reused
+12-origin archive with a strictly-separated 12 INIT + 12 VALIDATION + 12 FINAL timeline (36 origins,
+non-overlapping roles). Namespace `SD-01`…`SD-03`; guide §10.5 explicitly forbids an `SD-04`.
+
+**SD-01 (standardize Sharpe, build the real INIT archive) is complete: all seven gates PASS**
+(`G1-SOURCE`/`SHARPE`/`WIRING`/`TIMELINE`/`ARCHIVE`/`RESOURCE`/`REPORT`,
+`evidence/sharpe_decay_sd_v1/init_archive/`). Four real, code-verified defects from the guide's own
+SS0.2 finding table (sourced from an external audit `REGIME_LAB_FP01_FP10_OBJECTIVE_AUDIT_VI.md`
+this lab does **not** have a copy of — requested from the owner, disclosed rather than guessed at)
+plus one self-discovered defect were independently re-verified against the actual committed FP
+source, not copied from the guide's compressed summary, before being dispositioned in
+`configs/sharpe_decay_sd_v1/protocol_migration.json`: **F03a** — `fp/locked_study.py`'s
+`walk_forward_b_selection` picks `max(predicted_forward_utility)`, not a decay-minimizing rule,
+confirmed at line 134. **F03b** — Arm A selects from the full 256-trial search while B/C predicted
+only over FP-04's 16-medoid-capped archive, a real asymmetry. **F05** — `walk_forward_c_selection`
+literally returns `FALLBACK_TO_A` whenever B itself had fallen back, so C was never independently
+evaluated. **F02** — `selector_b.MIN_FIT_ORIGINS=12` is never actually enforced by
+`locked_study.py` (the same false premise self-corrected in FP-08's own `dec-61a43dad79d0ec5c`).
+**SELF01_RIDGE_INTERCEPT** (not in the guide's own table) — `fp/selector_b.py`'s `fit_ridge` has a
+de-meaned-y intercept, directly incompatible with SD-GUIDE-1.0 §5.5's explicit "no intercept, anchor
+prediction = 0 by construction" requirement; SD-02 must implement a fresh intercept-free ridge on
+contrast vectors instead.
+
+**A real, load-bearing timeline-feasibility finding, resolved with the owner before any archive
+build.** SD's own strict 12+12+12/56-day design needs a minimum **2252 days with zero scheduling
+gaps**; the `development` role alone (1460 days) is **792 days short**, with no guide-compliant way
+to close the gap by tightening INIT spacing alone (best case still ~506 days short — origins/role
+cannot legally drop below 12, forward blocks cannot legally shrink below 56 days). Real measured
+BTCUSDT coverage (`configs/data_eligibility.json`) extends to **2026-09-09** (2438 days usable),
+most of it inside the previously-untouched `outer_evaluation` role. Presented to the owner with these
+real numbers via `AskUserQuestion`; a disclosed, one-time, scoped exception to open
+`outer_evaluation` for `sharpe_decay_sd_v1` **only** was approved (`dec-61772d86c9594c69`) — this
+does **not** reopen `outer_evaluation` for `forward_persistence_fp_v1` or any RA/RF study, whose own
+registered data-role scope is unchanged. Exact 36 origin dates frozen before any outcome
+(`configs/sharpe_decay_sd_v1/timeline.json`): INIT (2020-07-04..2022-03-12) sits fully inside
+`development`, retrospective; VALIDATION (2022-05-14..2024-01-20) mostly inside `development`, its
+own tail crossing into `outer_evaluation`; FINAL (2024-03-23..2025-11-29) sits **entirely** inside
+the genuinely fresh 2024-2026 span — 172 days of disclosed margin beyond a 7-day boundary-gap pad at
+each role transition.
+
+**Canonical Sharpe wrapper (`sd/metrics.py`), reusing already-tested lab primitives, never a new
+return-computation engine.** Verified directly against the actually-installed `quantbt==1.1.1`
+package before writing this: `quantbt.metrics.performance.sharpe()` returns a bare `0.0` on
+zero-variance (indistinguishable from a genuinely-computed zero), and
+`BacktestResult.daily_equity` calls `resample("1D").last().ffill()` before `pct_change()` — silently
+assigning a 0% return to any missing market day. Neither is reused. Instead: `sd/metrics.py`
+composes `experiments.time_edge_contracts.daily_returns` (preceding-equity first observation, a hard
+`ContractError` on any missing/duplicate/unordered day, an EXACT expected-day-count check — closing
+the guide's own named "185/29 instead of 180/56" boundary bug) with `ra.ra07_stats_primitives.sharpe`
+(typed `ZERO_VARIANCE`/`TOO_FEW_OBSERVATIONS` status, fixed `sqrt(365)` annualization). One real bug
+found by running the tests: the underlying `daily_returns()` needs an explicit UTC offset on its own
+`start`/`end` (unlike its `rows` dates, which accept a bare day label) — fixed with a `_day()`
+normalizer. 14/14 tests pass, including the guide's own numeric examples (100→120→108 two-step
+returns; decay 1.30→0.85 = reduction 0.45).
+
+**minY selection rule (`sd/selection.py`), structurally — not just conventionally — independent of
+"B" vs "C."** Replaces F03a/F05: picks `min(Y_hat)` among eligible candidates (guide's own `minY`
+rule, never `max` utility), with the anchor always present as the contrast-zero reference
+(`Y_hat(anchor)=0` enforced structurally, `SelectionError` if violated). The module has **no concept
+of "B" or "C" at all** — it is the identical function called twice by the orchestrator with each
+arm's own scored candidates, so the F05 short-circuit shape cannot recur even by accident, not just
+by convention. 12/12 tests pass, including a structural proof that two independent calls never share
+state.
+
+**Real 8-trial micro-profile (SD01.6), then the real 12-origin archive build (SD01.7).** Micro-profile:
+225.05s, peak RSS 1019.4 MiB (registered 4 GiB budget, no exception needed), extrapolated to 9.0-12.0h
+for the full build — cross-checked against FP-03's own real 256-trial measurements. Two real, small-
+scale end-to-end integration probes (a single-candidate IS+FWD proof, then a full 4-candidate
+`build_one_origin` proof including the anchor-zero check) ran clean on the **first attempt each** —
+zero bugs found, a genuine contrast with this lab's own history of first-launch defects. The real
+build (`scripts/run_sd01_archive.py`, `sd/archive.py`'s representative-panel selection — ranked by
+the search's own cheap `mean_is_sharpe` proxy, explicitly NOT the canonical label itself, guide
+§2.2's own distinction — plus two fresh `fp.evaluator.evaluate_candidate` calls per candidate for
+real canonical IS180/FWD56 Sharpe) then ran **12/12 origins real, complete**: total wall
+**31817.97s (~8.84h)**, search-only ~6.98h, peak RSS **1987.3 MiB** throughout (well within budget,
+no exception needed — an earlier concern about linear RSS growth toward the cap was watched closely
+during the run and found to plateau, not grow unboundedly). **192/192 IS Sharpe status OK, 192/192
+FWD Sharpe status OK, 12/12 anchor `relative_decay_Y == 0.0` exactly** — the anchor-zero-by-
+construction guarantee held on every single real origin, independently re-derived straight from the
+12 raw ledger files (not trusted from the run's own summary), matching exactly what the formal
+verifier later re-confirmed.
+
+**A real operational proof of this session's own detachment discipline.** Launched as a fully
+detached background process (`setsid nohup ... & disown`, own session/process-group, immune to
+SIGHUP) specifically because the owner asked for it ("chạy nền task chính nhé, lỡ cửa sổ mất kết nối
+thì cũng k mất nhé"). Partway through the ~8.84h run, the INTERACTIVE SESSION itself restarted — all
+9 of this session's own `Monitor` watch tasks were killed and orphaned, confirmed via the harness's
+own `<task-notification status="stopped">` report — but the actual archive-build process (PID
+277246, a separate, properly-detached OS process) was completely untouched: still running, 11/12
+origins already complete by the time the new session re-checked it, finishing the 12th cleanly
+minutes later. This is the exact `setsid nohup ... & disown` pattern FP-04's own history already
+proved sufficient for a ~11h run after its first, undetached attempt was killed by a session
+interruption — now independently re-confirmed on a second, different real run.
+
+Independently re-verified against the full lab suite's fresh junit (not the orchestrator's own log)
+before finalizing: **1578 passed, 0 failed** (42 new SD-01 tests). SD-01 carries **NO model
+victory/no-edge verdict** (guide §8.2) — `research_status=NOT_ASSESSED` throughout; it builds and
+validates the measurement infrastructure and the real 192-row candidate archive SD-02's validation-
+fold model comparison will train against. **SD-02 needs its own explicit R-18 approval before it
+begins** — SD-01's own completion carries no implicit go-ahead, matching this lab's standing
+per-phase discipline.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 
