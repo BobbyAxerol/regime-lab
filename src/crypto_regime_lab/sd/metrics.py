@@ -119,3 +119,21 @@ def paired_reduction(decay_b: dict, decay_c: dict) -> dict:
         return {"value": None, "status": "UNDEFINED_INPUT",
                "b_status": decay_b["status"], "c_status": decay_c["status"]}
     return {"value": decay_b["value"] - decay_c["value"], "status": "OK"}
+
+
+def decompose_reduction(*, sr_is_b: float, sr_fwd_b: float, sr_is_c: float, sr_fwd_c: float) -> dict:
+    """Guide SS2.3's MANDATORY reconciliation ("bat buoc reconcile"):
+
+        R = (SR_IS_B - SR_IS_C) + (SR_FWD_C - SR_FWD_B)
+            \\_____ IS-reference ____/   \\_ forward-retention _/
+                contribution                  contribution
+
+    A smaller gap from a WEAKER IS fit is not, by itself, a better OOS
+    result -- guide: "khong che dieu nay bang cach chi bao R". Verified
+    against the guide's own worked numeric example (B: IS=1.80, FWD=0.50,
+    decay=1.30; C: IS=1.75, FWD=0.90, decay=0.85 -> reduction 0.45, IS
+    contribution 0.05, forward contribution 0.40)."""
+    is_contribution = sr_is_b - sr_is_c
+    fwd_contribution = sr_fwd_c - sr_fwd_b
+    r = is_contribution + fwd_contribution
+    return {"is_contribution": is_contribution, "fwd_contribution": fwd_contribution, "r": r}

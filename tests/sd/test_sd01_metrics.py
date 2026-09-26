@@ -147,3 +147,38 @@ def test_paired_reduction_propagates_undefined_input():
                            {"value": 0.85, "status": "OK"})
     assert r["status"] == "UNDEFINED_INPUT"
     assert r["value"] is None
+
+
+def test_decompose_reduction_guide_numeric_example():
+    """Guide SS2.3's own worked example: B IS=1.80 FWD=0.50 (decay 1.30),
+    C IS=1.75 FWD=0.90 (decay 0.85) -> reduction 0.45, IS contribution
+    0.05, forward contribution 0.40."""
+    result = m.decompose_reduction(sr_is_b=1.80, sr_fwd_b=0.50, sr_is_c=1.75, sr_fwd_c=0.90)
+    assert result["is_contribution"] == pytest.approx(0.05)
+    assert result["fwd_contribution"] == pytest.approx(0.40)
+    assert result["r"] == pytest.approx(0.45)
+
+
+def test_decompose_reduction_reconciles_with_paired_reduction():
+    """The decomposition's own R must match paired_reduction()'s R exactly
+    -- guide SS2.3: 'bat buoc reconcile', not an approximation."""
+    sr_is_b, sr_fwd_b, sr_is_c, sr_fwd_c = 2.1, -0.3, 1.9, 0.6
+    decay_b = m.signed_decay({"sharpe": sr_is_b, "sharpe_status": "OK"},
+                             {"sharpe": sr_fwd_b, "sharpe_status": "OK"})
+    decay_c = m.signed_decay({"sharpe": sr_is_c, "sharpe_status": "OK"},
+                             {"sharpe": sr_fwd_c, "sharpe_status": "OK"})
+    direct_r = m.paired_reduction(decay_b, decay_c)
+    decomposed = m.decompose_reduction(sr_is_b=sr_is_b, sr_fwd_b=sr_fwd_b,
+                                       sr_is_c=sr_is_c, sr_fwd_c=sr_fwd_c)
+    assert decomposed["r"] == pytest.approx(direct_r["value"])
+
+
+def test_decompose_reduction_sign_does_not_flip_with_a_weaker_is_fit():
+    """Guide SS2.3: a smaller gap from a weaker IS fit is not itself a
+    better OOS result -- a case where IS contribution is negative (C's
+    own IS is HIGHER than B's) must still decompose correctly, not have
+    its sign silently flipped to look favorable."""
+    result = m.decompose_reduction(sr_is_b=1.0, sr_fwd_b=0.0, sr_is_c=1.5, sr_fwd_c=0.0)
+    assert result["is_contribution"] == pytest.approx(-0.5)
+    assert result["fwd_contribution"] == pytest.approx(0.0)
+    assert result["r"] == pytest.approx(-0.5)

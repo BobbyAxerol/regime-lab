@@ -21,6 +21,7 @@ LAB = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(LAB / "src"))
 
 from crypto_regime_lab.sd import inference_sd03 as inf  # noqa: E402
+from crypto_regime_lab.sd import metrics as sdmetrics  # noqa: E402
 from crypto_regime_lab.sd import preflight_sd03 as pf  # noqa: E402
 from crypto_regime_lab.sd import verifier_sd03 as v3  # noqa: E402
 
@@ -85,6 +86,17 @@ def d1_table_rows(fold_records: dict) -> list:
             row[f"{arm}_D"] = out.get("D_selected")
         d_b, d_c = row["B_SD_GLOBAL_D"], row["JM_C2.0_D"]
         row["R_B_minus_C"] = (d_b - d_c) if d_b is not None and d_c is not None else None
+        sr_is_b, sr_fwd_b = row["B_SD_GLOBAL_SR_IS"], row["B_SD_GLOBAL_SR_FWD"]
+        sr_is_c, sr_fwd_c = row["JM_C2.0_SR_IS"], row["JM_C2.0_SR_FWD"]
+        if None not in (sr_is_b, sr_fwd_b, sr_is_c, sr_fwd_c):
+            decomp = sdmetrics.decompose_reduction(sr_is_b=sr_is_b, sr_fwd_b=sr_fwd_b,
+                                                   sr_is_c=sr_is_c, sr_fwd_c=sr_fwd_c)
+            row["is_contribution"] = decomp["is_contribution"]
+            row["fwd_contribution"] = decomp["fwd_contribution"]
+            row["decomposition_reconciles"] = (row["R_B_minus_C"] is not None
+                                               and abs(decomp["r"] - row["R_B_minus_C"]) < 1e-9)
+        else:
+            row["is_contribution"] = row["fwd_contribution"] = row["decomposition_reconciles"] = None
         rows.append(row)
     return rows
 
@@ -106,15 +118,19 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
             f"- contrast: {registration['primary_hypothesis']['contrast']}",
             f"- estimand: {registration['primary_hypothesis']['estimand']}",
             f"- safeguard: {registration['primary_hypothesis']['safeguard']}",
-            "", "## D1 table (guide SS10.3) — REAL, MEASURED, every fold shown", "",
-            "| origin | A winner | B winner | C winner | D_B | D_C | R=D_B-D_C |",
-            "|---|---|---|---|---:|---:|---:|"]
+            "", "## D1 table (guide SS10.3) — REAL, MEASURED, every fold shown, with the "
+            "guide SS2.3 MANDATORY reconciliation R=(IS_B-IS_C)+(FWD_C-FWD_B)", "",
+            "| origin | A winner | B winner | C winner | D_B | D_C | R=D_B-D_C | "
+            "IS contribution | FWD contribution | reconciles |",
+            "|---|---|---|---|---:|---:|---:|---:|---:|---|"]
     for row in d1_rows:
         lines.append(f"| {row['origin']} | "
                      f"{'ANCHOR' if row['A_M4_is_anchor'] else 'other'} | "
                      f"{'ANCHOR' if row['B_SD_GLOBAL_is_anchor'] else 'other'} | "
                      f"{'ANCHOR' if row['JM_C2.0_is_anchor'] else 'other'} | "
-                     f"{row['B_SD_GLOBAL_D']} | {row['JM_C2.0_D']} | {row['R_B_minus_C']} |")
+                     f"{row['B_SD_GLOBAL_D']} | {row['JM_C2.0_D']} | {row['R_B_minus_C']} | "
+                     f"{row['is_contribution']} | {row['fwd_contribution']} | "
+                     f"{row['decomposition_reconciles']} |")
     n_zero_by_construction = sum(1 for row in d1_rows if row["B_SD_GLOBAL_winner"] == row["JM_C2.0_winner"])
     lines += ["", f"- n paired-valid D1 folds: **{n_paired}/{len(d1_rows)}**"]
     if n_zero_by_construction > 0:
@@ -182,6 +198,10 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
              "measures whether the SAME candidate's own performance ages within one deployment)",
              "- **R = D_B - D_C** (guide SS2.3: paired reduction in Sharpe decay from adding the "
              "state-conditioned correction; positive means C decayed less than B)",
+             "- **IS-reference / forward-retention contribution** (guide SS2.3's own MANDATORY "
+             "decomposition, R = (SR_IS_B - SR_IS_C) + (SR_FWD_C - SR_FWD_B): a smaller R gap coming "
+             "from a WEAKER IS fit for C is not, by itself, evidence of better OOS retention -- both "
+             "pieces are reported so this cannot be hidden behind R alone)",
              "- **continuous account** (guide SS2.5/SD03.5: one account per arm running the WHOLE "
              "real path with actual admission/activation/fills, never 12 reset-and-restitched "
              "accounts)",

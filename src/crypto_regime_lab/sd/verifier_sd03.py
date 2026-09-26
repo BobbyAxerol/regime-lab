@@ -54,7 +54,7 @@ def load_deployment(lab_root: Path) -> dict:
     return out
 
 
-def gate_exec(fold_records: dict, *, final_origins: list, deployment: dict) -> dict:
+def gate_exec(lab_root: Path, fold_records: dict, *, final_origins: list, deployment: dict) -> dict:
     checks = [
         {"name": "all_12_final_folds_present", "holds": len(fold_records) == 12,
          "detail": f"{len(fold_records)}/12"},
@@ -64,7 +64,13 @@ def gate_exec(fold_records: dict, *, final_origins: list, deployment: dict) -> d
          "detail": f"{len(deployment)}/3"},
         {"name": "search_used_128_trials_every_fold",
          "holds": all(f["panel"]["search"]["trials_requested"] == 128 for f in fold_records.values())},
+        {"name": "account_reconciliation_exists_and_all_arms_reconcile", "holds": False},
     ]
+    recon_path = Path(lab_root) / "evidence" / "sharpe_decay_sd_v1" / "sd03_account_reconciliation.json"
+    if recon_path.is_file():
+        recon = json.loads(recon_path.read_text(encoding="utf-8"))
+        checks[-1]["holds"] = recon.get("all_arms_reconcile") is True
+        checks[-1]["detail"] = {arm: r["reconciles"] for arm, r in recon.get("results", {}).items()}
     return {"pass": all(c["holds"] for c in checks), "checks": checks}
 
 
@@ -105,6 +111,28 @@ def gate_metric(fold_records: dict) -> dict:
                    "holds": anchor_zero_checked > 0 and anchor_zero_holds == anchor_zero_checked,
                    "detail": f"{anchor_zero_holds}/{anchor_zero_checked}",
                    "vacuous": anchor_zero_checked == 0})
+
+    # S3-T06-DECOMPOSITION: R = (SR_IS_B - SR_IS_C) + (SR_FWD_C - SR_FWD_B), reconciled
+    # independently from the raw D1/SR fields on every fold (guide SS2.3: "bat buoc reconcile").
+    from . import metrics as sdmetrics
+
+    c_arm = jm_arm_name(2.0)
+    decomp_checked, decomp_holds = 0, 0
+    for record in fold_records.values():
+        b_out, c_out = record["arms"][ARM_B], record["arms"][c_arm]
+        sr_is_b, sr_fwd_b = b_out.get("SR_IS_selected"), b_out.get("SR_FWD_selected")
+        sr_is_c, sr_fwd_c = c_out.get("SR_IS_selected"), c_out.get("SR_FWD_selected")
+        d_b, d_c = b_out.get("D_selected"), c_out.get("D_selected")
+        if None in (sr_is_b, sr_fwd_b, sr_is_c, sr_fwd_c, d_b, d_c):
+            continue
+        decomp_checked += 1
+        decomp = sdmetrics.decompose_reduction(sr_is_b=sr_is_b, sr_fwd_b=sr_fwd_b,
+                                               sr_is_c=sr_is_c, sr_fwd_c=sr_fwd_c)
+        if abs(decomp["r"] - (d_b - d_c)) < 1e-9:
+            decomp_holds += 1
+    checks.append({"name": "decomposition_reconciles_arithmetically_every_fold",
+                   "holds": decomp_checked > 0 and decomp_holds == decomp_checked,
+                   "detail": f"{decomp_holds}/{decomp_checked}", "vacuous": decomp_checked == 0})
     return {"pass": all(c["holds"] for c in checks), "checks": checks}
 
 
@@ -209,7 +237,7 @@ def verify_sd03(*, lab_root: Path) -> dict:
                          if len(r_series) >= inf.MIN_PAIRED_FOLDS else {})
 
     gates = {
-        "G3-EXEC": gate_exec(fold_records, final_origins=final_origins, deployment=deployment),
+        "G3-EXEC": gate_exec(lab_root, fold_records, final_origins=final_origins, deployment=deployment),
         "G3-PAIR12": gate_pair12(fold_records, d2_records=d2_records, final_origins=final_origins),
         "G3-METRIC": gate_metric(fold_records),
         "G3-MODEL": gate_model(fold_records),

@@ -1,0 +1,39 @@
+{
+  "schema": "regime_lab.sd03_account_reconciliation.v1",
+  "results": {
+    "A_M4": {
+      "cache_event": "HIT",
+      "n_requested": 12,
+      "n_effected": 12,
+      "n_pending": 0,
+      "n_real_activation_records": 12,
+      "reconciles": true,
+      "total_fill_count": 1184,
+      "n_bars": 1094400
+    },
+    "B_SD_GLOBAL": {
+      "cache_event": "HIT",
+      "n_requested": 12,
+      "n_effected": 12,
+      "n_pending": 0,
+      "n_real_activation_records": 12,
+      "reconciles": true,
+      "total_fill_count": 980,
+      "n_bars": 1094400
+    },
+    "JM_C2.0": {
+      "cache_event": "HIT",
+      "n_requested": 12,
+      "n_effected": 12,
+      "n_pending": 0,
+      "n_real_activation_records": 12,
+      "reconciles": true,
+      "total_fill_count": 986,
+      "n_bars": 1094400
+    }
+  },
+  "all_arms_reconcile": true,
+  "wall_seconds_measured": 48.74,
+  "disclosure": "Every value here comes from a guaranteed cache HIT against the already-committed real continuous-account run -- zero new engine compute, the SAME real facets as the original deployment.",
+  "measured_at_utc": "2026-09-26T11:58:38.090986+00:00"
+}

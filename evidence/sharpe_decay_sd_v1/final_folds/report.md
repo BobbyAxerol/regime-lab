@@ -1,7 +1,7 @@
 # SD-03 — Final A/B/C run: D1/D2/continuous-account Sharpe, inference, conclusion
 
 - study_id: sharpe_decay_sd_v1, guide_version: SD-GUIDE-1.0
-- generated_at_utc: 2026-09-26T11:47:53.796223+00:00
+- generated_at_utc: 2026-09-26T11:59:26.825503+00:00
 - real FINAL folds found: 12/12
 - preflight: READY
 
@@ -14,22 +14,22 @@ SD-03 is the one final A/B/C run on >=12 paired OOS folds. Technical PASS does N
 - estimand: mean paired signed reduction R_bar = mean(D_B - D_C) over >=12 common folds
 - safeguard: mean paired standardized forward Sharpe difference Q_bar(C-B) vs non-inferiority margin -0.10
 
-## D1 table (guide SS10.3) — REAL, MEASURED, every fold shown
+## D1 table (guide SS10.3) — REAL, MEASURED, every fold shown, with the guide SS2.3 MANDATORY reconciliation R=(IS_B-IS_C)+(FWD_C-FWD_B)
 
-| origin | A winner | B winner | C winner | D_B | D_C | R=D_B-D_C |
-|---|---|---|---|---:|---:|---:|
-| 2024-03-23 | ANCHOR | other | other | 0.8774032239684211 | 0.35323227992747175 | 0.5241709440409493 |
-| 2024-05-18 | ANCHOR | ANCHOR | ANCHOR | 3.1921645158465646 | 3.1921645158465646 | 0.0 |
-| 2024-07-13 | ANCHOR | other | other | 0.40286287327097425 | 2.003808918818465 | -1.6009460455474909 |
-| 2024-09-07 | ANCHOR | other | other | -3.900416531075206 | -3.900416531075206 | 0.0 |
-| 2024-11-02 | ANCHOR | other | other | 1.3519708204670566 | 1.675939321205535 | -0.32396850073847827 |
-| 2024-12-28 | ANCHOR | other | other | 5.058582477833909 | 5.058582477833909 | 0.0 |
-| 2025-02-22 | ANCHOR | other | other | 1.0341977113970036 | 1.0341977113970036 | 0.0 |
-| 2025-04-19 | ANCHOR | other | other | -0.4371645170615529 | -0.4371645170615529 | 0.0 |
-| 2025-06-14 | ANCHOR | other | other | 2.1565114153704803 | 2.1565114153704803 | 0.0 |
-| 2025-08-09 | ANCHOR | other | other | -0.6361069884921766 | -0.6361069884921766 | 0.0 |
-| 2025-10-04 | ANCHOR | other | other | 1.9945158187552572 | 1.9945158187552572 | 0.0 |
-| 2025-11-29 | ANCHOR | other | other | 0.24529548551638292 | 0.24529548551638292 | 0.0 |
+| origin | A winner | B winner | C winner | D_B | D_C | R=D_B-D_C | IS contribution | FWD contribution | reconciles |
+|---|---|---|---|---:|---:|---:|---:|---:|---|
+| 2024-03-23 | ANCHOR | other | other | 0.8774032239684211 | 0.35323227992747175 | 0.5241709440409493 | -0.07080436265448231 | 0.5949753066954316 | True |
+| 2024-05-18 | ANCHOR | ANCHOR | ANCHOR | 3.1921645158465646 | 3.1921645158465646 | 0.0 | 0.0 | 0.0 | True |
+| 2024-07-13 | ANCHOR | other | other | 0.40286287327097425 | 2.003808918818465 | -1.6009460455474909 | -0.09518159783571767 | -1.5057644477117733 | True |
+| 2024-09-07 | ANCHOR | other | other | -3.900416531075206 | -3.900416531075206 | 0.0 | 0.0 | 0.0 | True |
+| 2024-11-02 | ANCHOR | other | other | 1.3519708204670566 | 1.675939321205535 | -0.32396850073847827 | 0.3787841647275909 | -0.7027526654660692 | True |
+| 2024-12-28 | ANCHOR | other | other | 5.058582477833909 | 5.058582477833909 | 0.0 | 0.0 | 0.0 | True |
+| 2025-02-22 | ANCHOR | other | other | 1.0341977113970036 | 1.0341977113970036 | 0.0 | 0.0 | 0.0 | True |
+| 2025-04-19 | ANCHOR | other | other | -0.4371645170615529 | -0.4371645170615529 | 0.0 | 0.0 | 0.0 | True |
+| 2025-06-14 | ANCHOR | other | other | 2.1565114153704803 | 2.1565114153704803 | 0.0 | 0.0 | 0.0 | True |
+| 2025-08-09 | ANCHOR | other | other | -0.6361069884921766 | -0.6361069884921766 | 0.0 | 0.0 | 0.0 | True |
+| 2025-10-04 | ANCHOR | other | other | 1.9945158187552572 | 1.9945158187552572 | 0.0 | 0.0 | 0.0 | True |
+| 2025-11-29 | ANCHOR | other | other | 0.24529548551638292 | 0.24529548551638292 | 0.0 | 0.0 | 0.0 | True |
 
 - n paired-valid D1 folds: **12/12**
 
@@ -99,6 +99,7 @@ SD-03 is the one final A/B/C run on >=12 paired OOS folds. Technical PASS does N
 - **D1** (guide SS2.2: primary decay label, same params, IS->forward Sharpe, measured fresh at each real FINAL origin)
 - **D2** (guide SS2.4: a frozen 112-day continuation of the SAME selected params, H1 (first 56 days) vs H2 (next 56 days), no account reset at the boundary -- measures whether the SAME candidate's own performance ages within one deployment)
 - **R = D_B - D_C** (guide SS2.3: paired reduction in Sharpe decay from adding the state-conditioned correction; positive means C decayed less than B)
+- **IS-reference / forward-retention contribution** (guide SS2.3's own MANDATORY decomposition, R = (SR_IS_B - SR_IS_C) + (SR_FWD_C - SR_FWD_B): a smaller R gap coming from a WEAKER IS fit for C is not, by itself, evidence of better OOS retention -- both pieces are reported so this cannot be hidden behind R alone)
 - **continuous account** (guide SS2.5/SD03.5: one account per arm running the WHOLE real path with actual admission/activation/fills, never 12 reset-and-restitched accounts)
 - **sensitivity analysis** (guide SS7.2: the SAME paired block-bootstrap re-run at every registered alternate block length (2 and 3 folds, alongside the primary 4), reported in full regardless of which one looks significant -- never used to override the primary decision, only to show whether it is robust to this design choice)
 - **same-contract replay** (guide SD03.8: re-running one already-committed real artifact -- here, the A_M4 D2 continuation at the first FINAL origin -- under the IDENTICAL params/cutoff/economics, to prove it reproduces exactly; a cache HIT on the replay is EXPECTED and disclosed, never treated as a fresh independent confirmation)
