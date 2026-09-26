@@ -576,10 +576,12 @@ selected `research_revision_N` targeting one of the report's named untried hypot
 deliberate decision to open `outer_evaluation` for a genuinely prospective evaluation — both are the
 owner's to choose, not an automatic next step.
 
-## Sharpe-decay final study — authoritative from 2026-09-25, current main direction
+## Sharpe-decay final study — SD-01/02/03 all complete (2026-09-25..2026-09-26)
 
-`REGIME_LAB_SHARPE_DECAY_FINAL_3_PHASE_GUIDE_VI.md` (SD-GUIDE-1.0) is the lab's current main line of
-work, opened by the owner's explicit "Làm luôn đi ... SD01.6 → SD01.7 → SD01.8" instruction. It is a
+`REGIME_LAB_SHARPE_DECAY_FINAL_3_PHASE_GUIDE_VI.md` (SD-GUIDE-1.0) was the lab's main line of work
+through this study's full three-phase close, opened by the owner's explicit "Làm luôn đi ... SD01.6
+→ SD01.7 → SD01.8" instruction, then carried through SD-02 ("Qua phase 2 luôn nhé") and SD-03 ("phase
+3 ... chưa thì làm luôn") to its final, registered conclusion below. It is a
 **new study** (`study_id=sharpe_decay_sd_v1`, `parent_study_id=forward_persistence_fp_v1`), branch
 `research/sharpe-decay-sd-v1` off `main` @ `f22851db5761` (main's tip immediately after FP-01..10
 merged in). It does not delete or rewrite FP/RA/RF history; it changes the primary metric from
@@ -685,6 +687,97 @@ validates the measurement infrastructure and the real 192-row candidate archive 
 fold model comparison will train against. **SD-02 needs its own explicit R-18 approval before it
 begins** — SD-01's own completion carries no implicit go-ahead, matching this lab's standing
 per-phase discipline.
+
+**SD-02 (JM validation on 12 real folds, recipe selection, freeze) is complete: all six G2-* gates
+PASS.** Built the full model layer: `jm_features.py` (3 causal daily features), `jm_model.py`
+(Statistical Jump Model K=2 — a batch coordinate-descent fit over a whole causal calibration window,
+plus a SEPARATE strictly-forward causal filter for the emitted tape, verified via a prefix-by-prefix
+online-parity test so the tape can never encode future information), `jm_vintage.py` (per-origin
+causal tapes — measured a real raw-prehistory shortfall on exactly 4 of the 12 INIT origins, typed
+`INSUFFICIENT_RAW_PREHISTORY`, no fabricated state), `contrast_features.py`/`ridge_contrast.py`/
+`model_bc.py` (intercept-free, per-origin-weighted contrast ridge for B_SD_GLOBAL, deliberately NOT
+reusing `fp/selector_b.py`'s `fit_ridge` — it has a de-meaned-y intercept, incompatible with this
+guide's "anchor prediction = 0 by construction" requirement, self-discovered as `SELF01_RIDGE_
+INTERCEPT`), `r_rule.py` (cheap dev comparator), `training_rows.py` (the real, verbatim-reused
+`fp.chronology`/`fp.forward_ledger` causality guard), `recipe_selection.py` (guide §5.8's locked
+rule), `model_quality.py` (MAE(Y)/rank/state-occupancy diagnostics).
+
+**Owner decision `dec-c94ea602aeac0f1a`** (via `AskUserQuestion`): B/C/R_RULE select among the SAME
+≤16-candidate representative panel + anchor SD-01's own archive already forward-evaluates, NOT the
+full raw ~100-115-candidate pool — avoids an estimated ~10h of new, undisclosed real engine compute.
+Revises `protocol_migration.json`'s F03b disposition (dated, original text preserved verbatim, never
+rewritten).
+
+**Real 12-fold VALIDATION run** (`scripts/run_sd02_validation.py`) ran fully detached,
+`total_wall_seconds=33666.11` (~9.35h), peak RSS 1869.5 MiB. A real, load-bearing bug was caught
+BEFORE this launched: `ratio_by_origin` was silently dropping insufficient-prehistory origins
+instead of keeping them mapped to `None`, which would have crashed `retag_states`'s missing-key
+guard mid-run — fixed via a real-data smoke test before spending the real compute.
+
+Verification (`sd/verifier_sd02.py`, guide §9.5's six G2-* gates, reading ONLY raw fold records):
+all PASS, none vacuous. Recipe selection: `RECIPE_SELECTED`, c=2.0, mean_R=0.4052 Sharpe points
+(≥ the registered 0.2 threshold) — **but explicitly disclosed as DEGENERATE**: all three penalty
+designs (c=0.5/1.0/2.0) picked the byte-identical candidate at every one of the 12 real folds
+(checked directly against each arm's own `winner_id`, not inferred from the mean average). The
+underlying JM state genuinely differs across recipes at 1/12 folds — proving the mechanism is live,
+not a code defect — it simply never flipped which candidate minY picked. Same shape this lab's
+history keeps finding (LAB-08 Arm E=Arm D, FP-07 C=B degenerate); `RECIPE_SELECTED, c=2.0` is
+reported as a tie-break among degenerate designs, never as evidence a stronger persistence penalty
+helps. Frozen in `configs/sharpe_decay_sd_v1/sd02_freeze.json`. `research_status` stays
+`NOT_ASSESSED` — SD-02 locks which recipe FINAL uses, it does not itself claim JM beats B.
+
+**SD-03 (the one final A/B/C run, D1/D2/continuous-account Sharpe, inference, conclusion) is
+complete: all seven G3-* gates PASS.** Closes the guide's SD-01/02/03 sequence. Built
+`preflight_sd03.py` (SD03.1, no engine calls — verifies prior receipts/freeze/timeline/budget AND
+a genuine new check, the installed `quantbt` version against SD-01's own pinned baseline),
+`inference_sd03.py` (guide §7.2/7.4's `analysis_plan`, LOCKED before any real FINAL fold existed —
+moving/circular block bootstrap, primary block length 4, 5000 resamples, plus the full §7.4 decision
+cascade, disclosed as an explicit priority ordering since the guide's own table is prose, not a
+literal state machine), `d2_continuation.py` (guide §2.4's frozen 112-day H1/H2 continuation, ONE
+real continuous call per candidate never two separate ones — verified with a REAL probe that D2's
+own H1 Sharpe matches the archive's standalone 56-day FWD Sharpe bit-for-bit), `deployment_sd03.py`
+(a thin adapter reusing FP-02/FP-07's own already-qualified `run_deployment`/`build_admitted_
+schedule` verbatim — never a new deployment engine).
+
+**Real compute, sequential, ~9.7h total**: (1) FINAL archive (`scripts/run_sd03_final_archive.py`,
+only 3 arms this time — A_M4/B_SD_GLOBAL/JM_C2.0, since SD-02 already froze the JM recipe and it is
+never re-selected): 12/12 real 128-trial searches on the FINAL role's own 12 origins
+(2024-03-23..2025-11-29), `total_wall_seconds=30295.71` (~8.42h), peak RSS 1832.0 MiB — survived an
+interactive-session restart mid-run undisturbed (the same `setsid nohup ... & disown` resilience
+proven repeatedly in this lab). Real, non-degenerate signal this time: 11/12 origins show
+B_SD_GLOBAL and JM_C2.0 both selecting a candidate genuinely different from A_M4's own stock pick,
+and unlike SD-02's fully-degenerate 12/12, 3/12 FINAL origins show B≠C too. (2) D2 continuations
+(`scripts/run_sd03_d2.py`): 36/36 real 112-day calls, 430.34s total, all OK. (3) Continuous-account
+deployment (`scripts/run_sd03_deployment.py`): measured via TWO real memory probes (200k then 600k
+bars) before committing to the full span — growth proved SUB-linear (a fixed overhead component
+dominates at small scale and gets amortized as bar count grows), so the larger, more reliable probe
+projected only 2516.1 MiB against the 4096 MiB budget (vs the smaller probe's noisier 3634.6 MiB
+estimate) — real full run (~1.09M bars) took 1243.86s (~20.7min), peak RSS 2090.3 MiB, even below
+the already-safe projection. 3 real continuous accounts, genuinely distinct fill counts (A_M4 1184,
+B_SD_GLOBAL 980, JM_C2.0 986).
+
+Independent verification (`sd/verifier_sd03.py`, guide §10.5's seven G3-* gates, reading ONLY raw
+artifacts): **all 7/7 PASS**, none vacuous (anchor Y_hat=0 checked non-vacuously across every arm's
+own scored table; C's context-prediction-called check proven non-vacuously even at real B-anchor
+folds).
+
+**The real, final, registered decision: `NO_MEANINGFUL_REDUCTION_AT_0_20_WITHIN_SCOPE`** (guide
+§7.4's own vocabulary, locked before FINAL ran). R point estimate **−0.1167 Sharpe points**, 95% CI
+**[−0.2335, 0.1771]** (block length 4, 5000 resamples, seed 20260926) — the CI's upper bound stays
+comfortably below the registered 0.20 meaningful-reduction threshold, so the JM correction shows no
+meaningful positive effect on this single real cell (A-SC/BTCUSDT), regardless of whether the
+negative point estimate itself is real or noise (the CI straddles zero too). Technical PASS does
+not require Sharpe improvement (guide §10.5).
+
+**Honest, disclosed finding, not glossed over**: 9/12 D1 folds have R=0 EXACTLY because B_SD_GLOBAL
+and JM_C2.0 picked the identical candidate at those origins — the same "more than half the evidence
+could not have shown an edge" shape LAB-06's own OP-14 finding already named, so the primary R
+estimate's effective sample size is much thinner than 12 folds suggests. NOT fully degenerate though
+(unlike SD-02's 12/12): 3/12 folds carry real, non-trivial B-vs-C evidence.
+
+This closes the guide's SD-01/02/03 sequence. Any further work is either (a) an owner-selected
+`research_revision_N`, or (b) a deliberate decision to extend scope (ETH cell, more origins) — both
+are the owner's to choose, matching guide §10.5's own "Không có SD-04" / no automatic next step.
 
 ## Corrective Mode 4 study — authoritative from 2026-09-11
 

@@ -6,7 +6,63 @@ Current source/runtime and approved registration:
 |---|---|---|---|---|
 | SD-01 | PASS (7/7 gates) | NOT_ASSESSED — measurement infrastructure + real archive only, no model fit yet | APPROVED (`dec-cefc167978e6c207`) | `evidence/sharpe_decay_sd_v1/init_archive/` |
 | SD-02 | PASS (6/6 gates) | NOT_ASSESSED; recipe RECIPE_SELECTED c=2.0 but DEGENERATE (all 3 recipes pick the identical candidate at every real fold) | APPROVED (`dec-9a35219678adf611`, `dec-c94ea602aeac0f1a`, `dec-c0c54ebc355b112b`) | `evidence/sharpe_decay_sd_v1/validation_folds/` |
-| SD-03 | not started | — | APPROVED (`dec-c0c54ebc355b112b`, "phase 3 ... chưa thì làm luôn") | — |
+| SD-03 | PASS (7/7 gates) | **NO_MEANINGFUL_REDUCTION_AT_0_20_WITHIN_SCOPE** (registered vocabulary) | APPROVED (`dec-c0c54ebc355b112b`, "phase 3 ... chưa thì làm luôn") | `evidence/sharpe_decay_sd_v1/final_folds/`, `d2_continuations/`, `continuous_accounts/` |
+
+## SD-03 complete (2026-09-26) — closes the guide's SD-01/02/03 sequence
+
+**All real compute done, sequentially, each stage's output feeding the next**:
+1. **FINAL archive** (`scripts/run_sd03_final_archive.py`): 12/12 real 128-trial
+   searches + A/B/C scoring on the FINAL role's own 12 origins (2024-03-23..
+   2025-11-29). `total_wall_seconds=30295.71` (~8.42h), peak RSS 1832.0 MiB.
+   Survived an interactive-session restart mid-run undisturbed (same
+   `setsid nohup ... & disown` resilience already proven repeatedly in this
+   lab). Only 3 arms this time (A_M4/B_SD_GLOBAL/JM_C2.0) since SD-02 already
+   froze the JM recipe -- never re-selected.
+2. **D2 frozen continuations** (`scripts/run_sd03_d2.py`): 36/36 real 112-day
+   continuous evaluate_candidate calls (12 origins x 3 arms), 430.34s total,
+   all OK.
+3. **Continuous-account deployment** (`scripts/run_sd03_deployment.py`):
+   measured via TWO real memory probes (200k then 600k bars) before
+   committing to the full span -- growth proved SUB-linear (fixed overhead
+   dominates at small scale), so the larger, more reliable probe projected
+   only 2516.1 MiB against the 4096 MiB budget (vs the smaller probe's
+   noisier 3634.6 MiB estimate). Real full run: ~1.09M bars, 1243.86s
+   (~20.7min), peak RSS 2090.3 MiB (even below the already-safe projection).
+   3 real continuous accounts, genuinely distinct fill counts (A_M4 1184,
+   B_SD_GLOBAL 980, JM_C2.0 986).
+
+**Independent verification** (`sd/verifier_sd03.py`, guide SS10.5's seven
+G3-* gates, reading ONLY raw artifacts): **all 7/7 PASS**, none vacuous
+(anchor Y_hat=0 checked non-vacuously across every arm's own scored table;
+C's context-prediction-called check proven non-vacuously even at real
+B-anchor folds).
+
+**The real, final, registered decision**: **NO_MEANINGFUL_REDUCTION_AT_0_20_
+WITHIN_SCOPE** (guide SS7.4's own vocabulary, locked before FINAL ran).
+R point estimate **-0.1167** Sharpe points, 95% CI **[-0.2335, 0.1771]**
+(block length 4, 5000 resamples, seed 20260926) -- upper CI bound stays
+comfortably below the registered 0.20 meaningful-reduction threshold, so
+the JM correction shows no meaningful positive effect on this single real
+cell (A-SC/BTCUSDT). Technical PASS does not require Sharpe improvement.
+
+**Honest, disclosed finding**: 9/12 D1 folds have R=0 EXACTLY because
+B_SD_GLOBAL and JM_C2.0 picked the identical candidate at those origins --
+the same "more than half the evidence could not have shown an edge" shape
+LAB-06's own OP-14 finding already named. NOT fully degenerate though
+(unlike SD-02's 12/12): 3/12 folds carry real, non-trivial B-vs-C evidence,
+and the underlying JM state genuinely differs across recipes at some real
+FINAL origins too.
+
+Full sd-only suite: **212 passed**. Full lab suite last confirmed green
+at **1731 passed** before this phase's real compute began; a final
+comprehensive full-suite run was launched after SD-03's own completion
+(result pending as of this note).
+
+This closes the guide's SD-01/02/03 sequence. Any further work is either
+(a) an owner-selected `research_revision_N`, or (b) a deliberate decision
+to extend scope (ETH cell, more origins, etc.) -- both are the owner's to
+choose, matching guide SS10.5's own "Khong co SD-04" / no automatic next
+step.
 
 ## SD-02 complete (2026-09-26)
 
