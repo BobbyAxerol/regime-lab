@@ -1,0 +1,22 @@
+{
+  "schema": "regime_lab.sd03_d2_continuation.v1",
+  "origin_cutoff": "2024-03-23",
+  "arm": "JM_C2.0",
+  "params": {
+    "coeff": 8,
+    "AP": 28,
+    "alpha.condition_threshold": 30,
+    "novolumedata": false,
+    "src_col": "close"
+  },
+  "result": {
+    "status": "OK",
+    "sr_h1": 0.933543749245754,
+    "sr_h2": -3.274698159826562,
+    "d_age": 4.208241909072316,
+    "cache_event": "MISS",
+    "n_days_total": 112
+  },
+  "wall_seconds_measured": 15.0,
+  "written_at_utc": "2026-09-26T09:57:05.552595+00:00"
+}

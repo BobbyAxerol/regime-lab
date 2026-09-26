@@ -1,0 +1,82 @@
+{
+  "schema": "regime_lab.sd02_model_protocol.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "phase_id": "SD-02",
+  "task": "SD02.1",
+  "guide_version": "SD-GUIDE-1.0",
+  "registered_at_utc": "2026-09-25T11:00:00+00:00",
+  "jm_features": {
+    "names": ["log_rv_ratio_28_180", "signed_path_efficiency_56", "autocorr_lag1_56"],
+    "definitions": {
+      "log_rv_ratio_28_180": "log(rv_28 / rv_180); rv_h = sample std (ddof=1) of the last h daily log returns; no annualization inside the ratio",
+      "signed_path_efficiency_56": "(close_t - close_(t-56)) / sum(abs(daily close changes)) over exactly 56 completed steps (57 close observations)",
+      "autocorr_lag1_56": "lag-1 Pearson autocorrelation of the last 56 daily log returns; only finite pairs used, never NaN-as-0"
+    },
+    "observation": "daily UTC, completed bars only",
+    "source_module": "src/crypto_regime_lab/sd/jm_features.py"
+  },
+  "jm_model": {
+    "K": 2,
+    "loss": "squared Euclidean distance on standardized features",
+    "objective": "min_{mu,s} sum_t l(z_t, mu_{s_t}) + lambda_J * sum_t 1(s_t != s_{t-1})",
+    "penalty_designs_c": [0.5, 1.0, 2.0],
+    "loss_scale_L": "train-only median finite one-centroid (grand-mean) loss on the current calibration window, same standardization the fit itself uses",
+    "lambda_j_formula": "lambda_J = c * L",
+    "model_calibration_window_days": 180,
+    "raw_prehistory_required_days": 360,
+    "raw_prehistory_shortfall_note": "measured against the registered earliest usable BTCUSDT date 2020-01-06 (registration.json data_role_exception.measured_full_interval): exactly 4 of the 12 INIT origins (2020-07-04, 2020-08-29, 2020-10-24, 2020-12-19) fall short and get a typed INSUFFICIENT_RAW_PREHISTORY status, no fabricated state; all 12 VALIDATION origins (>=2022-05-14) clear it",
+    "refit_policy": "fresh, independent fit at EVERY fixed selection cutoff, never a shared/rolling fit across origins; centroids from a later origin never overwrite an earlier origin's already-recorded state",
+    "standardization": "train-only mean/std (per-fit, over that origin's own 180-day calibration window), frozen for that fit; never fit on the full dataset",
+    "solver": {
+      "fit_algorithm": "coordinate descent: (a) full forward+backward Viterbi decode of the whole calibration batch given frozen centroids (E-step, legitimate since the WHOLE 180-day window is already 'past' relative to the origin cutoff), (b) recompute centroids as the mean of assigned points (M-step), repeat to convergence or max_iter",
+      "emitted_state_algorithm": "a SEPARATE, strictly forward-only causal filter (state[t] = argmin_k cost[t][k], cost built only from z[1..t]) applied to the FROZEN, already-fit centroids -- never the batch Viterbi path, so the tape can never encode information from a bar after t (guide: 'filtered decision theo past, khong smoothed/backtracked')",
+      "initialization": "k-means++-style, pinned numpy Generator seed",
+      "seed": 20260925,
+      "tolerance": 1e-8,
+      "max_iter": 100,
+      "convergence_criterion": "state path unchanged between iterations OR max centroid shift < tolerance"
+    },
+    "vintage_identity": "one independent causal tape per (origin, penalty recipe c) -- 'emit decision tape bat bien theo tung prefix': a historical origin's own recorded state is NEVER retroactively rewritten by a later origin's fit",
+    "source_module": "src/crypto_regime_lab/sd/jm_model.py, src/crypto_regime_lab/sd/jm_vintage.py"
+  },
+  "candidate_descriptor_and_contrast_model": {
+    "candidate_pool_scope": "PANEL-ONLY (owner decision dec-c94ea602aeac0f1a, 2026-09-25) -- B/C/R_RULE select among the SAME <=16-candidate representative panel + anchor SD-01/SD-02's own archive already forward-evaluates at each origin, NOT the full raw ~100-115-candidate unique-candidate pool. Revises protocol_migration.json F03b's 'full pool' disposition (scope_revision_sd02_20260925, original text preserved). Avoids an estimated ~10h of new, undisclosed real engine compute (real per-candidate IS-window evaluate_candidate calls for the full pool).",
+    "descriptor_fidelity_note": "because scope is panel-only, every scored candidate's descriptor is FULL REAL FIDELITY (canonical 180-day evaluate_candidate IS Sharpe + a real activity/support entry count from the SAME call) -- no proxy/approximation was needed for any candidate that IS scored.",
+    "z_features": ["norm_coeff", "norm_AP", "norm_alpha.condition_threshold", "is_daily_sharpe", "activity_entries"],
+    "z_feature_definitions": {
+      "norm_*": "schema-normalized effective A-SC parameters via fp.selector_b.normalized_params (declared-bounds [0,1] normalization, reused verbatim)",
+      "is_daily_sharpe": "canonical raw IS Sharpe (180-day window, sd.metrics.window_sharpe), NOT the search's cheap mean_is_sharpe_search_proxy",
+      "activity_entries": "real entry (trade) count from the SAME IS-window evaluate_candidate call, exposed via sd/archive.py's candidate_window_sharpe (SD02.1 addition) for freshly-built VALIDATION origins, backfilled via a guaranteed cache-HIT re-fetch (sd/candidate_descriptors.py) for SD-01's already-committed INIT origins"
+    },
+    "contrast_vector": "v = phi(z_candidate) - phi(z_anchor); phi = train-only standardizer with a fixed constant-column-drop rule (sd/contrast_features.py)",
+    "model_B": "no-intercept weighted ridge on v (sd/ridge_contrast.py); weight_i = 1/n_origin(i) so every origin contributes total weight 1 (guide SS5.5 point 1); objective = sum_origin(mean_candidate_squared_error) + lambda_global*||beta||^2, lambda_global=10.0",
+    "model_C": "state-specific residual correction gamma_state fit on Y - Y_hat_B, SAME contrast vector v, SAME weighted-ridge objective, lambda_state=10.0; support floor >=3 distinct matured origins per state else correction=0 (GLOBAL_FALLBACK/STATE_SUPPORT_LOW)",
+    "global_support_floor": "B needs >=12 distinct matured train origins at every decision (mbc.MIN_GLOBAL_TRAIN_ORIGINS)",
+    "self_discovered_defect_avoided": "SELF01_RIDGE_INTERCEPT -- fp/selector_b.py's own fit_ridge/predict_ridge are NOT reused (they de-mean y and fit a separate un-penalized intercept); sd/ridge_contrast.py is a fresh, intercept-free implementation verified via S1-T04-style anchor-zero and independent-objective-minimization tests",
+    "source_module": "src/crypto_regime_lab/sd/contrast_features.py, ridge_contrast.py, model_bc.py, candidate_descriptors.py"
+  },
+  "r_rule_comparator": {
+    "state_rule": "HIGH_VOL iff origin's own log_rv_ratio_28_180 (the SAME raw feature JM's own tape computes, read off z_raw's last calibration row) >= a per-fold threshold",
+    "threshold_fit": "median of log_rv_ratio_28_180 over the SAME chronologically-matured training origins B used at that fold (causal, permitted-past only, refit EVERY fold -- never a single fixed threshold across the whole study)",
+    "correction_architecture": "IDENTICAL to model_C (same fit_model_c/predict_c call), only the state SOURCE differs",
+    "source_module": "src/crypto_regime_lab/sd/r_rule.py"
+  },
+  "chronology_guard": {
+    "reused_verbatim": "fp.chronology.chronological_split / fp.forward_ledger.training_view -- guide migration finding F02's own remedy; no second, parallel causality check built for SD",
+    "label_available_at": "origin_cutoff + 56 days (the FWD window's own end -- when relative_decay_Y genuinely becomes knowable)",
+    "boundary_rule": "STRICT: a label is usable only if available BEFORE (not at-or-before) the decision time -- inherited from chronological_split's own '>=' blocked condition",
+    "source_module": "src/crypto_regime_lab/sd/training_rows.py"
+  },
+  "arms": {
+    "A_M4": "the search's own installed-selector pick (the anchor) -- no model, trivially eligible",
+    "B_SD_GLOBAL": "minY selection over model_B's predictions on the panel",
+    "R_RULE": "minY selection over model_C predictions, state from the volatility-threshold rule",
+    "JM_C0.5 / JM_C1.0 / JM_C2.0": "minY selection over model_C predictions, state from each penalty recipe's own causal JM tape"
+  },
+  "recipe_selection_rule": {
+    "primary_criterion": "mean validation R = D_B - D_C, MAXIMIZED among technically-valid designs (>=12 paired-valid folds); R>0 is NOT required",
+    "tie_break": "within 1e-6 Sharpe points, prefer the larger c, then a deterministic arm name -- never the final OOS result",
+    "outcomes": ["NO_VALID_JM_DESIGN", "WEAK_DEVELOPMENT_EVIDENCE (mean_R < 0.2 registered Sharpe points)", "RECIPE_SELECTED (mean_R >= 0.2)"],
+    "source_module": "src/crypto_regime_lab/sd/recipe_selection.py"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "regime_lab.sd_registration.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "guide_version": "SD-GUIDE-1.0",
+  "guide_source": "REGIME_LAB_SHARPE_DECAY_FINAL_3_PHASE_GUIDE_VI.md",
+  "registered_at_utc": "2026-09-25T00:00:00+00:00",
+  "registered_by_phase": "SD-01",
+  "parent_study_id": "forward_persistence_fp_v1",
+  "branch": "research/sharpe-decay-sd-v1",
+  "branched_from": {"ref": "main", "commit": "f22851db5761eac828b663d19b6e2b74c9e60c74"},
+  "primary_question": "does a JM (2-state jump model) regime signal let a global Sharpe-decay selector pick parameters with LOWER Sharpe decay than the same selector without regime conditioning, on a fixed common calendar? A sufficient reduction is accepted even if decay stays positive or OOS Sharpe stays negative.",
+  "primary_metric": "Sharpe ratio and Sharpe decay (D = SR_IS - SR_FWD), in Sharpe points -- NOT mean-return/day, bps/day or any daily-return-based statistic. This is a metric-definition change from the parent FP study.",
+  "arms": {
+    "A_M4": "stock Mode 4 real selection from QuantBT (optimization_mode=mode_4_is_only_robust, optimization_schedule=per_fold_causal, candidate_selection_metric=is_only_robust, scoring_backend=endpoint) -- no Sharpe-decay model, fixed common calendar",
+    "B_SD_GLOBAL": "global ridge regression predicting relative Sharpe decay Y_hat from candidate/IS descriptors, over the FULL eligible candidate pool at each cutoff (not a 16-medoid subset) -- same fixed calendar as A",
+    "C_SD_JM": "B_SD_GLOBAL plus a JM(K=2)-state-conditioned residual correction with shrinkage toward global; evaluated independently of B's admission/fallback status every model-ready fold -- same fixed calendar as A"
+  },
+  "explicitly_excluded_this_round": [
+    "dynamic refit timing, random-delay or volatility-delay overlay (FP-09's own mechanism is NOT continued or extended here)",
+    "K3/K4/HMM/HSMM/deep-learning regime sweep (JM K=2 only, max 3 jump-penalty designs)",
+    "a 4th phase (SD-04) or any model-family hunt for a positive result"
+  ],
+  "primary_hypothesis": {
+    "id": "H_REGIME",
+    "contrast": "C_SD_JM vs B_SD_GLOBAL",
+    "estimand": "mean paired signed reduction R_bar = mean(D_B - D_C) over >=12 common folds",
+    "safeguard": "mean paired standardized forward Sharpe difference Q_bar(C-B) vs non-inferiority margin -0.10"
+  },
+  "secondary_hypotheses": [
+    {"id": "H_SELECTOR", "contrast": "B_SD_GLOBAL vs A_M4", "role": "key secondary, about the selector itself"},
+    {"id": "H_POLICY", "contrast": "C_SD_JM vs A_M4", "role": "secondary, total policy vs stock baseline"}
+  ],
+  "thresholds": {
+    "meaningful_decay_reduction_sharpe_points": 0.20,
+    "oos_sharpe_noninferiority_margin_sharpe_points": 0.10,
+    "prediction_guard_margin_sharpe_points": 0.10,
+    "confidence_level": 0.95,
+    "validation_folds_min": 12,
+    "evaluation_paired_folds_min": 12,
+    "source": "SD-GUIDE-1.0 SS2.6, experimental defaults of the discussed plan -- not a universal statistical standard, materialized here before any final OOS run per the guide's own requirement",
+    "note": "these thresholds are in Sharpe points; configs/minimum_economic_effect.json's 6.4e-05/day MDE from the FP study is NOT reused here -- different unit, different metric definition, explicit removal per protocol_migration.json"
+  },
+  "timeline_structure": {
+    "roles": ["INIT (>=12 matured historical origins)", "VALIDATION (>=12 forward folds, common across model designs)",
+             "FREEZE (choose one JM recipe, lock all decision/analysis rules)",
+             "FINAL (>=12 OOS folds, common across A/B/C)", "D2 follow-up (56 more days for final anchors)"],
+    "candidate_train_days": 180, "forward_eval_block_days": 56,
+    "search_default_trials_per_cutoff": 128,
+    "note": "roles are strictly separate; the same 12 origins are never reused across INIT/VALIDATION/FINAL. Exact dates resolved by SD01.3's coverage planner before any bulk compute, not pre-assigned here."
+  },
+  "regime_model": {
+    "family": "JM (jump model), K=2 fixed",
+    "jump_penalty_designs": "max 3, c in {0.5, 1, 2} times train-only loss scale L (lambda_J = c*L)",
+    "feature_preset": ["log(rv_28 / rv_180)", "signed path efficiency (56 days)", "daily return lag-1 autocorrelation (56 days)"],
+    "model_calibration_window_days": 180,
+    "ridge_starting_penalties": {"lambda_global": 10, "lambda_state": 10},
+    "state_support_floor_origins": 3,
+    "global_support_floor_origins": 12
+  },
+  "primary_cell": {"alpha_id": "A-SC", "symbol": "BTCUSDT",
+                   "note": "proposed for prior integration work; SD-01 must still verify activity/Sharpe/coverage via train-only fixtures before treating it as final, not chosen because a prior final Sharpe looked good"},
+  "eth_replication": "only if budgeted before FINAL and has its own >=12 folds; not opened to rescue a weak BTC result",
+  "economics": {"initial_capital": 20000.0, "allocation_fraction": 0.10, "leverage_cap": 1,
+               "one_way_fee": 0.0004, "one_way_slippage": 0.0001,
+               "source": "SD-GUIDE-1.0 SS6.1, same defaults FP used -- execution settings, not a daily-return target"},
+  "sources": {
+    "I1_external_audit": {
+      "name": "REGIME_LAB_FP01_FP10_OBJECTIVE_AUDIT_VI.md",
+      "archive_sha256": "ce9bb179af6ba3bba4df4608a8e6c4a2c86f9ed633ca530e310a032fc958c6c1",
+      "status": "NOT PRESENT in this lab directory as of registration -- requested from owner; see protocol_migration.json's missing_source_note"
+    },
+    "I2_parent_guide": "REGIME_LAB_FORWARD_PERSISTENT_PLATEAU_GUIDE_VI.md (inherited engine/safety/chronology/evidence/owner-review rules)",
+    "S1": "Shu, Yu, Mulvey -- Downside Risk Reduction Using Regime-Switching Signals: A Statistical Jump Model Approach, arXiv:2402.05272v3 (equity allocation research, not a crypto WFO Sharpe-decay confirmation)",
+    "S2": "Ledoit, Wolf -- Robust performance hypothesis testing with the Sharpe ratio, J. Empirical Finance 15(5), 2008",
+    "S3": "Cawley, Talbot -- On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation, JMLR 11, 2010",
+    "S4": "Optuna official FAQ, reproducible optimization"
+  },
+  "data_role_exception": {
+    "decision_id": "dec-61772d86c9594c69",
+    "decision_ref": "evidence/regime_time_edge_ra_v1/owner_decisions.jsonl",
+    "scope": "sharpe_decay_sd_v1 ONLY -- does not reopen outer_evaluation for forward_persistence_fp_v1 or any RA/RF study",
+    "reason": "SD's own strict 12 INIT + 12 VALIDATION + 12 FINAL (non-overlapping 56-day forward windows/role) + 56-day D2 timeline needs a minimum of 2252 days (~6.17y) with ZERO scheduling gaps; development role alone (1460 days) is 792 days short even in that best case, with no guide-compliant way to close the gap by tightening INIT spacing alone (best case still ~506 days short)",
+    "measured_full_interval": {"start": "2020-01-06", "end": "2026-09-09",
+                               "days": 2438, "source": "configs/data_eligibility.json BTCUSDT usable_interval",
+                               "margin_over_bare_minimum_days": 186},
+    "expected_shape": "INIT + early VALIDATION mostly inside the old development span (retrospective, LOCKED_RETROSPECTIVE_EVALUATION per SD-GUIDE-1.0 SS4.4); FINAL + D2 very likely extend into 2024-2026",
+    "exact_dates": "to be resolved and frozen by SD01.3's own coverage planner, from actual timestamp/capability coverage, never chosen by outcome"
+  },
+  "phases": ["SD-01", "SD-02", "SD-03"],
+  "no_sd_04": "explicitly forbidden by SD-GUIDE-1.0 SS10.5 -- a different idea needs new owner direction, not extending this guide to hunt for a positive result",
+  "owner_approval": "each phase starts only on the owner's explicit approval recorded in evidence/regime_time_edge_ra_v1/owner_decisions.jsonl (R-18); SD-01 approved 2026-09-25 ('Làm nhé')"
+}

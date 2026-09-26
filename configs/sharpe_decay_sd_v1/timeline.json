@@ -1,0 +1,44 @@
+{
+  "schema": "regime_lab.sd_timeline.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "frozen_at_utc": "2026-09-25T00:00:00+00:00",
+  "frozen_before_any_outcome": true,
+  "coverage_source": "configs/data_eligibility.json: BTCUSDT usable_interval [2020-01-06, 2026-09-09], measured not assumed",
+  "data_role_exception": "dec-61772d86c9594c69 (evidence/regime_time_edge_ra_v1/owner_decisions.jsonl)",
+  "parameters": {
+    "train_days": 180, "forward_days": 56, "d2_followup_days": 56,
+    "origins_per_role": 12, "origin_spacing_days": 56,
+    "boundary_gap_days": 7,
+    "boundary_gap_rationale": "a disclosed, conservative pad at each INIT->VALIDATION and VALIDATION->FINAL boundary for guide SS4.2's own 'maturity trap' (a fold's label may not be available at the very next nominal decision cutoff); NOT zero, not unbounded, not tuned to any outcome -- revisit against SD01.3's own real capability/latency measurement before treating it as final if the measured common_ready_lag exceeds it"
+  },
+  "roles": {
+    "INIT": {
+      "first_origin": "2020-07-04", "last_origin": "2022-03-12",
+      "last_forward_end": "2022-05-07",
+      "data_role_label": "development (fully retrospective, no exception needed)",
+      "origins": ["2020-07-04", "2020-08-29", "2020-10-24", "2020-12-19", "2021-02-13", "2021-04-10",
+                 "2021-06-05", "2021-07-31", "2021-09-25", "2021-11-20", "2022-01-15", "2022-03-12"]
+    },
+    "VALIDATION": {
+      "first_origin": "2022-05-14", "last_origin": "2024-01-20",
+      "last_forward_end": "2024-03-16",
+      "data_role_label": "mostly development, retrospective; last origin's own forward window crosses into outer_evaluation (2024-01-01+) -- LOCKED_RETROSPECTIVE_EVALUATION per SD-GUIDE-1.0 SS4.4, not untouched",
+      "origins": ["2022-05-14", "2022-07-09", "2022-09-03", "2022-10-29", "2022-12-24", "2023-02-18",
+                 "2023-04-15", "2023-06-10", "2023-08-05", "2023-09-30", "2023-11-25", "2024-01-20"]
+    },
+    "FINAL": {
+      "first_origin": "2024-03-23", "last_origin": "2025-11-29",
+      "last_forward_end": "2026-01-24",
+      "data_role_label": "entirely inside outer_evaluation -- the genuinely fresh, never-touched-by-any-FP/RA/RF-work interval this exception opens",
+      "origins": ["2024-03-23", "2024-05-18", "2024-07-13", "2024-09-07", "2024-11-02", "2024-12-28",
+                 "2025-02-22", "2025-04-19", "2025-06-14", "2025-08-09", "2025-10-04", "2025-11-29"]
+    },
+    "D2_FOLLOWUP": {"end": "2026-03-21", "note": "H2 window end for FINAL's own last origin (H1 already counted in FINAL.last_forward_end)"}
+  },
+  "feasibility_check": {
+    "total_span_used_days": 2266, "full_usable_end": "2026-09-09",
+    "spare_days_after_d2_end": 172,
+    "verdict": "FEASIBLE with 172 days of disclosed margin beyond a 7-day boundary-gap pad at each role transition"
+  },
+  "next_step": "SD01.4: verify actual raw-data/feature-lookback prehistory and real activation/ready latency against these exact dates before treating them as final; SD01.6/7 measure real per-origin search cost against this plan before any bulk compute commitment"
+}

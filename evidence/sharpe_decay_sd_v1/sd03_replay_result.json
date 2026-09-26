@@ -1,0 +1,42 @@
+{
+  "schema": "regime_lab.sd03_replay_result.v1",
+  "replayed_origin": "2024-03-23",
+  "replayed_arm": "A_M4",
+  "original_ref": "evidence/sharpe_decay_sd_v1/d2_continuations/d2_2024-03-23_A_M4.json",
+  "d2_comparisons": [
+    {
+      "field": "status",
+      "original": "OK",
+      "replay": "OK",
+      "match": true
+    },
+    {
+      "field": "sr_h1",
+      "original": -0.33563380700255446,
+      "replay": -0.33563380700255446,
+      "match": true
+    },
+    {
+      "field": "sr_h2",
+      "original": -3.4106869704520166,
+      "replay": -3.4106869704520166,
+      "match": true
+    },
+    {
+      "field": "d_age",
+      "original": 3.075053163449462,
+      "replay": 3.075053163449462,
+      "match": true
+    }
+  ],
+  "all_gated_fields_match": true,
+  "pool_replay": null,
+  "pool_replay_note": "NOT run -- run_origin_search has no caching layer of its own (confirmed twice this session: re-running it costs a full fresh ~45min real 128-trial search every time, unlike evaluate_candidate/run_deployment which ARE genuinely cache-backed). replay_pool() in this file is fixed and unit-tested but deliberately not invoked here -- see its own docstring.",
+  "cache_provenance": {
+    "original_cache_event": "MISS",
+    "replay_cache_event": "HIT"
+  },
+  "disclosure": "SAME frozen market data, SAME code, SAME params/origin/economics were replayed under the identical contract -- this is NOT an independent confirmation of the original real result, only a proof that it reproduces exactly. A cache HIT on the replay is EXPECTED (the cache is warm from the original run) and is disclosed here, never gated on.",
+  "replay_wall_seconds": 3.25,
+  "replayed_at_utc": "2026-09-26T12:39:49.490343+00:00"
+}

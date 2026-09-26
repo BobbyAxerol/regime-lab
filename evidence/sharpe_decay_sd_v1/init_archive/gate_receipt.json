@@ -1,0 +1,70 @@
+{
+  "schema": "regime_lab.sharpe_decay_phase_gate.v1",
+  "phase_id": "SD-01",
+  "guide_version": "SD-GUIDE-1.0",
+  "technical_gate": "PASS",
+  "research_status": "NOT_ASSESSED",
+  "required_gates": [
+    "G1-SOURCE",
+    "G1-SHARPE",
+    "G1-WIRING",
+    "G1-TIMELINE",
+    "G1-ARCHIVE",
+    "G1-RESOURCE",
+    "G1-REPORT"
+  ],
+  "verification": {
+    "schema": "regime_lab.sd01_verification.v1",
+    "gates": {
+      "G1-SOURCE": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-SHARPE": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-WIRING": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-TIMELINE": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-ARCHIVE": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-RESOURCE": {
+        "pass": true,
+        "reasons": []
+      },
+      "G1-REPORT": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    "pytest": {
+      "tests": 1578,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "missing_required": []
+    },
+    "archive_summary": {
+      "total_label_rows": 192,
+      "is_ok": 192,
+      "fwd_ok": 192,
+      "anchor_zero_ok": 12,
+      "n_origins": 12
+    },
+    "overall": "PASS"
+  },
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": false,
+  "verified_at_utc": "2026-09-25T10:22:38.746865+00:00"
+}

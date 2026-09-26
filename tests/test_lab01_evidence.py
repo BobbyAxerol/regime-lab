@@ -136,5 +136,9 @@ def test_jsonl_sink_round_trip_through_the_evidence_writer(policy):
 def test_disk_usage_is_within_the_declared_quota(policy):
     report = disk_usage_report(policy)
     assert report["within_quota"] is True, report
-    assert report["quota_gib"] == 20
+    # derived from the registered policy, never hardcoded -- a disclosed
+    # quota revision (configs/sandbox_policy.json's own
+    # disk_quota_revision_20260926 note) must not silently expire this
+    # assertion the way a literal number would.
+    assert report["quota_gib"] == policy.raw["resource_budget"]["disk_quota_gib"]
     assert report["headroom_gib"] > 0
