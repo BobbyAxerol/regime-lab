@@ -5,9 +5,33 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from crypto_regime_lab.sd import preflight_sd03 as pf
 
 LAB = Path(__file__).resolve().parents[2]
+
+
+def test_check_installed_version_raises_on_missing_version():
+    with pytest.raises(pf.PreflightError):
+        pf.check_installed_version(LAB, installed_version=None)
+
+
+def test_check_installed_version_real_matches_pinned_baseline():
+    result = pf.check_installed_version(LAB, installed_version="1.1.1")
+    assert result["pass"] is True
+
+
+def test_check_installed_version_real_mismatch_typed_not_raised():
+    result = pf.check_installed_version(LAB, installed_version="9.9.9")
+    assert result["pass"] is False
+    mismatch = next(c for c in result["checks"] if c["name"] == "quantbt_version_matches_pinned_baseline")
+    assert mismatch["holds"] is False
+
+
+def test_verify_installed_route_real_quantbt_importable_and_matches():
+    result = pf.verify_installed_route(LAB)
+    assert result["pass"] is True
 
 
 def test_verify_prior_receipts_real_sd01_sd02_both_pass():

@@ -65,6 +65,12 @@ def test_select_recipe_excludes_unpaired_folds_never_imputes():
     assert stats["technically_valid"] is False   # 11 < 12
 
 
+def test_select_recipe_raises_with_no_recipes_to_choose_among():
+    folds = _folds_12([1.0] * 12, [{} for _ in range(12)])
+    with pytest.raises(rs.RecipeSelectionError):
+        rs.select_recipe(folds, recipes=())
+
+
 def test_recipe_stats_records_losing_designs_fully():
     folds = _folds_12([1.0] * 12, [{0.5: 2.0, 1.0: 0.5, 2.0: 0.5} for _ in range(12)])
     result = rs.select_recipe(folds, recipes=(0.5, 1.0, 2.0))

@@ -16,6 +16,38 @@ class PreflightError(ValueError):
     """A required preflight reference was missing or invalid."""
 
 
+def check_installed_version(lab_root: Path, *, installed_version) -> dict:
+    """Guide SD03.1: 'xuat hien package/route khong dung thi dung' (stop if
+    the wrong package/route appears). Separated from the real ``import
+    quantbt`` call below so the raise path is directly unit-testable
+    without needing to break the real installed package. A package with
+    no ``__version__`` at all cannot be verified against the pinned
+    baseline -- a genuinely broken environment, not just a soft mismatch,
+    so this raises rather than reporting a typed failure."""
+    if installed_version is None:
+        raise PreflightError("installed quantbt has no __version__ attribute -- cannot verify "
+                             "the route matches the pinned baseline; refusing to preflight")
+    lab_root = Path(lab_root)
+    study_reg_path = lab_root / "configs" / "study_registration.json"
+    checks = [{"name": "quantbt_version_present", "holds": True, "detail": installed_version}]
+    if study_reg_path.is_file():
+        baseline = json.loads(study_reg_path.read_text(encoding="utf-8"))["baseline"]
+        checks.append({"name": "quantbt_version_matches_pinned_baseline",
+                       "holds": installed_version == baseline["core_version"],
+                       "detail": f"installed={installed_version}, pinned={baseline['core_version']}"})
+    return {"pass": all(c["holds"] for c in checks), "checks": checks}
+
+
+def verify_installed_route(lab_root: Path) -> dict:
+    """The real caller: imports the ACTUALLY installed quantbt (if this
+    import itself fails, that IS the exceptional stop-condition guide
+    SD03.1 describes) and checks its version against the pinned baseline."""
+    import quantbt
+
+    installed_version = getattr(quantbt, "__version__", None)
+    return check_installed_version(lab_root, installed_version=installed_version)
+
+
 def verify_prior_receipts(lab_root: Path) -> dict:
     lab_root = Path(lab_root)
     sd01_path = lab_root / "evidence" / "sharpe_decay_sd_v1" / "init_archive" / "gate_receipt.json"
@@ -97,12 +129,13 @@ def planned_work_manifest(*, final_origins: list) -> dict:
 
 
 def preflight(lab_root: Path) -> dict:
+    r_route = verify_installed_route(lab_root)   # raises PreflightError on a broken environment
     r_receipts = verify_prior_receipts(lab_root)
     r_freeze = verify_freeze(lab_root)
     r_timeline = verify_timeline(lab_root)
     r_budget = verify_resource_budget(lab_root)
-    overall = all(r["pass"] for r in (r_receipts, r_freeze, r_timeline, r_budget))
+    overall = all(r["pass"] for r in (r_route, r_receipts, r_freeze, r_timeline, r_budget))
     manifest = planned_work_manifest(final_origins=r_timeline["final_origins"]) if overall else None
-    return {"overall": "READY" if overall else "BLOCKED",
+    return {"overall": "READY" if overall else "BLOCKED", "installed_route": r_route,
            "prior_receipts": r_receipts, "freeze": r_freeze, "timeline": r_timeline,
            "resource_budget": r_budget, "planned_work_manifest": manifest}

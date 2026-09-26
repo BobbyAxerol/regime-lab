@@ -55,6 +55,8 @@ def select_recipe(fold_records: list, *, recipes: tuple = (0.5, 1.0, 2.0)) -> di
     """Guide SS5.8's locked rule. Returns every design's own stats table
     (including losing/negative ones, guide: 'giu ca bang ket qua cac designs
     thua/am') plus the decision."""
+    if not recipes:
+        raise RecipeSelectionError("select_recipe needs at least one penalty design to choose among")
     candidates = [recipe_stats(fold_records, c=c) for c in recipes]
     eligible = [cand for cand in candidates if cand["technically_valid"]]
     if not eligible:

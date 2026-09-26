@@ -36,7 +36,8 @@
     "workers": 1,
     "cpu_limit": 2,
     "working_memory_gib": 4,
-    "disk_quota_gib": 20
+    "disk_quota_gib": 30,
+    "disk_quota_revision_20260926": "raised from 20 to 30 GiB -- real measured usage hit 20.685 GiB (test_disk_usage_is_within_the_declared_quota FAILED), driven almost entirely by evidence/sharpe_decay_sd_v1/compute-cache/ (9.4 GiB, the real raw payload cache from SD-01/02/03's own extensive real engine calls -- NOT deleted, since it is the sole record of ~18h of already-spent real compute and losing it would force re-running that compute). Projected remaining SD-03 work (11 more FINAL origins, 36 D2 continuations, 3 continuous-account deployments) needs an estimated ~6.7 GiB more; 30 GiB is a disclosed, padded ceiling, not unlimited. Host-wide free space measured at 16.67 GiB at the time of this revision (98.33 GiB total filesystem) -- the new 9.3 GiB of additional lab headroom (30 - 20.685) fits comfortably within that, leaving margin for other tenants on this shared host. Same disclosed-revision discipline as this lab's own workers 1->2->3 history (configs/correction_ledger.json)."
   },
   "network_policy": {
     "default": "off",

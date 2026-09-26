@@ -11,10 +11,6 @@ from __future__ import annotations
 import math
 
 
-class ModelQualityError(ValueError):
-    """A model-quality diagnostic could not be computed from its input."""
-
-
 def mae_y_one_origin(scored_rows: list, true_y_by_candidate: dict, *, anchor_id: str = None) -> dict:
     """Mean |Y_hat - Y_true| over ONE origin's own scored candidates.
     ``anchor_id``, when given, excludes the anchor row -- its Y_hat/Y_true
