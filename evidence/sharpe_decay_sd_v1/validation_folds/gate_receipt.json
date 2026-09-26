@@ -1,0 +1,148 @@
+{
+  "schema": "regime_lab.sharpe_decay_phase_gate.v1",
+  "phase_id": "SD-02",
+  "guide_version": "SD-GUIDE-1.0",
+  "technical_gate": "PASS",
+  "recipe_degenerate": true,
+  "research_status": "NOT_ASSESSED",
+  "recipe_decision": "RECIPE_SELECTED",
+  "required_gates": [
+    "G2-ML-VALID",
+    "G2-VAL12",
+    "G2-INDEPENDENCE",
+    "G2-RELEVANCE",
+    "G2-FREEZE",
+    "G2-OWNER"
+  ],
+  "verification": {
+    "overall": "PASS",
+    "gates": {
+      "G2-ML-VALID": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "all_12_folds_present",
+            "holds": true,
+            "detail": "missing=[]"
+          },
+          {
+            "name": "search_used_128_trials",
+            "holds": true,
+            "detail": "12/12"
+          },
+          {
+            "name": "all_3_jm_recipes_attempted",
+            "holds": true,
+            "detail": "12/12"
+          },
+          {
+            "name": "all_6_arms_present",
+            "holds": true,
+            "detail": "12/12"
+          },
+          {
+            "name": "anchor_y_hat_zero_in_every_arms_own_scored_table",
+            "holds": true,
+            "detail": "72/72",
+            "vacuous": false
+          }
+        ]
+      },
+      "G2-VAL12": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "jm_c0.5_paired_folds_>=_12",
+            "holds": true,
+            "detail": "n_paired_folds=12"
+          },
+          {
+            "name": "jm_c1.0_paired_folds_>=_12",
+            "holds": true,
+            "detail": "n_paired_folds=12"
+          },
+          {
+            "name": "jm_c2.0_paired_folds_>=_12",
+            "holds": true,
+            "detail": "n_paired_folds=12"
+          }
+        ]
+      },
+      "G2-INDEPENDENCE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "context_prediction_called_every_conditional_arm_every_fold",
+            "holds": true,
+            "detail": "48/48"
+          },
+          {
+            "name": "conditional_arm_scored_table_always_full_panel_size",
+            "holds": true,
+            "detail": "48/48"
+          },
+          {
+            "name": "c_scored_even_when_b_falls_back_to_anchor",
+            "holds": true,
+            "detail": "b_anchor_folds=3, c_scored_instances=12/12",
+            "vacuous": false
+          }
+        ]
+      },
+      "G2-RELEVANCE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "report_exists",
+            "holds": true,
+            "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/sharpe_decay_sd_v1/validation_folds/report.md"
+          },
+          {
+            "name": "report_states_a_registered_decision_outcome",
+            "holds": true
+          }
+        ]
+      },
+      "G2-FREEZE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "freeze_artifact_exists",
+            "holds": true,
+            "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/sharpe_decay_sd_v1/sd02_freeze.json"
+          },
+          {
+            "name": "frozen_recipe_matches_independent_recomputation",
+            "holds": true,
+            "detail": "frozen=RECIPE_SELECTED/2.0, recomputed=RECIPE_SELECTED/2.0"
+          },
+          {
+            "name": "freeze_is_immutable_snapshot_has_sealed_at",
+            "holds": true
+          }
+        ]
+      },
+      "G2-OWNER": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "owner_decisions_ledger_exists",
+            "holds": true
+          },
+          {
+            "name": "real_r18_reference_for_sd02",
+            "holds": true
+          }
+        ]
+      }
+    },
+    "n_folds_found": 12,
+    "n_folds_expected": 12
+  },
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "can_start_next_phase": true,
+  "verified_at_utc": "2026-09-26T01:11:55.506409+00:00"
+}

@@ -5,8 +5,44 @@ Current source/runtime and approved registration:
 | Phase | Technical | Research/scope | Owner | Evidence |
 |---|---|---|---|---|
 | SD-01 | PASS (7/7 gates) | NOT_ASSESSED — measurement infrastructure + real archive only, no model fit yet | APPROVED (`dec-cefc167978e6c207`) | `evidence/sharpe_decay_sd_v1/init_archive/` |
-| SD-02 | IN PROGRESS (code built, INIT-side prep running/complete, 12 VALIDATION folds not yet run) | not assessed | APPROVED (`dec-9a35219678adf611`, "Qua phase 2 luôn nhé") | `evidence/sharpe_decay_sd_v1/sd02_model/`, `validation_folds/` (not yet populated) |
-| SD-03 | not started | — | — | — |
+| SD-02 | PASS (6/6 gates) | NOT_ASSESSED; recipe RECIPE_SELECTED c=2.0 but DEGENERATE (all 3 recipes pick the identical candidate at every real fold) | APPROVED (`dec-9a35219678adf611`, `dec-c94ea602aeac0f1a`, `dec-c0c54ebc355b112b`) | `evidence/sharpe_decay_sd_v1/validation_folds/` |
+| SD-03 | not started | — | APPROVED (`dec-c0c54ebc355b112b`, "phase 3 ... chưa thì làm luôn") | — |
+
+## SD-02 complete (2026-09-26)
+
+**Real 12-fold VALIDATION run**: `scripts/run_sd02_validation.py` ran fully detached
+(`setsid nohup ... & disown`), 12/12 real folds, `total_wall_seconds=33666.11` (~9.35h),
+peak RSS 1869.5 MiB (within the 4096 MiB budget, no exception needed). Verified alive
+mid-run via CPU-time deltas (process time advancing 1:1 with wall clock) and per-fold
+file timestamps, not merely `ps` presence.
+
+**Verification (guide SS9.5, `sd/verifier_sd02.py`)**: all 6 G2-* gates PASS, independently
+re-derived from the raw `fold_*.json` records (the orchestrator itself writes no
+pass/fail judgment) — `G2-ML-VALID` (anchor Y_hat=0 in every arm's own scored table,
+zero vacuous checks), `G2-VAL12` (12/12 paired-valid folds for every recipe),
+`G2-INDEPENDENCE` (every conditional arm scored a full panel even at real B-anchor
+folds, non-vacuous), `G2-RELEVANCE`, `G2-FREEZE` (frozen recipe matches an independent
+recomputation), `G2-OWNER`.
+
+**Recipe selection (guide SS5.8)**: decision `RECIPE_SELECTED`, c=2.0, mean_R=0.4052
+Sharpe points (>= the registered 0.2 threshold) — **but disclosed as DEGENERATE**: all
+three penalty designs (c=0.5/1.0/2.0) selected the byte-identical candidate at every
+one of the 12 real folds, checked directly against each arm's own `winner_id` (not
+inferred from the mean_R average). The underlying JM state genuinely differs across
+recipes at 1/12 folds (proving the mechanism is live, not a code defect), but that
+difference never flipped which candidate minY picked. The guide's own tie-break rule
+correctly picked the larger c among tied designs — `RECIPE_SELECTED, c=2.0` must NOT be
+read as evidence a stronger persistence penalty helps; R never differed by c on any real
+fold. This is the same shape this lab's history keeps finding (LAB-08 Arm E=Arm D,
+FP-07 C=B degenerate).
+
+**Real per-fold pattern**: A_M4 is always the anchor (by construction). B/R_RULE/JM
+move together — 3/12 folds all fall back to the anchor, 9/12 all pick the identical
+non-anchor candidate. Full lab suite after SD-02: verification in progress (launched
+in background), sd-only suite: **153 passed**.
+
+**Freeze**: `configs/sharpe_decay_sd_v1/sd02_freeze.json` — c=2.0, lambda_global=10.0,
+lambda_state=10.0, K=2, panel-only candidate scope, recipe_degeneracy disclosed inline.
 
 ## SD-02 in-progress state (2026-09-25, mid-build)
 

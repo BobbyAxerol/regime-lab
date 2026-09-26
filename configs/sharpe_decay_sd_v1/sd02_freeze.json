@@ -1,0 +1,222 @@
+{
+  "schema": "regime_lab.sd02_freeze.v1",
+  "study_id": "sharpe_decay_sd_v1",
+  "phase_id": "SD-02",
+  "sealed_at_utc": "2026-09-26T01:11:55.480942+00:00",
+  "recipe_selection": {
+    "decision": "RECIPE_SELECTED",
+    "selected_c": 2.0,
+    "selected_arm": "JM_C2.0",
+    "mean_R": 0.4052002777808164,
+    "n_paired_folds": 12,
+    "tie_broken": true,
+    "candidates": [
+      {
+        "c": 0.5,
+        "arm_name": "JM_C0.5",
+        "n_paired_folds": 12,
+        "mean_R": 0.4052002777808164,
+        "technically_valid": true,
+        "paired": [
+          {
+            "origin_cutoff": "2022-05-14",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-07-09",
+            "R": -0.08171974342762955
+          },
+          {
+            "origin_cutoff": "2022-09-03",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-10-29",
+            "R": 2.6028354633716524
+          },
+          {
+            "origin_cutoff": "2022-12-24",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-02-18",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-04-15",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-06-10",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-08-05",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-09-30",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-11-25",
+            "R": 1.5971122619260698
+          },
+          {
+            "origin_cutoff": "2024-01-20",
+            "R": 0.7441753514997047
+          }
+        ]
+      },
+      {
+        "c": 1.0,
+        "arm_name": "JM_C1.0",
+        "n_paired_folds": 12,
+        "mean_R": 0.4052002777808164,
+        "technically_valid": true,
+        "paired": [
+          {
+            "origin_cutoff": "2022-05-14",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-07-09",
+            "R": -0.08171974342762955
+          },
+          {
+            "origin_cutoff": "2022-09-03",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-10-29",
+            "R": 2.6028354633716524
+          },
+          {
+            "origin_cutoff": "2022-12-24",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-02-18",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-04-15",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-06-10",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-08-05",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-09-30",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-11-25",
+            "R": 1.5971122619260698
+          },
+          {
+            "origin_cutoff": "2024-01-20",
+            "R": 0.7441753514997047
+          }
+        ]
+      },
+      {
+        "c": 2.0,
+        "arm_name": "JM_C2.0",
+        "n_paired_folds": 12,
+        "mean_R": 0.4052002777808164,
+        "technically_valid": true,
+        "paired": [
+          {
+            "origin_cutoff": "2022-05-14",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-07-09",
+            "R": -0.08171974342762955
+          },
+          {
+            "origin_cutoff": "2022-09-03",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2022-10-29",
+            "R": 2.6028354633716524
+          },
+          {
+            "origin_cutoff": "2022-12-24",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-02-18",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-04-15",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-06-10",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-08-05",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-09-30",
+            "R": 0.0
+          },
+          {
+            "origin_cutoff": "2023-11-25",
+            "R": 1.5971122619260698
+          },
+          {
+            "origin_cutoff": "2024-01-20",
+            "R": 0.7441753514997047
+          }
+        ]
+      }
+    ]
+  },
+  "recipe_degeneracy": {
+    "degenerate": true,
+    "n_folds_identical_winner": 12,
+    "n_folds_total": 12,
+    "jm_state_ever_differs_across_recipes": true
+  },
+  "frozen_hyperparameters": {
+    "lambda_global": 10.0,
+    "lambda_state": 10.0,
+    "K": 2,
+    "recipes_considered": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "prediction_guard_margin": -0.1,
+    "min_global_train_origins": 12,
+    "min_state_train_origins": 3
+  },
+  "candidate_pool_scope": "panel-only (owner dec-c94ea602aeac0f1a)",
+  "n_validation_folds": 12,
+  "validation_origins": [
+    "2022-05-14",
+    "2022-07-09",
+    "2022-09-03",
+    "2022-10-29",
+    "2022-12-24",
+    "2023-02-18",
+    "2023-04-15",
+    "2023-06-10",
+    "2023-08-05",
+    "2023-09-30",
+    "2023-11-25",
+    "2024-01-20"
+  ]
+}
