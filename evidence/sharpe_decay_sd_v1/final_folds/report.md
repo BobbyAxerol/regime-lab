@@ -1,7 +1,7 @@
 # SD-03 — Final A/B/C run: D1/D2/continuous-account Sharpe, inference, conclusion
 
 - study_id: sharpe_decay_sd_v1, guide_version: SD-GUIDE-1.0
-- generated_at_utc: 2026-09-26T11:59:26.825503+00:00
+- generated_at_utc: 2026-09-26T12:40:42.510289+00:00
 - real FINAL folds found: 12/12
 - preflight: READY
 
@@ -105,9 +105,10 @@ SD-03 is the one final A/B/C run on >=12 paired OOS folds. Technical PASS does N
 - **same-contract replay** (guide SD03.8: re-running one already-committed real artifact -- here, the A_M4 D2 continuation at the first FINAL origin -- under the IDENTICAL params/cutoff/economics, to prove it reproduces exactly; a cache HIT on the replay is EXPECTED and disclosed, never treated as a fresh independent confirmation)
 
 ## Same-contract replay (guide SD03.8)
-- replayed: 2024-03-23/A_M4
-- all gated fields match: **True**
+- D2 replayed: 2024-03-23/A_M4
+- all D2 gated fields match: **True**
 - cache provenance: original=MISS, replay=HIT (a MISS->HIT transition is expected and is evidence the replay found and reused the identical computation)
+- S3-T02-POOL-REPLAY (re-running the search itself): **deliberately NOT run** -- NOT run -- run_origin_search has no caching layer of its own (confirmed twice this session: re-running it costs a full fresh ~45min real 128-trial search every time, unlike evaluate_candidate/run_deployment which ARE genuinely cache-backed). replay_pool() in this file is fixed and unit-tested but deliberately not invoked here -- see its own docstring.
 
 ## Permitted conclusions
 - Technical: preflight READY, 12/12 real FINAL folds present.

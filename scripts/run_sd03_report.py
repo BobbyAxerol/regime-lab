@@ -215,11 +215,19 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
              "replay is EXPECTED and disclosed, never treated as a fresh independent confirmation)",
              "", "## Same-contract replay (guide SD03.8)"]
     if replay:
-        lines += [f"- replayed: {replay['replayed_origin']}/{replay['replayed_arm']}",
-                 f"- all gated fields match: **{replay['all_gated_fields_match']}**",
+        lines += [f"- D2 replayed: {replay['replayed_origin']}/{replay['replayed_arm']}",
+                 f"- all D2 gated fields match: **{replay['all_gated_fields_match']}**",
                  f"- cache provenance: original={replay['cache_provenance']['original_cache_event']}, "
                  f"replay={replay['cache_provenance']['replay_cache_event']} (a MISS->HIT transition "
                  "is expected and is evidence the replay found and reused the identical computation)"]
+        pool_replay = replay.get("pool_replay")
+        if pool_replay:
+            lines.append(f"- pool/search replayed at {pool_replay['origin_cutoff']} (guide "
+                         f"S3-T02-POOL-REPLAY): anchor+pool all match: "
+                         f"**{pool_replay['all_match']}**")
+        elif replay.get("pool_replay_note"):
+            lines.append(f"- S3-T02-POOL-REPLAY (re-running the search itself): "
+                         f"**deliberately NOT run** -- {replay['pool_replay_note']}")
     else:
         lines.append("- **NOT_YET_RUN** (scripts/run_sd03_replay.py has not been executed)")
 
