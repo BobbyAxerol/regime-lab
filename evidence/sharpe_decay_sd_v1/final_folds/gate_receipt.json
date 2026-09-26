@@ -1,0 +1,154 @@
+{
+  "schema": "regime_lab.sharpe_decay_phase_gate.v1",
+  "phase_id": "SD-03",
+  "guide_version": "SD-GUIDE-1.0",
+  "technical_gate": "PASS",
+  "research_decision": "NO_MEANINGFUL_REDUCTION_AT_0_20_WITHIN_SCOPE",
+  "required_gates": [
+    "G3-EXEC",
+    "G3-PAIR12",
+    "G3-METRIC",
+    "G3-MODEL",
+    "G3-INFERENCE",
+    "G3-EVIDENCE",
+    "G3-CLOSE"
+  ],
+  "verification": {
+    "overall": "PASS",
+    "gates": {
+      "G3-EXEC": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "all_12_final_folds_present",
+            "holds": true,
+            "detail": "12/12"
+          },
+          {
+            "name": "all_3_arms_present_every_fold",
+            "holds": true
+          },
+          {
+            "name": "all_3_continuous_accounts_present",
+            "holds": true,
+            "detail": "3/3"
+          },
+          {
+            "name": "search_used_128_trials_every_fold",
+            "holds": true
+          }
+        ]
+      },
+      "G3-PAIR12": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "primary_has_>=12_paired_valid_folds",
+            "holds": true,
+            "detail": "12"
+          },
+          {
+            "name": "d2_has_>=12_complete_anchors_or_disclosed_incomplete",
+            "holds": true,
+            "detail": "12/12 origins with all 3 arms' D2 present"
+          }
+        ]
+      },
+      "G3-METRIC": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "no_old_return_based_decay_field",
+            "holds": true
+          },
+          {
+            "name": "anchor_y_hat_zero_structurally",
+            "holds": true,
+            "detail": "36/36",
+            "vacuous": false
+          }
+        ]
+      },
+      "G3-MODEL": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "c_context_prediction_called_every_fold",
+            "holds": true
+          },
+          {
+            "name": "c_fallback_reason_always_typed",
+            "holds": true
+          },
+          {
+            "name": "c_scored_even_when_b_falls_back_to_anchor",
+            "holds": true,
+            "vacuous": false,
+            "detail": "1/1"
+          }
+        ]
+      },
+      "G3-INFERENCE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "decision_in_registered_vocabulary",
+            "holds": true
+          },
+          {
+            "name": "seed_and_block_length_frozen_pre_final",
+            "holds": true
+          }
+        ]
+      },
+      "G3-EVIDENCE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "report_exists",
+            "holds": true
+          },
+          {
+            "name": "all_12_folds_have_real_sha256",
+            "holds": true
+          },
+          {
+            "name": "d2_records_present_for_every_fold_x_arm",
+            "holds": true,
+            "detail": "36/36"
+          },
+          {
+            "name": "all_3_deployment_accounts_present",
+            "holds": true
+          }
+        ]
+      },
+      "G3-CLOSE": {
+        "pass": true,
+        "checks": [
+          {
+            "name": "freeze_artifact_exists",
+            "holds": true
+          },
+          {
+            "name": "freeze_records_completeness",
+            "holds": true
+          },
+          {
+            "name": "owner_decisions_ledger_exists",
+            "holds": true
+          }
+        ]
+      }
+    },
+    "n_folds_found": 12,
+    "n_d2_records": 36,
+    "n_deployment_accounts": 3,
+    "decision": "NO_MEANINGFUL_REDUCTION_AT_0_20_WITHIN_SCOPE"
+  },
+  "owner_review": {
+    "status": "PENDING",
+    "decision_ref": null
+  },
+  "verified_at_utc": "2026-09-26T10:31:42.907197+00:00"
+}

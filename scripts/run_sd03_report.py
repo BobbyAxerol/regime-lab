@@ -22,6 +22,7 @@ sys.path.insert(0, str(LAB / "src"))
 
 from crypto_regime_lab.sd import inference_sd03 as inf  # noqa: E402
 from crypto_regime_lab.sd import preflight_sd03 as pf  # noqa: E402
+from crypto_regime_lab.sd import verifier_sd03 as v3  # noqa: E402
 
 CFG = LAB / "configs" / "sharpe_decay_sd_v1"
 FINAL_DIR = LAB / "evidence" / "sharpe_decay_sd_v1" / "final_folds"
@@ -109,7 +110,20 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
                      f"{'ANCHOR' if row['B_SD_GLOBAL_is_anchor'] else 'other'} | "
                      f"{'ANCHOR' if row['JM_C2.0_is_anchor'] else 'other'} | "
                      f"{row['B_SD_GLOBAL_D']} | {row['JM_C2.0_D']} | {row['R_B_minus_C']} |")
+    n_zero_by_construction = sum(1 for row in d1_rows if row["B_SD_GLOBAL_winner"] == row["JM_C2.0_winner"])
     lines += ["", f"- n paired-valid D1 folds: **{n_paired}/{len(d1_rows)}**"]
+    if n_zero_by_construction > 0:
+        lines += ["",
+                 f"**HONEST FINDING, DISCLOSED**: {n_zero_by_construction}/{len(d1_rows)} of these paired "
+                 "folds have R = 0 EXACTLY, by construction, because B_SD_GLOBAL and JM_C2.0 selected "
+                 "the IDENTICAL candidate at those origins (checked directly against each arm's own "
+                 "winner_id) -- not a measured absence of effect at those folds, a structural non-event. "
+                 f"Only {len(d1_rows) - n_zero_by_construction}/{len(d1_rows)} folds carry real, "
+                 "non-trivial evidence about whether the JM correction helps or hurts. This is the same "
+                 "'more than half the evidence could not have shown an edge' shape LAB-06's own OP-14 "
+                 "finding already named in this lab's history -- the primary R estimate below is "
+                 "computed over all 12 folds (guide's own registered procedure), but its EFFECTIVE "
+                 "sample size for detecting a real effect is much thinner than 12 folds suggests."]
 
     lines += ["", "## D2 frozen continuations (guide SS2.4)"]
     if d2_records:
@@ -197,10 +211,20 @@ def main() -> int:
     }
     FREEZE_PATH.write_text(json.dumps(freeze, indent=2, default=str) + "\n", encoding="utf-8")
 
+    verdict = v3.verify_sd03(lab_root=LAB)
+    (FINAL_DIR / "gate_receipt.json").write_text(json.dumps({
+        "schema": "regime_lab.sharpe_decay_phase_gate.v1", "phase_id": "SD-03",
+        "guide_version": "SD-GUIDE-1.0", "technical_gate": verdict["overall"],
+        "research_decision": verdict["decision"], "required_gates": list(v3.REQUIRED_GATES),
+        "verification": verdict, "owner_review": {"status": "PENDING", "decision_ref": None},
+        "verified_at_utc": utcnow(),
+    }, indent=2, default=str) + "\n", encoding="utf-8")
+
     print(json.dumps({"n_final_folds": len(fold_records), "n_d2_records": len(d2_records),
                       "n_deployment_accounts": len(deployment), "complete": complete,
-                      "decision": decision["decision"]}, indent=2))
-    return 0 if complete else 1
+                      "decision": decision["decision"], "verification_overall": verdict["overall"],
+                      "gates": {k: g["pass"] for k, g in verdict["gates"].items()}}, indent=2))
+    return 0 if complete and verdict["overall"] == "PASS" else 1
 
 
 if __name__ == "__main__":
