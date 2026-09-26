@@ -183,3 +183,20 @@ def decide(*, r_series: list, q_series: list, seed: int, block_length: int = PRI
                    else DECISION_INCONCLUSIVE_MAGNITUDE)
 
     return {"decision": decision, "r_ci": r_ci, "q_ci": q_ci, "safety_ok": safety_ok}
+
+
+def sensitivity_analysis(*, r_series: list, q_series: list, seed: int,
+                         block_lengths: tuple = SENSITIVITY_BLOCK_LENGTHS) -> dict:
+    """Guide SS7.2: 'sensitivities 2 va 3 folds bao tat ca, khong chon cai
+    significant' -- computes the SAME bootstrap at every registered
+    sensitivity block length and reports ALL of them alongside the primary
+    (block length 4) result, never cherry-picking whichever one happens to
+    look significant. Purely descriptive: this function makes no decision
+    of its own and must not be used to override ``decide()``'s own primary
+    verdict."""
+    out = {}
+    for block_length in block_lengths:
+        r_ci = block_bootstrap_ci(r_series, block_length=block_length, seed=seed)
+        q_ci = block_bootstrap_ci(q_series, block_length=block_length, seed=seed) if q_series else None
+        out[block_length] = {"r_ci": r_ci, "q_ci": q_ci}
+    return out

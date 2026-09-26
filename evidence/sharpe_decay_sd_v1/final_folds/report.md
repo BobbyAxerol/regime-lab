@@ -1,7 +1,7 @@
 # SD-03 — Final A/B/C run: D1/D2/continuous-account Sharpe, inference, conclusion
 
 - study_id: sharpe_decay_sd_v1, guide_version: SD-GUIDE-1.0
-- generated_at_utc: 2026-09-26T10:31:42.542633+00:00
+- generated_at_utc: 2026-09-26T11:47:53.796223+00:00
 - real FINAL folds found: 12/12
 - preflight: READY
 
@@ -88,11 +88,25 @@ SD-03 is the one final A/B/C run on >=12 paired OOS folds. Technical PASS does N
 - **decision: NO_MEANINGFUL_REDUCTION_AT_0_20_WITHIN_SCOPE**
 - R point estimate: -0.1167286335204183, 95% CI [-0.2334572670408366, 0.17709308246570335] (block length 4, 5000 resamples, seed 20260926)
 
+### Sensitivity analysis (guide SS7.2: report ALL registered block lengths, never cherry-pick whichever looks significant) — descriptive only, does NOT override the primary (block length 4) decision above
+
+| block length | R point est. | R 95% CI | Q point est. | Q 95% CI |
+|---:|---:|---|---:|---|
+| 2 | -0.1167286335204183 | [-0.2938217159861216, 0.19377661940757598] | -0.13446181720686756 | [-0.3185049099716878, 0.1660801996363807] |
+| 3 | -0.1167286335204183 | [-0.2334572670408366, 0.19377661940757598] | -0.13446181720686756 | [-0.2689236344137351, 0.1750616462006005] |
+
 ## Glossary
 - **D1** (guide SS2.2: primary decay label, same params, IS->forward Sharpe, measured fresh at each real FINAL origin)
 - **D2** (guide SS2.4: a frozen 112-day continuation of the SAME selected params, H1 (first 56 days) vs H2 (next 56 days), no account reset at the boundary -- measures whether the SAME candidate's own performance ages within one deployment)
 - **R = D_B - D_C** (guide SS2.3: paired reduction in Sharpe decay from adding the state-conditioned correction; positive means C decayed less than B)
 - **continuous account** (guide SS2.5/SD03.5: one account per arm running the WHOLE real path with actual admission/activation/fills, never 12 reset-and-restitched accounts)
+- **sensitivity analysis** (guide SS7.2: the SAME paired block-bootstrap re-run at every registered alternate block length (2 and 3 folds, alongside the primary 4), reported in full regardless of which one looks significant -- never used to override the primary decision, only to show whether it is robust to this design choice)
+- **same-contract replay** (guide SD03.8: re-running one already-committed real artifact -- here, the A_M4 D2 continuation at the first FINAL origin -- under the IDENTICAL params/cutoff/economics, to prove it reproduces exactly; a cache HIT on the replay is EXPECTED and disclosed, never treated as a fresh independent confirmation)
+
+## Same-contract replay (guide SD03.8)
+- replayed: 2024-03-23/A_M4
+- all gated fields match: **True**
+- cache provenance: original=MISS, replay=HIT (a MISS->HIT transition is expected and is evidence the replay found and reused the identical computation)
 
 ## Permitted conclusions
 - Technical: preflight READY, 12/12 real FINAL folds present.

@@ -67,6 +67,11 @@ def load_deployment() -> dict:
     return out
 
 
+def load_replay() -> dict:
+    path = LAB / "evidence" / "sharpe_decay_sd_v1" / "sd03_replay_result.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
+
+
 def d1_table_rows(fold_records: dict) -> list:
     rows = []
     for origin, fold in sorted(fold_records.items()):
@@ -85,7 +90,7 @@ def d1_table_rows(fold_records: dict) -> list:
 
 
 def render_report(*, registration, fold_records, d1_rows, d2_records, deployment, decision,
-                  preflight_result) -> str:
+                  sensitivity, replay, preflight_result) -> str:
     n_paired = sum(1 for r in d1_rows if r["R_B_minus_C"] is not None)
     lines = ["# SD-03 — Final A/B/C run: D1/D2/continuous-account Sharpe, inference, conclusion",
             "", f"- study_id: {registration['study_id']}, guide_version: SD-GUIDE-1.0",
@@ -155,6 +160,20 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
     if "reason" in decision:
         lines.append(f"- reason: {decision['reason']}")
 
+    lines += ["", "### Sensitivity analysis (guide SS7.2: report ALL registered block "
+             "lengths, never cherry-pick whichever looks significant) — descriptive only, "
+             "does NOT override the primary (block length 4) decision above", "",
+             "| block length | R point est. | R 95% CI | Q point est. | Q 95% CI |",
+             "|---:|---:|---|---:|---|"]
+    for block_length, entry in sorted(sensitivity.items()):
+        r_ci, q_ci = entry["r_ci"], entry["q_ci"]
+        r_str = (f"[{r_ci['ci_lower']}, {r_ci['ci_upper']}]" if r_ci["status"] == "OK"
+                 else r_ci["status"])
+        q_str = (f"[{q_ci['ci_lower']}, {q_ci['ci_upper']}]" if q_ci and q_ci["status"] == "OK"
+                 else (q_ci["status"] if q_ci else "n/a"))
+        lines.append(f"| {block_length} | {r_ci.get('point_estimate')} | {r_str} | "
+                     f"{q_ci.get('point_estimate') if q_ci else 'n/a'} | {q_str} |")
+
     lines += ["", "## Glossary",
              "- **D1** (guide SS2.2: primary decay label, same params, IS->forward Sharpe, "
              "measured fresh at each real FINAL origin)",
@@ -166,7 +185,25 @@ def render_report(*, registration, fold_records, d1_rows, d2_records, deployment
              "- **continuous account** (guide SS2.5/SD03.5: one account per arm running the WHOLE "
              "real path with actual admission/activation/fills, never 12 reset-and-restitched "
              "accounts)",
-             "", "## Permitted conclusions",
+             "- **sensitivity analysis** (guide SS7.2: the SAME paired block-bootstrap re-run at "
+             "every registered alternate block length (2 and 3 folds, alongside the primary 4), "
+             "reported in full regardless of which one looks significant -- never used to override "
+             "the primary decision, only to show whether it is robust to this design choice)",
+             "- **same-contract replay** (guide SD03.8: re-running one already-committed real "
+             "artifact -- here, the A_M4 D2 continuation at the first FINAL origin -- under the "
+             "IDENTICAL params/cutoff/economics, to prove it reproduces exactly; a cache HIT on the "
+             "replay is EXPECTED and disclosed, never treated as a fresh independent confirmation)",
+             "", "## Same-contract replay (guide SD03.8)"]
+    if replay:
+        lines += [f"- replayed: {replay['replayed_origin']}/{replay['replayed_arm']}",
+                 f"- all gated fields match: **{replay['all_gated_fields_match']}**",
+                 f"- cache provenance: original={replay['cache_provenance']['original_cache_event']}, "
+                 f"replay={replay['cache_provenance']['replay_cache_event']} (a MISS->HIT transition "
+                 "is expected and is evidence the replay found and reused the identical computation)"]
+    else:
+        lines.append("- **NOT_YET_RUN** (scripts/run_sd03_replay.py has not been executed)")
+
+    lines += ["", "## Permitted conclusions",
              f"- Technical: preflight {preflight_result['overall']}, {len(fold_records)}/12 real "
              "FINAL folds present.",
              f"- Research: **{decision['decision']}** (guide SS7.4's own registered decision "
@@ -188,16 +225,19 @@ def main() -> int:
     d1_rows = d1_table_rows(fold_records)
     d2_records = load_d2(sorted(fold_records))
     deployment = load_deployment()
+    replay = load_replay()
 
     r_series = inf.paired_r_series([{"arms": fold["arms"]} for fold in fold_records.values()])
     q_series = inf.paired_q_series([{"arms": fold["arms"]} for fold in fold_records.values()])
     decision = inf.decide(r_series=r_series, q_series=q_series, seed=INFERENCE_SEED,
                           fold_records=list(fold_records.values()),
                           data_valid=len(fold_records) > 0)
+    sensitivity = (inf.sensitivity_analysis(r_series=r_series, q_series=q_series, seed=INFERENCE_SEED)
+                  if len(r_series) >= inf.MIN_PAIRED_FOLDS else {})
 
     report_text = render_report(registration=registration, fold_records=fold_records, d1_rows=d1_rows,
                                 d2_records=d2_records, deployment=deployment, decision=decision,
-                                preflight_result=preflight_result)
+                                sensitivity=sensitivity, replay=replay, preflight_result=preflight_result)
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text(report_text, encoding="utf-8")
 

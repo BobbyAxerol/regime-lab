@@ -98,6 +98,11 @@
           {
             "name": "seed_and_block_length_frozen_pre_final",
             "holds": true
+          },
+          {
+            "name": "registered_sensitivity_block_lengths_all_reported",
+            "holds": true,
+            "detail": "reported=[2, 3], registered=[2, 3]"
           }
         ]
       },
@@ -120,6 +125,11 @@
           {
             "name": "all_3_deployment_accounts_present",
             "holds": true
+          },
+          {
+            "name": "same_contract_replay_exists_and_matches",
+            "holds": true,
+            "detail": "replayed 2024-03-23/A_M4"
           }
         ]
       },
@@ -150,5 +160,5 @@
     "status": "PENDING",
     "decision_ref": null
   },
-  "verified_at_utc": "2026-09-26T10:31:42.907197+00:00"
+  "verified_at_utc": "2026-09-26T11:47:54.942738+00:00"
 }

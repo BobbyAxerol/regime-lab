@@ -140,7 +140,7 @@ def gate_model(fold_records: dict) -> dict:
     return {"pass": all(c["holds"] for c in checks), "checks": checks}
 
 
-def gate_inference(fold_records: dict, *, decision_result: dict) -> dict:
+def gate_inference(fold_records: dict, *, decision_result: dict, sensitivity_result: dict) -> dict:
     checks = [
         {"name": "decision_in_registered_vocabulary",
          "holds": decision_result.get("decision") in (
@@ -154,6 +154,10 @@ def gate_inference(fold_records: dict, *, decision_result: dict) -> dict:
              inf.DECISION_INCONCLUSIVE_MAGNITUDE)},
         {"name": "seed_and_block_length_frozen_pre_final",
          "holds": inf.PRIMARY_BLOCK_LENGTH == 4 and inf.DEFAULT_RESAMPLES == 5000},
+        {"name": "registered_sensitivity_block_lengths_all_reported",
+         "holds": set(sensitivity_result) == set(inf.SENSITIVITY_BLOCK_LENGTHS),
+         "detail": f"reported={sorted(sensitivity_result)}, "
+                   f"registered={sorted(inf.SENSITIVITY_BLOCK_LENGTHS)}"},
     ]
     return {"pass": all(c["holds"] for c in checks), "checks": checks}
 
@@ -161,6 +165,7 @@ def gate_inference(fold_records: dict, *, decision_result: dict) -> dict:
 def gate_evidence(lab_root: Path, *, fold_records: dict, d2_records: dict, deployment: dict) -> dict:
     lab_root = Path(lab_root)
     report_path = lab_root / "evidence" / "sharpe_decay_sd_v1" / "final_folds" / "report.md"
+    replay_path = lab_root / "evidence" / "sharpe_decay_sd_v1" / "sd03_replay_result.json"
     checks = [
         {"name": "report_exists", "holds": report_path.is_file()},
         {"name": "all_12_folds_have_real_sha256",
@@ -168,7 +173,12 @@ def gate_evidence(lab_root: Path, *, fold_records: dict, d2_records: dict, deplo
         {"name": "d2_records_present_for_every_fold_x_arm",
          "holds": len(d2_records) == 12 * len(ARMS), "detail": f"{len(d2_records)}/{12 * len(ARMS)}"},
         {"name": "all_3_deployment_accounts_present", "holds": len(deployment) == 3},
+        {"name": "same_contract_replay_exists_and_matches", "holds": False},
     ]
+    if replay_path.is_file():
+        replay = json.loads(replay_path.read_text(encoding="utf-8"))
+        checks[-1]["holds"] = replay.get("all_gated_fields_match") is True
+        checks[-1]["detail"] = f"replayed {replay.get('replayed_origin')}/{replay.get('replayed_arm')}"
     return {"pass": all(c["holds"] for c in checks), "checks": checks}
 
 
@@ -195,13 +205,16 @@ def verify_sd03(*, lab_root: Path) -> dict:
     q_series = inf.paired_q_series([{"arms": f["arms"]} for f in fold_list])
     decision_result = inf.decide(r_series=r_series, q_series=q_series, seed=20260926,
                                  fold_records=fold_list, data_valid=len(fold_records) > 0)
+    sensitivity_result = (inf.sensitivity_analysis(r_series=r_series, q_series=q_series, seed=20260926)
+                         if len(r_series) >= inf.MIN_PAIRED_FOLDS else {})
 
     gates = {
         "G3-EXEC": gate_exec(fold_records, final_origins=final_origins, deployment=deployment),
         "G3-PAIR12": gate_pair12(fold_records, d2_records=d2_records, final_origins=final_origins),
         "G3-METRIC": gate_metric(fold_records),
         "G3-MODEL": gate_model(fold_records),
-        "G3-INFERENCE": gate_inference(fold_records, decision_result=decision_result),
+        "G3-INFERENCE": gate_inference(fold_records, decision_result=decision_result,
+                                       sensitivity_result=sensitivity_result),
         "G3-EVIDENCE": gate_evidence(lab_root, fold_records=fold_records, d2_records=d2_records,
                                     deployment=deployment),
         "G3-CLOSE": gate_close(lab_root),

@@ -119,6 +119,32 @@ def test_decide_no_meaningful_reduction_when_upper_ci_below_threshold():
     assert result["decision"] == inf.DECISION_NO_MEANINGFUL_REDUCTION_AT_020
 
 
+def test_sensitivity_analysis_reports_both_registered_block_lengths():
+    import random
+    rng = random.Random(9)
+    r_series = [0.3 + rng.gauss(0, 0.05) for _ in range(12)]
+    q_series = [0.0 + rng.gauss(0, 0.05) for _ in range(12)]
+    result = inf.sensitivity_analysis(r_series=r_series, q_series=q_series, seed=1)
+    assert set(result) == set(inf.SENSITIVITY_BLOCK_LENGTHS)
+    for block_length, entry in result.items():
+        assert entry["r_ci"]["block_length"] == block_length
+        assert entry["r_ci"]["status"] == "OK"
+
+
+def test_sensitivity_analysis_never_overrides_primary_decision():
+    """The primary decide() call and sensitivity_analysis() are
+    independent -- computing sensitivities must not change what decide()
+    itself returns for the SAME series."""
+    import random
+    rng = random.Random(10)
+    r_series = [0.01 + rng.gauss(0, 0.05) for _ in range(12)]
+    q_series = [0.0] * 12
+    primary_before = inf.decide(r_series=r_series, q_series=q_series, seed=1)
+    inf.sensitivity_analysis(r_series=r_series, q_series=q_series, seed=1)
+    primary_after = inf.decide(r_series=r_series, q_series=q_series, seed=1)
+    assert primary_before["decision"] == primary_after["decision"]
+
+
 def test_decision_priority_order_documented():
     """The module's own priority cascade: NOT_EVALUABLE and
     INSUFFICIENT_PAIRED_FOLDS outrank the degenerate-data checks, which
