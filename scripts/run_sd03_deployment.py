@@ -97,8 +97,8 @@ def load_final_folds() -> dict:
     return out
 
 
-def run_probe() -> int:
-    """Real memory probe: load PROBE_BARS real 1-minute bars and run ONE
+def run_probe(probe_bars: int = PROBE_BARS) -> int:
+    """Real memory probe: load ``probe_bars`` real 1-minute bars and run ONE
     real single-version deployment (the anchor's own params at the first
     FINAL origin), measuring peak RSS to extrapolate to the full span --
     the SAME discipline FP-07 used before committing to its own full-span
@@ -106,14 +106,14 @@ def run_probe() -> int:
     policy = SandboxPolicy.discover(LAB)
     policy.assert_lab_root_ok()
     limits = apply_resource_limits(policy)
-    log_progress("probe_start", limits=limits, probe_bars=PROBE_BARS)
+    log_progress("probe_start", limits=limits, probe_bars=probe_bars)
 
     import pandas as pd
 
     from crypto_regime_lab.time_edge.compute_cache import ComputeCache
 
     frame_start, _ = frame_bounds()
-    probe_end = frame_start + pd.Timedelta(minutes=PROBE_BARS)
+    probe_end = frame_start + pd.Timedelta(minutes=probe_bars)
     frame, _partitions = load_real_bars(SYMBOL, start=frame_start.strftime("%Y-%m-%d"),
                                         end=(probe_end + pd.Timedelta(days=1)).strftime("%Y-%m-%d"))
     frame = frame[["open", "high", "low", "close", "volume"]].copy()
@@ -147,9 +147,16 @@ def run_probe() -> int:
              "within_budget": projected_mib < 4096.0}
     log_progress("probe_complete", **result)
     DEPLOY_DIR.mkdir(parents=True, exist_ok=True)
-    (DEPLOY_DIR / "memory_probe.json").write_text(json.dumps({
+    (DEPLOY_DIR / f"memory_probe_{probe_bars}.json").write_text(json.dumps({
         "schema": "regime_lab.sd03_deploy_memory_probe.v1", "measured_at_utc": utcnow(), **result,
     }, indent=2) + "\n", encoding="utf-8")
+    # run_full() always reads the LARGEST probe point on disk -- the most
+    # conservative/informative extrapolation, never the first one tried
+    existing = sorted(DEPLOY_DIR.glob("memory_probe_*.json"),
+                      key=lambda p: int(p.stem.rsplit("_", 1)[1]))
+    largest = json.loads(existing[-1].read_text(encoding="utf-8"))
+    (DEPLOY_DIR / "memory_probe.json").write_text(json.dumps(largest, indent=2) + "\n",
+                                                  encoding="utf-8")
     print(json.dumps(result, indent=2))
     return 0
 
@@ -215,8 +222,9 @@ def run_full() -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--probe", action="store_true")
+    parser.add_argument("--probe-bars", type=int, default=PROBE_BARS)
     args = parser.parse_args()
-    return run_probe() if args.probe else run_full()
+    return run_probe(args.probe_bars) if args.probe else run_full()
 
 
 if __name__ == "__main__":
