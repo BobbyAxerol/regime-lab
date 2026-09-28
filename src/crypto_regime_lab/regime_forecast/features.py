@@ -362,7 +362,9 @@ def compute_features(df_daily: pd.DataFrame) -> pd.DataFrame:
     perp_qv_7 = perp_qv.rolling(7).sum()
     df["perp_flow_imb_7d"] = np.where(perp_qv_7 > 1e-6, 2.0 * (perp_tb_qv_7 / perp_qv_7) - 1.0, 0.0)
     df["spot_perp_flow_diff_7d"] = df["flow_imb_7d"] - df["perp_flow_imb_7d"]
-    df["perp_volume_share_30d"] = (perp_qv.rolling(30).sum()) / np.maximum(qv.rolling(30).sum() + perp_qv.rolling(30).sum(), 1e-6)
+    perp_share = (perp_qv.rolling(30).sum()) / np.maximum(qv.rolling(30).sum() + perp_qv.rolling(30).sum(), 1e-6)
+    df["perp_quote_share_30d"] = perp_share
+    df["perp_volume_share_30d"] = perp_share
 
     spread = np.log(np.maximum(df["perp_close"], 1e-6) / np.maximum(c, 1e-6))
     df["spread_mean_7d"] = spread.rolling(7).mean()

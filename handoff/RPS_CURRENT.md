@@ -6,9 +6,21 @@ Current source/runtime and approved registration:
 |---|---|---|---|---|
 | **MF-01** | **PASS** (4/4 gates) | **DATA_QUALIFIED_SCOPE_LOCKED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf01-20260928T122818Z-64bb6ac4/` |
 | **MF-02** | **PASS** (6/6 gates) | **FEATURES_BASELINES_DURATION_LOCKED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf02-20260928T124051Z-1c4ebe49/` |
-| **MF-03** | NOT_STARTED | PENDING | PENDING | — |
+| **MF-03** | **PASS** (6/6 gates) | **MODEL_FIT_HORIZON_FROZEN** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf03-20260928T124620Z-c404799d/` |
 | **MF-04** | NOT_STARTED | PENDING | PENDING | — |
 | **MF-05** | NOT_STARTED | PENDING | PENDING | — |
+
+## MF-03 Complete (2026-09-28)
+- **Gates**: `G3-ABLATION` PASS, `G3-MODEL` PASS, `G3-CALIBRATION` PASS, `G3-FREEZE` PASS, `G3-DURATION-AND-HORIZON-FREEZE` PASS, `G3-REPORT` PASS.
+- **Feature Ablation**: Evaluated D0 vs D1 vs D2 across 48 Dev weekly origins. Winning cohort: `D1_DERIVATIVE_LIQUIDITY` (joint Brier 0.9808 on H90).
+- **Model Grid Evaluated**: M1..M4 LightGBM + M5 Chronos-2-Synth challenger.
+  - Winning Recipe H56: `M4_LGBM_CONSERVATIVE_SLOW` (calibrated joint Brier: 0.8618).
+  - Winning Recipe H90: `M2_LGBM_REGULARIZED_DEEP` (calibrated joint Brier: 0.7909).
+- **Temperature Scaling Calibration**: Fitted on validation OOF: H56 ($T_V=5.000, T_E=2.578$), H90 ($T_V=2.783, T_E=1.171$). Improved joint Brier by +0.1210 (H56) and +0.0995 (H90).
+- **Horizon Selection**: $H^* = 90$ selected quantitatively per Section 8.4 ($J_{90} = 0.7909 < J_{56} = 0.8618$).
+- **Freeze Manifest**: All model architectures, weights hashes, calibration factors, taxonomy hash, and 28-day refit cadence frozen in `configs/btc_regime_forecast_v1/freeze_manifest.json`. Zero TEST peeking.
+- **Financial Engine Calls**: 0 (QuantBT untouched).
+- **Next Phase**: MF-04 (Locked Test & Qualification).
 
 ## MF-02 Complete (2026-09-28)
 - **Gates**: `G2-FEATURES` PASS, `G2-TARGETS` PASS, `G2-SPLIT` PASS, `G2-BASELINE` PASS, `G2-REGISTRATION` PASS, `G2-DURATION-DEFINITION` PASS.
