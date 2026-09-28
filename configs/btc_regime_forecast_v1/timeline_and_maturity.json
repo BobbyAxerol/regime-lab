@@ -1,0 +1,74 @@
+{
+  "schema": "regime_lab.timeline_and_maturity.v1",
+  "study_id": "btc_regime_forecast_v1",
+  "guide_version": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "resolved_at_utc": "2026-09-28T12:00:00+00:00",
+  "resolved_by_phase": "MF-01",
+  "data_boundaries": {
+    "spot_earliest": "2018-01-01 00:00:00",
+    "spot_latest_closed_day": "2026-08-06",
+    "perp_earliest": "2020-01-01 00:00:00",
+    "metrics_earliest": "2020-09-01 00:00:00"
+  },
+  "candidate_horizons_days": [56, 90],
+  "ready_lag_days": 1,
+  "weekly_stride_days": 7,
+  "block_size_days": 28,
+  "blocks_per_role": 12,
+  "origins_per_role": 48,
+  "warmup": {
+    "start_date": "2021-07-18",
+    "end_date": "2022-01-13",
+    "days": 180,
+    "role": "RAW_FEATURE_WARMUP",
+    "notes": "180 days max rolling lookback prior to the first initial training origin. Fully covered by Spot (2018), Perp (2020-01), and Metrics (2020-09-01)."
+  },
+  "initial_training": {
+    "start_date": "2022-01-14",
+    "end_date": "2024-01-13",
+    "daily_origins_count": 730,
+    "role": "INITIAL_MATURED_TRAINING_HISTORY",
+    "last_origin_target_start": "2024-01-14",
+    "last_origin_target_end_h90": "2024-04-13",
+    "last_origin_maturity_utc": "2024-04-13T00:00:00+00:00",
+    "notes": "730 daily origins where H=90 labels mature strictly before the first validation origin (2024-04-13)."
+  },
+  "development": {
+    "role": "DEVELOPMENT_VALIDATION",
+    "block_count": 12,
+    "weekly_origins_count": 48,
+    "first_origin": "2024-04-13",
+    "last_origin": "2025-03-08",
+    "span_start": "2024-04-13",
+    "span_end": "2025-03-15",
+    "last_origin_target_start": "2025-03-09",
+    "last_origin_target_end_h90": "2025-06-07",
+    "last_origin_maturity_utc": "2025-06-07T00:00:00+00:00",
+    "notes": "12 blocks of 28 days = 336 days. 48 weekly origins on Saturdays. All H=90 outcomes mature strictly before the first locked-test origin (2025-06-07)."
+  },
+  "freeze_boundary": {
+    "freeze_at_utc": "2025-06-07T00:00:00+00:00",
+    "maturity_gap_days": 91,
+    "notes": "Enforces that all 12 validation blocks have matured outcomes available to choose model recipe, calibrator, and H* before the first locked-test origin."
+  },
+  "locked_test": {
+    "role": "LOCKED_TEST",
+    "block_count": 12,
+    "weekly_origins_count": 48,
+    "first_origin": "2025-06-07",
+    "last_origin": "2026-05-02",
+    "span_start": "2025-06-07",
+    "span_end": "2026-05-09",
+    "last_origin_target_start": "2026-05-03",
+    "last_origin_target_end_h90": "2026-08-01",
+    "last_origin_target_end_h56": "2026-06-28",
+    "last_origin_maturity_utc": "2026-08-01T00:00:00+00:00",
+    "notes": "12 blocks of 28 days = 336 days. 48 weekly origins on Saturdays. Evaluated under frozen rules and refit every 28 days only from matured labels."
+  },
+  "follow_up": {
+    "required_through": "2026-08-01",
+    "actual_available_closed_day": "2026-08-06",
+    "safety_margin_days": 5,
+    "is_followup_fully_covered": true
+  }
+}

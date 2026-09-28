@@ -1,0 +1,28 @@
+{
+  "schema": "regime_lab.resource_budget.v1",
+  "study_id": "btc_regime_forecast_v1",
+  "guide_version": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "registered_at_utc": "2026-09-28T12:00:00+00:00",
+  "limits": {
+    "device_type": "cpu",
+    "rlimit_as_mib": 4096,
+    "max_rss_allowed_mib": 4096,
+    "max_wall_seconds_per_fit": 3600,
+    "financial_engine_calls_allowed": 0
+  },
+  "workload": {
+    "feature_dimensions_max": 50,
+    "daily_training_rows_initial": 730,
+    "development_origins": 48,
+    "locked_test_origins": 48,
+    "refit_blocks_per_role": 12,
+    "lightgbm_grid_size": 4,
+    "horizons": [56, 90]
+  },
+  "challenger_resource_policy": {
+    "foundation_model": "autogluon/chronos-2-synth",
+    "mode": "past_covariates_only_frozen",
+    "must_profile_before_bulk": true,
+    "unfunded_disposition": "NOT_FUNDED_CHALLENGER"
+  }
+}

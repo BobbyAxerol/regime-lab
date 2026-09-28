@@ -1,0 +1,78 @@
+{
+  "schema": "regime_lab.source_allowlist.v1",
+  "study_id": "btc_regime_forecast_v1",
+  "guide_version": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "as_of_utc": "2026-09-28T12:00:00+00:00",
+  "target_market": {
+    "symbol": "BTCUSDT",
+    "venue": "BINANCE",
+    "target_price_reference": "SPOT"
+  },
+  "approved_sources": {
+    "crypto_binance_spot_1m": {
+      "status": "QUALIFIED_AVAILABLE",
+      "reader_class": "CryptoBinanceSpot1m",
+      "role": "PRIMARY_TARGET_AND_FLOW",
+      "granularity": "1m",
+      "earliest_observed": "2018-01-01 00:00:00",
+      "latest_closed": "2026-08-06 23:59:00",
+      "storage_relpath": "crypto/binance_spot/1m/symbol=BTCUSDT",
+      "snapshot_path": "snapshots/server_core_v1/crypto_binance_spot_1m/BTCUSDT",
+      "columns_required": ["time", "open", "high", "low", "close", "volume", "quote_volume", "number_of_trades", "taker_buy_base_volume", "taker_buy_quote_volume"],
+      "timezone": "UTC",
+      "notes": "Spot price is the default target reference for realized volatility and path efficiency; quote_volume is turnover in USDT."
+    },
+    "crypto_binance_futures_1m": {
+      "status": "QUALIFIED_AVAILABLE",
+      "reader_class": "CryptoBinance1m",
+      "role": "PERPETUAL_CONTEXT_AND_SPREAD",
+      "granularity": "1m",
+      "earliest_observed": "2020-01-01 00:00:00",
+      "latest_closed": "2026-09-09 20:10:00",
+      "storage_relpath": "crypto/binance_futures/1m/symbol=BTCUSDT",
+      "snapshot_path": "snapshots/server_core_v1/crypto_binance_futures_1m/BTCUSDT",
+      "columns_required": ["time", "open", "high", "low", "close", "volume", "quote_volume", "number_of_trades", "taker_buy_base_volume", "taker_buy_quote_volume"],
+      "timezone": "UTC",
+      "notes": "Used for basis/spread calculations log(P_perp / P_spot) and perp volume share; not the target price."
+    },
+    "crypto_binance_futures_metrics_5m": {
+      "status": "QUALIFIED_AVAILABLE",
+      "reader_class": "BinanceFuturesMetrics5m",
+      "role": "DERIVATIVES_POSITIONING_AND_LEVERAGE",
+      "granularity": "5m",
+      "earliest_observed": "2020-09-01 00:00:00",
+      "latest_closed": "2026-09-09 15:45:00",
+      "storage_relpath": "crypto/binance_futures_metrics/5m/symbol=BTCUSDT",
+      "snapshot_path": "snapshots/server_core_v1/crypto_binance_futures_metrics_5m/BTCUSDT",
+      "columns_required": ["time", "sum_open_interest", "sum_open_interest_value", "count_long_short_ratio", "count_toptrader_long_short_ratio", "sum_toptrader_long_short_ratio", "sum_taker_long_short_vol_ratio"],
+      "timezone": "UTC",
+      "notes": "Never sum OI snapshots across intervals; last available snapshot used for point-in-time state."
+    }
+  },
+  "excluded_sources": {
+    "coingecko_dominance": {
+      "status": "EXCLUDED_INSUFFICIENT_HISTORY",
+      "reason": "Public API limited to 365 days; historical global market cap requires paid Pro subscription and lacks point-in-time archive covering the 2021-2026 cohort. Excluded per Section 3.1 without blocking core."
+    },
+    "binance_btcdom": {
+      "status": "EXCLUDED_NO_PIT",
+      "reason": "Binance BTCDOM is a relative price strength index, not actual global market cap dominance. Surrogate definition rejected per Section 3.1."
+    },
+    "crypto_binance_orderbook_snapshot_1h": {
+      "status": "EXCLUDED_OUT_OF_SCOPE",
+      "reason": "Order book history only starts in 2023, insufficient for 2021-2026 timeline; out of scope for daily macro-regime forecast."
+    },
+    "deribit_options": {
+      "status": "EXCLUDED_OUT_OF_SCOPE",
+      "reason": "Deribit options history lacks live tail and approved reader in [I1]; excluded per Section 3.1."
+    },
+    "fear_and_greed": {
+      "status": "EXCLUDED_UNAVAILABLE",
+      "reason": "Supplemental external indicator not required for core V1.2 deliverables; default OFF."
+    },
+    "funding_rate_raw_rest": {
+      "status": "EXCLUDED_UNAVAILABLE",
+      "reason": "No separate canonical reader in [I1]; funding proxy derived from perp klines/metrics where available."
+    }
+  }
+}

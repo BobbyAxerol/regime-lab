@@ -1,0 +1,163 @@
+{
+  "run_id": "mf01-20260928T122749Z-c5d624ad",
+  "phase": "MF-01",
+  "verified_at_utc": "2026-09-28T12:27:49.562490+00:00",
+  "overall": "FAIL",
+  "gates": {
+    "G1-SOURCE": {
+      "pass": true,
+      "checks": [
+        {
+          "name": "crypto_binance_spot_1m_present_and_qualified",
+          "holds": true,
+          "detail": "PRIMARY_TARGET_AND_FLOW"
+        },
+        {
+          "name": "crypto_binance_futures_1m_present_and_qualified",
+          "holds": true,
+          "detail": "PERPETUAL_CONTEXT_AND_SPREAD"
+        },
+        {
+          "name": "crypto_binance_futures_metrics_5m_present_and_qualified",
+          "holds": true,
+          "detail": "DERIVATIVES_POSITIONING_AND_LEVERAGE"
+        },
+        {
+          "name": "crypto_binance_spot_1m_parquet_files_exist",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_spot_1m/BTCUSDT"
+        },
+        {
+          "name": "crypto_binance_futures_1m_parquet_files_exist",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_1m/BTCUSDT"
+        },
+        {
+          "name": "crypto_binance_futures_metrics_5m_parquet_files_exist",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/snapshots/server_core_v1/crypto_binance_futures_metrics_5m/BTCUSDT"
+        },
+        {
+          "name": "oi_summing_forbidden",
+          "holds": true,
+          "detail": "Summing OI snapshots raises ValueError as required"
+        }
+      ]
+    },
+    "G1-EXCLUDE": {
+      "pass": true,
+      "checks": [
+        {
+          "name": "coingecko_dominance_has_typed_exclusion",
+          "holds": true,
+          "detail": "EXCLUDED_INSUFFICIENT_HISTORY"
+        },
+        {
+          "name": "binance_btcdom_has_typed_exclusion",
+          "holds": true,
+          "detail": "EXCLUDED_NO_PIT"
+        },
+        {
+          "name": "crypto_binance_orderbook_snapshot_1h_has_typed_exclusion",
+          "holds": true,
+          "detail": "EXCLUDED_OUT_OF_SCOPE"
+        },
+        {
+          "name": "deribit_options_has_typed_exclusion",
+          "holds": true,
+          "detail": "EXCLUDED_OUT_OF_SCOPE"
+        }
+      ]
+    },
+    "G1-TIMELINE": {
+      "pass": true,
+      "checks": [
+        {
+          "check": "warmup_days_ge_180",
+          "holds": true,
+          "detail": "180 days [2021-07-18 to 2022-01-13]"
+        },
+        {
+          "check": "initial_training_days_ge_730",
+          "holds": true,
+          "detail": "730 daily origins [2022-01-14 to 2024-01-13]"
+        },
+        {
+          "check": "training_h90_matures_before_or_at_dev_first",
+          "holds": true,
+          "detail": "Last train H90 mature: 2024-04-13, Dev first: 2024-04-13"
+        },
+        {
+          "check": "development_48_weekly_origins_12_blocks",
+          "holds": true,
+          "detail": "48 origins, 12 blocks"
+        },
+        {
+          "check": "dev_last_h90_matures_before_or_at_test_first",
+          "holds": true,
+          "detail": "Dev last H90 mature: 2025-06-07, Test first: 2025-06-07"
+        },
+        {
+          "check": "test_48_weekly_origins_12_blocks",
+          "holds": true,
+          "detail": "48 origins, 12 blocks"
+        },
+        {
+          "check": "test_last_h90_followup_fully_covered",
+          "holds": true,
+          "detail": "Test last H90 mature: 2026-08-01, Spot latest: 2026-08-06 (margin: 5 days)"
+        }
+      ]
+    },
+    "G1-EVIDENCE": {
+      "pass": false,
+      "checks": [
+        {
+          "name": "config_registration.json_present",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_regime_forecast_v1/registration.json"
+        },
+        {
+          "name": "config_protocol_migration.json_present",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_regime_forecast_v1/protocol_migration.json"
+        },
+        {
+          "name": "config_source_allowlist.json_present",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_regime_forecast_v1/source_allowlist.json"
+        },
+        {
+          "name": "config_timeline_and_maturity.json_present",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_regime_forecast_v1/timeline_and_maturity.json"
+        },
+        {
+          "name": "config_resource_budget.json_present",
+          "holds": true,
+          "detail": "/root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_regime_forecast_v1/resource_budget.json"
+        },
+        {
+          "name": "run_artifact_request.json_present",
+          "holds": true,
+          "detail": "497 bytes"
+        },
+        {
+          "name": "run_artifact_gate_receipt.json_present",
+          "holds": false,
+          "detail": "MISSING"
+        },
+        {
+          "name": "run_artifact_report.md_present",
+          "holds": false,
+          "detail": "MISSING"
+        },
+        {
+          "name": "run_artifact_source_exclusions.json_present",
+          "holds": true,
+          "detail": "1276 bytes"
+        }
+      ]
+    }
+  }
+}
