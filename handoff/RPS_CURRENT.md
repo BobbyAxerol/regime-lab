@@ -7,8 +7,20 @@ Current source/runtime and approved registration:
 | **MF-01** | **PASS** (4/4 gates) | **DATA_QUALIFIED_SCOPE_LOCKED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf01-20260928T122818Z-64bb6ac4/` |
 | **MF-02** | **PASS** (6/6 gates) | **FEATURES_BASELINES_DURATION_LOCKED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf02-20260928T124051Z-1c4ebe49/` |
 | **MF-03** | **PASS** (6/6 gates) | **MODEL_FIT_HORIZON_FROZEN** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf03-20260928T124620Z-c404799d/` |
-| **MF-04** | NOT_STARTED | PENDING | PENDING | — |
+| **MF-04** | **PASS** (6/6 gates) | **LOCKED_TEST_VOL_QUALIFIED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf04-20260928T125717Z-c4ed139e/` |
 | **MF-05** | NOT_STARTED | PENDING | PENDING | — |
+
+## MF-04 Complete (2026-09-28)
+- **Gates**: `G4-EXEC` PASS, `G4-EVAL12` PASS, `G4-INFERENCE` PASS, `G4-HEADSTATUS` PASS, `G4-TIMING-EVAL` PASS, `G4-EVIDENCE` PASS.
+- **Locked Test Execution**: 48 weekly origins across 12 full blocks (2025-06-07 to 2026-05-02), 100% coverage, 28-day refits strictly from matured labels.
+- **Head Qualification Status ($H^* = 90$)**:
+  - **Volatility 3-class**: **`QUALIFIED`** (Brier Skill = +0.0749 [95% CI: +0.0050, +0.1632], Balanced Accuracy Gain = +0.3412 [95% CI: +0.1905, +0.5096]).
+  - **Efficiency 3-class**: `NOT_QUALIFIED` (Brier Skill = -0.8310).
+  - **Joint 9-class**: `NOT_QUALIFIED` (Brier Skill = -0.1224).
+  - **Continuous Volatility**: `INCONCLUSIVE_MARGINAL` (Relative Error Reduction = +0.0392, CI crosses 0).
+- **Secondary Horizon ($H = 56$)**: Volatility `INCONCLUSIVE_SUPPORT` (BSS +0.1577), Efficiency `NOT_QUALIFIED` (BSS -0.1050), Joint `INCONCLUSIVE_MARGINAL` (BSS +0.0510).
+- **Financial Engine Calls**: 0 (QuantBT untouched).
+- **Next Phase**: MF-05 (Consolidated Report, Freeze Package & WFO Bridge Determination).
 
 ## MF-03 Complete (2026-09-28)
 - **Gates**: `G3-ABLATION` PASS, `G3-MODEL` PASS, `G3-CALIBRATION` PASS, `G3-FREEZE` PASS, `G3-DURATION-AND-HORIZON-FREEZE` PASS, `G3-REPORT` PASS.
