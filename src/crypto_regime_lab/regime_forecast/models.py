@@ -104,24 +104,61 @@ class LightGbmRegimeModel:
         self.temp_v = 1.0
         self.temp_e = 1.0
 
-    def fit(self, df_matured: pd.DataFrame, feature_cols: List[str], target_h: int) -> None:
+    def fit(
+        self,
+        df_matured: pd.DataFrame,
+        feature_cols: List[str],
+        target_h: int = 90,
+        v_class_col: Optional[str] = None,
+        e_class_col: Optional[str] = None,
+        v_cont_col: Optional[str] = None,
+        e_cont_col: Optional[str] = None,
+        max_impute_share: float = 0.05,
+    ) -> None:
         self.feature_cols = feature_cols
-        v_class_col = f"target_v_class_h{target_h}"
-        e_class_col = f"target_e_class_h{target_h}"
-        v_cont_col = f"target_v_cont_h{target_h}"
-        e_cont_col = f"target_e_cont_h{target_h}"
+        if v_class_col is None:
+            v_class_col = f"target_v_class_h{target_h}"
+        if e_class_col is None:
+            e_class_col = f"target_e_class_h{target_h}"
+        if v_cont_col is None:
+            v_cont_col = f"target_v_cont_h{target_h}"
+        if e_cont_col is None:
+            e_cont_col = f"target_e_cont_h{target_h}"
 
-        req = feature_cols + [v_class_col, e_class_col, v_cont_col, e_cont_col]
-        sub = df_matured.dropna(subset=req)
+        target_cols = [v_class_col, e_class_col, v_cont_col, e_cont_col]
+        # Only drop rows where targets are missing/unmatured
+        sub = df_matured.dropna(subset=target_cols).copy()
         if len(sub) < 25:
             self.fitted = False
             return
 
-        X = sub[feature_cols].values
-        # Impute NaNs with column median
-        col_medians = np.nanmedian(X, axis=0)
-        inds = np.where(np.isnan(X))
-        X[inds] = np.take(col_medians, inds[1])
+        # Check imputation shares per feature column
+        self.imputed_row_share_per_column_: Dict[str, float] = {}
+        self.col_medians_: List[float] = []
+
+        X = np.zeros((len(sub), len(feature_cols)), dtype=np.float64)
+        for i, col in enumerate(feature_cols):
+            s = sub[col].values.astype(np.float64)
+            is_na = np.isnan(s)
+            nan_share = float(np.mean(is_na))
+            self.imputed_row_share_per_column_[col] = nan_share
+
+            if nan_share > max_impute_share:
+                raise ValueError(
+                    f"Column '{col}' has {nan_share:.2%} missing rows, which "
+                    f"exceeds maximum allowed imputation threshold {max_impute_share:.2%}."
+                )
+
+            med = float(np.nanmedian(s)) if not np.all(is_na) else 0.0
+            if np.isnan(med):
+                med = 0.0
+            self.col_medians_.append(med)
+            s[is_na] = med
+            X[:, i] = s
+
+        self.imputation_policy = "MEDIAN_TRAIN_FIT"
+        self.imputation_fill_values = {col: self.col_medians_[i] for i, col in enumerate(feature_cols)}
+        self.imputed_row_share_per_column = dict(self.imputed_row_share_per_column_)
 
         # Head V (3-class)
         params_v = dict(self.params_common)
@@ -170,8 +207,15 @@ class LightGbmRegimeModel:
                 "prob_j_9class": {c: 1.0 / len(j_classes) for c in j_classes},
             }
 
-        x_raw = np.array([float(origin_row.get(c, 0.0)) for c in self.feature_cols])
-        x_raw = np.nan_to_num(x_raw, nan=0.0).reshape(1, -1)
+        x_vals = []
+        for i, c in enumerate(self.feature_cols):
+            raw_v = origin_row.get(c, np.nan)
+            if pd.isna(raw_v):
+                val = self.col_medians_[i] if hasattr(self, "col_medians_") else 0.0
+            else:
+                val = float(raw_v)
+            x_vals.append(val)
+        x_raw = np.array(x_vals, dtype=np.float64).reshape(1, -1)
 
         # Continuous predictions
         pred_v_cont = float(self.reg_v.predict(x_raw)[0]) if self.reg_v is not None else 0.03
@@ -211,10 +255,10 @@ class LightGbmRegimeModel:
 
 
 class ChronosSynthChallenger:
-    """Challenger: Chronos-2-Synth zero-shot probabilistic foundation synthesizer.
-    
-    Generates Monte Carlo forward trajectories of realized volatility and returns
-    conditioned on a 180-day causal context window prior to origin.
+    """DEPRECATED / UNUSED: In btc_regime_forecast_v1, Chronos foundation synthesizer
+    is registered as BLOCKED_CAPABILITY in model_grid.json due to missing torch/chronos package,
+    frozen weights, and offline environment. This class is retained only for historical audit
+    and must not be evaluated as an active candidate model.
     """
     def __init__(self, config: Dict[str, Any]) -> None:
         self.config = config

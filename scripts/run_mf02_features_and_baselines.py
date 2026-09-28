@@ -17,6 +17,7 @@ from crypto_regime_lab.regime_forecast.features import (
     compute_features,
     get_feature_manifest,
     get_feature_columns,
+    compute_feature_coverage_table,
 )
 from crypto_regime_lab.regime_forecast.targets import (
     compute_forward_targets,
@@ -43,16 +44,63 @@ from crypto_regime_lab.regime_forecast.verifier_mf02 import run_mf02_verificatio
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent
+    import argparse
+    import sys
+    import hashlib
+
+    parser = argparse.ArgumentParser(description="Run MF-02 Features, Targets, Duration & Baselines")
+    parser.add_argument("--run-id", type=str, default=None)
+    parser.add_argument("--out-dir", type=str, default=None)
+    parser.add_argument("--lab-root", type=str, default=None)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--phase", type=str, default="MF-02")
+    args = parser.parse_args()
+
+    repo_root = Path(args.lab_root).resolve() if args.lab_root else Path(__file__).resolve().parent.parent
     snapshot_root = repo_root / "snapshots" / "server_core_v1"
     configs_dir = repo_root / "configs" / "btc_regime_forecast_v1"
     evidence_root = repo_root / "evidence" / "btc_regime_forecast_v1" / "runs"
     evidence_root.mkdir(parents=True, exist_ok=True)
 
-    timestamp_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_id = f"mf02-{timestamp_str}-{uuid.uuid4().hex[:8]}"
-    run_dir = evidence_root / run_id
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    timestamp_str = now_utc.strftime("%Y%m%dT%H%M%SZ")
+    run_id = args.run_id or f"mf02-{timestamp_str}-{uuid.uuid4().hex[:8]}"
+    run_dir = Path(args.out_dir) if args.out_dir else (evidence_root / run_id)
     run_dir.mkdir(parents=True, exist_ok=True)
+
+    # Compute registered config hash
+    reg_path = configs_dir / "registration.json"
+    reg_hash = hashlib.sha256(reg_path.read_bytes()).hexdigest() if reg_path.is_file() else "none"
+
+    # Write request.json
+    request_data = {
+        "study_id": "btc_regime_forecast_v1",
+        "phase": args.phase,
+        "run_id": run_id,
+        "argv": sys.argv,
+        "cwd": str(Path.cwd()),
+        "interpreter": sys.executable,
+        "python_version": sys.version,
+        "registered_config_hash": reg_hash,
+        "recomputed_from": "mf02-20260928T124051Z-1c4ebe49",
+        "invalidates_run": "mf02-20260928T124051Z-1c4ebe49",
+        "start_time_utc": now_utc.isoformat(),
+        "status": "RUNNING",
+    }
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    # Append to attempts.jsonl
+    start_attempt = {
+        "attempt_id": 1,
+        "timestamp": now_utc.isoformat(),
+        "event": "STARTED",
+        "phase": args.phase,
+        "argv": sys.argv,
+        "purpose": "RECOMPUTED_WITH_CORRECT_COVERAGE_AND_PER_COLUMN_NULLS"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(start_attempt) + "\n")
 
     print(f"=== Starting Phase MF-02 Execution: {run_id} ===")
 
@@ -288,10 +336,21 @@ def main() -> None:
     with open(run_dir / "model_grid.json", "w", encoding="utf-8") as f:
         json.dump(grid_data, f, indent=2)
 
-    # Feature manifest
-    feat_manifest = get_feature_manifest()
+    # Feature manifest and coverage table per Section 4 & FIX-01
+    role_windows = [
+        ("initial_training", "2022-01-14", "2024-01-13"),
+        ("development", "2024-04-13", "2025-03-15"),
+        ("locked_test", "2025-06-07", "2026-05-09"),
+    ]
+    df_feat_with_date = df_feat.reset_index().rename(columns={"index": "date"}) if "date" not in df_feat.columns else df_feat
+    coverage_table = compute_feature_coverage_table(df_feat_with_date, role_windows)
+    feat_manifest = get_feature_manifest(coverage_table)
     with open(run_dir / "feature_manifest.json", "w", encoding="utf-8") as f:
         json.dump(feat_manifest, f, indent=2)
+    with open(configs_dir / "feature_manifest.json", "w", encoding="utf-8") as f:
+        json.dump(feat_manifest, f, indent=2)
+    with open(run_dir / "coverage_summary.json", "w", encoding="utf-8") as f:
+        json.dump(feat_manifest["coverage_summary"], f, indent=2)
 
     # Taxonomy
     with open(run_dir / "target_taxonomy.json", "w", encoding="utf-8") as f:
@@ -383,6 +442,22 @@ Date: `{datetime.datetime.now(datetime.timezone.utc).isoformat()}`
     print(f"Verifier receipt status: {receipt['overall_status']}")
     print(f"Gates: {json.dumps(receipt['gates'], indent=2)}")
     assert receipt["overall_status"] == "PASS", "MF-02 Exit Gate Verification Failed!"
+
+    end_utc = datetime.datetime.now(datetime.timezone.utc)
+    request_data["status"] = "SUCCESS"
+    request_data["end_time_utc"] = end_utc.isoformat()
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    success_attempt = {
+        "attempt_id": 1,
+        "timestamp": end_utc.isoformat(),
+        "event": "SUCCESS",
+        "phase": args.phase,
+        "detail": "6/6 exit gates verified PASS"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(success_attempt) + "\n")
 
     print(f"=== Phase MF-02 COMPLETE: {run_id} ===")
 

@@ -42,6 +42,11 @@
     "confidence_level": 0.95,
     "evaluation_blocks_min": 12
   },
+  "data_qualification_thresholds": {
+    "min_column_coverage_per_role_window": 0.95,
+    "max_contiguous_missing_days_per_column": 7,
+    "max_impute_share_per_column": 0.05
+  },
   "phases": ["MF-01", "MF-02", "MF-03", "MF-04", "MF-05"],
   "owner_review_status": "PENDING"
 }

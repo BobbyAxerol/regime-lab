@@ -1,0 +1,51 @@
+{
+  "phase": "MF-02",
+  "overall_status": "PASS",
+  "gates": {
+    "G2-FEATURES": {
+      "status": "PASS",
+      "feature_count": 38,
+      "cohorts": [
+        "D0_CORE_PRICE_VOL",
+        "D1_DERIVATIVE_LIQUIDITY",
+        "D2_COMPOSITE_PRESSURE"
+      ]
+    },
+    "G2-TARGETS": {
+      "status": "PASS",
+      "horizons": [
+        "H56",
+        "H90"
+      ],
+      "frozen_on_prefix": "2022-01-14_to_2024-01-13"
+    },
+    "G2-SPLIT": {
+      "status": "PASS",
+      "training_origins": 730,
+      "dev_origins": 48,
+      "test_origins": 48
+    },
+    "G2-BASELINE": {
+      "status": "PASS",
+      "baselines_evaluated": [
+        "B1_PERSISTENCE",
+        "B2_MATURED_FREQ",
+        "B3_HAR_RV",
+        "B4_REGULARIZED_LINEAR"
+      ]
+    },
+    "G2-REGISTRATION": {
+      "status": "PASS",
+      "registered_configs_count": 4,
+      "model_types": [
+        "LIGHTGBM"
+      ]
+    },
+    "G2-DURATION-DEFINITION": {
+      "status": "PASS",
+      "total_episodes": 126,
+      "right_censored_episodes": 1,
+      "detector": "OBS14_CONFIRM3_V1"
+    }
+  }
+}

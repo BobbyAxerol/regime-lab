@@ -5,9 +5,12 @@ Follows BTC-RPS-V1.2 Section 10, Section 16, Section 18 (MF-05).
 
 from __future__ import annotations
 
+import argparse
 import datetime
+import hashlib
 import json
 from pathlib import Path
+import sys
 import uuid
 import numpy as np
 
@@ -18,32 +21,70 @@ from crypto_regime_lab.regime_forecast.verifier_mf05 import run_mf05_verificatio
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent
+    parser = argparse.ArgumentParser(description="Run MF-05 Consolidated Report & WFO Bridge Determination")
+    parser.add_argument("--run-id", type=str, default=None)
+    parser.add_argument("--out-dir", type=str, default=None)
+    parser.add_argument("--lab-root", type=str, default=None)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--phase", type=str, default="MF-05")
+    args = parser.parse_args()
+
+    repo_root = Path(args.lab_root).resolve() if args.lab_root else Path(__file__).resolve().parent.parent
     configs_dir = repo_root / "configs" / "btc_regime_forecast_v1"
     evidence_root = repo_root / "evidence" / "btc_regime_forecast_v1" / "runs"
     evidence_root.mkdir(parents=True, exist_ok=True)
 
-    timestamp_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_id = f"mf05-{timestamp_str}-{uuid.uuid4().hex[:8]}"
-    run_dir = evidence_root / run_id
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    timestamp_str = now_utc.strftime("%Y%m%dT%H%M%SZ")
+    run_id = args.run_id or f"mf05-{timestamp_str}-{uuid.uuid4().hex[:8]}"
+    run_dir = Path(args.out_dir) if args.out_dir else (evidence_root / run_id)
     run_dir.mkdir(parents=True, exist_ok=True)
+
+    # Compute registered config hash
+    reg_path = configs_dir / "registration.json"
+    reg_hash = hashlib.sha256(reg_path.read_bytes()).hexdigest() if reg_path.is_file() else "none"
+
+    # Write request.json
+    request_data = {
+        "study_id": "btc_regime_forecast_v1",
+        "phase": args.phase,
+        "run_id": run_id,
+        "argv": sys.argv,
+        "cwd": str(Path.cwd()),
+        "interpreter": sys.executable,
+        "python_version": sys.version,
+        "registered_config_hash": reg_hash,
+        "recomputed_from": "mf05-20260928T130054Z-7f368dbc",
+        "started_at_utc": now_utc.isoformat(),
+        "smoke": args.smoke,
+    }
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    # Record started attempt in attempts.jsonl
+    attempts_path = run_dir / "attempts.jsonl"
+    with open(attempts_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "run_id": run_id,
+            "phase": args.phase,
+            "status": "STARTED",
+            "timestamp_utc": now_utc.isoformat(),
+            "detail": "Runner initialized; starting reproduction audit and bridge determination",
+        }) + "\n")
 
     print(f"=== Starting Phase MF-05 Execution: {run_id} ===")
 
     # 1. Locate latest run directories for previous phases
     print("[1/6] Aggregating evidence from prior phases MF-01..MF-04...")
-    mf01_runs = sorted(evidence_root.glob("mf01-*"))
-    mf02_runs = sorted(evidence_root.glob("mf02-*"))
-    mf03_runs = sorted(evidence_root.glob("mf03-*"))
-    mf04_runs = sorted(evidence_root.glob("mf04-*"))
+    mf01_runs = sorted([d for d in evidence_root.glob("mf01-*") if (d / "gate_receipt.json").is_file()])
+    mf02_runs = sorted([d for d in evidence_root.glob("mf02-*") if (d / "gate_receipt.json").is_file()])
+    mf03_runs = sorted([d for d in evidence_root.glob("mf03-*") if (d / "gate_receipt.json").is_file()])
+    mf04_runs = sorted([d for d in evidence_root.glob("mf04-*") if (d / "gate_receipt.json").is_file() and (d / "test_forecasts.jsonl").is_file()])
 
-    assert mf01_runs, "No MF-01 run found"
-    assert mf02_runs, "No MF-02 run found"
-    assert mf03_runs, "No MF-03 run found"
-    assert mf04_runs, "No MF-04 run found"
-
-    for r_list in [mf01_runs, mf02_runs, mf03_runs]:
-        assert (r_list[-1] / "gate_receipt.json").exists()
+    assert mf01_runs, "No valid MF-01 run found"
+    assert mf02_runs, "No valid MF-02 run found"
+    assert mf03_runs, "No valid MF-03 run found"
+    assert mf04_runs, "No valid MF-04 run found"
 
     latest_mf04 = mf04_runs[-1]
 
@@ -58,7 +99,7 @@ def main() -> None:
         freeze_manifest = json.load(f)
 
     # 2. Audit Reproduction (Recompute metrics from sealed test_forecasts.jsonl)
-    print("[2/6] Executing independent Reproduction Audit from sealed forecasts...")
+    print(f"[2/6] Executing independent Reproduction Audit from sealed forecasts in {latest_mf04.name}...")
     forecast_records = []
     with open(latest_mf04 / "test_forecasts.jsonl", "r", encoding="utf-8") as f:
         for line in f:
@@ -95,6 +136,42 @@ def main() -> None:
     # 3. Create Handoff Manifests
     print("[3/6] Generating official handoff manifests (Qualification, Versions, Exclusions, WFO Bridge)...")
     
+    h90_vol_eval = mf04_eval["test_metrics"]["H90"]["volatility_3class"]
+    h90_eff_eval = mf04_eval["test_metrics"]["H90"]["efficiency_3class"]
+    h90_joint_eval = mf04_eval["test_metrics"]["H90"]["joint_9class"]
+
+    vol_status = mf04_heads["H90"]["volatility_3class"]["status"]
+    eff_status = mf04_heads["H90"]["efficiency_3class"]["status"]
+    joint_status = mf04_heads["H90"]["joint_9class"]["status"]
+
+    vol_bss = h90_vol_eval.get("brier_skill", h90_vol_eval.get("bss_model", 0.0))
+    vol_bss_ci = h90_vol_eval.get("brier_skill_ci_95", [h90_vol_eval.get("bss_ci_lower", 0.0), h90_vol_eval.get("bss_ci_upper", 0.0)])
+    vol_ba_gain = h90_vol_eval.get("bal_acc_gain", 0.0)
+    vol_ba_ci = h90_vol_eval.get("bal_acc_gain_ci_95", [0.0, 0.0])
+
+    eff_bss = h90_eff_eval.get("brier_skill", h90_eff_eval.get("bss_model", 0.0))
+    eff_bss_ci = h90_eff_eval.get("brier_skill_ci_95", [h90_eff_eval.get("bss_ci_lower", 0.0), h90_eff_eval.get("bss_ci_upper", 0.0)])
+
+    joint_bss = h90_joint_eval.get("brier_skill", h90_joint_eval.get("bss_model", 0.0))
+    joint_bss_ci = h90_joint_eval.get("brier_skill_ci_95", [h90_joint_eval.get("bss_ci_lower", 0.0), h90_joint_eval.get("bss_ci_upper", 0.0)])
+
+    if vol_status == "QUALIFIED":
+        claim_level = "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED"
+        takeaway = (
+            "Crypto price direction and path efficiency are not forecastable at 90-day horizons with current "
+            "derivatives positioning features. However, realized volatility is genuinely forecastable with "
+            f"statistically significant Brier skill ({vol_bss:.4f}, 95% CI strictly positive) "
+            f"and balanced accuracy gain (+{vol_ba_gain:.4f})."
+        )
+    else:
+        claim_level = "TECHNICALLY_VALID__ALL_HEADS_NOT_QUALIFIED__WFO_BRIDGE_CLOSED"
+        takeaway = (
+            "Neither realized volatility nor path efficiency nor joint regime classification forecastable "
+            f"better than frozen baselines on 90-day horizons with tested features and models (H90 Volatility Brier skill: {vol_bss:.4f}, "
+            f"95% CI: [{vol_bss_ci[0]:.4f}, {vol_bss_ci[1]:.4f}]). "
+            "All heads failed qualification standards against frozen baselines. WFO bridge remains strictly CLOSED."
+        )
+
     # Model Qualification Manifest
     model_qualification = {
         "study_id": "btc_regime_forecast_v1",
@@ -116,15 +193,11 @@ def main() -> None:
             },
         },
         "study_verdict": {
-            "claim_level": "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED",
-            "volatility_forecast": "QUALIFIED",
-            "path_efficiency_forecast": "NOT_QUALIFIED",
-            "joint_regime_forecast": "NOT_QUALIFIED",
-            "scientific_takeaway": (
-                "Crypto price direction and path efficiency are not forecastable at 90-day horizons with current "
-                "derivatives positioning features. However, realized volatility is genuinely forecastable with "
-                "statistically significant Brier skill (+0.0749, 95% CI strictly positive) and large balanced accuracy gain (+0.3412)."
-            ),
+            "claim_level": claim_level,
+            "volatility_forecast": vol_status,
+            "path_efficiency_forecast": eff_status,
+            "joint_regime_forecast": joint_status,
+            "scientific_takeaway": takeaway,
         },
     }
 
@@ -132,10 +205,12 @@ def main() -> None:
     version_manifest = {
         "study_id": "btc_regime_forecast_v1",
         "architecture": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
-        "winning_recipe": freeze_manifest["winning_recipe_h90"],
-        "timing_specification": freeze_manifest["timing_specification"],
-        "taxonomy_hash": freeze_manifest["taxonomy_hash"],
-        "model_weights_hashes": freeze_manifest["model_weights_hashes"],
+        "winning_recipe": freeze_manifest.get("winning_recipe_h90", {}),
+        "timing_specification": freeze_manifest.get("timing_specification", {}),
+        "taxonomy_hash": freeze_manifest.get("taxonomy_hash", ""),
+        "model_config_hashes": freeze_manifest.get("model_config_hashes", {}),
+        "weights_persisted": False,
+        "replay_method": "REFIT_FROM_FROZEN_CONFIG",
         "engine_binding": {
             "quantbt_engine_version": "1.1.1",
             "quantbt_native_version": "0.4.2",
@@ -156,6 +231,12 @@ def main() -> None:
             {"source": "FEAR_AND_GREED_INDEX", "reason": "Heuristic non-financial sentiment index with unverified revisions"},
             {"source": "BINANCE_REST_FUNDING_RATE", "reason": "Replaced by authoritative point-in-time metrics parquet"},
         ],
+        "excluded_columns": [
+            {"column": "count_toptrader_long_short_ratio", "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"},
+            {"column": "sum_toptrader_long_short_ratio", "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"},
+            {"feature": "log_top_account_ratio", "reason": "Derived from excluded count_toptrader_long_short_ratio"},
+            {"feature": "log_top_position_ratio", "reason": "Derived from excluded sum_toptrader_long_short_ratio"},
+        ],
     }
 
     # Resource Summary
@@ -169,23 +250,42 @@ def main() -> None:
         "disk_reclaimed": "0 bytes deleted; deduplicated via hardlinks",
     }
 
-    # WFO Bridge Decision Manifest (Section 18)
+    # WFO Bridge Decision Manifest (Section 18 & FIX-05)
+    qualified_heads_list = [k for k, v in mf04_heads["H90"].items() if v.get("status") == "QUALIFIED"]
+    failed_heads_list = [k for k, v in mf04_heads["H90"].items() if v.get("status") != "QUALIFIED"]
     wfo_bridge_decision = {
         "study_id": "btc_regime_forecast_v1",
         "decision_date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "wfo_bridge_status": "CLOSED",
+        "wfo_bridge_decision": "CLOSED",
         "joint_regime_parameter_selection_permitted": False,
+        "qualified_heads": qualified_heads_list,
+        "failed_heads": failed_heads_list,
+        "guide_citations": [
+            "Section 18.1 (Only genuinely qualified heads permitted)",
+            "Section 9.4 (Partial qualification restricts scope to single-dimension conditioning)",
+            "Section 18.3 (Mandatory >=128 strategy trials/cutoff across 2-3 tuning dimensions and >=12 paired-valid WFO folds)",
+            "Section 18.5 (Mandatory WFO timeline proof and financial domain gate satisfaction)"
+        ],
+        "unmet_wfo_conditions": [
+            "Strategy trial budget >=128 trials/cutoff not attempted or registered",
+            "Separate paired-valid WFO fold execution (>=12 folds) not executed",
+            "WFO timeline proof (meta-label history, latency, common calendar, D2 follow-up) not submitted",
+            "Financial domain gates and separate Owner study authorization not granted"
+        ],
         "rationale": (
-            "Per Section 18 of BTC-RPS-V1.2 Guide, the WFO Bridge requires all primary heads (including path efficiency "
-            "and joint regime classification) to clear strict qualification standards (Brier skill >= 0.05, CI > 0). "
-            "Because Head E and Head J failed qualification, reopening general calendar WFO with joint regime parameter "
-            "selection is strictly prohibited to avoid financial overfitting."
+            "Per Guide Section 18.1 and Section 9.4, only heads that clear strict qualification may be used in downstream research. "
+            f"In the locked evaluation, qualification status on H90 is Volatility: {vol_status}, Path Efficiency: {eff_status}, Joint: {joint_status}. "
+            "Therefore, predictive-regime parameter selection on joint regimes is strictly prohibited. "
+            "Furthermore, per Section 18.3 and Section 18.5, WFO execution requires >=128 attempted "
+            "strategy trials/cutoff across 2-3 dimensions, >=12 paired-valid WFO folds, timeline evidence, and financial domain gates, "
+            "none of which are satisfied in this model-first study. Therefore, the WFO Bridge is CLOSED."
         ),
         "volatility_conditioned_proposal": {
             "status": "SPECIFIED_NOT_EXECUTED",
             "proposal_title": "Volatility-Conditioned Regime Selection (V-CRS-V1)",
-            "supported_evidence": "Head Volatility (3-class) achieved robust QUALIFIED status (BSS = +0.0749, 95% CI: [+0.0050, +0.1632])",
-            "proposed_scope": "Conditioning strategy parameters / risk scaling strictly on Volatility regimes (LOW_VOL / MID_VOL / HIGH_VOL)",
+            "supported_evidence": f"Head Volatility status: {vol_status} (Brier skill: {vol_bss:.4f}, CI: [{vol_bss_ci[0]:.4f}, {vol_bss_ci[1]:.4f}])",
+            "proposed_scope": "Conditioning strategy risk / parameters strictly on Volatility regimes (LOW_VOL / MID_VOL / HIGH_VOL)",
             "requires_owner_approval": True,
             "financial_engine_calls_allowed": 0,
         },
@@ -236,9 +336,9 @@ def main() -> None:
 
     with open(run_dir / "study_scope.json", "w", encoding="utf-8") as f:
         json.dump({
-            "study_claim_level": "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED",
-            "volatility_head_status": "QUALIFIED",
-            "joint_regime_head_status": "NOT_QUALIFIED",
+            "study_claim_level": claim_level,
+            "volatility_head_status": vol_status,
+            "joint_regime_head_status": joint_status,
         }, f, indent=2)
 
     with open(run_dir / "wfo_bridge_decision.json", "w", encoding="utf-8") as f:
@@ -256,7 +356,7 @@ def main() -> None:
 Study: `btc_regime_forecast_v1`
 Run ID: `{run_id}`
 Date: `{datetime.datetime.now(datetime.timezone.utc).isoformat()}`
-Verdict: **`TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED`**
+Verdict: **`{claim_level}`**
 
 ---
 
@@ -265,19 +365,20 @@ Verdict: **`TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED`**
 Nghiên cứu **`btc_regime_forecast_v1`** (BTC-RPS-V1.2: Model-First Regime Forecasting) đã hoàn thành toàn diện 5 phases (MF-01 đến MF-05) mà **không thực hiện bất kỳ lệnh gọi tài chính nào** (`financial_engine_calls = 0`). Kho QuantBT được bảo vệ nguyên vẹn 100%.
 
 ### Phát hiện khoa học trung thực:
-1. **Dự báo Biến động (Volatility) là CÓ THẬT và VƯỢT TRỘI (QUALIFIED)**:
-   - Trên Primary Horizon $H^* = 90$ ngày, mô hình `M2_LGBM_REGULARIZED_DEEP` với cohort tính năng `D1_DERIVATIVE_LIQUIDITY` và Temperature Scaling ($T=2.783$) đạt:
-     - **Brier Skill Score**: **`+0.0749`** so với baseline tần suất lịch sử (95% Block-Bootstrap CI: `[+0.0050, +0.1632]`). Chặn dưới của khoảng tin cậy 95% hoàn toàn dương!
-     - **Balanced Accuracy Gain**: **`+0.3412`** (95% CI: `[+0.1905, +0.5096]`).
-     - Head Volatility 3-class chính thức đạt tiêu chuẩn **`QUALIFIED`**.
+1. **Dự báo Biến động (Volatility) trên Locked Test**:
+   - Trên Primary Horizon $H^* = 90$ ngày, mô hình `{freeze_manifest.get('winning_recipe_h90', {}).get('model_id', 'M4_LGBM_CONSERVATIVE_SLOW')}` với cohort tính năng `D1_DERIVATIVE_LIQUIDITY`:
+     - **Brier Skill Score**: **`{vol_bss:.4f}`** so với baseline tần suất lịch sử (95% Block-Bootstrap CI: `[{vol_bss_ci[0]:.4f}, {vol_bss_ci[1]:.4f}]`).
+     - **Balanced Accuracy Gain**: **`{vol_ba_gain:+.4f}`** (95% CI: `[{vol_ba_ci[0]:.4f}, {vol_ba_ci[1]:.4f}]`).
+     - Trạng thái kiểm định: **`{vol_status}`** (Không vượt qua ngưỡng qualification bắt buộc BSS >= 0.05 và CI > 0).
 2. **Dự báo Hướng đi & Hiệu suất đường đi (Path Efficiency) THẤT BẠI (NOT_QUALIFIED)**:
-   - Head Path Efficiency 3-class đạt Brier Skill Score **`-0.8310`** (95% CI: `[-1.3553, -0.4778]`).
+   - Head Path Efficiency 3-class đạt Brier Skill Score **`{eff_bss:.4f}`** (95% CI: `[{eff_bss_ci[0]:.4f}, {eff_bss_ci[1]:.4f}]`).
    - Tín hiệu dòng tiền phái sinh và định vị vị thế không thể dự báo hướng đi của Bitcoin ở chân trời 90 ngày.
 3. **Joint Regime (9-class) THẤT BẠI (NOT_QUALIFIED)**:
-   - Do bị kéo xuống bởi head hiệu suất đường đi, Joint 9-class đạt Brier Skill Score **`-0.1224`**.
+   - Do bị kéo xuống bởi cả hai chiều biến động và hiệu suất, Joint 9-class đạt Brier Skill Score **`{joint_bss:.4f}`** (95% CI: `[{joint_bss_ci[0]:.4f}, {joint_bss_ci[1]:.4f}]`).
 4. **Trạng thái WFO Bridge: CHÍNH THỨC ĐÓNG (CLOSED)**:
-   - Tuân thủ nghiêm ngặt Quy tắc Section 18 của Guide: Vì Joint Regime Head không đạt qualification, việc mở WFO để chọn tham số chiến lược theo 9 regime bị **CẤM HOÀN TOÀN** (`wfo_bridge_status = CLOSED`) để ngăn chặn triệt để hiện tượng curve-fitting tài chính.
-   - **Đề xuất có điều kiện**: Vì Head Volatility đạt `QUALIFIED`, lab đề xuất một hướng nghiên cứu mới **"Volatility-Conditioned Regime Selection" (V-CRS-V1)**, trạng thái `SPECIFIED_NOT_EXECUTED`, cần Owner phê duyệt trước khi thực thi.
+   - Tuân thủ nghiêm ngặt Quy tắc Section 18.1, 9.4, 18.3, 18.5 của Guide: Không có head nào đạt qualification trên Primary Horizon $H^*=90$, việc mở WFO để chọn tham số chiến lược theo regime bị **CẤM HOÀN TOÀN** (`wfo_bridge_status = CLOSED`).
+   - Các điều kiện WFO gồm >=128 strategy trials/cutoff, >=12 paired-valid WFO folds, timeline evidence và financial domain gates chưa được đáp ứng trong nghiên cứu model-first này.
+   - **Đề xuất có điều kiện**: Đề xuất nghiên cứu "Volatility-Conditioned Regime Selection" (V-CRS-V1) giữ trạng thái `SPECIFIED_NOT_EXECUTED`, cần Owner phê duyệt riêng trước khi thực thi.
 
 ---
 
@@ -285,11 +386,11 @@ Nghiên cứu **`btc_regime_forecast_v1`** (BTC-RPS-V1.2: Model-First Regime For
 
 | Phase | Trọng tâm | Trạng thái Exit Gates | Kết quả chính |
 |---|---|---|---|
-| **MF-01** | Data Qualification & Scope | **PASS** (4/4) | Binance Spot 1m, Perp 1m, Metrics 5m đủ 2018..2026. Loại bỏ dứt khoát CoinGecko, BTCDOM, L2, Options. |
-| **MF-02** | Features, Targets, Duration & Baselines | **PASS** (6/6) | 40 features nhân quả (D0/D1/D2), taxonomy đóng băng trên training prefix 730 ngày, 126 episodes duration ledger, 4 baselines evaluated. |
-| **MF-03** | Model Fit & Horizon Selection | **PASS** (6/6) | Ablation chọn D1, Grid 4 LightGBM + Chronos Synth, Calibration $T$, chọn $H^*=90$ do $J_{{90}} = 0.7909 < J_{{56}} = 0.8618$, freeze toàn bộ. |
-| **MF-04** | Locked Test & Qualification | **PASS** (6/6) | 48 weekly origins Test (2025-06-07..2026-05-02), 28-day refits từ matured labels. Volatility: **QUALIFIED**; Path & Joint: **NOT_QUALIFIED**. |
-| **MF-05** | Consolidated Report & WFO Bridge | **PASS** (6/6) | Tái lập 100% metrics, đóng gói package, xác định WFO Bridge = **CLOSED**, đề xuất Volatility-Conditioned proposal. |
+| **MF-01** | Data Qualification & Scope | **PASS** (5/5) | Binance Spot 1m, Perp 1m, Metrics 5m đủ 2018..2026. G1-COVERAGE pass. Loại bỏ dứt khoát CoinGecko, BTCDOM, L2, Options. |
+| **MF-02** | Features, Targets, Duration & Baselines | **PASS** (6/6) | 38 features nhân quả (D0/D1/D2), taxonomy đóng băng trên training prefix 730 ngày, 126 episodes duration ledger, 4 baselines evaluated. |
+| **MF-03** | Model Fit & Horizon Selection | **PASS** (6/6) | Ablation chọn D1, Grid 4 LightGBM, Chronos blocked capability, Calibration $T$, chọn $H^*=90$, freeze toàn bộ. |
+| **MF-04** | Locked Test & Qualification | **PASS** (6/6) | 48 weekly origins Test (2025-06-07..2026-05-02), 28-day refits từ matured labels. Volatility: NOT_QUALIFIED; Path: NOT_QUALIFIED; Joint: NOT_QUALIFIED. Block bootstrap ceil(H/7) + sensitivities. |
+| **MF-05** | Consolidated Report & WFO Bridge | **PASS** (6/6) | Tái lập 100% metrics, đóng gói package, xác định WFO Bridge = **CLOSED**. |
 
 ---
 
@@ -322,6 +423,17 @@ Lab đã hoàn thành nhiệm vụ theo chuẩn khoa học cao nhất. Bàn giao
     print(f"Verifier receipt status: {receipt['overall_status']}")
     print(f"Gates: {json.dumps(receipt['gates'], indent=2)}")
     assert receipt["overall_status"] == "PASS", "MF-05 Exit Gate Verification Failed!"
+
+    # Record success in attempts.jsonl
+    with open(attempts_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "run_id": run_id,
+            "phase": args.phase,
+            "status": "SUCCESS",
+            "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "overall_status": receipt["overall_status"],
+            "detail": "Consolidated report, manifests, and verifier all completed successfully",
+        }) + "\n")
 
     print(f"=== Phase MF-05 COMPLETE: {run_id} ===")
 

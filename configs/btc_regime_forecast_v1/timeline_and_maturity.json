@@ -6,9 +6,16 @@
   "resolved_by_phase": "MF-01",
   "data_boundaries": {
     "spot_earliest": "2018-01-01 00:00:00",
-    "spot_latest_closed_day": "2026-08-06",
+    "spot_latest_closed_day": "2026-08-07",
     "perp_earliest": "2020-01-01 00:00:00",
-    "metrics_earliest": "2020-09-01 00:00:00"
+    "metrics_earliest": "2020-09-01 00:00:00",
+    "excluded_partial_periods": [
+      {
+        "period": "2026-09",
+        "status": "EXCLUDED_PARTIAL_MONTH",
+        "reason": "Incomplete month at snapshot freeze boundary; excluded from closed daily evaluations"
+      }
+    ]
   },
   "candidate_horizons_days": [56, 90],
   "ready_lag_days": 1,

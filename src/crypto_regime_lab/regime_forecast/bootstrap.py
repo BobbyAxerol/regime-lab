@@ -13,8 +13,62 @@ Follows BTC-RPS-V1.2 Section 9 and Section 15 (MF-04):
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Tuple
+import math
+from typing import Any, Callable, Dict, List, Tuple
 import numpy as np
+
+
+def get_bootstrap_block_spec(horizon_h: int) -> Dict[str, int]:
+    """Computes primary and sensitivity block sizes according to Guide Section 6.5:
+    - Primary length: ceil(H / 7) origins.
+    - Sensitivity 1.5x: ceil(1.5 * H / 7) origins.
+    - Sensitivity 2.0x: ceil(2.0 * H / 7) origins.
+    """
+    primary = int(math.ceil(horizon_h / 7.0))
+    sens_1_5 = int(math.ceil(1.5 * horizon_h / 7.0))
+    sens_2_0 = int(math.ceil(2.0 * horizon_h / 7.0))
+    return {
+        "primary": primary,
+        "sensitivity_1_5x": sens_1_5,
+        "sensitivity_2_0x": sens_2_0,
+    }
+
+
+def compute_origin_overlap_summary(
+    origins: List[str],
+    horizons: List[int] = [56, 90],
+) -> Dict[str, Any]:
+    """Generates Section 6.5 overlap summary across weekly evaluation origins."""
+    n_origins = len(origins)
+    out: Dict[str, Any] = {
+        "n_origins": n_origins,
+        "origin_interval_days": 7,
+    }
+
+    for h in horizons:
+        spec = get_bootstrap_block_spec(h)
+        primary_k = spec["primary"]
+        # Pairs (i, j) with i < j where (j - i)*7 < h
+        overlap_pairs = sum(
+            1 for i in range(n_origins) for j in range(i + 1, n_origins)
+            if (j - i) * 7 < h
+        )
+        effective_episodes = round(n_origins / float(primary_k), 2)
+        calendar_span = (n_origins - 1) * 7 + h
+
+        out[f"H{h}"] = {
+            "horizon_days": h,
+            "primary_block_size": primary_k,
+            "sensitivity_blocks": [spec["sensitivity_1_5x"], spec["sensitivity_2_0x"]],
+            "overlapping_origin_pairs": overlap_pairs,
+            "calendar_span_days": calendar_span,
+            "estimated_effective_independent_episodes": effective_episodes,
+            "approximation_caveat": (
+                "Moving block bootstrap CI is an asymptotic approximation under overlapping "
+                "horizons; effective sample size is limited by horizon length."
+            ),
+        }
+    return out
 
 
 def compute_block_bootstrap_ci(
@@ -63,6 +117,54 @@ def compute_block_bootstrap_ci(
     ci_upper = float(np.percentile(boot_diffs, (1.0 - alpha) * 100))
 
     return point_estimate, ci_lower, ci_upper
+
+
+def compute_block_bootstrap_ci_with_sensitivities(
+    y_true: np.ndarray,
+    p_model: np.ndarray,
+    p_ref: np.ndarray,
+    metric_diff_fn: Callable[[np.ndarray, np.ndarray, np.ndarray], float],
+    horizon_h: int,
+    n_boot: int = 2000,
+    seed: int = 20260928,
+    ci_level: float = 0.95,
+) -> Dict[str, Any]:
+    """Computes primary block bootstrap CI plus two sensitivities per Section 6.5."""
+    spec = get_bootstrap_block_spec(horizon_h)
+    primary_k = spec["primary"]
+    pt, low, high = compute_block_bootstrap_ci(
+        y_true, p_model, p_ref, metric_diff_fn,
+        block_size=primary_k, n_boot=n_boot, seed=seed, ci_level=ci_level
+    )
+
+    sensitivities = {}
+    n = len(y_true)
+    for s_name, k in [("sens_1_5x", spec["sensitivity_1_5x"]), ("sens_2_0x", spec["sensitivity_2_0x"])]:
+        if n < 2 * k:
+            sensitivities[s_name] = {
+                "block_size": k,
+                "status": "NOT_INFORMATIVE",
+                "reason": f"Sample size {n} < 2 * block_size ({2 * k}); insufficient blocks",
+                "ci_95": None,
+            }
+        else:
+            _, s_low, s_high = compute_block_bootstrap_ci(
+                y_true, p_model, p_ref, metric_diff_fn,
+                block_size=k, n_boot=n_boot, seed=seed, ci_level=ci_level
+            )
+            sensitivities[s_name] = {
+                "block_size": k,
+                "status": "COMPUTED",
+                "ci_95": [s_low, s_high],
+            }
+
+    return {
+        "point_estimate": pt,
+        "ci_lower": low,
+        "ci_upper": high,
+        "primary_block_size": primary_k,
+        "sensitivities": sensitivities,
+    }
 
 
 def qualify_head_status(

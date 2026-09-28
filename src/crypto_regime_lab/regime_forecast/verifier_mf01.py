@@ -18,7 +18,7 @@ from . import sources
 from . import timeline
 
 
-REQUIRED_GATES = ("G1-SOURCE", "G1-EXCLUDE", "G1-TIMELINE", "G1-EVIDENCE")
+REQUIRED_GATES = ("G1-SOURCE", "G1-EXCLUDE", "G1-TIMELINE", "G1-EVIDENCE", "G1-COVERAGE")
 
 
 def verify_gate_source(lab_root: Path) -> dict[str, Any]:
@@ -141,20 +141,76 @@ def verify_gate_evidence(lab_root: Path, run_dir: Path | None = None) -> dict[st
     }
 
 
+def verify_gate_g1_coverage(coverage_data: dict[str, Any] | Path) -> dict[str, Any]:
+    """Gate G1-COVERAGE: verifies >=95% column-wise coverage per role window and no contiguous gaps > 7d."""
+    if isinstance(coverage_data, Path):
+        if not coverage_data.is_file():
+            return {"pass": False, "status": "FAIL", "reason": f"Coverage file missing: {coverage_data}"}
+        coverage_data = json.loads(coverage_data.read_text(encoding="utf-8"))
+
+    threshold = coverage_data.get("threshold", 0.95)
+    min_train = coverage_data.get("min_column_coverage_training", 1.0)
+    min_dev = coverage_data.get("min_column_coverage_dev", 1.0)
+    min_test = coverage_data.get("min_column_coverage_test", 1.0)
+    max_gap = coverage_data.get("max_contiguous_missing_days", 0)
+    status = coverage_data.get("status", "PASS")
+
+    checks = [
+        {"name": "training_coverage_ge_threshold", "holds": min_train >= threshold, "detail": f"{min_train} >= {threshold}"},
+        {"name": "dev_coverage_ge_threshold", "holds": min_dev >= threshold, "detail": f"{min_dev} >= {threshold}"},
+        {"name": "test_coverage_ge_threshold", "holds": min_test >= threshold, "detail": f"{min_test} >= {threshold}"},
+        {"name": "no_contiguous_gap_gt_7d", "holds": max_gap <= 7, "detail": f"{max_gap} <= 7"},
+        {"name": "declared_status_pass", "holds": status == "PASS", "detail": f"status={status}"},
+    ]
+
+    all_pass = all(c["holds"] for c in checks)
+    return {
+        "pass": all_pass,
+        "status": "PASS" if all_pass else "FAIL",
+        "checks": checks,
+    }
+
+
 def verify_mf01(lab_root: Path, run_dir: Path | None = None) -> dict[str, Any]:
     lab_root = Path(lab_root)
     g_source = verify_gate_source(lab_root)
     g_exclude = verify_gate_exclude(lab_root)
     g_timeline = verify_gate_timeline(lab_root)
     g_evidence = verify_gate_evidence(lab_root, run_dir=run_dir)
-    
+
+    # Coverage summary: check run_dir or find latest mf01 run or feature_manifest
+    cov_path = None
+    if run_dir is None:
+        runs_dir = lab_root / "evidence" / "btc_regime_forecast_v1" / "runs"
+        if runs_dir.is_dir():
+            for d in sorted(runs_dir.glob("mf01-*"), reverse=True):
+                if (d / "coverage_summary.json").is_file():
+                    cov_path = d / "coverage_summary.json"
+                    break
+
+    if cov_path is None and run_dir is not None and (run_dir / "coverage_summary.json").is_file():
+        cov_path = run_dir / "coverage_summary.json"
+
+    if cov_path is not None:
+        g_coverage = verify_gate_g1_coverage(cov_path)
+    elif (lab_root / "configs" / "btc_regime_forecast_v1" / "feature_manifest.json").is_file():
+        fm = json.loads((lab_root / "configs" / "btc_regime_forecast_v1" / "feature_manifest.json").read_text(encoding="utf-8"))
+        cov_data = fm.get("coverage_summary")
+        if cov_data:
+            g_coverage = verify_gate_g1_coverage(cov_data)
+        else:
+            g_coverage = {"pass": False, "status": "FAIL", "reason": "No coverage_summary in feature_manifest.json"}
+    else:
+        g_coverage = {"pass": False, "status": "FAIL", "reason": "coverage data not found"}
+
     gates = {
         "G1-SOURCE": g_source,
         "G1-EXCLUDE": g_exclude,
         "G1-TIMELINE": g_timeline,
         "G1-EVIDENCE": g_evidence,
+        "G1-COVERAGE": g_coverage,
     }
-    
+
     all_pass = all(g["pass"] for g in gates.values())
     return {
         "overall": "PASS" if all_pass else "FAIL",

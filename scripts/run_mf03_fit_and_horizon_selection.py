@@ -31,7 +31,6 @@ from crypto_regime_lab.regime_forecast.baselines import (
 )
 from crypto_regime_lab.regime_forecast.models import (
     LightGbmRegimeModel,
-    ChronosSynthChallenger,
     fit_optimal_temperature,
     temperature_scaling_softmax,
 )
@@ -39,16 +38,59 @@ from crypto_regime_lab.regime_forecast.verifier_mf03 import run_mf03_verificatio
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent
+    import argparse
+    import sys
+
+    parser = argparse.ArgumentParser(description="Run MF-03 Model Fit, Duration Baseline & Horizon Selection")
+    parser.add_argument("--run-id", type=str, default=None)
+    parser.add_argument("--out-dir", type=str, default=None)
+    parser.add_argument("--lab-root", type=str, default=None)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--phase", type=str, default="MF-03")
+    args = parser.parse_args()
+
+    repo_root = Path(args.lab_root).resolve() if args.lab_root else Path(__file__).resolve().parent.parent
     snapshot_root = repo_root / "snapshots" / "server_core_v1"
     configs_dir = repo_root / "configs" / "btc_regime_forecast_v1"
     evidence_root = repo_root / "evidence" / "btc_regime_forecast_v1" / "runs"
     evidence_root.mkdir(parents=True, exist_ok=True)
 
-    timestamp_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_id = f"mf03-{timestamp_str}-{uuid.uuid4().hex[:8]}"
-    run_dir = evidence_root / run_id
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    timestamp_str = now_utc.strftime("%Y%m%dT%H%M%SZ")
+    run_id = args.run_id or f"mf03-{timestamp_str}-{uuid.uuid4().hex[:8]}"
+    run_dir = Path(args.out_dir) if args.out_dir else (evidence_root / run_id)
     run_dir.mkdir(parents=True, exist_ok=True)
+
+    reg_path = configs_dir / "registration.json"
+    reg_hash = hashlib.sha256(reg_path.read_bytes()).hexdigest() if reg_path.is_file() else "none"
+
+    request_data = {
+        "study_id": "btc_regime_forecast_v1",
+        "phase": args.phase,
+        "run_id": run_id,
+        "argv": sys.argv,
+        "cwd": str(Path.cwd()),
+        "interpreter": sys.executable,
+        "python_version": sys.version,
+        "registered_config_hash": reg_hash,
+        "recomputed_from": "mf03-20260928T124620Z-c404799d",
+        "invalidates_run": "mf03-20260928T124620Z-c404799d",
+        "start_time_utc": now_utc.isoformat(),
+        "status": "RUNNING",
+    }
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    start_attempt = {
+        "attempt_id": 1,
+        "timestamp": now_utc.isoformat(),
+        "event": "STARTED",
+        "phase": args.phase,
+        "argv": sys.argv,
+        "purpose": "RECOMPUTED_WITH_UNIFIED_IMPUTATION_AND_CLEAN_MODEL_GRID"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(start_attempt) + "\n")
 
     print(f"=== Starting Phase MF-03 Execution: {run_id} ===")
 
@@ -89,6 +131,8 @@ def main() -> None:
         "H90": {"bs_v": 0.7944, "bs_e": 0.5099, "bs_j": 0.8728},
     }
 
+    train_start = pd.to_datetime("2022-01-14")
+
     # 2. Feature Cohort Ablation (D0, D1, D2)
     print("[2/6] Running Feature Cohort Ablation (D0 vs D1 vs D2) on 48 Dev origins...")
     cohorts_to_test = ["D0_CORE_PRICE_VOL", "D1_DERIVATIVE_LIQUIDITY", "D2_COMPOSITE_PRESSURE"]
@@ -125,7 +169,7 @@ def main() -> None:
                     continue
 
                 matured_mask = [
-                    is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], h, origin, ready_lag_days=1)
+                    (d >= train_start) and is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], h, origin, ready_lag_days=1)
                     for d in df_labeled.index
                 ]
                 df_m = df_labeled[matured_mask].copy()
@@ -174,22 +218,14 @@ def main() -> None:
     }
     preds_by_model: Dict[str, Any] = {}
 
-    h56_q = (taxonomy["H56"]["v_quantiles"]["q_1_3"], taxonomy["H56"]["v_quantiles"]["q_2_3"])
-    h56_tau = taxonomy["H56"]["e_quantiles"]["tau_symmetric"]
-    h90_q = (taxonomy["H90"]["v_quantiles"]["q_1_3"], taxonomy["H90"]["v_quantiles"]["q_2_3"])
-    h90_tau = taxonomy["H90"]["e_quantiles"]["tau_symmetric"]
-
     for m_cfg in model_configs:
         m_id = m_cfg["model_id"]
-        m_type = m_cfg.get("model_type", "LIGHTGBM")
         preds_by_model[m_id] = {"H56": {"y_v": [], "p_v": [], "y_e": [], "p_e": [], "y_j": [], "p_j": []},
                                 "H90": {"y_v": [], "p_v": [], "y_e": [], "p_e": [], "y_j": [], "p_j": []}}
         model_eval_summary["results"][m_id] = {}
 
         for h in [56, 90]:
             h_key = f"H{h}"
-            v_cutoff = h56_q if h == 56 else h90_q
-            e_tau = h56_tau if h == 56 else h90_tau
 
             for origin in dev_origins:
                 t_orig = pd.to_datetime(origin)
@@ -202,20 +238,14 @@ def main() -> None:
                 if pd.isna(true_v) or pd.isna(true_e) or pd.isna(true_j):
                     continue
 
-                if m_type == "CHRONOS_SYNTH":
-                    challenger = ChronosSynthChallenger(m_cfg)
-                    pred = challenger.predict_from_history(
-                        df_daily, origin, h, v_cutoff, e_tau, v_classes, e_classes, j_classes
-                    )
-                else:
-                    matured_mask = [
-                        is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], h, origin, ready_lag_days=1)
-                        for d in df_labeled.index
-                    ]
-                    df_m = df_labeled[matured_mask].copy()
-                    lgbm_model = LightGbmRegimeModel(m_cfg)
-                    lgbm_model.fit(df_m, winning_feature_cols, target_h=h)
-                    pred = lgbm_model.predict(orig_row, v_classes, e_classes, j_classes, apply_calibration=False)
+                matured_mask = [
+                    (d >= train_start) and is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], h, origin, ready_lag_days=1)
+                    for d in df_labeled.index
+                ]
+                df_m = df_labeled[matured_mask].copy()
+                lgbm_model = LightGbmRegimeModel(m_cfg)
+                lgbm_model.fit(df_m, winning_feature_cols, target_h=h, max_impute_share=0.05)
+                pred = lgbm_model.predict(orig_row, v_classes, e_classes, j_classes, apply_calibration=False)
 
                 prob_v_arr = np.array([pred["prob_v_3class"][c] for c in v_classes])
                 prob_e_arr = np.array([pred["prob_e_3class"][c] for c in e_classes])
@@ -348,7 +378,7 @@ def main() -> None:
     print("[6/6] Freezing model weights, recipes, and timing specification...")
     # Fit final models on training prefix to seal weights and hashes
     prefix_mask = [
-        is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], selected_h, "2024-04-13", ready_lag_days=1)
+        (d >= train_start) and is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], selected_h, "2024-04-13", ready_lag_days=1)
         for d in df_labeled.index
     ]
     df_matured_final = df_labeled[prefix_mask].copy()
@@ -385,10 +415,16 @@ def main() -> None:
             "temperature_v": fitted_temperatures["H90"]["temp_v"],
             "temperature_e": fitted_temperatures["H90"]["temp_e"],
         },
+        "model_config_hashes": {
+            winner_m_h56: hash_56,
+            winner_m_h90: hash_90,
+        },
         "model_weights_hashes": {
             winner_m_h56: hash_56,
             winner_m_h90: hash_90,
         },
+        "weights_persisted": False,
+        "replay_method": "REFIT_FROM_FROZEN_CONFIG",
         "taxonomy_hash": tax_hash,
         "timing_specification": {
             "primary_detector": "OBS14_CONFIRM3_V1",
@@ -466,6 +502,22 @@ All model architectures, winning hyperparameters, feature cohorts, calibration t
     print(f"Verifier receipt status: {receipt['overall_status']}")
     print(f"Gates: {json.dumps(receipt['gates'], indent=2)}")
     assert receipt["overall_status"] == "PASS", "MF-03 Exit Gate Verification Failed!"
+
+    end_utc = datetime.datetime.now(datetime.timezone.utc)
+    request_data["status"] = "SUCCESS"
+    request_data["end_time_utc"] = end_utc.isoformat()
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    success_attempt = {
+        "attempt_id": 1,
+        "timestamp": end_utc.isoformat(),
+        "event": "SUCCESS",
+        "phase": args.phase,
+        "detail": "6/6 exit gates verified PASS"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(success_attempt) + "\n")
 
     print(f"=== Phase MF-03 COMPLETE: {run_id} ===")
 

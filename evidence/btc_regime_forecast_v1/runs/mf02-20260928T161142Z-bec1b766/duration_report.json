@@ -1,0 +1,69 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-02",
+  "detector_id": "OBS14_CONFIRM3_V1",
+  "episode_ledger_summary": {
+    "total_episodes": 126,
+    "unique_regimes": 4,
+    "right_censored_count": 1,
+    "mean_duration_days": 12.126984126984127
+  },
+  "km_estimator_summary": {
+    "median_duration_by_regime": {
+      "LOW_VOL__CHOP_HOSTILE": 8.0,
+      "LOW_VOL__RANGE_NEUTRAL": 7.0,
+      "LOW_VOL__TREND_FRIENDLY": 16.0,
+      "MID_VOL__RANGE_NEUTRAL": 22.0
+    },
+    "rmst_by_regime": {
+      "LOW_VOL__CHOP_HOSTILE": 11.518018018018019,
+      "LOW_VOL__RANGE_NEUTRAL": 9.027272727272727,
+      "LOW_VOL__TREND_FRIENDLY": 16.075757575757574,
+      "MID_VOL__RANGE_NEUTRAL": 21.5
+    },
+    "rmrl_by_regime": {
+      "LOW_VOL__CHOP_HOSTILE": {
+        "age_14d": 7.833333333333333,
+        "age_28d": 8.5
+      },
+      "LOW_VOL__RANGE_NEUTRAL": {
+        "age_14d": 5.416666666666666,
+        "age_28d": 0.0
+      },
+      "LOW_VOL__TREND_FRIENDLY": {
+        "age_14d": 8.444444444444443,
+        "age_28d": 6.250000000000001
+      },
+      "MID_VOL__RANGE_NEUTRAL": {
+        "age_14d": 7.5,
+        "age_28d": 0.0
+      }
+    },
+    "first_exit_prob_by_regime": {
+      "LOW_VOL__CHOP_HOSTILE": {
+        "age_14d_h56": 1.0,
+        "age_28d_h56": 1.0,
+        "age_14d_h90": 1.0,
+        "age_28d_h90": 1.0
+      },
+      "LOW_VOL__RANGE_NEUTRAL": {
+        "age_14d_h56": 1.0,
+        "age_28d_h56": 1.0,
+        "age_14d_h90": 1.0,
+        "age_28d_h90": 1.0
+      },
+      "LOW_VOL__TREND_FRIENDLY": {
+        "age_14d_h56": 1.0,
+        "age_28d_h56": 1.0,
+        "age_14d_h90": 1.0,
+        "age_28d_h90": 1.0
+      },
+      "MID_VOL__RANGE_NEUTRAL": {
+        "age_14d_h56": 1.0,
+        "age_28d_h56": 1.0,
+        "age_14d_h90": 1.0,
+        "age_28d_h90": 1.0
+      }
+    }
+  }
+}

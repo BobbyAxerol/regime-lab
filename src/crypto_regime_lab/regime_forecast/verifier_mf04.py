@@ -89,7 +89,7 @@ def verify_gate_timing_eval(timing_data: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def run_mf04_verification(run_dir: Path) -> Dict[str, Any]:
+def run_mf04_verification(run_dir: Path, write_receipt: bool = True) -> Dict[str, Any]:
     """Run all 6 exit gates for MF-04."""
     summary_path = run_dir / "test_evaluation_summary.json"
     head_status_path = run_dir / "head_qualification_status.json"
@@ -129,8 +129,9 @@ def run_mf04_verification(run_dir: Path) -> Dict[str, Any]:
         },
     }
 
-    receipt_path = run_dir / "gate_receipt.json"
-    with open(receipt_path, "w", encoding="utf-8") as f:
-        json.dump(receipt, f, indent=2)
+    if write_receipt:
+        receipt_path = run_dir / "gate_receipt.json"
+        with open(receipt_path, "w", encoding="utf-8") as f:
+            json.dump(receipt, f, indent=2)
 
     return receipt

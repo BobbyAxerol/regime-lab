@@ -38,24 +38,69 @@ from crypto_regime_lab.regime_forecast.models import (
     LightGbmRegimeModel,
 )
 from crypto_regime_lab.regime_forecast.bootstrap import (
-    compute_block_bootstrap_ci,
     qualify_head_status,
     qualify_continuous_head_status,
+    compute_origin_overlap_summary,
+    compute_block_bootstrap_ci_with_sensitivities,
 )
 from crypto_regime_lab.regime_forecast.verifier_mf04 import run_mf04_verification
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent
+    import argparse
+    import sys
+    import hashlib
+
+    parser = argparse.ArgumentParser(description="Run MF-04 Locked Test & Qualification")
+    parser.add_argument("--run-id", type=str, default=None)
+    parser.add_argument("--out-dir", type=str, default=None)
+    parser.add_argument("--lab-root", type=str, default=None)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--phase", type=str, default="MF-04")
+    args = parser.parse_args()
+
+    repo_root = Path(args.lab_root).resolve() if args.lab_root else Path(__file__).resolve().parent.parent
     snapshot_root = repo_root / "snapshots" / "server_core_v1"
     configs_dir = repo_root / "configs" / "btc_regime_forecast_v1"
     evidence_root = repo_root / "evidence" / "btc_regime_forecast_v1" / "runs"
     evidence_root.mkdir(parents=True, exist_ok=True)
 
-    timestamp_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_id = f"mf04-{timestamp_str}-{uuid.uuid4().hex[:8]}"
-    run_dir = evidence_root / run_id
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    timestamp_str = now_utc.strftime("%Y%m%dT%H%M%SZ")
+    run_id = args.run_id or f"mf04-{timestamp_str}-{uuid.uuid4().hex[:8]}"
+    run_dir = Path(args.out_dir) if args.out_dir else (evidence_root / run_id)
     run_dir.mkdir(parents=True, exist_ok=True)
+
+    reg_path = configs_dir / "registration.json"
+    reg_hash = hashlib.sha256(reg_path.read_bytes()).hexdigest() if reg_path.is_file() else "none"
+
+    request_data = {
+        "study_id": "btc_regime_forecast_v1",
+        "phase": args.phase,
+        "run_id": run_id,
+        "argv": sys.argv,
+        "cwd": str(Path.cwd()),
+        "interpreter": sys.executable,
+        "python_version": sys.version,
+        "registered_config_hash": reg_hash,
+        "recomputed_from": "mf04-20260928T125717Z-c4ed139e",
+        "invalidates_run": "mf04-20260928T125717Z-c4ed139e",
+        "start_time_utc": now_utc.isoformat(),
+        "status": "RUNNING",
+    }
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    start_attempt = {
+        "attempt_id": 1,
+        "timestamp": now_utc.isoformat(),
+        "event": "STARTED",
+        "phase": args.phase,
+        "argv": sys.argv,
+        "purpose": "RECOMPUTED_WITH_HORIZON_SPECIFIC_BLOCK_BOOTSTRAP_AND_OVERLAP_SUMMARY"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(start_attempt) + "\n")
 
     print(f"=== Starting Phase MF-04 Execution: {run_id} ===")
 
@@ -149,13 +194,14 @@ def main() -> None:
 
         # Refit every 4 origins (28 days)
         if idx - last_refit_origin_idx >= 4 or active_m56 is None or active_m90 is None:
+            train_start = pd.to_datetime("2022-01-14")
             # Mask matured labels up to current origin
             m_mask_56 = [
-                is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], 56, origin, ready_lag_days=1)
+                (d >= train_start) and is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], 56, origin, ready_lag_days=1)
                 for d in df_labeled.index
             ]
             m_mask_90 = [
-                is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], 90, origin, ready_lag_days=1)
+                (d >= train_start) and is_label_mature(str(d.date()) if hasattr(d, "date") else str(d)[:10], 90, origin, ready_lag_days=1)
                 for d in df_labeled.index
             ]
             df_m_56 = df_labeled[m_mask_56].copy()
@@ -290,37 +336,45 @@ def main() -> None:
         mae_r = float(np.mean(np.abs(v_true_cont - v_pred_r)))
         rel_err_red = float(1.0 - (mae_m / mae_r)) if mae_r > 1e-6 else 0.0
 
-        # Block bootstrap CIs
+        # Block bootstrap CIs with horizon-specific block length and sensitivities (Guide §6.5 & FIX-04)
+
         def diff_bss_v(y, pm, pr):
             return brier_skill_score(brier_score_multiclass(y, pm), brier_score_multiclass(y, pr))
         def diff_ba_v(y, pm, pr):
             return balanced_accuracy(y, np.argmax(pm, axis=1), k=3) - balanced_accuracy(y, np.argmax(pr, axis=1), k=3)
 
-        _, bss_v_low, bss_v_high = compute_block_bootstrap_ci(y_v, p_v_m, p_v_r, diff_bss_v, block_size=5, n_boot=2000)
-        _, ba_v_low, ba_v_high = compute_block_bootstrap_ci(y_v, p_v_m, p_v_r, diff_ba_v, block_size=5, n_boot=2000)
+        res_bss_v = compute_block_bootstrap_ci_with_sensitivities(y_v, p_v_m, p_v_r, diff_bss_v, horizon_h=h, n_boot=2000)
+        bss_v_low, bss_v_high = res_bss_v["ci_lower"], res_bss_v["ci_upper"]
+        res_ba_v = compute_block_bootstrap_ci_with_sensitivities(y_v, p_v_m, p_v_r, diff_ba_v, horizon_h=h, n_boot=2000)
+        ba_v_low, ba_v_high = res_ba_v["ci_lower"], res_ba_v["ci_upper"]
 
         def diff_bss_e(y, pm, pr):
             return brier_skill_score(brier_score_multiclass(y, pm), brier_score_multiclass(y, pr))
         def diff_ba_e(y, pm, pr):
             return balanced_accuracy(y, np.argmax(pm, axis=1), k=3) - balanced_accuracy(y, np.argmax(pr, axis=1), k=3)
 
-        _, bss_e_low, bss_e_high = compute_block_bootstrap_ci(y_e, p_e_m, p_e_r, diff_bss_e, block_size=5, n_boot=2000)
-        _, ba_e_low, ba_e_high = compute_block_bootstrap_ci(y_e, p_e_m, p_e_r, diff_ba_e, block_size=5, n_boot=2000)
+        res_bss_e = compute_block_bootstrap_ci_with_sensitivities(y_e, p_e_m, p_e_r, diff_bss_e, horizon_h=h, n_boot=2000)
+        bss_e_low, bss_e_high = res_bss_e["ci_lower"], res_bss_e["ci_upper"]
+        res_ba_e = compute_block_bootstrap_ci_with_sensitivities(y_e, p_e_m, p_e_r, diff_ba_e, horizon_h=h, n_boot=2000)
+        ba_e_low, ba_e_high = res_ba_e["ci_lower"], res_ba_e["ci_upper"]
 
         def diff_bss_j(y, pm, pr):
             return brier_skill_score(brier_score_multiclass(y, pm), brier_score_multiclass(y, pr))
         def diff_ba_j(y, pm, pr):
             return balanced_accuracy(y, np.argmax(pm, axis=1), k=9) - balanced_accuracy(y, np.argmax(pr, axis=1), k=9)
 
-        _, bss_j_low, bss_j_high = compute_block_bootstrap_ci(y_j, p_j_m, p_j_r, diff_bss_j, block_size=5, n_boot=2000)
-        _, ba_j_low, ba_j_high = compute_block_bootstrap_ci(y_j, p_j_m, p_j_r, diff_ba_j, block_size=5, n_boot=2000)
+        res_bss_j = compute_block_bootstrap_ci_with_sensitivities(y_j, p_j_m, p_j_r, diff_bss_j, horizon_h=h, n_boot=2000)
+        bss_j_low, bss_j_high = res_bss_j["ci_lower"], res_bss_j["ci_upper"]
+        res_ba_j = compute_block_bootstrap_ci_with_sensitivities(y_j, p_j_m, p_j_r, diff_ba_j, horizon_h=h, n_boot=2000)
+        ba_j_low, ba_j_high = res_ba_j["ci_lower"], res_ba_j["ci_upper"]
 
         def diff_err_red(y, pm, pr):
             m = np.mean(np.abs(y - pm))
             r = np.mean(np.abs(y - pr))
             return 1.0 - (m / r) if r > 1e-6 else 0.0
 
-        _, red_low, red_high = compute_block_bootstrap_ci(v_true_cont, v_pred_m, v_pred_r, diff_err_red, block_size=5, n_boot=2000)
+        res_err_red = compute_block_bootstrap_ci_with_sensitivities(v_true_cont, v_pred_m, v_pred_r, diff_err_red, horizon_h=h, n_boot=2000)
+        red_low, red_high = res_err_red["ci_lower"], res_err_red["ci_upper"]
 
         # Qualification determinations
         q_v = qualify_head_status(bss_v, (bss_v_low, bss_v_high), ba_v_gain, (ba_v_low, ba_v_high))
@@ -422,6 +476,10 @@ def main() -> None:
         "test_metrics": test_metrics,
     }
 
+    overlap_summary = compute_origin_overlap_summary(test_origins, horizons=[56, 90])
+    with open(run_dir / "origin_overlap_summary.json", "w", encoding="utf-8") as f:
+        json.dump(overlap_summary, f, indent=2)
+
     with open(run_dir / "test_evaluation_summary.json", "w", encoding="utf-8") as f:
         json.dump(eval_summary, f, indent=2)
     with open(run_dir / "head_qualification_status.json", "w", encoding="utf-8") as f:
@@ -495,6 +553,22 @@ Date: `{datetime.datetime.now(datetime.timezone.utc).isoformat()}`
     print(f"Verifier receipt status: {receipt['overall_status']}")
     print(f"Gates: {json.dumps(receipt['gates'], indent=2)}")
     assert receipt["overall_status"] == "PASS", "MF-04 Exit Gate Verification Failed!"
+
+    end_utc = datetime.datetime.now(datetime.timezone.utc)
+    request_data["status"] = "SUCCESS"
+    request_data["end_time_utc"] = end_utc.isoformat()
+    with open(run_dir / "request.json", "w", encoding="utf-8") as f:
+        json.dump(request_data, f, indent=2)
+
+    success_attempt = {
+        "attempt_id": 1,
+        "timestamp": end_utc.isoformat(),
+        "event": "SUCCESS",
+        "phase": args.phase,
+        "detail": "6/6 exit gates verified PASS"
+    }
+    with open(run_dir / "attempts.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(success_attempt) + "\n")
 
     print(f"=== Phase MF-04 COMPLETE: {run_id} ===")
 

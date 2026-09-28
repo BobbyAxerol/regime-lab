@@ -45,16 +45,20 @@ def verify_gate_reproduce(reproduce_data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def verify_gate_scope(scope_data: Dict[str, Any]) -> Dict[str, Any]:
-    expected_claim = "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED"
+    valid_claims = [
+        "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED",
+        "TECHNICALLY_VALID__ALL_HEADS_NOT_QUALIFIED__WFO_BRIDGE_CLOSED",
+    ]
     claim = scope_data.get("study_claim_level")
-    assert claim == expected_claim, f"Unexpected claim level: {claim}"
-    assert scope_data.get("volatility_head_status") == "QUALIFIED", "Volatility head must be QUALIFIED"
+    assert claim in valid_claims, f"Unexpected claim level: {claim}"
+    vol_status = scope_data.get("volatility_head_status")
+    assert vol_status in ("QUALIFIED", "NOT_QUALIFIED"), f"Invalid volatility_head_status: {vol_status}"
     assert scope_data.get("joint_regime_head_status") == "NOT_QUALIFIED", "Joint head must be NOT_QUALIFIED"
 
     return {
         "status": "PASS",
         "claim_level": claim,
-        "volatility_status": "QUALIFIED",
+        "volatility_status": vol_status,
         "joint_status": "NOT_QUALIFIED",
     }
 
@@ -102,7 +106,7 @@ def verify_gate_owner(owner_data: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def run_mf05_verification(run_dir: Path) -> Dict[str, Any]:
+def run_mf05_verification(run_dir: Path, write_receipt: bool = True) -> Dict[str, Any]:
     """Run all 6 exit gates for MF-05."""
     report_meta_path = run_dir / "report_meta.json"
     reproduce_path = run_dir / "reproduce_audit.json"
@@ -153,8 +157,9 @@ def run_mf05_verification(run_dir: Path) -> Dict[str, Any]:
         },
     }
 
-    receipt_path = run_dir / "gate_receipt.json"
-    with open(receipt_path, "w", encoding="utf-8") as f:
-        json.dump(receipt, f, indent=2)
+    if write_receipt:
+        receipt_path = run_dir / "gate_receipt.json"
+        with open(receipt_path, "w", encoding="utf-8") as f:
+            json.dump(receipt, f, indent=2)
 
     return receipt

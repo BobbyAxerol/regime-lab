@@ -59,14 +59,14 @@
         "reg_lambda": 5.0,
         "random_state": 20260928
       }
-    },
+    }
+  ],
+  "blocked_capabilities": [
     {
-      "model_id": "M5_CHRONOS_SYNTH",
-      "model_type": "CHRONOS_SYNTH",
-      "architecture": "Chronos-Bolt autoregressive foundation probabilistic time-series synthesizer",
-      "context_window_days": 180,
-      "num_samples": 100,
-      "random_state": 20260928
+      "capability_id": "CHRONOS_2_SYNTH_FROZEN",
+      "status": "BLOCKED_CAPABILITY",
+      "metrics": null,
+      "reason": "no torch/chronos package, no frozen weights, network off"
     }
   ],
   "calibration_method": "TEMPERATURE_SCALING",

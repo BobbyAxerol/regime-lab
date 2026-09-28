@@ -40,7 +40,6 @@ def verify_gate_model(model_eval_data: Dict[str, Any]) -> Dict[str, Any]:
         "M2_LGBM_REGULARIZED_DEEP",
         "M3_LGBM_FEATURE_SUBSAMPLE",
         "M4_LGBM_CONSERVATIVE_SLOW",
-        "M5_CHRONOS_SYNTH",
     }
     actual = set(models)
     missing = expected_models - actual
@@ -56,7 +55,7 @@ def verify_gate_model(model_eval_data: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "status": "PASS",
         "models_count": len(models),
-        "challenger_included": "M5_CHRONOS_SYNTH" in actual,
+        "active_models": list(expected_models),
     }
 
 
@@ -117,7 +116,7 @@ def verify_gate_duration_and_horizon_freeze(horizon_data: Dict[str, Any]) -> Dic
     }
 
 
-def run_mf03_verification(run_dir: Path) -> Dict[str, Any]:
+def run_mf03_verification(run_dir: Path, write_receipt: bool = True) -> Dict[str, Any]:
     """Run all 6 exit gates for MF-03."""
     ablation_path = run_dir / "feature_ablation.json"
     model_eval_path = run_dir / "model_eval_summary.json"
@@ -163,8 +162,9 @@ def run_mf03_verification(run_dir: Path) -> Dict[str, Any]:
         },
     }
 
-    receipt_path = run_dir / "gate_receipt.json"
-    with open(receipt_path, "w", encoding="utf-8") as f:
-        json.dump(receipt, f, indent=2)
+    if write_receipt:
+        receipt_path = run_dir / "gate_receipt.json"
+        with open(receipt_path, "w", encoding="utf-8") as f:
+            json.dump(receipt, f, indent=2)
 
     return receipt

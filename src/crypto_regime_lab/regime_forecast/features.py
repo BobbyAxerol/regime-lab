@@ -50,7 +50,7 @@ FEATURE_GROUPS = {
     ],
     "M_POSITIONING": [
         "log_oi_change_7d", "log_oi_change_30d", "ret_oi_interaction_30d",
-        "log_global_ls_ratio", "log_top_account_ratio", "log_top_position_ratio"
+        "log_global_ls_ratio"
     ]
 }
 
@@ -105,8 +105,8 @@ for group_name, f_list in FEATURE_GROUPS.items():
         })
 
 
-def get_feature_manifest() -> dict[str, Any]:
-    return {
+def get_feature_manifest(coverage_table: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    out: dict[str, Any] = {
         "study_id": "btc_regime_forecast_v1",
         "feature_count": len(FEATURE_DEFINITIONS),
         "features": FEATURE_DEFINITIONS,
@@ -116,6 +116,26 @@ def get_feature_manifest() -> dict[str, Any]:
             "D2_COMPOSITE_PRESSURE": len(COHORTS["D2_COMPOSITE_PRESSURE"]),
         }
     }
+    if coverage_table is not None:
+        out["coverage_table"] = coverage_table
+        train_covs = [r["coverage_ratio"] for r in coverage_table if r["role_window"] == "initial_training"]
+        dev_covs = [r["coverage_ratio"] for r in coverage_table if r["role_window"] == "development"]
+        test_covs = [r["coverage_ratio"] for r in coverage_table if r["role_window"] == "locked_test"]
+        max_gap = max(r["longest_contiguous_missing_run"] for r in coverage_table) if coverage_table else 0
+
+        min_train = min(train_covs) if train_covs else 1.0
+        min_dev = min(dev_covs) if dev_covs else 1.0
+        min_test = min(test_covs) if test_covs else 1.0
+
+        out["coverage_summary"] = {
+            "threshold": 0.95,
+            "min_column_coverage_training": min_train,
+            "min_column_coverage_dev": min_dev,
+            "min_column_coverage_test": min_test,
+            "max_contiguous_missing_days": max_gap,
+            "status": "PASS" if min_train >= 0.95 and min_dev >= 0.95 and min_test >= 0.95 and max_gap <= 7 else "FAIL"
+        }
+    return out
 
 
 def build_daily_base_table(snapshot_root: Path, start_year: str = "2021") -> pd.DataFrame:
@@ -191,7 +211,7 @@ def build_daily_base_table(snapshot_root: Path, start_year: str = "2021") -> pd.
     df_metrics.sort_values("time", inplace=True)
     df_metrics.set_index("time", inplace=True)
 
-    daily_metrics = df_metrics.resample("1D").last().dropna()
+    daily_metrics = df_metrics.resample("1D").last()
     daily_metrics.rename(columns={
         "sum_open_interest": "oi",
         "sum_open_interest_value": "oi_value",
@@ -389,3 +409,70 @@ def get_feature_columns(cohort: str = "D1_DERIVATIVE_LIQUIDITY") -> list[str]:
 
 # Alias for backward/forward naming compatibility
 compute_all_features = compute_features
+
+
+def compute_feature_coverage_table(
+    df_feat: pd.DataFrame,
+    role_windows: list[tuple[str, str, str]],
+    feature_cols: list[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Computes column-wise coverage metrics per role window."""
+    if feature_cols is None:
+        feature_cols = COHORTS["D1_DERIVATIVE_LIQUIDITY"]
+
+    records = []
+    for role_name, start_date, end_date in role_windows:
+        mask = (df_feat["date"] >= pd.to_datetime(start_date)) & (df_feat["date"] <= pd.to_datetime(end_date))
+        sub = df_feat.loc[mask]
+        total_days = len(sub)
+
+        for col in feature_cols:
+            if col not in sub.columns:
+                records.append({
+                    "column": col,
+                    "role_window": role_name,
+                    "days_present": 0,
+                    "days_missing": total_days,
+                    "coverage_ratio": 0.0,
+                    "longest_contiguous_missing_run": total_days,
+                    "first_missing_date": start_date,
+                    "source_product": "unknown",
+                })
+                continue
+
+            is_na = sub[col].isna().values
+            days_missing = int(is_na.sum())
+            days_present = total_days - days_missing
+            coverage_ratio = float(days_present / total_days) if total_days > 0 else 0.0
+
+            longest_run = 0
+            curr_run = 0
+            first_missing = None
+            for d, val in zip(sub["date"], is_na):
+                if val:
+                    if first_missing is None:
+                        first_missing = str(d)[:10]
+                    curr_run += 1
+                    if curr_run > longest_run:
+                        longest_run = curr_run
+                else:
+                    curr_run = 0
+
+            if "oi" in col or "ls_ratio" in col:
+                src_prod = "crypto_binance_futures_metrics_5m"
+            elif "perp" in col or "spread" in col:
+                src_prod = "crypto_binance_futures_1m"
+            else:
+                src_prod = "crypto_binance_spot_1m"
+
+            records.append({
+                "column": col,
+                "role_window": role_name,
+                "days_present": days_present,
+                "days_missing": days_missing,
+                "coverage_ratio": round(coverage_ratio, 4),
+                "longest_contiguous_missing_run": longest_run,
+                "first_missing_date": first_missing,
+                "source_product": src_prod,
+            })
+    return records

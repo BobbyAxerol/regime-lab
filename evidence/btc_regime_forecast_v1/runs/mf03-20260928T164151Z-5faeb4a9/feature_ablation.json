@@ -1,0 +1,24 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-03",
+  "cohorts": [
+    "D0_CORE_PRICE_VOL",
+    "D1_DERIVATIVE_LIQUIDITY",
+    "D2_COMPOSITE_PRESSURE"
+  ],
+  "winning_cohort": "D1_DERIVATIVE_LIQUIDITY",
+  "results_by_cohort": {
+    "D0_CORE_PRICE_VOL": {
+      "brier_score_j_h56": 1.0284361450551407,
+      "brier_score_j_h90": 1.0731185340944338
+    },
+    "D1_DERIVATIVE_LIQUIDITY": {
+      "brier_score_j_h56": 1.0612787095853642,
+      "brier_score_j_h90": 1.0073376789690867
+    },
+    "D2_COMPOSITE_PRESSURE": {
+      "brier_score_j_h56": 1.0612787095853642,
+      "brier_score_j_h90": 1.0073376789690867
+    }
+  }
+}

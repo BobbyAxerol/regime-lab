@@ -26,5 +26,23 @@
       "source": "BINANCE_REST_FUNDING_RATE",
       "reason": "Replaced by authoritative point-in-time metrics parquet"
     }
+  ],
+  "excluded_columns": [
+    {
+      "column": "count_toptrader_long_short_ratio",
+      "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"
+    },
+    {
+      "column": "sum_toptrader_long_short_ratio",
+      "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"
+    },
+    {
+      "feature": "log_top_account_ratio",
+      "reason": "Derived from excluded count_toptrader_long_short_ratio"
+    },
+    {
+      "feature": "log_top_position_ratio",
+      "reason": "Derived from excluded sum_toptrader_long_short_ratio"
+    }
   ]
 }
