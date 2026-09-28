@@ -70,5 +70,25 @@ Tất cả 9 findings (FIX-01..FIX-09) từ Cline review đã được thực th
 
 ---
 
+## Đột phá Nghiên cứu: Volatility-Conditioned Selection & Multi-Horizon Study (2026-09-28)
+Sau khi giải quyết xong toàn bộ 9 review findings (FIX-01..FIX-09) và ghi nhận kết luận khách quan của MF-05 trên mô hình 9-class ($H=90$d không đạt qualification), nghiên cứu đã mở rộng khảo sát chuyên sâu theo hướng **Volatility-Conditioned Selection** và **Rút ngắn Horizon**:
+- **Đặc tả mới**: [`BTC_VOLATILITY_CONDITIONED_REGIME_SELECTION_SPEC_V1_VI.md`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/BTC_VOLATILITY_CONDITIONED_REGIME_SELECTION_SPEC_V1_VI.md) (`study_id: btc_volatility_forecast_v1`).
+- **Đăng ký chính thức**: [`configs/btc_volatility_forecast_v1/registration.json`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/configs/btc_volatility_forecast_v1/registration.json).
+- **Thực nghiệm đa chân trời**: [`scripts/exp_volatility_horizons_study.py`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/scripts/exp_volatility_horizons_study.py) đánh giá $H \in \{14, 28, 56, 90\}$.
+- **Kết quả thực nghiệm**:
+  - **$H = 14$ ngày (Primary Horizon)**: Đạt **Accuracy 62.5%** (so với Persistence 60.4%), **Brier Skill Score = +0.0791 (+7.9% so với baseline)** - **lần đầu tiên có skill dương vững chắc trên OOS**. Nhận diện `LOW_VOL`: **Recall 84.0%**, **Precision 67.7%**, **F1 0.750**. Trùng khớp tự nhiên với thời lượng trung vị của regime BTC (**12.1 ngày** đo bằng Kaplan-Meier trong MF-02).
+  - **$H = 28$ ngày (Secondary Horizon)**: Đạt **Accuracy 58.3%**, **BSS ~0% (-0.005)**, cân bằng cao: Low Vol F1 0.696, Mid Vol F1 0.632.
+  - $H=56$ và $H=90$ ngày suy thoái do thời lượng dự báo quá dài so với nhịp biến động của thị trường.
+- **Evidence lưu trữ**: [`evidence/exp_volatility_horizons_v1/study_results.json`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/exp_volatility_horizons_v1/study_results.json).
+
+---
+
+## Tài liệu Bàn giao Toàn diện cho Downstream Agent
+Chi tiết đầy đủ về kiến trúc mô hình, bảng so sánh metrics, ma trận nhầm lẫn (confusion matrix), danh mục evidence và hướng dẫn thiết kế Walk-Forward Optimization (WFO) được ghi lại tại:
+👉 **[`handoff/RPS_HANDOFF_VOLATILITY_WFO_V1.md`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/handoff/RPS_HANDOFF_VOLATILITY_WFO_V1.md)**
+
+---
+
 ## Next Action
-Bàn giao toàn bộ checklist hoàn thành (14/14 mục đạt chuẩn per §6 `RPS_REVIEW_01_GEMINI_FIX_TASKS.md`) cho Owner và Reviewer (Cline) tiến hành vòng review 02.
+Bàn giao tài liệu [`handoff/RPS_HANDOFF_VOLATILITY_WFO_V1.md`](file:///root/bobby/pool_alpha/lab_regime_model_quantbt/handoff/RPS_HANDOFF_VOLATILITY_WFO_V1.md) cho Downstream Agent để tiến hành lập kế hoạch và triển khai Walk-Forward Optimization (WFO) chứng minh Time Edge trên `A-SC / BTCUSDT / 15m`.
+
