@@ -1,0 +1,54 @@
+{
+  "schema": "regime_lab.vol_wfo_model_manifest.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "phase": "VWFO-01",
+  "model_family": "LightGBM",
+  "recipe_id": "M4_LGBM_CONSERVATIVE_SLOW",
+  "primary_horizon_days": 14,
+  "conditioning_signal": "p_LOW_VOL",
+  "class_order": [
+    "LOW_VOL",
+    "MID_VOL",
+    "HIGH_VOL"
+  ],
+  "model_parameters": {
+    "objective": "multiclass",
+    "num_class": 3,
+    "boosting_type": "gbdt",
+    "num_leaves": 7,
+    "max_depth": 3,
+    "learning_rate": 0.015,
+    "n_estimators": 80,
+    "min_child_samples": 40,
+    "subsample": 0.8,
+    "colsample_bytree": 0.65,
+    "random_state": 20260928,
+    "verbose": -1
+  },
+  "imputation_policy": {
+    "strategy": "TRAIN_MEDIAN_REUSE",
+    "notes": "Column medians fitted strictly on training prefix (2022-01-14 to 2024-01-13) and frozen for all inference (FIX-03)."
+  },
+  "temperature_scaling": {
+    "status": "FROZEN_VALIDATION",
+    "T_V": 3.946,
+    "notes": "Temperature scaling fitted on validation prefix to align predicted probabilities with actual frequencies."
+  },
+  "feature_schema": [
+    "rvol_7d_ann", "rvol_14d_ann", "rvol_30d_ann", "rvol_60d_ann", "rvol_ratio_7_30", "rvol_ratio_14_60",
+    "garman_klass_14d", "parkinson_14d", "log_range_14d", "range_to_rv_ratio_14d",
+    "vol_of_vol_14d", "vol_of_vol_28d", "downside_vol_share_14d", "downside_vol_share_28d",
+    "volume_usd_ma7", "volume_shock_7_30", "amihud_illiquidity_14d", "illiquidity_shock_14_60",
+    "basis_spread_bps", "basis_vol_7d", "basis_vol_14d",
+    "oi_usd", "oi_change_7d", "oi_change_14d", "oi_change_30d", "oi_to_volume_7d", "oi_vol_interaction_14d",
+    "funding_rate_last", "funding_rate_8h_mean_7d", "funding_rate_8h_zscore_14d", "funding_vol_14d",
+    "perp_taker_imb_7d", "taker_buy_share_7d",
+    "top_trader_long_short_ratio", "top_trader_ls_change_7d",
+    "price_trend_ma20_ratio", "price_trend_ma50_ratio", "price_rsi_14d"
+  ],
+  "taxonomy_quantiles_log_vol": {
+    "q33_3": -0.8872,
+    "q66_7": -0.5142,
+    "notes": "Tertiles derived strictly on 730-day training prefix."
+  }
+}

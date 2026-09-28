@@ -1,0 +1,64 @@
+{
+  "schema": "regime_lab.vol_wfo_source_and_economics.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "phase": "VWFO-01",
+  "scope": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT",
+    "strategy_timeframe": "15m",
+    "execution_timeframe": "1m",
+    "venue": "BINANCE",
+    "forecast_target_market": "Binance BTCUSDT Spot (CryptoBinanceSpot1m)",
+    "execution_market": "Binance USD-M Perpetual (CryptoBinance1m)",
+    "live_orders_authorized": false
+  },
+  "alpha_parameters": {
+    "tunable_dimensions": [
+      {
+        "name": "coeff",
+        "kind": "int",
+        "low": 1,
+        "high": 8,
+        "step": 1
+      },
+      {
+        "name": "AP",
+        "kind": "int",
+        "low": 5,
+        "high": 60,
+        "step": 1
+      },
+      {
+        "name": "alpha.condition_threshold",
+        "kind": "int",
+        "low": 30,
+        "high": 80,
+        "step": 5
+      }
+    ],
+    "fixed_parameters": {
+      "novolumedata": false,
+      "src_col": "close"
+    }
+  },
+  "economics": {
+    "initial_equity": 20000.0,
+    "allocation_fraction": 0.10,
+    "leverage_cap": 1.0,
+    "one_way_fee_decimal": 0.0004,
+    "one_way_slippage_decimal": 0.0001,
+    "terminal_valuation": "mark_to_market",
+    "standardized_initial_state": "FLAT_NO_PREROLL_TRADES",
+    "continuous_account_reset_each_fold": false
+  },
+  "execution_and_clocks": {
+    "sizing_mapping": "sizing_mapping_v1",
+    "execution_ordering": "next_open_contract_to_verify",
+    "strategy_decision_clock": "closed_15m",
+    "execution_resolution": "1m",
+    "ready_lag_policy": "WAIT_FLAT_PREFIX_WITHIN_H14",
+    "common_ready_lag_days": 1,
+    "proposal_ttl_days": 2,
+    "max_revalidation_age_days": 28
+  }
+}

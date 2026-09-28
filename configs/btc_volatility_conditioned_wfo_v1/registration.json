@@ -1,0 +1,33 @@
+{
+  "schema": "regime_lab.vol_wfo_registration.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "guide_version": "VOL-WFO-V1.0",
+  "registered_at_utc": "2026-09-28T22:25:00+00:00",
+  "scope": {
+    "alpha_id": "A-SC",
+    "symbol": "BTCUSDT",
+    "venue": "BINANCE",
+    "strategy_timeframe": "15m",
+    "execution_timeframe": "1m"
+  },
+  "model": {
+    "recipe_id": "M4_LGBM_CONSERVATIVE_SLOW",
+    "primary_horizon_days": 14,
+    "secondary_horizon_days": 28,
+    "conditioning_signal": "p_LOW_VOL"
+  },
+  "component_hashes": {
+    "model_manifest_sha256": "ab7bc966b3bfdbfb859d4f7b8dac52bef9bbd567b1d64f65c60e74ecdc2fa2e5",
+    "timeline_sha256": "30df834e10265a3ef17d92eb7b17140f6cd6717bccacae9c7f534a734e53f300",
+    "source_and_economics_sha256": "505409544a0910a15be381d5a5f5b8536704760c81b3da9845ca46e44d076e33",
+    "resource_budget_sha256": "3219f59c647db205d31875a081e80db30054114a0360f63e0493373789113696",
+    "handoff_acceptance_sha256": "b98f416c6cce593d62e218cf8b5ca08aa292a31b87c4aa4f5246dd2edce85a62"
+  },
+  "wfo_bridge_status": "MODEL_HANDOFF_ACCEPTED_H14",
+  "owner_approval": {
+    "status": "PENDING",
+    "decision_id": null,
+    "approved_at_utc": null,
+    "notes": "Awaiting Owner review of Phase VWFO-01 deliverables"
+  }
+}

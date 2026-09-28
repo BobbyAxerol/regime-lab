@@ -1,0 +1,17 @@
+{
+  "schema": "regime_lab.vol_wfo_resource_budget.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "phase": "VWFO-01",
+  "trials_per_sampler_cutoff": 128,
+  "samplers_count_dev": 2,
+  "samplers_count_final": 1,
+  "folds_init": 12,
+  "folds_dev": 12,
+  "folds_final": 12,
+  "total_search_attempts_planned": 7680,
+  "max_memory_gib": 4.0,
+  "max_wall_clock_hours": 12.0,
+  "production_writes_allowed": false,
+  "quantbt_read_only": true,
+  "notes": "Workload arithmetic follows VOL-WFO-V1.0 Section 11.3. Zero writes to production files or directories outside lab workspace."
+}
