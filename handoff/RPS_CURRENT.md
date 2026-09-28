@@ -8,7 +8,16 @@ Current source/runtime and approved registration:
 | **MF-02** | **PASS** (6/6 gates) | **FEATURES_BASELINES_DURATION_LOCKED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf02-20260928T124051Z-1c4ebe49/` |
 | **MF-03** | **PASS** (6/6 gates) | **MODEL_FIT_HORIZON_FROZEN** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf03-20260928T124620Z-c404799d/` |
 | **MF-04** | **PASS** (6/6 gates) | **LOCKED_TEST_VOL_QUALIFIED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf04-20260928T125717Z-c4ed139e/` |
-| **MF-05** | NOT_STARTED | PENDING | PENDING | — |
+| **MF-05** | **PASS** (6/6 gates) | **VOLATILITY_QUALIFIED_WFO_CLOSED** | APPROVED (owner batch authorization) | `evidence/btc_regime_forecast_v1/runs/mf05-20260928T130054Z-7f368dbc/` |
+
+## MF-05 Complete (2026-09-28)
+- **Gates**: `G5-REPORT` PASS, `G5-REPRODUCE` PASS, `G5-SCOPE` PASS, `G5-BRIDGE` PASS, `G5-DURATION-HANDOFF` PASS, `G5-OWNER` PASS.
+- **Consolidated Final Verdict**: **`TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED`**.
+- **WFO Bridge Decision**: **`CLOSED`** per Section 18. General calendar WFO parameter selection based on joint 9-class regimes is strictly prohibited to avoid financial overfitting.
+- **Conditional Bridge Proposal**: "Volatility-Conditioned Regime Selection" (V-CRS-V1) proposed as `SPECIFIED_NOT_EXECUTED`, requiring separate Owner review and registration.
+- **Metrics Reproduction**: 100% verified with 0.0 discrepancy from sealed forecast records without invoking models.
+- **Financial Engine Calls**: **0** throughout all 5 phases (QuantBT 100% untouched).
+- **Handoff Complete**: All 7 manifests generated and frozen in `configs/btc_regime_forecast_v1/`. Ready for Owner review.
 
 ## MF-04 Complete (2026-09-28)
 - **Gates**: `G4-EXEC` PASS, `G4-EVAL12` PASS, `G4-INFERENCE` PASS, `G4-HEADSTATUS` PASS, `G4-TIMING-EVAL` PASS, `G4-EVIDENCE` PASS.

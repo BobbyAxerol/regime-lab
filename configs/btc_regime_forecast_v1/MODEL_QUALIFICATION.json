@@ -1,0 +1,121 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "completed_at_utc": "2026-09-28T13:00:54.750541+00:00",
+  "primary_horizon": 90,
+  "secondary_horizon": 56,
+  "heads": {
+    "H90": {
+      "volatility_3class": {
+        "status": "QUALIFIED",
+        "reason": "Passes both Brier Skill (>=0.05, CI>0) and Balanced Accuracy Gain (>=0.05, CI>0)",
+        "brier_skill": 0.07493581836471885,
+        "brier_skill_ci_95": [
+          0.004957213688527665,
+          0.16316791754003263
+        ],
+        "bal_acc_gain": 0.3411978221415608,
+        "bal_acc_gain_ci_95": [
+          0.19047619047619047,
+          0.509586956521739
+        ]
+      },
+      "efficiency_3class": {
+        "status": "NOT_QUALIFIED",
+        "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+        "brier_skill": -0.8310428517880968,
+        "brier_skill_ci_95": [
+          -1.355310030418926,
+          -0.4778006610077405
+        ],
+        "bal_acc_gain": 0.024691358024691357,
+        "bal_acc_gain_ci_95": [
+          -0.5,
+          0.05555555555555558
+        ]
+      },
+      "joint_9class": {
+        "status": "NOT_QUALIFIED",
+        "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+        "brier_skill": -0.12242850004793038,
+        "brier_skill_ci_95": [
+          -0.19549783069417004,
+          -0.0548048480430445
+        ],
+        "bal_acc_gain": 0.0,
+        "bal_acc_gain_ci_95": [
+          0.0,
+          0.0
+        ]
+      },
+      "volatility_continuous": {
+        "status": "INCONCLUSIVE_MARGINAL",
+        "reason": "Positive error reduction but bootstrap CI overlaps zero",
+        "rel_error_reduction": 0.039150036567395685,
+        "rel_error_reduction_ci_95": [
+          -0.39579633190209923,
+          0.3981564065813161
+        ]
+      }
+    },
+    "H56": {
+      "volatility_3class": {
+        "status": "INCONCLUSIVE_SUPPORT",
+        "reason": "Passes Brier Skill but Balanced Accuracy gain is below threshold",
+        "brier_skill": 0.1577421844886412,
+        "brier_skill_ci_95": [
+          0.06528273767920653,
+          0.23769512841878754
+        ],
+        "bal_acc_gain": 0.013122171945701422,
+        "bal_acc_gain_ci_95": [
+          -0.10621629581822267,
+          0.5156739354395602
+        ]
+      },
+      "efficiency_3class": {
+        "status": "NOT_QUALIFIED",
+        "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+        "brier_skill": -0.10504504121201408,
+        "brier_skill_ci_95": [
+          -0.3080858531459955,
+          -0.017778595475239894
+        ],
+        "bal_acc_gain": 0.08080808080808083,
+        "bal_acc_gain_ci_95": [
+          -0.24024999999999955,
+          0.19047619047619052
+        ]
+      },
+      "joint_9class": {
+        "status": "INCONCLUSIVE_MARGINAL",
+        "reason": "Positive point estimate but bootstrap confidence interval overlaps zero",
+        "brier_skill": 0.05103154927346054,
+        "brier_skill_ci_95": [
+          -0.00039699048368188925,
+          0.08174828341459763
+        ],
+        "bal_acc_gain": 0.056249999999999994,
+        "bal_acc_gain_ci_95": [
+          -0.12987012987012986,
+          0.3095508658008657
+        ]
+      },
+      "volatility_continuous": {
+        "status": "NOT_QUALIFIED",
+        "reason": "Failed error reduction standard against frozen baseline",
+        "rel_error_reduction": -0.20501320440924564,
+        "rel_error_reduction_ci_95": [
+          -0.638028125546691,
+          0.10525300534244413
+        ]
+      }
+    }
+  },
+  "study_verdict": {
+    "claim_level": "TECHNICALLY_VALID__VOLATILITY_QUALIFIED_ONLY__WFO_BRIDGE_CLOSED",
+    "volatility_forecast": "QUALIFIED",
+    "path_efficiency_forecast": "NOT_QUALIFIED",
+    "joint_regime_forecast": "NOT_QUALIFIED",
+    "scientific_takeaway": "Crypto price direction and path efficiency are not forecastable at 90-day horizons with current derivatives positioning features. However, realized volatility is genuinely forecastable with statistically significant Brier skill (+0.0749, 95% CI strictly positive) and large balanced accuracy gain (+0.3412)."
+  }
+}

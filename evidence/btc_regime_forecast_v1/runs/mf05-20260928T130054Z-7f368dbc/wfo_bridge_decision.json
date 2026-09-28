@@ -1,0 +1,15 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "decision_date_utc": "2026-09-28T13:00:54.750568+00:00",
+  "wfo_bridge_status": "CLOSED",
+  "joint_regime_parameter_selection_permitted": false,
+  "rationale": "Per Section 18 of BTC-RPS-V1.2 Guide, the WFO Bridge requires all primary heads (including path efficiency and joint regime classification) to clear strict qualification standards (Brier skill >= 0.05, CI > 0). Because Head E and Head J failed qualification, reopening general calendar WFO with joint regime parameter selection is strictly prohibited to avoid financial overfitting.",
+  "volatility_conditioned_proposal": {
+    "status": "SPECIFIED_NOT_EXECUTED",
+    "proposal_title": "Volatility-Conditioned Regime Selection (V-CRS-V1)",
+    "supported_evidence": "Head Volatility (3-class) achieved robust QUALIFIED status (BSS = +0.0749, 95% CI: [+0.0050, +0.1632])",
+    "proposed_scope": "Conditioning strategy parameters / risk scaling strictly on Volatility regimes (LOW_VOL / MID_VOL / HIGH_VOL)",
+    "requires_owner_approval": true,
+    "financial_engine_calls_allowed": 0
+  }
+}
