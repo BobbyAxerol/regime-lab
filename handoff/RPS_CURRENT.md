@@ -1,3 +1,12 @@
+> ## ⚠️ REVIEWER HOLD — 2026-09-28 (Cline)
+>
+> Verdict: **`NOT_APPROVABLE_AS_IS`**. 3 blocking findings (FIX-01 coverage/join,
+> FIX-02 Chronos labeling, FIX-03 fit/predict imputation skew) + 6 significant.
+> Việc phải làm: **`handoff/RPS_REVIEW_01_GEMINI_FIX_TASKS.md`**.
+> Bảng "APPROVED (owner batch authorization)" bên dưới **không còn hiệu lực** cho tới khi
+> FIX-01…FIX-09 xanh và MF-02..MF-05 được re-run; cột Owner giữ nguyên như đã ghi (không sửa
+> lịch sử) nhưng quyết định duyệt đang **TẠM GIỮ**.
+
 # RPS_CURRENT — BTC-RPS-V1.2 Model-First Study
 
 Current source/runtime and approved registration:
