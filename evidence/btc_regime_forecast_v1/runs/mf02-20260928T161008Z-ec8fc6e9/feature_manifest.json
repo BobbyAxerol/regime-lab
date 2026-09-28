@@ -1,0 +1,1427 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "feature_count": 38,
+  "features": [
+    {
+      "feature_id": "ret_7d",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric ret_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "ret_30d",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric ret_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "ret_90d",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric ret_90d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "pe_30d",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric pe_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "pe_90d",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric pe_90d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "ema_norm_dist_30_90",
+      "group": "P1_TREND",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric ema_norm_dist_30_90 for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "rvol_7d",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric rvol_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "rvol_30d",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric rvol_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "rvol_56d",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric rvol_56d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "rvol_90d",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric rvol_90d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_rvol_ratio_7_90",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_rvol_ratio_7_90 for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_rvol_ratio_30_180",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_rvol_ratio_30_180 for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "vol_of_vol_30d",
+      "group": "P2_VOLATILITY",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric vol_of_vol_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "down_share_30d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric down_share_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "down_share_90d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric down_share_90d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "skew_30d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric skew_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "kurt_30d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric kurt_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "autocorr_signed_30d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric autocorr_signed_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "autocorr_abs_30d",
+      "group": "P3_TAILS",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric autocorr_abs_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "body_range_ratio_7d",
+      "group": "P4_CANDLES",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric body_range_ratio_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "upper_wick_ratio_7d",
+      "group": "P4_CANDLES",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric upper_wick_ratio_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "lower_wick_ratio_7d",
+      "group": "P4_CANDLES",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric lower_wick_ratio_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "range_price_ratio_7d",
+      "group": "P4_CANDLES",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric range_price_ratio_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "volume_anom_30d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric volume_anom_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "trade_count_anom_30d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric trade_count_anom_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_avg_trade_size_30d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_avg_trade_size_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "flow_imb_1d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric flow_imb_1d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "flow_imb_7d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric flow_imb_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "flow_sign_persistence_30d",
+      "group": "F_SPOT_FLOW",
+      "cohort": "D0_CORE_PRICE_VOL",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric flow_sign_persistence_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "perp_flow_imb_1d",
+      "group": "X_SPOT_PERP",
+      "cohort": "D1_DERIVATIVE_LIQUIDITY",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric perp_flow_imb_1d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "perp_flow_imb_7d",
+      "group": "X_SPOT_PERP",
+      "cohort": "D1_DERIVATIVE_LIQUIDITY",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric perp_flow_imb_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "spot_perp_flow_diff_7d",
+      "group": "X_SPOT_PERP",
+      "cohort": "D1_DERIVATIVE_LIQUIDITY",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric spot_perp_flow_diff_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "perp_quote_share_30d",
+      "group": "X_SPOT_PERP",
+      "cohort": "D1_DERIVATIVE_LIQUIDITY",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric perp_quote_share_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "spread_mean_7d",
+      "group": "X_SPOT_PERP",
+      "cohort": "D1_DERIVATIVE_LIQUIDITY",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric spread_mean_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_oi_change_7d",
+      "group": "M_POSITIONING",
+      "cohort": "D2_COMPOSITE_PRESSURE",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_oi_change_7d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_oi_change_30d",
+      "group": "M_POSITIONING",
+      "cohort": "D2_COMPOSITE_PRESSURE",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_oi_change_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "ret_oi_interaction_30d",
+      "group": "M_POSITIONING",
+      "cohort": "D2_COMPOSITE_PRESSURE",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric ret_oi_interaction_30d for BTCUSDT regime forecast"
+    },
+    {
+      "feature_id": "log_global_ls_ratio",
+      "group": "M_POSITIONING",
+      "cohort": "D2_COMPOSITE_PRESSURE",
+      "causal_lag_days": 1,
+      "description": "Causal rolling metric log_global_ls_ratio for BTCUSDT regime forecast"
+    }
+  ],
+  "cohorts": {
+    "D0_CORE_PRICE_VOL": 29,
+    "D1_DERIVATIVE_LIQUIDITY": 38,
+    "D2_COMPOSITE_PRESSURE": 38
+  },
+  "coverage_table": [
+    {
+      "column": "ret_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_90d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_90d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ema_norm_dist_30_90",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_56d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_90d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_7_90",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_30_180",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "vol_of_vol_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_90d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "skew_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "kurt_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_signed_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_abs_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "body_range_ratio_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "upper_wick_ratio_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "lower_wick_ratio_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "range_price_ratio_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "volume_anom_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "trade_count_anom_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_avg_trade_size_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_1d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_sign_persistence_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "perp_flow_imb_1d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_flow_imb_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spot_perp_flow_diff_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_quote_share_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spread_mean_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "log_oi_change_7d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_oi_change_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "ret_oi_interaction_30d",
+      "role_window": "initial_training",
+      "days_present": 730,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_global_ls_ratio",
+      "role_window": "initial_training",
+      "days_present": 725,
+      "days_missing": 5,
+      "coverage_ratio": 0.9932,
+      "longest_contiguous_missing_run": 5,
+      "first_missing_date": "2022-01-14",
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "ret_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_90d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_90d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ema_norm_dist_30_90",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_56d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_90d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_7_90",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_30_180",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "vol_of_vol_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_90d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "skew_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "kurt_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_signed_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_abs_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "body_range_ratio_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "upper_wick_ratio_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "lower_wick_ratio_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "range_price_ratio_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "volume_anom_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "trade_count_anom_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_avg_trade_size_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_1d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_sign_persistence_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "perp_flow_imb_1d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_flow_imb_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spot_perp_flow_diff_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_quote_share_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spread_mean_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "log_oi_change_7d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_oi_change_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "ret_oi_interaction_30d",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_global_ls_ratio",
+      "role_window": "development",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "ret_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ret_90d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "pe_90d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "ema_norm_dist_30_90",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_56d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "rvol_90d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_7_90",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_rvol_ratio_30_180",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "vol_of_vol_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "down_share_90d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "skew_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "kurt_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_signed_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "autocorr_abs_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "body_range_ratio_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "upper_wick_ratio_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "lower_wick_ratio_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "range_price_ratio_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "volume_anom_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "trade_count_anom_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "log_avg_trade_size_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_1d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_imb_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "flow_sign_persistence_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_spot_1m"
+    },
+    {
+      "column": "perp_flow_imb_1d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_flow_imb_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spot_perp_flow_diff_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "perp_quote_share_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "spread_mean_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_1m"
+    },
+    {
+      "column": "log_oi_change_7d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_oi_change_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "ret_oi_interaction_30d",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    },
+    {
+      "column": "log_global_ls_ratio",
+      "role_window": "locked_test",
+      "days_present": 337,
+      "days_missing": 0,
+      "coverage_ratio": 1.0,
+      "longest_contiguous_missing_run": 0,
+      "first_missing_date": null,
+      "source_product": "crypto_binance_futures_metrics_5m"
+    }
+  ],
+  "coverage_summary": {
+    "threshold": 0.95,
+    "min_column_coverage_training": 0.9932,
+    "min_column_coverage_dev": 1.0,
+    "min_column_coverage_test": 1.0,
+    "max_contiguous_missing_days": 5,
+    "status": "PASS"
+  }
+}

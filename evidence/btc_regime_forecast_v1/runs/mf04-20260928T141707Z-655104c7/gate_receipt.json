@@ -1,0 +1,41 @@
+{
+  "phase": "MF-04",
+  "overall_status": "PASS",
+  "gates": {
+    "G4-EXEC": {
+      "status": "PASS",
+      "forecasts_count": 48,
+      "horizons": [
+        "H56",
+        "H90"
+      ],
+      "engine_calls": 0
+    },
+    "G4-EVAL12": {
+      "status": "PASS",
+      "origins_count": 48,
+      "blocks_count": 12,
+      "coverage": "100%"
+    },
+    "G4-INFERENCE": {
+      "status": "PASS",
+      "refit_cadence": 28,
+      "recipe_frozen": true,
+      "look_ahead": false
+    },
+    "G4-HEADSTATUS": {
+      "status": "PASS",
+      "primary_horizon": 90,
+      "primary_joint_status": "NOT_QUALIFIED"
+    },
+    "G4-TIMING-EVAL": {
+      "status": "PASS",
+      "detector": "OBS14_CONFIRM3_V1",
+      "dwell_analysis": "COMPLETED"
+    },
+    "G4-EVIDENCE": {
+      "status": "PASS",
+      "report_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/btc_regime_forecast_v1/runs/mf04-20260928T141707Z-655104c7/report.md"
+    }
+  }
+}

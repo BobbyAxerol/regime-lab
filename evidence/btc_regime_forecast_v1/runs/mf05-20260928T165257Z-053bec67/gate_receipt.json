@@ -1,0 +1,44 @@
+{
+  "phase": "MF-05",
+  "overall_status": "PASS",
+  "gates": {
+    "G5-REPORT": {
+      "status": "PASS",
+      "phases": [
+        "MF-01",
+        "MF-02",
+        "MF-03",
+        "MF-04",
+        "MF-05"
+      ],
+      "financial_engine_calls": 0
+    },
+    "G5-REPRODUCE": {
+      "status": "PASS",
+      "reproduction": "VERIFIED",
+      "max_discrepancy": 0.0
+    },
+    "G5-SCOPE": {
+      "status": "PASS",
+      "claim_level": "TECHNICALLY_VALID__ALL_HEADS_NOT_QUALIFIED__WFO_BRIDGE_CLOSED",
+      "volatility_status": "NOT_QUALIFIED",
+      "joint_status": "NOT_QUALIFIED"
+    },
+    "G5-BRIDGE": {
+      "status": "PASS",
+      "wfo_bridge_status": "CLOSED",
+      "joint_selection_permitted": false,
+      "proposal_status": "SPECIFIED_NOT_EXECUTED"
+    },
+    "G5-DURATION-HANDOFF": {
+      "status": "PASS",
+      "mean_dwell": 11.52662721893491,
+      "empirical_survival_handed_off": true
+    },
+    "G5-OWNER": {
+      "status": "PASS",
+      "package_complete": true,
+      "ready_for_owner_review": true
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "crypto_binance_spot_1m": {
+    "status": "QUALIFIED_AVAILABLE",
+    "reader_class": "CryptoBinanceSpot1m",
+    "market": "BINANCE_SPOT",
+    "role": "PRIMARY_TARGET_AND_FLOW",
+    "file_count": 104,
+    "total_bytes": 343730514,
+    "earliest_bar": "2018-01-01 00:00:00",
+    "latest_bar": "2026-08-07 04:13:00",
+    "snapshot_dir": "snapshots/server_core_v1/crypto_binance_spot_1m/BTCUSDT"
+  },
+  "crypto_binance_futures_1m": {
+    "status": "QUALIFIED_AVAILABLE",
+    "reader_class": "CryptoBinance1m",
+    "market": "BINANCE_USDM_FUTURES",
+    "role": "PERPETUAL_CONTEXT_AND_SPREAD",
+    "file_count": 81,
+    "total_bytes": 241868712,
+    "earliest_bar": "2020-01-01 00:00:00",
+    "latest_bar": "2026-09-09 20:10:00",
+    "snapshot_dir": "snapshots/server_core_v1/crypto_binance_futures_1m/BTCUSDT"
+  },
+  "crypto_binance_futures_metrics_5m": {
+    "status": "QUALIFIED_AVAILABLE",
+    "reader_class": "BinanceFuturesMetrics5m",
+    "market": "BINANCE_USDM_FUTURES_METRICS",
+    "role": "DERIVATIVES_POSITIONING_AND_LEVERAGE",
+    "file_count": 73,
+    "total_bytes": 36662580,
+    "earliest_bar": "2020-09-01 00:00:00",
+    "latest_bar": "2026-09-09 15:45:00",
+    "snapshot_dir": "snapshots/server_core_v1/crypto_binance_futures_metrics_5m/BTCUSDT"
+  }
+}

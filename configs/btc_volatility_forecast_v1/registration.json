@@ -1,0 +1,37 @@
+{
+  "schema": "regime_lab.btc_volatility_forecast_registration.v1",
+  "study_id": "btc_volatility_forecast_v1",
+  "spec_version": "BTC-VCRS-V1.0",
+  "spec_source": "BTC_VOLATILITY_CONDITIONED_REGIME_SELECTION_SPEC_V1_VI.md",
+  "registered_at_utc": "2026-09-28T19:35:00+00:00",
+  "parent_study_id": "btc_regime_forecast_v1",
+  "branch": "research/btc-regime-forecast-v1",
+  "primary_question": "Does an enhanced LightGBM model focusing strictly on volatility dynamics and derivatives positioning forecast short-horizon (14-day and 28-day) market regimes on BTCUSDT with statistically significant skill over standard persistence baselines, to enable risk-conditioned parameter management?",
+  "primary_paradigm": "VOLATILITY_CONDITIONED_SHORT_HORIZONS",
+  "current_wfo_status": "SPECIFIED_PENDING_VOLATILITY_QUALIFICATION",
+  "financial_engine_calls_allowed": 0,
+  "horizons_candidate_days": [14, 28],
+  "primary_horizon": 14,
+  "secondary_horizon": 28,
+  "forecast_tasks": {
+    "volatility_multiclass": ["LOW_VOL", "MID_VOL", "HIGH_VOL"],
+    "continuous_log_volatility": "log_realized_volatility"
+  },
+  "baselines": [
+    "PERSISTENCE",
+    "HISTORICAL_FREQUENCIES",
+    "HAR_STYLE_RV"
+  ],
+  "models": {
+    "primary": "LIGHTGBM_VOL_ENHANCED",
+    "grid_size": 4
+  },
+  "qualification_thresholds": {
+    "overall_accuracy_min": 0.55,
+    "balanced_accuracy_gain_min": 0.03,
+    "brier_skill_point_min": 0.04,
+    "confidence_level": 0.95,
+    "evaluation_origins_count": 48
+  },
+  "owner_review_status": "APPROVED_TO_EXECUTE"
+}

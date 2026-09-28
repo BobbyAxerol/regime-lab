@@ -1,0 +1,52 @@
+{
+  "schema": "regime_lab.btc_regime_forecast_registration.v1",
+  "study_id": "btc_regime_forecast_v1",
+  "guide_version": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "guide_source": "REGIME_LAB_BTCUSDT_REGIME_PARAMETER_SELECTION_V1_5_PHASE_GUIDE_VI.md",
+  "registered_at_utc": "2026-09-28T12:00:00+00:00",
+  "registered_by_phase": "MF-01",
+  "parent_study_id": "sharpe_decay_sd_v1",
+  "branch": "research/btc-regime-forecast-v1",
+  "branched_from": {
+    "ref": "main",
+    "commit": "2461f42d"
+  },
+  "primary_question": "Does a machine learning model (LightGBM supervised, with Chronos-2-Synth as challenger) forecast forward 56-day and 90-day market conditions (realized volatility and path efficiency regimes) on BTCUSDT better than standard statistical baselines (persistence, matured frequencies, HAR-style RV, regularized linear), before any Sharpe-decay WFO parameter selection is re-evaluated?",
+  "primary_paradigm": "MODEL_FIRST_REGIME_DURATION",
+  "current_wfo_status": "CLOSED_PENDING_MODEL_QUALIFICATION_AND_OWNER",
+  "current_phase_engine_runs_allowed": 0,
+  "financial_authority": "quantbt-engine==1.1.1 (UNMODIFIED, pinned, read-only)",
+  "horizons_candidate_days": [56, 90],
+  "primary_horizon": "UNSELECTED_PENDING_DEVELOPMENT_EVALUATION",
+  "forecast_tasks": {
+    "volatility_multiclass": ["LOW", "NORMAL", "HIGH"],
+    "path_multiclass": ["DIRECTIONAL_DOWN", "LOW_EFFICIENCY", "DIRECTIONAL_UP"],
+    "volatility_quantiles": [0.1, 0.5, 0.9],
+    "efficiency_median": "point_in_minus_one_to_plus_one"
+  },
+  "baselines": [
+    "PERSISTENCE",
+    "MATURED_FREQUENCIES",
+    "HAR_STYLE_RV",
+    "REGULARIZED_LINEAR"
+  ],
+  "models": {
+    "primary": "LIGHTGBM_SUPERVISED",
+    "foundation_challenger": "autogluon/chronos-2-synth",
+    "lgbm_grid_size": 4
+  },
+  "qualification_thresholds": {
+    "brier_skill_point_min": 0.05,
+    "balanced_accuracy_gain_min": 0.05,
+    "regression_error_reduction_min": 0.10,
+    "confidence_level": 0.95,
+    "evaluation_blocks_min": 12
+  },
+  "data_qualification_thresholds": {
+    "min_column_coverage_per_role_window": 0.95,
+    "max_contiguous_missing_days_per_column": 7,
+    "max_impute_share_per_column": 0.05
+  },
+  "phases": ["MF-01", "MF-02", "MF-03", "MF-04", "MF-05"],
+  "owner_review_status": "PENDING"
+}

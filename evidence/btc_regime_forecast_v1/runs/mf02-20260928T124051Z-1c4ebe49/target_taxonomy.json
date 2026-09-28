@@ -1,0 +1,70 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "schema": "regime_lab.target_taxonomy.v2",
+  "frozen_on_prefix": "2022-01-14_to_2024-01-13",
+  "prefix_sample_count": 730,
+  "H56": {
+    "v_quantiles": {
+      "q_1_3": 0.44411183068133364,
+      "q_2_3": 0.5640925121264759
+    },
+    "e_quantiles": {
+      "tau_symmetric": 0.16295222110653756
+    },
+    "classes": {
+      "volatility": [
+        "LOW_VOL",
+        "MID_VOL",
+        "HIGH_VOL"
+      ],
+      "efficiency": [
+        "TREND_FRIENDLY",
+        "RANGE_NEUTRAL",
+        "CHOP_HOSTILE"
+      ],
+      "joint_9class": [
+        "LOW_VOL__TREND_FRIENDLY",
+        "LOW_VOL__RANGE_NEUTRAL",
+        "LOW_VOL__CHOP_HOSTILE",
+        "MID_VOL__TREND_FRIENDLY",
+        "MID_VOL__RANGE_NEUTRAL",
+        "MID_VOL__CHOP_HOSTILE",
+        "HIGH_VOL__TREND_FRIENDLY",
+        "HIGH_VOL__RANGE_NEUTRAL",
+        "HIGH_VOL__CHOP_HOSTILE"
+      ]
+    }
+  },
+  "H90": {
+    "v_quantiles": {
+      "q_1_3": 0.46778739224513,
+      "q_2_3": 0.5651221374704439
+    },
+    "e_quantiles": {
+      "tau_symmetric": 0.12882834184837128
+    },
+    "classes": {
+      "volatility": [
+        "LOW_VOL",
+        "MID_VOL",
+        "HIGH_VOL"
+      ],
+      "efficiency": [
+        "TREND_FRIENDLY",
+        "RANGE_NEUTRAL",
+        "CHOP_HOSTILE"
+      ],
+      "joint_9class": [
+        "LOW_VOL__TREND_FRIENDLY",
+        "LOW_VOL__RANGE_NEUTRAL",
+        "LOW_VOL__CHOP_HOSTILE",
+        "MID_VOL__TREND_FRIENDLY",
+        "MID_VOL__RANGE_NEUTRAL",
+        "MID_VOL__CHOP_HOSTILE",
+        "HIGH_VOL__TREND_FRIENDLY",
+        "HIGH_VOL__RANGE_NEUTRAL",
+        "HIGH_VOL__CHOP_HOSTILE"
+      ]
+    }
+  }
+}

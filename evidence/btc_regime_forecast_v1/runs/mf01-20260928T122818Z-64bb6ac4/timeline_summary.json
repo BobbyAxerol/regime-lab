@@ -1,0 +1,40 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "warmup_days_ge_180",
+      "holds": true,
+      "detail": "180 days [2021-07-18 to 2022-01-13]"
+    },
+    {
+      "check": "initial_training_days_ge_730",
+      "holds": true,
+      "detail": "730 daily origins [2022-01-14 to 2024-01-13]"
+    },
+    {
+      "check": "training_h90_matures_before_or_at_dev_first",
+      "holds": true,
+      "detail": "Last train H90 mature: 2024-04-13, Dev first: 2024-04-13"
+    },
+    {
+      "check": "development_48_weekly_origins_12_blocks",
+      "holds": true,
+      "detail": "48 origins, 12 blocks"
+    },
+    {
+      "check": "dev_last_h90_matures_before_or_at_test_first",
+      "holds": true,
+      "detail": "Dev last H90 mature: 2025-06-07, Test first: 2025-06-07"
+    },
+    {
+      "check": "test_48_weekly_origins_12_blocks",
+      "holds": true,
+      "detail": "48 origins, 12 blocks"
+    },
+    {
+      "check": "test_last_h90_followup_fully_covered",
+      "holds": true,
+      "detail": "Test last H90 mature: 2026-08-01, Spot latest: 2026-08-06 (margin: 5 days)"
+    }
+  ]
+}

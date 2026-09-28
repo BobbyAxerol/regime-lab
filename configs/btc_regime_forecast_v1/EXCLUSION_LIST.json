@@ -1,0 +1,48 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "excluded_sources_count": 6,
+  "dispositions": [
+    {
+      "source": "COINGECKO_DOMINANCE_HISTORICAL",
+      "reason": "Insufficient historical PIT depth (365d cap on public endpoint)"
+    },
+    {
+      "source": "BINANCE_BTCDOM",
+      "reason": "Synthetic price strength index, not global market cap dominance"
+    },
+    {
+      "source": "BINANCE_FUTURES_ORDERBOOK_DEPTH",
+      "reason": "Requires commercial tick data, non-blocking to daily regime"
+    },
+    {
+      "source": "DERIBIT_OPTIONS_IMPLIED_VOL",
+      "reason": "Options strike archive missing 2021 cohort"
+    },
+    {
+      "source": "FEAR_AND_GREED_INDEX",
+      "reason": "Heuristic non-financial sentiment index with unverified revisions"
+    },
+    {
+      "source": "BINANCE_REST_FUNDING_RATE",
+      "reason": "Replaced by authoritative point-in-time metrics parquet"
+    }
+  ],
+  "excluded_columns": [
+    {
+      "column": "count_toptrader_long_short_ratio",
+      "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"
+    },
+    {
+      "column": "sum_toptrader_long_short_ratio",
+      "reason": "Missing Feb-Dec 2022 in Binance 5m metrics lake (58.77% < 95% threshold)"
+    },
+    {
+      "feature": "log_top_account_ratio",
+      "reason": "Derived from excluded count_toptrader_long_short_ratio"
+    },
+    {
+      "feature": "log_top_position_ratio",
+      "reason": "Derived from excluded sum_toptrader_long_short_ratio"
+    }
+  ]
+}

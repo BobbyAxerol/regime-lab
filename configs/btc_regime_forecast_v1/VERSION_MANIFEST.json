@@ -1,0 +1,31 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "architecture": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "winning_recipe": {
+    "model_id": "M4_LGBM_CONSERVATIVE_SLOW",
+    "feature_cohort": "D1_DERIVATIVE_LIQUIDITY",
+    "temperature_v": 3.9460479268096007,
+    "temperature_e": 2.106779832983858
+  },
+  "timing_specification": {
+    "primary_detector": "OBS14_CONFIRM3_V1",
+    "ready_lag_days": 1,
+    "refit_cadence_days": 28,
+    "test_blocks_count": 12,
+    "test_weekly_origins": 48,
+    "test_start_date": "2025-06-07",
+    "test_end_date": "2026-05-02"
+  },
+  "taxonomy_hash": "69ce58ea6a11330bc3b205dd6e26df2bfaef408c02fe252c57f31cc473b14d87",
+  "model_config_hashes": {
+    "M4_LGBM_CONSERVATIVE_SLOW": "bcb91c8b50601682cb81bac3946d22ad18aa0dc1e7c74a6e7ca6f0a573b99621"
+  },
+  "weights_persisted": false,
+  "replay_method": "REFIT_FROM_FROZEN_CONFIG",
+  "engine_binding": {
+    "quantbt_engine_version": "1.1.1",
+    "quantbt_native_version": "0.4.2",
+    "financial_engine_calls_executed": 0,
+    "status": "UNTOUCHED_AND_PROTECTED"
+  }
+}

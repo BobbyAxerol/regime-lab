@@ -1,0 +1,26 @@
+{
+  "coingecko_dominance": {
+    "status": "EXCLUDED_INSUFFICIENT_HISTORY",
+    "reason": "Public API limited to 365 days; historical global market cap requires paid Pro subscription and lacks point-in-time archive covering the 2021-2026 cohort. Excluded per Section 3.1 without blocking core."
+  },
+  "binance_btcdom": {
+    "status": "EXCLUDED_NO_PIT",
+    "reason": "Binance BTCDOM is a relative price strength index, not actual global market cap dominance. Surrogate definition rejected per Section 3.1."
+  },
+  "crypto_binance_orderbook_snapshot_1h": {
+    "status": "EXCLUDED_OUT_OF_SCOPE",
+    "reason": "Order book history only starts in 2023, insufficient for 2021-2026 timeline; out of scope for daily macro-regime forecast."
+  },
+  "deribit_options": {
+    "status": "EXCLUDED_OUT_OF_SCOPE",
+    "reason": "Deribit options history lacks live tail and approved reader in [I1]; excluded per Section 3.1."
+  },
+  "fear_and_greed": {
+    "status": "EXCLUDED_UNAVAILABLE",
+    "reason": "Supplemental external indicator not required for core V1.2 deliverables; default OFF."
+  },
+  "funding_rate_raw_rest": {
+    "status": "EXCLUDED_UNAVAILABLE",
+    "reason": "No separate canonical reader in [I1]; funding proxy derived from perp klines/metrics where available."
+  }
+}

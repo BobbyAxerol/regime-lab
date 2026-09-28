@@ -1,0 +1,30 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-03",
+  "method": "TEMPERATURE_SCALING",
+  "provenance": "VALIDATION_OOF_ONLY",
+  "fitted_temperatures": {
+    "H56": {
+      "temp_v": 5.0,
+      "temp_e": 2.5778891047625976
+    },
+    "H90": {
+      "temp_v": 2.7833080354502915,
+      "temp_e": 1.1714637575566607
+    }
+  },
+  "impact": {
+    "H56": {
+      "model_id": "M4_LGBM_CONSERVATIVE_SLOW",
+      "brier_score_j_uncalibrated": 0.982774847763528,
+      "brier_score_j_calibrated": 0.8617790414968964,
+      "brier_score_improvement": 0.12099580626663153
+    },
+    "H90": {
+      "model_id": "M2_LGBM_REGULARIZED_DEEP",
+      "brier_score_j_uncalibrated": 0.8903530024203204,
+      "brier_score_j_calibrated": 0.7908824855516676,
+      "brier_score_improvement": 0.09947051686865283
+    }
+  }
+}

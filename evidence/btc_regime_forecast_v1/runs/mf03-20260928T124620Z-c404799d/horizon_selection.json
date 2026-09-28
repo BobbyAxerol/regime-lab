@@ -1,0 +1,11 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-03",
+  "selected_horizon": 90,
+  "j_h56": 0.8617790414968964,
+  "j_h90": 0.7908824855516676,
+  "selection_rationale": "H90 achieved superior calibrated loss (J_90=0.7909 < J_56=0.8618).",
+  "duration_interpretation": "Mean episode 12.1 days, median 10.0 days. Window-condition forecast scope.",
+  "winning_recipe_h56": "M4_LGBM_CONSERVATIVE_SLOW",
+  "winning_recipe_h90": "M2_LGBM_REGULARIZED_DEEP"
+}

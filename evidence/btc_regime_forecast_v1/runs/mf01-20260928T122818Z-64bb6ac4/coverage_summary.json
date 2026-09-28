@@ -1,0 +1,25 @@
+{
+  "phase": "MF-01",
+  "status": "PASS",
+  "threshold": 0.95,
+  "min_column_coverage_training": 0.9932,
+  "min_column_coverage_dev": 1.0,
+  "min_column_coverage_test": 1.0,
+  "max_contiguous_missing_days": 5,
+  "excluded_low_coverage_columns": [
+    {
+      "column": "count_toptrader_long_short_ratio",
+      "derived_features": ["log_top_account_ratio"],
+      "training_coverage": 0.5877,
+      "disposition": "EXCLUDE_COLUMN_LOW_COVERAGE",
+      "reason": "Training coverage 58.77% < 95% threshold due to 301 missing days in 2022"
+    },
+    {
+      "column": "sum_toptrader_long_short_ratio",
+      "derived_features": ["log_top_position_ratio"],
+      "training_coverage": 0.5877,
+      "disposition": "EXCLUDE_COLUMN_LOW_COVERAGE",
+      "reason": "Training coverage 58.77% < 95% threshold due to 301 missing days in 2022"
+    }
+  ]
+}

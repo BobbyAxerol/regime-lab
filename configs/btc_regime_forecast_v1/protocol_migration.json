@@ -1,0 +1,57 @@
+{
+  "schema": "regime_lab.protocol_migration.v1",
+  "study_id": "btc_regime_forecast_v1",
+  "guide_version": "BTC-RPS-V1.2-MODEL-FIRST-DURATION",
+  "parent_study_id": "sharpe_decay_sd_v1",
+  "migration_date_utc": "2026-09-28T12:00:00+00:00",
+  "items": [
+    {
+      "id": "MIG-01-PARADIGM",
+      "prior": "Run samplers x JM/HMM/context matrix then test Sharpe decay WFO directly",
+      "current": "Model-first: qualification of regime forecast model on BTCUSDT before reopening WFO",
+      "rationale": "Prior studies (RF-05, RA-07, FP-07..09, SD-01..03) showed cadence artifacts, transition cost domination, and model degeneracy when coupling directly to WFO without proven regime predictive skill. Financial engine runs set to 0 in MF-01..MF-05."
+    },
+    {
+      "id": "MIG-02-METRIC",
+      "prior": "Primary metric was daily return / Sharpe decay across all phases",
+      "current": "Primary metric is regime forecast quality: Multiclass Brier Skill, Balanced Accuracy, and Continuous Target MAE; Sharpe decay preserved in Section 18 WFO bridge only",
+      "rationale": "Model forecasting accuracy on forward market conditions must be established first with proper scoring rules before evaluating parameter selection."
+    },
+    {
+      "id": "MIG-03-HORIZON",
+      "prior": "V1.1 chose H90 primary and H180 secondary a priori",
+      "current": "V1.2 compares H56 and H90 on identical origins; H* selected on Development and frozen before Test; H180 removed from active forecast roster",
+      "rationale": "Candidate horizons 56 and 90 calendar days are evaluated empirically; H180 lookback and IS180 reference retained for features, not forecast target."
+    },
+    {
+      "id": "MIG-04-DURATION",
+      "prior": "No empirical timing or regime duration study; assumed fixed durations",
+      "current": "Section 4D empirical regime duration: observed-state tape (OBS14_CONFIRM3_V1 vs OBS28), Kaplan-Meier survival curves, right-censoring, restricted mean survival/remaining time",
+      "rationale": "Prevents assuming BTC has a known fixed cycle; distinguishes dwell duration, current state age, and remaining time to first exit."
+    },
+    {
+      "id": "MIG-05-MODEL_ARCHITECTURE",
+      "prior": "Latent state Jump Model (JM K=2) and HMM as primary classifiers",
+      "current": "Supervised learning against realized future targets: LightGBM primary candidate, Chronos-2-Synth frozen foundation challenger, 4 statistical baselines",
+      "rationale": "Latent models collapsed or degenerated in SD-02/SD-03; supervised targets provide objective, algorithm-independent ground truth."
+    },
+    {
+      "id": "MIG-06-DATA_EXCLUSIONS",
+      "prior": "Attempted integration of external sources (CoinGecko, dominance, L2, options)",
+      "current": "Strict exclusion of sources lacking adequate history, PIT availability, or free licensing: CoinGecko dominance, Binance BTCDOM, 1h Orderbook, Deribit options excluded; core Binance Spot/Perp/Metrics prioritized",
+      "rationale": "Prevents auxiliary external data gaps from blocking core model qualification."
+    },
+    {
+      "id": "MIG-07-EVALUATION_SPLIT",
+      "prior": "12 INIT + 12 VAL + 12 FINAL WFO candidate search origins",
+      "current": ">=730 initial matured daily training origins, >=12 Development blocks (48 weekly origins), >=12 Locked Test blocks (48 weekly origins), 28-day block structure with overlap reporting and block bootstrap",
+      "rationale": "Purely market-data-driven splits tailored for long-horizon overlapping forecasts without running candidate optimization in model phases."
+    },
+    {
+      "id": "MIG-08-WFO_BRIDGE",
+      "prior": "WFO always running concurrently",
+      "current": "WFO Bridge (Section 18) locked as CLOSED_PENDING_MODEL_QUALIFICATION_AND_OWNER; requires >=128 trials/cutoff, >=12 paired folds, and qualified forecast head to reopen",
+      "rationale": "Preserves all Mode 4 contracts and findings while preventing premature execution."
+    }
+  ]
+}

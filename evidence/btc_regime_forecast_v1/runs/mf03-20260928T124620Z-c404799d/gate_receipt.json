@@ -1,0 +1,51 @@
+{
+  "phase": "MF-03",
+  "overall_status": "PASS",
+  "gates": {
+    "G3-ABLATION": {
+      "status": "PASS",
+      "cohorts_evaluated": [
+        "D0_CORE_PRICE_VOL",
+        "D1_DERIVATIVE_LIQUIDITY",
+        "D2_COMPOSITE_PRESSURE"
+      ],
+      "winning_cohort": "D1_DERIVATIVE_LIQUIDITY"
+    },
+    "G3-MODEL": {
+      "status": "PASS",
+      "models_count": 5,
+      "challenger_included": true
+    },
+    "G3-CALIBRATION": {
+      "status": "PASS",
+      "temperatures": {
+        "H56": {
+          "temp_v": 5.0,
+          "temp_e": 2.5778891047625976
+        },
+        "H90": {
+          "temp_v": 2.7833080354502915,
+          "temp_e": 1.1714637575566607
+        }
+      },
+      "provenance": "VALIDATION_OOF_ONLY"
+    },
+    "G3-FREEZE": {
+      "status": "PASS",
+      "selected_horizon_h_star": 90,
+      "frozen_recipes": {
+        "H56": "M4_LGBM_CONSERVATIVE_SLOW",
+        "H90": "M2_LGBM_REGULARIZED_DEEP"
+      }
+    },
+    "G3-DURATION-AND-HORIZON-FREEZE": {
+      "status": "PASS",
+      "selected_h_star": 90,
+      "rationale": "H90 achieved superior calibrated loss (J_90=0.7909 < J_56=0.8618)."
+    },
+    "G3-REPORT": {
+      "status": "PASS",
+      "report_path": "/root/bobby/pool_alpha/lab_regime_model_quantbt/evidence/btc_regime_forecast_v1/runs/mf03-20260928T124620Z-c404799d/report.md"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-03_FREEZE",
+  "frozen_at_utc": "2026-09-28T16:48:58.952993+00:00",
+  "selected_horizon": 90,
+  "winning_recipe_h56": {
+    "model_id": "M4_LGBM_CONSERVATIVE_SLOW",
+    "feature_cohort": "D1_DERIVATIVE_LIQUIDITY",
+    "temperature_v": 5.0,
+    "temperature_e": 2.540182056622634
+  },
+  "winning_recipe_h90": {
+    "model_id": "M4_LGBM_CONSERVATIVE_SLOW",
+    "feature_cohort": "D1_DERIVATIVE_LIQUIDITY",
+    "temperature_v": 3.9460479268096007,
+    "temperature_e": 2.106779832983858
+  },
+  "model_config_hashes": {
+    "M4_LGBM_CONSERVATIVE_SLOW": "bcb91c8b50601682cb81bac3946d22ad18aa0dc1e7c74a6e7ca6f0a573b99621"
+  },
+  "model_weights_hashes": {
+    "M4_LGBM_CONSERVATIVE_SLOW": "bcb91c8b50601682cb81bac3946d22ad18aa0dc1e7c74a6e7ca6f0a573b99621"
+  },
+  "weights_persisted": false,
+  "replay_method": "REFIT_FROM_FROZEN_CONFIG",
+  "taxonomy_hash": "69ce58ea6a11330bc3b205dd6e26df2bfaef408c02fe252c57f31cc473b14d87",
+  "timing_specification": {
+    "primary_detector": "OBS14_CONFIRM3_V1",
+    "ready_lag_days": 1,
+    "refit_cadence_days": 28,
+    "test_blocks_count": 12,
+    "test_weekly_origins": 48,
+    "test_start_date": "2025-06-07",
+    "test_end_date": "2026-05-02"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "phase": "MF-04",
+  "primary_horizon": 90,
+  "H56": {
+    "volatility_3class": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+      "brier_skill": -0.00034651684621866963,
+      "brier_skill_ci_95": [
+        -0.03038566740550723,
+        0.043760237152169146
+      ],
+      "bal_acc_gain": 0.008597285067873328,
+      "bal_acc_gain_ci_95": [
+        -0.2000154320987654,
+        0.18378851540616234
+      ]
+    },
+    "efficiency_3class": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+      "brier_skill": -0.056801669137761523,
+      "brier_skill_ci_95": [
+        -0.3360650349598166,
+        0.041785895604884736
+      ],
+      "bal_acc_gain": -0.08585858585858583,
+      "bal_acc_gain_ci_95": [
+        -0.27161306042884986,
+        0.15943478260869556
+      ]
+    },
+    "joint_9class": {
+      "status": "INCONCLUSIVE_MARGINAL",
+      "reason": "Positive point estimate but bootstrap confidence interval overlaps zero",
+      "brier_skill": 0.022288148077912018,
+      "brier_skill_ci_95": [
+        -0.027361736068134697,
+        0.055835476691398454
+      ],
+      "bal_acc_gain": 0.059375,
+      "bal_acc_gain_ci_95": [
+        -0.02431175595238094,
+        0.2
+      ]
+    },
+    "volatility_continuous": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed error reduction standard against frozen baseline",
+      "rel_error_reduction": -0.16951154600191787,
+      "rel_error_reduction_ci_95": [
+        -0.4133394988150035,
+        0.14722058707294816
+      ]
+    }
+  },
+  "H90": {
+    "volatility_3class": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+      "brier_skill": -0.011778518118555903,
+      "brier_skill_ci_95": [
+        -0.056084425235569696,
+        0.013395650141743478
+      ],
+      "bal_acc_gain": -0.10617059891107078,
+      "bal_acc_gain_ci_95": [
+        -0.16666666666666669,
+        0.04958999728923756
+      ]
+    },
+    "efficiency_3class": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+      "brier_skill": -0.30369690831436813,
+      "brier_skill_ci_95": [
+        -0.7429892238979315,
+        -0.03849987605059989
+      ],
+      "bal_acc_gain": 0.0,
+      "bal_acc_gain_ci_95": [
+        -0.5,
+        0.0
+      ]
+    },
+    "joint_9class": {
+      "status": "NOT_QUALIFIED",
+      "reason": "Failed qualification standards; negative or sub-threshold skill against frozen baseline",
+      "brier_skill": -0.027670704413236935,
+      "brier_skill_ci_95": [
+        -0.12781082900234755,
+        0.05006713940948168
+      ],
+      "bal_acc_gain": -0.2,
+      "bal_acc_gain_ci_95": [
+        -0.25,
+        0.0
+      ]
+    },
+    "volatility_continuous": {
+      "status": "INCONCLUSIVE_MARGINAL",
+      "reason": "Positive error reduction but bootstrap CI overlaps zero",
+      "rel_error_reduction": 0.023889277846673607,
+      "rel_error_reduction_ci_95": [
+        -0.356109168994916,
+        0.3613312115479557
+      ]
+    }
+  }
+}

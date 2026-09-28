@@ -1,0 +1,28 @@
+{
+  "n_origins": 48,
+  "origin_interval_days": 7,
+  "H56": {
+    "horizon_days": 56,
+    "primary_block_size": 8,
+    "sensitivity_blocks": [
+      12,
+      16
+    ],
+    "overlapping_origin_pairs": 308,
+    "calendar_span_days": 385,
+    "estimated_effective_independent_episodes": 6.0,
+    "approximation_caveat": "Moving block bootstrap CI is an asymptotic approximation under overlapping horizons; effective sample size is limited by horizon length."
+  },
+  "H90": {
+    "horizon_days": 90,
+    "primary_block_size": 13,
+    "sensitivity_blocks": [
+      20,
+      26
+    ],
+    "overlapping_origin_pairs": 498,
+    "calendar_span_days": 419,
+    "estimated_effective_independent_episodes": 3.69,
+    "approximation_caveat": "Moving block bootstrap CI is an asymptotic approximation under overlapping horizons; effective sample size is limited by horizon length."
+  }
+}

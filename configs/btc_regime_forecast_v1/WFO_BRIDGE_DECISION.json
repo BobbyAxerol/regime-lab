@@ -1,0 +1,35 @@
+{
+  "study_id": "btc_regime_forecast_v1",
+  "decision_date_utc": "2026-09-28T16:52:57.220270+00:00",
+  "wfo_bridge_status": "CLOSED",
+  "wfo_bridge_decision": "CLOSED",
+  "joint_regime_parameter_selection_permitted": false,
+  "qualified_heads": [],
+  "failed_heads": [
+    "volatility_3class",
+    "efficiency_3class",
+    "joint_9class",
+    "volatility_continuous"
+  ],
+  "guide_citations": [
+    "Section 18.1 (Only genuinely qualified heads permitted)",
+    "Section 9.4 (Partial qualification restricts scope to single-dimension conditioning)",
+    "Section 18.3 (Mandatory >=128 strategy trials/cutoff across 2-3 tuning dimensions and >=12 paired-valid WFO folds)",
+    "Section 18.5 (Mandatory WFO timeline proof and financial domain gate satisfaction)"
+  ],
+  "unmet_wfo_conditions": [
+    "Strategy trial budget >=128 trials/cutoff not attempted or registered",
+    "Separate paired-valid WFO fold execution (>=12 folds) not executed",
+    "WFO timeline proof (meta-label history, latency, common calendar, D2 follow-up) not submitted",
+    "Financial domain gates and separate Owner study authorization not granted"
+  ],
+  "rationale": "Per Guide Section 18.1 and Section 9.4, only heads that clear strict qualification may be used in downstream research. In the locked evaluation, qualification status on H90 is Volatility: NOT_QUALIFIED, Path Efficiency: NOT_QUALIFIED, Joint: NOT_QUALIFIED. Therefore, predictive-regime parameter selection on joint regimes is strictly prohibited. Furthermore, per Section 18.3 and Section 18.5, WFO execution requires >=128 attempted strategy trials/cutoff across 2-3 dimensions, >=12 paired-valid WFO folds, timeline evidence, and financial domain gates, none of which are satisfied in this model-first study. Therefore, the WFO Bridge is CLOSED.",
+  "volatility_conditioned_proposal": {
+    "status": "SPECIFIED_NOT_EXECUTED",
+    "proposal_title": "Volatility-Conditioned Regime Selection (V-CRS-V1)",
+    "supported_evidence": "Head Volatility status: NOT_QUALIFIED (Brier skill: -0.0118, CI: [-0.0561, 0.0134])",
+    "proposed_scope": "Conditioning strategy risk / parameters strictly on Volatility regimes (LOW_VOL / MID_VOL / HIGH_VOL)",
+    "requires_owner_approval": true,
+    "financial_engine_calls_allowed": 0
+  }
+}
