@@ -1,0 +1,61 @@
+{
+  "schema": "regime_lab.vol_wfo_timing_receipt.v1",
+  "phase": "VWFO-04",
+  "common_ready_lag_days": 1,
+  "update_cadence_days": 14,
+  "proposal_ttl_days": 2,
+  "max_revalidation_age_days": 28,
+  "symmetric_across_arms": true,
+  "backdating_rejected": true,
+  "invalid_window_bounds_rejected": true,
+  "arm_checks": {
+    "A_M4": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "B0_GLOBAL": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "B_CAP": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "O_PERSIST": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "C_H14": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "P_NI_01": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "P_NI_02": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    },
+    "P_NI_03": {
+      "proposal_accepted": true,
+      "blocked_before_not_before": true,
+      "activated_at_not_before": true,
+      "active_version_after": 1
+    }
+  }
+}

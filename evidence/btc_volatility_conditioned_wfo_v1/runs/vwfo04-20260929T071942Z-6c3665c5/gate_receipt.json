@@ -1,0 +1,68 @@
+{
+  "schema": "regime_lab.vol_wfo_gate_receipt.v1",
+  "phase": "VWFO-04",
+  "evidence_run_id": "vwfo04-20260929T071942Z-6c3665c5",
+  "technical_gate": "PASS",
+  "implementation_status": "COMPLETE",
+  "research_status": "OPERATIONAL_BOUNDARIES_QUALIFIED",
+  "owner_review": "PENDING",
+  "gates": {
+    "G4-CLOCKS": {
+      "status": "PASS",
+      "details": {
+        "common_ready_lag_days": 1,
+        "update_cadence_days": 14,
+        "proposal_ttl_days": 2,
+        "max_revalidation_age_days": 28,
+        "symmetric_across_arms": true
+      }
+    },
+    "G4-LIFECYCLE": {
+      "status": "PASS",
+      "details": {
+        "idempotency_duplicate_ignored": true,
+        "version_mismatch_rejected": true,
+        "expired_proposal_rejected": true,
+        "same_params_refresh_verified": true,
+        "fault_tests_passed": 8
+      }
+    },
+    "G4-PARITY": {
+      "status": "PASS",
+      "details": {
+        "parity_pass": true,
+        "max_equity_diff": 0.0,
+        "final_equity_diff": 0.0,
+        "stream_orders": 50,
+        "batch_orders": 50,
+        "stream_fills": 50,
+        "batch_fills": 50
+      }
+    },
+    "G4-RECOVERY": {
+      "status": "PASS",
+      "details": {
+        "cold_recovery_success": true,
+        "state_corruption_detected": false,
+        "recovered_active_version": 1,
+        "recovered_proposal_ids_count": 2
+      }
+    },
+    "G4-NO_PRODUCTION_WRITES": {
+      "status": "PASS",
+      "details": {
+        "production_orders_authorized": false,
+        "live_orders_sent_count": 0,
+        "quantbt_protected_tree_clean": true
+      }
+    },
+    "G4-OWNER": {
+      "status": "PENDING",
+      "details": {
+        "review_status": "WAITING_OWNER_REVIEW",
+        "required_for": "Proceeding to Phase VWFO-05 (Locked Final WFO)",
+        "rule": "R28: Verifier cannot approve its own phase; owner approval ledger must record decision"
+      }
+    }
+  }
+}

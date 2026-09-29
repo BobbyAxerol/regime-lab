@@ -1,0 +1,42 @@
+{
+  "schema": "regime_lab.vol_wfo_live_policy.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "phase": "VWFO-04",
+  "operational_boundary": {
+    "execution_mode": "STREAMING_REPLAY_SHADOW",
+    "production_orders_authorized": false,
+    "strategy_decision_clock": "closed_15m",
+    "execution_resolution": "1m",
+    "execution_ordering": "next_open_contract_to_verify",
+    "ready_lag_policy": "WAIT_FLAT_PREFIX_WITHIN_H14"
+  },
+  "timing_contract": {
+    "common_ready_lag_days": 1,
+    "proposal_ttl_days": 2,
+    "update_cadence_days": 14,
+    "max_revalidation_age_days": 28
+  },
+  "bundle_validation": {
+    "required_bundle_fields": [
+      "recipe_id",
+      "weights",
+      "imputer_medians",
+      "temperature_t_v",
+      "taxonomy_quantiles",
+      "feature_schema"
+    ],
+    "reject_weights_only": true,
+    "require_exact_schema_length": 38
+  },
+  "safety_pause_rules": {
+    "action_on_max_revalidation_exceeded": "SAFE_ENTRY_PAUSE",
+    "block_new_entries": true,
+    "allow_protective_exits": true,
+    "force_close_existing_positions": false
+  },
+  "idempotency_and_versioning": {
+    "enforce_expected_incumbent_version": true,
+    "deduplicate_by_proposal_id": true,
+    "same_params_refreshes_watermark_only": true
+  }
+}
