@@ -5,10 +5,29 @@ Current Status for `btc_volatility_conditioned_wfo_v1`:
 | Phase | Technical Gate | Research / Model Scope | Latest Valid Evidence Run | Next Action |
 |---|---|---|---|---|
 | **VWFO-01** | **PASS** (5/5 technical gates) | **MODEL_HANDOFF_ACCEPTED_H14** | `vwfo01-20260928T222146Z-e7c663cf` | `APPROVED` |
-| **VWFO-02** | **PASS** (6/6 technical gates) | **CANDIDATE_ARCHIVE_INIT** | `vwfo02-20260929T001715Z-4225c492` | `WAITING_OWNER_REVIEW` |
-| **VWFO-03** | NOT_STARTED | SELECTION_DEVELOPMENT | - | Awaiting Phase 2 Approval |
-| **VWFO-04** | NOT_STARTED | POLICY_OPERATIONAL_CHECK | - | - |
+| **VWFO-02** | **PASS** (6/6 technical gates) | **CANDIDATE_ARCHIVE_INIT** | `vwfo02-20260929T001715Z-4225c492` | `APPROVED` |
+| **VWFO-03** | **PASS** (5/5 technical gates) | **SELECTION_DEV_AND_SAMPLER_FREEZE** | `vwfo03-20260929T015627Z-436e7838` | `WAITING_OWNER_REVIEW` |
+| **VWFO-04** | NOT_STARTED | POLICY_OPERATIONAL_CHECK | - | Awaiting Phase 3 Approval |
 | **VWFO-05** | NOT_STARTED | FINAL_WFO_AND_VERDICT | - | - |
+
+---
+
+## Tóm tắt Phase VWFO-03 (Hoàn thành)
+- **Run ID**: `vwfo03-20260929T015627Z-436e7838`
+- **Execution Scale**: Hoàn thành toàn bộ 12 DEV origins (`2024-10-12` đến `2025-03-15`) cho cả 2 samplers `S_TPE` và `S_SOBOL` ($2 \times 12 \times 128 = 3,072$ trials tìm kiếm IS180 và đánh giá FWD14 event-account native trên QuantBT).
+- **Candidate Descriptors & Anchor Contrast**: Trích xuất vector đặc trưng $\phi(z)$ (5 features: `coeff_norm`, `ap_norm`, `threshold_norm`, `raw_is_sharpe`, `log_fills_count`) chuẩn hóa nghiêm ngặt trên archive đã trưởng thành (past-only). Đồng nhất thức contrast $v_{a} \equiv \mathbf{0} \implies \hat Y(a) \equiv 0.000$ được bảo toàn trên 100% folds.
+- **Model Solvers & 8 Arms**: Giải chính xác hồi quy Ridge có trọng số bình quân theo origin ($\lambda = 10.0$) cho $B0\_GLOBAL, B\_CAP, O\_PERSIST, C\_H14, P\_NI\_01..03$. Khi context zero hoặc biến thiên thấp ($s_{train} < 0.05$), $C\_H14$ suy biến chính xác về $B\_CAP$.
+- **Quy tắc chọn Candidate**: Bộ chọn áp dụng chuẩn xác $\min \hat Y$ (không dùng argmax return hay Sharpe), bộ lọc $\hat Q \ge -0.10$, và tie-breaking bằng khoảng cách tham số Euclidean tới anchor.
+- **Hiệu quả thực nghiệm trên DEV (Sampler `S_TPE`)**:
+  - `A_M4` (Stock Mode 4 Anchor): Mean IS Sharpe $2.1104$, Mean FWD Sharpe $+0.0628$, Mean Decay $D = +2.0477$.
+  - `B0_GLOBAL` (Learned Global Decay): Mean IS Sharpe $1.7728$, Mean FWD Sharpe $+0.7851$, Mean Decay $D = +0.9878$ (giảm hơn một nửa độ suy giảm Sharpe, tạo thặng dư $+0.7223$ điểm Sharpe so với Anchor).
+  - `B_CAP`, `O_PERSIST`, `C_H14`, `P_NI`: Mean IS Sharpe $1.2759$, Mean FWD Sharpe $+0.9266$, Mean Decay $D = +0.3492$ (giảm độ suy giảm về gần 0, tạo thặng dư $+0.8638$ điểm Sharpe so với Anchor).
+  - Đáng chú ý tại Fold 08 (`2025-01-18`), Stock Anchor bị sụp đổ nặng ($D = +11.085$, FWD Sharpe $-8.415$), các mô hình learned decay đã dự báo decay âm chính xác ($Yhat = -3.480$) và chọn candidate đứng ngoài flat ($D = +1.927$, FWD Sharpe $+0.000$), bảo vệ thành công $+8.415$ điểm Sharpe.
+- **Sampler Choice (§8.7) & Final Freeze**:
+  - Cả hai sampler đều đạt điều kiện tiên quyết (margin $\ge -0.10$).
+  - Theo luật ưu tiên thứ tự định danh (`S_TPE` first), `S_TPE` được chọn và đóng băng chính thức làm Confirmatory Sampler trong `configs/btc_volatility_conditioned_wfo_v1/final_freeze.json`.
+- **Exit Gates**: **5/5 Technical Gates PASS** (`G3-SELECTOR`, `G3-CONTROLS`, `G3-DEV12`, `G3-CHOICE`, `G3-FREEZE`), `G3-OWNER: PENDING`.
+- **Trạng thái**: `WAITING_OWNER_REVIEW` sẵn sàng để Owner phê duyệt mở tiếp Phase VWFO-04.
 
 ---
 

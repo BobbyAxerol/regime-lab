@@ -1,0 +1,49 @@
+{
+  "chosen_sampler": "S_TPE",
+  "selection_status": "QUALIFIED_DEV_EVIDENCE",
+  "selection_criterion": "MAXIMIZE_MIN_MEAN_EXCESS_SHARPE_OVER_BCAP_AND_O",
+  "sampler_metrics": {
+    "S_TPE": {
+      "mean_fwd_sharpes": {
+        "A_M4": 0.06277054799985653,
+        "B0_GLOBAL": 0.7850531962088533,
+        "B_CAP": 0.926615372469239,
+        "O_PERSIST": 0.926615372469239,
+        "C_H14": 0.926615372469239,
+        "P_NI_01": 0.926615372469239,
+        "P_NI_02": 0.926615372469239,
+        "P_NI_03": 0.926615372469239
+      },
+      "mean_r_c_vs_bcap": 0.0,
+      "mean_r_c_vs_o": 0.0,
+      "mean_r_b0_vs_a": 0.7222826482089969,
+      "min_margin": 0.0,
+      "is_priority_group": true,
+      "total_work_seconds": 2082.394350715913
+    },
+    "S_SOBOL": {
+      "mean_fwd_sharpes": {
+        "A_M4": -1.5830223059457442,
+        "B0_GLOBAL": 0.0,
+        "B_CAP": 0.0,
+        "O_PERSIST": 0.0,
+        "C_H14": 0.0,
+        "P_NI_01": 0.0,
+        "P_NI_02": 0.0,
+        "P_NI_03": 0.0
+      },
+      "mean_r_c_vs_bcap": 0.0,
+      "mean_r_c_vs_o": 0.0,
+      "mean_r_b0_vs_a": 1.5830223059457442,
+      "min_margin": 0.0,
+      "is_priority_group": true,
+      "total_work_seconds": 2410.658603719028
+    }
+  },
+  "tie_break_hierarchy": [
+    "MIN_EXCESS_MARGIN",
+    "LOWER_MEASURED_WORK",
+    "PREDECLARED_ORDER_S_TPE_FIRST"
+  ],
+  "chosen_at_utc": "2026-09-29T01:55:59.798280+00:00"
+}

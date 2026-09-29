@@ -1,0 +1,73 @@
+{
+  "schema": "regime_lab.vol_wfo_gate_receipt.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "phase": "VWFO-03",
+  "run_id": "vwfo03-20260929T015627Z-436e7838",
+  "technical_gate": "PASS",
+  "gates": {
+    "G3-SELECTOR": {
+      "status": "PASS",
+      "details": {
+        "descriptor_features": 5,
+        "objective": "MINIMIZE_SIGNED_YHAT",
+        "filter_floor": -0.1,
+        "registered_arms": [
+          "A_M4",
+          "B0_GLOBAL",
+          "B_CAP",
+          "O_PERSIST",
+          "C_H14",
+          "P_NI_01",
+          "P_NI_02",
+          "P_NI_03"
+        ]
+      }
+    },
+    "G3-CONTROLS": {
+      "status": "PASS",
+      "details": {
+        "evaluated_controls": [
+          "B_CAP",
+          "O_PERSIST",
+          "P_NI_01",
+          "P_NI_02",
+          "P_NI_03"
+        ],
+        "c_vs_bcap_margin": 0.0,
+        "c_vs_o_margin": 0.0
+      }
+    },
+    "G3-DEV12": {
+      "status": "PASS",
+      "details": {
+        "planned_dev_origins": 12,
+        "tpe_folds_evaluated": 12,
+        "sobol_folds_evaluated": 12,
+        "total_dev_trials": 3072
+      }
+    },
+    "G3-CHOICE": {
+      "status": "PASS",
+      "details": {
+        "chosen_sampler": "S_TPE",
+        "criterion": "MAXIMIZE_MIN_MEAN_EXCESS_SHARPE_OVER_BCAP_AND_O",
+        "tpe_min_margin": 0.0,
+        "sobol_min_margin": 0.0
+      }
+    },
+    "G3-FREEZE": {
+      "status": "PASS",
+      "details": {
+        "frozen_sampler": "S_TPE",
+        "final_origins_count": 12,
+        "final_arms_count": 8,
+        "freeze_boundary_gap_days": 70
+      }
+    },
+    "G3-OWNER": {
+      "status": "PENDING",
+      "description": "Waiting for Owner review and approval to proceed to Phase VWFO-04 (Rule R28)"
+    }
+  },
+  "report_exists": true
+}
