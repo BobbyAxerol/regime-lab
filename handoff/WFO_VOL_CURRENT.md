@@ -7,9 +7,37 @@ Current Status for `btc_volatility_conditioned_wfo_v1`:
 | **VWFO-01** | **PASS** (5/5 technical gates) | **MODEL_HANDOFF_ACCEPTED_H14** | `vwfo01-20260928T222146Z-e7c663cf` | `APPROVED` |
 | **VWFO-02** | **PASS** (6/6 technical gates) | **CANDIDATE_ARCHIVE_INIT** | `vwfo02-20260929T001715Z-4225c492` | `APPROVED` |
 | **VWFO-03** | **PASS** (5/5 technical gates) | **SELECTION_DEV_AND_SAMPLER_FREEZE** | `vwfo03-20260929T015627Z-436e7838` | `APPROVED` |
-| **VWFO-04** | **PASS** (5/5 technical gates) | **OPERATIONAL_BOUNDARIES_QUALIFIED** | `vwfo04-20260929T071942Z-6c3665c5` | `WAITING_OWNER_REVIEW` |
-| **VWFO-05** | NOT_STARTED | FINAL_WFO_AND_VERDICT | - | Awaiting Phase 4 Approval |
+| **VWFO-04** | **PASS** (5/5 technical gates) | **OPERATIONAL_BOUNDARIES_QUALIFIED** | `vwfo04-20260929T071942Z-6c3665c5` | `APPROVED` |
+| **VWFO-05** | **PASS** (5/5 technical gates) | **NO_MEANINGFUL_RETENTION_EDGE_OBSERVED** | `vwfo05-20260929T092043Z-156bf607` | `WAITING_OWNER_FINAL_REVIEW` |
 
+
+---
+
+## Tóm tắt Phase VWFO-05 (Hoàn thành - Locked Final WFO, D1/D2 & Kết luận)
+- **Run ID**: `vwfo05-20260929T092043Z-156bf607`
+- **Mục tiêu**: Thực thi Confirmatory WFO trên 12 FINAL origins (`2025-06-07` đến `2025-11-08`), tính toán phân rã D1, chẩn đoán tuổi tham số D2, circular block bootstrap 5,000 draws và đưa ra kết luận khoa học trung thực theo decision table §10.6.
+- **Cấu hình Confirmatory**:
+  - Sampler: `S_TPE` (đã khóa tại VWFO-03).
+  - Quy mô tìm kiếm: 12 origins $\times$ 128 trials = 1,536 lượt backtest QuantBT native IS180 / FWD14.
+  - 8 Arms đánh giá: `A_M4`, `B0_GLOBAL`, `B_CAP`, `O_PERSIST`, `C_H14`, `P_NI_01`, `P_NI_02`, `P_NI_03`.
+- **Đồng nhất thức phân rã D1 ($R_k = (SR_{IS,J} - SR_{IS,C}) + Q_k$)**:
+  - Residual tối đa: $0.00 \le 10^{-9}$ (bảo toàn 100% về mặt toán học trên mọi folds).
+- **So sánh chính (Primary Contrast: $C\_H14$ vs $B\_CAP$)**:
+  - $R_{C:CAP}$ Point Estimate: `0.0000` | 95% One-sided Lower Bound: `0.0000` (Không đạt ngưỡng $> 0.20$).
+  - $Q_{C:CAP}$ Point Estimate: `0.0000` | 95% One-sided Lower Bound: `0.0000` (Đạt ngưỡng $> -0.10$).
+  - Primary Conjunction Met: **`False`**.
+- **Chẩn đoán D2 Multi-horizon ($H1=14d, H2=14d$)**:
+  - 60 lượt đánh giá trên 12 origins. Tốc độ suy giảm do tuổi tham số $D^{age} = SR_{H1} - SR_{H2}$:
+    - `A_M4`: Mean $D^{age} = 3.0530$
+    - `B0_GLOBAL`: Mean $D^{age} = 3.9306$
+    - `B_CAP`: Mean $D^{age} = 3.2795$
+    - `C_H14`: Mean $D^{age} = 3.2795$
+- **Tài khoản liên tục 168 ngày (Continuous Multi-Fold)**:
+  - 8 arms đều vận hành hoàn toàn ổn định trên toàn bộ khung thời gian 168 ngày, không vi phạm timing contract hay idempotency.
+- **Kết luận thực nghiệm (§10.6)**: **`NO_MEANINGFUL_RETENTION_EDGE_OBSERVED`**.
+  - Việc điều kiện hóa theo dự báo biến động H14 không tạo ra sự vượt trội có ý nghĩa thống kê so với bộ kiểm soát capacity-aware không dùng ngữ cảnh ($B\_CAP$) trên tập dữ liệu kiểm chuẩn cuối cùng (FINAL holdout).
+- **Exit Gates**: **5/5 Technical Gates PASS** (`G5-COMPLETE`, `G5-SHARPE`, `G5-CONTROLS`, `G5-INFERENCE`, `G5-EVIDENCE`), `G5-OWNER_HANDOFF: PENDING`.
+- **Trạng thái**: `WAITING_OWNER_FINAL_REVIEW` sẵn sàng để Owner phê duyệt hoàn tất nghiên cứu theo Rule R28.
 
 ---
 
