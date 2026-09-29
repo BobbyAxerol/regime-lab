@@ -1,0 +1,49 @@
+{
+  "sizing": {
+    "20k_notional": 2000.0,
+    "30k_notional": 3000.0,
+    "status": "PASS"
+  },
+  "warmup": {
+    "is_clean": true,
+    "orders_count": 0,
+    "fills_count": 0,
+    "position": 0.0,
+    "fee_drift": 0.0,
+    "cash_drift": 0.0,
+    "status": "PASS"
+  },
+  "execution": {
+    "decision_ref_price": 50000.0,
+    "quantity": 0.04,
+    "fill_price": 50100.0,
+    "fill_notional": 2004.0,
+    "execution_type": "NEXT_OPEN",
+    "same_close_leakage_detected": false,
+    "next_close_leakage_detected": false
+  },
+  "sharpe_typing": {
+    "all_zero": {
+      "sharpe": null,
+      "status": "NO_TRADE_WITH_ZERO_RETURNS",
+      "day_count": 14,
+      "mean_daily_return": 0.0,
+      "std_daily_return": 0.0
+    },
+    "zero_variance": {
+      "sharpe": null,
+      "status": "ZERO_VARIANCE",
+      "day_count": 14,
+      "mean_daily_return": 0.001,
+      "std_daily_return": 0.0
+    },
+    "valid": {
+      "sharpe": 6.136670934532025,
+      "status": "VALID",
+      "day_count": 14,
+      "mean_daily_return": 0.00025,
+      "std_daily_return": 0.0007783117824941562
+    }
+  },
+  "status": "QUALIFIED"
+}

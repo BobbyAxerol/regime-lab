@@ -42,7 +42,7 @@ def build_sampler(sampler_id: str, seed: int) -> optuna.samplers.BaseSampler:
     if sampler_id == "S_TPE":
         return optuna.samplers.TPESampler(seed=seed, n_startup_trials=10)
     elif sampler_id == "S_SOBOL":
-        return optuna.samplers.QMCSampler(qmc_type="sobol", seed=seed, scramble=True)
+        return optuna.samplers.QMCSampler(qmc_type="sobol", seed=seed, scramble=True, warn_independent_sampling=False)
     else:
         raise ValueError(f"Unknown sampler_id: {sampler_id}. Supported: S_TPE, S_SOBOL")
 
@@ -90,6 +90,7 @@ def score_candidate_is180(
     is_start: pd.Timestamp,
     is_end: pd.Timestamp,
     *,
+    alpha_id: str = "A-SC",
     subperiods: int = 6,
     initial_capital: float = 20000.0,
     one_way_fee: float = 0.0004,
@@ -113,10 +114,23 @@ def score_candidate_is180(
             "shard_sharpes": [],
         }
 
+    # Parameter feasibility check for A-VWAP
+    if alpha_id == "A-VWAP":
+        if float(params.get("rsi_os", 30)) >= float(params.get("rsi_ob", 70)):
+            return {
+                "status": "FAILED_CANDIDATE",
+                "reason": "rsi_os >= rsi_ob infeasible",
+                "is_sharpe": float("-inf"),
+                "temporal_score": float("-inf"),
+                "daily_returns": [],
+                "fills_count": 0,
+                "shard_sharpes": [],
+            }
+
     initial = VersionWindow("is-score", params, 0, "initial", required_warm_bars=None)
     try:
         run = run_event_account(
-            "A-SC",
+            alpha_id,
             is_data,
             initial=initial,
             schedule=[],
@@ -283,6 +297,7 @@ def run_cutoff_search(
                 params,
                 is_start,
                 cutoff,
+                alpha_id=alpha_id,
                 subperiods=config.is_subperiods,
                 initial_capital=initial_capital,
                 one_way_fee=one_way_fee,

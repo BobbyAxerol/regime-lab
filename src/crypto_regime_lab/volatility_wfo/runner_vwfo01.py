@@ -36,7 +36,7 @@ def get_git_info(cwd: Path) -> Dict[str, str]:
         return {"branch": "main", "commit": "unknown", "dirty": "false"}
 
 
-def run_phase_vwfo01(lab_root: Path | None = None) -> Path:
+def run_phase_vwfo01(lab_root: Path | None = None, study_id: str = "btc_volatility_conditioned_wfo_v1") -> Path:
     if lab_root is None:
         lab_root = Path(__file__).resolve().parents[3]
     
@@ -45,21 +45,29 @@ def run_phase_vwfo01(lab_root: Path | None = None) -> Path:
     random_token = hashlib.sha256(f"vwfo01_{ts_str}".encode()).hexdigest()[:8]
     run_id = f"vwfo01-{ts_str}-{random_token}"
 
-    evidence_root = lab_root / "evidence" / "btc_volatility_conditioned_wfo_v1"
+    config_root = lab_root / "configs" / study_id
+    evidence_root = lab_root / "evidence" / study_id
     run_dir = evidence_root / "runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
     git_info = get_git_info(lab_root)
 
+    scope_str = "A-SC / BTCUSDT / 15m"
+    reg_path = config_root / "registration.json"
+    if reg_path.is_file():
+        reg_data = json.loads(reg_path.read_text(encoding="utf-8"))
+        alpha = reg_data.get("scope", {}).get("alpha_id", "A-SC")
+        scope_str = f"{alpha} / BTCUSDT / 15m"
+
     # 1. Request
     request = {
         "schema": "regime_lab.vwfo_request.v1",
-        "study_id": "btc_volatility_conditioned_wfo_v1",
+        "study_id": study_id,
         "phase": "VWFO-01",
         "run_id": run_id,
         "invoked_at_utc": timestamp.isoformat(),
         "git": git_info,
-        "scope": "A-SC / BTCUSDT / 15m"
+        "scope": scope_str
     }
     (run_dir / "request.json").write_text(json.dumps(request, indent=2), encoding="utf-8")
 
@@ -99,10 +107,10 @@ def run_phase_vwfo01(lab_root: Path | None = None) -> Path:
     (run_dir / "domain_qualification.json").write_text(json.dumps(domain_summary, indent=2), encoding="utf-8")
 
     # 5. Gate verification
-    verif = verify_vwfo01(lab_root)
+    verif = verify_vwfo01(lab_root, study_id=study_id)
     gate_receipt = {
         "schema": "regime_lab.vol_wfo_gate.v1",
-        "study_id": "btc_volatility_conditioned_wfo_v1",
+        "study_id": study_id,
         "phase": "VWFO-01",
         "run_id": run_id,
         "timestamp_utc": timestamp.isoformat(),
@@ -131,11 +139,11 @@ def run_phase_vwfo01(lab_root: Path | None = None) -> Path:
     report_content = f"""# VWFO Run Report — {run_id}
 
 ## 1. Identity / Scope
-- **Study ID**: `btc_volatility_conditioned_wfo_v1`
+- **Study ID**: `{study_id}`
 - **Phase**: `VWFO-01` (Handoff Acceptance & Financial Boundary Qualification)
 - **Run ID**: `{run_id}`
 - **Git State**: branch `{git_info['branch']}`, commit `{git_info['commit']}` (dirty: `{git_info['dirty']}`)
-- **Target Alpha / Venue**: `A-SC / BTCUSDT / 15m` on Binance
+- **Target Alpha / Venue**: `{scope_str}` on Binance
 - **Engine Build**: QuantBT `1.1.1` (pinned, read-only)
 
 ## 2. Câu hỏi và Phạm vi được phép
@@ -219,3 +227,12 @@ Current Status for `btc_volatility_conditioned_wfo_v1`:
     (lab_root / "handoff" / "WFO_VOL_CURRENT.md").write_text(handoff_current, encoding="utf-8")
 
     return run_dir
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="VWFO-01 Runner")
+    parser.add_argument("--study-id", type=str, default="btc_volatility_conditioned_wfo_v1")
+    args = parser.parse_args()
+    out_dir = run_phase_vwfo01(study_id=args.study_id)
+    print(f"VWFO-01 completed successfully: {out_dir}")

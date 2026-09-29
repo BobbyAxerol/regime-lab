@@ -67,7 +67,7 @@ def _json_default(obj: Any) -> Any:
 
 def _run_single_origin_job(job_args: tuple) -> dict[str, Any]:
     """Worker function executing IS180 search, panel selection, and FWD14 evaluation for one origin."""
-    sampler_id, origin, seed, frame_15m, trials_per_cutoff = job_args
+    sampler_id, origin, seed, frame_15m, trials_per_cutoff, alpha_id = job_args
     origin_dt = pd.Timestamp(origin, tz="UTC")
     cutoff_iso = origin_dt.isoformat()
     fwd_end_dt = origin_dt + pd.Timedelta(days=14)
@@ -81,6 +81,7 @@ def _run_single_origin_job(job_args: tuple) -> dict[str, Any]:
         n_trials=trials_per_cutoff,
         seed=seed,
         is_days=180,
+        alpha_id=alpha_id,
     )
 
     # 2. Select base panel
@@ -112,6 +113,7 @@ def _run_single_origin_job(job_args: tuple) -> dict[str, Any]:
         eval_union,
         fwd_start=origin_dt,
         fwd_end=fwd_end_dt,
+        alpha_id=alpha_id,
     )
 
     # 5. Compute Sharpe decay labels D and Y
@@ -136,14 +138,32 @@ def _run_single_origin_job(job_args: tuple) -> dict[str, Any]:
 
 def run_vwfo02_experiment(
     *,
-    trials_per_cutoff: int = 128,
+    study_id: str = "btc_volatility_conditioned_wfo_v1",
+    trials_per_cutoff: int | None = None,
     smoke: bool = False,
     output_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Execute Phase VWFO-02 pipeline."""
-    timeline_file = CONFIG_DIR / "timeline.json"
+    config_dir = LAB_ROOT / "configs" / study_id
+    evidence_dir = LAB_ROOT / "evidence" / study_id
+
+    timeline_file = config_dir / "timeline.json"
     timeline = json.loads(timeline_file.read_text())
     init_origins = timeline["roles"]["INIT"]["origins"]
+
+    alpha_id = "A-SC"
+    reg_file = config_dir / "registration.json"
+    if reg_file.is_file():
+        reg_data = json.loads(reg_file.read_text())
+        alpha_id = reg_data.get("scope", {}).get("alpha_id", "A-SC")
+
+    budget_file = config_dir / "resource_budget.json"
+    if trials_per_cutoff is None:
+        if budget_file.is_file():
+            b_data = json.loads(budget_file.read_text())
+            trials_per_cutoff = b_data.get("trials_per_sampler_cutoff", 128)
+        else:
+            trials_per_cutoff = 128
 
     if smoke:
         init_origins = init_origins[:2]
@@ -152,7 +172,7 @@ def run_vwfo02_experiment(
 
     run_id = new_lab_run_id("vwfo02")
     if output_dir is None:
-        run_dir = EVIDENCE_DIR / "runs" / run_id
+        run_dir = evidence_dir / "runs" / run_id
     else:
         run_dir = Path(output_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -175,7 +195,7 @@ def run_vwfo02_experiment(
         base_seed = 20260928 + s_idx * 50000
         for f_idx, origin in enumerate(init_origins):
             seed = base_seed + f_idx * 1000
-            jobs.append((sampler_id, origin, seed, frame_15m, trials_per_cutoff))
+            jobs.append((sampler_id, origin, seed, frame_15m, trials_per_cutoff, alpha_id))
 
     completed_jobs: list[dict[str, Any]] = []
     checkpoint_dir = run_dir / "checkpoints"
@@ -242,6 +262,7 @@ def run_vwfo02_experiment(
         seed=20260928,
         is_days=180,
         cache=test_cache,
+        alpha_id=alpha_id,
     )
 
     # Re-run identical search (cache hit)
@@ -253,6 +274,7 @@ def run_vwfo02_experiment(
         seed=20260928,
         is_days=180,
         cache=test_cache,
+        alpha_id=alpha_id,
     )
     cache_hit_ok = rerun_res["cache_hits"] >= (rerun_res["completed_trials"] - 5)
 
@@ -266,6 +288,7 @@ def run_vwfo02_experiment(
         is_days=180,
         cache=test_cache,
         one_way_fee=0.0008,  # doubled fee
+        alpha_id=alpha_id,
     )
     cache_miss_ok = miss_res["cache_hits"] == 0
 
@@ -413,9 +436,10 @@ Tuân thủ Rule R28: Trạng thái hiện tại được đặt là **`WAITING_
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run VWFO-02 experiment")
+    parser.add_argument("--study-id", type=str, default="btc_volatility_conditioned_wfo_v1", help="Study ID")
     parser.add_argument("--smoke", action="store_true", help="Run fast smoke test (2 origins, 16 trials)")
-    parser.add_argument("--trials", type=int, default=128, help="Trials per cutoff (default 128)")
+    parser.add_argument("--trials", type=int, default=None, help="Trials per cutoff (default from budget)")
     args = parser.parse_args()
 
-    res = run_vwfo02_experiment(trials_per_cutoff=args.trials, smoke=args.smoke)
+    res = run_vwfo02_experiment(study_id=args.study_id, trials_per_cutoff=args.trials, smoke=args.smoke)
     print(f"Run completed successfully. Receipt at {res['run_dir']}/gate_receipt.json")

@@ -1,0 +1,77 @@
+{
+  "schema": "regime_lab.vol_wfo_bootstrap_inference.v1",
+  "phase": "VWFO-05",
+  "n_draws": 5000,
+  "block_length": 3,
+  "seed": 20260929,
+  "primary_contrast": {
+    "r_c_vs_bcap": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "q_c_vs_bcap": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "secondary_contrasts": {
+    "r_c_vs_o": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "q_c_vs_o": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "r_c_vs_p": {
+      "point": -1.850371707708594e-17,
+      "lower95": -3.700743415417188e-17,
+      "ci95": [
+        -5.551115123125783e-17,
+        0.0
+      ]
+    },
+    "q_c_vs_p": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "q_c_vs_b0": {
+      "point": 0.0,
+      "lower95": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "decision_verdict": {
+    "verdict": "NO_MEANINGFUL_RETENTION_EDGE_OBSERVED",
+    "primary_conjunction_met": false,
+    "secondary_conjunction_met": false,
+    "primary_r_lower95": 0.0,
+    "primary_q_lower95": 0.0,
+    "threshold_r": 0.2,
+    "threshold_q": -0.1,
+    "common_folds_count": 12
+  }
+}

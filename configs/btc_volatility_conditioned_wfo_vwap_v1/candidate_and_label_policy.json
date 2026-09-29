@@ -1,0 +1,47 @@
+{
+  "schema": "regime_lab.vol_wfo_candidate_and_label_policy.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "version": "VOL-WFO-V1.0",
+  "windows": {
+    "candidate_is_days": 180,
+    "forward_eval_days": 14,
+    "cadence_days": 14,
+    "initial_capital": 20000.0,
+    "allocation_fraction": 0.1,
+    "fee_rate": 0.0004,
+    "slippage_bps": 1.0,
+    "trading_days_annualization": 365
+  },
+  "base_panel_policy": {
+    "max_candidates": 16,
+    "selection_rule": "IS_ONLY_MULTIDIMENSIONAL_STRATIFIED",
+    "quotas": {
+      "stock_anchor": 1,
+      "top_is_sharpe": 6,
+      "parameter_diversity": 5,
+      "controls_mid_low": 4
+    },
+    "anchor_role": "Mode 4 stock robust winner (select_is_only_robust_record)",
+    "top_is_role": "Highest completed IS Sharpe candidates",
+    "diversity_role": "Maximal parameter coverage across (coeff, AP, condition_threshold)",
+    "controls_role": "Mid and lower IS Sharpe candidates for unpenalized decay baseline"
+  },
+  "winner_union_policy": {
+    "rule": "EVALUATE_ALL_REGISTERED_WINNERS",
+    "description": "If an arm selects a candidate outside the top 16 base panel, that candidate is appended to the forward evaluation set before reading forward data."
+  },
+  "label_formulation": {
+    "sharpe_decay_formula": "D_{k, theta} = SR_{IS180, k, theta} - SR_{FWD14, k, theta}",
+    "relative_decay_formula": "Y_{k, theta} = D_{k, theta} - D_{k, anchor}",
+    "relative_sharpe_gain_formula": "Q_{k, theta} = SR_{FWD, k, theta} - SR_{FWD, k, anchor} = SR_{IS, k, theta} - SR_{IS, k, anchor} - Y_{k, theta}",
+    "anchor_relative_decay": 0.0,
+    "target_interpretation": "Lower Y represents less Sharpe decay relative to stock Mode 4 anchor; negative Y means the candidate outperformed the anchor in forward persistence."
+  },
+  "archive_policy": {
+    "maturity_rule": "matured_at = origin_cutoff + 14_days",
+    "exposure_guard": "STRICT_PAST_ONLY_FILTER: as_of <= matured_at",
+    "origin_weight_normalization": "EQUAL_WEIGHT_PER_MATURED_ORIGIN: sum_{theta} w_{k, theta} = 1.0, total_weight_k = 1.0 / K",
+    "retention_tier": "CANDIDATE_COMPACT",
+    "failure_policy": "NO_ZERO_FILLING: failed or censored trials keep explicit status and reason"
+  }
+}

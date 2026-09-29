@@ -1,0 +1,35 @@
+{
+  "account_state": {
+    "active_orders": {},
+    "active_params": {
+      "AP": 15,
+      "alpha.condition_threshold": 45,
+      "coeff": 3
+    },
+    "active_version": 1,
+    "cash": 20000.0,
+    "entry_price": 0.0,
+    "equity": 20000.0,
+    "fills_count": 0,
+    "last_param_change": "2025-06-08T00:15:00+00:00",
+    "last_revalidation": "2025-06-12T01:00:00+00:00",
+    "operational_status": "ACTIVE",
+    "position": 0.0,
+    "processed_proposal_ids": [
+      "p-life-01",
+      "p-same"
+    ],
+    "rejections_count": 0,
+    "revalidation_count": 2
+  },
+  "allocation_fraction": 0.1,
+  "arm_id": "C_H14",
+  "common_ready_lag_days": 1,
+  "event_log_count": 4,
+  "max_revalidation_age_days": 28,
+  "one_way_fee": 0.0004,
+  "pending_proposal": null,
+  "proposal_ttl_days": 2,
+  "slippage_bps": 1.0,
+  "wait_flat_required": true
+}

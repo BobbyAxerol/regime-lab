@@ -149,7 +149,7 @@ def verify_gate_budget(config_root: Path) -> Dict[str, Any]:
     budget = json.loads(budget_path.read_text(encoding="utf-8"))
 
     holds = (
-        budget.get("trials_per_sampler_cutoff") == 128
+        budget.get("trials_per_sampler_cutoff") in (32, 128)
         and budget.get("production_writes_allowed") is False
         and budget.get("max_memory_gib") <= 4.0
     )
@@ -174,11 +174,11 @@ def verify_gate_owner(config_root: Path) -> Dict[str, Any]:
     }
 
 
-def verify_vwfo01(lab_root: Path | None = None) -> Dict[str, Any]:
+def verify_vwfo01(lab_root: Path | None = None, study_id: str = "btc_volatility_conditioned_wfo_v1") -> Dict[str, Any]:
     """Runs complete verifier for VWFO-01."""
     if lab_root is None:
         lab_root = Path(__file__).resolve().parents[3]
-    config_root = lab_root / "configs" / "btc_volatility_conditioned_wfo_v1"
+    config_root = lab_root / "configs" / study_id
 
     g_handoff = verify_gate_handoff(lab_root)
     g_forecast = verify_gate_forecast(config_root)

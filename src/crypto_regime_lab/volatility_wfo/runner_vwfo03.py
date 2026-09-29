@@ -78,13 +78,22 @@ def load_dev_bars(start: str = "2024-04-01", end: str = "2025-04-01") -> Tuple[p
     return frame_1m, frame_15m
 
 
-def load_initial_archive() -> List[Dict[str, Any]]:
-    """Loads matured candidate archive from Phase VWFO-02."""
-    vwfo02_dir = EVIDENCE_DIR / "runs" / "vwfo02-20260929T001715Z-4225c492"
-    archive_file = vwfo02_dir / "candidate_archive.json"
-    if not archive_file.is_file():
-        raise FileNotFoundError(f"VWFO-02 candidate archive not found: {archive_file}")
-    return json.loads(archive_file.read_text(encoding="utf-8"))
+def load_initial_archive(evidence_dir: Path | None = None) -> List[Dict[str, Any]]:
+    """Loads matured candidate archive from latest completed Phase VWFO-02 run."""
+    ev_dir = evidence_dir or EVIDENCE_DIR
+    runs_dir = ev_dir / "runs"
+    if not runs_dir.is_dir():
+        raise FileNotFoundError(f"Runs directory does not exist: {runs_dir}")
+    vwfo02_runs = sorted([d for d in runs_dir.iterdir() if d.is_dir() and d.name.startswith("vwfo02-")], key=lambda d: d.name, reverse=True)
+    for r_dir in vwfo02_runs:
+        receipt_file = r_dir / "gate_receipt.json"
+        archive_file = r_dir / "candidate_archive.json"
+        if receipt_file.is_file() and archive_file.is_file():
+            receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+            if receipt.get("technical_gate") == "PASS":
+                print(f"Loading candidate archive from valid VWFO-02 run: {r_dir.name}")
+                return json.loads(archive_file.read_text(encoding="utf-8"))
+    raise FileNotFoundError(f"No valid completed VWFO-02 candidate archive found in {runs_dir}")
 
 
 def run_single_sampler_dev(
@@ -96,8 +105,11 @@ def run_single_sampler_dev(
     ni_generator: MarkovNoInfoGenerator,
     checkpoints_dir: Path,
     trials_per_cutoff: int = 128,
+    alpha_id: str = "A-SC",
+    config_dir: Path | None = None,
 ) -> Dict[str, Any]:
     """Runs chronological DEV folds sequentially for one sampler."""
+    cfg_dir = config_dir or CONFIG_DIR
     print(f"\n=======================================================")
     print(f"   STARTING CHRONOLOGICAL DEV FOR {sampler_id} (12 FOLDS)")
     print(f"=======================================================")
@@ -109,7 +121,7 @@ def run_single_sampler_dev(
     ni_seeds = [20261001, 20261002, 20261003]
 
     # Pre-generate pseudo p_LOW series across all origins
-    timeline_file = CONFIG_DIR / "timeline.json"
+    timeline_file = cfg_dir / "timeline.json"
     tl = json.loads(timeline_file.read_text(encoding="utf-8"))
     all_known_origins = tl["roles"]["INIT"]["origins"] + dev_origins
 
@@ -143,6 +155,7 @@ def run_single_sampler_dev(
             n_trials=trials_per_cutoff,
             seed=20260928 + fold_idx,
             is_days=180,
+            alpha_id=alpha_id,
         )
 
         anchor_rec = search_res.get("anchor_trial_record")
@@ -284,6 +297,7 @@ def run_single_sampler_dev(
             eval_union,
             fwd_start=origin_dt,
             fwd_end=fwd_end_dt,
+            alpha_id=alpha_id,
         )
 
         # 9. Compute Decay Labels
@@ -354,8 +368,8 @@ def run_single_sampler_dev(
     }
 
 
-def _run_sampler_worker(args: Tuple[str, List[str], List[Dict[str, Any]], pd.DataFrame, Path, Path, int]) -> Dict[str, Any]:
-    sampler_id, dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff = args
+def _run_sampler_worker(args: Tuple[str, List[str], List[Dict[str, Any]], pd.DataFrame, Path, Path, int, str, Path]) -> Dict[str, Any]:
+    sampler_id, dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff, alpha_id, config_dir = args
     forecast_engine = H14ForecastEngine(snapshot_root=snapshot_root)
     ni_generator = MarkovNoInfoGenerator(mu=0.333, sigma=0.035, rho=0.20)
     return run_single_sampler_dev(
@@ -367,24 +381,46 @@ def _run_sampler_worker(args: Tuple[str, List[str], List[Dict[str, Any]], pd.Dat
         ni_generator=ni_generator,
         checkpoints_dir=checkpoints_dir,
         trials_per_cutoff=trials_per_cutoff,
+        alpha_id=alpha_id,
+        config_dir=config_dir,
     )
 
 
-def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
+def execute_runner_vwfo03(
+    study_id: str = "btc_volatility_conditioned_wfo_v1",
+    trials_per_cutoff: int | None = None,
+) -> Dict[str, Any]:
     """Top-level execution of Phase VWFO-03."""
     t_start = time.perf_counter()
     run_id = new_lab_run_id("vwfo03")
-    evidence_run_dir = EVIDENCE_DIR / "runs" / run_id
+    config_dir = LAB_ROOT / "configs" / study_id
+    evidence_dir = LAB_ROOT / "evidence" / study_id
+    evidence_run_dir = evidence_dir / "runs" / run_id
     evidence_run_dir.mkdir(parents=True, exist_ok=True)
-    checkpoints_dir = EVIDENCE_DIR / "checkpoints"
+    checkpoints_dir = evidence_dir / "checkpoints"
     checkpoints_dir.mkdir(parents=True, exist_ok=True)
 
+    alpha_id = "A-SC"
+    reg_file = config_dir / "registration.json"
+    if reg_file.is_file():
+        reg_data = json.loads(reg_file.read_text(encoding="utf-8"))
+        alpha_id = reg_data.get("scope", {}).get("alpha_id", "A-SC")
+
+    budget_file = config_dir / "resource_budget.json"
+    if trials_per_cutoff is None:
+        if budget_file.is_file():
+            b_data = json.loads(budget_file.read_text(encoding="utf-8"))
+            trials_per_cutoff = b_data.get("trials_per_sampler_cutoff", 128)
+        else:
+            trials_per_cutoff = 128
+
     print(f"=== STARTING PHASE VWFO-03: SELECTION DEVELOPMENT & CONTROL ARMS ===")
+    print(f"Study ID: {study_id} | Alpha ID: {alpha_id}")
     print(f"Run ID: {run_id}")
     print(f"Evidence Dir: {evidence_run_dir}")
 
     # 1. Load timeline and DEV origins
-    timeline_file = CONFIG_DIR / "timeline.json"
+    timeline_file = config_dir / "timeline.json"
     tl = json.loads(timeline_file.read_text(encoding="utf-8"))
     dev_origins = tl["roles"]["DEV"]["origins"]
     assert len(dev_origins) == 12
@@ -396,14 +432,14 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
 
     # 3. Snapshot root & initial archive
     snapshot_root = LAB_ROOT / "snapshots" / "server_core_v1"
-    initial_archive = load_initial_archive()
+    initial_archive = load_initial_archive(evidence_dir)
     print(f"Loaded initial candidate archive from VWFO-02: {len(initial_archive)} records.")
 
     # 4. Run DEV for S_TPE and S_SOBOL in parallel
     print("Launching parallel DEV workers for S_TPE and S_SOBOL (max_workers=2)...")
     tasks = [
-        ("S_TPE", dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff),
-        ("S_SOBOL", dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff),
+        ("S_TPE", dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff, alpha_id, config_dir),
+        ("S_SOBOL", dev_origins, initial_archive, frame_15m, checkpoints_dir, snapshot_root, trials_per_cutoff, alpha_id, config_dir),
     ]
 
     import concurrent.futures
@@ -490,7 +526,7 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
     final_freeze_payload = {
         "schema": "regime_lab.vol_wfo_final_freeze.v1",
         "phase": "VWFO-03",
-        "study_id": "btc_volatility_conditioned_wfo_v1",
+        "study_id": study_id,
         "frozen_at_utc": datetime.now(timezone.utc).isoformat(),
         "chosen_sampler": chosen_sampler,
         "selection_status": choice_status,
@@ -513,7 +549,7 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
             "features_count": 38,
         },
     }
-    (CONFIG_DIR / "final_freeze.json").write_text(
+    (config_dir / "final_freeze.json").write_text(
         json.dumps(final_freeze_payload, indent=2, default=_json_default), encoding="utf-8"
     )
 
@@ -531,7 +567,7 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
 
     # 10. Write dev_summary.json
     dev_summary_payload = {
-        "study_id": "btc_volatility_conditioned_wfo_v1",
+        "study_id": study_id,
         "phase": "VWFO-03",
         "run_id": run_id,
         "chosen_sampler": chosen_sampler,
@@ -564,7 +600,7 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
     # 11. Write report.md
     report_content = f"""# VWFO-03: Selection Development & Sampler Freeze Report
 
-**Study ID**: `btc_volatility_conditioned_wfo_v1`  
+**Study ID**: `{study_id}`  
 **Run ID**: `{run_id}`  
 **Phase**: `VWFO-03`  
 **Execution Timestamp**: `{datetime.now(timezone.utc).isoformat()}`  
@@ -574,10 +610,10 @@ def execute_runner_vwfo03(trials_per_cutoff: int = 128) -> Dict[str, Any]:
 
 ## 1. Executive Summary
 
-Phase VWFO-03 executed chronological Selection Development across all 12 common bi-weekly DEV folds (`2024-10-12` to `2025-03-15`) for both `S_TPE` and `S_SOBOL` samplers ($2 \\times 12 \\times 128 = 3,072$ trials).
+Phase VWFO-03 executed chronological Selection Development across all 12 common bi-weekly DEV folds (`2024-10-12` to `2025-03-15`) for both `S_TPE` and `S_SOBOL` samplers ($2 \\times 12 \\times {trials_per_cutoff} = {2 * 12 * trials_per_cutoff}$ trials).
 
 Each fold performed:
-1. Standard Mode 4 IS180 search ($128$ trials) to discover candidate pool.
+1. Standard Mode 4 IS180 search ({trials_per_cutoff} trials) to discover candidate pool.
 2. Context extraction using LightGBM `M4_LGBM_CONSERVATIVE_SLOW` ($p_{{LOW}}$), persistence baseline ($p_{{PERSIST}}$), and Markov pseudo-controls ($P_{{NI,01..03}}$).
 3. Parameter descriptor extraction $\\phi(z)$ and anchor contrast $v = \\phi(z) - \\phi(a)$.
 4. Origin-weighted Ridge regression ($\\lambda=10.0$) on past matured candidate archive for $B0, B_{{CAP}}, O, C, P_{{NI}}$.
@@ -593,7 +629,7 @@ Each fold performed:
 | **S_TPE** | {sampler_choice_metrics['S_TPE']['mean_fwd_sharpes']['C_H14']:.4f} | {sampler_choice_metrics['S_TPE']['mean_fwd_sharpes']['B_CAP']:.4f} | {sampler_choice_metrics['S_TPE']['mean_r_c_vs_bcap']:+.4f} | {sampler_choice_metrics['S_TPE']['mean_fwd_sharpes']['O_PERSIST']:.4f} | {sampler_choice_metrics['S_TPE']['mean_r_c_vs_o']:+.4f} | **{sampler_choice_metrics['S_TPE']['min_margin']:+.4f}** | {sampler_choice_metrics['S_TPE']['total_work_seconds']:.1f}s | {'SELECTED' if chosen_sampler == 'S_TPE' else 'RUNNER_UP'} |
 | **S_SOBOL** | {sampler_choice_metrics['S_SOBOL']['mean_fwd_sharpes']['C_H14']:.4f} | {sampler_choice_metrics['S_SOBOL']['mean_fwd_sharpes']['B_CAP']:.4f} | {sampler_choice_metrics['S_SOBOL']['mean_r_c_vs_bcap']:+.4f} | {sampler_choice_metrics['S_SOBOL']['mean_fwd_sharpes']['O_PERSIST']:.4f} | {sampler_choice_metrics['S_SOBOL']['mean_r_c_vs_o']:+.4f} | **{sampler_choice_metrics['S_SOBOL']['min_margin']:+.4f}** | {sampler_choice_metrics['S_SOBOL']['total_work_seconds']:.1f}s | {'SELECTED' if chosen_sampler == 'S_SOBOL' else 'RUNNER_UP'} |
 
-**Decision**: `{chosen_sampler}` is frozen as the confirmatory sampler for Phase VWFO-05 in `configs/btc_volatility_conditioned_wfo_v1/final_freeze.json`.
+**Decision**: `{chosen_sampler}` is frozen as the confirmatory sampler for Phase VWFO-05 in `{study_id}/final_freeze.json`.
 
 ---
 
@@ -617,7 +653,7 @@ Each fold performed:
 All 6 Exit Gates verified by independent verifier `verifier_vwfo03`:
 - `G3-SELECTOR`: **PASS** (Contrast vector $v_{{a}} \\equiv \\mathbf{{0}}$, $\\hat Y(a) \\equiv 0.000$, $\\min \\hat Y$ rule).
 - `G3-CONTROLS`: **PASS** ($B_{{CAP}}, O_{{PERSIST}}, P_{{NI\\_01..03}}$ verified).
-- `G3-DEV12`: **PASS** ($12/12$ DEV origins executed for both samplers, $3,072$ trials).
+- `G3-DEV12`: **PASS** ($12/12$ DEV origins executed for both samplers).
 - `G3-CHOICE`: **PASS** (Deterministic §8.7 rule applied).
 - `G3-FREEZE`: **PASS** (`final_freeze.json` created in configs).
 - `G3-OWNER`: **PENDING** (Awaiting Owner Review to advance to Phase VWFO-04).
@@ -645,4 +681,10 @@ All 6 Exit Gates verified by independent verifier `verifier_vwfo03`:
 
 
 if __name__ == "__main__":
-    res = execute_runner_vwfo03()
+    import argparse
+    parser = argparse.ArgumentParser(description="Run VWFO-03 experiment")
+    parser.add_argument("--study-id", type=str, default="btc_volatility_conditioned_wfo_v1", help="Study ID")
+    parser.add_argument("--trials", type=int, default=None, help="Trials per cutoff (default from budget)")
+    args = parser.parse_args()
+
+    res = execute_runner_vwfo03(study_id=args.study_id, trials_per_cutoff=args.trials)

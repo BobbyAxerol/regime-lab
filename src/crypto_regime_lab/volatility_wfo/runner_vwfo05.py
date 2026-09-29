@@ -82,18 +82,19 @@ def _json_default(obj: Any) -> Any:
     raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
 
 
-def verify_owner_approval_vwfo04() -> Dict[str, Any]:
+def verify_owner_approval_vwfo04(evidence_dir: Path | None = None) -> Dict[str, Any]:
     """Verifies owner approval for VWFO-04 -> VWFO-05 from owner_decisions.jsonl."""
-    ledger_file = EVIDENCE_DIR / "owner_decisions.jsonl"
+    ev_dir = evidence_dir or EVIDENCE_DIR
+    ledger_file = ev_dir / "owner_decisions.jsonl"
     if not ledger_file.is_file():
-        raise RuntimeError("Missing owner_decisions.jsonl ledger")
+        raise RuntimeError(f"Missing owner_decisions.jsonl ledger in {ev_dir}")
 
     with open(ledger_file, "r", encoding="utf-8") as f:
         records = [json.loads(line) for line in f if line.strip()]
 
     target_decision = None
     for rec in reversed(records):
-        if rec.get("decides") == "VWFO-04->VWFO-05":
+        if rec.get("decides") in ("VWFO-04->VWFO-05", "AUTHORIZE_VWAP_VOLATILITY_CONDITIONED_WFO_STUDY"):
             target_decision = rec
             break
 
@@ -117,19 +118,26 @@ def load_final_bars(start: str = "2024-11-01", end: str = "2025-12-15") -> Tuple
     return frame_1m, frame_15m
 
 
-def load_matured_archive_before_final() -> List[Dict[str, Any]]:
+def load_matured_archive_before_final(evidence_dir: Path | None = None) -> List[Dict[str, Any]]:
     """Loads accumulated candidate archive from Phase VWFO-03 (contains INIT + DEV records)."""
-    vwfo03_dir = EVIDENCE_DIR / "runs" / "vwfo03-20260929T015627Z-436e7838"
-    archive_file = vwfo03_dir / "candidate_archive.json"
-    if not archive_file.is_file():
-        raise RuntimeError(f"Candidate archive from VWFO-03 missing: {archive_file}")
-    with open(archive_file, "r", encoding="utf-8") as f:
-        return json.load(f)
+    ev_dir = evidence_dir or EVIDENCE_DIR
+    runs_dir = ev_dir / "runs"
+    vwfo03_runs = sorted(runs_dir.glob("vwfo03-*"), reverse=True)
+    for r_dir in vwfo03_runs:
+        receipt_file = r_dir / "gate_receipt.json"
+        archive_file = r_dir / "candidate_archive.json"
+        if receipt_file.is_file() and archive_file.is_file():
+            receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+            if receipt.get("technical_gate") == "PASS":
+                with open(archive_file, "r", encoding="utf-8") as f:
+                    return json.load(f)
+    raise RuntimeError(f"No completed VWFO-03 run with passing technical gate found in {runs_dir}")
 
 
-def build_final_model_bundle() -> ModelBundle:
+def build_final_model_bundle(config_dir: Path | None = None) -> ModelBundle:
     """Builds reference ModelBundle from model_manifest.json."""
-    manifest_file = CONFIG_DIR / "model_manifest.json"
+    cfg_dir = config_dir or CONFIG_DIR
+    manifest_file = cfg_dir / "model_manifest.json"
     with open(manifest_file, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
@@ -158,13 +166,23 @@ def build_final_model_bundle() -> ModelBundle:
     )
 
 
-def run_vwfo05(resume_run_id: str | None = None) -> None:
+def run_vwfo05(study_id: str = "btc_volatility_conditioned_wfo_v1", resume_run_id: str | None = None) -> None:
     print("=" * 80)
     print("VWFO-05: Locked Final WFO, D1/D2 & Conclusion Runner")
+    print(f"Study ID: {study_id}")
     print("=" * 80)
 
+    config_dir = LAB_ROOT / "configs" / study_id
+    evidence_dir = LAB_ROOT / "evidence" / study_id
+
+    alpha_id = "A-SC"
+    reg_file = config_dir / "registration.json"
+    if reg_file.is_file():
+        reg_data = json.loads(reg_file.read_text(encoding="utf-8"))
+        alpha_id = reg_data.get("scope", {}).get("alpha_id", "A-SC")
+
     # 1. Verify Owner Approval
-    approval = verify_owner_approval_vwfo04()
+    approval = verify_owner_approval_vwfo04(evidence_dir)
     print(f"[1/9] Owner approval verified: {approval['decision_id']} ({approval['decides']})")
 
     # 2. Setup Run Directory
@@ -172,7 +190,7 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
         run_id = resume_run_id
     else:
         run_id = new_lab_run_id("vwfo05")
-    run_dir = EVIDENCE_DIR / "runs" / run_id
+    run_dir = evidence_dir / "runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     checkpoints_dir = run_dir / "checkpoints"
     checkpoints_dir.mkdir(parents=True, exist_ok=True)
@@ -181,6 +199,7 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
     request_metadata = {
         "schema": "regime_lab.vol_wfo_run_request.v1",
         "phase": "VWFO-05",
+        "study_id": study_id,
         "run_id": run_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "approval_reference": approval["decision_id"],
@@ -190,15 +209,15 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
         json.dump(request_metadata, f, indent=2)
 
     # 3. Load Configs & Historical Archive
-    freeze_cfg = json.loads((CONFIG_DIR / "final_freeze.json").read_text(encoding="utf-8"))
-    timeline_cfg = json.loads((CONFIG_DIR / "timeline.json").read_text(encoding="utf-8"))
+    freeze_cfg = json.loads((config_dir / "final_freeze.json").read_text(encoding="utf-8"))
+    timeline_cfg = json.loads((config_dir / "timeline.json").read_text(encoding="utf-8"))
     final_origins = freeze_cfg["final_origins"]
     chosen_sampler = freeze_cfg["chosen_sampler"]
     trials_per_cutoff = freeze_cfg["trials_per_cutoff"]
 
     print(f"[3/9] Configuration loaded: Sampler={chosen_sampler}, Origins={len(final_origins)}, Trials={trials_per_cutoff}")
 
-    archive = load_matured_archive_before_final()
+    archive = load_matured_archive_before_final(evidence_dir)
     print(f"Loaded {len(archive)} historical matured records from VWFO-03")
 
     # 4. Load Real Market Bars
@@ -217,7 +236,7 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
         + final_origins
     )
     pseudo_p_lows = {s: ni_generator.generate_series(all_known_origins, seed=s) for s in ni_seeds}
-    bundle = build_final_model_bundle()
+    bundle = build_final_model_bundle(config_dir)
 
     # 5. Execute 12 FINAL Folds
     print("[5/9] Executing 12 Confirmatory FINAL Folds...")
@@ -245,6 +264,7 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
             frame_15m,
             origin_cutoff=origin_dt.isoformat(),
             sampler_id=chosen_sampler,
+            alpha_id=alpha_id,
             n_trials=trials_per_cutoff,
             seed=20260928 + 100 + fold_idx,
             is_days=180,
@@ -723,7 +743,8 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
 ## Identity / scope
 - **Phase**: VWFO-05 (Locked Final WFO, D1/D2 và Kết luận)
 - **Guide Version**: VOL-WFO-V1.0 (§16, §10, §17)
-- **Study ID**: `btc_volatility_conditioned_wfo_v1`
+- **Study ID**: `{study_id}`
+- **Strategy & Instrument**: {alpha_id} on Binance BTCUSDT Spot/Perpetual
 - **Owner Approval Reference**: `{approval['decision_id']}` ({approval['decides']})
 - **Chosen Confirmatory Sampler**: `{chosen_sampler}` (Frozen in VWFO-03)
 - **Evaluation Origins**: 12 FINAL origins from 2025-06-07 to 2025-11-08 (14-day cadence)
@@ -793,6 +814,7 @@ def run_vwfo05(resume_run_id: str | None = None) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="VWFO-05 Confirmatory Runner")
+    parser.add_argument("--study-id", type=str, default="btc_volatility_conditioned_wfo_v1", help="Study ID")
     parser.add_argument("--resume", type=str, default=None, help="Resume existing run ID")
     args = parser.parse_args()
-    run_vwfo05(resume_run_id=args.resume)
+    run_vwfo05(study_id=args.study_id, resume_run_id=args.resume)

@@ -1,0 +1,104 @@
+{
+  "schema": "regime_lab.vol_wfo_timeline.v1",
+  "study_id": "btc_volatility_conditioned_wfo_v1",
+  "version": "VOL-WFO-V1.0",
+  "cadence_days": 14,
+  "folds_per_role": 12,
+  "candidate_is_days": 180,
+  "forward_eval_days": 14,
+  "d2_continuation_days": 28,
+  "data_boundaries": {
+    "spot_earliest": "2018-01-01",
+    "perp_earliest": "2020-01-01",
+    "metrics_earliest": "2020-09-01",
+    "spot_latest_closed_day": "2026-08-07"
+  },
+  "model_training_prefix": {
+    "start": "2022-01-14",
+    "end": "2024-01-13",
+    "days": 730,
+    "status": "MATURED_BEFORE_INIT"
+  },
+  "roles": {
+    "INIT": {
+      "role": "CANDIDATE_ARCHIVE_INITIATION",
+      "origin_count": 12,
+      "origins": [
+        "2024-04-13",
+        "2024-04-27",
+        "2024-05-11",
+        "2024-05-25",
+        "2024-06-08",
+        "2024-06-22",
+        "2024-07-06",
+        "2024-07-20",
+        "2024-08-03",
+        "2024-08-17",
+        "2024-08-31",
+        "2024-09-14"
+      ],
+      "first_origin": "2024-04-13",
+      "last_origin": "2024-09-14",
+      "first_window_start": "2024-04-13",
+      "last_window_end": "2024-09-28",
+      "maturity_utc": "2024-09-28T00:00:00+00:00",
+      "notes": "12 bi-weekly origins to generate candidate archive labels D = SR_IS - SR_FWD before DEV."
+    },
+    "DEV": {
+      "role": "SELECTION_DEVELOPMENT",
+      "origin_count": 12,
+      "origins": [
+        "2024-10-12",
+        "2024-10-26",
+        "2024-11-09",
+        "2024-11-23",
+        "2024-12-07",
+        "2024-12-21",
+        "2025-01-04",
+        "2025-01-18",
+        "2025-02-01",
+        "2025-02-15",
+        "2025-03-01",
+        "2025-03-15"
+      ],
+      "first_origin": "2024-10-12",
+      "last_origin": "2025-03-15",
+      "first_window_start": "2024-10-12",
+      "last_window_end": "2025-03-29",
+      "maturity_utc": "2025-03-29T00:00:00+00:00",
+      "notes": "12 common bi-weekly folds for TPE vs Sobol evaluation and sampler freeze."
+    },
+    "FREEZE_BOUNDARY": {
+      "freeze_start": "2025-03-29",
+      "freeze_end": "2025-06-07",
+      "gap_days": 70,
+      "notes": "70-day freeze gap ensuring all DEV outcomes mature before FINAL start."
+    },
+    "FINAL": {
+      "role": "CONFIRMATORY_FINAL_WFO",
+      "origin_count": 12,
+      "origins": [
+        "2025-06-07",
+        "2025-06-21",
+        "2025-07-05",
+        "2025-07-19",
+        "2025-08-02",
+        "2025-08-16",
+        "2025-08-30",
+        "2025-09-13",
+        "2025-09-27",
+        "2025-10-11",
+        "2025-10-25",
+        "2025-11-08"
+      ],
+      "first_origin": "2025-06-07",
+      "last_origin": "2025-11-08",
+      "first_window_start": "2025-06-07",
+      "last_window_end": "2025-11-22",
+      "maturity_utc": "2025-11-22T00:00:00+00:00",
+      "d2_last_anchor_end": "2025-12-06",
+      "d2_maturity_utc": "2025-12-06T00:00:00+00:00",
+      "notes": "12 paired-valid final folds on the winning sampler + 28-day D2 continuation."
+    }
+  }
+}

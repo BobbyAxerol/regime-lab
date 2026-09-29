@@ -1,0 +1,67 @@
+{
+  "schema": "regime_lab.vol_wfo_gate_receipt.v1",
+  "phase": "VWFO-05",
+  "evidence_run_id": "vwfo05-20260929T164541Z-25048d80",
+  "technical_gate": "PASS",
+  "implementation_status": "COMPLETE",
+  "research_status": "NO_MEANINGFUL_RETENTION_EDGE_OBSERVED",
+  "owner_review": "PENDING",
+  "gates": {
+    "G5-COMPLETE": {
+      "status": "PASS",
+      "details": {
+        "common_paired_folds": 12,
+        "chosen_sampler": "S_SOBOL",
+        "arms_count": 8,
+        "continuous_evaluated": true,
+        "d2_evaluated": true
+      }
+    },
+    "G5-SHARPE": {
+      "status": "PASS",
+      "details": {
+        "max_d1_residual": 0.0,
+        "evaluated_folds": 12,
+        "mean_r_c_cap": 0.0,
+        "mean_q_c_cap": 0.0
+      }
+    },
+    "G5-CONTROLS": {
+      "status": "PASS",
+      "details": {
+        "evaluated_contrasts": [
+          "C_H14 vs B_CAP",
+          "C_H14 vs O_PERSIST",
+          "C_H14 vs P_NI_COMPOSITE",
+          "B0_GLOBAL vs A_M4"
+        ],
+        "placebo_composite_valid": true
+      }
+    },
+    "G5-INFERENCE": {
+      "status": "PASS",
+      "details": {
+        "bootstrap_draws": 5000,
+        "block_length": 3,
+        "decision_verdict": "NO_MEANINGFUL_RETENTION_EDGE_OBSERVED",
+        "r_lower95": 0.0,
+        "q_lower95": 0.0
+      }
+    },
+    "G5-EVIDENCE": {
+      "status": "PASS",
+      "details": {
+        "all_artifacts_present": true,
+        "artifacts_count": 9
+      }
+    },
+    "G5-OWNER_HANDOFF": {
+      "status": "PENDING",
+      "details": {
+        "review_status": "WAITING_OWNER_FINAL_REVIEW",
+        "study_completion": "STUDY_EXECUTED_AND_BOUNDED",
+        "rule": "R28: Verifier cannot approve its own phase; owner approval ledger must record decision"
+      }
+    }
+  }
+}

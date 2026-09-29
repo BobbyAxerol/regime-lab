@@ -22,7 +22,8 @@ def verify_vwfo04(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
     if lab_root is None:
         lab_root = evidence_run_dir.parents[3]
 
-    configs_dir = lab_root / "configs" / "btc_volatility_conditioned_wfo_v1"
+    study_id = evidence_run_dir.parent.parent.name if evidence_run_dir.parent.name == "runs" else "btc_volatility_conditioned_wfo_v1"
+    configs_dir = lab_root / "configs" / study_id
     live_policy_file = configs_dir / "live_policy.json"
 
     # Evidence files in run directory

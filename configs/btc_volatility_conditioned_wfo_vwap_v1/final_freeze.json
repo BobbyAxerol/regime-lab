@@ -1,0 +1,52 @@
+{
+  "schema": "regime_lab.vol_wfo_final_freeze.v1",
+  "phase": "VWFO-03",
+  "study_id": "btc_volatility_conditioned_wfo_vwap_v1",
+  "frozen_at_utc": "2026-09-29T16:42:55.862712+00:00",
+  "chosen_sampler": "S_SOBOL",
+  "selection_status": "QUALIFIED_DEV_EVIDENCE",
+  "final_origins": [
+    "2025-06-07",
+    "2025-06-21",
+    "2025-07-05",
+    "2025-07-19",
+    "2025-08-02",
+    "2025-08-16",
+    "2025-08-30",
+    "2025-09-13",
+    "2025-09-27",
+    "2025-10-11",
+    "2025-10-25",
+    "2025-11-08"
+  ],
+  "final_arms": [
+    "A_M4",
+    "B0_GLOBAL",
+    "B_CAP",
+    "O_PERSIST",
+    "C_H14",
+    "P_NI_01",
+    "P_NI_02",
+    "P_NI_03"
+  ],
+  "freeze_boundary_gap_days": 70,
+  "trials_per_cutoff": 32,
+  "primary_comparison": "C_H14 vs B_CAP",
+  "secondary_comparisons": [
+    "C_H14 vs O_PERSIST",
+    "B0_GLOBAL vs A_M4",
+    "C_H14 vs P_NI_COMPOSITE"
+  ],
+  "economics": {
+    "initial_equity": 20000.0,
+    "allocation_fraction": 0.1,
+    "leverage_cap": 1,
+    "one_way_fee_decimal": 0.0004,
+    "one_way_slippage_decimal": 0.0001
+  },
+  "model_frozen": {
+    "recipe_id": "M4_LGBM_CONSERVATIVE_SLOW",
+    "temperature_t_v": 3.946,
+    "features_count": 38
+  }
+}

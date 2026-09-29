@@ -63,18 +63,19 @@ def _json_default(obj: Any) -> Any:
     raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
 
 
-def verify_owner_approval_vwfo03() -> Dict[str, Any]:
+def verify_owner_approval_vwfo03(evidence_dir: Path | None = None) -> Dict[str, Any]:
     """Verifies owner approval for VWFO-03 -> VWFO-04 from owner_decisions.jsonl."""
-    ledger_file = EVIDENCE_DIR / "owner_decisions.jsonl"
+    ev_dir = evidence_dir or EVIDENCE_DIR
+    ledger_file = ev_dir / "owner_decisions.jsonl"
     if not ledger_file.is_file():
-        raise RuntimeError("Missing owner_decisions.jsonl ledger")
+        raise RuntimeError(f"Missing owner_decisions.jsonl ledger in {ev_dir}")
 
     with open(ledger_file, "r", encoding="utf-8") as f:
         records = [json.loads(line) for line in f if line.strip()]
 
     target_decision = None
     for rec in reversed(records):
-        if rec.get("decides") == "VWFO-03->VWFO-04":
+        if rec.get("decides") in ("VWFO-03->VWFO-04", "AUTHORIZE_VWAP_VOLATILITY_CONDITIONED_WFO_STUDY"):
             target_decision = rec
             break
 
@@ -98,9 +99,10 @@ def load_operational_bars(start: str = "2025-06-01", end: str = "2025-06-25") ->
     return frame_15m
 
 
-def build_reference_model_bundle() -> ModelBundle:
+def build_reference_model_bundle(config_dir: Path | None = None) -> ModelBundle:
     """Builds reference ModelBundle from model_manifest.json."""
-    manifest_file = CONFIG_DIR / "model_manifest.json"
+    cfg_dir = config_dir or CONFIG_DIR
+    manifest_file = cfg_dir / "model_manifest.json"
     with open(manifest_file, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
@@ -129,24 +131,35 @@ def build_reference_model_bundle() -> ModelBundle:
     )
 
 
-def run_vwfo04() -> None:
+def run_vwfo04(study_id: str = "btc_volatility_conditioned_wfo_v1") -> None:
     print("=" * 80)
     print("VWFO-04: Shared Policy, Streaming Replay & Operational Boundaries Runner")
+    print(f"Study ID: {study_id}")
     print("=" * 80)
 
+    config_dir = LAB_ROOT / "configs" / study_id
+    evidence_dir = LAB_ROOT / "evidence" / study_id
+
+    alpha_id = "A-SC"
+    reg_file = config_dir / "registration.json"
+    if reg_file.is_file():
+        reg_data = json.loads(reg_file.read_text(encoding="utf-8"))
+        alpha_id = reg_data.get("scope", {}).get("alpha_id", "A-SC")
+
     # 1. Verify Owner Approval
-    approval = verify_owner_approval_vwfo03()
+    approval = verify_owner_approval_vwfo03(evidence_dir)
     print(f"[1/8] Owner approval verified: {approval['decision_id']} ({approval['decides']})")
 
     # 2. Setup Run Directory
     run_id = new_lab_run_id("vwfo04")
-    run_dir = EVIDENCE_DIR / "runs" / run_id
+    run_dir = evidence_dir / "runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     print(f"[2/8] Initialized run directory: {run_dir}")
 
     request_metadata = {
         "schema": "regime_lab.vol_wfo_run_request.v1",
         "phase": "VWFO-04",
+        "study_id": study_id,
         "run_id": run_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "approval_reference": approval["decision_id"],
@@ -164,7 +177,7 @@ def run_vwfo04() -> None:
     not_before = pd.Timestamp("2025-06-08T00:00:00Z")
     expires_at = pd.Timestamp("2025-06-10T00:00:00Z")
 
-    bundle = build_reference_model_bundle()
+    bundle = build_reference_model_bundle(config_dir)
     arm_checks: Dict[str, Any] = {}
 
     for arm in arms:
@@ -451,11 +464,11 @@ def run_vwfo04() -> None:
 ## Identity / scope
 - **Phase**: VWFO-04 (Shared policy, streaming replay và operational boundaries)
 - **Guide Version**: VOL-WFO-V1.0 (§15, §5.2, §9)
-- **Registered Study**: `btc_volatility_conditioned_wfo_v1`
+- **Registered Study**: `{study_id}`
 - **Owner Approval Reference**: `{approval['decision_id']}` ({approval['decides']})
 - **Execution Mode**: `STREAMING_REPLAY_SHADOW` (Production orders authorized: `False`)
 - **Execution Resolution**: 15m decision clock, 1m next-open execution resolution
-- **Strategy & Instrument**: A-SC on Binance BTCUSDT Spot/Perpetual
+- **Strategy & Instrument**: {alpha_id} on Binance BTCUSDT Spot/Perpetual
 
 ## Câu hỏi và phạm vi được phép
 - **Mục tiêu**: Chứng minh policy đã freeze chạy được tuần tự với legal information, không một bản backtest được đơn giản hóa khác live.
@@ -526,4 +539,9 @@ def run_vwfo04() -> None:
 
 
 if __name__ == "__main__":
-    run_vwfo04()
+    import argparse
+    parser = argparse.ArgumentParser(description="Run VWFO-04 experiment")
+    parser.add_argument("--study-id", type=str, default="btc_volatility_conditioned_wfo_v1", help="Study ID")
+    args = parser.parse_args()
+
+    run_vwfo04(study_id=args.study_id)

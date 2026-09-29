@@ -94,13 +94,21 @@ def select_base_panel(
     if remaining:
         # Distance to already chosen panel candidates
         def _norm_dist(p1: dict, p2: dict) -> float:
-            # coeff: 1..8 -> range 7
-            # AP: 5..60 -> range 55
-            # threshold: 30..80 -> range 50
-            d_c = (p1.get("coeff", 1) - p2.get("coeff", 1)) / 7.0
-            d_ap = (p1.get("AP", 5) - p2.get("AP", 5)) / 55.0
-            d_th = (p1.get("alpha.condition_threshold", 30) - p2.get("alpha.condition_threshold", 30)) / 50.0
-            return float(math.sqrt(d_c**2 + d_ap**2 + d_th**2))
+            if "dev_mult" in p1 or "dev_mult" in p2:
+                d_dev = (p1.get("dev_mult", 2.0) - p2.get("dev_mult", 2.0)) / 4.5
+                d_stop = (p1.get("stop_atr", 3.0) - p2.get("stop_atr", 3.0)) / 9.0
+                d_tgt = (p1.get("target_r", 2.0) - p2.get("target_r", 2.0)) / 9.0
+                d_rsi = (p1.get("rsi_len", 14) - p2.get("rsi_len", 14)) / 75.0
+                d_htf = (p1.get("htf_ema_len", 200) - p2.get("htf_ema_len", 200)) / 680.0
+                return float(math.sqrt(d_dev**2 + d_stop**2 + d_tgt**2 + d_rsi**2 + d_htf**2))
+            else:
+                # coeff: 1..8 -> range 7
+                # AP: 5..60 -> range 55
+                # threshold: 30..80 -> range 50
+                d_c = (p1.get("coeff", 1) - p2.get("coeff", 1)) / 7.0
+                d_ap = (p1.get("AP", 5) - p2.get("AP", 5)) / 55.0
+                d_th = (p1.get("alpha.condition_threshold", 30) - p2.get("alpha.condition_threshold", 30)) / 50.0
+                return float(math.sqrt(d_c**2 + d_ap**2 + d_th**2))
 
         while div_added < diversity_quota and remaining:
             # Pick candidate that maximizes minimum distance to all existing panel members
@@ -188,6 +196,7 @@ def evaluate_candidates_forward(
     fwd_start: pd.Timestamp,
     fwd_end: pd.Timestamp,
     *,
+    alpha_id: str = "A-SC",
     initial_capital: float = 20000.0,
     one_way_fee: float = 0.0004,
     slippage_bps: float = 1.0,
@@ -204,9 +213,16 @@ def evaluate_candidates_forward(
 
     for cand in candidates:
         params = cand["params"]
+        effective_alpha = alpha_id
+        if "dev_mult" in params:
+            effective_alpha = "A-VWAP"
+        elif "coeff" in params:
+            effective_alpha = "A-SC"
+
         cache_key = hashlib.sha256(
             json.dumps(
                 {
+                    "alpha_id": effective_alpha,
                     "params": params,
                     "fwd_start": fwd_start.isoformat(),
                     "fwd_end": fwd_end.isoformat(),
@@ -224,7 +240,7 @@ def evaluate_candidates_forward(
             initial = VersionWindow("fwd-eval", params, 0, "initial", required_warm_bars=None)
             try:
                 run = run_event_account(
-                    "A-SC",
+                    effective_alpha,
                     fwd_data,
                     initial=initial,
                     schedule=[],

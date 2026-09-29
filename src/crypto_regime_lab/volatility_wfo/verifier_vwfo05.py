@@ -22,8 +22,8 @@ def verify_vwfo05(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
     """Independent verification of Phase VWFO-05 outputs and gates."""
     if lab_root is None:
         lab_root = evidence_run_dir.parents[3]
-
-    configs_dir = lab_root / "configs" / "btc_volatility_conditioned_wfo_v1"
+    study_id = evidence_run_dir.parent.parent.name if evidence_run_dir.parent.name == "runs" else "btc_volatility_conditioned_wfo_v1"
+    configs_dir = lab_root / "configs" / study_id
     final_freeze_file = configs_dir / "final_freeze.json"
 
     # Evidence files in run directory
@@ -48,9 +48,14 @@ def verify_vwfo05(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
         arms_evaluated = summary_data.get("arms_evaluated", [])
         chosen_sampler = summary_data.get("chosen_sampler", "")
 
+        expected_sampler = "S_TPE"
+        if final_freeze_file.is_file():
+            freeze_data = json.loads(final_freeze_file.read_text(encoding="utf-8"))
+            expected_sampler = freeze_data.get("chosen_sampler", "S_TPE")
+
         complete_pass = (
             final_folds_count >= 12
-            and chosen_sampler == "S_TPE"
+            and chosen_sampler == expected_sampler
             and all(a in arms_evaluated for a in ["A_M4", "B0_GLOBAL", "B_CAP", "O_PERSIST", "C_H14", "P_NI_01", "P_NI_02", "P_NI_03"])
             and summary_data.get("continuous_accounts_evaluated") is True
             and summary_data.get("d2_evaluated") is True

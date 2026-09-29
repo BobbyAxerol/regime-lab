@@ -1,0 +1,49 @@
+{
+  "chosen_sampler": "S_SOBOL",
+  "selection_status": "QUALIFIED_DEV_EVIDENCE",
+  "selection_criterion": "MAXIMIZE_MIN_MEAN_EXCESS_SHARPE_OVER_BCAP_AND_O",
+  "sampler_metrics": {
+    "S_TPE": {
+      "mean_fwd_sharpes": {
+        "A_M4": 0.0,
+        "B0_GLOBAL": 0.0,
+        "B_CAP": 0.0,
+        "O_PERSIST": 0.0,
+        "C_H14": 0.0,
+        "P_NI_01": 0.0,
+        "P_NI_02": 0.0,
+        "P_NI_03": 0.0
+      },
+      "mean_r_c_vs_bcap": 0.0,
+      "mean_r_c_vs_o": 0.0,
+      "mean_r_b0_vs_a": 0.0,
+      "min_margin": 0.0,
+      "is_priority_group": true,
+      "total_work_seconds": 535.2758501910139
+    },
+    "S_SOBOL": {
+      "mean_fwd_sharpes": {
+        "A_M4": 0.0,
+        "B0_GLOBAL": 0.0,
+        "B_CAP": 0.0,
+        "O_PERSIST": 0.0,
+        "C_H14": 0.0,
+        "P_NI_01": 0.0,
+        "P_NI_02": 0.0,
+        "P_NI_03": 0.0
+      },
+      "mean_r_c_vs_bcap": 0.0,
+      "mean_r_c_vs_o": 0.0,
+      "mean_r_b0_vs_a": 0.0,
+      "min_margin": 0.0,
+      "is_priority_group": true,
+      "total_work_seconds": 533.3375166410115
+    }
+  },
+  "tie_break_hierarchy": [
+    "MIN_EXCESS_MARGIN",
+    "LOWER_MEASURED_WORK",
+    "PREDECLARED_ORDER_S_TPE_FIRST"
+  ],
+  "chosen_at_utc": "2026-09-29T16:42:55.861742+00:00"
+}

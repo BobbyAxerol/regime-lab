@@ -1,0 +1,176 @@
+{
+  "schema": "regime_lab.vol_wfo_gate_receipt.v1",
+  "phase": "VWFO-02",
+  "run_id": "vwfo02-20260929T162618Z-00dd54c8",
+  "overall_status": "FAIL",
+  "technical_gate": "FAIL",
+  "owner_review": "WAITING_OWNER_REVIEW",
+  "research_status": "EXPLORATORY_ARCHIVE_INITIATED",
+  "implementation_status": "COMPLETE",
+  "gates": {
+    "G2-MODE4": {
+      "gate": "G2-MODE4",
+      "status": "PASS",
+      "reason": "All 24 searches have qualified Mode 4 robust anchors",
+      "total_anchors_checked": 4,
+      "details": [
+        {
+          "sampler_id": "S_TPE",
+          "origin": "2024-04-13T00:00:00+00:00",
+          "has_anchor": true,
+          "temporal_score": 0.031949682288539116,
+          "is_sharpe": 0.22312094707166488,
+          "max_is_sharpe": 0.22312094707166488,
+          "anchor_objective_is_finite": true
+        },
+        {
+          "sampler_id": "S_TPE",
+          "origin": "2024-04-27T00:00:00+00:00",
+          "has_anchor": true,
+          "temporal_score": 0.0,
+          "is_sharpe": 0.0,
+          "max_is_sharpe": 0.0,
+          "anchor_objective_is_finite": true
+        },
+        {
+          "sampler_id": "S_SOBOL",
+          "origin": "2024-04-13T00:00:00+00:00",
+          "has_anchor": true,
+          "temporal_score": 0.0,
+          "is_sharpe": -1.4907276669318916,
+          "max_is_sharpe": -1.4907276669318916,
+          "anchor_objective_is_finite": true
+        },
+        {
+          "sampler_id": "S_SOBOL",
+          "origin": "2024-04-27T00:00:00+00:00",
+          "has_anchor": true,
+          "temporal_score": 0.0,
+          "is_sharpe": 0.0,
+          "max_is_sharpe": 0.0,
+          "anchor_objective_is_finite": true
+        }
+      ]
+    },
+    "G2-POOL": {
+      "gate": "G2-POOL",
+      "status": "PASS",
+      "reason": "All 4 pools executed 16 attempted trials and formed valid base panels <= 16",
+      "total_pools": 4,
+      "sample_checks": [
+        {
+          "sampler_id": "S_TPE",
+          "origin": "2024-04-13T00:00:00+00:00",
+          "attempted": 16,
+          "completed": 16,
+          "panel_size": 15,
+          "panel_size_ok": true,
+          "has_anchor": true,
+          "roles": [
+            "CONTROL_MID_LOW",
+            "TOP_IS_SHARPE",
+            "PARAMETER_DIVERSITY",
+            "STOCK_MODE4_ANCHOR"
+          ],
+          "pass": true
+        },
+        {
+          "sampler_id": "S_TPE",
+          "origin": "2024-04-27T00:00:00+00:00",
+          "attempted": 16,
+          "completed": 16,
+          "panel_size": 15,
+          "panel_size_ok": true,
+          "has_anchor": true,
+          "roles": [
+            "CONTROL_MID_LOW",
+            "TOP_IS_SHARPE",
+            "PARAMETER_DIVERSITY",
+            "STOCK_MODE4_ANCHOR"
+          ],
+          "pass": true
+        },
+        {
+          "sampler_id": "S_SOBOL",
+          "origin": "2024-04-13T00:00:00+00:00",
+          "attempted": 16,
+          "completed": 16,
+          "panel_size": 15,
+          "panel_size_ok": true,
+          "has_anchor": true,
+          "roles": [
+            "CONTROL_MID_LOW",
+            "TOP_IS_SHARPE",
+            "PARAMETER_DIVERSITY",
+            "STOCK_MODE4_ANCHOR"
+          ],
+          "pass": true
+        },
+        {
+          "sampler_id": "S_SOBOL",
+          "origin": "2024-04-27T00:00:00+00:00",
+          "attempted": 16,
+          "completed": 16,
+          "panel_size": 15,
+          "panel_size_ok": true,
+          "has_anchor": true,
+          "roles": [
+            "CONTROL_MID_LOW",
+            "TOP_IS_SHARPE",
+            "PARAMETER_DIVERSITY",
+            "STOCK_MODE4_ANCHOR"
+          ],
+          "pass": true
+        }
+      ]
+    },
+    "G2-INIT12": {
+      "gate": "G2-INIT12",
+      "status": "FAIL",
+      "reason": "Origins mismatch schedule",
+      "samplers": {
+        "S_TPE": {
+          "origin_count": 2,
+          "expected_count": 12,
+          "matches_schedule": false
+        },
+        "S_SOBOL": {
+          "origin_count": 2,
+          "expected_count": 12,
+          "matches_schedule": false
+        }
+      }
+    },
+    "G2-LABELS": {
+      "gate": "G2-LABELS",
+      "status": "PASS",
+      "reason": "All labels D and Y reconcile with raw Sharpe paths and Y_anchor = 0.0 structurally",
+      "total_origins_checked": 4,
+      "all_origins_valid": true
+    },
+    "G2-REUSE": {
+      "gate": "G2-REUSE",
+      "status": "PASS",
+      "reason": "Semantic cache hits on identical run, misses on altered fee, and respects causal boundaries",
+      "details": {
+        "identical_run_cache_hit": true,
+        "fee_change_cache_miss": true,
+        "no_future_leakage": true,
+        "cache_entries_total": 24
+      }
+    },
+    "G2-REPORT_OWNER": {
+      "gate": "G2-REPORT_OWNER",
+      "status": "PASS",
+      "reason": "report.md present and owner status is WAITING_OWNER_REVIEW",
+      "has_report": true,
+      "has_receipt": false,
+      "owner_review": "WAITING_OWNER_REVIEW"
+    }
+  },
+  "summary": {
+    "total_gates": 6,
+    "passed_gates": 5,
+    "failed_gates": 1
+  }
+}

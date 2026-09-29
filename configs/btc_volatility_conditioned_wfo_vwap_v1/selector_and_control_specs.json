@@ -1,0 +1,85 @@
+{
+  "schema": "regime_lab.vol_wfo_selector_and_control_specs.v1",
+  "phase": "VWFO-03",
+  "study_id": "btc_volatility_conditioned_wfo_vwap_v1",
+  "registered_at_utc": "2026-09-29T16:00:00Z",
+  "descriptor_vector": {
+    "features": [
+      "dev_mult_norm",
+      "rsi_len_norm",
+      "rsi_os_norm",
+      "rsi_ob_norm",
+      "stop_atr_norm",
+      "target_r_norm",
+      "atr_len_norm",
+      "htf_ema_len_norm",
+      "exit_at_vwap_flag",
+      "time_stop_on_flag",
+      "time_stop_bars_norm",
+      "raw_is_sharpe",
+      "log_fills_count"
+    ],
+    "scaling_policy": "PAST_MATURED_STANDARDIZATION_ONLY",
+    "anchor_contrast": "v = phi(candidate) - phi(anchor)",
+    "structural_identity": "v_anchor == 0 -> Yhat_anchor == 0"
+  },
+  "arms": {
+    "A_M4": {
+      "role": "RAW_STOCK_ANCHOR",
+      "description": "Stock Mode 4 temporal robustness clustering anchor record",
+      "requires_model": false
+    },
+    "B0_GLOBAL": {
+      "role": "LEARNED_GLOBAL_SHARPE_DECAY",
+      "description": "Origin-weighted Ridge regression on contrast features without market context",
+      "regularization_lambda": 10.0,
+      "requires_model": false
+    },
+    "B_CAP": {
+      "role": "CAPACITY_POOLED_CONTROL",
+      "description": "B0 plus pooled residual correction gamma_0 with penalty 10.0",
+      "regularization_lambda": 10.0,
+      "requires_model": false
+    },
+    "O_PERSIST": {
+      "role": "PERSISTENCE_CONTEXT_CONTROL",
+      "description": "B0 plus pooled and interaction correction using persistence baseline probability p_PERSIST",
+      "regularization_lambda": 10.0,
+      "requires_model": false
+    },
+    "C_H14": {
+      "role": "VOLATILITY_CONDITIONED_SELECTION",
+      "description": "B0 plus pooled and interaction correction using M4_LGBM_CONSERVATIVE_SLOW probability p_LOW",
+      "regularization_lambda": 10.0,
+      "requires_model": true,
+      "context_min_std_floor": 0.05
+    },
+    "P_NI_01": {
+      "role": "NO_INFO_CONTROL_1",
+      "seed": 20261001,
+      "regularization_lambda": 10.0
+    },
+    "P_NI_02": {
+      "role": "NO_INFO_CONTROL_2",
+      "seed": 20261002,
+      "regularization_lambda": 10.0
+    },
+    "P_NI_03": {
+      "role": "NO_INFO_CONTROL_3",
+      "seed": 20261003,
+      "regularization_lambda": 10.0
+    }
+  },
+  "selection_rule": {
+    "q_hat_formula": "Q_hat(theta) = SR_IS(theta) - SR_IS(anchor) - Yhat(theta)",
+    "q_hat_filter_floor": -0.10,
+    "objective": "MINIMIZE_SIGNED_YHAT",
+    "fallback_chain": ["ARM_WINNER", "B0_PROPOSAL", "STOCK_ANCHOR"],
+    "tie_break": ["PARAMETER_EUCLIDEAN_DISTANCE_TO_ANCHOR", "CANDIDATE_ID_DIGEST"]
+  },
+  "sampler_selection_rule": {
+    "priority_margin_floor": -0.10,
+    "criterion": "MAXIMIZE_MIN_MEAN_EXCESS_SHARPE_OVER_BCAP_AND_O",
+    "tie_break": ["LOWER_MEASURED_WORK", "PREDECLARED_ORDER_S_TPE_FIRST"]
+  }
+}

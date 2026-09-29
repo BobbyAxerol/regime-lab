@@ -151,7 +151,7 @@ def engine_param_ranges(alpha_id: str) -> dict[str, Any]:
     for name, spec in schema.specs.items():
         if spec.kind == "fixed":
             ranges[name] = spec.fixed_value
-        elif spec.kind == "categorical":
+        elif spec.kind in ("categorical", "bool"):
             ranges[name] = list(spec.choices)
         elif spec.kind == "int":
             ranges[name] = (int(spec.low), int(spec.high), int(spec.step or 1))

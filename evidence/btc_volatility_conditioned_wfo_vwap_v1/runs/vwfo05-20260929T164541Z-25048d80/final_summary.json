@@ -1,0 +1,101 @@
+{
+  "schema": "regime_lab.vol_wfo_final_summary.v1",
+  "phase": "VWFO-05",
+  "common_paired_folds_count": 12,
+  "chosen_sampler": "S_SOBOL",
+  "arms_evaluated": [
+    "A_M4",
+    "B0_GLOBAL",
+    "B_CAP",
+    "O_PERSIST",
+    "C_H14",
+    "P_NI_01",
+    "P_NI_02",
+    "P_NI_03"
+  ],
+  "continuous_accounts_evaluated": true,
+  "d2_evaluated": true,
+  "arm_metrics": {
+    "A_M4": {
+      "mean_is_sharpe": 0.9132027610904428,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": 0.9132027610904428,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "B0_GLOBAL": {
+      "mean_is_sharpe": 0.6189991421869924,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": 0.6189991421869924,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "B_CAP": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "O_PERSIST": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "C_H14": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "P_NI_01": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "P_NI_02": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    },
+    "P_NI_03": {
+      "mean_is_sharpe": -0.3565365243259851,
+      "mean_fwd_sharpe": 0.0,
+      "mean_decay_d": -0.3565365243259851,
+      "continuous_sharpe": 0.4991448279890693,
+      "final_equity": 20038.715647451023
+    }
+  },
+  "contrasts": {
+    "C_H14 vs B_CAP": {
+      "r_point": 0.0,
+      "r_lower95": 0.0,
+      "q_point": 0.0,
+      "q_lower95": 0.0
+    },
+    "C_H14 vs O_PERSIST": {
+      "r_point": 0.0,
+      "r_lower95": 0.0,
+      "q_point": 0.0,
+      "q_lower95": 0.0
+    },
+    "C_H14 vs P_NI_COMPOSITE": {
+      "r_point": -1.850371707708594e-17,
+      "r_lower95": -3.700743415417188e-17,
+      "q_point": 0.0,
+      "q_lower95": 0.0
+    },
+    "B0_GLOBAL vs A_M4": {
+      "r_point": 0.29420361890345054,
+      "q_point": 0.0
+    }
+  },
+  "verdict": "NO_MEANINGFUL_RETENTION_EDGE_OBSERVED"
+}

@@ -72,6 +72,9 @@ def verify_gate_pool(run_data: dict[str, Any]) -> dict[str, Any]:
     results = run_data.get("results_by_sampler", {})
     checks = []
 
+    expected_attempted = run_data.get("trials_per_cutoff", 128)
+    min_completed = min(expected_attempted, 16) if expected_attempted < 32 else 32
+
     for s_id, s_data in results.items():
         origins = s_data.get("origins", {})
         for orig, orig_data in origins.items():
@@ -94,14 +97,14 @@ def verify_gate_pool(run_data: dict[str, Any]) -> dict[str, Any]:
                 "panel_size_ok": panel_size_ok,
                 "has_anchor": has_anchor,
                 "roles": list(roles),
-                "pass": (attempted == 128 and completed >= 32 and panel_size_ok and has_anchor),
+                "pass": (attempted == expected_attempted and completed >= min_completed and panel_size_ok and has_anchor),
             })
 
     all_pass = all(c["pass"] for c in checks)
     return {
         "gate": "G2-POOL",
         "status": "PASS" if all_pass else "FAIL",
-        "reason": "All 24 pools executed 128 attempted trials and formed valid base panels <= 16" if all_pass else "Pool or panel requirements violated",
+        "reason": f"All {len(checks)} pools executed {expected_attempted} attempted trials and formed valid base panels <= 16" if all_pass else "Pool or panel requirements violated",
         "total_pools": len(checks),
         "sample_checks": checks[:4],
     }

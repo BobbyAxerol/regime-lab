@@ -34,39 +34,96 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 
 
-DESCRIPTOR_FEATURES = [
-    "coeff_norm",
-    "ap_norm",
-    "threshold_norm",
-    "raw_is_sharpe",
-    "log_fills_count",
-]
-
-PARAM_RANGES = {
-    "coeff": 4.0,  # 1 to 5
-    "AP": 90.0,  # 10 to 100
-    "alpha.condition_threshold": 80.0,  # 10 to 90
+DESCRIPTOR_FEATURES_MAP = {
+    "A-SC": [
+        "coeff_norm",
+        "ap_norm",
+        "threshold_norm",
+        "raw_is_sharpe",
+        "log_fills_count",
+    ],
+    "A-VWAP": [
+        "dev_mult_norm",
+        "rsi_len_norm",
+        "rsi_os_norm",
+        "rsi_ob_norm",
+        "stop_atr_norm",
+        "target_r_norm",
+        "atr_len_norm",
+        "htf_ema_len_norm",
+        "exit_at_vwap_flag",
+        "time_stop_on_flag",
+        "time_stop_bars_norm",
+        "raw_is_sharpe",
+        "log_fills_count",
+    ],
 }
+DESCRIPTOR_FEATURES = DESCRIPTOR_FEATURES_MAP["A-SC"]
+
+PARAM_RANGES_MAP = {
+    "A-SC": {
+        "coeff": 4.0,  # 1 to 5
+        "AP": 90.0,  # 10 to 100
+        "alpha.condition_threshold": 80.0,  # 10 to 90
+    },
+    "A-VWAP": {
+        "dev_mult": 4.5,
+        "rsi_len": 75.0,
+        "rsi_os": 40.0,
+        "rsi_ob": 35.0,
+        "stop_atr": 9.0,
+        "target_r": 9.0,
+        "atr_len": 85.0,
+        "htf_ema_len": 680.0,
+        "exit_at_vwap": 1.0,
+        "time_stop_on": 1.0,
+        "time_stop_bars": 115.0,
+    },
+}
+PARAM_RANGES = PARAM_RANGES_MAP["A-SC"]
 
 
-def _extract_raw_descriptor(cand: Dict[str, Any]) -> np.ndarray:
-    """Extracts raw numeric vector [coeff, AP, threshold, is_sharpe, log(1 + fills)]."""
+def _extract_raw_descriptor(cand: Dict[str, Any], alpha_id: Optional[str] = None) -> np.ndarray:
+    """Extracts raw numeric vector for A-SC or A-VWAP."""
     params = cand.get("params", {})
-    coeff = float(params.get("coeff", 2))
-    ap = float(params.get("AP", 40))
-    threshold = float(params.get("alpha.condition_threshold", 50))
-    is_sharpe = float(cand.get("is_sharpe", 0.0))
-    fills = float(cand.get("fills_count", 0))
-    log_fills = float(np.log1p(max(fills, 0.0)))
-    return np.array([coeff, ap, threshold, is_sharpe, log_fills], dtype=np.float64)
+    if alpha_id == "A-VWAP" or "dev_mult" in params:
+        dev_mult = float(params.get("dev_mult", 2.0))
+        rsi_len = float(params.get("rsi_len", 14))
+        rsi_os = float(params.get("rsi_os", 30))
+        rsi_ob = float(params.get("rsi_ob", 70))
+        stop_atr = float(params.get("stop_atr", 3.0))
+        target_r = float(params.get("target_r", 2.0))
+        atr_len = float(params.get("atr_len", 14))
+        htf_ema_len = float(params.get("htf_ema_len", 200))
+        exit_at_vwap = 1.0 if bool(params.get("exit_at_vwap", False)) else 0.0
+        time_stop_on = 1.0 if bool(params.get("time_stop_on", False)) else 0.0
+        time_stop_bars = float(params.get("time_stop_bars", 20))
+        is_sharpe = float(cand.get("is_sharpe", 0.0))
+        fills = float(cand.get("fills_count", 0))
+        log_fills = float(np.log1p(max(fills, 0.0)))
+        return np.array([
+            dev_mult, rsi_len, rsi_os, rsi_ob, stop_atr, target_r,
+            atr_len, htf_ema_len, exit_at_vwap, time_stop_on, time_stop_bars,
+            is_sharpe, log_fills
+        ], dtype=np.float64)
+    else:
+        coeff = float(params.get("coeff", 2))
+        ap = float(params.get("AP", 40))
+        threshold = float(params.get("alpha.condition_threshold", 50))
+        is_sharpe = float(cand.get("is_sharpe", 0.0))
+        fills = float(cand.get("fills_count", 0))
+        log_fills = float(np.log1p(max(fills, 0.0)))
+        return np.array([coeff, ap, threshold, is_sharpe, log_fills], dtype=np.float64)
 
 
 class CandidateDescriptorStandardizer:
     """Standardizes candidate descriptors strictly using past matured training candidates."""
 
-    def __init__(self) -> None:
-        self.means: np.ndarray = np.zeros(len(DESCRIPTOR_FEATURES), dtype=np.float64)
-        self.stds: np.ndarray = np.ones(len(DESCRIPTOR_FEATURES), dtype=np.float64)
+    def __init__(self, alpha_id: str = "A-SC") -> None:
+        self.alpha_id = alpha_id
+        dim = len(DESCRIPTOR_FEATURES_MAP.get(alpha_id, DESCRIPTOR_FEATURES))
+        self.means: np.ndarray = np.zeros(dim, dtype=np.float64)
+        self.stds: np.ndarray = np.ones(dim, dtype=np.float64)
         self.fitted: bool = False
 
     def fit(self, training_candidates: List[Dict[str, Any]]) -> "CandidateDescriptorStandardizer":
@@ -74,7 +131,13 @@ class CandidateDescriptorStandardizer:
             self.fitted = True
             return self
 
-        raw_matrix = np.array([_extract_raw_descriptor(c) for c in training_candidates], dtype=np.float64)
+        first_params = training_candidates[0].get("params", {})
+        if "dev_mult" in first_params:
+            self.alpha_id = "A-VWAP"
+        elif "coeff" in first_params:
+            self.alpha_id = "A-SC"
+
+        raw_matrix = np.array([_extract_raw_descriptor(c, self.alpha_id) for c in training_candidates], dtype=np.float64)
         self.means = np.mean(raw_matrix, axis=0)
         stds = np.std(raw_matrix, axis=0, ddof=1) if len(raw_matrix) > 1 else np.ones(raw_matrix.shape[1])
         # Floor std at 1e-4 to avoid divide by zero
@@ -83,7 +146,13 @@ class CandidateDescriptorStandardizer:
         return self
 
     def transform(self, cand: Dict[str, Any]) -> np.ndarray:
-        raw = _extract_raw_descriptor(cand)
+        raw = _extract_raw_descriptor(cand, self.alpha_id)
+        if len(raw) != len(self.means):
+            if len(raw) > len(self.means):
+                self.means = np.zeros(len(raw), dtype=np.float64)
+                self.stds = np.ones(len(raw), dtype=np.float64)
+            else:
+                raw = np.pad(raw, (0, len(self.means) - len(raw)))
         return (raw - self.means) / self.stds
 
 
@@ -96,19 +165,24 @@ def compute_contrast_vector(
 
     By mathematical identity, if cand is anchor, v is identically zeros.
     """
+    dim = len(standardizer.means)
     if cand.get("is_anchor", False) or cand.get("candidate_id") == anchor.get("candidate_id"):
-        return np.zeros(len(DESCRIPTOR_FEATURES), dtype=np.float64)
+        return np.zeros(dim, dtype=np.float64)
     phi_cand = standardizer.transform(cand)
     phi_anchor = standardizer.transform(anchor)
     return phi_cand - phi_anchor
 
 
-def compute_param_distance(cand: Dict[str, Any], anchor: Dict[str, Any]) -> float:
+def compute_param_distance(cand: Dict[str, Any], anchor: Dict[str, Any], alpha_id: Optional[str] = None) -> float:
     """Normalized Euclidean distance to anchor in parameter space."""
     p_c = cand.get("params", {})
     p_a = anchor.get("params", {})
+    if alpha_id == "A-VWAP" or "dev_mult" in p_c or "dev_mult" in p_a:
+        param_ranges = PARAM_RANGES_MAP["A-VWAP"]
+    else:
+        param_ranges = PARAM_RANGES_MAP["A-SC"]
     dist_sq = 0.0
-    for k, span in PARAM_RANGES.items():
+    for k, span in param_ranges.items():
         v_c = float(p_c.get(k, 0.0))
         v_a = float(p_a.get(k, 0.0))
         diff = (v_c - v_a) / max(span, 1.0)
@@ -184,7 +258,7 @@ def fit_selectors(
             for s in historical_ni_contexts.keys():
                 z_ni_rows[s].append(float(historical_ni_contexts[s].get(orig, 0.0)))
 
-    d = len(DESCRIPTOR_FEATURES)
+    d = len(standardizer.means)
     if not v_rows or matured_origins < 1:
         # Cold start fallback
         return SelectorModelFit(

@@ -1,0 +1,115 @@
+{
+  "schema": "regime_lab.vol_wfo_source_and_economics.v1",
+  "study_id": "btc_volatility_conditioned_wfo_vwap_v1",
+  "phase": "VWFO-01",
+  "scope": {
+    "alpha_id": "A-VWAP",
+    "symbol": "BTCUSDT",
+    "strategy_timeframe": "15m",
+    "execution_timeframe": "1m",
+    "venue": "BINANCE",
+    "forecast_target_market": "Binance BTCUSDT Spot (CryptoBinanceSpot1m)",
+    "execution_market": "Binance USD-M Perpetual (CryptoBinance1m)",
+    "live_orders_authorized": false
+  },
+  "alpha_parameters": {
+    "tunable_dimensions": [
+      {
+        "name": "dev_mult",
+        "kind": "float",
+        "low": 0.5,
+        "high": 5.0,
+        "step": 0.1
+      },
+      {
+        "name": "rsi_len",
+        "kind": "int",
+        "low": 5,
+        "high": 80,
+        "step": 1
+      },
+      {
+        "name": "rsi_os",
+        "kind": "int",
+        "low": 10,
+        "high": 50,
+        "step": 1
+      },
+      {
+        "name": "rsi_ob",
+        "kind": "int",
+        "low": 55,
+        "high": 90,
+        "step": 1
+      },
+      {
+        "name": "stop_atr",
+        "kind": "float",
+        "low": 1.0,
+        "high": 10.0,
+        "step": 0.1
+      },
+      {
+        "name": "target_r",
+        "kind": "float",
+        "low": 1.0,
+        "high": 10.0,
+        "step": 0.1
+      },
+      {
+        "name": "atr_len",
+        "kind": "int",
+        "low": 5,
+        "high": 90,
+        "step": 1
+      },
+      {
+        "name": "htf_ema_len",
+        "kind": "int",
+        "low": 20,
+        "high": 700,
+        "step": 10
+      },
+      {
+        "name": "exit_at_vwap",
+        "kind": "bool",
+        "choices": [false, true]
+      },
+      {
+        "name": "time_stop_on",
+        "kind": "bool",
+        "choices": [false, true]
+      },
+      {
+        "name": "time_stop_bars",
+        "kind": "int",
+        "low": 5,
+        "high": 120,
+        "step": 5
+      }
+    ],
+    "fixed_parameters": {
+      "htf_tf": "1h"
+    }
+  },
+  "economics": {
+    "initial_equity": 20000.0,
+    "allocation_fraction": 0.10,
+    "leverage_cap": 1.0,
+    "one_way_fee_decimal": 0.0004,
+    "one_way_slippage_decimal": 0.0001,
+    "terminal_valuation": "mark_to_market",
+    "standardized_initial_state": "FLAT_NO_PREROLL_TRADES",
+    "continuous_account_reset_each_fold": false
+  },
+  "execution_and_clocks": {
+    "sizing_mapping": "sizing_mapping_v1",
+    "execution_ordering": "next_open_contract_to_verify",
+    "strategy_decision_clock": "closed_15m",
+    "execution_resolution": "1m",
+    "ready_lag_policy": "WAIT_FLAT_PREFIX_WITHIN_H14",
+    "common_ready_lag_days": 1,
+    "proposal_ttl_days": 2,
+    "max_revalidation_age_days": 28
+  }
+}

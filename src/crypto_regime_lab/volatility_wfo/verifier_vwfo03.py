@@ -21,7 +21,8 @@ def verify_vwfo03(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
     if lab_root is None:
         lab_root = evidence_run_dir.parents[3]
 
-    configs_dir = lab_root / "configs" / "btc_volatility_conditioned_wfo_v1"
+    study_id = evidence_run_dir.parent.parent.name if evidence_run_dir.parent.name == "runs" else "btc_volatility_conditioned_wfo_v1"
+    configs_dir = lab_root / "configs" / study_id
     selector_specs_file = configs_dir / "selector_and_control_specs.json"
     timeline_file = configs_dir / "timeline.json"
     final_freeze_file = configs_dir / "final_freeze.json"
@@ -43,13 +44,35 @@ def verify_vwfo03(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
         rule = specs.get("selection_rule", {})
         arms = specs.get("arms", {})
 
-        expected_features = [
-            "coeff_norm",
-            "ap_norm",
-            "threshold_norm",
-            "raw_is_sharpe",
-            "log_fills_count",
-        ]
+        reg_file = configs_dir / "registration.json"
+        alpha_id = "A-SC"
+        if reg_file.is_file():
+            alpha_id = json.loads(reg_file.read_text(encoding="utf-8")).get("scope", {}).get("alpha_id", "A-SC")
+
+        if alpha_id == "A-VWAP":
+            expected_features = [
+                "dev_mult_norm",
+                "rsi_len_norm",
+                "rsi_os_norm",
+                "rsi_ob_norm",
+                "stop_atr_norm",
+                "target_r_norm",
+                "atr_len_norm",
+                "htf_ema_len_norm",
+                "exit_at_vwap_flag",
+                "time_stop_on_flag",
+                "time_stop_bars_norm",
+                "raw_is_sharpe",
+                "log_fills_count",
+            ]
+        else:
+            expected_features = [
+                "coeff_norm",
+                "ap_norm",
+                "threshold_norm",
+                "raw_is_sharpe",
+                "log_fills_count",
+            ]
         has_features = features == expected_features
         has_min_yhat = rule.get("objective") == "MINIMIZE_SIGNED_YHAT"
         has_floor = rule.get("q_hat_filter_floor") == -0.10
@@ -179,7 +202,7 @@ def verify_vwfo03(evidence_run_dir: Path, lab_root: Path | None = None) -> Dict[
 
     return {
         "schema": "regime_lab.vol_wfo_gate_receipt.v1",
-        "study_id": "btc_volatility_conditioned_wfo_v1",
+        "study_id": study_id,
         "phase": "VWFO-03",
         "run_id": evidence_run_dir.name,
         "technical_gate": technical_gate,
